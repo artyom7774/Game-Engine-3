@@ -1,0 +1,152 @@
+from PyQt5.QtWidgets import QDialog, QLabel, QPushButton, QLineEdit
+from PyQt5 import QtWidgets, QtCore
+
+from scr.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath
+
+from scr.variables import *
+
+import os
+
+
+class CreateObjectFunctions:
+    @staticmethod
+    def create(project, dialog, event, name: str = None, logger: bool = True, load: str = "engine/files/objects.json", save: str = None) -> None:
+        if save is None:
+            path = projectTreeGetFilePath(projectTreeGetPath(project.objects["tree_project"].selectedItems()[0]))
+
+        else:
+            path = save
+
+        if name is None:
+            name = dialog.objects["name_entry"].text()
+
+        # LOGGER
+
+        if logger:
+            if name == "":
+                dialog.objects["log_label"].setText("Imposiable object name")
+
+                return 0
+
+            try:
+                with open(f"scr/files/using/{name}", "w") as file:
+                    pass
+
+            except BaseException:
+                dialog.objects["log_label"].setText("Imposiable object name")
+
+                return 0
+
+            for element in os.listdir(path):
+                if element == name:
+                    dialog.objects["log_label"].setText("Object name already exist")
+
+                    return 0
+
+        # CREATE
+
+        with open(load, "r") as file:
+            objects = json.load(file)
+
+        out = {
+            "dependences": objects["dependences"],
+            "dependence": objects["dependences"][objects["standard"]["type"]]
+        }
+
+        out["type"] = {
+            "name": objects["name"]["type"],
+            "value": objects["standard"]["type"],
+            "type": objects["type"]["type"]
+        }
+
+        if out["type"]["type"] == "choose":
+            out["type"]["choose"] = objects["specials"]["choose"]["type"]
+
+        for element in list(set([key for key in objects["dependences"].keys()] + [out["type"]["value"]])):
+            for value in objects["objects"][element]:
+                if element not in out:
+                    out[element] = {}
+
+                if objects["type"] == "choose":
+                    out[element][value] = {
+                        "name": objects["name"][value],
+                        "value": objects["standard"][value],
+                        "type": objects["type"][value],
+                        "choose": objects["specials"]["choose"][value]
+                    }
+
+                else:
+                    out[element][value] = {
+                        "name": objects["name"][value],
+                        "value": objects["standard"][value],
+                        "type": objects["type"][value]
+                    }
+
+        if name == "":
+            with open(f"{path}", "w") as file:
+                json.dump(out, file, indent=4)
+
+        else:
+            with open(f"{path}/{name}.obj", "w") as file:
+                json.dump(out, file, indent=4)
+
+        project.init()
+
+        if dialog is not None:
+            dialog.close()
+
+
+class CreateObject(QDialog):
+    def __init__(self, project, parent=None) -> None:
+        QDialog.__init__(self, parent)
+
+        self.project = project
+
+        self.setWindowTitle(translate("Create object"))
+        self.setFixedSize(600, 400)
+
+        desktop = QtWidgets.QApplication.desktop()
+        self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
+
+        self.objects = {}
+
+        self.init()
+
+    def init(self) -> None:
+        self.objects["empty"] = QPushButton(parent=self)
+        self.objects["empty"].setGeometry(0, 0, 0, 0)
+
+        # NAME
+
+        self.objects["name_label"] = QLabel(parent=self, text=translate("Object name") + ":")
+        self.objects["name_label"].setGeometry(10, 10, 200, 25)
+        self.objects["name_label"].setFont(FONT)
+        self.objects["name_label"].show()
+
+        self.objects["name_entry"] = QLineEdit(parent=self)
+        self.objects["name_entry"].setGeometry(210, 10, 300, 25)
+        self.objects["name_entry"].setFont(FONT)
+        self.objects["name_entry"].show()
+
+        # LOG TEXT
+
+        self.objects["log_label"] = QLabel(parent=self, text="")
+        self.objects["log_label"].setGeometry(0, 310, 600, 20)
+        self.objects["log_label"].setFont(FONT)
+        self.objects["log_label"].show()
+
+        self.objects["log_label"].setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.objects["log_label"].setStyleSheet("color: red;")
+
+        # CREATE
+
+        self.objects["create_button"] = QPushButton(parent=self, text=translate("Create"))
+        self.objects["create_button"].setStyleSheet(BUTTON_BLUE_STYLE)
+
+        self.objects["create_button"].released.connect(lambda: self.objects["empty"].setFocus())
+
+        self.objects["create_button"].setGeometry(150, 340, 300, 40)
+        self.objects["create_button"].setFont(FONT)
+        self.objects["create_button"].show()
+
+        self.objects["create_button"].clicked.connect(lambda event: CreateObjectFunctions.create(self.project, self, event))

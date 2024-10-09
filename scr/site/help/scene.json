@@ -1,0 +1,20 @@
+{
+    "name": "Scene",
+    "pages": {
+        "1": {
+            "title": "Control in the scene",
+            "text": [
+                "Movement - mouse",
+                "Move object - arrows",
+                "",
+                "Binds:",
+                "  Q - remove object selection",
+                "",
+                "  Ctrl+C - copy object",
+                "  Ctrl+V - paste object",
+                "",
+                "  Delete - delete object"
+            ]
+        }
+    }
+}

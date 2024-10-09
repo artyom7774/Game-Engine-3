@@ -1,0 +1,16 @@
+project::width = 700
+project::height = 700
+project::fps = 60
+
+project::name = "Test"
+project::icon = ""
+
+project::debug = True
+
+project::flags = {
+
+}
+
+project::variables = {
+
+}
