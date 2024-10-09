@@ -6,3 +6,4 @@
 - unpack the archive
 - activate program (after the first activation, python and the necessary libraries will be installed)
 <br>
+![](icon.png)
