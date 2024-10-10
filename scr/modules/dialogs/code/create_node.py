@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QDialog,  QPushButton, QTreeWidget, QTreeWidgetItem, QApplication
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 
 from engine.vector.float import Vec2f
@@ -118,3 +119,8 @@ class CreateNode(QDialog):
 
         self.objects["open_button"].clicked.connect(lambda event: CreateNodeFunctions.create(self.project, self, self.position, event))
 
+    def keyPressEvent(self, event) -> None:
+        if event.key() in (Qt.Key_Enter, Qt.Key_Return):
+            self.objects["open_button"].click()
+
+        event.accept()

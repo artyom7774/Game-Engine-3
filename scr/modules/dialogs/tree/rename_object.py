@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QDialog, QLabel, QPushButton, QLineEdit
+from PyQt5.QtCore import Qt
 from PyQt5 import QtWidgets, QtCore
 
 from scr.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath
@@ -122,3 +123,9 @@ class RenameObject(QDialog):
         self.objects["create_button"].show()
 
         self.objects["create_button"].clicked.connect(lambda event: RenameObjectFunctions.rename(self.project, self, event))
+
+    def keyPressEvent(self, event) -> None:
+        if event.key() in (Qt.Key_Enter, Qt.Key_Return):
+            self.objects["create_button"].click()
+
+        event.accept()

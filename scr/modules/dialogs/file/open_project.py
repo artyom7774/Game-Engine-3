@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QDialog, QLabel, QComboBox, QPushButton
+from PyQt5.QtCore import Qt
 from PyQt5 import QtWidgets
 
 from scr.modules import functions
@@ -71,4 +72,10 @@ class OpenProject(QDialog):
         self.objects["open_button"].show()
 
         self.objects["open_button"].clicked.connect(lambda event: OpenProjectFunctions.open(self.project, self, event))
+
+    def keyPressEvent(self, event) -> None:
+        if event.key() in (Qt.Key_Enter, Qt.Key_Return):
+            self.objects["open_button"].click()
+
+        event.accept()
 
