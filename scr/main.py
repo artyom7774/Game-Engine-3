@@ -11,6 +11,7 @@ from scr.variables import *
 
 import qdarktheme
 import threading
+import requests
 import ctypes
 
 
@@ -70,7 +71,25 @@ class Main(QMainWindow):
 
         self.initialization()
 
+        self.versionUpdateMessage()
+
         self.init()
+
+    def versionUpdateMessage(self) -> None:
+        url = "https://raw.githubusercontent.com/artyom7774/Game-Engine-3/main/scr/files/version.json"
+
+        if functions.haveInternet():
+            response = requests.get(url)
+
+            if response.status_code == 200:
+                lastVersion = json.loads(response.text)["version"]
+                nowVersion = json.load(open("scr/files/version.json", "r"))["version"]
+
+                if lastVersion != nowVersion:
+                    MessageBox.special(f"{translate('Update')} {lastVersion}", translate("A new version of the project has been released. Please update the product"))
+
+            else:
+                print(response.status_code)
 
     def geometryInit(self) -> None:
         try:

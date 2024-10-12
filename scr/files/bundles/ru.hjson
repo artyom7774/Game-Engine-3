@@ -160,4 +160,7 @@
     "Set var": "Установить переменную"
     "Set var by name": "Установить переменную по имени"
     "global": "глобальная"
+    "New version": "Новая версия"
+    "Update": "Обновление"
+    "A new version of the project has been released. Please update the product": "Вышла новая версия проекта. Пожалуйста, обновите продукт"
 }

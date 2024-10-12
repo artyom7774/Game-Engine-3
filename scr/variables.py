@@ -74,6 +74,17 @@ class MessageBox:
         msg.setStandardButtons(QMessageBox.Ok)
         msg.exec_()
 
+    @staticmethod
+    def special(name, detail):
+        title = translate.translate(name)
+
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText(translate(str(detail)))
+        msg.setWindowTitle(title)
+        msg.setStandardButtons(QMessageBox.Ok)
+        msg.exec_()
+
 
 class Size:
     @staticmethod

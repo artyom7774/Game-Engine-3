@@ -5,6 +5,7 @@ from scr.modules import functions
 
 from scr.variables import *
 
+import requests
 import typing
 import shutil
 import os
@@ -101,6 +102,16 @@ def createProjectDirectory(project, name: str) -> None:
     project.selectProject = name
 
     project.init()
+
+
+def haveInternet():
+    try:
+        response = requests.get('http://www.google.com', timeout=1)
+
+    except requests.ConnectionError:
+        return False
+
+    return True
 
 
 def projectTreeGetPath(obj, path: list = None, deep: int = 0) -> list:
