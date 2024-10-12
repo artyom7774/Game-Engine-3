@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
+from PyQt5.QtCore import QEvent
 from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QIcon, Qt
 

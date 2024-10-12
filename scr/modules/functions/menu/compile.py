@@ -211,7 +211,7 @@ class Compile:
         return 0
 
     @staticmethod
-    def compile(project, executable: bool = True) -> None:
+    def compile(project, executable: bool = True) -> bool:
         engine = f"projects/{project.selectProject}/scr/engine"
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
@@ -339,7 +339,7 @@ class Compile:
         program = program.replace("%PROJECT_PROGRAMS%", str(programs))
         program = program.replace("%PROJECT_SCENES%", str(scenes))
 
-        program = program.replace("%ENGINE_VERSION%", str(json.load(open("engine/version.json", encoding="utf-8"))["version"]))
+        program = program.replace("%ENGINE_VERSION%", str(json.load(open("scr/files/version.json", encoding="utf-8"))["version"]))
 
         program = program.replace("%COMPILER%", str(open("scr/code/compiler.py").read()))
 

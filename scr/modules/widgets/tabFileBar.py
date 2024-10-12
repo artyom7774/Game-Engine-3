@@ -69,8 +69,8 @@ class TabFileBar(QTabBar):
 
         super().removeTab(index)
 
-        if self.currentIndex() + 1 >= index:
-            self.setCurrentIndex(index - 1)
+        # if self.currentIndex() + 1 >= index:
+        #     self.setCurrentIndex(index - 1)
 
         if self.count() == 0:
             self.project.selectFile = ""
