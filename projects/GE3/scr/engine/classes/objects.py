@@ -66,25 +66,11 @@ class StaticObject:
     def __str__(self):
         return f"StaticObject(id = {self.id} pos = {self.pos})"
 
+    def __repr__(self):
+        return f"StaticObject(id = {self.id} pos = {self.pos})"
+
     def update(self, collisions: typing.List["VObject"] = None) -> None:
         self.collision(0, 0, True)
-
-    def returning(self, hitbox: SquareHitbox, obj: VObject, step: int, x: float, y: float) -> None:
-        var = False
-
-        while Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-            var = True
-
-            self.pos.x -= math.ceil(abs(x) / step) * (1 if x >= 0 else -1)
-            self.pos.y -= math.ceil(abs(y) / step) * (1 if y >= 0 else -1)
-
-        if var:
-            self.pos.x += math.ceil(abs(x) / step) * (1 if x >= 0 else -1)
-            self.pos.y += math.ceil(abs(y) / step) * (1 if y >= 0 else -1)
-
-        self.distance = math.sqrt(self.pos.x ** 2 + self.pos.y ** 2)
-
-        return var
 
     def move(self, x: float = 0, y: float = 0) -> None:
         y = 0 if abs(y) < FLOAT_PRECISION else y
@@ -100,29 +86,32 @@ class StaticObject:
 
         collisions = self.game.cash["collisions"][self.id] if self.id in self.game.cash["collisions"] else []
 
-        step = math.ceil(math.ceil(abs(x) + abs(y)) / self.game.objects.minLenghtObject) * 2
+        step = max(abs(x), abs(y)) + 1
 
         hitbox = self.getEditHitbox(x, y)
 
         lastPos = Vec2i(self.pos.x, self.pos.y)
 
+        useX = True
+        useY = True
+
         for _ in range(step):
             for i, obj in enumerate(collisions):
                 if "collision" in obj["functions"]["types"]:
-                    if self.returning(hitbox, obj, math.ceil(abs(x) + abs(y)), x, y):
-                        break
+                    if self.collision(x, 0):
+                        useX = False
+
+                    if self.collision(0, y):
+                        useY = False
 
             else:
-                self.pos.x += math.ceil(abs(x) / step) * (1 if x >= 0 else -1)
-                self.pos.y += math.ceil(abs(y) / step) * (1 if y >= 0 else -1)
+                self.pos.x += (abs(x) / step) * (1 if x >= 0 else -1) * useX
+                self.pos.y += (abs(y) / step) * (1 if y >= 0 else -1) * useY
 
-                continue
+        self.pos.x = round(self.pos.x)
+        self.pos.y = round(self.pos.y)
 
-            break
-
-        for obj in collisions:
-            if "collision" in obj["functions"]["types"]:
-                self.returning(hitbox, obj, math.ceil(abs(x) + abs(y)), x, y)
+        # TODO: починить коллизию при 135 градусов
 
         if self.sprite is not None:
             self.sprite.pos.x += self.pos.x - lastPos.x
@@ -204,6 +193,9 @@ class DynamicObject(StaticObject):
     def __str__(self):
         return f"DynamicObject(id = {self.id} pos = {self.pos})"
 
+    def __repr__(self):
+        return f"DynamicObject(id = {self.id} pos = {self.pos})"
+
     def update(self, collisions=None) -> None:
         if collisions is None:
             collisions = []
@@ -245,7 +237,7 @@ class DynamicObject(StaticObject):
         self.move(math.trunc(x), math.trunc(y))
 
     def moveByAngle(self, angle: int, speed: int = None):
-        self.vectors["move"].angle = angle
+        self.vectors["move"].angle = 180 - angle
         self.vectors["move"].power = self.speed if speed is None else speed
 
     def moveByType(self, move: str, speed: int = None) -> None:
@@ -291,9 +283,5 @@ class DynamicObject(StaticObject):
         return pos
 
 
-class BulletObject:
-    pass
-
-
-class PlatformObject:
+class KinematicObject:
     pass

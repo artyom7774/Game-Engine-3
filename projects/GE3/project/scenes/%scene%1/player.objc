@@ -35,7 +35,7 @@
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": -43
+                    "value": -200
                 }
             },
             "type": "dict"

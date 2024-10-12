@@ -10,7 +10,6 @@ from scr.variables import *
 
 import qdarktheme
 import threading
-import logging
 import ctypes
 
 
@@ -37,8 +36,6 @@ class Main(QMainWindow):
             pass
 
         self.app = app
-
-        logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", filename="scr/files/logs/log.txt", level=logging.DEBUG)
 
         qdarktheme.setup_theme()
 

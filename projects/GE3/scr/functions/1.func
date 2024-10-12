@@ -210,7 +210,7 @@
                 "n": {
                     "code": "n",
                     "name": "__n__",
-                    "standard": 3,
+                    "standard": 10,
                     "type": "number",
                     "value": null
                 },
@@ -301,7 +301,7 @@
             },
             "type": "text",
             "width": 6,
-            "x": 42,
+            "x": 52,
             "y": 11
         },
         "425514688": {
@@ -323,8 +323,8 @@
                     "standard": null,
                     "type": "path",
                     "value": {
-                        "id": 228279284,
-                        "name": "after"
+                        "id": 875668606,
+                        "name": "path"
                     }
                 },
                 "text": {
@@ -333,7 +333,7 @@
                     "standard": "",
                     "type": "text",
                     "value": {
-                        "id": 564472589,
+                        "id": 875668606,
                         "name": "answer"
                     }
                 }
@@ -348,7 +348,7 @@
             },
             "type": "text",
             "width": 6,
-            "x": 42,
+            "x": 52,
             "y": 15
         },
         "860948134": {
@@ -493,6 +493,68 @@
             "width": 8,
             "x": 32,
             "y": 11
+        },
+        "875668606": {
+            "display": {
+                "discription": "...",
+                "name": "A + B",
+                "text": {
+                    "__a__": "a",
+                    "__answer__": "answer",
+                    "__b__": "b",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 4,
+            "id": 875668606,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 228279284,
+                        "name": "after"
+                    }
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "standard": 0,
+                    "type": "number",
+                    "value": {
+                        "id": 564472589,
+                        "name": "answer"
+                    }
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "standard": 1,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "plus",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "type": "number",
+            "width": 8,
+            "x": 42,
+            "y": 15
         }
     }
 }

@@ -83,6 +83,21 @@ def createProjectDirectory(project, name: str) -> None:
 
     shutil.copytree("engine/", f"projects/{name}/engine/")
 
+    queue = os.listdir(f"projects/{name}/")
+
+    while len(queue) > 0:
+        path = f"projects/{name}/{queue[0]}"
+
+        if os.path.isfile(path):
+            if path.endswith("EMPTY.txt"):
+                os.remove(path)
+
+        else:
+            for element in os.listdir(path):
+                queue.append(queue[0] + "/" + element)
+
+        queue.pop(0)
+
     project.selectProject = name
 
     project.init()
