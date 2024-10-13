@@ -46,6 +46,16 @@ BFONT.setPointSize(18)
 SFONT = QFont("Courier", weight=16)
 SFONT.setPointSize(13)
 
+# BIG HELP FONT
+
+BIG_HELP_FONT = QFont("Georgia")
+BIG_HELP_FONT.setPointSize(18)
+
+# HELP FONT
+
+HELP_FONT = QFont("Courier")
+HELP_FONT.setPointSize(10)
+
 # TRANSLATE
 
 translate = Translate(SETTINGS["language"])

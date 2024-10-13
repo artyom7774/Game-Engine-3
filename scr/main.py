@@ -1,9 +1,9 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
+from PyQt5.QtWidgets import QMainWindow, QWidget, QLabel, QVBoxLayout, QScrollArea, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
 from PyQt5.QtCore import QEvent
 from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QIcon, Qt
 
-from scr.modules.widgets.tabFileBar import TabFileBar
+from scr.modules.widgets import TabFileBar, VersionLogScrollArea
 
 from scr.modules import functions
 
@@ -89,7 +89,7 @@ class Main(QMainWindow):
                     MessageBox.special(f"{translate('Update')} {lastVersion}", translate("A new version of the project has been released. Please update the product"))
 
             else:
-                print(response.status_code)
+                print(f"ERROR: can't download project version, status = {response.status_code}")
 
     def geometryInit(self) -> None:
         try:
@@ -101,6 +101,8 @@ class Main(QMainWindow):
         self.objects["tree_project"].hide()
         self.objects["tab_file_bar"].hide()
         self.objects["center_rama"].hide()
+
+        self.objects["version_log"].hide()
 
         if self.selectProject != "":
             self.objects["tree_project"].show()
@@ -114,8 +116,11 @@ class Main(QMainWindow):
             self.objects["tab_file_bar"].show()
             self.objects["tab_file_bar"].setGeometry(10 + 10 + Size.x(16), 40, Size.x(68) - 40, 30)
 
-        if self.selectProject != "":
             functions.project.centerMenuInit(self)
+
+        else:
+            self.objects["version_log"].show()
+            self.objects["version_log"].setGeometry(10, 10, Size.x(100) - 20, Size.y(100) - 20)
 
         if self.selectFile == "" and self.objects["tab_file_bar"].count() != 0:
             self.selectFile = self.objects["tab_file_bar"].objects[self.objects["tab_file_bar"].currentIndex()]["name"]
@@ -171,6 +176,10 @@ class Main(QMainWindow):
         self.objects["center_rama"] = FocusTreeWidget(self)
         # self.objects["center_rama"].mousePressEvent.connect(lambda: self.objects["center_rama"].setFocus())
         self.objects["center_rama"].setHeaderHidden(True)
+
+        # VERSION LOG
+
+        self.objects["version_log"] = VersionLogScrollArea(self, json.load(open("scr/files/updates.json")))
 
         # PROJECT TREE
 

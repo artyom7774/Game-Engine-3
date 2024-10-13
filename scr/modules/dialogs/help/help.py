@@ -3,12 +3,6 @@ from PyQt5 import QtWidgets
 
 from scr.variables import *
 
-BIG_HELP_FONT = QFont("Georgia")
-BIG_HELP_FONT.setPointSize(18)
-
-HELP_FONT = QFont("Courier")
-HELP_FONT.setPointSize(10)
-
 
 class Help(QDialog):
     def __init__(self, project, value, parent=None) -> None:
