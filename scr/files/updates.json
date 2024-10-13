@@ -6,7 +6,7 @@
     "updates": {
         "3.0.1b": {
             "name": "3.0.1b",
-            "text": "- update moving by angle\n- \nmessage about a program update, if one exists"
+            "text": "- update moving object by angle\n- message about a program update, if one exists"
         }
     }
 }
