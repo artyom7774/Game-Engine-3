@@ -91,6 +91,12 @@ class Main(QMainWindow):
             else:
                 print(f"ERROR: can't download project version, status = {response.status_code}")
 
+    def install(self) -> None:
+        os.system("setup.bat")
+
+        with open("python/.gitignore", "w") as file:
+            file.write("*")
+
     def geometryInit(self) -> None:
         try:
             self.objects["tree_project"].hide()
@@ -162,7 +168,7 @@ class Main(QMainWindow):
         request = ["python", "python/Scripts/python.exe", "python/Scripts/pip.exe", "python/Scripts/pyinstaller.exe"]
 
         if not all([os.path.exists(element) for element in request]):
-            thr = threading.Thread(target=lambda: os.system("setup.bat"))
+            thr = threading.Thread(target=lambda: self.install())
             thr.start()
 
         # TAB FILE BAR
