@@ -179,84 +179,6 @@
             "x": 18,
             "y": 4
         },
-        "228279284": {
-            "display": {
-                "discription": "For N times every x frames",
-                "name": "For N times",
-                "text": {
-                    "__after__": "after iterators",
-                    "__index__": "index",
-                    "__iterator__": "iterator",
-                    "__n__": "N",
-                    "__name__": "name",
-                    "__none__": "",
-                    "__path__": "path",
-                    "__x__": "X"
-                }
-            },
-            "height": 4,
-            "id": 228279284,
-            "inputs": {
-                "path": {
-                    "code": "path",
-                    "name": "__path__",
-                    "standard": null,
-                    "type": "path",
-                    "value": {
-                        "id": 448342426,
-                        "name": "path"
-                    }
-                },
-                "n": {
-                    "code": "n",
-                    "name": "__n__",
-                    "standard": 10,
-                    "type": "number",
-                    "value": null
-                },
-                "x": {
-                    "code": "x",
-                    "name": "__x__",
-                    "standard": 60,
-                    "type": "number",
-                    "value": null
-                }
-            },
-            "name": "for_",
-            "outputs": {
-                "iterator": {
-                    "code": "iterator",
-                    "name": "__iterator__",
-                    "type": "iterator"
-                },
-                "index": {
-                    "code": "index",
-                    "name": "__index__",
-                    "type": "number"
-                },
-                "after": {
-                    "code": "after",
-                    "name": "__after__",
-                    "type": "path"
-                }
-            },
-            "sorting": {
-                "inputs": [
-                    "path",
-                    "n",
-                    "x"
-                ],
-                "outputs": [
-                    "iterator",
-                    "index",
-                    "after"
-                ]
-            },
-            "type": "event",
-            "width": 8,
-            "x": 10,
-            "y": 13
-        },
         "968341045": {
             "display": {
                 "discription": "...",
@@ -372,7 +294,7 @@
                     "standard": null,
                     "type": "path",
                     "value": {
-                        "id": 228279284,
+                        "id": 966807845,
                         "name": "iterator"
                     }
                 },
@@ -396,7 +318,7 @@
                     "standard": "",
                     "type": "Any",
                     "value": {
-                        "id": 228279284,
+                        "id": 966807845,
                         "name": "index"
                     }
                 }
@@ -516,7 +438,7 @@
                     "standard": null,
                     "type": "path",
                     "value": {
-                        "id": 228279284,
+                        "id": 966807845,
                         "name": "after"
                     }
                 },
@@ -555,6 +477,84 @@
             "width": 8,
             "x": 42,
             "y": 15
+        },
+        "966807845": {
+            "display": {
+                "discription": "For N times every x frames",
+                "name": "For N times",
+                "text": {
+                    "__after__": "after iterators",
+                    "__index__": "index",
+                    "__iterator__": "iterator",
+                    "__n__": "N",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__x__": "X"
+                }
+            },
+            "height": 4,
+            "id": 966807845,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 448342426,
+                        "name": "path"
+                    }
+                },
+                "n": {
+                    "code": "n",
+                    "name": "__n__",
+                    "standard": 10,
+                    "type": "number",
+                    "value": null
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "standard": 60,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "for_",
+            "outputs": {
+                "iterator": {
+                    "code": "iterator",
+                    "name": "__iterator__",
+                    "type": "iterator"
+                },
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "type": "number"
+                },
+                "after": {
+                    "code": "after",
+                    "name": "__after__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "n",
+                    "x"
+                ],
+                "outputs": [
+                    "iterator",
+                    "index",
+                    "after"
+                ]
+            },
+            "type": "loop",
+            "width": 8,
+            "x": 10,
+            "y": 13
         }
     }
 }

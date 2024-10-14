@@ -4,7 +4,12 @@
             "name": "Events",
             "nodes": [
                 "onStartGame",
-                "everyFrame",
+                "everyFrame"
+            ]
+        },
+        "loops": {
+            "name": "Loops",
+            "nodes": [
                 "for_"
             ]
         },
@@ -49,6 +54,10 @@
             "first": "#801a1b",
             "second": "#cecac9"
         },
+        "loop": {
+            "first": "#000000",
+            "second": "#cecac9"
+        },
         "text": {
             "first": "#417f19",
             "second": "#cecac9"
@@ -68,6 +77,7 @@
     },
     "icons": {
         "number": "scr/code/sprites/types/number.png",
+        "loop": "scr/code/sprites/types/loop.png",
         "event": "scr/code/sprites/types/event.png",
         "text": "scr/code/sprites/types/text.png",
         "logic": "",
@@ -291,7 +301,7 @@
             }
         },
         "for_": {
-            "type": "event",
+            "type": "loop",
             "name": "for_",
             "x": null,
             "y": null,

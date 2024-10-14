@@ -4,7 +4,6 @@ from scr.modules.widgets import FocusLineEdit, FocusComboBox
 
 from scr.variables import *
 
-import pyautogui
 import math
 import json
 import os
@@ -250,6 +249,3 @@ class Object:
                 json.dump(file, f, indent=4)
 
             project.init()
-
-            if last["type"] != "bool":
-                pyautogui.click()

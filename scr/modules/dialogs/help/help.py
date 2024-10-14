@@ -47,38 +47,40 @@ class Help(QDialog):
         self.init()
 
     def change(self) -> None:
-        for element in self.objects.values():
-            element.deleteLater()
-
-        self.objects = {}
-
         self.page = list(self.project.objects["help_pages"].keys())[self.list.currentIndex().row()]
 
         self.init()
 
     def init(self) -> None:
+        for element in self.objects.values():
+            element.deleteLater()
+
+        self.objects = {}
+
         x = 220
         y = 10
 
         for page in self.pages[self.page]["pages"]:
-            self.objects["main"] = QLabel(parent=self)
-            self.objects["main"].setFont(BIG_HELP_FONT)
-            self.objects["main"].setGeometry(x + 50, y, 500, 35)
-            self.objects["main"].setText(translate(self.pages[self.page]["pages"][page]["title"]))
-            self.objects["main"].show()
+            self.objects[f"{page}_main"] = QLabel(parent=self)
+            self.objects[f"{page}_main"].setFont(BIG_HELP_FONT)
+            self.objects[f"{page}_main"].setGeometry(x + 50, y, 500, 35)
+            self.objects[f"{page}_main"].setText(translate(self.pages[self.page]["pages"][page]["title"]))
+            self.objects[f"{page}_main"].show()
 
             y += 50
 
             for i, text in enumerate(self.pages[self.page]["pages"][page]["text"]):
-                self.objects[f"text_{i}"] = QLabel(parent=self)
-                self.objects[f"text_{i}"].setFont(HELP_FONT)
-                self.objects[f"text_{i}"].setGeometry(x, y, self.width() - 240, 20)
-                self.objects[f"text_{i}"].setText(translate(text))
-                self.objects[f"text_{i}"].setWordWrap(True)
-                self.objects[f"text_{i}"].show()
+                self.objects[f"{page}_text_{i}"] = QLabel(parent=self)
+                self.objects[f"{page}_text_{i}"].setFont(HELP_FONT)
+                self.objects[f"{page}_text_{i}"].setGeometry(x, y, self.width() - 240, 20)
+                self.objects[f"{page}_text_{i}"].setText(translate(text))
+                self.objects[f"{page}_text_{i}"].setWordWrap(True)
+                self.objects[f"{page}_text_{i}"].show()
 
-                count = getColumnСount(self.objects[f"text_{i}"])
+                count = getColumnСount(self.objects[f"{page}_text_{i}"])
 
-                self.objects[f"text_{i}"].setGeometry(x, y, self.width() - 240, 20 * count)
+                self.objects[f"{page}_text_{i}"].setGeometry(x, y, self.width() - 240, 20 * count)
 
                 y += 20 * count
+
+            y += 50

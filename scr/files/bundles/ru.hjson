@@ -171,4 +171,5 @@
     "Compile version of project NOT SUPPORTED write text node": "Скомпилированная версия проекта НЕ ПОДДЕРЖИВАЕТ нод вывода текста"
     "Run and compile project": "Запуск и компиляция проекта"
     "To run or compile a program, you must click on the \"Project\" menu and click the \"Run\" or \"Compile\" button": "Чтобы запустить или скомпилировать программу, необходимо зайти в меню \"Проект\" и нажать кнопку \"Запустить\" или \"Скомпилировать\""
+    "Loops": "Циклы"
 }

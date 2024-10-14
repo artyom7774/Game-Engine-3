@@ -32,6 +32,12 @@
                     "Binds:",
                     "  Delete - delete node"
                 ]
+            },
+            "2": {
+                "title": "Nodes",
+                "text": [
+                    "Event nodes:"
+                ]
             }
         }
     },
