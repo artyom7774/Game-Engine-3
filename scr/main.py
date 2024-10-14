@@ -257,33 +257,33 @@ class Main(QMainWindow):
 
         # PROJECT MENU
 
-        project_run = QAction(translate("Run"), self)
-        project_run.triggered.connect(lambda: functions.compile.run(self))
+        project_run_action = QAction(translate("Run"), self)
+        project_run_action.triggered.connect(lambda: functions.compile.run(self))
 
-        project_compile = QAction(translate("Compile"), self)
-        project_compile.triggered.connect(lambda: functions.compile.compile(self))
+        project_compile_action = QAction(translate("Compile"), self)
+        project_compile_action.triggered.connect(lambda: functions.compile.compile(self))
 
-        project_compile_and_run = QAction(translate("Compile and run"), self)
-        project_compile_and_run.triggered.connect(lambda: functions.compile.compileAndRun(self))
+        project_compile_and_run_action = QAction(translate("Compile and run"), self)
+        project_compile_and_run_action.triggered.connect(lambda: functions.compile.compileAndRun(self))
 
-        project_save_project_as = QAction(translate("Save project"), self)
-        project_save_project_as.triggered.connect(lambda: functions.compile.saveProject(self))
+        project_save_project_as_action = QAction(translate("Save project"), self)
+        project_save_project_as_action.triggered.connect(lambda: functions.compile.saveProject(self))
 
-        project_save_executable_as = QAction(translate("Save executable project"), self)
-        project_save_executable_as.triggered.connect(lambda: functions.compile.saveExecutableProject(self))
+        project_save_executable_as_action = QAction(translate("Save executable project"), self)
+        project_save_executable_as_action.triggered.connect(lambda: functions.compile.saveExecutableProject(self))
 
         self.menues["project_menu"] = self.menubar.addMenu(translate("Project"))
 
         if self.selectProject == "" and not self.compiling:
             self.menues["project_menu"].setDisabled(True)
 
-        self.menues["project_menu"].addAction(project_run)
+        self.menues["project_menu"].addAction(project_run_action)
         self.menues["project_menu"].addSeparator()
-        self.menues["project_menu"].addAction(project_compile)
-        self.menues["project_menu"].addAction(project_compile_and_run)
+        self.menues["project_menu"].addAction(project_compile_action)
+        self.menues["project_menu"].addAction(project_compile_and_run_action)
         self.menues["project_menu"].addSeparator()
-        self.menues["project_menu"].addAction(project_save_project_as)
-        self.menues["project_menu"].addAction(project_save_executable_as)
+        self.menues["project_menu"].addAction(project_save_project_as_action)
+        self.menues["project_menu"].addAction(project_save_executable_as_action)
 
         # HELP MENU
 
@@ -292,14 +292,15 @@ class Main(QMainWindow):
         if self.selectProject == "":
             self.menues["help_menu"].setDisabled(True)
 
-        for path in os.listdir("scr/site/help/"):
-            with open(f"scr/site/help/{path}", "r") as file:
-                var = json.load(file)
+        self.objects["help_pages"] = {}
 
-            action = QAction(translate(var["name"]), self)
-            action.triggered.connect(lambda: functions.menu.help.help_(self, var))
+        for name, value in json.load(open("scr/site/help.json")).items():
+            self.objects["help_pages"][value["name"]] = dict(value)
 
-            self.menues["help_menu"].addAction(action)
+        help_program_action = QAction(translate("Program"), self)
+        help_program_action.triggered.connect(lambda: functions.menu.help.help_(self, "Scene"))
+
+        self.menues["help_menu"].addAction(help_program_action)
 
     def shortcut(self) -> None:
         def right(project):

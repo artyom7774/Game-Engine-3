@@ -620,7 +620,11 @@ class Scene:
         project.cash["file"][project.selectFile].camera.pos.x -= x
         project.cash["file"][project.selectFile].camera.pos.y -= y
 
-        Scene.update(project, "move")
+        try:
+            Scene.update(project, "move")
+
+        except BaseException:
+            pass
 
     @staticmethod
     def test(project) -> None:

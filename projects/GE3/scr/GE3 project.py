@@ -1,4 +1,4 @@
-# MADE BY GAME ENGINE 3.0.0b
+# MADE BY GAME ENGINE 3.0.1
 
 import engine
 import sys

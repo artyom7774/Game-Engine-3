@@ -1,0 +1,52 @@
+{
+    "Scene": {
+        "name": "Scene",
+        "pages": {
+            "1": {
+                "title": "Control in the scene",
+                "text": [
+                    "Movement - mouse",
+                    "Move object - arrows",
+                    "",
+                    "Binds:",
+                    "  Q - remove object selection",
+                    "",
+                    "  Ctrl+C - copy object",
+                    "  Ctrl+V - paste object",
+                    "",
+                    "  Delete - delete object"
+                ]
+            }
+        }
+    },
+
+    "Code": {
+        "name": "Code",
+        "pages": {
+            "1": {
+                "title": "Control nodes",
+                "text": [
+                    "Movement - mouse",
+                    "Move node - middle mouse button",
+                    "",
+                    "Binds:",
+                    "  Delete - delete node"
+                ]
+            }
+        }
+    },
+
+    "Run": {
+        "name": "Run",
+        "pages": {
+            "1": {
+                "title": "Run and compile project",
+                "text": [
+                    "To run or compile a program, you must click on the \"Project\" menu and click the \"Run\" or \"Compile\" button",
+                    "",
+                    "Compile version of project NOT SUPPORTED write text node"
+                ]
+            }
+        }
+    }
+}

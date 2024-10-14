@@ -163,4 +163,12 @@
     "New version": "Новая версия"
     "Update": "Обновление"
     "A new version of the project has been released. Please update the product": "Вышла новая версия проекта. Пожалуйста, обновите продукт"
+    "Control nodes": "Управление нодов"
+    "Move node - middle mouse button": "Перемещение нодов - средняя кнопка мыши"
+    "  Delete - delete node": "  Delete - удалить нод"
+    "Code": "Функция"
+    "Program": "Программа"
+    "Compile version of project NOT SUPPORTED write text node": "Скомпилированная версия проекта НЕ ПОДДЕРЖИВАЕТ нод вывода текста"
+    "Run and compile project": "Запуск и компиляция проекта"
+    "To run or compile a program, you must click on the \"Project\" menu and click the \"Run\" or \"Compile\" button": "Чтобы запустить или скомпилировать программу, необходимо зайти в меню \"Проект\" и нажать кнопку \"Запустить\" или \"Скомпилировать\""
 }

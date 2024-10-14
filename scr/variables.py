@@ -3,8 +3,6 @@ from PyQt5.QtGui import QFont
 
 from scr.modules.translate import Translate
 
-from PIL import ImageFont
-
 import importlib.util
 import json
 import os

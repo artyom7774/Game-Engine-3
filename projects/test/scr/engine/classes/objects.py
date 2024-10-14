@@ -92,23 +92,26 @@ class StaticObject:
 
         lastPos = Vec2i(self.pos.x, self.pos.y)
 
+        useX = True
+        useY = True
+
         for _ in range(step):
             for i, obj in enumerate(collisions):
-                # print(obj)
-
                 if "collision" in obj["functions"]["types"]:
-                    if self.collision(x, y):
-                        print("collision")
+                    if self.collision(x, 0):
+                        useX = False
 
-                        break
+                    if self.collision(0, y):
+                        useY = False
 
             else:
-                self.pos.x += math.ceil(abs(x) / step) * (1 if x >= 0 else -1)
-                self.pos.y += math.ceil(abs(y) / step) * (1 if y >= 0 else -1)
+                self.pos.x += (abs(x) / step) * (1 if x >= 0 else -1) * useX
+                self.pos.y += (abs(y) / step) * (1 if y >= 0 else -1) * useY
 
-                continue
+        self.pos.x = round(self.pos.x)
+        self.pos.y = round(self.pos.y)
 
-            break
+        # TODO: починить коллизию при 135 градусов
 
         if self.sprite is not None:
             self.sprite.pos.x += self.pos.x - lastPos.x
@@ -234,7 +237,7 @@ class DynamicObject(StaticObject):
         self.move(math.trunc(x), math.trunc(y))
 
     def moveByAngle(self, angle: int, speed: int = None):
-        self.vectors["move"].angle = angle
+        self.vectors["move"].angle = 180 - angle
         self.vectors["move"].power = self.speed if speed is None else speed
 
     def moveByType(self, move: str, speed: int = None) -> None:
@@ -280,9 +283,5 @@ class DynamicObject(StaticObject):
         return pos
 
 
-class BulletObject:
-    pass
-
-
-class PlatformObject:
+class KinematicObject:
     pass
