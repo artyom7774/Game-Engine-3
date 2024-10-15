@@ -3,7 +3,6 @@
 ![icon](https://github.com/artyom7774/Game-Engine-3/blob/main/icon.png)
 
 - DONT RUN / COMPILE PROJECT WHILE CONSOLE OPENED
-<br>
 
 <br>Shell for creating applications and games using a graphical editor in the python 3 programming language
 <br>To install this program you will need:
