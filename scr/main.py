@@ -86,7 +86,7 @@ class Main(QMainWindow):
                 nowVersion = json.load(open("scr/files/version.json", "r"))["version"]
 
                 if lastVersion != nowVersion:
-                    MessageBox.special(f"{translate('Update')} {lastVersion}", translate("A new version of the project has been released. Please update the product"))
+                    MessageBox.special(f"{translate('Update')} {nowVersion} -> {lastVersion}", translate("A new version of the project has been released. Please update the product"))
 
             else:
                 print(f"ERROR: can't download project version, status = {response.status_code}")
