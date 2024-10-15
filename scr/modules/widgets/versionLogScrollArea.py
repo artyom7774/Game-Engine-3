@@ -33,12 +33,6 @@ class VersionLogScrollArea(QWidget):
 
             layout.addWidget(text)
 
-        """
-        for i in range(100):
-            label = QLabel(f"Label {i + 1}", container)
-            layout.addWidget(label)
-        """
-
         container.setLayout(layout)
 
         self.area.setWidget(container)

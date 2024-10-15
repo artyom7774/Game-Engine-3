@@ -19,7 +19,6 @@
             }
         }
     },
-
     "Code": {
         "name": "Code",
         "pages": {
@@ -36,12 +35,35 @@
             "2": {
                 "title": "Nodes",
                 "text": [
-                    "Event nodes:"
+                    "Event nodes:",
+                    "  On start game",
+                    "  Every frame",
+                    "",
+                    "Loop nodes:",
+                    "  For N times",
+                    "",
+                    "Object nodes:",
+                    "  Move object",
+                    "  Set object pos",
+                    "  Get object pos",
+                    "  Get object ID by name",
+                    "",
+                    "Text nodes:",
+                    "  Write text",
+                    "",
+                    "Numbers nodes:",
+                    "  Plus",
+                    "  Minus",
+                    "  Multiply",
+                    "  Divide",
+                    "",
+                    "Another nodes:",
+                    "  Get var",
+                    "  Set var"
                 ]
             }
         }
     },
-
     "Run": {
         "name": "Run",
         "pages": {

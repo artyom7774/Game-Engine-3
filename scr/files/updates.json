@@ -1,12 +1,18 @@
 {
     "sorted": [
-        "3.0.1"
+        "3.0.1",
+        "3.0.2"
     ],
 
     "updates": {
         "3.0.1": {
             "name": "3.0.1",
             "text": "- update moving object by angle\n- message about a program update, if one exists\n- update help menu"
+        },
+
+        "3.0.2": {
+            "name": "3.0.2",
+            "text": "- update help menu"
         }
     }
 }
