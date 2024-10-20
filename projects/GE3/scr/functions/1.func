@@ -509,7 +509,7 @@
                 "n": {
                     "code": "n",
                     "name": "__n__",
-                    "standard": 10,
+                    "standard": 100,
                     "type": "number",
                     "value": null
                 },

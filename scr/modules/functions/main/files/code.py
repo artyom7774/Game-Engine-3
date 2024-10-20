@@ -179,7 +179,7 @@ class CodeNodeConnectorLineEdit(QLineEdit):
 
 
 class CodeNodeConnector(QLabel):
-    def __init__(self, parent, project, node: dict, id: int, keys: dict, number: int, input: dict = None, output: dict = None):
+    def __init__(self, parent, project, node: dict, id: int, keys: dict, number: int, input: dict = None, output: dict = None) -> None:
         QLabel.__init__(self, parent)
 
         self.project = project
@@ -187,12 +187,17 @@ class CodeNodeConnector(QLabel):
         self.setGeometry(0, (number + 1) * CODE_GRID_CELL_SIZE, parent.width(), CODE_GRID_CELL_SIZE)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
+        self.number = number
+
         self.keys = keys
+
+        self.node = node
 
         self.left = None
         self.right = None
 
         self.inputLeftText = None
+        self.inputLeftRama = None
 
         if input is not None:
             self.left = QLabel(self)
@@ -239,6 +244,19 @@ class CodeNodeConnector(QLabel):
 
         self.show()
 
+    def updateObjectGeometry(self) -> None:
+        self.setGeometry(0, (self.number + 1) * CODE_GRID_CELL_SIZE, self.parent().width(), CODE_GRID_CELL_SIZE)
+
+        if self.left is not None:
+            self.left.setGeometry(0, 9 + self.node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
+
+        if self.right is not None:
+            self.right.setGeometry(self.width() - 12, 9 + self.node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
+
+        if self.inputLeftText is not None:
+            self.inputLeftText.setGeometry(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 3, self.width() - 40, 14)
+            self.inputLeftRama.setGeometry(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 5, self.width() - 40, 18)
+
 
 class CodeNode(QTreeWidget):
     def __init__(self, parent, node: dict) -> None:
@@ -257,10 +275,10 @@ class CodeNode(QTreeWidget):
         self.connectors = {}
 
         self.setGeometry(
-            (node["x"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].x) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE,
-            (node["y"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].y - node["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + (node["height"] - 2),
-            node["width"] * CODE_GRID_CELL_SIZE + 3,
-            node["height"] * CODE_GRID_CELL_SIZE + 3
+            (self.node["x"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].x) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE,
+            (self.node["y"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].y - self.node["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + (self.node["height"] - 2),
+            self.node["width"] * CODE_GRID_CELL_SIZE + 3,
+            self.node["height"] * CODE_GRID_CELL_SIZE + 3
         )
 
         self.bg = QLabel(self)
@@ -362,6 +380,16 @@ class CodeNode(QTreeWidget):
 
         self.bg.setPixmap(qpixmap)
 
+    def updateObjectGeometry(self) -> None:
+        self.setGeometry(
+            (self.node["x"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].x) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE,
+            (self.node["y"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].y - self.node["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + (self.node["height"] - 2),
+            self.node["width"] * CODE_GRID_CELL_SIZE + 3,
+            self.node["height"] * CODE_GRID_CELL_SIZE + 3
+        )
+
+        for key, connector in self.connectors.items():
+            connector.updateObjectGeometry()
 
 class CodeLabel(QLabel):
     def __init__(self, parent=None, pressFunction: typing.Callable = None, releasedFunction: typing.Callable = None) -> None:
@@ -502,11 +530,6 @@ class CodeLabel(QLabel):
     def mouseReleaseEvent(self, event) -> None:
         # Code.update(self.project)
 
-        for node in self.project.objects["main"]["nodes"].values():
-            for connector in node.connectors.values():
-                if connector.inputLeftText is not None:
-                    connector.inputLeftText.save()
-
         self.stop = False
 
         for element in self.project.objects["main"]["liner"].points["inputs"]:
@@ -547,11 +570,6 @@ class CodeLabel(QLabel):
                 self.releasedFunction(event.pos().x() - self.project.objects["main"]["code"].width() // 2, event.pos().y() - self.project.objects["main"]["code"].height() // 2)
 
     def mouseMoveEvent(self, event) -> None:
-        if self.stop:
-            Code.update(self.project)
-
-            return
-
         # MOVE SCENE
 
         self.nowPoint = event.pos()
@@ -566,7 +584,7 @@ class CodeLabel(QLabel):
                 self.project.cash["file"][self.project.selectFile].x -= x
                 self.project.cash["file"][self.project.selectFile].y -= y
 
-            Code.update(self.project)
+            Code.update(self.project, call="move")
 
         Code.selected(self.project)
 
@@ -886,7 +904,7 @@ class Code:
 
         # NODES
 
-        Code.nodes(project)
+        Code.nodes(project, call != "move")
 
         # ALL CONNECTORS
 
@@ -1014,38 +1032,43 @@ class Code:
         project.objects["main"]["replacer_pos"].show()
 
     @staticmethod
-    def nodes(project) -> None:
-        for node in project.objects["main"]["nodes"].values():
-            for connector in node.connectors.values():
-                if connector.inputLeftText is not None:
-                    try:
-                        # connector.inputLeftText.save()
+    def nodes(project, create: bool = True) -> None:
+        if create:
+            for node in project.objects["main"]["nodes"].values():
+                for connector in node.connectors.values():
+                    if connector.inputLeftText is not None:
+                        try:
+                            # connector.inputLeftText.save()
 
-                        connector.inputLeftText.deleteLater()
-                        connector.inputLeftRama.deleteLater()
+                            connector.inputLeftText.deleteLater()
+                            connector.inputLeftRama.deleteLater()
 
-                    except RuntimeError:
-                        pass
+                        except RuntimeError:
+                            pass
 
-            try:
-                node.hide()
+                try:
+                    node.hide()
 
-            except AttributeError:
-                pass
+                except AttributeError:
+                    pass
 
-            except RuntimeError:
-                continue
+                except RuntimeError:
+                    continue
 
-            try:
-                node.deleteLater()
+                try:
+                    node.deleteLater()
 
-            except AttributeError:
-                pass
+                except AttributeError:
+                    pass
 
-        project.objects["main"]["nodes"] = {}
+            project.objects["main"]["nodes"] = {}
 
-        for id, node in project.objects["main"]["function"]["objects"].items():
-            project.objects["main"]["nodes"][node["id"]] = CodeNode(project, node)
+            for id, node in project.objects["main"]["function"]["objects"].items():
+                project.objects["main"]["nodes"][node["id"]] = CodeNode(project, node)
+
+        else:
+            for id, node in project.objects["main"]["function"]["objects"].items():
+                project.objects["main"]["nodes"][node["id"]].updateObjectGeometry()
 
     @staticmethod
     def menu(project, position) -> None:
