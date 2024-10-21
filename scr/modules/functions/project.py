@@ -344,7 +344,7 @@ def centerMenuInit(project, update: bool = False) -> None:
             functions.main.files.Config.init(project)
 
         elif project.selectFile.endswith("collision.cfg"):
-            functions.main.files.Text.init(project)  # TODO
+            functions.main.files.Text.init(project)  # TODO таблица для редактора коллизий
 
         elif project.selectFile.endswith(".obj") or project.selectFile.endswith(".objc"):
             functions.main.files.Object.init(project)

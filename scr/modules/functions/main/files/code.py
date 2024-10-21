@@ -169,9 +169,6 @@ class CodeNodeConnectorLineEdit(QLineEdit):
         if TypeCurrect.currect_(type, text):
             self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = TypeSet.set_(type, text)
 
-        with open(self.project.selectFile, "w", encoding="utf-8") as file:
-            json.dump(self.project.objects["main"]["function"], file, indent=4)
-
     def focusOutEvent(self, event) -> None:
         self.save()
 
@@ -188,6 +185,7 @@ class CodeNodeConnector(QLabel):
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         self.number = number
+        self.id = id
 
         self.keys = keys
 
@@ -248,9 +246,13 @@ class CodeNodeConnector(QLabel):
         self.setGeometry(0, (self.number + 1) * CODE_GRID_CELL_SIZE, self.parent().width(), CODE_GRID_CELL_SIZE)
 
         if self.left is not None:
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
+
             self.left.setGeometry(0, 9 + self.node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
 
         if self.right is not None:
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
+
             self.right.setGeometry(self.width() - 12, 9 + self.node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
 
         if self.inputLeftText is not None:
@@ -520,12 +522,6 @@ class CodeLabel(QLabel):
             self.project.objects["main"]["replacer"].node = None
 
             self.project.init()
-
-        # try:
-        #     self.setFocus()
-        #
-        # except RuntimeError:
-        #     pass
 
     def mouseReleaseEvent(self, event) -> None:
         # Code.update(self.project)
@@ -1025,10 +1021,11 @@ class Code:
         project.objects["main"]["replacer_pos"] = CodeNodeStroke(project.objects["main"]["code"])
         project.objects["main"]["replacer_pos"].setGeometry(
             (x - project.cash["file"][project.selectFile].x) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE,
-            (y - project.cash["file"][project.selectFile].y - nodeType["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + 1,
-            nodeType["width"] * (CODE_GRID_CELL_SIZE + 1) - 2,
-            nodeType["height"] * (CODE_GRID_CELL_SIZE + 1)
+            (y - project.cash["file"][project.selectFile].y - nodeType["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + (nodeType["height"] - 2),
+            nodeObj.width(),
+            nodeObj.height()
         )
+
         project.objects["main"]["replacer_pos"].show()
 
     @staticmethod

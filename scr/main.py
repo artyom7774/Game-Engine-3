@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QWidget, QLabel, QVBoxLayout, QScrollArea, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
+from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
 from PyQt5.QtCore import QEvent
 from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QIcon, Qt
@@ -12,7 +12,32 @@ from scr.variables import *
 import qdarktheme
 import threading
 import requests
+import pynput
 import ctypes
+
+"""
+if "main" in self.objects and "nodes" in self.objects["main"]:
+    for id, node in self.objects["main"]["nodes"].items():
+        for key, connector in node.connectors.items():
+            if connector.inputLeftText is not None:
+                connector.inputLeftText.save()
+
+    with open(self.selectFile, "w", encoding="utf-8") as file:
+        json.dump(self.objects["main"]["function"], file, indent=4)
+
+def on_click(x, y, button, pressed):
+    if pressed:
+        print(f"Мышь нажата на позиции ({x}, {y}) с кнопкой {button}")
+
+
+def func():
+    with pynput.mouse.Listener(on_click=on_click) as listener:
+        listener.join()
+
+
+thr = threading.Thread(target=lambda: func())
+thr.start()
+"""
 
 
 class FocusTreeWidget(QTreeWidget):
@@ -73,7 +98,34 @@ class Main(QMainWindow):
 
         self.versionUpdateMessage()
 
+        self.customClickEvent()
+
         self.init()
+
+    def customClickEvent(self) -> None:
+        def function() -> None:
+            with pynput.mouse.Listener(on_click=click) as listener:
+                listener.join()
+
+        def click(x, y, button, pressed) -> None:
+            if not pressed:
+                return
+
+            try:
+                if "main" in self.objects and "nodes" in self.objects["main"]:
+                    for id, node in self.objects["main"]["nodes"].items():
+                        for key, connector in node.connectors.items():
+                            if connector.inputLeftText is not None:
+                                connector.inputLeftText.save()
+
+                    with open(self.selectFile, "w", encoding="utf-8") as file:
+                        json.dump(self.objects["main"]["function"], file, indent=4)
+
+            except RuntimeError:
+                pass
+
+        thr = threading.Thread(target=lambda: function())
+        thr.start()
 
     def versionUpdateMessage(self) -> None:
         url = "https://raw.githubusercontent.com/artyom7774/Game-Engine-3/main/scr/files/version.json"
