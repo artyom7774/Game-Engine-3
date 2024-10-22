@@ -1,5 +1,6 @@
 import functools
 import typing
+import numba
 import math
 
 
@@ -113,3 +114,8 @@ def bezierCurveWidth(x0: int, y0: int, x1: int, y1: int, x2: int, y2: int, x3: i
             stack.append([x0, y0, x01, y01, x012, y012, x0123, y0123])
 
     return answer
+
+
+@numba.njit(cache=True, fastmath=True)
+def pow(x: int, y: int) -> int:
+    return x ** y

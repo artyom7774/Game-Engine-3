@@ -493,7 +493,7 @@ def run(project) -> None:
 
     logger(project, "Run")
 
-    thr = threading.Thread(target=lambda:  Compile.run(project))
+    thr = threading.Thread(target=lambda: Compile.run(project))
     thr.start()
 
 

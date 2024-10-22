@@ -1,7 +1,8 @@
 {
     "sorted": [
         "3.0.1",
-        "3.0.2"
+        "3.0.2",
+        "3.0.3"
     ],
 
     "updates": {
@@ -13,6 +14,11 @@
         "3.0.2": {
             "name": "3.0.2",
             "text": "- update help menu"
+        },
+
+        "3.0.3": {
+            "name": "3.0.3",
+            "text": "- optimize code editor\n- bug fix in code editor"
         }
     }
 }
