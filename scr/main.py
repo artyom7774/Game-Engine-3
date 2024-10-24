@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QMessageBox, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
-=======
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
->>>>>>> cc16b35b65e6b2ef15d6e4ca8dd8ce55c8b8ddf4
 from PyQt5.QtCore import QEvent
 from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QIcon, Qt
@@ -19,30 +16,6 @@ import threading
 import requests
 import pynput
 import ctypes
-
-"""
-if "main" in self.objects and "nodes" in self.objects["main"]:
-    for id, node in self.objects["main"]["nodes"].items():
-        for key, connector in node.connectors.items():
-            if connector.inputLeftText is not None:
-                connector.inputLeftText.save()
-
-    with open(self.selectFile, "w", encoding="utf-8") as file:
-        json.dump(self.objects["main"]["function"], file, indent=4)
-
-def on_click(x, y, button, pressed):
-    if pressed:
-        print(f"Мышь нажата на позиции ({x}, {y}) с кнопкой {button}")
-
-
-def func():
-    with pynput.mouse.Listener(on_click=on_click) as listener:
-        listener.join()
-
-
-thr = threading.Thread(target=lambda: func())
-thr.start()
-"""
 
 
 class FocusTreeWidget(QTreeWidget):

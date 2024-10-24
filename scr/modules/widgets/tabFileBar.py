@@ -37,6 +37,8 @@ class TabFileBar(QTabBar):
         if any([element["name"] == name for element in self.objects]):
             self.setCurrentIndex([element["name"] == name for element in self.objects].index(True))
 
+            print("add -> return 0")
+
             return 0
 
         index = super().addTab(visiable)
@@ -45,6 +47,10 @@ class TabFileBar(QTabBar):
             "name": name,
             "visiable": visiable
         })
+
+        self.updateSelectFile()
+
+        print("add ->", self.objects, self.project.selectFile)
 
         self.setTabIcon(index, icon if icon else QIcon())
         self.setTabText(index, visiable)
@@ -63,6 +69,18 @@ class TabFileBar(QTabBar):
     def removeAll(self) -> None:
         for _ in range(len(self.objects)):
             self.pop(0)
+
+    def updateSelectFile(self) -> None:
+        if self.count() == 0:
+            self.project.selectFile = ""
+
+        elif self.count() == 1:
+            self.project.selectFile = self.objects[0]["name"]
+
+        else:
+            self.project.selectFile = self.objects[self.currentIndex()]["name"]
+
+        print(self.project.selectFile, self.objects)
 
     def pop(self, index: int) -> None:
         self.objects.pop(index)
