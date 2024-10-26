@@ -121,7 +121,7 @@ class StaticObject:
 
     def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False) -> bool:
         # TODO кешировать функцию по fpsc (номер кадра), x, y, allowFunctions
-        
+
         hitbox = self.getEditHitbox(x, y)
 
         if self.id not in self.game.cash["collisions"]:
