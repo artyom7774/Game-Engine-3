@@ -46,8 +46,8 @@ SFONT.setPointSize(13)
 
 # BIG HELP FONT
 
-BIG_HELP_FONT = QFont("Georgia")
-BIG_HELP_FONT.setPointSize(18)
+BIG_HELP_FONT = QFont("Consolas")
+BIG_HELP_FONT.setPointSize(14)
 
 # HELP FONT
 

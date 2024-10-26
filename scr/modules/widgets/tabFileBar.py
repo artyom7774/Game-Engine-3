@@ -46,6 +46,8 @@ class TabFileBar(QTabBar):
             "visiable": visiable
         })
 
+        self.updateSelectFile()
+
         self.setTabIcon(index, icon if icon else QIcon())
         self.setTabText(index, visiable)
 
@@ -63,6 +65,16 @@ class TabFileBar(QTabBar):
     def removeAll(self) -> None:
         for _ in range(len(self.objects)):
             self.pop(0)
+
+    def updateSelectFile(self) -> None:
+        if self.count() == 0:
+            self.project.selectFile = ""
+
+        elif self.count() == 1:
+            self.project.selectFile = self.objects[0]["name"]
+
+        else:
+            self.project.selectFile = self.objects[self.currentIndex()]["name"]
 
     def pop(self, index: int) -> None:
         self.objects.pop(index)

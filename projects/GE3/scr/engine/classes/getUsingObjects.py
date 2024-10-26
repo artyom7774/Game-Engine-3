@@ -44,14 +44,14 @@ def binaryRight(objects: typing.List[VObject], distance: float) -> int:
 class GetUsingObjects:
     @staticmethod
     def getUsingObjectsBase(game, group: "ObjectGroup") -> None:
-        dynamics = [obj for obj in group.objects if type(obj) == DynamicObject and any(obj.getVectorsPower().get())]
+        dynamics = [obj for obj in group.objects if type(obj) == DynamicObject]
 
         for obj in dynamics:
             GetUsingObjects.getUsingObjectsIteration(game, group.objects, obj)
 
     @staticmethod
     def getUsingObjectsCircle(game, group: "ObjectGroup") -> None:
-        dynamics = [obj for obj in group.objects if type(obj) == DynamicObject and any(obj.getVectorsPower().get())]
+        dynamics = [obj for obj in group.objects if type(obj) == DynamicObject]
 
         game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.distance)
 
@@ -80,5 +80,5 @@ class GetUsingObjects:
             var = obj.collisions.get(second.group)
 
             if var is not None:
-                if Collision.rect(second.pos.x + second.hitbox.x, second.pos.y + second.hitbox.y, second.hitbox.width, second.hitbox.height, obj.pos.x + hitbox.x, obj.pos.y + hitbox.y, hitbox.width, hitbox.height):
+                if True or Collision.rect(second.pos.x + second.hitbox.x, second.pos.y + second.hitbox.y, second.hitbox.width, second.hitbox.height, obj.pos.x + hitbox.x, obj.pos.y + hitbox.y, hitbox.width, hitbox.height):
                     game.cash["collisions"][obj.id].append({"object": second, "functions": var})

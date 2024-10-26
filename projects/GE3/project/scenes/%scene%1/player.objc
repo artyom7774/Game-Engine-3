@@ -30,7 +30,7 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": 0
+                    "value": 17
                 },
                 "y": {
                     "name": "Y",
@@ -56,7 +56,7 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 40
+                    "value": 41
                 },
                 "height": {
                     "name": "Height",

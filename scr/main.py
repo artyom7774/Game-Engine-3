@@ -1,3 +1,4 @@
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QMessageBox, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
 from PyQt5.QtCore import QEvent
 from PyQt5.QtGui import QKeySequence
@@ -9,35 +10,12 @@ from scr.modules import functions
 
 from scr.variables import *
 
+import webbrowser
 import qdarktheme
 import threading
 import requests
 import pynput
 import ctypes
-
-"""
-if "main" in self.objects and "nodes" in self.objects["main"]:
-    for id, node in self.objects["main"]["nodes"].items():
-        for key, connector in node.connectors.items():
-            if connector.inputLeftText is not None:
-                connector.inputLeftText.save()
-
-    with open(self.selectFile, "w", encoding="utf-8") as file:
-        json.dump(self.objects["main"]["function"], file, indent=4)
-
-def on_click(x, y, button, pressed):
-    if pressed:
-        print(f"Мышь нажата на позиции ({x}, {y}) с кнопкой {button}")
-
-
-def func():
-    with pynput.mouse.Listener(on_click=on_click) as listener:
-        listener.join()
-
-
-thr = threading.Thread(target=lambda: func())
-thr.start()
-"""
 
 
 class FocusTreeWidget(QTreeWidget):
@@ -128,6 +106,10 @@ class Main(QMainWindow):
         thr.start()
 
     def versionUpdateMessage(self) -> None:
+        def function():
+            thr = threading.Thread(target=lambda: webbrowser.open("https://github.com/artyom7774/Game-Engine-3/releases"))
+            thr.start()
+
         url = "https://raw.githubusercontent.com/artyom7774/Game-Engine-3/main/scr/files/version.json"
 
         if functions.haveInternet():
@@ -138,7 +120,18 @@ class Main(QMainWindow):
                 nowVersion = json.load(open("scr/files/version.json", "r"))["version"]
 
                 if lastVersion != nowVersion:
-                    MessageBox.special(f"{translate('Update')} {nowVersion} -> {lastVersion}", translate("A new version of the project has been released. Please update the product"))
+                    msg = QMessageBox()
+                    msg.setWindowTitle(f"{translate('Update')} {nowVersion} -> {lastVersion}")
+                    msg.setText(translate("A new version of the project has been released. Please update the product"))
+                    msg.setIcon(QMessageBox.Information)
+
+                    openButton = QPushButton(translate("Open"))
+                    openButton.clicked.connect(lambda: function())
+                    msg.addButton(openButton, QMessageBox.ActionRole)
+
+                    okButton = msg.addButton(QMessageBox.Ok)
+
+                    msg.exec_()
 
             else:
                 print(f"ERROR: can't download project version, status = {response.status_code}")

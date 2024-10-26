@@ -18,8 +18,8 @@ import math
 class StaticObject:
     def __init__(
         self, game,
-        pos: typing.Union[typing.List[float], Vec2f],
-        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f],
+        pos: typing.Union[typing.List[float], Vec2f, Vec2i],
+        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f, Vec4i],
         sprite: VSprite = None,
         group: str = None,
 

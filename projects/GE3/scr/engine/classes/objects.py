@@ -18,8 +18,8 @@ import math
 class StaticObject:
     def __init__(
         self, game,
-        pos: typing.Union[typing.List[float], Vec2f],
-        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f],
+        pos: typing.Union[typing.List[float], Vec2f, Vec2i],
+        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f, Vec4i],
         sprite: VSprite = None,
         group: str = None,
 
@@ -126,7 +126,11 @@ class StaticObject:
             return False
 
         for obj in self.game.cash["collisions"][self.id]:
+            print(obj["object"].pos.x, obj["object"].pos.y)
+
             if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+                print("->", obj["object"].pos.x, obj["object"].pos.y)
+
                 if allowFunctions:
                     for element in obj["functions"]["functions"]:
                         getattr(self.game.functions, element.replace("function::", "").replace("()", ""))(self.game, self, obj)

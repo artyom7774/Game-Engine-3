@@ -28,7 +28,7 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": 480
+                    "value": -416
                 },
                 "y": {
                     "name": "Y",

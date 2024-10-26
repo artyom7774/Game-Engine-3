@@ -92,10 +92,6 @@ class SceneLabel(QLabel):
         with open(self.project.cash["file"][self.project.selectFile].settings, "r") as file:
             self.sceneSettings = json.load(file)
 
-        self.project.objects["main"]["scene_timer"] = QTimer(self.project)
-        self.project.objects["main"]["scene_timer"].timeout.connect(lambda: self.updateCameraObject())
-        self.project.objects["main"]["scene_timer"].start(1000 // 30)
-
     def updateCameraObject(self) -> None:
         if self.x() < QCursor.pos().x() - self.project.x() < self.x() + self.width() and self.y() < QCursor.pos().y() - self.project.y() - 40 < self.y() + self.height():
             self.position = Vec2f(QCursor.pos().x() - self.project.x() - self.x(), QCursor.pos().y() - self.project.y() - self.y() - 40)
@@ -149,6 +145,8 @@ class SceneLabel(QLabel):
             self.drawing = False
 
     def mouseMoveEvent(self, event) -> None:
+        self.updateCameraObject()
+
         if event.buttons() & Qt.LeftButton and self.drawing:
             x = event.pos().x() - self.lastPoint.x()
             y = event.pos().y() - self.lastPoint.y()
@@ -379,9 +377,9 @@ class Scene:
             except AttributeError:
                 pass
 
-        project.objects["main"]["timer"] = QTimer(project)
-        project.objects["main"]["timer"].timeout.connect(lambda: update_())
-        project.objects["main"]["timer"].start(1000 // 30)
+        # project.objects["main"]["timer"] = QTimer(project)
+        # project.objects["main"]["timer"].timeout.connect(lambda: update_())
+        # project.objects["main"]["timer"].start(1000 // 30)
 
     @staticmethod
     def objects(project) -> None:
@@ -470,10 +468,10 @@ class Scene:
         project.objects["main"]["scene_menu_new_action"].triggered.connect(lambda: Scene.createSceneObject(project, position))
 
         project.objects["main"]["scene_menu_copy_action"] = QAction(translate("Copy"), project)
-        project.objects["main"]["scene_menu_copy_action"].triggered.connect(lambda: Scene.pasteObject(project))
+        project.objects["main"]["scene_menu_copy_action"].triggered.connect(lambda: Scene.copyObject(project))
 
         project.objects["main"]["scene_menu_paste_action"] = QAction(translate("Paste"), project)
-        project.objects["main"]["scene_menu_paste_action"].triggered.connect(lambda: Scene.copyObject(project))
+        project.objects["main"]["scene_menu_paste_action"].triggered.connect(lambda: Scene.pasteObject(project))
 
         project.objects["main"]["scene_menu_delete_action"] = QAction(translate("Delete"), project)
         project.objects["main"]["scene_menu_delete_action"].triggered.connect(lambda: Scene.deleteSceneObject(project, position))
@@ -487,7 +485,6 @@ class Scene:
 
         else:
             project.objects["main"]["scene_menu_copy_action"].setDisabled(True)
-            project.objects["main"]["scene_menu_paste_action"].setDisabled(True)
             project.objects["main"]["scene_menu_delete_action"].setDisabled(True)
 
         project.objects["main"]["scene_menu"].addAction(project.objects["main"]["scene_menu_new_action"])
@@ -581,6 +578,10 @@ class Scene:
             project.cash["file"][project.selectFile].screen = application.frame(image=True, screenFillColor=(32, 33, 36), lastDrawing=lastDrawing)
 
         except KeyError:
+            project.objects["tab_file_bar"].updateSelectFile()
+
+            print("error")
+
             return 0
 
         image = functions.files.Scene.getVisiableScreen(project)
@@ -671,9 +672,12 @@ class Scene:
             if obj.group.find("debug") != -1 and obj.group.startswith("__") and obj.group.endswith("__"):
                 continue
 
-            if obj.pos.x + obj.hitbox.x < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.hitbox.x + obj.hitbox.width and obj.pos.y + obj.hitbox.y < y + \
-                project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.hitbox.y + obj.hitbox.height:
-                os.remove(obj.variables["file"])
+            if obj.pos.x + obj.hitbox.x < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.hitbox.x + obj.hitbox.width and obj.pos.y + obj.hitbox.y < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.hitbox.y + obj.hitbox.height:
+                try:
+                    os.remove(obj.variables["file"])
+
+                except OSError:
+                    pass
 
                 project.init()
 
