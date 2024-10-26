@@ -21,12 +21,12 @@
         },
         "visiable_grid": {
             "name": "Grid visiable",
-            "value": true,
+            "value": false,
             "type": "bool"
         },
         "snap": {
             "name": "Snap to grid",
-            "value": true,
+            "value": false,
             "type": "bool"
         },
         "grid": {

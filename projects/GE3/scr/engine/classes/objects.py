@@ -126,11 +126,7 @@ class StaticObject:
             return False
 
         for obj in self.game.cash["collisions"][self.id]:
-            print(obj["object"].pos.x, obj["object"].pos.y)
-
             if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                print("->", obj["object"].pos.x, obj["object"].pos.y)
-
                 if allowFunctions:
                     for element in obj["functions"]["functions"]:
                         getattr(self.game.functions, element.replace("function::", "").replace("()", ""))(self.game, self, obj)
