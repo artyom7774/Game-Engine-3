@@ -1,0 +1,26 @@
+body {
+    display: flex;
+}
+
+.menu {
+    width: 200px;
+    border-right: 1px solid #ccc;
+    padding-right: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+.submenu {
+    padding-left: 20px;
+}
+
+.content {
+    padding-left: 20px;
+}
