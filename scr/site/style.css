@@ -8,6 +8,14 @@ body {
     padding-right: 10px;
 }
 
+.submenu {
+    padding-left: 20px;
+}
+
+.menu-item {
+    padding-left: 40px;
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -15,10 +23,6 @@ ul {
 
 li {
     margin: 5px 0;
-}
-
-.submenu {
-    padding-left: 20px;
 }
 
 .content {
