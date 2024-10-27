@@ -33,6 +33,8 @@ async function loadJSON(filePath) {
 
 async function loadHelpMenu(menu, submenu){
     help = await cacheLoadJSON("./help.json");
+	
+	// кодом дабавить в Main подменю Download с сылкой на гитхаб и их релизы
 
     now = help[menu];
 
