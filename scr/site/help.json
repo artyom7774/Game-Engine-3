@@ -1,4 +1,20 @@
 {
+    "Main": {
+        "name": "Main",
+        "pages": {
+            "1": {
+                "title": "Game Engine 3",
+                "text": [
+                    "Shell for creating applications and games using a graphical editor in the python 3 programming language",
+                    "",
+                    "To install this program you will need:",
+                    "  Install last version GE3 in releases: https://github.com/artyom7774/Game-Engine-3/releases",
+                    "  Unpack the archive",
+                    "  activate program (after the first activation, python and the necessary libraries will be installed)"
+                ]
+            }
+        }
+    },
     "Scene": {
         "name": "Scene",
         "pages": {
@@ -58,8 +74,8 @@
                     "  Divide",
                     "",
                     "Another nodes:",
-                    "  Get var",
-                    "  Set var"
+                    "  Get variable",
+                    "  Set variable"
                 ]
             }
         }

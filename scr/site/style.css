@@ -1,19 +1,41 @@
 body {
+    font-size: 17px;
+}
+
+header {
+
+}
+
+content {
     display: flex;
 }
 
+footer {
+
+}
+
 .menu {
-    width: 200px;
+    width: 300px;
     border-right: 1px solid #ccc;
     padding-right: 10px;
 }
 
-.submenu {
+.menu-submenu {
     padding-left: 20px;
 }
 
-.menu-item {
-    padding-left: 40px;
+.menu-submenu-item {
+    padding-left: 20px;
+}
+
+.big-help-text {
+    font-family: Consolas;
+    font-size: 25px;
+}
+
+.help-text {
+    font-family: Courier;
+    font-size: 17px;
 }
 
 ul {
@@ -25,6 +47,11 @@ li {
     margin: 5px 0;
 }
 
+p {
+    white-space: pre;
+}
+
 .content {
     padding-left: 20px;
+    min-height: 100%;
 }
