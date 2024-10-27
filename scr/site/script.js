@@ -1,3 +1,19 @@
+function cache(func) {
+    const cache = new Map();
+
+    return function(...args) {
+        const key = JSON.stringify(args);
+
+        if (cache.has(key)) {
+            return cache.get(key);
+        }
+
+        cache.set(key, func.apply(this, args));
+
+        return cache.get(key);
+    };
+}
+
 async function loadJSON(filePath) {
     try {
         const response = await fetch(filePath);
@@ -15,14 +31,13 @@ async function loadJSON(filePath) {
     }
 }
 
-
 async function loadHelpMenu(menu, submenu){
-    help = await loadJSON("./help.json");
+    help = await cacheLoadJSON("./help.json");
 
     now = help[menu];
 
-    for (const key in now["pages"]){
-        if (now["pages"][key]["title"] === submenu){
+    for (const key in now["pages"]) {
+        if (now["pages"][key]["title"] === submenu) {
             now = now["pages"][key];
             break;
         }
@@ -32,13 +47,13 @@ async function loadHelpMenu(menu, submenu){
 
     variables.push(`<p class="big-help-text">\t${now["title"]}</p>`);
 
-    for (const key in now["text"]){
+    for (const key in now["text"]) {
         variables.push(`<p class="help-text">${now["text"][key]}</p>`);
     }
 
     text = "";
 
-    for (const index in variables){
+    for (const index in variables) {
         text += variables[index];
     }
 
@@ -47,25 +62,25 @@ async function loadHelpMenu(menu, submenu){
     return text;
 };
 
-
-async function initialization(){        
+async function initialization(){
+    const contentClass = document.querySelector(".content");
+    const contentMenu = document.querySelector(".menu");
+    
     // INIT MENU ELEMENTS
 
-    const contentMenu = document.querySelector(".menu");
-
-    help = await loadJSON("./help.json");
+    help = await cacheLoadJSON("./help.json");
 
     text = "";
 
-    for (const name in help){
+    for (const name in help) {
         text += `<li class="menu-submenu" id="${help[name]["name"]}">${help[name]["name"]}`;
 
         index = 0;
 
-        for (const page in help[name]["pages"]){
+        for (const page in help[name]["pages"]) {
             text += `<div class="menu-submenu-element">`;
 
-            if (Object.keys(help[name]["pages"]).length - 1 === index){
+            if (Object.keys(help[name]["pages"]).length - 1 === index) {
                 text += `<svg height="30" width="26"><polyline points="10,0 10,15 25,15" style="fill:none;stroke:white;stroke-width:1" /></svg>`;
             } else {
                 text += `<svg height="30" width="26"><polyline points="10,0 10,15 25,15 10,15 10,30" style="fill:none;stroke:white;stroke-width:1" /></svg>`;
@@ -84,18 +99,15 @@ async function initialization(){
 
     // SET START CONTENT TEXT
 
-    const contentClass = document.querySelector(".content");
-
     const submenu = document.getElementById("Game Engine 3");
     const menu = submenu.parentElement.parentElement;
 
     contentClass.innerHTML = await loadHelpMenu(menu.id, submenu.id);
 
-    // INIT
+    // FINISH
 
     addMenuEventListeners();
 };
-
 
 function addMenuEventListeners() {
     document.querySelectorAll(".menu-submenu-item").forEach(item => {
@@ -111,6 +123,11 @@ function addMenuEventListeners() {
     });
 };
 
+// INITIALIZE
+
+let cacheLoadJSON = cache(loadJSON);
+
+// START
 
 document.addEventListener('DOMContentLoaded', function () {
     initialization();
