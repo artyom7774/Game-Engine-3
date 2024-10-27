@@ -1,5 +1,9 @@
 body {
     font-size: 17px;
+
+    color: #e4e7eb;
+
+    background-color: #202124;
 }
 
 header {
@@ -15,17 +19,37 @@ footer {
 }
 
 .menu {
-    width: 300px;
+    width: 20em;
     border-right: 1px solid #ccc;
     padding-right: 10px;
 }
 
 .menu-submenu {
+    margin-top: 5px;
+    margin-bottom: 5px;
+
     padding-left: 20px;
 }
 
 .menu-submenu-item {
+    margin: 0px;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    margin-left: 20px;
+
+    height: 20px;
+
+    display: block;
+
+    cursor: pointer;
+}
+
+.content {
     padding-left: 20px;
+    min-height: 100%;
+    width: 100%;
 }
 
 .big-help-text {
@@ -36,22 +60,26 @@ footer {
 .help-text {
     font-family: Courier;
     font-size: 17px;
+
+    min-height: 20px;
+
+    margin: 5px;
 }
 
 ul {
     list-style-type: none;
+
     padding: 0;
 }
 
 li {
+    list-style-type: none;
+
     margin: 5px 0;
 }
 
 p {
     white-space: pre;
-}
 
-.content {
-    padding-left: 20px;
-    min-height: 100%;
+    word-wrap: break-word;
 }

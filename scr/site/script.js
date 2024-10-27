@@ -17,9 +17,9 @@ async function loadJSON(filePath) {
 
 
 async function loadHelpMenu(menu, submenu){
-    obj = await loadJSON("./help.json");
+    help = await loadJSON("./help.json");
 
-    now = obj[menu];
+    now = help[menu];
 
     for (const key in now["pages"]){
         if (now["pages"][key]["title"] === submenu){
@@ -27,9 +27,6 @@ async function loadHelpMenu(menu, submenu){
             break;
         }
     }
-
-    // console.log(obj);
-    // console.log(now);
 
     variables = [];
 
@@ -47,43 +44,34 @@ async function loadHelpMenu(menu, submenu){
 
     text = "<div>" + text + "</div>";
 
-    // console.log(text);
-
     return text;
-}
-
-async function initialization(){
-    const content = document.querySelector(".content");
-
-    const submenu = document.getElementById("Game Engine 3");
-    const menu = submenu.parentElement;
-
-    const text = await loadHelpMenu(menu.id, submenu.id);
-
-    // console.log(text);
-
-    content.innerHTML = text;
-}
+};
 
 
 document.querySelectorAll(".menu-submenu-item").forEach(item => {
     item.addEventListener("click", async event => {
         const content = document.querySelector(".content");
 
-        // const submenu = document.getElementById(event.target.innerText);
-
         const submenu = document.getElementById(event.currentTarget.id);
-
-        // console.log(submenu, event.target.id);
-
         const menu = submenu.parentElement;
 
         const text = await loadHelpMenu(menu.id, submenu.id);
-
-        // console.log(text);
 
         content.innerHTML = text;
     });
 });
 
-initialization()
+
+async function initialization(){
+    const contentClass = document.querySelector(".content");
+    
+    // SET STAT CONTENT TEXT
+
+    const submenu = document.getElementById("Game Engine 3");
+    const menu = submenu.parentElement;
+
+    contentClass.innerHTML = await loadHelpMenu(menu.id, submenu.id);
+};
+
+
+initialization();

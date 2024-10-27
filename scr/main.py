@@ -349,7 +349,7 @@ class Main(QMainWindow):
             self.objects["help_pages"][value["name"]] = dict(value)
 
         help_program_action = QAction(translate("Program"), self)
-        help_program_action.triggered.connect(lambda: functions.menu.help.help_(self, "Scene"))
+        help_program_action.triggered.connect(lambda: functions.menu.help.help_(self, "Main"))
 
         self.menues["help_menu"].addAction(help_program_action)
 
