@@ -48,30 +48,70 @@ async function loadHelpMenu(menu, submenu){
 };
 
 
-document.querySelectorAll(".menu-submenu-item").forEach(item => {
-    item.addEventListener("click", async event => {
-        const content = document.querySelector(".content");
+async function initialization(){        
+    // INIT MENU ELEMENTS
 
-        const submenu = document.getElementById(event.currentTarget.id);
-        const menu = submenu.parentElement;
+    const contentMenu = document.querySelector(".menu");
 
-        const text = await loadHelpMenu(menu.id, submenu.id);
+    help = await loadJSON("./help.json");
 
-        content.innerHTML = text;
-    });
-});
+    text = "";
 
+    for (const name in help){
+        text += `<li class="menu-submenu" id="${help[name]["name"]}">${help[name]["name"]}`;
 
-async function initialization(){
+        index = 0;
+
+        for (const page in help[name]["pages"]){
+            text += `<div class="menu-submenu-element">`;
+
+            if (Object.keys(help[name]["pages"]).length - 1 === index){
+                text += `<svg height="30" width="26"><polyline points="10,0 10,15 25,15" style="fill:none;stroke:white;stroke-width:1" /></svg>`;
+            } else {
+                text += `<svg height="30" width="26"><polyline points="10,0 10,15 25,15 10,15 10,30" style="fill:none;stroke:white;stroke-width:1" /></svg>`;
+            }
+
+            text += `<p class="menu-submenu-item" id="${help[name]["pages"][page]["title"]}">${help[name]["pages"][page]["title"]}</p>`;
+            text += `</div>`;
+
+            index += 1;
+        }
+
+        text += `</li>`
+    }
+
+    contentMenu.innerHTML = text;
+
+    // SET START CONTENT TEXT
+
     const contentClass = document.querySelector(".content");
-    
-    // SET STAT CONTENT TEXT
 
     const submenu = document.getElementById("Game Engine 3");
-    const menu = submenu.parentElement;
+    const menu = submenu.parentElement.parentElement;
 
     contentClass.innerHTML = await loadHelpMenu(menu.id, submenu.id);
+
+    // INIT
+
+    addMenuEventListeners();
 };
 
 
-initialization();
+function addMenuEventListeners() {
+    document.querySelectorAll(".menu-submenu-item").forEach(item => {
+        item.addEventListener("click", async event => {
+            const content = document.querySelector(".content");
+
+            const submenu = document.getElementById(event.currentTarget.id);
+            const menu = submenu.parentElement.parentElement;
+
+            const text = await loadHelpMenu(menu.id, submenu.id);
+            content.innerHTML = text;
+        });
+    });
+};
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    initialization();
+});
