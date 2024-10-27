@@ -1,4 +1,5 @@
 body {
+    font-family: Courier;
     font-size: 17px;
 
     color: #e4e7eb;
@@ -36,7 +37,7 @@ footer {
 }
 
 .menu-submenu-item {
-    margin: 5px 0 5px 5px;
+    margin: 5px;
 
     height: 20px;
 
