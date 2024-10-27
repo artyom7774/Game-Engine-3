@@ -60,6 +60,8 @@ footer {
     font-family: Courier;
     font-size: 17px;
 
+    min-height: 20px;
+
     margin: 5px;
 }
 
