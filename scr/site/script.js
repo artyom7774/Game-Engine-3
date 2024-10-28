@@ -31,11 +31,11 @@ async function loadJSON(filePath) {
     }
 }
 
-async function getHelpMenu(){
+async function getHelpMenu() {
     help = await cacheLoadJSON("./help.json");
 
     help["Main"]["pages"]["2"] = {
-        "title": "Download",
+        "title": "Downloads",
         "text": [
             "Github - <a href='https://github.com/artyom7774/Game-Engine-3'>https://github.com/artyom7774/Game-Engine-3</a>",
             "Github releases - <a href='https://github.com/artyom7774/Game-Engine-3/Releases'>https://github.com/artyom7774/Game-Engine-3/Releases</a>"
@@ -45,7 +45,7 @@ async function getHelpMenu(){
     return help;
 }
 
-async function loadHelpMenu(menu, submenu){
+async function loadHelpMenu(menu, submenu) {
     help = await getHelpMenu()
 
     console.log(help)
