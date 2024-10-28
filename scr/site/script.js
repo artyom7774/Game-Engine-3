@@ -31,10 +31,24 @@ async function loadJSON(filePath) {
     }
 }
 
-async function loadHelpMenu(menu, submenu){
+async function getHelpMenu(){
     help = await cacheLoadJSON("./help.json");
-	
-	// кодом дабавить в Main подменю Download с сылкой на гитхаб и их релизы
+
+    help["Main"]["pages"]["2"] = {
+        "title": "Download",
+        "text": [
+            "Github - <a href='https://github.com/artyom7774/Game-Engine-3'>https://github.com/artyom7774/Game-Engine-3</a>",
+            "Github releases - <a href='https://github.com/artyom7774/Game-Engine-3/Releases'>https://github.com/artyom7774/Game-Engine-3/Releases</a>"
+        ]
+    }
+
+    return help;
+}
+
+async function loadHelpMenu(menu, submenu){
+    help = await getHelpMenu()
+
+    console.log(help)
 
     now = help[menu];
 
@@ -70,7 +84,7 @@ async function initialization(){
     
     // INIT MENU ELEMENTS
 
-    help = await cacheLoadJSON("./help.json");
+    help = await getHelpMenu()
 
     text = "";
 
