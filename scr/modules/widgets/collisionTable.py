@@ -46,12 +46,10 @@ class CollisionTable(QTableWidget):
 
                 check.setChecked(groups[row] in collisions and groups[col] in collisions[groups[row]])
 
-                check.stateChanged.connect(
-                    lambda state="", empty=None, x=row, y=col: function(self.project, x, y, 0 if state == 0 else 1))
+                check.stateChanged.connect(lambda state="", empty=None, x=row, y=col: function(self.project, x, y, 0 if state == 0 else 1))
 
-                check.setMinimumSize(20, 20)
-
-                check.setMaximumSize(check.minimumSize().width(), check.minimumSize().height())
+                check.setMinimumSize(24, 24)
+                check.setMaximumSize(24, 24)
 
                 widget = QWidget()
 
@@ -82,13 +80,13 @@ class CollisionTable(QTableWidget):
         pixmap = QPixmap(width, height)
         pixmap.fill(QColor("#202124"))
 
-        painter = QPainter(pixmap)
-        pen = QPen(QColor("#3f4042"), 1)
-        painter.setPen(pen)
+        # painter = QPainter(pixmap)
+        # pen = QPen(QColor("#3f4042"), 1)
+        # painter.setPen(pen)
 
-        painter.drawLine(-2, 0, width + 3, height)
-        painter.drawLine(width, 0, -5, height)
+        # painter.drawLine(-2, 0, width + 3, height)
+        # painter.drawLine(width, 0, -5, height)
 
-        painter.end()
+        # painter.end()
 
         return pixmap

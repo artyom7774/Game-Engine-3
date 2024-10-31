@@ -1,4 +1,4 @@
-from PyQt5.Qt import QIcon, QTreeWidgetItem, QMenu, QAction, QLabel
+from PyQt5.Qt import QIcon, QTreeWidgetItem, QMenu, QAction
 from PyQt5 import QtWidgets
 
 from scr.modules import functions

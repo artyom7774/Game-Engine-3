@@ -32,13 +32,13 @@ class FocusTreeWidget(QTreeWidget):
 
 class Main(QMainWindow):
     def __init__(self, app) -> None:
-        QMainWindow.__init__(self)
-
         try:
             ctypes.windll.shcore.SetProcessDpiAwareness(True)
 
         except AttributeError:
             pass
+
+        QMainWindow.__init__(self)
 
         self.app = app
 
@@ -127,6 +127,7 @@ class Main(QMainWindow):
 
                     openButton = QPushButton(translate("Open"))
                     openButton.clicked.connect(lambda: function())
+
                     msg.addButton(openButton, QMessageBox.ActionRole)
 
                     okButton = msg.addButton(QMessageBox.Ok)

@@ -1,6 +1,5 @@
-from PyQt5.QtWidgets import QTreeWidget, QPushButton, QCheckBox, QHeaderView, QAbstractItemView
-from PyQt5.QtCore import QSize
-from PyQt5.Qt import QPixmap
+from PyQt5.QtWidgets import QTreeWidget, QPushButton, QHeaderView, QAbstractItemView
+from PyQt5.Qt import QPixmap, Qt
 
 from scr.modules.widgets.collisionTable import CollisionTable
 from scr.modules.widgets import FocusLineEdit
@@ -9,8 +8,6 @@ from scr.modules.functions.project import *
 
 import json
 
-# в project.objects["main"]["adds"] добавлять новые элементы и после изменять первую строчку collision.cfg
-
 
 class CollisionAdditions:
     style = "background-color: rgba(0, 0, 0, 0); border: 1px solid #3f4042;"
@@ -18,7 +15,9 @@ class CollisionAdditions:
     @staticmethod
     def init(project) -> None:
         project.objects["main"]["create"] = QTreeWidget(project)
-        project.objects["main"]["create"].setHeaderHidden(True)
+        project.objects["main"]["create"].header().setMaximumHeight(25)
+        project.objects["main"]["create"].setHeaderLabels([translate("Name"), ""])
+
         project.objects["main"]["create"].setGeometry(
             project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
             40,
@@ -30,7 +29,9 @@ class CollisionAdditions:
 
         header = project.objects["main"]["create"].header()
         header.setSectionResizeMode(1, QHeaderView.Fixed)
-        header.setMinimumSectionSize(22)
+        header.setMinimumSectionSize(24)
+
+        # header.setDefaultAlignment(Qt.AlignCenter)
 
         project.objects["main"]["create"].setSelectionMode(QAbstractItemView.NoSelection)
 
@@ -54,8 +55,8 @@ class CollisionAdditions:
 
             project.objects["main"][f"additions_element_remove_{name}"] = QPushButton()
 
-            project.objects["main"][f"additions_element_remove_{name}"].setIcon(QIcon(QPixmap("C:\\Users\\37529\\Desktop\\github\\Game-Engine-3\\scr\\files\\sprites\\remove.png")))
-            project.objects["main"][f"additions_element_remove_{name}"].setIconSize(QSize(16, 16))
+            project.objects["main"][f"additions_element_remove_{name}"].setIcon(QIcon(QPixmap("scr/files/sprites/remove.png")))
+            # project.objects["main"][f"additions_element_remove_{name}"].setIconSize(QSize(16, 16))
 
             project.objects["main"][f"additions_element_remove_{name}"].released.connect(lambda empty=None, n=name: CollisionAdditions.remove(project, n))
             project.objects["main"][f"additions_element_remove_{name}"].setStyleSheet(CollisionAdditions.style)
@@ -71,19 +72,43 @@ class CollisionAdditions:
 
     @staticmethod
     def rename(project, name: str) -> None:
-        print("rename")
+        if len(project.objects["main"][f"additions_element_name_{name}"].text().split()) > 1:
+            return
+
+        if project.objects["main"][f"additions_element_name_{name}"].text() in project.objects["main"]["adds"]:
+            return
 
         project.objects["main"]["adds"].insert(project.objects["main"]["adds"].index(name), project.objects["main"][f"additions_element_name_{name}"].text())
 
-        print(project.objects["main"]["adds"])
-
         CollisionAdditions.remove(project, name)
+
+        project.init()
 
     @staticmethod
     def remove(project, name: str) -> None:
         if name in project.objects["main"]["adds"]:
             project.objects["main"]["adds"].remove(name)
 
+        CollisionAdditions.save(project)
+
+        project.init()
+
+    @staticmethod
+    def plus(project) -> None:
+        name = "underfined"
+        number = -1
+
+        while (f"{name}-({number})" if number != -1 else name) in project.objects["main"]["adds"]:
+            number += 1
+
+        project.objects["main"]["adds"].append(f"{name}-({number})" if number != -1 else name)
+
+        CollisionAdditions.save(project)
+
+        project.init()
+
+    @staticmethod
+    def save(project) -> None:
         with open(project.selectFile, "r") as file:
             config = file.read()
 
@@ -99,10 +124,6 @@ class CollisionAdditions:
         with open(project.selectFile, "w") as file:
             file.write(config)
 
-        project.init()
-
-    @staticmethod
-    def plus(project) -> None:
         project.init()
 
 

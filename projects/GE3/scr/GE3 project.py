@@ -4,7 +4,7 @@ import engine
 import sys
 
 VARIABLES = {
-    "globals": {'underfined (1)': {'name': 'underfined (1)', 'type': 'logic', 'value': False}, 'var': {'name': 'var', 'type': 'number', 'value': 1}},
+    "globals": {'underfined (1)': {'name': 'underfined (1)', 'type': 'logic', 'value': False}, 'var': {'name': 'var', 'type': 'number', 'value': 1}, 'underfined': {'name': 'underfined', 'type': 'text', 'value': ''}},
     "locals": {'projects/GE3/project/functions/1.func': {'underfined': {'name': 'underfined', 'type': 'logic', 'value': False}}},
     "objects": {}
 }
