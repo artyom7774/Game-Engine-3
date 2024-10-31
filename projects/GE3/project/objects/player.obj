@@ -5,10 +5,12 @@
             "StaticObject"
         ]
     },
-    "dependence": [],
+    "dependence": [
+        "StaticObject"
+    ],
     "type": {
         "name": "Object type",
-        "value": "StaticObject",
+        "value": "DynamicObject",
         "type": "choose",
         "choose": {
             "input": [
@@ -28,12 +30,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": 225
+                    "value": 0
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": -14
+                    "value": 0
                 }
             },
             "type": "dict"
@@ -97,7 +99,7 @@
         },
         "group": {
             "name": "Name of object group",
-            "value": "object",
+            "value": "player",
             "type": "str"
         },
         "layer": {

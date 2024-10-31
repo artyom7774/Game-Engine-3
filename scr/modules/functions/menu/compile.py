@@ -187,12 +187,14 @@ class Compile:
             text = file.read()
 
         """
-        name = "program"
+        name = "game"
         spec = importlib.util.spec_from_loader(name, loader=None)
 
         program = importlib.util.module_from_spec(spec)
 
         exec(text, program.__dict__)
+
+        os.chdir(f"projects/{project.selectProject}/scr")
 
         game = program.Game()
         game.start()
@@ -260,7 +262,7 @@ class Compile:
 
         output = f"projects/{project.selectProject}/scr/{projectSettingsCfg['values']['name']['value']}.py"
 
-        # LOAD PROGRAMS AND LOCALD VARIABLES
+        # LOAD PROGRAMS AND LOCAL VARIABLES
 
         programs = {}
         locals = {}

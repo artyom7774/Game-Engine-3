@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QToolTip, QLineEdit, QPushButton, QComboBox
+from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QToolTip, QLineEdit, QPushButton, QAbstractItemView, QComboBox
 from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon
 from PyQt5.Qt import Qt, QPoint, QTimer
 
@@ -307,7 +307,7 @@ class CodeNode(QTreeWidget):
         # CONNECTORS
 
         if "sorting" in self.node and "outputs" in self.node["sorting"]:
-            self.node["outputs"] = dict(sorted(self.node["outputs"].items(),key=lambda x: self.node["sorting"]["outputs"].index(x[1]["code"])))
+            self.node["outputs"] = dict(sorted(self.node["outputs"].items(), key=lambda x: self.node["sorting"]["outputs"].index(x[1]["code"])))
 
         else:
             self.node["outputs"] = dict(sorted(self.node["outputs"].items(), key=lambda x: self.project.objects["main"]["config"]["sorting"].index(x[1]["type"])))
@@ -625,7 +625,7 @@ class CodeLabel(QLabel):
 
 
 class CodeAdditionsVarsType(QTreeWidget):
-    style = "background-color: rgba(0, 0, 0, 0); border: 1px solid #2a2b2e"
+    style = "background-color: rgba(0, 0, 0, 0); border: 1px solid #3f4042"
 
     def __init__(self, parent, pos: Vec4i, name: str, path: str) -> None:
         QTreeWidget.__init__(self, parent)
@@ -642,6 +642,8 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.setGeometry(self.pos.x, self.pos.y, self.pos.z, self.pos.w)
 
         self.setColumnCount(3)
+
+        self.setSelectionMode(QAbstractItemView.NoSelection)
 
         self.setColumnWidth(0, self.width() // 3 - 2)
         self.setColumnWidth(1, self.width() // 3 - 2)

@@ -4,3 +4,5 @@ from .focusComboBox import FocusComboBox
 from .tabFileBar import TabFileBar
 
 from .versionLogScrollArea import VersionLogScrollArea
+
+from .collisionTable import CollisionTable

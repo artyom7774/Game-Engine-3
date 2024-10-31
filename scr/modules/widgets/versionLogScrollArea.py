@@ -22,6 +22,7 @@ class VersionLogScrollArea(QWidget):
             update = information["updates"][version]
 
             name = QLabel()
+            name.setStyleSheet("padding-bottom: 4px; padding-top: 4px;")
             name.setFont(BIG_HELP_FONT)
             name.setText(update["name"])
 

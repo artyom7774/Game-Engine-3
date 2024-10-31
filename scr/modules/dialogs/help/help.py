@@ -11,6 +11,7 @@ def getColumnСount(label):
     label_width = label.width()
 
     column_count = text_width // label_width
+
     if text_width % label_width > 0:
         column_count += 1
 

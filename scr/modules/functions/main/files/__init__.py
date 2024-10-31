@@ -7,3 +7,5 @@ from .code import Code, CodeHash, CodeCompiler
 from .text import Text
 
 from .image import Image
+
+from .collision import Collision
