@@ -28,7 +28,7 @@ class ConfigButtonStartSceneFunctions:
 
             return 0
 
-        scene = scenes[dialog.objects["choose_combobox"].currentIndex()]
+        scene = scenes[dialog.objects["choose_combobox"].currentIndex()].replace(f"projects/{project.selectProject}/project/", "")
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             config = json.load(file)
@@ -107,7 +107,7 @@ class Config:
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             config = json.load(file)
 
-        if os.path.exists(config["values"]["start_scene"]["value"]):
+        if os.path.exists(f"projects/{project.selectProject}/project/" + config["values"]["start_scene"]["value"]):
             pass
 
         else:

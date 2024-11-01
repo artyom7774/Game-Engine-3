@@ -196,4 +196,9 @@
     "value": "значение"
     "iterator": "итерация"
     "Create object group": "Создать новую группу объектов"
+    "Shell for creating applications and games using a graphical editor in the python 3 programming language": "Оболочка для создания приложений и игр с помощью графического редактора на языке программирования Python 3"
+    "To install this program you will need:": "Для установки этой программы вам понадобится:"
+    "  Install last version GE3 in releases": "  Установите последнюю версию GE3 в релизах."
+    "  Unpack the archive": "  Распаковать архив"
+    "  activate program (after the first activation, python and the necessary libraries will be installed)": "  активировать программу (после первой активации будет установлен Python и необходимые библиотеки)"
 }

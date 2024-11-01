@@ -95,13 +95,12 @@ class CollisionAdditions:
 
     @staticmethod
     def plus(project) -> None:
-        name = "underfined"
-        number = -1
+        number = 1
 
-        while (f"{name}-({number})" if number != -1 else name) in project.objects["main"]["adds"]:
+        while str(number) in project.objects["main"]["adds"]:
             number += 1
 
-        project.objects["main"]["adds"].append(f"{name}-({number})" if number != -1 else name)
+        project.objects["main"]["adds"].append(str(number))
 
         CollisionAdditions.save(project)
 
@@ -119,7 +118,7 @@ class CollisionAdditions:
 
         config = f"$[{', '.join([symbol + element + symbol for element in project.objects['main']['adds']])}]$" + "\n" + "\n".join(config)
 
-        print(config)
+        # print(config)
 
         with open(project.selectFile, "w") as file:
             file.write(config)

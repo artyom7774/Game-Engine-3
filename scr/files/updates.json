@@ -24,7 +24,7 @@
 
         "3.0.4": {
             "name": "3.0.4",
-            "text": "- optimize run project\n- project site with help menu: https://artyom7774.github.io"
+            "text": "- optimize run project\n- project site with help menu: https://artyom7774.github.io\n- fixed bug with save (executable) project\n- create collision editor"
         }
     }
 }

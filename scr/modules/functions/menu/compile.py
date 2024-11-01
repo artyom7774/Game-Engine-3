@@ -253,7 +253,7 @@ class Compile:
         with open(f"projects/{project.selectProject}/project/project.cfg", "r") as file:
             projectSettingsCfg = json.load(file)
 
-        if projectSettingsCfg["values"]["start_scene"]["value"] == "":
+        if f"projects/{project.selectProject}/project/" + projectSettingsCfg["values"]["start_scene"]["value"] == "":
             MessageBox.error("Project start scene is empty")
 
             project.compiling = False
@@ -278,7 +278,7 @@ class Compile:
         scenes = {}
 
         for scene in functions.project.getAllProjectScenes(project, False):
-            scenePath = f"projects/{project.selectProject}/project/cash/{'-'.join(scene.split('/'))}-setting.json"
+            scenePath = f"projects/{project.selectProject}/project/cash/{'-'.join(scene.split('/')[3:])}-setting.json"
 
             objects = {}
 
@@ -316,7 +316,7 @@ class Compile:
         projectSettingsStandard = projectSettings
         projectSettings = functions.main.files.Config.get(projectSettings)
 
-        if not any([scene == projectSettings["start_scene"] for scene in scenes.keys()]):
+        if not any([scene == f"projects/{project.selectProject}/project/" + projectSettings["start_scene"] for scene in scenes.keys()]):
             project.dialog.logSignal.emit(
                 translate("ERROR") + ": " + translate("project start scene is not found") + "\n"
             )
@@ -331,13 +331,16 @@ class Compile:
 
         # MAKE PROJECT
 
+        useProjectSettings = dict(projectSettings)
+        useProjectSettings["start_scene"] = f"projects/{project.selectProject}/project/" + useProjectSettings["start_scene"]
+
         program = PROGRAM
 
         program = program.replace("%PROJECT_GLOBAL_VARIABLES%", str(projectSettingsStandard["variables"]))
         program = program.replace("%PROJECT_LOCAL_VARIABLES%", str(locals))
         program = program.replace("%PROJECT_OBJECTS_VARIABLES%", str({}))
 
-        program = program.replace("%PROJECT_SETTINGS%", str(projectSettings))
+        program = program.replace("%PROJECT_SETTINGS%", str(useProjectSettings))
         program = program.replace("%PROJECT_PROGRAMS%", str(programs))
         program = program.replace("%PROJECT_SCENES%", str(scenes))
 
@@ -447,7 +450,7 @@ class Compile:
 
         path = f"projects/{project.selectProject}/scr"
 
-        loads = ["functions", "assets", "engine", "files", f"{projectSettings['values']['name']['value']}.py", f"{projectSettings['values']['name']['value']}.exe"]
+        loads = ["functions", "assets", "engine", "files", "code", f"{projectSettings['values']['name']['value']}.py", f"{projectSettings['values']['name']['value']}.exe", "collision.cfg"]
 
         folder = QFileDialog.getExistingDirectory(project, translate("Choose path"), "/home")
 

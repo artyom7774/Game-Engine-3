@@ -16,7 +16,7 @@
         },
         "visiable_screen": {
             "name": "Visible screen",
-            "value": false,
+            "value": true,
             "type": "bool"
         },
         "visiable_grid": {

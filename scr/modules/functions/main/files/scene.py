@@ -318,7 +318,7 @@ class Scene:
 
     @staticmethod
     def init(project, call: str = "") -> None:
-        project.cash["file"][project.selectFile].settings = f"projects/{project.selectProject}/project/cash/{'-'.join(project.selectFile.split('/'))}-setting.json"
+        project.cash["file"][project.selectFile].settings = f"projects/{project.selectProject}/project/cash/{'-'.join(project.selectFile.split('/')[3:])}-setting.json"
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r") as file:
             project.objects["main"]["project_settings"] = json.load(file)
@@ -632,7 +632,7 @@ class Scene:
         # FOCUS OBJECT
 
         for scene in functions.project.getAllProjectScenes(project, False):
-            path = f"projects/{project.selectProject}/project/cash/{'-'.join(scene.split('/'))}-setting.json"
+            path = f"projects/{project.selectProject}/project/cash/{'-'.join(scene.split('/')[3:])}-setting.json"
 
             if not os.path.exists(path):
                 continue
@@ -642,6 +642,8 @@ class Scene:
 
             name = sceneSettings["Scene"]["focus"]["value"]
 
+            print(name)
+
             if name == "":
                 continue
 
@@ -649,7 +651,11 @@ class Scene:
                 name += ".objc"
 
             if name not in os.listdir(scene):
-                name = ""
+                if True:
+                    pass
+
+                else:
+                    name = ""
 
             sceneSettings["Scene"]["focus"]["value"] = name
 
