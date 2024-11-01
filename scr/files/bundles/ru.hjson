@@ -201,4 +201,5 @@
     "  Install last version GE3 in releases": "  Установите последнюю версию GE3 в релизах."
     "  Unpack the archive": "  Распаковать архив"
     "  activate program (after the first activation, python and the necessary libraries will be installed)": "  активировать программу (после первой активации будет установлен Python и необходимые библиотеки)"
+    "Main": "Основное"
 }

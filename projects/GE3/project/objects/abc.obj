@@ -102,7 +102,7 @@
         },
         "layer": {
             "name": "Object layer",
-            "value": 0,
+            "value": -1,
             "type": "int"
         }
     },

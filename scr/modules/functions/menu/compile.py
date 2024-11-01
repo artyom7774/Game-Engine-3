@@ -12,7 +12,6 @@ import json
 import sys
 import os
 
-
 PROGRAM = \
 """# MADE BY GAME ENGINE %ENGINE_VERSION%
 
@@ -35,35 +34,35 @@ SCENES = %PROJECT_SCENES%
 class Game(engine.Application):
     def __init__(self):
         engine.Application.__init__(self)
-        
+
         self.objects.collisions = engine.Collision("collision.cfg")
-        
+
         self.setDebug(SETTINGS["debug"])
-        
+
         self.setSize(SETTINGS["width"], SETTINGS["height"])
         self.setName(SETTINGS["name"])
         self.setIcon(SETTINGS["icon"])
-        
+
         self.setFps(SETTINGS["fps"])
-        
+
         self.setCamera(engine.camera.StaticCamera(self, 0, 0))
-        
+
         self.objectIDByName = {}
-        
+
         self.scene = None
-        
+
         self.loadScene(SETTINGS["start_scene"])
 
         self.programs = {}
-        
+
         self.settings = {"settings": SETTINGS, "programs": PROGRAMS, "scenes": SCENES, "variables": VARIABLES}      
-        
+
         with open("output.txt", "w") as file:
             pass
-        
+
         for key, value in PROGRAMS.items():
             self.programs[key] = Compiler(self, key, value, self.settings)
-            
+
     def print(self, text: str) -> None:    
         with open("output.txt", "a+") as file:
             file.write(str(text))
@@ -76,30 +75,31 @@ class Game(engine.Application):
 
     def loadScene(self, scene):
         self.objects.empty()
-        
+
         self.scene = scene
 
         for key, value in SCENES[scene]["objects"].items():
             type = value["type"]
             variables = value["variables"]
-            
+
             obj = getattr(engine.objects, type)(self, **variables)
-            
+
             if scene not in self.objectIDByName:
                 self.objectIDByName[scene] = {}
-                
+
             self.objectIDByName[scene][key] = obj.id
-            
+
             self.objects.add(obj)
-            
+
             if SCENES[scene]["focus"] is not None and key == SCENES[scene]["focus"]:
                 self.setCamera(engine.camera.FocusCamera(self, obj))
-                
-        
+
+
 if __name__ == "__main__":
     game = Game()
     game.start()
 """
+
 
 
 class LoggerTextEdit(QTextEdit):
