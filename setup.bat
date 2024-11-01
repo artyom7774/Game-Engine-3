@@ -1,5 +1,7 @@
 @echo off
 
+echo Please wait for the libraries to be installed
+
 rem install python
 
 setup\python.exe /passive
