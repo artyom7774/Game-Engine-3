@@ -74,7 +74,7 @@ class GetUsingObjects:
 
         game.cash["object_sorted_by_distance"] = sortedObjects
         """
-        
+
         # """
         game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.distance)
         # """
