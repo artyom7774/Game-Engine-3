@@ -103,6 +103,7 @@ class Main(QMainWindow):
                 pass
 
         thr = threading.Thread(target=lambda: function())
+        thr.daemon = True
         thr.start()
 
     def versionUpdateMessage(self) -> None:

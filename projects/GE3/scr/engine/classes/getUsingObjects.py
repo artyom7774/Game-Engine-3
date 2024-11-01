@@ -62,16 +62,22 @@ class GetUsingObjects:
             else:
                 sortedObjects.append(obj)
 
+        # TODO: починить и использовать этот код для оптимизации
+
+        """
         for obj in dynamicsObjects:
-            position = binaryLeft(sortedObjects, obj.distance) - 1
+            position = binaryRight(sortedObjects, obj.distance)
 
             # print(len(sortedObjects), position)
 
             sortedObjects.insert(position, obj)
 
         game.cash["object_sorted_by_distance"] = sortedObjects
+        """
 
-        # game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.distance)
+        # """
+        game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.distance)
+        # """
 
         for obj in dynamicsObjects:
             l = binaryLeft(game.cash["object_sorted_by_distance"], obj.distance - group.maxLenghtObject)
