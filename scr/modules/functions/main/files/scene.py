@@ -642,8 +642,6 @@ class Scene:
 
             name = sceneSettings["Scene"]["focus"]["value"]
 
-            print(name)
-
             if name == "":
                 continue
 

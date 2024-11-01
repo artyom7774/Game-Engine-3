@@ -30,6 +30,10 @@ class VersionLogScrollArea(QWidget):
 
             text = QLabel()
             text.setFont(HELP_FONT)
+            text.setContentsMargins(0, 4, 0, 4)
+            text.setMinimumHeight(20)
+            text.setWordWrap(True)
+
             text.setText(update["text"])
 
             layout.addWidget(text)

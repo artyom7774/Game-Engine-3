@@ -29,6 +29,7 @@ def binaryLeft(objects: typing.List[VObject], distance: float) -> int:
 
 def binaryRight(objects: typing.List[VObject], distance: float) -> int:
     left, right = 0, len(objects) - 1
+
     while left < right:
         mid = (left + right + 1) // 2
 
@@ -51,11 +52,28 @@ class GetUsingObjects:
 
     @staticmethod
     def getUsingObjectsCircle(game, group: "ObjectGroup") -> None:
-        dynamics = [obj for obj in group.objects if type(obj) == DynamicObject]
+        sortedObjects = []
+        dynamicsObjects = []
 
-        game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.distance)
+        for obj in group.objects:
+            if type(obj) == DynamicObject:
+                dynamicsObjects.append(obj)
 
-        for obj in dynamics:
+            else:
+                sortedObjects.append(obj)
+
+        for obj in dynamicsObjects:
+            position = binaryLeft(sortedObjects, obj.distance) - 1
+
+            # print(len(sortedObjects), position)
+
+            sortedObjects.insert(position, obj)
+
+        game.cash["object_sorted_by_distance"] = sortedObjects
+
+        # game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.distance)
+
+        for obj in dynamicsObjects:
             l = binaryLeft(game.cash["object_sorted_by_distance"], obj.distance - group.maxLenghtObject)
             r = binaryRight(game.cash["object_sorted_by_distance"], obj.distance + group.maxLenghtObject) + 1
 

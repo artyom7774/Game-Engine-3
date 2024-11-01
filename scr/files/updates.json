@@ -3,7 +3,7 @@
         "3.0.1",
         "3.0.2",
         "3.0.3",
-        "3.0.4"
+        "3.1.0"
     ],
 
     "updates": {
@@ -22,9 +22,9 @@
             "text": "- optimize code editor\n- fixed bugs in code editor\n- fixed bug with object collision"
         },
 
-        "3.0.4": {
-            "name": "3.0.4",
-            "text": "- optimize run project\n- project site with help menu: https://artyom7774.github.io\n- fixed bug with save (executable) project\n- create collision editor"
+        "3.1.0": {
+            "name": "3.1.0",
+            "text": "- fixed bug with visiable versions\n- optimize run project\n- project site with help menu: https://artyom7774.github.io\n- fixed bug with save (executable) project\n- create collision editor"
         }
     }
 }
