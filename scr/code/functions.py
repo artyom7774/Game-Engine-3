@@ -90,7 +90,7 @@ if __name__ == "__main__":
     start = time.time()
 
     variables = {"locals": {"123": {"value": 1}}, "globals": {"1": {"value": True}}}
-    text = "%math(%local_var(%math(122 + 1)) + 1)" * 10
+    text = "%math(%local_var(%math(122 + 1)) + 1)" * 100
 
     print(decodeHolders(text, variables))
 
