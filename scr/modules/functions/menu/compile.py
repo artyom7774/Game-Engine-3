@@ -101,7 +101,6 @@ if __name__ == "__main__":
 """
 
 
-
 class LoggerTextEdit(QTextEdit):
     def __init__(self, project):
         QTextEdit.__init__(self, project)
