@@ -23,6 +23,15 @@ def setVar(program, path: str, nodes: dict, id: int, variables: dict) -> dict:
         value = nodes["objects"][str(id)]["inputs"]["value"]["standard"]
 
     if gl:
+        type = variables["globals"][name]["type"]
+
+    else:
+        type = variables["locals"][path][name]["type"]
+
+    if type == "number":
+        value = float(value)
+
+    if gl:
         variables["globals"][name]["value"] = value
 
     else:

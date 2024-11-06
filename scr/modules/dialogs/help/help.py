@@ -84,4 +84,4 @@ class Help(QDialog):
 
                 y += 20 * count
 
-            y += 50
+            y += 30

@@ -15,14 +15,29 @@ class Translate:
         self.lang = lang
 
     def translate(self, word: str) -> str:
+        if len(word) == 0:
+            return ""
+
+        spaces = 0
+
+        while word[0] == " ":
+            word = word[1:]
+
+            spaces += 1
+
         if not os.path.exists(f"scr/files/bundles/{self.lang.lower()}.hjson") and self.lang == "EN":
             return word
 
         if self.lang not in self.out:
             self.out[self.lang] = hjson.load(open(f"scr/files/bundles/{self.lang.lower()}.hjson", encoding="utf-8"))
 
-        if word in self.out[self.lang]:
-            return self.out[self.lang][word]
+        if " " * spaces + word in self.out[self.lang]:
+            return self.out[self.lang][" " * spaces + word]
+
+        elif word in self.out[self.lang]:
+            answer = self.out[self.lang][word]
 
         else:
-            return word
+            answer = word
+
+        return " " * spaces + answer

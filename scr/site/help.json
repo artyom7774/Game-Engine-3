@@ -2,7 +2,7 @@
     "Main": {
         "name": "Main",
         "pages": {
-            "1": {
+            "Game Engine 3": {
                 "title": "Game Engine 3",
                 "text": [
                     "Shell for creating applications and games using a graphical editor in the python 3 programming language",
@@ -18,7 +18,7 @@
     "Scene": {
         "name": "Scene",
         "pages": {
-            "1": {
+            "Control in the scene": {
                 "title": "Control in the scene",
                 "text": [
                     "Movement - mouse",
@@ -38,7 +38,7 @@
     "Code": {
         "name": "Code",
         "pages": {
-            "1": {
+            "Control nodes": {
                 "title": "Control nodes",
                 "text": [
                     "Movement - mouse",
@@ -48,7 +48,7 @@
                     "  Delete - delete node"
                 ]
             },
-            "2": {
+            "Nodes": {
                 "title": "Nodes",
                 "text": [
                     "Event nodes:",
@@ -75,7 +75,25 @@
                     "",
                     "Another nodes:",
                     "  Get variable",
-                    "  Set variable"
+                    "  Set variable",
+                    "  Decode holder"
+                ]
+            }
+        }
+    },
+    "Nodes": {
+        "name": "Nodes",
+        "pages": {
+            "On start game": {
+                "title": "On start game",
+                "text": [
+                    "Return signal on start game window"
+                ]
+            },
+            "Every frame": {
+                "title": "Every frame",
+                "text": [
+                    "Return signal every frame"
                 ]
             }
         }
@@ -83,7 +101,7 @@
     "Run": {
         "name": "Run",
         "pages": {
-            "1": {
+            "Run and compile project": {
                 "title": "Run and compile project",
                 "text": [
                     "To run or compile a program, you must click on the \"Project\" menu and click the \"Run\" or \"Compile\" button",

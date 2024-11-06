@@ -96,8 +96,9 @@ class Main(QMainWindow):
                             if connector.inputLeftText is not None:
                                 connector.inputLeftText.save()
 
-                    with open(self.selectFile, "w", encoding="utf-8") as file:
-                        json.dump(self.objects["main"]["function"], file, indent=4)
+                    if "function" in self.objects["main"]:
+                        with open(self.selectFile, "w", encoding="utf-8") as file:
+                            json.dump(self.objects["main"]["function"], file, indent=4)
 
             except RuntimeError:
                 pass
@@ -109,6 +110,7 @@ class Main(QMainWindow):
     def versionUpdateMessage(self) -> None:
         def function():
             thr = threading.Thread(target=lambda: webbrowser.open("https://github.com/artyom7774/Game-Engine-3/releases"))
+            thr.daemon = True
             thr.start()
 
         url = "https://raw.githubusercontent.com/artyom7774/Game-Engine-3/main/scr/files/version.json"

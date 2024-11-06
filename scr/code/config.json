@@ -45,7 +45,8 @@
             "name": "Another",
             "nodes": [
                 "setVar",
-                "getVar"
+                "getVar",
+                "holder"
             ]
         }
     },
@@ -155,6 +156,68 @@
         "Any"
     ],
     "nodes": {
+        "holder": {
+            "type": "another",
+            "name": "holder",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "Decode holder",
+                "discription": "Decode holder",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__answer__": "answer"
+                }
+            }
+        },
+
         "setVar": {
             "type": "another",
             "name": "setVar",

@@ -12,6 +12,10 @@ def writeText(program, path: str, nodes: dict, id: int, variables: dict) -> dict
 
     line = True
 
-    program.print(">>> " + text + "\n" if line else ">>> " + text)
+    answer = ">>> " + text + "\n" if line else ">>> " + text
+
+    program.print(answer)
+
+    print(answer)
 
     return queue
