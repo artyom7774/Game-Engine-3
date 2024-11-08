@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QDialog, QLabel, QListWidget
+from PyQt5.QtWidgets import QDialog, QLabel, QListWidget, QVBoxLayout, QScrollArea, QWidget
 from PyQt5.QtGui import QFontMetrics
 from PyQt5 import QtWidgets
 
@@ -7,6 +7,7 @@ from scr.variables import *
 
 def getColumnСount(label):
     font_metrics = QFontMetrics(label.font())
+
     text_width = font_metrics.width(label.text())
     label_width = label.width()
 
@@ -35,20 +36,10 @@ class Help(QDialog):
 
         self.objects = {}
 
-        self.list = QListWidget(self)
-        self.list.addItems([translate(element) for element in self.project.objects["help_pages"]])
-        self.list.setGeometry(10, 10, 200, self.height() - 20)
-        self.list.show()
-
-        index = self.list.model().index(0, 0)
-        self.list.setCurrentIndex(index)
-
-        self.list.currentItemChanged.connect(lambda: self.change())
-
         self.init()
 
     def change(self) -> None:
-        self.page = list(self.project.objects["help_pages"].keys())[self.list.currentIndex().row()]
+        self.page = list(self.project.objects["help_pages"].keys())[self.objects["list"].currentIndex().row()]
 
         self.init()
 
@@ -58,30 +49,70 @@ class Help(QDialog):
 
         self.objects = {}
 
+        self.objects["list"] = QListWidget(self)
+        self.objects["list"].addItems([(f"→ {translate(element)}" if self.page == element else translate(element)) for element in self.project.objects["help_pages"]])
+        self.objects["list"].setGeometry(10, 10, 200, self.height() - 20)
+        self.objects["list"].show()
+
+        # index = self.objects["list"].model().index(0, 0)
+        # self.objects["list"].setCurrentIndex(index)
+
+        self.objects["list"].currentItemChanged.connect(lambda: self.change())
+
+        layout = QVBoxLayout()
+
         x = 220
         y = 10
 
-        for page in self.pages[self.page]["pages"]:
-            self.objects[f"{page}_main"] = QLabel(parent=self)
+        for i, page in enumerate(self.pages[self.page]["pages"]):
+            self.objects[f"{page}_main"] = QLabel()
             self.objects[f"{page}_main"].setFont(BIG_HELP_FONT)
             self.objects[f"{page}_main"].setGeometry(x + 50, y, 500, 35)
-            self.objects[f"{page}_main"].setText(translate(self.pages[self.page]["pages"][page]["title"]))
-            self.objects[f"{page}_main"].show()
+
+            self.objects[f"{page}_main"].setText(" " * 3 + translate(self.pages[self.page]["pages"][page]["title"]))
+
+            # self.objects[f"{page}_main"].show()
+
+            up = QLabel()
+            up.setMaximumHeight(5)
+
+            if i > 0:
+                layout.addWidget(up)
+
+            layout.addWidget(self.objects[f"{page}_main"])
 
             y += 50
 
-            for i, text in enumerate(self.pages[self.page]["pages"][page]["text"]):
-                self.objects[f"{page}_text_{i}"] = QLabel(parent=self)
-                self.objects[f"{page}_text_{i}"].setFont(HELP_FONT)
-                self.objects[f"{page}_text_{i}"].setGeometry(x, y, self.width() - 240, 20)
-                self.objects[f"{page}_text_{i}"].setText(translate(text))
-                self.objects[f"{page}_text_{i}"].setWordWrap(True)
-                self.objects[f"{page}_text_{i}"].show()
+            for j, text in enumerate(self.pages[self.page]["pages"][page]["text"]):
+                self.objects[f"{page}_text_{j}"] = QLabel()
+                self.objects[f"{page}_text_{j}"].setFont(HELP_FONT)
+                self.objects[f"{page}_text_{j}"].setText(translate(text))
+                self.objects[f"{page}_text_{j}"].setWordWrap(True)
+                # self.objects[f"{page}_text_{j}"].show()
 
-                count = getColumnСount(self.objects[f"{page}_text_{i}"])
+                if text == "":
+                    self.objects[f"{page}_text_{j}"].setMaximumHeight(10)
 
-                self.objects[f"{page}_text_{i}"].setGeometry(x, y, self.width() - 240, 20 * count)
+                    layout.addWidget(self.objects[f"{page}_text_{j}"])
+
+                    continue
+
+                count = getColumnСount(self.objects[f"{page}_text_{j}"])
+
+                self.objects[f"{page}_text_{j}"].setGeometry(x, y, self.width() - 240, 20 * count)
+
+                layout.addWidget(self.objects[f"{page}_text_{j}"])
 
                 y += 20 * count
 
             y += 30
+
+        widget = QWidget()
+        widget.setFixedWidth(self.width() - 260)
+        widget.setLayout(layout)
+
+        self.objects["scroll"] = QScrollArea(self)
+        self.objects["scroll"].horizontalScrollBar().hide()
+        self.objects["scroll"].setGeometry(230, 10, self.width() - 250, self.height() - 20)
+        self.objects["scroll"].setWidget(widget)
+        self.objects["scroll"].show()

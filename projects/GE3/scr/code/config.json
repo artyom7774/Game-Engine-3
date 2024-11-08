@@ -207,7 +207,7 @@
                 }
             },
             "display": {
-                "name": "Holder",
+                "name": "Decode holder",
                 "discription": "Decode holder",
                 "text": {
                     "__none__": "",

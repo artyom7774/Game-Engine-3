@@ -8,9 +8,9 @@
                     "Shell for creating applications and games using a graphical editor in the python 3 programming language",
                     "",
                     "To install this program you will need:",
-                    "  Install last version GE3 in releases",
-                    "  Unpack the archive",
-                    "  activate program (after the first activation, python and the necessary libraries will be installed)"
+                    "- Install last version GE3 in releases",
+                    "- Unpack the archive",
+                    "- activate program (after the first activation, python and the necessary libraries will be installed)"
                 ]
             }
         }
@@ -25,12 +25,12 @@
                     "Move object - arrows",
                     "",
                     "Binds:",
-                    "  Q - remove object selection",
+                    "- Q - remove object selection",
                     "",
-                    "  Ctrl+C - copy object",
-                    "  Ctrl+V - paste object",
+                    "- Ctrl+C - copy object",
+                    "- Ctrl+V - paste object",
                     "",
-                    "  Delete - delete object"
+                    "- Delete - delete object"
                 ]
             }
         }
@@ -45,38 +45,38 @@
                     "Move node - middle mouse button",
                     "",
                     "Binds:",
-                    "  Delete - delete node"
+                    "- Delete - delete node"
                 ]
             },
             "Nodes": {
                 "title": "Nodes",
                 "text": [
                     "Event nodes:",
-                    "  On start game",
-                    "  Every frame",
+                    "- On start game",
+                    "- Every frame",
                     "",
                     "Loop nodes:",
-                    "  For N times",
+                    "- For N times",
                     "",
                     "Object nodes:",
-                    "  Move object",
-                    "  Set object pos",
-                    "  Get object pos",
-                    "  Get object ID by name",
+                    "- Move object",
+                    "- Set object pos",
+                    "- Get object pos",
+                    "- Get object ID by name",
                     "",
                     "Text nodes:",
-                    "  Write text",
+                    "- Write text",
                     "",
                     "Numbers nodes:",
-                    "  Plus",
-                    "  Minus",
-                    "  Multiply",
-                    "  Divide",
+                    "- Plus",
+                    "- Minus",
+                    "- Multiply",
+                    "- Divide",
                     "",
                     "Another nodes:",
-                    "  Get variable",
-                    "  Set variable",
-                    "  Decode holder"
+                    "- Get variable",
+                    "- Set variable",
+                    "- Decode holder"
                 ]
             }
         }
@@ -87,13 +87,103 @@
             "On start game": {
                 "title": "On start game",
                 "text": [
-                    "Return signal on start game window"
+                    "Return signal on start game"
                 ]
             },
             "Every frame": {
                 "title": "Every frame",
                 "text": [
                     "Return signal every frame"
+                ]
+            },
+            "For N times": {
+                "title": "For N times",
+                "text": [
+                    "Return signal N times every K frames"
+                ]
+            },
+            "Write text": {
+                "title": "Write text",
+                "text": [
+                    "Write any text on sonsole",
+                    "Compile version of project NOT SUPPORTED this node"
+                ]
+            },
+            "Plus": {
+                "title": "Plus",
+                "text": [
+                    "Return sum of two numbers"
+                ]
+            },
+            "Minus": {
+                "title": "Minus",
+                "text": [
+                    "Return difference of two numbers"
+                ]
+            },
+            "Multiply": {
+                "title": "Multiply",
+                "text": [
+                    "Return multiplication of two numbers"
+                ]
+            },
+            "Divide": {
+                "title": "Divide",
+                "text": [
+                    "Return division of two numbers"
+                ]
+            },
+            "Get object ID by name": {
+                "title": "Get object ID by name",
+                "text": [
+                    "Get name of object and return ID"
+                ]
+            },
+            "Set object pos": {
+                "title": "Set object pos",
+                "text": [
+                    "Get ID and new X, Y object"
+                ]
+            },
+            "Move object": {
+                "title": "Move object",
+                "text": [
+                    "Get ID and X, Y offset"
+                ]
+            },
+            "Get object pos": {
+                "title": "Get object pos",
+                "text": [
+                    "Get object ID and return X, Y object"
+                ]
+            },
+            "Set variable": {
+                "title": "Set variable",
+                "text": [
+                    "Get name of variable, if global variable and new value variable"
+                ]
+            },
+            "Get variable": {
+                "title": "Get variable",
+                "text": [
+                    "Get name of variable, bool if global variable",
+                    "Return value of variable"
+                ]
+            },
+            "Decode holder": {
+                "title": "Decode holder",
+                "text": [
+                    "Decode text holder to value",
+                    "",
+                    "All holders:",
+                    "- %math(<any math expression>) - return answer on this expression",
+                    "- %local_var(<name>) - return value of <name> local var",
+                    "- %global_var(<name>) - return value of <name> global var",
+                    "",
+                    "Example:",
+                    "- let: local variable abc = 1",
+                    "",
+                    "- %math(%local_var(abc) + 2) -> 3"
                 ]
             }
         }

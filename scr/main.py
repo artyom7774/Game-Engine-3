@@ -1,6 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QMessageBox, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
-from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut
-from PyQt5.QtCore import QEvent
+from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
 from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QIcon, Qt
 
@@ -343,9 +341,6 @@ class Main(QMainWindow):
         # HELP MENU
 
         self.menues["help_menu"] = self.menubar.addMenu(translate("Help"))
-
-        if self.selectProject == "":
-            self.menues["help_menu"].setDisabled(True)
 
         self.objects["help_pages"] = {}
 

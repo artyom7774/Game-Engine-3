@@ -18,6 +18,13 @@ class Translate:
         if len(word) == 0:
             return ""
 
+        point = False
+
+        if word[0] == "-":
+            word = word[1:]
+
+            point = True
+
         spaces = 0
 
         while word[0] == " ":
@@ -40,4 +47,4 @@ class Translate:
         else:
             answer = word
 
-        return " " * spaces + answer
+        return ("•" if point else "") + " " * spaces + answer
