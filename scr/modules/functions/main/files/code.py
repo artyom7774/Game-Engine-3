@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QToolTip, QLineEdit, QPushButton, QAbstractItemView, QComboBox
-from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon
+from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon, QPalette
 from PyQt5.Qt import Qt, QPoint, QTimer
 
 from scr.modules.dialogs import CreateNode
@@ -74,14 +74,6 @@ class CodeLiner:
     node: dict = None
 
     start: Vec2f = None
-
-
-class CodeCompiler:
-    @staticmethod
-    def compiler(project, code: dict) -> dict:
-        # compile code for compiling, optimize
-
-        pass
 
 
 class TypeSet:

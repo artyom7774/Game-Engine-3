@@ -16,17 +16,17 @@
         },
         "visiable_screen": {
             "name": "Visible screen",
-            "value": true,
+            "value": false,
             "type": "bool"
         },
         "visiable_grid": {
             "name": "Grid visiable",
-            "value": false,
+            "value": true,
             "type": "bool"
         },
         "snap": {
             "name": "Snap to grid",
-            "value": false,
+            "value": true,
             "type": "bool"
         },
         "grid": {

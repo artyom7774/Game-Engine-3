@@ -63,6 +63,17 @@ class Game(engine.Application):
         for key, value in PROGRAMS.items():
             self.programs[key] = Compiler(self, key, value, self.settings)
 
+        self.setMouseEvent(0, lambda: self.mouseLeftClick())
+        self.setMouseEvent(2, lambda: self.mouseRightClick())
+
+    def mouseLeftClick(self):
+        for key, value in PROGRAMS.items():
+            self.programs[key].event("mouseLeftClick")
+            
+    def mouseRightClick(self):
+        for key, value in PROGRAMS.items():
+            self.programs[key].event("mouseRightClick")
+
     def print(self, text: str) -> None:    
         with open("output.txt", "a+") as file:
             file.write(str(text))

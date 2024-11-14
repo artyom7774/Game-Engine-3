@@ -30,7 +30,7 @@
 
         "3.1.1": {
             "name": "3.1.1",
-            "text": "- update site and help menu"
+            "text": "- update site and help menu\n- update vector move in dynamic object\n- nodes for mouse and keyboard click"
         }
     }
 }

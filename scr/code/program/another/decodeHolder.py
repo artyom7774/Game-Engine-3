@@ -93,7 +93,7 @@ def decodeHolders(text: str, variables: dict):
     return text
 
 
-def holder(program, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def decodeHolder(program, path: str, nodes: dict, id: int, variables: dict) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
