@@ -216,7 +216,7 @@ class Game(engine.Application):
     def mouseLeftClick(self):
         for key, value in PROGRAMS.items():
             self.programs[key].event("mouseLeftClick")
-
+            
     def mouseRightClick(self):
         for key, value in PROGRAMS.items():
             self.programs[key].event("mouseRightClick")

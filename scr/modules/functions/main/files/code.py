@@ -189,9 +189,9 @@ class CodeNodeConnector(QLabel):
         self.inputLeftText = None
         self.inputLeftRama = None
 
-        if input is not None:
+        if input is not None and not (input["type"] == "path" and self.node["type"] == "event"):
             self.left = QLabel(self)
-            self.left.setGeometry(0, 9 + node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
+            self.left.setGeometry(0, 9 + (node["y"] + (node["type"] == "event")) // CODE_GRID_CELL_SIZE, 10, 10)
             self.left.setAttribute(Qt.WA_TranslucentBackground)
 
             if input["value"] is not None:

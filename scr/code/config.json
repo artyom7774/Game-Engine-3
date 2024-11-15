@@ -6,7 +6,9 @@
                 "onStartGame",
                 "everyFrame",
                 "mouseRightClick",
-                "mouseLeftClick"
+                "mouseLeftClick",
+                "keyboardClick",
+                "keyboardPress"
             ]
         },
         "loops": {
@@ -158,6 +160,92 @@
         "Any"
     ],
     "nodes": {
+        "keyboardClick": {
+            "type": "event",
+            "name": "keyboardClick",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "keyboard click",
+                "discription": "starts on key click",
+                "text": {
+                    "__none__": "",
+                    "__key__": "key",
+                    "__path__": "path"
+                }
+            }
+        },
+
+        "keyboardPress": {
+            "type": "event",
+            "name": "keyboardPress",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Keyboard press",
+                "discription": "starts while key pressed",
+                "text": {
+                    "__none__": "",
+                    "__key__": "key",
+                    "__path__": "path"
+                }
+            }
+        },
+
         "mouseLeftClick": {
             "type": "event",
             "name": "mouseLeftClick",
@@ -179,6 +267,7 @@
                 "discription": "starts on left click",
                 "text": {
                     "__none__": "",
+                    "__key__": "key",
                     "__path__": "path"
                 }
             }
