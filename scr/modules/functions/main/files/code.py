@@ -1,9 +1,9 @@
-from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QToolTip, QLineEdit, QPushButton, QAbstractItemView, QComboBox
-from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon, QPalette
+from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QToolTip, QLineEdit, QPushButton, QAbstractItemView
+from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon
 from PyQt5.Qt import Qt, QPoint, QTimer
 
 from scr.modules.dialogs import CreateNode
-from scr.modules.functions.algorithm import bezierCurveDeep, bezierCurveWidth
+from scr.modules.functions.algorithm import bezierCurveWidth
 
 from scr.modules.widgets import FocusLineEdit, FocusComboBox
 
@@ -26,8 +26,6 @@ import copy
 
 # создать объект из шаблона (принимать x, y) (вернуть id объекта)
 # создать объект (в будущем) (принимать все значения) (вернуть id объекта)
-
-# при клике мыши (вернуть x, y)
 
 
 def isCurrectNode(obj: dict):
@@ -95,7 +93,7 @@ class TypeSet:
 
     @staticmethod
     def logic(value: typing.Any):
-        return True if value in ("true", "True", "1") else False
+        return True if value in ("true", "True", "1", "+") else False
 
     @staticmethod
     def Any(value: typing.Any):
@@ -128,7 +126,7 @@ class TypeCurrect:
 
     @staticmethod
     def logic(value: typing.Any):
-        return value in ("true", "True", "false", "False", "0", "1")
+        return value in ("true", "True", "false", "False", "0", "1", "+", "-")
 
     @staticmethod
     def Any(value: typing.Any):

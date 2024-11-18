@@ -121,9 +121,15 @@ class Compiler:
 
             queue.pop(0)
 
+    def get(self, event: str) -> list:
+        return self.nodesSortedByTypes["event"][event]
+
     def event(self, event: str) -> None:
         for id in self.nodesSortedByTypes["event"][event]:
             self.queue(id)
+
+    def start(self, id):
+        self.queue(id)
 
     def update(self) -> None:
         remove = []
@@ -154,9 +160,3 @@ class Compiler:
             self.timer.remove(element)
 
         self.event("everyFrame")
-
-
-"""
-if __name__ == "__main__":
-    compiler = Compiler(json.load(open("projects/GE3/project/functions/function.func")))
-"""

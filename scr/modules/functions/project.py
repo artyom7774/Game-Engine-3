@@ -108,7 +108,7 @@ def haveInternet():
     try:
         response = requests.get('http://www.google.com', timeout=1)
 
-    except requests.ConnectionError:
+    except:
         return False
 
     return True

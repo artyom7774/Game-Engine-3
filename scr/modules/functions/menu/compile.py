@@ -55,7 +55,7 @@ class Game(engine.Application):
 
         self.programs = {}
 
-        self.settings = {"settings": SETTINGS, "programs": PROGRAMS, "scenes": SCENES, "variables": VARIABLES}      
+        self.settings = {"settings": SETTINGS, "programs": PROGRAMS, "scenes": SCENES, "variables": VARIABLES}
 
         with open("output.txt", "w") as file:
             pass
@@ -65,6 +65,20 @@ class Game(engine.Application):
 
         self.setMouseEvent(0, lambda: self.mouseLeftClick())
         self.setMouseEvent(2, lambda: self.mouseRightClick())
+
+        keys = {"click": [], "press": []}
+
+        for name, program in PROGRAMS.items():
+            for id in self.programs[name].get("keyboardClick"):
+                node = PROGRAMS[name]["objects"][id]
+
+                self.setKeyEvent(["KEYDOWN", node["inputs"]["key"]["standard"]], lambda temp=id: self.programs[name].start(temp))
+
+        for name, program in PROGRAMS.items():
+            for id in self.programs[name].get("keyboardPress"):
+                node = PROGRAMS[name]["objects"][id]
+
+                self.setKeyEvent(["PRESS", node["inputs"]["key"]["standard"]], lambda temp=id: self.programs[name].start(temp))
 
     def mouseLeftClick(self):
         for key, value in PROGRAMS.items():

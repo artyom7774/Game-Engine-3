@@ -98,7 +98,7 @@ class Main(QMainWindow):
                         with open(self.selectFile, "w", encoding="utf-8") as file:
                             json.dump(self.objects["main"]["function"], file, indent=4)
 
-            except RuntimeError:
+            except BaseException:
                 pass
 
         thr = threading.Thread(target=lambda: function())
@@ -136,7 +136,7 @@ class Main(QMainWindow):
                     msg.exec_()
 
             else:
-                print(f"ERROR: can't download project version, status = {response.status_code}")
+                print(f"ERROR: can't download now project version, status = {response.status_code}")
 
     def install(self) -> None:
         os.system("setup.bat")

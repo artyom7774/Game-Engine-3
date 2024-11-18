@@ -197,8 +197,27 @@ class DynamicObject(StaticObject):
 
         super().update(collisions)
 
+        for name, vector in self.vectors.items():
+            print(name, vector.angle, vector.power)
+
+        print("---")
+
+        if self.collision(0, -1):
+            # self.vectors["__fall__"].power = max([vector.power for name, vector in self.vectors.items()])
+
+            y = 0
+
+            for name, vector in self.vectors.items():
+                if name.startswith("jump"):
+                    if vector.power * math.cos(math.radians(vector.angle)) < 0:
+                        y += vector.power * math.cos(math.radians(vector.angle))
+
+            self.moveByAngle(0, y, 1, "wall")
+
+            # self.vectors["__fall__"].power = 1
+
         if self.collision(0, 1):
-            self.vectors["__fall__"].power = 0
+            self.vectors["__fall__"].power = 1
 
         else:
             self.vectors["__fall__"].power += self.gravity / 1000
@@ -219,17 +238,25 @@ class DynamicObject(StaticObject):
             if vector.power <= FLOAT_PRECISION and name != "__fall__":
                 rem.append(name)
 
-            self.move(math.trunc(x), math.trunc(y))
+            # self.move(math.trunc(x + 0.5 * (x >= 0)), math.trunc(y + 0.5 * (y >= 0)))
 
         for name in rem:
             self.vectors.pop(name)
 
-        # self.move(math.trunc(pos.x), math.trunc(pos.y))
+        self.move(math.trunc(pos.x + 0.5 * (pos.x >= 0)), math.trunc(pos.y + 0.5 * (pos.y >= 0)))
 
-    def moveByAngle(self, angle: int, speed: int = None):
+    def moveByAngle(self, angle: int, speed: int = None, slidingStep: int = None, name: str = "vector"):
         id = random.randint(1, 1000000000)
 
-        self.vectors[f"vector ({id})"] = AngleVector(180 - angle, self.speed if speed is None else speed, self.slidingStep)
+        self.vectors[f"{name} ({id})"] = AngleVector(180 - angle, self.speed if speed is None else speed, self.slidingStep if slidingStep is None else slidingStep)
+
+    def moveByType(self, move: str) -> None:
+        if move == "jump":
+            # if self.vectors["fall"].power <= 0 and self.vectors["jump"].power <= 0 and self.collision(0, 1):
+            self.moveByAngle(0, self.jumpPower, 1, "jump")
+
+        else:
+            raise NameError(f"move type {move} is not defined")
 
     def getVectorsPower(self) -> Vec2i:
         pos = Vec2f(0, 0)

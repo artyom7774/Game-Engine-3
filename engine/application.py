@@ -139,7 +139,12 @@ class Application:
 
         except AttributeError:
             event[0] = event[0]
-            event[1] = getattr(pygame, "K_" + event[1])
+
+            try:
+                event[1] = getattr(pygame, "K_" + event[1])
+
+            except AttributeError:
+                event[1] = getattr(pygame, "K_" + event[1].upper())
 
         if event[0] not in self.events:
             self.events[event[0]] = {}

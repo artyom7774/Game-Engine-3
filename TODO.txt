@@ -143,10 +143,11 @@
 080. [x] holders
 081. [x] переписать отображения текста в help на SQcrollArea
 082. [x] вектор падения не используеться если объект перемещаеться вверх как минимум на 1 пиксель
+083. [ ] при событие клика мыши возвращает x, y мыши
 
 mading:
 
-now: 66 / 82
+now: 66 / 83
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
  17248177  322.216    0.000  594.735    0.000 objects.py:122(collision)

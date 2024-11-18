@@ -58,7 +58,7 @@ class Image:
             capacity *= 2
 
         if capacity > project.engine.FLOAT_PRECISION:
-            image = image.resize((math.trunc(image.width * capacity), math.trunc(image.height * capacity)), resample=PImage.NEAREST)
+            image = image.resize((math.trunc(image.width * capacity) + (math.trunc(image.width * capacity) < 1), math.trunc(image.height * capacity) + (math.trunc(image.height * capacity) < 1)), resample=PImage.NEAREST)
 
         else:
             return 0

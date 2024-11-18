@@ -143,16 +143,16 @@ class ObjectGroup:
             if obj.sprite is not None:
                 sprite = None
 
-                if type(obj.sprite) == list:
+                if type(obj.sprite) == Sprite:
+                    sprite = obj.sprite.get()
+
+                elif type(obj.sprite) == list:
                     alphaRect(self.game.screen, obj.sprite, SquareHitbox([obj.pos.x, obj.pos.y, obj.hitbox.width, obj.hitbox.height]))
 
                 elif type(obj.sprite) == types.FunctionType:
                     obj.sprite()
 
                     continue
-
-                elif type(obj.sprite) == Sprite:
-                    sprite = obj.sprite.get()
 
                 else:
                     sprite = obj.sprite.get(obj)

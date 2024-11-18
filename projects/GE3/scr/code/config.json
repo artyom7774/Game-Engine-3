@@ -42,7 +42,8 @@
                 "getObjectIDByName",
                 "setObjectPos",
                 "moveObject",
-                "getObjectPos"
+                "getObjectPos",
+                "jump"
             ]
         },
         "another": {
@@ -160,6 +161,59 @@
         "Any"
     ],
     "nodes": {
+        "jump": {
+            "type": "objects",
+            "name": "jump",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "imitate jump",
+                "discription": "imitate jump",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__name__": "name",
+                    "__id__": "ID",
+                    "__angle__": "angle",
+                    "__power__": "power"
+                }
+            }
+        },
+
         "keyboardClick": {
             "type": "event",
             "name": "keyboardClick",
@@ -169,6 +223,14 @@
             "height": 3,
             "id": null,
             "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
                 "key": {
                     "code": "key",
                     "name": "__key__",
@@ -204,6 +266,14 @@
             "height": 3,
             "id": null,
             "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
                 "key": {
                     "code": "key",
                     "name": "__key__",
@@ -238,15 +308,7 @@
             "width": 6,
             "height": 3,
             "id": null,
-            "inputs": {
-                "key": {
-                    "code": "key",
-                    "name": "__key__",
-                    "type": "text",
-                    "value": null,
-                    "standard": ""
-                }
-            },
+            "inputs": {},
             "outputs": {
                 "path": {
                     "code": "path",

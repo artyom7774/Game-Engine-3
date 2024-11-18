@@ -121,7 +121,7 @@
         },
         "jumpPower": {
             "name": "Power jump",
-            "value": 10,
+            "value": 25,
             "type": "int"
         },
         "slidingStep": {
