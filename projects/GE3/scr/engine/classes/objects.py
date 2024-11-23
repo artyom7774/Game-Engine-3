@@ -204,7 +204,7 @@ class DynamicObject(StaticObject):
 
         if self.collision(0, -1):
             # self.vectors["__fall__"].power = max([vector.power for name, vector in self.vectors.items()])
-
+            """
             y = 0
 
             for name, vector in self.vectors.items():
@@ -212,9 +212,12 @@ class DynamicObject(StaticObject):
                     if vector.power * math.cos(math.radians(vector.angle)) < 0:
                         y += vector.power * math.cos(math.radians(vector.angle))
 
-            self.moveByAngle(0, y, 1, "wall")
+            print(y)
 
-            # self.vectors["__fall__"].power = 1
+            self.moveByAngle(0, -y - 2, 1, "wall", True)
+
+            self.vectors["__fall__"].power = 1
+            """
 
         if self.collision(0, 1):
             self.vectors["__fall__"].power = 1
@@ -245,8 +248,8 @@ class DynamicObject(StaticObject):
 
         self.move(math.trunc(pos.x + 0.5 * (pos.x >= 0)), math.trunc(pos.y + 0.5 * (pos.y >= 0)))
 
-    def moveByAngle(self, angle: int, speed: int = None, slidingStep: int = None, name: str = "vector"):
-        id = random.randint(1, 1000000000)
+    def moveByAngle(self, angle: int, speed: int = None, slidingStep: int = None, name: str = "vector", specifical: bool = False):
+        id = random.randint(1, 1000000000) if not specifical else 1
 
         self.vectors[f"{name} ({id})"] = AngleVector(180 - angle, self.speed if speed is None else speed, self.slidingStep if slidingStep is None else slidingStep)
 
@@ -254,6 +257,8 @@ class DynamicObject(StaticObject):
         if move == "jump":
             # if self.vectors["fall"].power <= 0 and self.vectors["jump"].power <= 0 and self.collision(0, 1):
             self.moveByAngle(0, self.jumpPower, 1, "jump")
+            
+            self.vectors["__fall__"].power = 1
 
         else:
             raise NameError(f"move type {move} is not defined")
