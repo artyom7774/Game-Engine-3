@@ -93,11 +93,20 @@ def remove(project) -> None:
 def copy(project) -> None:
     path = projectTreeGetFilePath(projectTreeGetPath(project.objects["tree_project"].selectedItems()[0]))
 
-    os.system(f"powershell -command \"Get-Item \"{os.getcwd()}/{path}\" | Set-Clipboard\"")
+    if SYSTEM == "Windows":
+        os.system(f"powershell -command \"Get-Item \"{os.getcwd()}/{path}\" | Set-Clipboard\"")
+
+    elif SYSTEM == "Linux":
+        # TODO
+
+        print("ERROR: system (Linux) not supported this operation")
+
+    else:
+        print("ERROR: system (Unknown) not supported this operation")
 
 
 def paste(project) -> None:
-    def GetPathFromClipboard() -> typing.Any:
+    def WindowsGetPath() -> typing.Any:
         try:
             win32clipboard.OpenClipboard()
 
@@ -109,6 +118,11 @@ def paste(project) -> None:
 
         finally:
             win32clipboard.CloseClipboard()
+
+    def LinuxGetPath() -> typing.Any:
+        # TODO
+
+        return 0
 
     def createCopyFile(path) -> str:
         index = 1
@@ -122,7 +136,19 @@ def paste(project) -> None:
 
             index += 1
 
-    input = GetPathFromClipboard()
+    if SYSTEM == "Windows":
+        input = WindowsGetPath()
+
+    elif SYSTEM == "Linux":
+        input = LinuxGetPath()
+
+        print("ERROR: system (Linux) not supported this operation")
+        return 0
+
+    else:
+        print("ERROR: system (Unknown) not supported this operation")
+        return 0
+
     output = projectTreeGetFilePath(projectTreeGetPath(project.objects["tree_project"].selectedItems()[0]))
 
     if input is None:

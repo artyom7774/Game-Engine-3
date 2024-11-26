@@ -44,6 +44,7 @@ class Game(engine.Application):
         self.setIcon(SETTINGS["icon"])
 
         self.setFps(SETTINGS["fps"])
+        self.setTps(SETTINGS["tps"])
 
         self.setCamera(engine.camera.StaticCamera(self, 0, 0))
 

@@ -3,4 +3,4 @@ python -m cProfile -s cumulative "Game Engine 3.py"
 python -m cProfile -s tottime "Game Engine 3.py"
 
 INSTALL:
-pyinstaller --noconfirm "Game Engine 3.spec"
+pyinstaller "Game Engine 3.spec"

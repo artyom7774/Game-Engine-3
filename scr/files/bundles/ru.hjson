@@ -31,7 +31,8 @@
     "Russian": "Русский"
     "English": "Английский"
     "Debugger": "Отладчик"
-    "Max fps count": Максимальное fps
+    "Max fps count": "Максимальное fps"
+    "Max tps count": "Максимальное tps"
     "Path to project icon": "Путь до иконки проекта"
     "Debug mode": "Режим отладчика"
     "Impossible operation": "Операция невозможна"

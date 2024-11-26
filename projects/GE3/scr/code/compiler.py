@@ -1,8 +1,27 @@
 import importlib.util
 
+import threading
+import pygame
 import typing
 import json
 import os
+
+
+class Tps:
+    def __init__(self, maxTps: int = 20, function: typing.Callable = None):
+        self.maxTps = maxTps
+
+        self.function = function
+
+        self.start()
+
+    def start(self):
+        clock = pygame.time.Clock()
+
+        while True:
+            self.function()
+
+            clock.tick(self.maxTps)
 
 
 class Compiler:
@@ -10,10 +29,13 @@ class Compiler:
         self.project = project
 
         self.program = None
+        self.counter = None
 
         self.path = path
 
         self.nodes = nodes
+
+        self.tpsc = 0
 
         self.settings = settings
 
@@ -92,6 +114,10 @@ class Compiler:
 
         exec(text, self.program.__dict__)
 
+        self.counter = threading.Thread(target=lambda: Tps(self.settings["settings"]["tps"], lambda: self.tps()))
+        self.counter.daemon = True
+        self.counter.start()
+
         self.event("onStartGame")
 
     def queue(self, id: int = None, queue: list = None) -> None:
@@ -160,3 +186,8 @@ class Compiler:
             self.timer.remove(element)
 
         self.event("everyFrame")
+
+    def tps(self):
+        print("tps")
+
+        self.tpsc += 1

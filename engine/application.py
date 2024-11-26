@@ -18,7 +18,7 @@ pygame.init()
 class Application:
     def __init__(
         self, usingWidth: int = 700, usingHeight: int = 700, displayWidth: int = 700, displayHeight: int = 700,
-        fps: int = 60, name: str = "GE3 project", icon: str = "", flags: typing.Dict[str, typing.Any] = None,
+        fps: int = 60, tps: int = 20, name: str = "GE3 project", icon: str = "", flags: typing.Dict[str, typing.Any] = None,
         variables: typing.Dict[str, typing.Any] = None, visiable: bool = True, debug: bool = False,
         autoUpdateScreen: bool = True, collision: str = ""
     ) -> None:
@@ -48,6 +48,7 @@ class Application:
         self.displayHeight = displayHeight
 
         self.fps = fps
+        self.tps = tps
 
         self.mouse = pygame.mouse.get_pos()
         self.click = [0, 0, 0, 0, 0]
@@ -107,6 +108,9 @@ class Application:
 
     def setFps(self, fps: int) -> None:
         self.fps = fps
+
+    def setTps(self, tps: int) -> None:
+        self.tps = tps
 
     def setSize(self, width: int = None, height: int = None) -> None:
         self.setDisplaySize(width, height)

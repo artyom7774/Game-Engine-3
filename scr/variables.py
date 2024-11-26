@@ -4,8 +4,12 @@ from PyQt5.QtGui import QFont
 from scr.modules.translate import Translate
 
 import importlib.util
+import platform
+import pygame
 import json
 import os
+
+pygame.init()
 
 
 with open("scr/files/settings/settings.json", "r") as file:
@@ -115,6 +119,10 @@ def loader(path):
 
 
 size = {}
+
+SYSTEM = platform.system()
+
+print(f"LOG: program runned on \"{SYSTEM} {platform.release()}\"")
 
 IMAGE_FORMATES = "jpeg jpg jpe jfif png ico tiff tif eps svg".split()
 BLOCKED_FORMATES = "cfg obj objc func".split()

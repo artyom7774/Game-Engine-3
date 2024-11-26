@@ -68,6 +68,8 @@ class TabFileBar(QTabBar):
 
     def updateSelectFile(self) -> None:
         if self.count() == 0:
+            self.project.objects["status_bar"].showMessage("")
+
             self.project.selectFile = ""
 
         elif self.count() == 1:
@@ -85,6 +87,8 @@ class TabFileBar(QTabBar):
         #     self.setCurrentIndex(index - 1)
 
         if self.count() == 0:
+            self.project.objects["status_bar"].showMessage("")
+
             self.project.selectFile = ""
 
         elif self.count() == 1:

@@ -257,7 +257,7 @@ class DynamicObject(StaticObject):
         if move == "jump":
             # if self.vectors["fall"].power <= 0 and self.vectors["jump"].power <= 0 and self.collision(0, 1):
             self.moveByAngle(0, self.jumpPower, 1, "jump")
-            
+
             self.vectors["__fall__"].power = 1
 
         else:
