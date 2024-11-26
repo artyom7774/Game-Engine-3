@@ -398,6 +398,92 @@
             "width": 6,
             "x": 11,
             "y": 0
+        },
+        "357827601": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 357827601,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 386087673,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "1",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 20,
+            "y": 22
+        },
+        "386087673": {
+            "display": {
+                "discription": "start every N frames",
+                "name": "Every N frame",
+                "text": {
+                    "__n__": "N",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 386087673,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "N": {
+                    "code": "N",
+                    "name": "__n__",
+                    "standard": 1,
+                    "type": "number",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "everyFrame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 12,
+            "y": 22
         }
     }
 }
