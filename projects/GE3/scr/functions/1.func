@@ -512,50 +512,6 @@
             "width": 6,
             "x": 3,
             "y": 19
-        },
-        "752355296": {
-            "display": {
-                "discription": "...",
-                "name": "Write text",
-                "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__text__": "text"
-                }
-            },
-            "height": 3,
-            "id": 752355296,
-            "inputs": {
-                "path": {
-                    "code": "path",
-                    "name": "__path__",
-                    "standard": null,
-                    "type": "path",
-                    "value": {
-                        "id": 452164667,
-                        "name": "path"
-                    }
-                },
-                "text": {
-                    "code": "text",
-                    "name": "__text__",
-                    "standard": "1",
-                    "type": "text",
-                    "value": null
-                }
-            },
-            "name": "writeText",
-            "outputs": {
-                "path": {
-                    "code": "path",
-                    "name": "__path__",
-                    "type": "path"
-                }
-            },
-            "type": "text",
-            "width": 6,
-            "x": 11,
-            "y": 25
         }
     }
 }

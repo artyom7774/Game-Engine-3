@@ -21,7 +21,7 @@ class Tps:
         while True:
             clock.tick(self.maxTps)
 
-            self.function()
+            self.function(round(clock.get_fps()))
 
 
 class Compiler:
@@ -36,6 +36,7 @@ class Compiler:
         self.nodes = nodes
 
         self.tpsc = 0
+        self.tpsNow = 0
 
         self.settings = settings
 
@@ -116,7 +117,7 @@ class Compiler:
 
         self.event("onStartGame")
 
-        self.counter = threading.Thread(target=lambda: Tps(self.settings["settings"]["tps"], lambda: self.tps()))
+        self.counter = threading.Thread(target=lambda: Tps(self.settings["settings"]["tps"], lambda tps: self.tps(tps)))
         self.counter.daemon = True
         self.counter.start()
 
@@ -189,8 +190,12 @@ class Compiler:
             if self.project.fpsc % self.nodes["objects"][id]["inputs"]["N"]["standard"] == 0:
                 self.start(id)
 
-    def tps(self):
+        self.project.updateCustonCaption(f"FPS = {round(self.project.clock.get_fps())} TPS = {self.tpsNow}")
+
+    def tps(self, tps: int):
         self.tpsc += 1
+
+        self.tpsNow = tps
 
         for id in self.nodesSortedByTypes["event"]["everyTick"]:
             if self.project.fpsc % self.nodes["objects"][id]["inputs"]["N"]["standard"] == 0:

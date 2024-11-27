@@ -410,7 +410,11 @@ class CodeLabel(QLabel):
         x = self.nowPoint.x()
         y = self.nowPoint.y()
 
-        self.project.cash["file"][self.project.selectFile].lastToolTipPoses.append(Vec2i(x, y))
+        try:
+            self.project.cash["file"][self.project.selectFile].lastToolTipPoses.append(Vec2i(x, y))
+
+        except KeyError:
+            return
 
         if len(self.project.cash["file"][self.project.selectFile].lastToolTipPoses) > 2:
             self.project.cash["file"][self.project.selectFile].lastToolTipPoses.pop(0)
@@ -614,6 +618,9 @@ class CodeLabel(QLabel):
 
         else:
             QToolTip.hideText()
+
+    def deleteLater(self):
+        self.project.objects["main"]["code_timer"].stop()
 
 
 class CodeAdditionsVarsType(QTreeWidget):

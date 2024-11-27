@@ -30,7 +30,7 @@
 
         "3.2.0": {
             "name": "3.2.0",
-            "text": "- update site and help menu\n- update vector move in dynamic object\n- nodes for mouse and keyboard click and press- update node every frame\n- add node every tick\n- can't set input in event nodes\n- fixed console in run project"
+            "text": "- update site and help menu\n- update vector move in dynamic object\n- nodes for mouse and keyboard click and press\n- update node every frame\n- add node every tick\n- can't set input in event nodes\n- fixed console in run project\n- update logger"
         }
     }
 }

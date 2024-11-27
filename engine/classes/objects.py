@@ -92,7 +92,7 @@ class StaticObject:
 
         collisions = self.game.cash["collisions"][self.id] if self.id in self.game.cash["collisions"] else []
 
-        step = math.ceil(abs(x) + abs(y) + 1) + 8
+        step = math.ceil(abs(x) + abs(y) + 1)
 
         hitbox = self.getEditHitbox(x, y)
 

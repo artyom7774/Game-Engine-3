@@ -103,6 +103,12 @@ class Application:
     def setIcon(self, icon: str) -> None:
         self.icon = icon
 
+    def updateCaption(self) -> None:
+        pygame.display.set_caption(self.name, self.icon)
+
+    def updateCustonCaption(self, text: str) -> None:
+        pygame.display.set_caption(text)
+
     def setDebug(self, debug: bool) -> None:
         self.debug = debug
 
@@ -183,8 +189,8 @@ class Application:
 
         self.click = [0] * 5
 
-        if self.debug:
-            pygame.display.set_caption(str(round(self.clock.get_fps())))
+        # if self.debug:
+        #     pygame.display.set_caption(str(round(self.clock.get_fps())))
 
         if self.doCollisionsUpdate:
             engine.classes.getUsingObjects.GetUsingObjects.getUsingObjectsCircle(self, self.objects)

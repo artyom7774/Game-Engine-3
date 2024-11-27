@@ -120,7 +120,7 @@ class Main(QMainWindow):
                 lastVersion = json.loads(response.text)["version"]
                 nowVersion = json.load(open("scr/files/version.json", "r"))["version"]
 
-                print(lastVersion, nowVersion)
+                print(f"LOG: last version = {lastVersion}, now version = {nowVersion}")
 
                 if lastVersion != nowVersion:
                     msg = QMessageBox()
@@ -139,6 +139,9 @@ class Main(QMainWindow):
 
             else:
                 print(f"ERROR: can't download now project version, status = {response.status_code}")
+
+        else:
+            print("ERROR: can't download now project version, bad internet connection")
 
     def install(self) -> None:
         os.system("setup.bat")

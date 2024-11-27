@@ -92,7 +92,7 @@ class Game(engine.Application):
 
     def print(self, text: str) -> None:    
         with open("output.txt", "a+") as file:
-            if os.stat("output.txt").st_size < 4:
+            if os.stat("output.txt").st_size < 2:
                 file.write(str(text.replace("\\n", "")))
                 
             else:
