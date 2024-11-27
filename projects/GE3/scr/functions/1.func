@@ -398,6 +398,164 @@
             "width": 6,
             "x": 11,
             "y": 0
+        },
+        "998048326": {
+            "display": {
+                "discription": "move object",
+                "name": "Move object",
+                "text": {
+                    "__angle__": "angle",
+                    "__id__": "ID",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__power__": "power"
+                }
+            },
+            "height": 5,
+            "id": 998048326,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 452164667,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 883097818,
+                        "name": "id"
+                    }
+                },
+                "angle": {
+                    "code": "angle",
+                    "name": "__angle__",
+                    "standard": 90,
+                    "type": "number",
+                    "value": null
+                },
+                "power": {
+                    "code": "power",
+                    "name": "__power__",
+                    "standard": 1,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "moveObject",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "angle",
+                    "power"
+                ]
+            },
+            "type": "objects",
+            "width": 10,
+            "x": 11,
+            "y": 19
+        },
+        "452164667": {
+            "display": {
+                "discription": "start every N ticks",
+                "name": "Every N ticks",
+                "text": {
+                    "__n__": "N",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 452164667,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "N": {
+                    "code": "N",
+                    "name": "__n__",
+                    "standard": 1,
+                    "type": "number",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "everyTick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 3,
+            "y": 19
+        },
+        "752355296": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 752355296,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 452164667,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "1",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 11,
+            "y": 25
         }
     }
 }

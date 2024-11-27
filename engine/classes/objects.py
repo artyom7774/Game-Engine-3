@@ -63,6 +63,13 @@ class StaticObject:
 
         self.sprite = sprite if type(sprite) != list else Sprite(self.game, self, *sprite)
 
+        self.spriteDeltaX = 0
+        self.spriteDeltaY = 0
+
+        if type(self.sprite) == Sprite:
+            self.spriteDeltaX = self.pos.x - self.sprite.pos.x
+            self.spriteDeltaY = self.pos.y - self.sprite.pos.y
+
         self.distance = math.sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 
     def __str__(self):
@@ -85,7 +92,7 @@ class StaticObject:
 
         collisions = self.game.cash["collisions"][self.id] if self.id in self.game.cash["collisions"] else []
 
-        step = abs(x) + abs(y) + 1
+        step = math.ceil(abs(x) + abs(y) + 1) + 8
 
         hitbox = self.getEditHitbox(x, y)
 
@@ -107,12 +114,12 @@ class StaticObject:
                 self.pos.x += (abs(x) / step) * (1 if x >= 0 else -1) * useX
                 self.pos.y += (abs(y) / step) * (1 if y >= 0 else -1) * useY
 
-        self.pos.x = round(self.pos.x)
-        self.pos.y = round(self.pos.y)
+        # self.pos.x = round(self.pos.x)
+        # self.pos.y = round(self.pos.y)
 
         if self.sprite is not None:
-            self.sprite.pos.x += self.pos.x - lastPos.x
-            self.sprite.pos.y += self.pos.y - lastPos.y
+            self.sprite.pos.x = math.trunc(self.pos.x + self.spriteDeltaX)
+            self.sprite.pos.y = math.trunc(self.pos.y + self.spriteDeltaY)
 
         self.distance = math.sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 
@@ -197,10 +204,10 @@ class DynamicObject(StaticObject):
 
         super().update(collisions)
 
-        for name, vector in self.vectors.items():
-            print(name, vector.angle, vector.power)
+        # for name, vector in self.vectors.items():
+        #     print(name, vector.angle, vector.power)
 
-        print("---")
+        # print("---")
 
         if self.collision(0, -1):
             # self.vectors["__fall__"].power = max([vector.power for name, vector in self.vectors.items()])
@@ -246,7 +253,7 @@ class DynamicObject(StaticObject):
         for name in rem:
             self.vectors.pop(name)
 
-        self.move(math.trunc(pos.x + 0.5 * (pos.x >= 0)), math.trunc(pos.y + 0.5 * (pos.y >= 0)))
+        self.move(pos.x, pos.y)
 
     def moveByAngle(self, angle: int, speed: int = None, slidingStep: int = None, name: str = "vector", specifical: bool = False):
         id = random.randint(1, 1000000000) if not specifical else 1

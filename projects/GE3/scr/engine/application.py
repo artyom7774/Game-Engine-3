@@ -259,6 +259,8 @@ class Application:
         if self.autoUpdateScreen:
             pygame.display.update()
 
+        self.fpsc += 1
+
         self.capacity = self.clock.tick(self.fps)
 
         if image:

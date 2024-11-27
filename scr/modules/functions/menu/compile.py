@@ -17,6 +17,7 @@ PROGRAM = \
 
 import engine
 import sys
+import os
 
 VARIABLES = {
     "globals": %PROJECT_GLOBAL_VARIABLES%,
@@ -91,7 +92,11 @@ class Game(engine.Application):
 
     def print(self, text: str) -> None:    
         with open("output.txt", "a+") as file:
-            file.write(str(text))
+            if os.stat("output.txt").st_size < 4:
+                file.write(str(text.replace("\\n", "")))
+                
+            else:
+                file.write("\\n" + str(text.replace("\\n", "")))
 
     def update(self) -> None:
         super().update()

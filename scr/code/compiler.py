@@ -19,9 +19,9 @@ class Tps:
         clock = pygame.time.Clock()
 
         while True:
-            self.function()
-
             clock.tick(self.maxTps)
+
+            self.function()
 
 
 class Compiler:
@@ -114,11 +114,11 @@ class Compiler:
 
         exec(text, self.program.__dict__)
 
+        self.event("onStartGame")
+
         self.counter = threading.Thread(target=lambda: Tps(self.settings["settings"]["tps"], lambda: self.tps()))
         self.counter.daemon = True
         self.counter.start()
-
-        self.event("onStartGame")
 
     def queue(self, id: int = None, queue: list = None) -> None:
         if queue is None:
@@ -185,7 +185,13 @@ class Compiler:
         for element in remove:
             self.timer.remove(element)
 
-        self.event("everyFrame")
+        for id in self.nodesSortedByTypes["event"]["everyFrame"]:
+            if self.project.fpsc % self.nodes["objects"][id]["inputs"]["N"]["standard"] == 0:
+                self.start(id)
 
     def tps(self):
         self.tpsc += 1
+
+        for id in self.nodesSortedByTypes["event"]["everyTick"]:
+            if self.project.fpsc % self.nodes["objects"][id]["inputs"]["N"]["standard"] == 0:
+                self.start(id)

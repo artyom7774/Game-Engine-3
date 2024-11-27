@@ -4,7 +4,7 @@
         "3.0.2",
         "3.0.3",
         "3.1.0",
-        "3.2.0 beta"
+        "3.2.0"
     ],
 
     "updates": {
@@ -28,9 +28,9 @@
             "text": "- fixed bug with visiable versions\n- optimize run project\n- project site with help menu: https://artyom7774.github.io\n- fixed bug with save (executable) project\n- create collision editor"
         },
 
-        "3.2.0 beta": {
-            "name": "3.2.0 beta",
-            "text": "- update site and help menu\n- update vector move in dynamic object\n- nodes for mouse and keyboard click and press"
+        "3.2.0": {
+            "name": "3.2.0",
+            "text": "- update site and help menu\n- update vector move in dynamic object\n- nodes for mouse and keyboard click and press- update node every frame\n- add node every tick\n- can't set input in event nodes\n- fixed console in run project"
         }
     }
 }

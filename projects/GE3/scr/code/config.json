@@ -5,6 +5,7 @@
             "nodes": [
                 "onStartGame",
                 "everyFrame",
+                "everyTick",
                 "mouseRightClick",
                 "mouseLeftClick",
                 "keyboardClick",
@@ -236,7 +237,8 @@
                     "name": "__key__",
                     "type": "text",
                     "value": null,
-                    "standard": ""
+                    "standard": "",
+                    "visible": false
                 }
             },
             "outputs": {
@@ -279,7 +281,8 @@
                     "name": "__key__",
                     "type": "text",
                     "value": null,
-                    "standard": ""
+                    "standard": "",
+                    "visible": false
                 }
             },
             "outputs": {
@@ -890,15 +893,31 @@
                 }
             }
         },
-        "everyFrame": {
+        "everyTick": {
             "type": "event",
-            "name": "everyFrame",
+            "name": "everyTick",
             "x": null,
             "y": null,
             "width": 6,
             "height": 3,
             "id": null,
-            "inputs": {},
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "N": {
+                    "code": "N",
+                    "name": "__n__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1,
+                    "visible": false
+                }
+            },
             "outputs": {
                 "path": {
                     "code": "path",
@@ -907,11 +926,54 @@
                 }
             },
             "display": {
-                "name": "Every frame",
-                "discription": "start every frame",
+                "name": "Every N ticks",
+                "discription": "start every N ticks",
                 "text": {
                     "__none__": "",
-                    "__path__": "path"
+                    "__path__": "path",
+                    "__n__": "N"
+                }
+            }
+        },
+        "everyFrame": {
+            "type": "event",
+            "name": "everyFrame",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "N": {
+                    "code": "N",
+                    "name": "__n__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1,
+                    "visible": false
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Every N frame",
+                "discription": "start every N frames",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__n__": "N"
                 }
             }
         },

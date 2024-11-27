@@ -13,6 +13,7 @@ from engine.variables import *
 import typing
 import pygame
 import types
+import math
 
 
 class ParticleGroup:
@@ -163,5 +164,5 @@ class ObjectGroup:
             if self.game.debug or (obj.group.startswith("__") and obj.group.endswith("__") and not obj.group == "__debug_unvisiable__"):
                 pygame.draw.rect(
                     self.game.screen, (255, 0, 0) if "debug_color" not in obj.specials else obj.specials["debug_color"],
-                    (obj.pos.x + obj.hitbox.x + px, obj.pos.y + obj.hitbox.y + py, obj.hitbox.width, obj.hitbox.height), 1
+                    (math.trunc(obj.pos.x) + obj.hitbox.x + px, math.trunc(obj.pos.y) + obj.hitbox.y + py, obj.hitbox.width, obj.hitbox.height), 1
                 )

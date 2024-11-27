@@ -188,7 +188,7 @@ class CodeNodeConnector(QLabel):
         self.inputLeftRama = None
 
         if input is not None and not (input["type"] == "path" and self.node["type"] == "event"):
-            if "visible" not in input:
+            if "visible" not in input or True:
                 self.left = QLabel(self)
                 self.left.setGeometry(0, 9 + (node["y"] + (node["type"] == "event")) // CODE_GRID_CELL_SIZE, 10, 10)
                 self.left.setAttribute(Qt.WA_TranslucentBackground)
@@ -218,7 +218,7 @@ class CodeNodeConnector(QLabel):
 
             self.leftText = translate(node["display"]["text"][input["name"]])
 
-            self.project.objects["main"]["liner"].points["inputs"].append([{"id": id, "number": number, "keys": self.keys}, Vec2f(parent.x() + self.x() + 5, parent.y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": id, "number": number, "keys": self.keys, "type": self.node["type"]}, Vec2f(parent.x() + self.x() + 5, parent.y() + self.y() + self.height() // 2)])
 
         if output is not None:
             self.right = QLabel(self)
@@ -237,7 +237,7 @@ class CodeNodeConnector(QLabel):
         self.setGeometry(0, (self.number + 1) * CODE_GRID_CELL_SIZE, self.parent().width(), CODE_GRID_CELL_SIZE)
 
         if self.left is not None:
-            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "type": self.node["type"]}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
             self.left.setGeometry(0, 9 + self.node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
 
@@ -536,15 +536,16 @@ class CodeLabel(QLabel):
             elif start is not None:
                 if self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["type"] in [self.project.objects["main"]["function"]["objects"][str(start[0]["id"])]["outputs"][start[0]["keys"][start[0]["number"]]["output"]]["type"]] + self.project.objects["main"]["config"]["infelicity"][self.project.objects["main"]["function"]["objects"][str(start[0]["id"])]["outputs"][start[0]["keys"][start[0]["number"]]["output"]]["type"]]:
                     if start[0]["id"] != finish[0]["id"]:
-                        path = self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["code"]
+                        if finish[0]["type"] != "event":
+                            path = self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["code"]
 
-                        self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][path]["value"] = {
-                            "id": start[0]["id"],
-                            "name": start[0]["keys"][start[0]["number"]]["output"]
-                        }
+                            self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][path]["value"] = {
+                                "id": start[0]["id"],
+                                "name": start[0]["keys"][start[0]["number"]]["output"]
+                            }
 
-                        with open(self.project.selectFile, "w", encoding="utf-8") as file:
-                            json.dump(self.project.objects["main"]["function"], file, indent=4)
+                            with open(self.project.selectFile, "w", encoding="utf-8") as file:
+                                json.dump(self.project.objects["main"]["function"], file, indent=4)
 
             else:
                 pass

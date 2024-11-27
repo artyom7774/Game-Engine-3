@@ -120,6 +120,8 @@ class Main(QMainWindow):
                 lastVersion = json.loads(response.text)["version"]
                 nowVersion = json.load(open("scr/files/version.json", "r"))["version"]
 
+                print(lastVersion, nowVersion)
+
                 if lastVersion != nowVersion:
                     msg = QMessageBox()
                     msg.setWindowTitle(f"{translate('Update')} {nowVersion} -> {lastVersion}")
