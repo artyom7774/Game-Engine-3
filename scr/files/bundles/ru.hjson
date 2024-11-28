@@ -228,4 +228,11 @@
     "Example:": "Пример:"
     "let: local variable abc = 1": "пусть: локальная переменная abc = 1"
     "%math(%local_var(abc) + 2) -> 3": "%math(%local_var(abc) + 2) -> 3"
+    "Jump": "Прыжок"
+    "": ""
+    "": ""
+    "": ""
+    "": ""
+    "": ""
+    "": ""
 }

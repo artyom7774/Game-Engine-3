@@ -174,6 +174,9 @@ class Main(QMainWindow):
             self.objects["tab_file_bar"].show()
             self.objects["tab_file_bar"].setGeometry(10 + 10 + Size.x(16), 40, Size.x(68) - 40, 30)
 
+            if "main" in self.objects and "code" in self.objects["main"]:
+                self.objects["main"]["code"].hide()
+
             functions.project.centerMenuInit(self)
 
         else:
