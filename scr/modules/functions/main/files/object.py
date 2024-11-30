@@ -29,11 +29,15 @@ class Object:
                 self.value = FocusLineEdit(project, releasedFocusFunction=lambda: Object.function(self.value, project, save, temp, path))
                 self.value.setText(str(temp["value"]))
 
+                self.value.saveAllValues = lambda: Object.function(self.value, project, save, temp, path, init=False)
+
             elif temp["type"] == "choose":
                 self.value = FocusComboBox(releasedFocusFunction=lambda: Object.function(self.value, project, save, temp, path))
                 self.value.currentIndexChanged.connect(lambda: self.value.clearFocus())
                 self.value.addItems([translate(element) for element in temp["choose"]["input"]])
                 self.value.setCurrentIndex([temp["value"] == element for i, element in enumerate(temp["choose"]["output"])].index(True))
+
+                self.value.saveAllValues = lambda: Object.function(self.value, project, save, temp, path, init=False)
 
             elif temp["type"] == "dict":
                 project.objects["main"]["object_tree_objects"][path] = QTreeWidgetItem(project.objects["main"]["object_tree_objects"][path[:path.rfind("/")]])
@@ -95,6 +99,9 @@ class Object:
 
                 return 0
 
+            else:
+                project.objects["main"]["widgets"].append(widget)
+
             if path.count("/") == 0:
                 project.objects["main"]["object_tree_objects"][path] = QTreeWidgetItem(project.objects["main"]["object_tree_main"])
 
@@ -122,6 +129,8 @@ class Object:
 
         project.objects["main"]["object_tree"] = QTreeWidget(parent=project)
 
+        project.objects["main"]["widgets"] = []
+
         if pos is None:
             project.objects["main"]["object_tree"].setGeometry(project.objects["center_rama"].x(), project.objects["center_rama"].y(), project.objects["center_rama"].width(), project.objects["center_rama"].height())
 
@@ -131,6 +140,8 @@ class Object:
         project.objects["main"]["object_tree"].header().hide()
         project.objects["main"]["object_tree"].setFont(LFONT)
         project.objects["main"]["object_tree"].show()
+
+        project.objects["main"]["object_tree"].saveAllValues = lambda self, project: Object.saveAllValues(project)
 
         project.objects["main"]["object_tree_main"] = QTreeWidgetItem(project.objects["main"]["object_tree"])
         project.objects["main"]["object_tree_main"].setText(0, file[file.rfind("/") + 1:])
@@ -156,7 +167,7 @@ class Object:
                 include(project, obj, f"{key}/{k1}", class_)
 
     @staticmethod
-    def function(obj, project, save: str, last: dict, path: str) -> None:
+    def function(obj, project, save: str, last: dict, path: str, init: bool = True) -> None:
         with open(f"engine/files/objects.json", "r") as file:
             objects = json.load(file)
 
@@ -248,4 +259,14 @@ class Object:
             with open(save, "w") as f:
                 json.dump(file, f, indent=4)
 
-            project.init()
+            if init:
+                project.init()
+
+    @staticmethod
+    def saveAllValues(project):
+        print(0)
+        for widget in project.objects["main"]["widgets"]:
+            print(1)
+            if hasattr(widget.value, "saveAllValues"):
+                print(2)
+                widget.value.saveAllValues()

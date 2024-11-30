@@ -176,6 +176,8 @@ class Config:
 
                     project.objects["main"][f"{k}_entry"].setText(str(v["value"]))
 
+                    project.objects["main"][f"{k}_entry"].saveAllValues = lambda self, proj, key=k, value=v, name=project.selectFile: Config.function(project, f"{key}_entry", key, value, name)
+
                 elif v["type"] == "bool":
                     project.objects["main"][f"{k}_checkbox"] = QCheckBox(parent=project)
                     project.objects["main"][f"{k}_checkbox"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
@@ -203,24 +205,24 @@ class Config:
             y += 10
 
     @staticmethod
-    def save(project, key: str, value: dict) -> None:
-        if project.selectFile == "":
-            return 0
+    def save(project, key: str, value: dict, name: str = None) -> None:
+        if name is None:
+            name = project.selectFile
 
         try:
-            with open(project.selectFile, "r") as file:
+            with open(name, "r") as file:
                 config = json.load(file)
 
             config["values"][key] = value
 
-            with open(project.selectFile, "w") as file:
+            with open(name, "w") as file:
                 json.dump(config, file, indent=4)
 
         except PermissionError:
             pass
 
     @staticmethod
-    def function(project, obj: str, key: str, value: dict) -> None:
+    def function(project, obj: str, key: str, value: dict, name: str = None) -> None:
         if obj == f"{key}_entry":
             answer = ""
 
@@ -230,7 +232,7 @@ class Config:
 
                 elif value["type"] == "path":
                     if os.path.exists(f"projects/{project.selectProject}/project/{project.objects['main'][obj].text()}") and any([project.objects['main'][obj].text().endswith(element) for element in IMAGE_FORMATES]):
-                        answer = project.objects['main'][obj].text()
+                        answer = project.objects["main"][obj].text()
 
                     else:
                         if project.objects["main"][obj].text() != "":
@@ -245,17 +247,17 @@ class Config:
                     answer = ""
 
             except BaseException:
-                project.objects['main'][obj].setText(str(value["value"]))
+                project.objects["main"][obj].setText(str(value["value"]))
 
             else:
                 value["value"] = answer
 
-                Config.save(project, key, value)
+                Config.save(project, key, value, name)
 
         elif obj == f"{key}_checkbox":
             value["value"] = project.objects["main"][obj].isChecked()
 
-            Config.save(project, key, value)
+            Config.save(project, key, value, name)
 
         else:
             pass

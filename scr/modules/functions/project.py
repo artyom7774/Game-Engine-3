@@ -283,11 +283,28 @@ def projectTreeProjectMenuOpen(project, position) -> None:
         project.objects["tree_project_menu"].popup(project.objects["tree_project"].mapToGlobal(position)) if project.objects["tree_project"].selectedItems() else None
 
 
+def SaveAllObjectsValues(project) -> None:
+    for key, value in project.objects["main"].items():
+        try:
+            if hasattr(value, "saveAllValues"):
+                value.saveAllValues(value, project)
+
+        except RuntimeError:
+            pass
+
+
 def centerMenuInit(project, update: bool = False) -> None:
     if "main" not in project.objects:
         project.objects["main"] = {}
 
+    # if "main" in project.objects and "code" in project.objects["main"]:
+    #     project.objects["main"]["code"].hide()
+    #
+    #     project.objects["main"]["code"].deleteLater()
+
     if project.selectFile != "" or update:
+        SaveAllObjectsValues(project)
+
         for key, value in project.objects["main"].items():
             if key.find("timer") != -1:
                 try:

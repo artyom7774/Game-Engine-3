@@ -1,9 +1,9 @@
-from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QToolTip, QLineEdit, QPushButton, QAbstractItemView
+from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QToolTip, QLineEdit, QPushButton, QComboBox
 from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon
 from PyQt5.Qt import Qt, QPoint, QTimer
 
 from scr.modules.dialogs import CreateNode
-from scr.modules.functions.algorithm import bezierCurveWidth
+from scr.modules.functions.algorithm import bezierCurveDeep, bezierCurveWidth
 
 from scr.modules.widgets import FocusLineEdit, FocusComboBox
 
@@ -26,6 +26,8 @@ import copy
 
 # создать объект из шаблона (принимать x, y) (вернуть id объекта)
 # создать объект (в будущем) (принимать все значения) (вернуть id объекта)
+
+# при клике мыши (вернуть x, y)
 
 
 def isCurrectNode(obj: dict):
@@ -74,6 +76,14 @@ class CodeLiner:
     start: Vec2f = None
 
 
+class CodeCompiler:
+    @staticmethod
+    def compiler(project, code: dict) -> dict:
+        # compile code for compiling, optimize
+
+        pass
+
+
 class TypeSet:
     @staticmethod
     def set_(type: str, text: str):
@@ -93,7 +103,7 @@ class TypeSet:
 
     @staticmethod
     def logic(value: typing.Any):
-        return True if value in ("true", "True", "1", "+") else False
+        return True if value in ("true", "True", "1") else False
 
     @staticmethod
     def Any(value: typing.Any):
@@ -126,7 +136,7 @@ class TypeCurrect:
 
     @staticmethod
     def logic(value: typing.Any):
-        return value in ("true", "True", "false", "False", "0", "1", "+", "-")
+        return value in ("true", "True", "false", "False", "0", "1")
 
     @staticmethod
     def Any(value: typing.Any):
@@ -187,19 +197,18 @@ class CodeNodeConnector(QLabel):
         self.inputLeftText = None
         self.inputLeftRama = None
 
-        if input is not None and not (input["type"] == "path" and self.node["type"] == "event"):
-            if "visible" not in input or True:
-                self.left = QLabel(self)
-                self.left.setGeometry(0, 9 + (node["y"] + (node["type"] == "event")) // CODE_GRID_CELL_SIZE, 10, 10)
-                self.left.setAttribute(Qt.WA_TranslucentBackground)
+        if input is not None:
+            self.left = QLabel(self)
+            self.left.setGeometry(0, 9 + node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
+            self.left.setAttribute(Qt.WA_TranslucentBackground)
 
-                if input["value"] is not None:
-                    self.left.setPixmap(QPixmap(project.objects["main"]["config"]["connectors"]["sprites"][project.objects["main"]["function"]["objects"][str(input["value"]["id"])]["outputs"][input["value"]["name"]]["type"]]))
+            if input["value"] is not None:
+                self.left.setPixmap(QPixmap(project.objects["main"]["config"]["connectors"]["sprites"][project.objects["main"]["function"]["objects"][str(input["value"]["id"])]["outputs"][input["value"]["name"]]["type"]]))
 
-                else:
-                    self.left.setPixmap(QPixmap(project.objects["main"]["config"]["connectors"]["sprites"][input["type"]]))
+            else:
+                self.left.setPixmap(QPixmap(project.objects["main"]["config"]["connectors"]["sprites"][input["type"]]))
 
-                self.left.show()
+            self.left.show()
 
             if input["type"] not in CODE_CONNECTOR_NO_HAVE_INPUT_TYPES:
                 self.inputLeftText = CodeNodeConnectorLineEdit(project.objects["main"]["code"], self.project, id, input)
@@ -218,7 +227,7 @@ class CodeNodeConnector(QLabel):
 
             self.leftText = translate(node["display"]["text"][input["name"]])
 
-            self.project.objects["main"]["liner"].points["inputs"].append([{"id": id, "number": number, "keys": self.keys, "type": self.node["type"]}, Vec2f(parent.x() + self.x() + 5, parent.y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": id, "number": number, "keys": self.keys}, Vec2f(parent.x() + self.x() + 5, parent.y() + self.y() + self.height() // 2)])
 
         if output is not None:
             self.right = QLabel(self)
@@ -237,7 +246,7 @@ class CodeNodeConnector(QLabel):
         self.setGeometry(0, (self.number + 1) * CODE_GRID_CELL_SIZE, self.parent().width(), CODE_GRID_CELL_SIZE)
 
         if self.left is not None:
-            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "type": self.node["type"]}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
             self.left.setGeometry(0, 9 + self.node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
 
@@ -298,7 +307,7 @@ class CodeNode(QTreeWidget):
         # CONNECTORS
 
         if "sorting" in self.node and "outputs" in self.node["sorting"]:
-            self.node["outputs"] = dict(sorted(self.node["outputs"].items(), key=lambda x: self.node["sorting"]["outputs"].index(x[1]["code"])))
+            self.node["outputs"] = dict(sorted(self.node["outputs"].items(),key=lambda x: self.node["sorting"]["outputs"].index(x[1]["code"])))
 
         else:
             self.node["outputs"] = dict(sorted(self.node["outputs"].items(), key=lambda x: self.project.objects["main"]["config"]["sorting"].index(x[1]["type"])))
@@ -404,6 +413,10 @@ class CodeLabel(QLabel):
         self.project.objects["main"]["code_timer"].timeout.connect(lambda: self.timerToolTip())
         self.project.objects["main"]["code_timer"].start(1000 // 2)
 
+        self.project.objects["main"]["code_timer_second"] = QTimer(self)
+        self.project.objects["main"]["code_timer_second"].timeout.connect(lambda: self.timer())
+        self.project.objects["main"]["code_timer_second"].start(1000 // 40)
+
         self.stop = False
 
     def timerToolTip(self):
@@ -420,6 +433,34 @@ class CodeLabel(QLabel):
             self.project.cash["file"][self.project.selectFile].lastToolTipPoses.pop(0)
 
         self.project.objects["main"]["code"].viewToolTip()
+
+    def timer(self):
+        # MOVE SCENE IF SELECT COLLECTOR
+
+        if self.project.objects["main"]["liner"].start is not None:
+            if self.point.x() < 20:
+                self.project.cash["file"][self.project.selectFile].x -= 8
+                self.project.objects["main"]["liner"].start.x += 8
+
+                Code.update(self.project, call="move")
+
+            if self.point.x() > self.project.objects["main"]["code"].width() - 20:
+                self.project.cash["file"][self.project.selectFile].x += 8
+                self.project.objects["main"]["liner"].start.x -= 8
+
+                Code.update(self.project, call="move")
+
+            if self.point.y() < 20:
+                self.project.cash["file"][self.project.selectFile].y -= 8
+                self.project.objects["main"]["liner"].start.y += 8
+
+                Code.update(self.project, call="move")
+
+            if self.point.y() > self.project.objects["main"]["code"].height() - 20:
+                self.project.cash["file"][self.project.selectFile].y += 8
+                self.project.objects["main"]["liner"].start.y -= 8
+
+                Code.update(self.project, call="move")
 
     def mousePressEvent(self, event) -> None:
         # Code.update(self.project)
@@ -540,16 +581,15 @@ class CodeLabel(QLabel):
             elif start is not None:
                 if self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["type"] in [self.project.objects["main"]["function"]["objects"][str(start[0]["id"])]["outputs"][start[0]["keys"][start[0]["number"]]["output"]]["type"]] + self.project.objects["main"]["config"]["infelicity"][self.project.objects["main"]["function"]["objects"][str(start[0]["id"])]["outputs"][start[0]["keys"][start[0]["number"]]["output"]]["type"]]:
                     if start[0]["id"] != finish[0]["id"]:
-                        if finish[0]["type"] != "event":
-                            path = self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["code"]
+                        path = self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["code"]
 
-                            self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][path]["value"] = {
-                                "id": start[0]["id"],
-                                "name": start[0]["keys"][start[0]["number"]]["output"]
-                            }
+                        self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][path]["value"] = {
+                            "id": start[0]["id"],
+                            "name": start[0]["keys"][start[0]["number"]]["output"]
+                        }
 
-                            with open(self.project.selectFile, "w", encoding="utf-8") as file:
-                                json.dump(self.project.objects["main"]["function"], file, indent=4)
+                        with open(self.project.selectFile, "w", encoding="utf-8") as file:
+                            json.dump(self.project.objects["main"]["function"], file, indent=4)
 
             else:
                 pass
@@ -619,12 +659,9 @@ class CodeLabel(QLabel):
         else:
             QToolTip.hideText()
 
-    def deleteLater(self):
-        self.project.objects["main"]["code_timer"].stop()
-
 
 class CodeAdditionsVarsType(QTreeWidget):
-    style = "background-color: rgba(0, 0, 0, 0); border: 1px solid #3f4042"
+    style = "background-color: rgba(0, 0, 0, 0); border: 1px solid #2a2b2e"
 
     def __init__(self, parent, pos: Vec4i, name: str, path: str) -> None:
         QTreeWidget.__init__(self, parent)
@@ -641,8 +678,6 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.setGeometry(self.pos.x, self.pos.y, self.pos.z, self.pos.w)
 
         self.setColumnCount(3)
-
-        self.setSelectionMode(QAbstractItemView.NoSelection)
 
         self.setColumnWidth(0, self.width() // 3 - 2)
         self.setColumnWidth(1, self.width() // 3 - 2)

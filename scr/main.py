@@ -85,7 +85,10 @@ class Main(QMainWindow):
 
         def click(x, y, button, pressed) -> None:
             if not pressed:
-                return
+                return 0
+
+            if not self.selectFile.endswith(".func"):
+                return 0
 
             try:
                 if "main" in self.objects and "nodes" in self.objects["main"]:
@@ -175,7 +178,11 @@ class Main(QMainWindow):
             self.objects["tab_file_bar"].setGeometry(10 + 10 + Size.x(16), 40, Size.x(68) - 40, 30)
 
             if "main" in self.objects and "code" in self.objects["main"]:
-                self.objects["main"]["code"].hide()
+                try:
+                    self.objects["main"]["code"].hide()
+
+                except RuntimeError:
+                    pass
 
             functions.project.centerMenuInit(self)
 

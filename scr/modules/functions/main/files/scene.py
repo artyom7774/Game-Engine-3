@@ -194,6 +194,8 @@ class SceneAdditions:
                 self.value = FocusLineEdit(parent=project, releasedFocusFunction=lambda: self.focusOutLabel(project, save, temp, path))
                 self.value.setText(str(temp["value"]))
 
+                self.value.saveAllValues = lambda: ObjectTypingClass.function(self.value, project, save, temp, path, init=False)
+
             elif temp["type"] == "choose":
                 self.value = FocusComboBox(releasedFocusFunction=lambda: ObjectTypingClass.function(self.value, project, save, temp, path))
                 self.value.currentIndexChanged.connect(lambda: self.value.clearFocus())
@@ -286,6 +288,8 @@ class SceneAdditions:
         project.objects["main"]["settings"].header().setFont(FONT)
         project.objects["main"]["settings"].show()
 
+        # TODO
+
         if project.cash["file"][project.selectFile].selectObject is not None:
             file = project.cash["file"][project.selectFile].selectObject.variables["file"]
 
@@ -365,6 +369,8 @@ class Scene:
             project.objects["main"]["scene"].customContextMenuRequested.connect(
                 lambda pos: Scene.menu(project, pos)
             )
+
+            project.objects["main"]["scene"].saveAllValues = lambda self, project: Scene.saveAllValues(project)
 
             Scene.update(project)
 
@@ -852,6 +858,10 @@ class Scene:
             Scene.select(project, obj.pos.x + obj.hitbox.width // 2, obj.pos.y + obj.hitbox.height // 2)
 
             Scene.update(project)
+
+    @staticmethod
+    def saveAllValues(project) -> None:
+        pass
 
     @staticmethod
     def getVisiableScreen(project) -> Image.Image:

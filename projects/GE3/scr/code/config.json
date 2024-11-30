@@ -202,8 +202,8 @@
                 }
             },
             "display": {
-                "name": "imitate jump",
-                "discription": "imitate jump",
+                "name": "Jump",
+                "discription": "jump",
                 "text": {
                     "__none__": "",
                     "__path__": "path",
@@ -249,7 +249,7 @@
                 }
             },
             "display": {
-                "name": "keyboard click",
+                "name": "Keyboard click",
                 "discription": "starts on key click",
                 "text": {
                     "__none__": "",

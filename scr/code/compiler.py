@@ -7,23 +7,6 @@ import json
 import os
 
 
-class Tps:
-    def __init__(self, maxTps: int = 20, function: typing.Callable = None):
-        self.maxTps = maxTps
-
-        self.function = function
-
-        self.start()
-
-    def start(self):
-        clock = pygame.time.Clock()
-
-        while True:
-            clock.tick(self.maxTps)
-
-            self.function(round(clock.get_fps()))
-
-
 class Compiler:
     def __init__(self, project, path: str, nodes: typing.Dict[str, dict], settings: dict) -> None:
         self.project = project
@@ -116,10 +99,6 @@ class Compiler:
         exec(text, self.program.__dict__)
 
         self.event("onStartGame")
-
-        self.counter = threading.Thread(target=lambda: Tps(self.settings["settings"]["tps"], lambda tps: self.tps(tps)))
-        self.counter.daemon = True
-        self.counter.start()
 
     def queue(self, id: int = None, queue: list = None) -> None:
         if queue is None:

@@ -32,6 +32,23 @@ SCENES = %PROJECT_SCENES%
 %COMPILER%
 
 
+class Tps:
+    def __init__(self, maxTps: int = 20, function: typing.Callable = None):
+        self.maxTps = maxTps
+
+        self.function = function
+
+        self.start()
+
+    def start(self):
+        clock = pygame.time.Clock()
+
+        while True:
+            clock.tick(self.maxTps)
+
+            self.function(round(clock.get_fps()))
+
+
 class Game(engine.Application):
     def __init__(self):
         engine.Application.__init__(self)
@@ -65,6 +82,10 @@ class Game(engine.Application):
         for key, value in PROGRAMS.items():
             self.programs[key] = Compiler(self, key, value, self.settings)
 
+        self.counter = threading.Thread(target=lambda: self.tpsStart())
+        self.counter.daemon = True
+        self.counter.start()
+
         self.setMouseEvent(0, lambda: self.mouseLeftClick())
         self.setMouseEvent(2, lambda: self.mouseRightClick())
 
@@ -81,15 +102,7 @@ class Game(engine.Application):
                 node = PROGRAMS[name]["objects"][id]
 
                 self.setKeyEvent(["PRESS", node["inputs"]["key"]["standard"]], lambda temp=id: self.programs[name].start(temp))
-
-    def mouseLeftClick(self):
-        for key, value in PROGRAMS.items():
-            self.programs[key].event("mouseLeftClick")
-            
-    def mouseRightClick(self):
-        for key, value in PROGRAMS.items():
-            self.programs[key].event("mouseRightClick")
-
+    
     def print(self, text: str) -> None:    
         with open("output.txt", "a+") as file:
             if os.stat("output.txt").st_size < 2:
@@ -103,6 +116,21 @@ class Game(engine.Application):
 
         for key, value in self.programs.items():
             self.programs[key].update()
+    
+    def tpsStart(self):
+        def function(tps):
+            for key, value in PROGRAMS.items():
+                self.programs[key].tps(tps)
+
+        tps = Tps(SETTINGS["tps"], lambda tps: function(tps))
+
+    def mouseLeftClick(self):
+        for key, value in PROGRAMS.items():
+            self.programs[key].event("mouseLeftClick")
+            
+    def mouseRightClick(self):
+        for key, value in PROGRAMS.items():
+            self.programs[key].event("mouseRightClick")
 
     def loadScene(self, scene):
         self.objects.empty()
