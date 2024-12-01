@@ -90,6 +90,10 @@ class TypeSet:
         return getattr(TypeSet, type)(text)
 
     @staticmethod
+    def choose(value: typing.Any):
+        return float(value) if math.trunc(float(value)) != math.ceil(float(value)) else int(float(value))
+
+    @staticmethod
     def path(value: typing.Any):
         return value
 
@@ -112,15 +116,19 @@ class TypeSet:
 
 class TypeCurrect:
     @staticmethod
-    def currect_(type: str, text: str):
+    def currect_(type: str, text: str) -> bool:
         return getattr(TypeCurrect, type)(text)
 
     @staticmethod
-    def path(value: typing.Any):
+    def choose(value: typing.Any) -> bool:
         return True
 
     @staticmethod
-    def number(value: typing.Any):
+    def path(value: typing.Any) -> bool:
+        return True
+
+    @staticmethod
+    def number(value: typing.Any) -> bool:
         try:
             float(value)
 
@@ -131,15 +139,15 @@ class TypeCurrect:
             return True
 
     @staticmethod
-    def text(value: typing.Any):
+    def text(value: typing.Any) -> bool:
         return isinstance(value, str)
 
     @staticmethod
-    def logic(value: typing.Any):
+    def logic(value: typing.Any) -> bool:
         return value in ("true", "True", "false", "False", "0", "1")
 
     @staticmethod
-    def Any(value: typing.Any):
+    def Any(value: typing.Any) -> bool:
         return True
 
 

@@ -15,7 +15,8 @@
         "loops": {
             "name": "Loops",
             "nodes": [
-                "for_"
+                "for_",
+                "if_"
             ]
         },
         "text": {
@@ -98,6 +99,7 @@
             "number": "scr/code/sprites/connectors/number.png",
             "logic": "scr/code/sprites/connectors/logic.png",
             "iterator": "scr/code/sprites/connectors/iterator.png",
+            "choose": "scr/code/sprites/connectors/choose.png",
             "Any": "scr/code/sprites/connectors/any.png"
         },
         "colors": {
@@ -106,6 +108,7 @@
             "number": "#6765e4",
             "logic": "#801a1b",
             "iterator": "#8b008b",
+            "choose": "#e7a965",
             "Any": "#cecac9"
         }
     },
@@ -135,6 +138,7 @@
         "path": [],
         "number": [
             "text",
+            "choose",
             "Any"
         ],
         "text": [
@@ -150,6 +154,7 @@
         ],
         "Any": [
             "number",
+            "choose",
             "text",
             "logic"
         ]
@@ -159,6 +164,7 @@
         "number",
         "text",
         "logic",
+        "choose",
         "Any"
     ],
     "nodes": {
@@ -560,6 +566,93 @@
                     "__answer__": "answer",
                     "__name__": "name",
                     "__global__": "global"
+                }
+            }
+        },
+        "if_": {
+            "type": "loop",
+            "name": "if_",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "a",
+                    "b",
+                    "operation"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": null
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": null
+                },
+                "operation": {
+                    "code": "operation",
+                    "name": "__operation__",
+                    "type": "choose",
+                    "value": null,
+                    "standard": 0,
+                    "choose": {
+                        "options": [
+                            "==",
+                            "!=",
+                            "<=",
+                            ">=",
+                            "<",
+                            ">"
+                        ]
+                    }
+                }
+            },
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "If",
+                "discription": "If",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__a__": "A",
+                    "__b__": "B",
+                    "__operation__": "operation",
+                    "__path_true__": "path if true",
+                    "__path_false__": "path if false"
                 }
             }
         },
