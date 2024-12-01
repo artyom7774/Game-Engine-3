@@ -36,7 +36,7 @@
 
         "3.2.1": {
             "name": "3.2.1",
-            "text": "- fixed bug with save files\n- fixed bug with save code files\n- fixed bug with using more funcions files in project"
+            "text": "- fixed bug with save files\n- fixed bug with save code files\n- fixed bug with using more funcions files in project\n- update code editor"
         }
     }
 }

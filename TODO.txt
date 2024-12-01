@@ -157,7 +157,7 @@
 
 mading: 88, 89
 
-now: 69 / 89
+now: 70 / 89
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
  17248177  322.216    0.000  594.735    0.000 objects.py:122(collision)
