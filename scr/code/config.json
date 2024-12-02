@@ -582,8 +582,8 @@
                 "inputs": [
                     "path",
                     "a",
-                    "b",
-                    "operation"
+                    "operation",
+                    "b"
                 ],
                 "outputs": [
                     "path_true",

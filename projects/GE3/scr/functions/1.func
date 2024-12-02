@@ -513,7 +513,95 @@
             "x": 11,
             "y": 19
         },
-        "310140438": {
+        "745101838": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 745101838,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 613066106,
+                        "name": "path_false"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "No",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 25,
+            "y": -9
+        },
+        "788589013": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 788589013,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 613066106,
+                        "name": "path_true"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "Yes",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 25,
+            "y": -14
+        },
+        "613066106": {
             "display": {
                 "discription": "If",
                 "name": "If",
@@ -528,26 +616,22 @@
                 }
             },
             "height": 5,
-            "id": 310140438,
+            "id": 613066106,
             "inputs": {
                 "path": {
                     "code": "path",
                     "name": "__path__",
                     "standard": null,
                     "type": "path",
-                    "value": null
+                    "value": {
+                        "id": 549381112,
+                        "name": "path"
+                    }
                 },
                 "a": {
                     "code": "a",
                     "name": "__a__",
-                    "standard": "None",
-                    "type": "Any",
-                    "value": null
-                },
-                "b": {
-                    "code": "b",
-                    "name": "__b__",
-                    "standard": "None",
+                    "standard": "1",
                     "type": "Any",
                     "value": null
                 },
@@ -566,6 +650,13 @@
                     "name": "__operation__",
                     "standard": 0,
                     "type": "choose",
+                    "value": null
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "standard": "2",
+                    "type": "Any",
                     "value": null
                 }
             },
@@ -586,8 +677,8 @@
                 "inputs": [
                     "path",
                     "a",
-                    "b",
-                    "operation"
+                    "operation",
+                    "b"
                 ],
                 "outputs": [
                     "path_true",

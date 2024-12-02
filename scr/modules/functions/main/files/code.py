@@ -189,16 +189,20 @@ class CodeNodeConnectorComboBox(QComboBox):
         self.id = id
         self.input = input
 
+        self.index = self.input["standard"]
+
         self.addItems(self.input["choose"]["options"])
         self.setCurrentIndex(self.input["standard"])
 
+        self.currentIndexChanged.connect(self.indexChange)
+
     def save(self) -> None:
-        print(1)
+        self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = self.index
 
-    def focusOutEvent(self, event) -> None:
+    def indexChange(self, index) -> None:
+        self.index = index
+
         self.save()
-
-        event.accept()
 
 
 class CodeNodeConnector(QLabel):
