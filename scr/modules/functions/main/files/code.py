@@ -24,9 +24,6 @@ import copy
 # for i, element in enumerate(list)
 # while & (& - условие)
 
-# создать объект из шаблона (принимать x, y) (вернуть id объекта)
-# создать объект (в будущем) (принимать все значения) (вернуть id объекта)
-
 # при клике мыши (вернуть x, y)
 
 
@@ -183,6 +180,27 @@ class CodeNodeConnectorLineEdit(QLineEdit):
         event.accept()
 
 
+class CodeNodeConnectorComboBox(QComboBox):
+    def __init__(self, parent, project, id, input) -> None:
+        QComboBox.__init__(self, parent)
+
+        self.project = project
+
+        self.id = id
+        self.input = input
+
+        self.addItems(self.input["choose"]["options"])
+        self.setCurrentIndex(self.input["standard"])
+
+    def save(self) -> None:
+        print(1)
+
+    def focusOutEvent(self, event) -> None:
+        self.save()
+
+        event.accept()
+
+
 class CodeNodeConnector(QLabel):
     def __init__(self, parent, project, node: dict, id: int, keys: dict, number: int, input: dict = None, output: dict = None) -> None:
         QLabel.__init__(self, parent)
@@ -202,12 +220,14 @@ class CodeNodeConnector(QLabel):
         self.left = None
         self.right = None
 
+        self.input = input
+
         self.inputLeftText = None
         self.inputLeftRama = None
 
         if input is not None:
             self.left = QLabel(self)
-            self.left.setGeometry(0, 9 + node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
+            self.left.setGeometry(0, 9, 10, 10)
             self.left.setAttribute(Qt.WA_TranslucentBackground)
 
             if input["value"] is not None:
@@ -219,17 +239,26 @@ class CodeNodeConnector(QLabel):
             self.left.show()
 
             if input["type"] not in CODE_CONNECTOR_NO_HAVE_INPUT_TYPES:
-                self.inputLeftText = CodeNodeConnectorLineEdit(project.objects["main"]["code"], self.project, id, input)
-                self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
-                self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 3, self.width() - 40, 14)
-                self.inputLeftText.setStyleSheet("background-color: rgba(63, 64, 66, 0); border: 0px")
-                self.inputLeftText.setText(str(input["standard"]))
-                self.inputLeftText.setFont(MFONT)
-                self.inputLeftText.show()
+                if input["type"] == "choose":
+                    self.inputLeftText = CodeNodeConnectorComboBox(project.objects["main"]["code"], self.project, id, input)
+                    self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
+                    self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 3, self.width() - 40, 14)
+                    self.inputLeftText.setStyleSheet("background-color: rgba(63, 64, 66, 0); border: 0px")
+                    self.inputLeftText.setFont(MFONT)
+                    self.inputLeftText.show()
+
+                else:
+                    self.inputLeftText = CodeNodeConnectorLineEdit(project.objects["main"]["code"], self.project, id, input)
+                    self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
+                    self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 4, self.width() - 40, 14)
+                    self.inputLeftText.setStyleSheet("background-color: rgba(63, 64, 66, 0); border: 0px")
+                    self.inputLeftText.setText(str(input["standard"]))
+                    self.inputLeftText.setFont(MFONT)
+                    self.inputLeftText.show()
 
                 self.inputLeftRama = QLabel(project.objects["main"]["code"])
                 self.inputLeftRama.setAttribute(Qt.WA_TransparentForMouseEvents)
-                self.inputLeftRama.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 5, self.width() - 40, 18)
+                self.inputLeftRama.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 6, self.width() - 40, 18)
                 self.inputLeftRama.setStyleSheet("border: 1px solid #cecac9;")
                 self.inputLeftRama.show()
 
@@ -239,7 +268,7 @@ class CodeNodeConnector(QLabel):
 
         if output is not None:
             self.right = QLabel(self)
-            self.right.setGeometry(self.width() - 12, 9 + node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
+            self.right.setGeometry(self.width() - 12, 9, 10, 10)
             self.right.setAttribute(Qt.WA_TranslucentBackground)
             self.right.setPixmap(QPixmap(project.objects["main"]["config"]["connectors"]["sprites"][output["type"]]))
             self.right.show()
@@ -256,16 +285,16 @@ class CodeNodeConnector(QLabel):
         if self.left is not None:
             self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
-            self.left.setGeometry(0, 9 + self.node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
+            self.left.setGeometry(0, 9, 10, 10)
 
         if self.right is not None:
             self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
-            self.right.setGeometry(self.width() - 12, 9 + self.node["y"] // CODE_GRID_CELL_SIZE, 10, 10)
+            self.right.setGeometry(self.width() - 12, 9, 10, 10)
 
         if self.inputLeftText is not None:
-            self.inputLeftText.setGeometry(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 3, self.width() - 40, 14)
-            self.inputLeftRama.setGeometry(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 5, self.width() - 40, 18)
+            self.inputLeftText.setGeometry(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 4 - (self.input["type"] == "choose"), self.width() - 40, 14)
+            self.inputLeftRama.setGeometry(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 6, self.width() - 40, 18)
 
 
 class CodeNode(QTreeWidget):
