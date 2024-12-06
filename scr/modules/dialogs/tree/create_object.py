@@ -60,6 +60,9 @@ class CreateObjectFunctions:
             "type": objects["type"]["type"]
         }
 
+        out["variables"] = {}
+        out["animator"] = dict(ANIMATOR_BASE_VALUE)
+
         if out["type"]["type"] == "choose":
             out["type"]["choose"] = objects["specials"]["choose"]["type"]
 

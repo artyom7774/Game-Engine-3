@@ -1,6 +1,10 @@
-from PyQt5.QtWidgets import QLabel, QTreeWidget, QTreeWidgetItem, QWidget, QHBoxLayout, QSizePolicy, QSpacerItem
+from PyQt5.QtWidgets import QLabel, QTreeWidget, QTreeWidgetItem, QWidget, QHBoxLayout, QSizePolicy, QSpacerItem, QPushButton
 
 from scr.modules.widgets import FocusLineEdit, FocusComboBox
+
+from scr.modules.functions.main.files.code import CodeAdditionsVarsType
+
+from engine.vector.int import Vec4i
 
 from scr.variables import *
 
@@ -80,7 +84,7 @@ class Object:
         return temp
 
     @staticmethod
-    def init(project, class_=ObjectTreeWidgetItem, file=None, pos=None, type: str = "object") -> None:
+    def init(project, class_=ObjectTreeWidgetItem, file=None, pos=None, type: str = "object", variables: bool = True, bottom: bool = False) -> None:
         def include(project, obj: dict, path: str, class_) -> None:
             temp = Object.get(obj, path)
 
@@ -125,9 +129,48 @@ class Object:
         except FileNotFoundError:
             return 0
 
+        if "object_variables" in project.objects["main"]:
+            try:
+                project.objects["main"]["object_variables"].hide()
+
+                project.objects["main"]["object_variables"].deleteLater()
+
+            except RuntimeError:
+                pass
+
         project.objects["main"]["object_tree_objects"] = {}
 
         project.objects["main"]["object_tree"] = QTreeWidget(parent=project)
+
+        if "variables" not in project.objects["main"]:
+            project.objects["main"]["variables"] = {}
+
+        if variables:
+            if bottom:
+                project.objects["main"]["object_variables"] = CodeAdditionsVarsType(
+                    project,
+                    Vec4i(
+                        project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
+                        40 + 10 + (project.height() - 80) // 2,
+                        project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
+                        (project.height() - 80) // 2
+                    ),
+                    translate("Create object variable"),
+                    file
+                )
+
+            else:
+                project.objects["main"]["object_variables"] = CodeAdditionsVarsType(
+                    project,
+                    Vec4i(
+                        project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
+                        40,
+                        project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
+                        project.height() - 70
+                    ),
+                    translate("Create object variable"),
+                    file
+                )
 
         project.objects["main"]["widgets"] = []
 
@@ -199,7 +242,7 @@ class Object:
             doing = True
 
         if last["type"] == "path":
-            if os.path.exists(f"projects/{project.selectProject}/project/{text}") and any([text.endswith(element) for element in IMAGE_FORMATES]):
+            if text == "" or (os.path.exists(f"projects/{project.selectProject}/project/{text}") and any([text.endswith(element) for element in IMAGE_FORMATES])):
                 temp["value"] = text
 
                 doing = True
@@ -264,9 +307,6 @@ class Object:
 
     @staticmethod
     def saveAllValues(project):
-        print(0)
         for widget in project.objects["main"]["widgets"]:
-            print(1)
             if hasattr(widget.value, "saveAllValues"):
-                print(2)
                 widget.value.saveAllValues()

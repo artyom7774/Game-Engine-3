@@ -860,7 +860,7 @@ class CodeAdditions:
                 (project.height() - 80) // 2
             ),
             translate("Create local variable"),
-            project.selectFile,
+            project.selectFile
         )
 
         project.objects["main"]["variables"]["globals"] = CodeAdditionsVarsType(
@@ -872,7 +872,7 @@ class CodeAdditions:
                 (project.height() - 80) // 2
             ),
             translate("Create global variable"),
-            f"projects/{project.selectProject}/project/project.cfg",
+            f"projects/{project.selectProject}/project/project.cfg"
         )
 
     @staticmethod
@@ -942,8 +942,12 @@ class Code:
 
         pos = Vec2f(project.cash["file"][project.selectFile].x, project.cash["file"][project.selectFile].y)
 
-        with open(project.selectFile, "r", encoding="utf-8") as file:
-            project.objects["main"]["function"] = json.load(file)
+        try:
+            with open(project.selectFile, "r", encoding="utf-8") as file:
+                project.objects["main"]["function"] = json.load(file)
+
+        except json.JSONDecodeError:
+            return 0
 
         # GRID
 

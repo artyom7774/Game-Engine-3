@@ -139,6 +139,10 @@ CODE_CONNECTOR_NO_HAVE_INPUT_TYPES = ["path"]
 OBJECT_CURRECT_TEST = ["type", "type/name", "type/value", "type/type", "StaticObject", "StaticObject/pos", "StaticObject/hitbox", "StaticObject/sprite", "StaticObject/group", "StaticObject/layer"]
 NODE_CURRECT_TEST = ["display", "id", "width", "height", "x", "y", "name", "inputs", "outputs", "type"]
 
+ANIMATOR_BASE_VALUE = {
+
+}
+
 SPRITES = {
     "dir": "scr/files/sprites/dir.png",
     "cfg": "scr/files/sprites/cfg.png",

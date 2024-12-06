@@ -29,8 +29,8 @@ def bezierСurve(x0, y0, x1, y1, x2, y2, x3, y3, d):
             y123 = (y12 + y23) / 2
             x0123 = (x012 + x123) / 2
             y0123 = (y012 + y123) / 2
-            b3(x0, y0, x01, y01, x012, y012, x0123, y0123, d)
-            b3(x0123, y0123, x123, y123, x23, y23, x3, y3, d)
+            bezierСurve(x0, y0, x01, y01, x012, y012, x0123, y0123, d)
+            bezierСurve(x0123, y0123, x123, y123, x23, y23, x3, y3, d)
 
     function(x0, y0, x1, y1, x2, y2, x3, y3, d)
 

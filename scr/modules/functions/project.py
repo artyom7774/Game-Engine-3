@@ -319,14 +319,6 @@ def centerMenuInit(project, update: bool = False) -> None:
             except BaseException:
                 pass
 
-        if "variables" in project.objects["main"]:
-            for element in project.objects["main"]["variables"].values():
-                try:
-                    element.deleteLater()
-
-                except RuntimeError:
-                    pass
-
         """
         rem = []
 

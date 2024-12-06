@@ -323,22 +323,25 @@ class Compile:
         # LOAD PROGRAMS AND LOCAL VARIABLES
 
         programs = {}
-        locals = {}
+        locals_variables = {}
 
         for program in functions.project.getAllProjectPrograms(project, False):
             with open(program, "r", encoding="utf-8") as file:
                 programs[program] = json.load(file)
 
-                locals[program] = programs[program]["variables"]
+                locals_variables[program] = programs[program]["variables"]
 
         # LOAD SCENES
 
         scenes = {}
+        objects_variables = {}
 
         for scene in functions.project.getAllProjectScenes(project, False):
             scenePath = f"projects/{project.selectProject}/project/cash/{'-'.join(scene.split('/')[3:])}-setting.json"
 
             objects = {}
+
+            objects_variables[scene] = {}
 
             for element in os.listdir(scene):
                 objectPath = f"{scene}/{element}"
@@ -351,6 +354,8 @@ class Compile:
                     "type": type,
                     "variables": variables
                 }
+
+                objects_variables[scene][element] = json.load(open(objectPath))["variables"]
 
             if os.path.exists(scenePath):
                 focus = json.load(open(scenePath))["Scene"]["focus"]["value"]
@@ -395,8 +400,8 @@ class Compile:
         program = PROGRAM
 
         program = program.replace("%PROJECT_GLOBAL_VARIABLES%", str(projectSettingsStandard["variables"]))
-        program = program.replace("%PROJECT_LOCAL_VARIABLES%", str(locals))
-        program = program.replace("%PROJECT_OBJECTS_VARIABLES%", str({}))
+        program = program.replace("%PROJECT_LOCAL_VARIABLES%", str(locals_variables))
+        program = program.replace("%PROJECT_OBJECTS_VARIABLES%", str(objects_variables))
 
         program = program.replace("%PROJECT_SETTINGS%", str(useProjectSettings))
         program = program.replace("%PROJECT_PROGRAMS%", str(programs))

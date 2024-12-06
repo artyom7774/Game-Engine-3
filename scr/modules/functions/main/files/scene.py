@@ -286,9 +286,6 @@ class SceneAdditions:
         project.objects["main"]["settings"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 40, Size.x(16), Size.y(100) - 70)
         project.objects["main"]["settings"].setHeaderHidden(True)
         project.objects["main"]["settings"].header().setFont(FONT)
-        project.objects["main"]["settings"].show()
-
-        # TODO
 
         if project.cash["file"][project.selectFile].selectObject is not None:
             file = project.cash["file"][project.selectFile].selectObject.variables["file"]
@@ -296,12 +293,14 @@ class SceneAdditions:
             ObjectTypingClass.init(
                 project, SceneAdditions.SceneAdditionWidgetItem, file,
                 (
-                    project.objects["main"]["settings"].x(),
-                    project.objects["main"]["settings"].y(),
-                    project.objects["main"]["settings"].width(),
-                    project.objects["main"]["settings"].height()
-                ), type="object"
+                    project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
+                    40,
+                    project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
+                    (project.height() - 80) // 2
+                ), type="object", bottom=True
             )
+
+            project.objects["main"]["settings"].hide()
 
         else:
             file = project.cash["file"][project.selectFile].settings
@@ -313,8 +312,10 @@ class SceneAdditions:
                     project.objects["main"]["settings"].y(),
                     project.objects["main"]["settings"].width(),
                     project.objects["main"]["settings"].height()
-                ), type="scene"
+                ), type="scene", variables=False
             )
+
+            project.objects["main"]["settings"].show()
 
 
 class Scene:

@@ -153,6 +153,25 @@ class Main(QMainWindow):
             file.write("*")
 
     def geometryInit(self) -> None:
+        if "main" in self.objects and "object_variables" in self.objects["main"]:
+            try:
+                self.objects["main"]["object_variables"].hide()
+
+                self.objects["main"]["object_variables"].deleteLater()
+
+            except RuntimeError:
+                pass
+
+        if "main" in self.objects and "variables" in self.objects["main"]:
+            for element in self.objects["main"]["variables"].values():
+                try:
+                    element.hide()
+
+                    element.deleteLater()
+
+                except RuntimeError:
+                    pass
+
         try:
             self.objects["tree_project"].hide()
 

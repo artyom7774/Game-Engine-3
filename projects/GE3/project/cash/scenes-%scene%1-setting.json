@@ -47,7 +47,7 @@
         },
         "focus": {
             "name": "Name focus object",
-            "value": "player.objc",
+            "value": "player-0.objc",
             "type": "str"
         }
     }
