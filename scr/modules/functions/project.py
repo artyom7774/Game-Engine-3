@@ -297,6 +297,29 @@ def centerMenuInit(project, update: bool = False) -> None:
     if "main" not in project.objects:
         project.objects["main"] = {}
 
+    try:
+        if "main" in project.objects and "object_variables" in project.objects["main"]:
+            try:
+                project.objects["main"]["object_variables"].hide()
+
+                project.objects["main"]["object_variables"].deleteLater()
+
+            except RuntimeError:
+                pass
+
+        if "main" in project.objects and "variables" in project.objects["main"]:
+            for element in project.objects["main"]["variables"].values():
+                try:
+                    element.hide()
+
+                    element.deleteLater()
+
+                except RuntimeError:
+                    pass
+
+    except BaseException:
+        pass
+
     # if "main" in project.objects and "code" in project.objects["main"]:
     #     project.objects["main"]["code"].hide()
     #

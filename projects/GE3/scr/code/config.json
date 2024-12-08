@@ -45,6 +45,8 @@
                 "setObjectPos",
                 "moveObject",
                 "getObjectPos",
+                "setObjectVar",
+                "getObjectVar",
                 "jump"
             ]
         },
@@ -731,6 +733,151 @@
                     "__n__": "N",
                     "__x__": "X",
                     "__index__": "index"
+                }
+            }
+        },
+        "getObjectVar": {
+            "type": "objects",
+            "name": "getObjectVar",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "name"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "Get object var",
+                "discription": "Get object var by name",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__answer__": "answer",
+                    "__name__": "name",
+                    "__id__": "ID"
+                }
+            }
+        },
+        "setObjectVar": {
+            "type": "objects",
+            "name": "setObjectVar",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "name",
+                    "value"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Set object var",
+                "discription": "Set object var by name",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__name__": "name",
+                    "__id__": "ID",
+                    "__value__": "value"
                 }
             }
         },

@@ -240,7 +240,11 @@ class CodeNodeConnector(QLabel):
             else:
                 self.left.setPixmap(QPixmap(project.objects["main"]["config"]["connectors"]["sprites"][input["type"]]))
 
-            self.left.show()
+            if self.node["type"] == "event" and self.input["type"] == "path":
+                self.left.hide()
+
+            else:
+                self.left.show()
 
             if input["type"] not in CODE_CONNECTOR_NO_HAVE_INPUT_TYPES:
                 if input["type"] == "choose":
@@ -268,7 +272,7 @@ class CodeNodeConnector(QLabel):
 
             self.leftText = translate(node["display"]["text"][input["name"]])
 
-            self.project.objects["main"]["liner"].points["inputs"].append([{"id": id, "number": number, "keys": self.keys}, Vec2f(parent.x() + self.x() + 5, parent.y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": id, "number": number, "keys": self.keys, "node": self.node}, Vec2f(parent.x() + self.x() + 5, parent.y() + self.y() + self.height() // 2)])
 
         if output is not None:
             self.right = QLabel(self)
@@ -287,12 +291,12 @@ class CodeNodeConnector(QLabel):
         self.setGeometry(0, (self.number + 1) * CODE_GRID_CELL_SIZE, self.parent().width(), CODE_GRID_CELL_SIZE)
 
         if self.left is not None:
-            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "node": self.node}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
             self.left.setGeometry(0, 9, 10, 10)
 
         if self.right is not None:
-            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["outputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
             self.right.setGeometry(self.width() - 12, 9, 10, 10)
 
@@ -619,9 +623,9 @@ class CodeLabel(QLabel):
             if abs(self.project.objects["main"]["liner"].start.x - event.pos().x()) < CODE_POINT_PRECISION and abs(self.project.objects["main"]["liner"].start.y - event.pos().y()) < CODE_POINT_PRECISION:
                 pass
 
-            elif start is not None:
+            elif start is not None: # TODO
                 if self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["type"] in [self.project.objects["main"]["function"]["objects"][str(start[0]["id"])]["outputs"][start[0]["keys"][start[0]["number"]]["output"]]["type"]] + self.project.objects["main"]["config"]["infelicity"][self.project.objects["main"]["function"]["objects"][str(start[0]["id"])]["outputs"][start[0]["keys"][start[0]["number"]]["output"]]["type"]]:
-                    if start[0]["id"] != finish[0]["id"]:
+                    if start[0]["id"] != finish[0]["id"] and finish[0]["node"]["type"] != "event":
                         path = self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["code"]
 
                         self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][path]["value"] = {

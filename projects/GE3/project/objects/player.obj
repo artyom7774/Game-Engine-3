@@ -5,10 +5,12 @@
             "StaticObject"
         ]
     },
-    "dependence": [],
+    "dependence": [
+        "StaticObject"
+    ],
     "type": {
         "name": "Object type",
-        "value": "StaticObject",
+        "value": "DynamicObject",
         "type": "choose",
         "choose": {
             "input": [
@@ -47,7 +49,7 @@
         },
         "jumpPower": {
             "name": "Power jump",
-            "value": 10,
+            "value": 15,
             "type": "int"
         },
         "slidingStep": {
@@ -132,7 +134,7 @@
         },
         "group": {
             "name": "Name of object group",
-            "value": "object",
+            "value": "player",
             "type": "str"
         },
         "layer": {

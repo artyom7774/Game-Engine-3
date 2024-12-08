@@ -86,27 +86,6 @@ class TabFileBar(QTabBar):
         # if self.currentIndex() + 1 >= index:
         #     self.setCurrentIndex(index - 1)
 
-        if "main" in self.project.objects and "object_variables" in self.project.objects["main"]:
-            try:
-                self.project.objects["main"]["object_variables"].hide()
-
-                self.project.objects["main"]["object_variables"].deleteLater()
-
-            except RuntimeError:
-                pass
-
-        if "main" in self.project.objects and "variables" in self.project.objects["main"]:
-            for element in self.project.objects["main"]["variables"].values():
-                try:
-                    element.hide()
-
-                    element.deleteLater()
-
-                except RuntimeError:
-                    pass
-
         self.updateSelectFile()
-
-        # self.project.init()
 
         functions.project.centerMenuInit(self.project, True)

@@ -67,6 +67,7 @@ class Game(engine.Application):
         self.setCamera(engine.camera.StaticCamera(self, 0, 0))
 
         self.objectIDByName = {}
+        self.objectNameByID = {}
 
         self.scene = None
 
@@ -102,7 +103,7 @@ class Game(engine.Application):
                 node = PROGRAMS[name]["objects"][id]
 
                 self.setKeyEvent(["PRESS", node["inputs"]["key"]["standard"]], lambda temp=id: self.programs[name].start(temp))
-    
+
     def print(self, text: str) -> None:    
         with open("output.txt", "a+") as file:
             if os.stat("output.txt").st_size < 2:
@@ -146,7 +147,11 @@ class Game(engine.Application):
             if scene not in self.objectIDByName:
                 self.objectIDByName[scene] = {}
 
+            if scene not in self.objectNameByID:
+                self.objectNameByID[scene] = {}
+
             self.objectIDByName[scene][key] = obj.id
+            self.objectNameByID[scene][str(obj.id)] = key
 
             self.objects.add(obj)
 

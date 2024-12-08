@@ -5,12 +5,10 @@
             "StaticObject"
         ]
     },
-    "dependence": [
-        "StaticObject"
-    ],
+    "dependence": [],
     "type": {
         "name": "Object type",
-        "value": "DynamicObject",
+        "value": "StaticObject",
         "type": "choose",
         "choose": {
             "input": [
@@ -23,41 +21,8 @@
             ]
         }
     },
-    "variables": {
-        "var": {
-            "name": "var",
-            "type": "number",
-            "value": 0
-        },
-        "underfined": {
-            "name": "underfined",
-            "type": "text",
-            "value": ""
-        }
-    },
+    "variables": {},
     "animator": {},
-    "DynamicObject": {
-        "speed": {
-            "name": "Moving speed",
-            "value": 5,
-            "type": "int"
-        },
-        "gravity": {
-            "name": "Object gravity",
-            "value": 300,
-            "type": "int"
-        },
-        "jumpPower": {
-            "name": "Power jump",
-            "value": 16,
-            "type": "int"
-        },
-        "slidingStep": {
-            "name": "Braking power",
-            "value": 1000000.0,
-            "type": "int"
-        }
-    },
     "StaticObject": {
         "pos": {
             "name": "Object position",
@@ -65,12 +30,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": -180
+                    "value": -256
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": -84
+                    "value": 0
                 }
             },
             "type": "dict"
@@ -91,12 +56,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 41
+                    "value": 32
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 43
+                    "value": 32
                 }
             },
             "type": "dict"
@@ -107,7 +72,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets/player.png"
+                    "value": "assets/grass.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -134,12 +99,34 @@
         },
         "group": {
             "name": "Name of object group",
-            "value": "player",
+            "value": "block",
             "type": "str"
         },
         "layer": {
             "name": "Object layer",
             "value": 0,
+            "type": "int"
+        }
+    },
+    "DynamicObject": {
+        "speed": {
+            "name": "Moving speed",
+            "value": 5,
+            "type": "int"
+        },
+        "gravity": {
+            "name": "Object gravity",
+            "value": 300,
+            "type": "int"
+        },
+        "jumpPower": {
+            "name": "Power jump",
+            "value": 10,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 1000000.0,
             "type": "int"
         }
     }
