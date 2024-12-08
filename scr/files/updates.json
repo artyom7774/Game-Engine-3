@@ -36,7 +36,7 @@
 
         "3.3.0": {
             "name": "3.3.0",
-            "text": "- fixed bug with save files\n- fixed bug with save code files\n- fixed bug with using more funcions files in project\n- update code editor"
+            "text": "- fixed bug with save files\n- fixed bug with save code files\n- fixed bug with using more funcions files in project\n- update code editor\n- every object have you'r variables\n- node for save and get object variables"
         }
     }
 }
