@@ -27,10 +27,10 @@ VARIABLES = {
 
 SETTINGS = %PROJECT_SETTINGS%
 PROGRAMS = %PROJECT_PROGRAMS%
+OBJECTS = %PROJECT_OBJECTS%
 SCENES = %PROJECT_SCENES%
 
 %COMPILER%
-
 
 class Tps:
     def __init__(self, maxTps: int = 20, function: typing.Callable = None):
@@ -74,6 +74,9 @@ class Game(engine.Application):
         self.loadScene(SETTINGS["start_scene"])
 
         self.programs = {}
+
+        self.allObjects = OBJECTS
+        self.linkEngine = engine
 
         self.settings = {"settings": SETTINGS, "programs": PROGRAMS, "scenes": SCENES, "variables": VARIABLES}
 
@@ -379,6 +382,22 @@ class Compile:
                     "focus": focus
                 }
 
+        # ALL OBJECTS
+
+        allObjects = {}
+
+        for obj in functions.project.getAllProjectObjects(project, False):
+            type, variables = functions.main.files.Scene.loadObjectFile(project, -1, json.load(open(obj)))
+
+            variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
+
+            name = obj.replace(f"projects/{project.selectProject}/project/objects/", "")
+
+            allObjects[name] = {
+                "type": type,
+                "variables": variables
+            }
+
         # CAN RUN PROJECT
 
         projectSettingsStandard = projectSettings
@@ -411,6 +430,7 @@ class Compile:
         program = program.replace("%PROJECT_SETTINGS%", str(useProjectSettings))
         program = program.replace("%PROJECT_PROGRAMS%", str(programs))
         program = program.replace("%PROJECT_SCENES%", str(scenes))
+        program = program.replace("%PROJECT_OBJECTS%", str(allObjects))
 
         program = program.replace("%ENGINE_VERSION%", str(json.load(open("scr/files/version.json", encoding="utf-8"))["version"]))
 

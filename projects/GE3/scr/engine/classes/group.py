@@ -79,9 +79,6 @@ class ObjectGroup:
         self.maxLenghtObject = -INF
         self.minLenghtObject = +INF
 
-    def __len__(self) -> int:
-        return len(self.objects)
-
     def empty(self):
         self.maxLenghtObject = -INF
         self.minLenghtObject = +INF
@@ -158,8 +155,15 @@ class ObjectGroup:
                 else:
                     sprite = obj.sprite.get(obj)
 
-            if obj.sprite is not None and sprite is not None and type(obj.sprite) != list and self.game.usingWidth + 200 > obj.pos.x + px > -200 and self.game.usingHeight + 200 > obj.pos.y + py > -200:
-                self.game.screen.blit(sprite, (obj.sprite.pos.x + px, obj.sprite.pos.y + py))
+            if obj.sprite is not None and sprite is not None and type(obj.sprite) != list:
+                obj.sprite.pos.x = 0
+                obj.sprite.pos.y = 0
+
+                if self.game.usingWidth + 200 > obj.pos.x + obj.sprite.pos.x + px > -200 and self.game.usingHeight + 200 > obj.pos.y + obj.sprite.pos.y + py > -200:
+                    self.game.screen.blit(sprite, (obj.pos.x + obj.sprite.pos.x + px, obj.pos.y + obj.sprite.pos.y + py))
+
+                # else:
+                #     print(f"not visiable: {obj.sprite.pos.x} {obj.sprite.pos.y}")
 
             if self.game.debug or (obj.group.startswith("__") and obj.group.endswith("__") and not obj.group == "__debug_unvisiable__"):
                 pygame.draw.rect(

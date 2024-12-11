@@ -30,12 +30,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": 576
+                    "value": 640
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": -96
+                    "value": 0
                 }
             },
             "type": "dict"

@@ -47,6 +47,7 @@
                 "getObjectPos",
                 "setObjectVar",
                 "getObjectVar",
+                "createObject",
                 "jump"
             ]
         },
@@ -55,6 +56,7 @@
             "nodes": [
                 "setVar",
                 "getVar",
+                "random_",
                 "decodeHolder"
             ]
         }
@@ -499,6 +501,89 @@
                 }
             }
         },
+        "createObject": {
+            "type": "objects",
+            "name": "createObject",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "x",
+                    "y"
+                ],
+                "outputs": [
+                    "path",
+                    "id"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+
+            "display": {
+                "name": "Create object",
+                "discription": "Create object",
+                "text": {
+                    "__none__": "",
+                    "__name__": "name",
+                    "__path__": "path",
+                    "__id__": "ID",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            }
+        },
 
         "getVar": {
             "type": "another",
@@ -733,6 +818,77 @@
                     "__n__": "N",
                     "__x__": "X",
                     "__index__": "index"
+                }
+            }
+        },
+        "random_": {
+            "type": "another",
+            "name": "random_",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "a",
+                    "b"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                },
+
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 2
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "Random",
+                "discription": "Return random number in [A, B]",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__answer__": "answer",
+                    "__a__": "A",
+                    "__b__": "B"
                 }
             }
         },

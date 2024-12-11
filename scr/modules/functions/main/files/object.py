@@ -214,8 +214,12 @@ class Object:
         with open(f"engine/files/objects.json", "r") as file:
             objects = json.load(file)
 
-        with open(save, "r") as f:
-            file = json.load(f)
+        try:
+            with open(save, "r") as f:
+                file = json.load(f)
+
+        except BaseException:
+            return 0
 
         if last["type"] == "bool":
             text = obj.isChecked()

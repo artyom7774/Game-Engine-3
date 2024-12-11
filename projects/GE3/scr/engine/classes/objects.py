@@ -1,5 +1,3 @@
-from pickle import FLOAT
-
 from engine.classes.collision import Collision
 
 from engine.classes.hitbox import SquareHitbox
@@ -63,13 +61,6 @@ class StaticObject:
 
         self.sprite = sprite if type(sprite) != list else Sprite(self.game, self, *sprite)
 
-        self.spriteDeltaX = 0
-        self.spriteDeltaY = 0
-
-        if type(self.sprite) == Sprite:
-            self.spriteDeltaX = self.pos.x - self.sprite.pos.x
-            self.spriteDeltaY = self.pos.y - self.sprite.pos.y
-
         self.distance = math.sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 
     def __str__(self):
@@ -117,17 +108,15 @@ class StaticObject:
         # self.pos.x = round(self.pos.x)
         # self.pos.y = round(self.pos.y)
 
-        if self.sprite is not None:
-            self.sprite.pos.x = math.trunc(self.pos.x + self.spriteDeltaX)
-            self.sprite.pos.y = math.trunc(self.pos.y + self.spriteDeltaY)
-
         self.distance = math.sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 
-    def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False) -> bool:
-        hitbox = self.getEditHitbox(x, y)
+    def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False) -> bool:
+        hitbox = self.getEditHitbox(x, y, append)
 
         if self.id not in self.game.cash["collisions"]:
             return False
+
+        flag = False
 
         for obj in self.game.cash["collisions"][self.id]:
             if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
@@ -136,23 +125,34 @@ class StaticObject:
                         getattr(self.game.functions, element.replace("function::", "").replace("()", ""))(self.game, self, obj)
 
                 if "collision" in obj["functions"]["types"]:
-                    return True
+                    if allowFunctions:
+                        flag = True
 
-        return False
+                    else:
+                        return True
 
-    def getEditHitbox(self, x: float = 0, y: float = 0) -> SquareHitbox:
+        return flag
+
+    def getEditHitbox(self, x: float = 0, y: float = 0, append: bool = False) -> SquareHitbox:
         hitbox = self.hitbox.copy()
+
+        if append:
+            hitbox.x -= 1
+            hitbox.width += 2
+
+            hitbox.y -= 1
+            hitbox.height += 2
 
         if x > 0:
             hitbox.x += 1
 
-        if x < 0:
+        elif x < 0:
             hitbox.x -= 1
 
         if y < 0:
             hitbox.y -= 1
 
-        if y > 0:
+        elif y > 0:
             hitbox.y += 1
 
         return hitbox
