@@ -223,10 +223,10 @@ class Logger(QDialog):
         if not os.path.exists(f"projects/{self.project.selectProject}/scr/output.txt"):
             return
 
-        with open(f"projects/{self.project.selectProject}/scr/output.txt", "r") as file:
+        with open(f"projects/{self.project.selectProject}/scr/output.txt", "r", encoding="utf-8") as file:
             text = file.read()
 
-        with open(f"projects/{self.project.selectProject}/scr/output.txt", "w") as file:
+        with open(f"projects/{self.project.selectProject}/scr/output.txt", "w", encoding="utf-8") as file:
             pass
 
         if text == "":
@@ -243,13 +243,13 @@ class Compile:
     def run(project) -> None:
         project.compiling = False
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r") as file:
+        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettings = json.load(file)
 
         if Compile.compile(project, executable=False):
             return 1
 
-        with open(f"projects/{project.selectProject}/scr/{projectSettings['values']['name']['value']}.py", "r") as file:
+        with open(f"projects/{project.selectProject}/scr/{projectSettings['values']['name']['value']}.py", "r", encoding="utf-8") as file:
             text = file.read()
 
         """
@@ -316,7 +316,7 @@ class Compile:
 
         shutil.copyfile(f"projects/{project.selectProject}/project/collision.cfg", names["collision"])
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r") as file:
+        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettingsCfg = json.load(file)
 
         if f"projects/{project.selectProject}/project/" + projectSettingsCfg["values"]["start_scene"]["value"] == "":
@@ -436,7 +436,7 @@ class Compile:
 
         program = program.replace("%COMPILER%", str(open("scr/code/compiler.py").read()))
 
-        with open(output, "w") as file:
+        with open(output, "w", encoding="utf-8") as file:
             file.write(program)
 
         try:
@@ -487,7 +487,7 @@ class Compile:
     def compileAndRun(project) -> None:
         Compile.compile(project)
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r") as file:
+        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettings = json.load(file)
 
         path = f"projects/{project.selectProject}/scr"
@@ -500,7 +500,7 @@ class Compile:
     def saveProject(project) -> None:
         Compile.compile(project, executable=False)
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r") as file:
+        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettings = json.load(file)
 
         path = f"projects/{project.selectProject}"
@@ -533,7 +533,7 @@ class Compile:
     def saveExecutableProject(project) -> None:
         Compile.compile(project)
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r") as file:
+        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettings = json.load(file)
 
         path = f"projects/{project.selectProject}/scr"

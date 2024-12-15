@@ -1,4 +1,5 @@
-OPERATIONS = ["==", "!=", "<=", ">=", "<", ">"]
+OPERATIONS = ["0. ==", "1. !=", "2. <=", "3. >=", "4. <", "5. >"]
+
 
 def if_(program, path: str, nodes: dict, id: int, variables: dict) -> dict:
     queue = []
@@ -21,7 +22,7 @@ def if_(program, path: str, nodes: dict, id: int, variables: dict) -> dict:
     else:
         operation = int(nodes["objects"][str(id)]["inputs"]["operation"]["standard"])
 
-    if eval(f"{a} {OPERATIONS[operation]} {b}"):
+    if eval(f"{a} {OPERATIONS[operation][3:]} {b}"):
         for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
             queue.append(name["id"])
 

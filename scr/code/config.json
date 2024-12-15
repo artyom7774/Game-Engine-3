@@ -16,13 +16,15 @@
             "name": "Loops",
             "nodes": [
                 "for_",
-                "if_"
+                "if_",
+                "ifCollision"
             ]
         },
         "text": {
             "name": "Text",
             "nodes": [
-                "writeText"
+                "writeText",
+                "displayText"
             ]
         },
         "numbers": {
@@ -57,7 +59,8 @@
                 "setVar",
                 "getVar",
                 "random_",
-                "decodeHolder"
+                "decodeHolder",
+                "exit_"
             ]
         }
     },
@@ -707,12 +710,12 @@
                     "standard": 0,
                     "choose": {
                         "options": [
-                            "==",
-                            "!=",
-                            "<=",
-                            ">=",
-                            "<",
-                            ">"
+                            "0. ==",
+                            "1. !=",
+                            "2. <=",
+                            "3. >=",
+                            "4. <",
+                            "5. >"
                         ]
                     }
                 }
@@ -740,6 +743,132 @@
                     "__operation__": "operation",
                     "__path_true__": "path if true",
                     "__path_false__": "path if false"
+                }
+            }
+        },
+        "ifCollision": {
+            "type": "loop",
+            "name": "ifCollision",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "group",
+                    "append"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false",
+                    "id_in_group"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+                "group": {
+                    "code": "group",
+                    "name": "__group__",
+                    "type": "text",
+                    "value": null,
+                    "standard": "object"
+                },
+                "append": {
+                    "code": "append",
+                    "name": "__append__",
+                    "type": "logic",
+                    "value": null,
+                    "standard": false
+                }
+            },
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                },
+                "id_in_group": {
+                    "code": "id_in_group",
+                    "name": "__id_in_group__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "If collision",
+                "discription": "If collision",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__id__": "ID",
+                    "__group__": "group name",
+                    "__append__": "use contact",
+                    "__path_true__": "path if true",
+                    "__path_false__": "path if false",
+                    "__id_in_group__": "ID object of group"
+                }
+            }
+        },
+        "exit_": {
+            "type": "another",
+            "name": "exit_",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Exit",
+                "discription": "Exit",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path"
                 }
             }
         },
@@ -1370,6 +1499,63 @@
                     "__none__": "",
                     "__path__": "path",
                     "__n__": "N"
+                }
+            }
+        },
+        "displayText": {
+            "type": "text",
+            "name": "displayText",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Display text",
+                "discription": "...",
+                "text": {
+                    "__none__": "",
+                    "__text__": "text",
+                    "__path__": "path",
+                    "__x__": "X",
+                    "__y__": "Y"
                 }
             }
         },

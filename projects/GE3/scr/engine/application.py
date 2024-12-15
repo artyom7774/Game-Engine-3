@@ -83,6 +83,9 @@ class Application:
 
         self.visiable = visiable
 
+        self.lastDrawing = []
+        self.afterDrawing = []
+
         self.capacity = 0
 
         self.init()
@@ -225,14 +228,14 @@ class Application:
 
     def frame(
         self, image: bool = False, screenFillColor: typing.Any = None,
-        lastDrawing: typing.Union[typing.List[typing.Callable], typing.Dict[str, typing.List[str]]] = None,
-        afterDrawing: typing.Union[typing.List[typing.Callable], typing.Dict[str, typing.List[str]]] = None
+        lastDrawing: typing.List[typing.Union[typing.List[typing.Any], typing.Callable]] = None,
+        afterDrawing: typing.List[typing.Union[typing.List[typing.Any], typing.Callable]] = None
     ) -> typing.Union[Image.Image, None]:
         if lastDrawing is None:
-            lastDrawing = []
+            lastDrawing = self.lastDrawing
 
         if afterDrawing is None:
-            afterDrawing = []
+            afterDrawing = self.afterDrawing
 
         self.logic()
 
@@ -269,6 +272,9 @@ class Application:
 
         self.capacity = self.clock.tick(self.fps)
 
+        self.lastDrawing = []
+        self.afterDrawing = []
+
         if image:
             return self.getScreenImage()
 
@@ -283,3 +289,6 @@ class Application:
         pygame.quit()
 
         sys.exit()
+
+    def exit(self) -> None:
+        self.play = False

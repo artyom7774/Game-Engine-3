@@ -25,14 +25,13 @@ def get_ttf(font_type: str, font_size: int) -> FreeTypeFont:
 
 def print_text(
         screen, x: float, y: float, message: str, font_size: int = 20,
-        font_type: str = BASE_FONT, font_color: typing.Tuple[int] = (0, 0, 0), alpha: int = 255
+        font_type: str = BASE_FONT, font_color: typing.Tuple[int] = (255, 255, 255), alpha: int = 255
 ) -> None:
     font = get_font(font_type, font_size)
     text = font.render(message, True, font_color)
     text.set_alpha(alpha)
 
     screen.blit(text, (x, y))
-
 
 def center_print_text(
     screen, rect: SquareHitbox, message: str, font_size: int = 20,

@@ -5,7 +5,8 @@
         "3.0.3",
         "3.1.0",
         "3.2.0",
-        "3.3.0"
+        "3.3.0",
+        "3.4.0"
     ],
 
     "updates": {
@@ -37,6 +38,11 @@
         "3.3.0": {
             "name": "3.3.0",
             "text": "- fixed bug with save files\n- fixed bug with save code files\n- fixed bug with using more funcions files in project\n- update code editor\n- every object have you'r variables\n- node for save and get object variables"
+        },
+
+        "3.4.0": {
+            "name": "3.4.0",
+            "text": "- add node dislay text, if collision, create object, random\n- optimize code editor"
         }
     }
 }

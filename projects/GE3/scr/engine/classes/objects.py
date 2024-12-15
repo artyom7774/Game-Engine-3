@@ -94,7 +94,7 @@ class StaticObject:
 
         for _ in range(step):
             for i, obj in enumerate(collisions):
-                if "collision" in obj["functions"]["types"]:
+                if obj["functions"] is not None and "collision" in obj["functions"]["types"]:
                     if self.collision(x, 0):
                         useX = False
 
@@ -121,10 +121,11 @@ class StaticObject:
         for obj in self.game.cash["collisions"][self.id]:
             if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
                 if allowFunctions:
-                    for element in obj["functions"]["functions"]:
-                        getattr(self.game.functions, element.replace("function::", "").replace("()", ""))(self.game, self, obj)
+                    if obj["functions"] is not None:
+                        for element in obj["functions"]["functions"]:
+                            getattr(self.game.functions, element.replace("function::", "").replace("()", ""))(self.game, self, obj)
 
-                if "collision" in obj["functions"]["types"]:
+                if obj["functions"] is not None and "collision" in obj["functions"]["types"]:
                     if allowFunctions:
                         flag = True
 
@@ -132,6 +133,19 @@ class StaticObject:
                         return True
 
         return flag
+
+    def collisionGetID(self, x: float = 0, y: float = 0, append: bool = False, group: str = None) -> typing.Any:
+        hitbox = self.getEditHitbox(x, y, append)
+
+        if self.id not in self.game.cash["collisions"]:
+            return [False, -1]
+
+        for obj in self.game.cash["collisions"][self.id]:
+            if obj["object"].group == group or group is None:
+                if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+                    return [True, obj["object"]]
+
+        return [False, -1]
 
     def getEditHitbox(self, x: float = 0, y: float = 0, append: bool = False) -> SquareHitbox:
         hitbox = self.hitbox.copy()

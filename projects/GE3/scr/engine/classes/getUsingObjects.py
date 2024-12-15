@@ -103,6 +103,6 @@ class GetUsingObjects:
 
             var = obj.collisions.get(second.group)
 
-            if var is not None:
+            if var is not None or True:
                 if True or Collision.rect(second.pos.x + second.hitbox.x, second.pos.y + second.hitbox.y, second.hitbox.width, second.hitbox.height, obj.pos.x + hitbox.x, obj.pos.y + hitbox.y, hitbox.width, hitbox.height):
                     game.cash["collisions"][obj.id].append({"object": second, "functions": var})

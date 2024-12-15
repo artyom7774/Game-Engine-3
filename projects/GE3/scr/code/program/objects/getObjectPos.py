@@ -5,12 +5,12 @@ def getObjectPos(program, path: str, nodes: dict, id: int, variables: dict) -> d
         queue.append(name["id"])
 
     if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
-        ids = str(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
 
     else:
-        ids = str(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
 
-    pos = program.objects.getById(int(ids)).pos
+    pos = program.objects.getById(ids).pos
 
     for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
         nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = pos.x
