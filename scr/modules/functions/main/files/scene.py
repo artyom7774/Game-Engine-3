@@ -89,7 +89,7 @@ class SceneLabel(QLabel):
             except RuntimeError:
                 pass
 
-        with open(self.project.cash["file"][self.project.selectFile].settings, "r") as file:
+        with open(self.project.cash["file"][self.project.selectFile].settings, "r", encoding="utf-8") as file:
             self.sceneSettings = json.load(file)
 
     def updateCameraObject(self) -> None:
@@ -325,13 +325,13 @@ class Scene:
     def init(project, call: str = "") -> None:
         project.cash["file"][project.selectFile].settings = f"projects/{project.selectProject}/project/cash/{'-'.join(project.selectFile.split('/')[3:])}-setting.json"
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r") as file:
+        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             project.objects["main"]["project_settings"] = json.load(file)
 
         if not os.path.exists(project.cash["file"][project.selectFile].settings):
             CreateObjectFunctions.create(project, None, None, "", False, "engine/files/scene.json", project.cash["file"][project.selectFile].settings)
 
-        with open(project.cash["file"][project.selectFile].settings, "r") as file:
+        with open(project.cash["file"][project.selectFile].settings, "r", encoding="utf-8") as file:
             project.objects["main"]["scene_settings"] = json.load(file)
 
         try:

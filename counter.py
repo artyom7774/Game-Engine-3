@@ -1,4 +1,4 @@
-with open("TODO.txt", "r") as file:
+with open("TODO.txt", "r", encoding="utf-8") as file:
     text = file.read()
 
 count = 0

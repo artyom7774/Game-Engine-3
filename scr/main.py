@@ -149,7 +149,7 @@ class Main(QMainWindow):
     def install(self) -> None:
         os.system("setup.bat")
 
-        with open("python/.gitignore", "w") as file:
+        with open("python/.gitignore", "w", encoding="utf-8") as file:
             file.write("*")
 
     def geometryInit(self) -> None:
@@ -207,7 +207,7 @@ class Main(QMainWindow):
 
         else:
             self.objects["version_log"].show()
-            self.objects["version_log"].setGeometry(10, 10, Size.x(100) - 20, Size.y(100) - 20)
+            self.objects["version_log"].setGeometry(10, 10, Size.x(200) - 20, Size.y(100) - 20)
 
         if self.selectFile == "" and self.objects["tab_file_bar"].count() != 0:
             self.selectFile = self.objects["tab_file_bar"].objects[self.objects["tab_file_bar"].currentIndex()]["name"]

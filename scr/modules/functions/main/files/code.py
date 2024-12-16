@@ -623,7 +623,7 @@ class CodeLabel(QLabel):
             if abs(self.project.objects["main"]["liner"].start.x - event.pos().x()) < CODE_POINT_PRECISION and abs(self.project.objects["main"]["liner"].start.y - event.pos().y()) < CODE_POINT_PRECISION:
                 pass
 
-            elif start is not None: # TODO
+            elif start is not None:
                 if self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["type"] in [self.project.objects["main"]["function"]["objects"][str(start[0]["id"])]["outputs"][start[0]["keys"][start[0]["number"]]["output"]]["type"]] + self.project.objects["main"]["config"]["infelicity"][self.project.objects["main"]["function"]["objects"][str(start[0]["id"])]["outputs"][start[0]["keys"][start[0]["number"]]["output"]]["type"]]:
                     if start[0]["id"] != finish[0]["id"] and finish[0]["node"]["type"] != "event":
                         path = self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["code"]

@@ -127,7 +127,7 @@ class Config:
 
     @staticmethod
     def init(project) -> None:
-        with open(project.selectFile, "r") as file:
+        with open(project.selectFile, "r", encoding="utf-8") as file:
             config = json.load(file)
 
         project.objects["main"]["globals"] = ConfigAdditionsVarsType(
@@ -210,12 +210,12 @@ class Config:
             name = project.selectFile
 
         try:
-            with open(name, "r") as file:
+            with open(name, "r", encoding="utf-8") as file:
                 config = json.load(file)
 
             config["values"][key] = value
 
-            with open(name, "w") as file:
+            with open(name, "w", encoding="utf-8") as file:
                 json.dump(config, file, indent=4)
 
         except PermissionError:

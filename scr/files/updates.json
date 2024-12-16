@@ -42,7 +42,7 @@
 
         "3.4.0": {
             "name": "3.4.0",
-            "text": "- add node dislay text, if collision, create object, random\n- optimize code editor"
+            "text": "- add node dislay text, if collision, create object, random, remove object, for object in group, connect text"
         }
     }
 }

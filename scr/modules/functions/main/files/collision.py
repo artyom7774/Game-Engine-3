@@ -108,7 +108,7 @@ class CollisionAdditions:
 
     @staticmethod
     def save(project) -> None:
-        with open(project.selectFile, "r") as file:
+        with open(project.selectFile, "r", encoding="utf-8") as file:
             config = file.read()
 
         config = config.split("\n")
@@ -120,7 +120,7 @@ class CollisionAdditions:
 
         # print(config)
 
-        with open(project.selectFile, "w") as file:
+        with open(project.selectFile, "w", encoding="utf-8") as file:
             file.write(config)
 
         project.init()
@@ -129,7 +129,7 @@ class CollisionAdditions:
 class Collision:
     @staticmethod
     def init(project) -> None:
-        with open(project.selectFile, "r") as file:
+        with open(project.selectFile, "r", encoding="utf-8") as file:
             text = file.read().split("\n")[0].replace("$", "").replace("$", "")
 
         project.objects["main"]["adds"] = eval(text)
@@ -137,7 +137,7 @@ class Collision:
         project.objects["main"]["groups"] = project.objects["main"]["adds"]
 
         for path in getAllProjectObjects(project, onlyFileName=False):
-            with open(path, "r") as file:
+            with open(path, "r", encoding="utf-8") as file:
                 obj = json.load(file)
 
             if obj["StaticObject"]["group"]["value"] not in project.objects["main"]["groups"]:
@@ -151,7 +151,7 @@ class Collision:
 
     @staticmethod
     def function(project, x: int, y: int, state: bool) -> None:
-        with open(project.selectFile, "r") as file:
+        with open(project.selectFile, "r", encoding="utf-8") as file:
             config = file.read()
 
         first = project.objects["main"]["groups"][x]
@@ -171,7 +171,7 @@ class Collision:
             config = config.replace(f"{first} <-> {second} - collision", "")
             config = config.replace(f"{second} <-> {first} - collision", "")
 
-        with open(project.selectFile, "w") as file:
+        with open(project.selectFile, "w", encoding="utf-8") as file:
             file.write(config)
 
         project.init()

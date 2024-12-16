@@ -18,7 +18,7 @@ def application() -> None:
 
 
 def main() -> None:
-    with open("scr/files/logs/log.txt", "w+") as file:
+    with open("scr/files/logs/log.txt", "w+", encoding="utf-8") as file:
         try:
             if not DEBUG:
                 sys.stdout = file

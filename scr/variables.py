@@ -12,7 +12,7 @@ import os
 pygame.init()
 
 
-with open("scr/files/settings/settings.json", "r") as file:
+with open("scr/files/settings/settings.json", "r", encoding="utf-8") as file:
     SETTINGS = json.load(file)
 
 PLUS = 64 + 8 - 1

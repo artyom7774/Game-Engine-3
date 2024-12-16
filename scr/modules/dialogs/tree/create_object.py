@@ -30,7 +30,7 @@ class CreateObjectFunctions:
                 return 0
 
             try:
-                with open(f"scr/files/using/{name}", "w") as file:
+                with open(f"scr/files/using/{name}", "w", encoding="utf-8") as file:
                     pass
 
             except BaseException:
@@ -46,7 +46,7 @@ class CreateObjectFunctions:
 
         # CREATE
 
-        with open(load, "r") as file:
+        with open(load, "r", encoding="utf-8") as file:
             objects = json.load(file)
 
         out = {
@@ -87,11 +87,11 @@ class CreateObjectFunctions:
                     }
 
         if name == "":
-            with open(f"{path}", "w") as file:
+            with open(f"{path}", "w", encoding="utf-8") as file:
                 json.dump(out, file, indent=4)
 
         else:
-            with open(f"{path}/{name}.obj", "w") as file:
+            with open(f"{path}/{name}.obj", "w", encoding="utf-8") as file:
                 json.dump(out, file, indent=4)
 
         project.init()

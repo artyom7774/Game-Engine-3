@@ -28,11 +28,11 @@ class Compiler:
         self.timer = []
 
         try:
-            with open("scr/code/config.json", "r") as file:
+            with open("scr/code/config.json", "r", encoding="utf-8") as file:
                 self.config = json.load(file)
 
         except FileNotFoundError:
-            with open("code/config.json", "r") as file:
+            with open("code/config.json", "r", encoding="utf-8") as file:
                 self.config = json.load(file)
 
         for name, node in self.config["nodes"].items():
