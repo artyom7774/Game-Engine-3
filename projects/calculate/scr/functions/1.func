@@ -1,0 +1,3041 @@
+{
+    "variables": {},
+    "objects": {
+        "335608568": {
+            "display": {
+                "discription": "Decode holder",
+                "name": "Decode holder",
+                "text": {
+                    "__answer__": "answer",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 335608568,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 330317823,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "%math(%global_var(answer))",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "decodeHolder",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "type": "another",
+            "width": 6,
+            "x": 28,
+            "y": 19
+        },
+        "566572614": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 566572614,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "1",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 1
+        },
+        "68796078": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 68796078,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "2",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 7
+        },
+        "438528013": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 438528013,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "3",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 13
+        },
+        "573112897": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 573112897,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "4",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 19
+        },
+        "440446167": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 440446167,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "5",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 25
+        },
+        "186299334": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 186299334,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "6",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 31
+        },
+        "884254809": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 884254809,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "7",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 37
+        },
+        "600331941": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 600331941,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "8",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 43
+        },
+        "76894856": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 76894856,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "9",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 49
+        },
+        "266064138": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 266064138,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "0",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 55
+        },
+        "210283848": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 210283848,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 566572614,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "1",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 1
+        },
+        "984604192": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 984604192,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 68796078,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "2",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 7
+        },
+        "240696675": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 240696675,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 438528013,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "3",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 13
+        },
+        "815637930": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 815637930,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 573112897,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "4",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 19
+        },
+        "423070009": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 423070009,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 440446167,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "5",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 25
+        },
+        "546000850": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 546000850,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 186299334,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "6",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 31
+        },
+        "547111824": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 547111824,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 884254809,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "7",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 37
+        },
+        "340020524": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 340020524,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 600331941,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "8",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 43
+        },
+        "303718336": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 303718336,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 76894856,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "9",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 49
+        },
+        "97137443": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 97137443,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 266064138,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "0",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 55
+        },
+        "330108804": {
+            "display": {
+                "discription": "start every N ticks",
+                "name": "Every N ticks",
+                "text": {
+                    "__n__": "N",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 330108804,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "N": {
+                    "code": "N",
+                    "name": "__n__",
+                    "standard": 1,
+                    "type": "number",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "everyTick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 21,
+            "y": 1
+        },
+        "263350814": {
+            "display": {
+                "discription": "Get var by name",
+                "name": "Get var",
+                "text": {
+                    "__answer__": "answer",
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 263350814,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 330108804,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "text",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                }
+            },
+            "name": "getVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "type": "another",
+            "width": 8,
+            "x": 28,
+            "y": 1
+        },
+        "149938330": {
+            "display": {
+                "discription": "Connect text",
+                "name": "Connect text",
+                "text": {
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text1__": "first text",
+                    "__text2__": "second text",
+                    "__text__": "text"
+                }
+            },
+            "height": 4,
+            "id": 149938330,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 263350814,
+                        "name": "path"
+                    }
+                },
+                "text1": {
+                    "code": "text1",
+                    "name": "__text1__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 263350814,
+                        "name": "answer"
+                    }
+                },
+                "text2": {
+                    "code": "text2",
+                    "name": "__text2__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 416786642,
+                        "name": "answer"
+                    }
+                }
+            },
+            "name": "connectText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text1",
+                    "text2"
+                ],
+                "outputs": [
+                    "path",
+                    "text"
+                ]
+            },
+            "type": "text",
+            "width": 8,
+            "x": 37,
+            "y": 1
+        },
+        "416786642": {
+            "display": {
+                "discription": "Get var by name",
+                "name": "Get var",
+                "text": {
+                    "__answer__": "answer",
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 416786642,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 330108804,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                }
+            },
+            "name": "getVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "type": "another",
+            "width": 8,
+            "x": 28,
+            "y": 6
+        },
+        "130611557": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 130611557,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 149938330,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "text",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "",
+                    "type": "Any",
+                    "value": {
+                        "id": 149938330,
+                        "name": "text"
+                    }
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 46,
+            "y": 1
+        },
+        "330317823": {
+            "display": {
+                "discription": "start every N frames",
+                "name": "Every N frame",
+                "text": {
+                    "__n__": "N",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 330317823,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "N": {
+                    "code": "N",
+                    "name": "__n__",
+                    "standard": 1,
+                    "type": "number",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "everyFrame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 21,
+            "y": 13
+        },
+        "81507521": {
+            "display": {
+                "discription": "Get var by name",
+                "name": "Get var",
+                "text": {
+                    "__answer__": "answer",
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 81507521,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 330317823,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "text",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                }
+            },
+            "name": "getVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "type": "another",
+            "width": 8,
+            "x": 28,
+            "y": 13
+        },
+        "624922400": {
+            "display": {
+                "discription": "...",
+                "name": "Display text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            },
+            "height": 5,
+            "id": 624922400,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 81507521,
+                        "name": "path"
+                    }
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "standard": 10,
+                    "type": "number",
+                    "value": null
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "standard": 10,
+                    "type": "number",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 81507521,
+                        "name": "answer"
+                    }
+                }
+            },
+            "name": "displayText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 10,
+            "x": 37,
+            "y": 13
+        },
+        "376090646": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 376090646,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 130611557,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 57,
+            "y": 1
+        },
+        "495336957": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 495336957,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "q",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 61
+        },
+        "944340339": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 944340339,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "w",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 67
+        },
+        "427832092": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 427832092,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "e",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 73
+        },
+        "59222778": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 59222778,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "r",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 79
+        },
+        "18662951": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 18662951,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 495336957,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "+",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 61
+        },
+        "314347743": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 314347743,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 944340339,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "-",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 67
+        },
+        "973874167": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 973874167,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 427832092,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "*",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 73
+        },
+        "208388204": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 208388204,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 59222778,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "/",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 79
+        },
+        "527135760": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 527135760,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "BACKSPACE",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 21,
+            "y": 25
+        },
+        "852603151": {
+            "display": {
+                "discription": "Decode holder",
+                "name": "Decode holder",
+                "text": {
+                    "__answer__": "answer",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 852603151,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 527135760,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "%math(%global_var(text)[:-1])",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "decodeHolder",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "type": "another",
+            "width": 6,
+            "x": 28,
+            "y": 25
+        },
+        "275940109": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 275940109,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 852603151,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "text",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "",
+                    "type": "Any",
+                    "value": {
+                        "id": 852603151,
+                        "name": "answer"
+                    }
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 37,
+            "y": 25
+        },
+        "90950629": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 90950629,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "RETURN",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 21,
+            "y": 31
+        },
+        "182132522": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 182132522,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 992818388,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "answer",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "",
+                    "type": "Any",
+                    "value": {
+                        "id": 992818388,
+                        "name": "answer"
+                    }
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 37,
+            "y": 31
+        },
+        "992818388": {
+            "display": {
+                "discription": "Get var by name",
+                "name": "Get var",
+                "text": {
+                    "__answer__": "answer",
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 992818388,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 90950629,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "text",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                }
+            },
+            "name": "getVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "type": "another",
+            "width": 8,
+            "x": 28,
+            "y": 31
+        },
+        "138179699": {
+            "display": {
+                "discription": "...",
+                "name": "Display text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            },
+            "height": 5,
+            "id": 138179699,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 335608568,
+                        "name": "path"
+                    }
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "standard": 10,
+                    "type": "number",
+                    "value": null
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "standard": 40,
+                    "type": "number",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 335608568,
+                        "name": "answer"
+                    }
+                }
+            },
+            "name": "displayText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 10,
+            "x": 37,
+            "y": 19
+        },
+        "599141863": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 599141863,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "PERIOD",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 1,
+            "y": 85
+        },
+        "621368913": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 621368913,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 599141863,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "symbol",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": ".",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 8,
+            "y": 85
+        },
+        "505259596": {
+            "display": {
+                "discription": "start every N frames",
+                "name": "Every N frame",
+                "text": {
+                    "__n__": "N",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 505259596,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "N": {
+                    "code": "N",
+                    "name": "__n__",
+                    "standard": 1,
+                    "type": "number",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "everyFrame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 21,
+            "y": 37
+        },
+        "941520318": {
+            "display": {
+                "discription": "...",
+                "name": "Display text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            },
+            "height": 5,
+            "id": 941520318,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 505259596,
+                        "name": "path"
+                    }
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "standard": 5,
+                    "type": "number",
+                    "value": null
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "standard": 415,
+                    "type": "number",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "Q \u0437\u043d\u0430\u043a \u0441\u0443\u043c\u043c\u044b",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "displayText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 10,
+            "x": 28,
+            "y": 37
+        },
+        "777213400": {
+            "display": {
+                "discription": "...",
+                "name": "Display text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            },
+            "height": 5,
+            "id": 777213400,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 505259596,
+                        "name": "path"
+                    }
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "standard": 5,
+                    "type": "number",
+                    "value": null
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "standard": 435,
+                    "type": "number",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "W \u0437\u043d\u0430\u043a \u0440\u0430\u0437\u043d\u043e\u0441\u0442\u0438",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "displayText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 10,
+            "x": 28,
+            "y": 43
+        },
+        "247976118": {
+            "display": {
+                "discription": "...",
+                "name": "Display text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            },
+            "height": 5,
+            "id": 247976118,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 505259596,
+                        "name": "path"
+                    }
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "standard": 5,
+                    "type": "number",
+                    "value": null
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "standard": 455,
+                    "type": "number",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "E \u0437\u043d\u0430\u043a \u043f\u0440\u043e\u0438\u0437\u0432\u0435\u0434\u0435\u043d\u0438\u044f",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "displayText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 10,
+            "x": 28,
+            "y": 49
+        },
+        "332579688": {
+            "display": {
+                "discription": "...",
+                "name": "Display text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            },
+            "height": 5,
+            "id": 332579688,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 505259596,
+                        "name": "path"
+                    }
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "standard": 5,
+                    "type": "number",
+                    "value": null
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "standard": 475,
+                    "type": "number",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "R \u0437\u043d\u0430\u043a \u0434\u0435\u043b\u0435\u043d\u0438\u044f",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "displayText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 10,
+            "x": 28,
+            "y": 55
+        }
+    }
+}

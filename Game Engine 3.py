@@ -7,7 +7,9 @@ import sys
 
 # SETTINGS
 
-DEBUG = True
+DEBUG = False
+
+print(f"LOG: debug mode = {DEBUG}")
 
 
 def application() -> None:
