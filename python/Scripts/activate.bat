@@ -8,7 +8,11 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
+<<<<<<< HEAD
 set VIRTUAL_ENV=C:\Users\37529\Desktop\github\Game-Engine-3\python
+=======
+set VIRTUAL_ENV=C:\Users\k123\Desktop\ge3\python
+>>>>>>> 05409c3f194ff1bda800f75e2efd911ffcc088a3
 
 if not defined PROMPT set PROMPT=$P$G
 

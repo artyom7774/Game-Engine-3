@@ -1,0 +1,15 @@
+<<<<<<< HEAD
+=======
+Traceback (most recent call last):
+  File "C:\Users\k123\Desktop\ge3\Game Engine 3.py", line 30, in main
+    application()
+  File "C:\Users\k123\Desktop\ge3\Game Engine 3.py", line 18, in application
+    ex = Main(app)
+         ^^^^^^^^^
+  File "C:\Users\k123\Desktop\ge3\scr\main.py", line 76, in __init__
+    self.initialization()
+  File "C:\Users\k123\Desktop\ge3\scr\main.py", line 253, in initialization
+    bundlesSiteInit()
+    ^^^^^^^^^^^^^^^
+NameError: name 'bundlesSiteInit' is not defined
+>>>>>>> 05409c3f194ff1bda800f75e2efd911ffcc088a3

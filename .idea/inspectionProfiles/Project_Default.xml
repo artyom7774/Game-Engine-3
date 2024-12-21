@@ -40,7 +40,6 @@
     <inspection_tool class="HtmlUnknownTarget" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="HtmlWrongAttributeValue" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="IgnoreFileDuplicateEntry" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="InconsistentLineSeparators" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="Json5StandardCompliance" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="JsonDuplicatePropertyKeys" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JsonPathEvaluateUnknownKey" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -76,7 +75,9 @@
       </option>
     </inspection_tool>
     <inspection_tool class="PyDictCreationInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyInterpreterInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PyMandatoryEncodingInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyMethodMayBeStaticInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="PyMissingTypeHintsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="ignoredErrors">
@@ -95,6 +96,7 @@
           <option value="E222" />
           <option value="E221" />
           <option value="W605" />
+          <option value="E721" />
         </list>
       </option>
     </inspection_tool>
@@ -130,19 +132,7 @@
     <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredIdentifiers">
         <list>
-          <option value="list.*" />
-          <option value="DATA.modules.draw.Draw.*" />
-          <option value="DATA.modules.base.screen.draw.bar.BarUp.screen" />
-          <option value="DATA.modules.base.screen.drawing.bar.BarUp.*" />
-          <option value="DATA.modules.base.draw.details.bars.up.BarUp.screen" />
-          <option value="int.*" />
-          <option value="str.id" />
-          <option value="DATA.modules.blocks.Block.__getitem__" />
-          <option value="float.__getitem__" />
-          <option value="PyQt5.QtCore.Qt.*" />
-          <option value="tuple.*" />
-          <option value="object.surface" />
-          <option value="object.*" />
+          <option value="str.*" />
         </list>
       </option>
     </inspection_tool>
