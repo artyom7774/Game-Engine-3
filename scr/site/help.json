@@ -53,19 +53,34 @@
                 "text": [
                     "Event nodes:",
                     "- On start game",
-                    "- Every frame",
+                    "- Every N frames",
+                    "- Every N ticks",
+                    "- Mouse right click",
+                    "- Mouse left click",
+                    "- Keyboard click",
+                    "- Keyboard press",
                     "",
                     "Loop nodes:",
                     "- For N times",
+                    "- For objects in group",
+                    "- If",
+                    "- If collision",
                     "",
                     "Object nodes:",
                     "- Move object",
                     "- Set object pos",
                     "- Get object pos",
                     "- Get object ID by name",
+                    "- Set object var",
+                    "- Get object var",
+                    "- Create object",
+                    "- Remove object",
+                    "- Jump",
                     "",
                     "Text nodes:",
+                    "- Connect text",
                     "- Write text",
+                    "- Display text",
                     "",
                     "Numbers nodes:",
                     "- Plus",
@@ -76,7 +91,9 @@
                     "Another nodes:",
                     "- Get variable",
                     "- Set variable",
-                    "- Decode holder"
+                    "- Decode holder",
+                    "- Random",
+                    "- Exit"
                 ]
             }
         }
@@ -98,6 +115,22 @@
                     "- let: local variable abc = 1",
                     "",
                     "- %math(%local_var(abc) + 2) -> 3"
+                ]
+            },
+            "Keyboard click": {
+                "title": "Keyboard click",
+                "text": [
+                    "Keyboard click",
+                    "",
+                    "Return path on click button"
+                ]
+            },
+            "Keyboard press": {
+                "title": "Keyboard press",
+                "text": [
+                    "Keyboard press",
+                    "",
+                    "Return path every frame while button pressed"
                 ]
             }
         }

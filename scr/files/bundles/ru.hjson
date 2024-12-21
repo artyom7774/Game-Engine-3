@@ -251,4 +251,6 @@
     "Random": "Случайное"
     "Exit": "Выйти"
     "Downloads": "Загрузка"
+    "Return path on click button": "Возвращает путь при нажатие клавишы"
+    "Return path every frame while button pressed": "Возвращает путь каждый кадр пока кнопка нажата"
 }
