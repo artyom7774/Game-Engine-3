@@ -104,9 +104,9 @@ class Main(QMainWindow):
             except BaseException:
                 pass
 
-        thr = threading.Thread(target=lambda: function())
-        thr.daemon = True
-        thr.start()
+        # thr = threading.Thread(target=lambda: function())
+        # thr.daemon = True
+        # thr.start()
 
     def versionUpdateMessage(self) -> None:
         def function():

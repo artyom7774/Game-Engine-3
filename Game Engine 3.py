@@ -3,13 +3,29 @@ from PyQt5.QtWidgets import QApplication
 from scr.main import Main
 
 import traceback
+import hjson
+import json
 import sys
+import os
 
 # SETTINGS
 
-DEBUG = False
+DEBUG = True
 
 print(f"LOG: debug mode = {DEBUG}")
+
+
+def bundlesSiteInit():
+    bundles = "scr/files/bundles"
+
+    for path in os.listdir(bundles):
+        file = f"{bundles}/{path}"
+
+        if os.path.isfile(file):
+            bundle = hjson.load(open(file, encoding="utf-8"))
+
+            with open(f"{bundles}/json/{path.replace('.hjson', '.json')}", "w+", encoding="utf-8") as f:
+                json.dump(bundle, f, indent=4)
 
 
 def application() -> None:
@@ -20,6 +36,8 @@ def application() -> None:
 
 
 def main() -> None:
+    bundlesSiteInit()
+
     with open("scr/files/logs/log.txt", "w+", encoding="utf-8") as file:
         try:
             if not DEBUG:

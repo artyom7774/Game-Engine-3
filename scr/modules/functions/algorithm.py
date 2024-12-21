@@ -3,6 +3,8 @@ import typing
 import numba
 import math
 
+from engine.functions.cache import cache
+
 
 def cacheBezierCurve(func):
     cache = {}
@@ -73,7 +75,7 @@ def bezierCurveDeep(x0: int, y0: int, x1: int, y1: int, x2: int, y2: int, x3: in
 
 @cacheBezierCurve
 def bezierCurveWidth(x0: int, y0: int, x1: int, y1: int, x2: int, y2: int, x3: int, y3: int, d: int) -> typing.List[typing.List[int]]:
-    answer = []
+    answer = [[x0, y0]]
 
     stack = [[x0, y0, x1, y1, x2, y2, x3, y3]]
 
@@ -112,6 +114,8 @@ def bezierCurveWidth(x0: int, y0: int, x1: int, y1: int, x2: int, y2: int, x3: i
 
             stack.append([x0123, y0123, x123, y123, x23, y23, x3, y3])
             stack.append([x0, y0, x01, y01, x012, y012, x0123, y0123])
+
+    answer.append([x3, y3])
 
     return answer
 

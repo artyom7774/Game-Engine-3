@@ -223,7 +223,7 @@
     "All holders:": "Все шаблоны:"
     "%math(<any math expression>) - return answer on this expression": "%math(<any math expression>) - возвращает ответ на мат. операцию"
     "%local_var(<name>) - return value of <name> local var": "local_var(<name>) - возвращает значение локальной переменной <name>"
-    "%global_var(<name>) - return value of <name> global var": "local_var(<name>) - возвращает значение глобальной переменной <name>"
+    "%global_var(<name>) - return value of <name> global var": "global_var(<name>) - возвращает значение глобальной переменной <name>"
     "Example:": "Пример:"
     "let: local variable abc = 1": "пусть: локальная переменная abc = 1"
     "%math(%local_var(abc) + 2) -> 3": "%math(%local_var(abc) + 2) -> 3"
@@ -250,4 +250,5 @@
     "Remove object": "Удалить объект"
     "Random": "Случайное"
     "Exit": "Выйти"
+    "Downloads": "Загрузка"
 }

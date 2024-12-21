@@ -73,14 +73,6 @@ class CodeLiner:
     start: Vec2f = None
 
 
-class CodeCompiler:
-    @staticmethod
-    def compiler(project, code: dict) -> dict:
-        # compile code for compiling, optimize
-
-        pass
-
-
 class TypeSet:
     @staticmethod
     def set_(type: str, text: str):
@@ -288,21 +280,21 @@ class CodeNodeConnector(QLabel):
         self.show()
 
     def updateObjectGeometry(self) -> None:
-        self.setGeometry(0, (self.number + 1) * CODE_GRID_CELL_SIZE, self.parent().width(), CODE_GRID_CELL_SIZE)
+        self.move(0, (self.number + 1) * CODE_GRID_CELL_SIZE)
 
         if self.left is not None:
             self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "node": self.node}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
-            self.left.setGeometry(0, 9, 10, 10)
+            self.left.move(0, 9)
 
         if self.right is not None:
             self.project.objects["main"]["liner"].points["outputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
-            self.right.setGeometry(self.width() - 12, 9, 10, 10)
+            self.right.move(self.width() - 12, 9)
 
         if self.inputLeftText is not None:
-            self.inputLeftText.setGeometry(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 4 - (self.input["type"] == "choose"), self.width() - 40, 14)
-            self.inputLeftRama.setGeometry(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 6, self.width() - 40, 18)
+            self.inputLeftText.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 4 - (self.input["type"] == "choose"))
+            self.inputLeftRama.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 6)
 
 
 class CodeNode(QTreeWidget):
@@ -428,11 +420,9 @@ class CodeNode(QTreeWidget):
         self.bg.setPixmap(qpixmap)
 
     def updateObjectGeometry(self) -> None:
-        self.setGeometry(
+        self.move(
             (self.node["x"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].x) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE,
-            (self.node["y"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].y - self.node["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + (self.node["height"] - 2),
-            self.node["width"] * CODE_GRID_CELL_SIZE + 3,
-            self.node["height"] * CODE_GRID_CELL_SIZE + 3
+            (self.node["y"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].y - self.node["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + (self.node["height"] - 2)
         )
 
         for key, connector in self.connectors.items():
@@ -459,7 +449,7 @@ class CodeLabel(QLabel):
         self.project.objects["main"]["code_timer"].start(1000 // 2)
 
         self.project.objects["main"]["code_timer_second"] = QTimer(self)
-        self.project.objects["main"]["code_timer_second"].timeout.connect(lambda: self.timer())
+        self.project.objects["main"]["code_timer_second"].timeout.connect(lambda: self.timerMoveScene())
         self.project.objects["main"]["code_timer_second"].start(1000 // 40)
 
         self.stop = False
@@ -479,7 +469,7 @@ class CodeLabel(QLabel):
 
         self.project.objects["main"]["code"].viewToolTip()
 
-    def timer(self):
+    def timerMoveScene(self):
         # MOVE SCENE IF SELECT COLLECTOR
 
         if self.project.objects["main"]["liner"].start is not None:
@@ -1018,7 +1008,7 @@ class Code:
                         CODE_LINER_PRECISION
                     )
 
-                    points = [QPoint(math.trunc(pos[0]), math.trunc(pos[1])) for pos in poses]
+                    points = [QPoint(int(pos[0]), int(pos[1])) for pos in poses]
 
                     painter.drawPolyline(QPolygon(points))
 

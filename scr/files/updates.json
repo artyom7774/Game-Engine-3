@@ -6,7 +6,8 @@
         "3.1.0",
         "3.2.0",
         "3.3.0",
-        "3.4.0"
+        "3.4.0",
+        "3.4.1"
     ],
 
     "updates": {
@@ -43,6 +44,11 @@
         "3.4.0": {
             "name": "3.4.0",
             "text": "- add node dislay text, if collision, create object, random, remove object, for object in group, connect text"
+        },
+
+        "3.4.1": {
+            "name": "3.4.1",
+            "text": "- new color for type \"Any\" in code\n- optimize code\n- optimize scene"
         }
     }
 }

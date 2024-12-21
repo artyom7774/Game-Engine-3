@@ -505,17 +505,6 @@ class Scene:
 
     @staticmethod
     def update(project, call: str = "") -> None:
-        def PILImageToPixMap(pil_image: Image.Image) -> QPixmap:
-            pil_image = pil_image.convert("RGBA")
-
-            data = pil_image.tobytes("raw", "RGBA")
-
-            qimage = QImage(data, pil_image.width, pil_image.height, QImage.Format_RGBA8888)
-
-            qpixmap = QPixmap.fromImage(qimage)
-
-            return qpixmap
-
         try:
             application = project.application[project.selectFile]
 
@@ -591,17 +580,7 @@ class Scene:
 
             return 0
 
-        image = functions.files.Scene.getVisiableScreen(project)
-
-        image = image.resize((project.objects["main"]["scene"].width(), project.objects["main"]["scene"].height()), Image.NEAREST)
-
-        try:
-            qpixmap = PILImageToPixMap(image)
-
-        except SystemError as e:
-            print("SystemError:", e)
-
-            return 0
+        qpixmap = QPixmap(Scene.getVisiableScreen(QImage(project.application[project.selectFile].screen.get_buffer(), project.desktop.width(), project.desktop.height(), QImage.Format_RGB32), project.objects["center_rama"].width(), project.objects["center_rama"].height()))
 
         # UI
 
@@ -865,17 +844,21 @@ class Scene:
         pass
 
     @staticmethod
-    def getVisiableScreen(project) -> Image.Image:
-        def center(image, newWidth, newHeight) -> Image.Image:
-            width, height = image.size
+    def getVisiableScreen(image, width, height) -> Image.Image:
+        def center(image: QImage, newWidth: int, newHeight: int) -> QImage:
+            width = image.width()
+            height = image.height()
 
             left = (width - newWidth) // 2
             top = (height - newHeight) // 2
-            right = (width + newWidth) // 2
-            bottom = (height + newHeight) // 2
+            right = left + newWidth
+            bottom = top + newHeight
 
-            return image.crop((left, top, right, bottom))
+            # Убедимся, что координаты не выходят за пределы изображения
+            if left < 0 or top < 0 or right > width or bottom > height:
+                raise ValueError("Новые размеры выходят за пределы исходного изображения")
 
-        # project.cash["file"][project.selectFile].screen.save("scene.png")
+            # Обрезаем изображение
+            return image.copy(left, top, newWidth, newHeight)
 
-        return center(project.cash["file"][project.selectFile].screen, project.objects["center_rama"].width(), project.objects["center_rama"].height())
+        return center(image, width, height)
