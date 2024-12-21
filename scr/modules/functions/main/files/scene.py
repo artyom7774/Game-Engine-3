@@ -854,11 +854,6 @@ class Scene:
             right = left + newWidth
             bottom = top + newHeight
 
-            # Убедимся, что координаты не выходят за пределы изображения
-            if left < 0 or top < 0 or right > width or bottom > height:
-                raise ValueError("Новые размеры выходят за пределы исходного изображения")
-
-            # Обрезаем изображение
             return image.copy(left, top, newWidth, newHeight)
 
         return center(image, width, height)
