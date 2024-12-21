@@ -48,7 +48,7 @@
 
         "3.4.1": {
             "name": "3.4.1",
-            "text": "- new color for type \"Any\" in code\n- optimize code\n- optimize scene"
+            "text": "- new color for type \"Any\" in code\n- optimize code\n- optimize scene\n- fixbug with move object"
         }
     }
 }

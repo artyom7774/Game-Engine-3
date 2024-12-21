@@ -54,7 +54,9 @@ class StaticObject:
 
         self.group = group
 
+        self.procesionPos = Vec2f(0, 0)
         self.pos = pos if type(pos) == Vec2f else Vec2f(*pos)
+
         self.hitbox = hitbox if type(hitbox) == SquareHitbox else SquareHitbox(hitbox)
 
         self.drawPriority = layer
@@ -76,6 +78,15 @@ class StaticObject:
         y = 0 if abs(y) < FLOAT_PRECISION else y
         x = 0 if abs(x) < FLOAT_PRECISION else x
 
+        self.procesionPos.x += x
+        self.procesionPos.y += y
+
+        x = int(self.procesionPos.x)
+        y = int(self.procesionPos.y)
+
+        self.procesionPos.x -= x
+        self.procesionPos.y -= y
+
         if x == 0 and y == 0:
             return 0
 
@@ -86,8 +97,6 @@ class StaticObject:
         step = math.ceil(abs(x) + abs(y) + 1)
 
         hitbox = self.getEditHitbox(x, y)
-
-        lastPos = Vec2f(self.pos.x, self.pos.y)
 
         useX = True
         useY = True
@@ -105,8 +114,8 @@ class StaticObject:
                 self.pos.x += (abs(x) / step) * (1 if x >= 0 else -1) * useX
                 self.pos.y += (abs(y) / step) * (1 if y >= 0 else -1) * useY
 
-        # self.pos.x = round(self.pos.x)
-        # self.pos.y = round(self.pos.y)
+        self.pos.x = round(self.pos.x)
+        self.pos.y = round(self.pos.y)
 
         self.distance = math.sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 

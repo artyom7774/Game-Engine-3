@@ -176,13 +176,11 @@
 - использование стилей в написание текста и GUI компонентов
 097. [ ] компилировать проект в web версию
 098. [ ] оптимизировать в group функцию getByID
-099. [ ] в code при обновление нодов при передвижение вместо setGeometry использовать move
+099. [x] в code при обновление нодов при передвижение вместо setGeometry использовать move
 
 mading: 89, 90
 
-now: 71 / 96
-
-создать проект из шаблона
+now: 72 / 99
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
  17248177  322.216    0.000  594.735    0.000 objects.py:122(collision)
