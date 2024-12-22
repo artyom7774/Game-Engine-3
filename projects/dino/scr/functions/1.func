@@ -2849,7 +2849,10 @@
                     "name": "__operation__",
                     "standard": 0,
                     "type": "choose",
-                    "value": null
+                    "value": {
+                        "id": 319727102,
+                        "name": "answer"
+                    }
                 },
                 "b": {
                     "code": "b",
