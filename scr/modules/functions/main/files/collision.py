@@ -6,11 +6,13 @@ from scr.modules.widgets import FocusLineEdit
 
 from scr.modules.functions.project import *
 
+from scr.variables import *
+
 import json
 
 
 class CollisionAdditions:
-    style = "background-color: rgba(0, 0, 0, 0); border: 1px solid #3f4042;"
+    style = f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'};"
 
     @staticmethod
     def init(project) -> None:
@@ -49,17 +51,22 @@ class CollisionAdditions:
 
             project.objects["main"][f"additions_element_name_{name}"] = FocusLineEdit(releasedFocusFunction=lambda empty=None, n=name: CollisionAdditions.rename(project, n))
             project.objects["main"][f"additions_element_name_{name}"].setText(name)
-            project.objects["main"][f"additions_element_name_{name}"].setStyleSheet(CollisionAdditions.style)
+            project.objects["main"][f"additions_element_name_{name}"].setStyleSheet(f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}")
 
             project.objects["main"]["create"].setItemWidget(item, 0, project.objects["main"][f"additions_element_name_{name}"])
 
             project.objects["main"][f"additions_element_remove_{name}"] = QPushButton()
 
-            project.objects["main"][f"additions_element_remove_{name}"].setIcon(QIcon(QPixmap("scr/files/sprites/remove.png")))
+            if SETTINGS["theme"] == "dark":
+                project.objects["main"][f"additions_element_remove_{name}"].setIcon(QIcon(QPixmap("scr/files/sprites/remove.png")))
+
+            else:
+                project.objects["main"][f"additions_element_remove_{name}"].setIcon(QIcon(QPixmap("scr/files/sprites/remove-light.png")))
+
             # project.objects["main"][f"additions_element_remove_{name}"].setIconSize(QSize(16, 16))
 
             project.objects["main"][f"additions_element_remove_{name}"].released.connect(lambda empty=None, n=name: CollisionAdditions.remove(project, n))
-            project.objects["main"][f"additions_element_remove_{name}"].setStyleSheet(CollisionAdditions.style)
+            project.objects["main"][f"additions_element_remove_{name}"].setStyleSheet(f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}")
 
             project.objects["main"]["create"].setItemWidget(item, 1, project.objects["main"][f"additions_element_remove_{name}"])
 

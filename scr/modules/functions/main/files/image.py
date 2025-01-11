@@ -66,7 +66,7 @@ class Image:
         x = (maxWidth - image.width) // 2
         y = (maxHeight - image.height) // 2
 
-        image = replaceTransparentColor(image, (32, 33, 36))
+        image = replaceTransparentColor(image, (32, 33, 36) if SETTINGS["theme"] == 'dark' else (248, 249, 250))
         image.save("scr/files/cash/image.png")
 
         pixmap = QPixmap()

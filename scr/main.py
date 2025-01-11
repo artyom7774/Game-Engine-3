@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
-from PyQt5.QtGui import QKeySequence
+from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QLabel, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
+from PyQt5.QtGui import QKeySequence, QPixmap, QImage, QColor
 from PyQt5.Qt import QIcon, Qt
 
 from scr.modules.widgets import TabFileBar, VersionLogScrollArea
@@ -40,7 +40,7 @@ class Main(QMainWindow):
 
         self.app = app
 
-        qdarktheme.setup_theme()
+        qdarktheme.setup_theme(theme=SETTINGS["theme"])
 
         self.application = {}
         self.engine = None
@@ -104,13 +104,13 @@ class Main(QMainWindow):
             except BaseException:
                 pass
 
-        # thr = threading.Thread(target=lambda: function())
-        # thr.daemon = True
+        thr = threading.Thread(target=lambda: function())
+        thr.daemon = True
         # thr.start()
 
     def versionUpdateMessage(self) -> None:
         def function():
-            thr = threading.Thread(target=lambda: webbrowser.open("https://github.com/artyom7774/Game-Engine-3/releases"))
+            thr = threading.Thread(target=lambda: webbrowser.open("https://artyom7774.github.io"))
             thr.daemon = True
             thr.start()
 
@@ -303,16 +303,24 @@ class Main(QMainWindow):
 
         self.init("initialization")
 
+    def theme(self) -> None:
+        if SETTINGS["theme"] == "light":
+            pass
+
     def init(self, type: str = "") -> None:
         self.menu()
 
         if self.selectProject == "":
+            self.theme()
+
             return 0
 
         functions.project.projectTreeInit(self)
         functions.project.centerMenuInit(self)
 
         self.geometryInit()
+
+        self.theme()
 
     def menu(self) -> None:
         self.statusBar()
@@ -382,9 +390,14 @@ class Main(QMainWindow):
             self.objects["help_pages"][value["name"]] = dict(value)
 
         help_program_action = QAction(translate("Program"), self)
-        help_program_action.triggered.connect(lambda: functions.menu.help.help_(self, "Main"))
+        help_program_action.triggered.connect(lambda: functions.menu.help.help_(self))
+
+        author_program_action = QAction(translate("About"), self)
+        author_program_action.triggered.connect(lambda: functions.menu.help.about(self))
 
         self.menues["help_menu"].addAction(help_program_action)
+        self.menues["help_menu"].addSeparator()
+        self.menues["help_menu"].addAction(author_program_action)
 
     def shortcut(self) -> None:
         def right(project):

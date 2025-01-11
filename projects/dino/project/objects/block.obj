@@ -23,6 +23,28 @@
     },
     "variables": {},
     "animator": {},
+    "DynamicObject": {
+        "speed": {
+            "name": "Moving speed",
+            "value": 5,
+            "type": "int"
+        },
+        "gravity": {
+            "name": "Object gravity",
+            "value": 300,
+            "type": "int"
+        },
+        "jumpPower": {
+            "name": "Power jump",
+            "value": 10,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 1000000.0,
+            "type": "int"
+        }
+    },
     "StaticObject": {
         "pos": {
             "name": "Object position",
@@ -105,28 +127,6 @@
         "layer": {
             "name": "Object layer",
             "value": 0,
-            "type": "int"
-        }
-    },
-    "DynamicObject": {
-        "speed": {
-            "name": "Moving speed",
-            "value": 5,
-            "type": "int"
-        },
-        "gravity": {
-            "name": "Object gravity",
-            "value": 300,
-            "type": "int"
-        },
-        "jumpPower": {
-            "name": "Power jump",
-            "value": 10,
-            "type": "int"
-        },
-        "slidingStep": {
-            "name": "Braking power",
-            "value": 1000000.0,
             "type": "int"
         }
     }

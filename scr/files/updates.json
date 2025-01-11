@@ -54,7 +54,7 @@
 
         "3.4.2": {
             "name": "3.4.2",
-            "text": "- update help menu"
+            "text": "- update help menu\n- fixed bug with write text on console\n- delete help menu\n- new variable types: dict, list\n- add nodes for using lists and dicts\n- light theme"
         }
     }
 }

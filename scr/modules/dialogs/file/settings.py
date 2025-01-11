@@ -3,22 +3,83 @@ from PyQt5 import QtWidgets
 
 from scr.variables import *
 
+import qdarktheme
 import threading
 
 
 class SettingsFunctions:
     @staticmethod
     def confirm(project, dialog, event) -> None:
+        global BUTTON_RED_STYLE, BUTTON_BLUE_STYLE
+
         languages = dict(zip(LANGUAGES.values(), LANGUAGES.keys()))
+        themes = list(THEMES.keys())
 
         settings = {
-            "language": languages[dialog.objects["language_combobox"].currentText()]
+            "language": languages[dialog.objects["language_combobox"].currentText()],
+            "theme": themes[dialog.objects["theme_combobox"].currentIndex()]
         }
 
         for key, value in settings.items():
             SETTINGS[key] = value
 
         translate.lang = SETTINGS["language"]
+
+        qdarktheme.setup_theme(theme=SETTINGS["theme"])
+
+        if SETTINGS["theme"] == "dark":
+            BUTTON_RED_STYLE = """
+            QPushButton {
+                color: red;
+            }
+            QPushButton:hover {
+                background-color: #3B2727;
+            }
+            QPushButton:pressed {
+                background-color: #F66060;
+                color: black;
+            }
+            """
+
+            BUTTON_BLUE_STYLE = """
+            QPushButton {
+                color: #8ab4f7;
+            }
+            QPushButton:hover {
+                background-color: #272e3b;
+            }
+            QPushButton:pressed {
+                background-color: #5f9af4;
+                color: black;
+            }
+            """
+
+        else:
+            BUTTON_RED_STYLE = """
+            QPushButton {
+                color: red;
+            }
+            QPushButton:hover {
+                background-color: #F0E0E0;
+            }
+            QPushButton:pressed {
+                background-color: #F66060;
+                color: black;
+            }
+            """
+
+            BUTTON_BLUE_STYLE = """
+            QPushButton {
+                color: #1E90FF;
+            }
+            QPushButton:hover {
+                background-color: #E0E8F0;
+            }
+            QPushButton:pressed {
+                background-color: #ADD8E6;
+                color: black;
+            }
+            """
 
         with open("scr/files/settings/settings.json", "w") as file:
             json.dump(SETTINGS, file, indent=4)
@@ -90,6 +151,20 @@ class Settings(QDialog):
         self.objects["language_combobox"].setGeometry(210, 10, 300, 25)
         self.objects["language_combobox"].setFont(FONT)
         self.objects["language_combobox"].show()
+
+        # THEME
+
+        self.objects["theme_label"] = QLabel(parent=self, text=translate("Theme") + ":")
+        self.objects["theme_label"].setGeometry(10, 45, 200, 25)
+        self.objects["theme_label"].setFont(FONT)
+        self.objects["theme_label"].show()
+
+        self.objects["theme_combobox"] = QComboBox(parent=self)
+        self.objects["theme_combobox"].addItems([translate(obj) for obj in THEMES.values()])
+        self.objects["theme_combobox"].setCurrentIndex([translate(obj).lower() == translate(THEMES[SETTINGS["theme"]]).lower() for obj in THEMES.values()].index(True))
+        self.objects["theme_combobox"].setGeometry(210, 45, 300, 25)
+        self.objects["theme_combobox"].setFont(FONT)
+        self.objects["theme_combobox"].show()
 
         # COMFIRM
 

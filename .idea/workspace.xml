@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aabb1d5-bc1e-45a8-b587-1369a102e97a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/project/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/project/functions/1.func" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/GE3 project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/functions/1.func" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/updates.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/updates.json" afterDir="false" />
-    </list>
+    <list default="true" id="4aabb1d5-bc1e-45a8-b587-1369a102e97a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,30 +39,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Batch.setup.executor&quot;: &quot;Run&quot;,
-    &quot;Python.GE3 project.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.Game Engine 3.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/37529/Desktop/github/Game-Engine-3/scr/code/program/objects&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Batch.setup.executor": "Run",
+    "Python.1.executor": "Run",
+    "Python.2.executor": "Run",
+    "Python.GE3 project.executor": "Debug",
+    "Python.Game Engine 3.executor": "Debug",
+    "Python.compile.executor": "Debug",
+    "Python.negative_color.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/37529/Desktop/github/Game-Engine-3/scr/code/program/event",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\scr\code\program\event" />
+      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\scr\code\program\set" />
       <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\scr\code\program\objects" />
       <recent name="C:\Users\k123\Desktop\ge3\projects\abc\scr\files" />
       <recent name="C:\Users\k123\Desktop\ge3\projects\abc\project\files" />
-      <recent name="C:\Users\k123\Desktop\ge3\scr\base\project\scenes" />
-      <recent name="C:\Users\k123\Desktop\ge3\scr\base\project\objects" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\k123\Desktop\ge3\scr\code\sprites\types" />

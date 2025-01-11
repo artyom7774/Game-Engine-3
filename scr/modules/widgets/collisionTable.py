@@ -4,6 +4,8 @@ from PyQt5.QtGui import QFontMetrics, QPixmap, QPainter, QPen, QColor
 
 from engine.functions.loads import loadCollisionFile
 
+from scr.variables import *
+
 import typing
 
 
@@ -73,12 +75,12 @@ class CollisionTable(QTableWidget):
 
                 self.setItem(row, col, QTableWidgetItem())
 
-        self.setStyleSheet("background-color: #202124;")
+        self.setStyleSheet(f"background-color: #{'202124' if SETTINGS['theme'] == 'dark' else 'f8f9fa'};")
 
     @staticmethod
     def createСrossPixMap(width: int, height: int) -> QPixmap:
         pixmap = QPixmap(width, height)
-        pixmap.fill(QColor("#202124"))
+        pixmap.fill(QColor(f"#{'202124' if SETTINGS['theme'] == 'dark' else 'f8f9fa'}"))
 
         # painter = QPainter(pixmap)
         # pen = QPen(QColor("#3f4042"), 1)

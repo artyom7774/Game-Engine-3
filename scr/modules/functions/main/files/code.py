@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QToolTip, QLineEdit, QPushButton, QComboBox
 from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon
-from PyQt5.Qt import Qt, QPoint, QTimer
+from PyQt5.Qt import Qt, QPoint, QTimer, QSize
 
 from scr.modules.dialogs import CreateNode
 from scr.modules.functions.algorithm import bezierCurveDeep, bezierCurveWidth
@@ -18,13 +18,7 @@ import typing
 import random
 import math
 import copy
-
-# if (a & b) than else (& - условие)
-# for element in list
-# for i, element in enumerate(list)
-# while & (& - условие)
-
-# при клике мыши (вернуть x, y)
+import re
 
 
 def isCurrectNode(obj: dict):
@@ -99,6 +93,14 @@ class TypeSet:
         return True if value in ("true", "True", "1") else False
 
     @staticmethod
+    def list(value: typing.Any) -> bool:
+        return eval(value)
+
+    @staticmethod
+    def dict(value: typing.Any) -> bool:
+        return eval(value)
+
+    @staticmethod
     def Any(value: typing.Any):
         return value
 
@@ -129,11 +131,27 @@ class TypeCurrect:
 
     @staticmethod
     def text(value: typing.Any) -> bool:
-        return isinstance(value, str)
+        return True
 
     @staticmethod
     def logic(value: typing.Any) -> bool:
         return value in ("true", "True", "false", "False", "0", "1")
+
+    @staticmethod
+    def list(value: typing.Any) -> bool:
+        try:
+            return type(eval(value)) == list
+
+        except BaseException:
+            return False
+
+    @staticmethod
+    def dict(value: typing.Any) -> bool:
+        try:
+            return type(eval(value)) == dict
+
+        except BaseException:
+            return False
 
     @staticmethod
     def Any(value: typing.Any) -> bool:
@@ -155,6 +173,8 @@ class CodeNodeConnectorLineEdit(QLineEdit):
 
         self.project = project
 
+        self.use = False
+
         self.id = id
         self.input = input
 
@@ -166,7 +186,14 @@ class CodeNodeConnectorLineEdit(QLineEdit):
         if TypeCurrect.currect_(type, text):
             self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = TypeSet.set_(type, text)
 
+    def focusInEvent(self, event) -> None:
+        self.use = True
+
+        event.accept()
+
     def focusOutEvent(self, event) -> None:
+        self.use = False
+
         self.save()
 
         event.accept()
@@ -180,6 +207,8 @@ class CodeNodeConnectorComboBox(QComboBox):
 
         self.id = id
         self.input = input
+
+        self.use = False
 
         self.index = self.input["standard"]
 
@@ -305,7 +334,7 @@ class CodeNode(QTreeWidget):
         self.show()
 
         self.setAttribute(Qt.WA_TransparentForMouseEvents)
-        self.setStyleSheet("border-radius: 0px; background-color: rgba(63, 64, 66, 220);")
+        self.setStyleSheet(f"border-width: 0px; border-radius: 0px; background-color: rgba{'(63, 64, 66, 220)' if SETTINGS['theme'] == 'dark' else '(218, 220, 224, 220)'};")
 
         self.project = parent
 
@@ -428,6 +457,7 @@ class CodeNode(QTreeWidget):
         for key, connector in self.connectors.items():
             connector.updateObjectGeometry()
 
+
 class CodeLabel(QLabel):
     def __init__(self, parent=None, pressFunction: typing.Callable = None, releasedFunction: typing.Callable = None) -> None:
         QLabel.__init__(self, parent)
@@ -499,6 +529,18 @@ class CodeLabel(QLabel):
 
     def mousePressEvent(self, event) -> None:
         # Code.update(self.project)
+
+        flag = False
+
+        for id, node in self.project.objects["main"]["function"]["objects"].items():
+            for index, connector in self.project.objects["main"]["nodes"][node["id"]].connectors.items():
+                if connector.inputLeftText is not None:
+                    connector.inputLeftText.save()
+
+                    flag = max(flag, connector.inputLeftText.use)
+
+        if flag:
+            json.dump(self.project.objects["main"]["function"], open(self.project.selectFile, "w", encoding="utf-8"), indent=4)
 
         self.setFocus()
 
@@ -696,10 +738,10 @@ class CodeLabel(QLabel):
 
 
 class CodeAdditionsVarsType(QTreeWidget):
-    style = "background-color: rgba(0, 0, 0, 0); border: 1px solid #2a2b2e"
-
     def __init__(self, parent, pos: Vec4i, name: str, path: str) -> None:
         QTreeWidget.__init__(self, parent)
+
+        self.style = f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}"
 
         with open("scr/code/config.json", "r", encoding="utf-8") as file:
             self.config = json.load(file)
@@ -711,6 +753,8 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.path = path
 
         self.setGeometry(self.pos.x, self.pos.y, self.pos.z, self.pos.w)
+
+        self.setContextMenuPolicy(Qt.CustomContextMenu)
 
         self.setColumnCount(3)
 
@@ -727,7 +771,12 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.plusButton.setText(name)
         self.plusButton.show()
 
+        with open(self.path, "r", encoding="utf-8") as file:
+            self.variables = json.load(file)["variables"]
+
         self.setRootIsDecorated(False)
+
+        self.menu = None
 
         self.plusButton.clicked.connect(lambda: self.new())
 
@@ -735,12 +784,58 @@ class CodeAdditionsVarsType(QTreeWidget):
 
         self.show()
 
-    def init(self) -> None:
-        with open(self.path, "r", encoding="utf-8") as file:
-            variables = json.load(file)["variables"]
+    def eventFilter(self, obj, event):
+        if event.type() == event.ContextMenu:
+            self.createMenu(self.mapFromGlobal(event.globalPos()))
 
-        for name, value in variables.items():
+            return True
+
+        return super().eventFilter(obj, event)
+
+    def createMenu(self, position) -> None:
+        x = position.x()
+        y = position.y()
+
+        ox = x - self.project.objects["center_rama"].x() + self.x()
+        oy = y - self.project.objects["center_rama"].y() + self.y()
+
+        pos = QPoint(ox, oy)
+
+        index = self.currentIndex().row()
+
+        name = list(self.variables.keys())[index]
+
+        self.menu = QMenu()
+        # self.menu.setWindowFlags(self.menu.windowFlags() | Qt.Popup)
+        # self.menu.raise_()
+
+        delete_variable = QAction(translate("Remove"), self.project)
+        delete_variable.triggered.connect(lambda empty=None, n=name: self.removeVariableFunction(n))
+
+        self.menu.addAction(delete_variable)
+
+        self.menu.popup(self.project.objects["main"]["code"].mapToGlobal(pos))
+
+    def removeVariableFunction(self, name):
+        with open(self.path, "r", encoding="utf-8") as file:
+            text = json.load(file)
+
+        self.variables.pop(name)
+
+        text["variables"] = self.variables
+
+        with open(self.path, "w", encoding="utf-8") as file:
+            json.dump(text, file, indent=4)
+
+        self.project.init()
+
+    def init(self) -> None:
+        for i, name in enumerate(self.variables):
+            value = self.variables[name]
+
             item = QTreeWidgetItem()
+
+            item.setSizeHint(0, QSize(0, 25))
 
             self.addTopLevelItem(item)
 
@@ -791,7 +886,12 @@ class CodeAdditionsVarsType(QTreeWidget):
         with open(self.path, "r", encoding="utf-8") as file:
             text = json.load(file)
 
-        name = text["variables"][name]["name"]
+        try:
+            name = text["variables"][name]["name"]
+
+        except KeyError:
+            return 0
+
         new = self.project.objects["main"][f"additions_element_name_{name}"].text()
 
         if new == name or len(new) < 1 or new in list(text["variables"].keys()):
@@ -946,10 +1046,10 @@ class Code:
         # GRID
 
         qpixmap = QPixmap(project.objects["center_rama"].width(), project.objects["center_rama"].height())
-        qpixmap.fill(QColor(32, 33, 36))
+        qpixmap.fill(QColor(32, 33, 36) if SETTINGS["theme"] == "dark" else QColor(248, 249, 250))
 
         painter = QPainter(qpixmap)
-        painter.setPen(QPen(QColor(63, 64, 66), 1))
+        painter.setPen(QPen(QColor(63, 64, 66)if SETTINGS["theme"] == "dark" else QColor(218, 220, 224), 1))
 
         painter.setFont(SFONT)
 

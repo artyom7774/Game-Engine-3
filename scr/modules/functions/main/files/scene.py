@@ -545,10 +545,13 @@ class Scene:
 
         lastDrawing = []
 
+        if SETTINGS["theme"] == "light":
+            lastDrawing.append(["rect", [application.screen, (248, 249, 250), (0, 0, project.desktop.width(), project.desktop.height())]])
+
         if sceneSettings["Scene"]["visiable_grid"]["value"]:
             for px in range(-project.objects["main"]["scene"].width() // 2 // gridWidth - 2, project.objects["main"]["scene"].width() // 2 // gridWidth + 2):
                 for py in range(-project.objects["main"]["scene"].height() // 2 // gridHeight - 2, project.objects["main"]["scene"].height() // 2 // gridHeight + 2):
-                    lastDrawing.append(["rect", [application.screen, (63, 64, 66), (
+                    lastDrawing.append(["rect", [application.screen, (63, 64, 66) if SETTINGS["theme"] == "dark" else (218, 220, 224), (
                         (project.desktop.width() // 2 + gridX - (x - gridX) - (gridWidth * (gridX // gridWidth))) + px * gridWidth,
                         (project.desktop.height() // 2 + gridY - (y - gridY) - (gridHeight * (gridY // gridHeight))) + py * gridHeight,
                         gridWidth,
@@ -587,7 +590,7 @@ class Scene:
         painter = QPainter(qpixmap)
         painter.setFont(SFONT)
 
-        painter.setPen(QPen(QColor(255, 255, 255), 1))
+        painter.setPen(QPen(QColor(255, 255, 255) if SETTINGS["theme"] == "dark" else QColor(218, 220, 224), 1))
 
         painter.drawText(
             5, project.objects["center_rama"].height() - 8, f"X, Y: {project.cash['file'][project.selectFile].camera.pos.x}  {project.cash['file'][project.selectFile].camera.pos.y}"

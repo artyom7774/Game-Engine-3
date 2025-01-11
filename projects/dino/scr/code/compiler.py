@@ -91,6 +91,9 @@ class Compiler:
                 with open(f"{path}/{dir}/{module}", "r", encoding="utf-8") as f:
                     text = text + f.read() + "\n"
 
+        thr = threading.Thread(target=lambda: open("compiling.txt", "w").write(text))
+        thr.start()
+
         name = "program"
         spec = importlib.util.spec_from_loader(name, loader=None)
 

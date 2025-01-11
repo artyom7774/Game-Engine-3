@@ -194,6 +194,10 @@ def projectTreeProjectMenuInit(project) -> typing.Dict[str, bool]:
     return answer
 
 
+def getColor(name: str) -> str:
+    return SPRITES[name] if ((SETTINGS["theme"] == "dark") or (f"{name}-light" not in SPRITES)) else SPRITES[f"{name}-light"]
+
+
 def projectTreeProjectMenuOpen(project, position) -> None:
     if len(project.objects["tree_project"].selectedItems()) > 0:
         path = projectTreeGetPath(project.objects["tree_project"].selectedItems()[0])
@@ -206,7 +210,7 @@ def projectTreeProjectMenuOpen(project, position) -> None:
 
         if len(path) > 1:
             project.objects["tree_project_menu_new_menu_dir_action"] = QAction(translate("Directory"), project)
-            project.objects["tree_project_menu_new_menu_dir_action"].setIcon(QIcon(SPRITES["dir"]))
+            project.objects["tree_project_menu_new_menu_dir_action"].setIcon(QIcon(getColor("dir")))
             project.objects["tree_project_menu_new_menu_dir_action"].triggered.connect(lambda: functions.tree.createDir(project))
             project.objects["tree_project_menu_new_menu"].addAction(project.objects["tree_project_menu_new_menu_dir_action"])
 
@@ -215,25 +219,25 @@ def projectTreeProjectMenuOpen(project, position) -> None:
         if len(path) > 1 and path[1] == "scenes":
             if "/".join(path).find("%scene%") == -1:
                 project.objects["tree_project_menu_new_menu_scene_action"] = QAction(translate("Scene"), project)
-                project.objects["tree_project_menu_new_menu_scene_action"].setIcon(QIcon(SPRITES["scene"]))
+                project.objects["tree_project_menu_new_menu_scene_action"].setIcon(QIcon(getColor("scene")))
                 project.objects["tree_project_menu_new_menu_scene_action"].triggered.connect(lambda: functions.tree.createScene(project))
                 project.objects["tree_project_menu_new_menu"].addAction(project.objects["tree_project_menu_new_menu_scene_action"])
 
         if len(path) > 1 and path[1] == "functions":
             project.objects["tree_project_menu_new_menu_function_action"] = QAction(translate("Function"), project)
-            project.objects["tree_project_menu_new_menu_function_action"].setIcon(QIcon(SPRITES["func"]))
+            project.objects["tree_project_menu_new_menu_function_action"].setIcon(QIcon(getColor("func")))
             project.objects["tree_project_menu_new_menu_function_action"].triggered.connect(lambda: functions.tree.createFunction(project))
             project.objects["tree_project_menu_new_menu"].addAction(project.objects["tree_project_menu_new_menu_function_action"])
 
         if len(path) > 1 and path[1] == "objects":
             project.objects["tree_project_menu_new_menu_object_action"] = QAction(translate("Object"), project)
-            project.objects["tree_project_menu_new_menu_object_action"].setIcon(QIcon(SPRITES["obj"]))
+            project.objects["tree_project_menu_new_menu_object_action"].setIcon(QIcon(getColor("obj")))
             project.objects["tree_project_menu_new_menu_object_action"].triggered.connect(lambda: functions.tree.createObject(project))
             project.objects["tree_project_menu_new_menu"].addAction(project.objects["tree_project_menu_new_menu_object_action"])
 
         if len(path) > 1:
             project.objects["tree_project_menu_new_menu_file_action"] = QAction(translate("File"), project)
-            project.objects["tree_project_menu_new_menu_file_action"].setIcon(QIcon(SPRITES["file"]))
+            project.objects["tree_project_menu_new_menu_file_action"].setIcon(QIcon(getColor("file")))
             project.objects["tree_project_menu_new_menu_file_action"].triggered.connect(lambda: functions.tree.createFile(project))
             project.objects["tree_project_menu_new_menu"].addAction(project.objects["tree_project_menu_new_menu_file_action"])
 
@@ -398,7 +402,7 @@ def projectTreeInit(project) -> None:
     project.objects["tree_project"].clear()
 
     project.objects["tree_project_main"] = QTreeWidgetItem(project.objects["tree_project"])
-    project.objects["tree_project_main"].setIcon(0, QIcon("scr/files/sprites/dir.png"))
+    project.objects["tree_project_main"].setIcon(0, QIcon(getColor("dir")))
     project.objects["tree_project_main"].setText(0, project.selectProject)
     project.objects["tree_project_main"].setExpanded(True)
 
@@ -427,10 +431,10 @@ def projectTreeInit(project) -> None:
             project.objects["project_tree_file_objects"][path].setText(0, re.sub(r"%.*?%", "", path[path.rfind("/"):].replace("/", "") if path.find("/") != -1 else path))
 
             if path[path.rfind("/") + 1:].find("%scene%") != -1:
-                project.objects["project_tree_file_objects"][path].setIcon(0, QIcon(SPRITES["scene"]))
+                project.objects["project_tree_file_objects"][path].setIcon(0, QIcon(getColor("scene")))
 
             else:
-                project.objects["project_tree_file_objects"][path].setIcon(0, QIcon(SPRITES["dir"]))
+                project.objects["project_tree_file_objects"][path].setIcon(0, QIcon(getColor("dir")))
 
             project.objects["project_tree_file_objects"][path].setExpanded(project.objects["project_tree_file_opened"][path])
 
@@ -455,10 +459,10 @@ def projectTreeInit(project) -> None:
             project.objects["project_tree_file_objects"][path].setText(0, path.split("/")[-1])
 
             if path[path.rfind(".") + 1:] in SPRITES:
-                project.objects["project_tree_file_objects"][path].setIcon(0, QIcon(SPRITES[path[path.rfind(".") + 1:]]))
+                project.objects["project_tree_file_objects"][path].setIcon(0, QIcon(getColor(path[path.rfind(".") + 1:])))
 
             else:
-                project.objects["project_tree_file_objects"][path].setIcon(0, QIcon(SPRITES["file"]))
+                project.objects["project_tree_file_objects"][path].setIcon(0, QIcon(getColor("file")))
 
             project.objects["project_tree_file_objects"][path].setExpanded(project.objects["project_tree_file_opened"][path])
 

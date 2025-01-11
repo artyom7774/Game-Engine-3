@@ -5,6 +5,7 @@ from scr.modules.translate import Translate
 
 import importlib.util
 import platform
+import random
 import pygame
 import json
 import os
@@ -37,6 +38,11 @@ LFONT.setPointSize(10)
 LBFONT = QFont()
 LBFONT.setPointSize(8)
 LBFONT.setBold(True)
+
+# BASE BIG FONT
+
+BBFONT = QFont()
+BBFONT.setPointSize(18)
 
 # BIG FONT
 
@@ -139,6 +145,8 @@ CODE_CONNECTOR_NO_HAVE_INPUT_TYPES = ["path"]
 OBJECT_CURRECT_TEST = ["type", "type/name", "type/value", "type/type", "StaticObject", "StaticObject/pos", "StaticObject/hitbox", "StaticObject/sprite", "StaticObject/group", "StaticObject/layer"]
 NODE_CURRECT_TEST = ["display", "id", "width", "height", "x", "y", "name", "inputs", "outputs", "type"]
 
+SOCKET_ID = random.randint(2**10, 2**16 - 1)
+
 ANIMATOR_BASE_VALUE = {
 
 }
@@ -152,11 +160,16 @@ SPRITES = {
     "func": "scr/files/sprites/func.png",
     "obj": "scr/files/sprites/obj.png",
     "objc": "scr/files/sprites/obj.png",
-    "json": "scr/files/sprites/json.png"
+    "json": "scr/files/sprites/json.png",
+    "scene-light": "scr/files/sprites/scene-light.png",
+    "dir-light": "scr/files/sprites/dir-light.png"
 }
 
 for element in IMAGE_FORMATES:
     SPRITES[element] = "scr/files/sprites/image.png"
+
+for element in IMAGE_FORMATES:
+    SPRITES[f"{element}-light"] = "scr/files/sprites/image-light.png"
 
 BASE_SETTINGS = {
     "language": "EN"
@@ -167,28 +180,61 @@ LANGUAGES = {
     "EN": "English"
 }
 
-BUTTON_RED_STYLE = """
-QPushButton {
-    color: red;
+THEMES = {
+    "light": "Light",
+    "dark": "Dark"
 }
-QPushButton:hover {
-    background-color: #3B2727;
-}
-QPushButton:pressed {
-    background-color: #F66060;
-    color: black;
-}
-"""
 
-BUTTON_BLUE_STYLE = """
-QPushButton {
-    color: #8ab4f7;
-}
-QPushButton:hover {
-    background-color: #272e3b;
-}
-QPushButton:pressed {
-    background-color: #5f9af4;
-    color: black;
-}
-"""
+if SETTINGS["theme"] == "dark":
+    BUTTON_RED_STYLE = """
+    QPushButton {
+        color: red;
+    }
+    QPushButton:hover {
+        background-color: #3B2727;
+    }
+    QPushButton:pressed {
+        background-color: #F66060;
+        color: black;
+    }
+    """
+
+    BUTTON_BLUE_STYLE = """
+    QPushButton {
+        color: #8ab4f7;
+    }
+    QPushButton:hover {
+        background-color: #272e3b;
+    }
+    QPushButton:pressed {
+        background-color: #5f9af4;
+        color: black;
+    }
+    """
+
+else:
+    BUTTON_RED_STYLE = """
+    QPushButton {
+        color: red;
+    }
+    QPushButton:hover {
+        background-color: #F0E0E0;
+    }
+    QPushButton:pressed {
+        background-color: #F66060;
+        color: black;
+    }
+    """
+
+    BUTTON_BLUE_STYLE = """
+    QPushButton {
+        color: #1E90FF;
+    }
+    QPushButton:hover {
+        background-color: #E0E8F0;
+    }
+    QPushButton:pressed {
+        background-color: #ADD8E6;
+        color: black;
+    }
+    """

@@ -7,6 +7,7 @@ from scr.modules import functions
 from scr.variables import *
 
 import threading
+import socket
 import shutil
 import json
 import sys
@@ -16,8 +17,11 @@ PROGRAM = \
 """# MADE BY GAME ENGINE %ENGINE_VERSION%
 
 import engine
+import socket
 import sys
 import os
+
+SOCKET_ID = %SOCKET_ID%
 
 VARIABLES = {
     "globals": %PROJECT_GLOBAL_VARIABLES%,
@@ -80,9 +84,13 @@ class Game(engine.Application):
 
         self.settings = {"settings": SETTINGS, "programs": PROGRAMS, "scenes": SCENES, "variables": VARIABLES}
 
-        with open("output.txt", "w") as file:
-            pass
-
+        try:
+            self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket.connect(("localhost", SOCKET_ID))
+        
+        except BaseException:
+            self.socket = None
+        
         for key, value in PROGRAMS.items():
             self.programs[key] = Compiler(self, key, value, self.settings)
 
@@ -107,13 +115,9 @@ class Game(engine.Application):
 
                 self.setKeyEvent(["PRESS", node["inputs"]["key"]["standard"]], lambda temp=id: self.programs[name].start(temp))
 
-    def print(self, text: str) -> None:    
-        with open("output.txt", "a+") as file:
-            if os.stat("output.txt").st_size < 2:
-                file.write(str(text.replace("\\n", "")))
-                
-            else:
-                file.write("\\n" + str(text.replace("\\n", "")))
+    def print(self, text: str) -> None:
+        if self.socket is not None:
+            self.socket.sendall(text.encode())
 
     def update(self) -> None:
         super().update()
@@ -197,11 +201,37 @@ class Logger(QDialog):
 
         self.init()
 
+        self.host = None
+
+        self.conn = None
+        self.addr = None
+
+        thr = threading.Thread(target=lambda: self.connect())
+        thr.daemon = True
+        thr.start()
+
         self.logSignal.connect(self.send)
 
         self.project.objects["main"]["timer"] = QTimer(project)
         self.project.objects["main"]["timer"].timeout.connect(lambda: self.text())
         self.project.objects["main"]["timer"].start(1000 // 24)
+
+    def connect(self) -> None:
+        try:
+            self.host = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.host.bind(("localhost", SOCKET_ID))
+            self.host.listen(1)
+
+        except OSError:
+            print("ERROR: can't create socket")
+
+        try:
+            self.conn, self.addr = self.host.accept()
+
+        except BaseException:
+            return 0
+
+        print("LOG: program connected")
 
     def init(self) -> None:
         self.objects["empty"] = QPushButton(parent=self)
@@ -215,27 +245,29 @@ class Logger(QDialog):
 
         self.objects["entry"] = QLineEdit(self)
         self.objects["entry"].setGeometry(10, self.height() - 37, self.width() - 20, 29)
-        self.objects["entry"].setStyleSheet("QLineEdit { background-color: #1c1d1f; }")
+        self.objects["entry"].setStyleSheet(f"background-color: #{'1c1d1f' if SETTINGS['theme'] == 'dark' else 'ffffff'};")
         self.objects["entry"].setFont(FONT)
         self.objects["entry"].show()
 
     def text(self) -> None:
-        if not os.path.exists(f"projects/{self.project.selectProject}/scr/output.txt"):
-            return
+        if self.conn is None:
+            return 0
 
-        with open(f"projects/{self.project.selectProject}/scr/output.txt", "r", encoding="utf-8") as file:
-            text = file.read()
+        try:
+            data = self.conn.recv(1024)
 
-        with open(f"projects/{self.project.selectProject}/scr/output.txt", "w", encoding="utf-8") as file:
-            pass
+        except ConnectionResetError:
+            return 0
 
-        if text == "":
-            return
-
-        self.objects["text"].append(text)
+        self.send(data.decode().rstrip())
 
     def send(self, text: str) -> None:
         self.objects["text"].append(text)
+
+    def closeEvent(self, event):
+        self.host.close()
+
+        event.accept()
 
 
 class Compile:
@@ -273,7 +305,10 @@ class Compile:
         pathPython = pathPython[:pathPython.rfind('\\')]
         pathPython = f"{pathPython}/python/Scripts/python.exe"
 
-        os.system(f"cd \"{pathProject}\" && \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\"")
+        thr = threading.Thread(target=lambda: os.system(f"cd \"{pathProject}\" && \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""))
+        thr.daemon = True
+        thr.start()
+
         # """
 
         return 0
@@ -422,6 +457,8 @@ class Compile:
         useProjectSettings["start_scene"] = f"projects/{project.selectProject}/project/" + useProjectSettings["start_scene"]
 
         program = PROGRAM
+
+        program = program.replace("%SOCKET_ID%", str(SOCKET_ID))
 
         program = program.replace("%PROJECT_GLOBAL_VARIABLES%", str(projectSettingsStandard["variables"]))
         program = program.replace("%PROJECT_LOCAL_VARIABLES%", str(locals_variables))
@@ -577,6 +614,12 @@ class Compile:
 
 
 def logger(project, name) -> None:
+    try:
+        project.dialog.close()
+
+    except BaseException:
+        pass
+
     project.dialog = Logger(project, name)
     project.dialog.show()
 

@@ -241,7 +241,7 @@
     "Mouse left click": "При нажатие ЛКМ"
     "Keyboard click": "При нажатие клавиши"
     "Keyboard press": "Пока клавиша нажата"
-    "For objects group": "По каждому объекту группы"
+    "For objects in group": "По каждому объекту группы"
     "If collision": "Если косаеться"
     "Connect text": "Соеденить текст"
     "Display text": "Отобразить текст"
@@ -253,4 +253,12 @@
     "Downloads": "Загрузка"
     "Return path on click button": "Возвращает путь при нажатие клавишы"
     "Return path every frame while button pressed": "Возвращает путь каждый кадр пока кнопка нажата"
+    "About": "О программе"
+    "Site": "Сайт"
+    "Set": "Множество"
+    "Theme": "Тема",
+    "Light": "Светлая",
+    "Dark": "Тёмная",
+    "System": "Системная",
+    "Remove": "Удалить"
 }

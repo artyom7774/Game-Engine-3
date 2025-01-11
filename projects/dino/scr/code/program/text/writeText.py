@@ -12,7 +12,7 @@ def writeText(program, compiler, path: str, nodes: dict, id: int, variables: dic
 
     line = True
 
-    answer = ">>> " + text + "\n" if line else ">>> " + text
+    answer = ">>> " + text.rstrip() + "\n" if line else ">>> " + text.rstrip()
 
     program.print(answer)
 

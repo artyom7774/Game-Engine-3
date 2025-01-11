@@ -91,6 +91,9 @@ class Compiler:
                 with open(f"{path}/{dir}/{module}", "r", encoding="utf-8") as f:
                     text = text + f.read() + "\n"
 
+        thr = threading.Thread(target=lambda: open("compiling.txt", "w").write(text))
+        thr.start()
+
         name = "program"
         spec = importlib.util.spec_from_loader(name, loader=None)
 
@@ -108,6 +111,11 @@ class Compiler:
 
         while len(queue) > 0:
             id = queue[0]
+
+            if str(id) not in self.nodes["objects"]:
+                queue.pop(0)
+
+                continue
 
             var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
 

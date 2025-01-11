@@ -2,7 +2,7 @@ from PyQt5.Qt import QIcon
 
 from scr.modules.dialogs import CreateDir, CreateScene, CreateFunction, CreateFile, RenameObject, CreateObject
 
-from scr.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath
+from scr.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath, getColor
 
 from scr.variables import *
 
@@ -55,7 +55,7 @@ def open(project, path: str = None) -> None:
 
         return 0
 
-    icon = (SPRITES["scene"] if path.find("%scene%") != -1 else SPRITES["dir"]) if os.path.isdir(path) else (SPRITES[path[path.rfind(".") + 1:]] if path[path.rfind(".") + 1:] in SPRITES else SPRITES["file"])
+    icon = (getColor("scene") if path.find("%scene%") != -1 else getColor("dir")) if os.path.isdir(path) else (getColor(path[path.rfind(".") + 1:]) if path[path.rfind(".") + 1:] in SPRITES else getColor("file"))
 
     if update:
         project.objects["tab_file_bar"].add(path, re.sub("%.*?%", "", path[path.rfind("/") + 1:]), QIcon(icon))
