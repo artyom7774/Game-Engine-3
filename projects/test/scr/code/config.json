@@ -1,0 +1,2761 @@
+{
+    "groups": {
+        "events": {
+            "name": "Events",
+            "nodes": [
+                "onStartGame",
+                "everyFrame",
+                "everyTick",
+                "mouseRightClick",
+                "mouseLeftClick",
+                "keyboardClick",
+                "keyboardPress"
+            ]
+        },
+        "loops": {
+            "name": "Loops",
+            "nodes": [
+                "for_",
+                "forObjectsGroup",
+                "forListElements",
+                "forDictElements"
+            ]
+        },
+        "text": {
+            "name": "Text",
+            "nodes": [
+                "connectText",
+                "sliceText",
+                "writeText",
+                "displayText"
+            ]
+        },
+        "numbers": {
+            "name": "Numbers",
+            "nodes": [
+                "plus",
+                "minus",
+                "multiply",
+                "divide"
+            ]
+        },
+        "logic": {
+            "name": "Logic",
+            "nodes": [
+                "if_",
+                "ifCollision"
+            ]
+        },
+        "objects": {
+            "name": "Objects",
+            "nodes": [
+                "getObjectIDByName",
+                "setObjectPos",
+                "moveObject",
+                "getObjectPos",
+                "setObjectVar",
+                "getObjectVar",
+                "createObject",
+                "removeObject",
+                "jump"
+            ]
+        },
+        "another": {
+            "name": "Another",
+            "nodes": [
+                "setVar",
+                "getVar",
+                "random_",
+                "decodeHolder",
+                "exit_"
+            ]
+        },
+        "set": {
+            "name": "Set",
+            "nodes": [
+                "getByIndex",
+                "deleteByIndex",
+                "getIndexOfElement",
+                "sliceList",
+                "getByKey",
+                "removeByKey",
+                "getKeyOfElement"
+            ]
+        }
+    },
+    "colors": {
+        "event": {
+            "first": "#801a1b",
+            "second": "#cecac9"
+        },
+        "loop": {
+            "first": "#8b008b",
+            "second": "#cecac9"
+        },
+        "text": {
+            "first": "#417f19",
+            "second": "#cecac9"
+        },
+        "number": {
+            "first": "#9fa021",
+            "second": "#cecac9"
+        },
+        "objects": {
+            "first": "#6765e4",
+            "second": "#cecac9"
+        },
+        "logic": {
+            "first": "#8b008b",
+            "second": "#cecac9"
+        },
+        "another": {
+            "first": "#801a1b",
+            "second": "#cecac9"
+        },
+        "set": {
+            "first": "#9fa021",
+            "second": "#cecac9"
+        }
+    },
+    "icons": {
+        "number": "scr/code/sprites/types/number.png",
+        "loop": "scr/code/sprites/types/loop.png",
+        "event": "scr/code/sprites/types/event.png",
+        "text": "scr/code/sprites/types/text.png",
+        "logic": "scr/code/sprites/types/logic.png",
+        "another": "scr/code/sprites/types/event.png",
+        "objects": "scr/code/sprites/types/objects.png",
+        "set": "scr/code/sprites/types/set.png"
+    },
+    "connectors": {
+        "sprites": {
+            "path": "scr/code/sprites/connectors/path.png",
+            "text": "scr/code/sprites/connectors/text.png",
+            "number": "scr/code/sprites/connectors/number.png",
+            "logic": "scr/code/sprites/connectors/logic.png",
+            "iterator": "scr/code/sprites/connectors/iterator.png",
+            "choose": "scr/code/sprites/connectors/choose.png",
+            "list": "scr/code/sprites/connectors/list.png",
+            "dict": "scr/code/sprites/connectors/dict.png",
+            "Any": "scr/code/sprites/connectors/any.png"
+        },
+        "colors": {
+            "path": "#cecac9",
+            "text": "#417f19",
+            "number": "#6765e4",
+            "logic": "#801a1b",
+            "iterator": "#8b008b",
+            "choose": "#e7a965",
+            "list": "#9fa021",
+            "dict": "#b18d75",
+            "Any": "#46d5bf"
+        }
+    },
+    "variables": {
+        "number": {
+            "type": "number"
+        },
+        "text": {
+            "type": "text"
+        },
+        "logic": {
+            "type": "logic"
+        },
+        "list": {
+            "type": "list"
+        },
+        "dict": {
+            "type": "dict"
+        },
+        "Any": {
+            "type": "Any"
+        }
+    },
+    "standardVariablesTypes": {
+        "number": 0,
+        "text": "",
+        "logic": false,
+        "list": [],
+        "dict": {},
+        "Any": ""
+    },
+    "variablesTypes": [
+        "number",
+        "text",
+        "logic",
+        "list",
+        "dict",
+        "Any"
+    ],
+    "infelicity": {
+        "path": [],
+        "number": [
+            "text",
+            "choose",
+            "Any"
+        ],
+        "text": [
+            "Any"
+        ],
+        "logic": [
+            "number",
+            "text",
+            "Any"
+        ],
+        "iterator": [
+            "path"
+        ],
+        "list": [
+            "text",
+            "Any"
+        ],
+        "dict": [
+            "text",
+            "Any"
+        ],
+        "Any": [
+            "number",
+            "choose",
+            "text",
+            "logic",
+            "list",
+            "dict"
+        ]
+    },
+    "sorting": [
+        "path",
+        "number",
+        "text",
+        "logic",
+        "choose",
+        "list",
+        "dict",
+        "Any"
+    ],
+    "nodes": {
+        "jump": {
+            "type": "objects",
+            "name": "jump",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Jump",
+                "discription": "jump",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__name__": "name",
+                    "__id__": "ID",
+                    "__angle__": "angle",
+                    "__power__": "power"
+                }
+            }
+        },
+
+        "keyboardClick": {
+            "type": "event",
+            "name": "keyboardClick",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": "",
+                    "visible": false
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Keyboard click",
+                "discription": "starts on key click",
+                "text": {
+                    "__none__": "",
+                    "__key__": "key",
+                    "__path__": "path"
+                }
+            }
+        },
+
+        "keyboardPress": {
+            "type": "event",
+            "name": "keyboardPress",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": "",
+                    "visible": false
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Keyboard press",
+                "discription": "starts while key pressed",
+                "text": {
+                    "__none__": "",
+                    "__key__": "key",
+                    "__path__": "path"
+                }
+            }
+        },
+
+        "mouseLeftClick": {
+            "type": "event",
+            "name": "mouseLeftClick",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {},
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Mouse left click",
+                "discription": "starts on left click",
+                "text": {
+                    "__none__": "",
+                    "__key__": "key",
+                    "__path__": "path"
+                }
+            }
+        },
+
+        "mouseRightClick": {
+            "type": "event",
+            "name": "mouseRightClick",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {},
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Mouse right click",
+                "discription": "starts on right click",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            }
+        },
+
+        "decodeHolder": {
+            "type": "another",
+            "name": "decodeHolder",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "Decode holder",
+                "discription": "Decode holder",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__answer__": "answer"
+                }
+            }
+        },
+
+        "setVar": {
+            "type": "another",
+            "name": "setVar",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "type": "logic",
+                    "value": null,
+                    "standard": false
+                },
+
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Set var",
+                "discription": "Set var by name",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value",
+                    "__name__": "name",
+                    "__global__": "global"
+                }
+            }
+        },
+        "createObject": {
+            "type": "objects",
+            "name": "createObject",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "x",
+                    "y"
+                ],
+                "outputs": [
+                    "path",
+                    "id"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+
+            "display": {
+                "name": "Create object",
+                "discription": "Create object",
+                "text": {
+                    "__none__": "",
+                    "__name__": "name",
+                    "__path__": "path",
+                    "__id__": "ID",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            }
+        },
+
+        "getVar": {
+            "type": "another",
+            "name": "getVar",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "type": "logic",
+                    "value": null,
+                    "standard": false
+                },
+
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "Get var",
+                "discription": "Get var by name",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__answer__": "answer",
+                    "__name__": "name",
+                    "__global__": "global"
+                }
+            }
+        },
+        "if_": {
+            "type": "logic",
+            "name": "if_",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "a",
+                    "operation",
+                    "b"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": null
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": null
+                },
+                "operation": {
+                    "code": "operation",
+                    "name": "__operation__",
+                    "type": "choose",
+                    "value": null,
+                    "standard": 0,
+                    "choose": {
+                        "options": [
+                            "0. ==",
+                            "1. !=",
+                            "2. <=",
+                            "3. >=",
+                            "4. <",
+                            "5. >"
+                        ]
+                    }
+                }
+            },
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "If",
+                "discription": "If",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__a__": "A",
+                    "__b__": "B",
+                    "__operation__": "operation",
+                    "__path_true__": "path if true",
+                    "__path_false__": "path if false"
+                }
+            }
+        },
+        "ifCollision": {
+            "type": "logic",
+            "name": "ifCollision",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "group",
+                    "append"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false",
+                    "id_in_group"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+                "group": {
+                    "code": "group",
+                    "name": "__group__",
+                    "type": "text",
+                    "value": null,
+                    "standard": "object"
+                },
+                "append": {
+                    "code": "append",
+                    "name": "__append__",
+                    "type": "logic",
+                    "value": null,
+                    "standard": false
+                }
+            },
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                },
+                "id_in_group": {
+                    "code": "id_in_group",
+                    "name": "__id_in_group__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "If collision",
+                "discription": "If collision",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__id__": "ID",
+                    "__group__": "group name",
+                    "__append__": "use contact",
+                    "__path_true__": "path if true",
+                    "__path_false__": "path if false",
+                    "__id_in_group__": "ID object of group"
+                }
+            }
+        },
+        "exit_": {
+            "type": "another",
+            "name": "exit_",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Exit",
+                "discription": "Exit",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            }
+        },
+        "for_": {
+            "type": "loop",
+            "name": "for_",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "n",
+                    "x"
+                ],
+                "outputs": [
+                    "iterator",
+                    "index",
+                    "after"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "n": {
+                    "code": "n",
+                    "name": "__n__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "iterator": {
+                    "code": "iterator",
+                    "name": "__iterator__",
+                    "type": "iterator"
+                },
+
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "type": "number"
+                },
+
+                "after": {
+                    "code": "after",
+                    "name": "__after__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "For N times",
+                "discription": "For N times every x frames",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__iterator__": "iterator",
+                    "__after__": "after iterators",
+                    "__name__": "name",
+                    "__n__": "N",
+                    "__x__": "X",
+                    "__index__": "index"
+                }
+            }
+        },
+        "forListElements": {
+            "type": "loop",
+            "name": "forListElements",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list"
+                ],
+                "outputs": [
+                    "iterator",
+                    "index",
+                    "element",
+                    "after"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list",
+                    "value": null,
+                    "standard": []
+                }
+            },
+            "outputs": {
+                "iterator": {
+                    "code": "iterator",
+                    "name": "__iterator__",
+                    "type": "iterator"
+                },
+
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "type": "number"
+                },
+
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any"
+                },
+
+                "after": {
+                    "code": "after",
+                    "name": "__after__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "For list elements",
+                "discription": "For list elements",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__iterator__": "iterator",
+                    "__after__": "after iterators",
+                    "__name__": "name",
+                    "__element__": "element",
+                    "__list__": "list",
+                    "__index__": "index"
+                }
+            }
+        },
+        "forDictElements": {
+            "type": "loop",
+            "name": "forDictElements",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "dict"
+                ],
+                "outputs": [
+                    "iterator",
+                    "key",
+                    "element",
+                    "after"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict",
+                    "value": null,
+                    "standard": {}
+                }
+            },
+            "outputs": {
+                "iterator": {
+                    "code": "iterator",
+                    "name": "__iterator__",
+                    "type": "iterator"
+                },
+
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text"
+                },
+
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any"
+                },
+
+                "after": {
+                    "code": "after",
+                    "name": "__after__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "For dict elements",
+                "discription": "For dict elements",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__iterator__": "iterator",
+                    "__after__": "after iterators",
+                    "__name__": "name",
+                    "__element__": "element",
+                    "__dict__": "dict",
+                    "__key__": "key"
+                }
+            }
+        },
+        "random_": {
+            "type": "another",
+            "name": "random_",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "a",
+                    "b"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                },
+
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 2
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "Random",
+                "discription": "Return random number in [A, B]",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__answer__": "answer",
+                    "__a__": "A",
+                    "__b__": "B"
+                }
+            }
+        },
+        "getObjectVar": {
+            "type": "objects",
+            "name": "getObjectVar",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "name"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "Get object var",
+                "discription": "Get object var by name",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__answer__": "answer",
+                    "__name__": "name",
+                    "__id__": "ID"
+                }
+            }
+        },
+        "setObjectVar": {
+            "type": "objects",
+            "name": "setObjectVar",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "name",
+                    "value"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Set object var",
+                "discription": "Set object var by name",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__name__": "name",
+                    "__id__": "ID",
+                    "__value__": "value"
+                }
+            }
+        },
+        "moveObject": {
+            "type": "objects",
+            "name": "moveObject",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "angle",
+                    "power"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+                "angle": {
+                    "code": "angle",
+                    "name": "__angle__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "power": {
+                    "code": "power",
+                    "name": "__power__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Move object",
+                "discription": "move object",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__name__": "name",
+                    "__id__": "ID",
+                    "__angle__": "angle",
+                    "__power__": "power"
+                }
+            }
+        },
+        "setObjectPos": {
+            "type": "objects",
+            "name": "setObjectPos",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Set object pos",
+                "discription": "set object pos",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__name__": "name",
+                    "__id__": "ID",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            }
+        },
+        "getObjectPos": {
+            "type": "objects",
+            "name": "getObjectPos",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number"
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "Get object pos",
+                "discription": "get object pos",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__name__": "name",
+                    "__id__": "ID",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            }
+        },
+        "getObjectIDByName": {
+            "type": "objects",
+            "name": "getObjectIDByName",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "Get object ID by name",
+                "discription": "get object ID by name, return -1 if object name is not found",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__name__": "name",
+                    "__id__": "ID"
+                }
+            }
+        },
+        "onStartGame": {
+            "type": "event",
+            "name": "onStartGame",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {},
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "On start game",
+                "discription": "starts at the start of the game",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            }
+        },
+        "everyTick": {
+            "type": "event",
+            "name": "everyTick",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "N": {
+                    "code": "N",
+                    "name": "__n__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1,
+                    "visible": false
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Every N ticks",
+                "discription": "start every N ticks",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__n__": "N"
+                }
+            }
+        },
+        "everyFrame": {
+            "type": "event",
+            "name": "everyFrame",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "N": {
+                    "code": "N",
+                    "name": "__n__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1,
+                    "visible": false
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Every N frame",
+                "discription": "start every N frames",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__n__": "N"
+                }
+            }
+        },
+        "displayText": {
+            "type": "text",
+            "name": "displayText",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Display text",
+                "discription": "...",
+                "text": {
+                    "__none__": "",
+                    "__text__": "text",
+                    "__path__": "path",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            }
+        },
+        "writeText": {
+            "type": "text",
+            "name": "writeText",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Write text",
+                "discription": "...",
+                "text": {
+                    "__none__": "",
+                    "__text__": "text",
+                    "__path__": "path"
+                }
+            }
+        },
+        "plus": {
+            "type": "number",
+            "name": "plus",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "A + B",
+                "discription": "...",
+                "text": {
+                    "__none__": "",
+                    "__text__": "text",
+                    "__path__": "path",
+                    "__a__": "a",
+                    "__b__": "b",
+                    "__answer__": "answer"
+                }
+            }
+        },
+        "minus": {
+            "type": "number",
+            "name": "minus",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "A - B",
+                "discription": "...",
+                "text": {
+                    "__none__": "",
+                    "__text__": "text",
+                    "__path__": "path",
+                    "__a__": "a",
+                    "__b__": "b",
+                    "__answer__": "answer"
+                }
+            }
+        },
+        "multiply": {
+            "type": "number",
+            "name": "multiply",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "A * B",
+                "discription": "...",
+                "text": {
+                    "__none__": "",
+                    "__text__": "text",
+                    "__path__": "path",
+                    "__a__": "a",
+                    "__b__": "b",
+                    "__answer__": "answer"
+                }
+            }
+        },
+        "divide": {
+            "type": "number",
+            "name": "divide",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "A / B",
+                "discription": "...",
+                "text": {
+                    "__none__": "",
+                    "__text__": "text",
+                    "__path__": "path",
+                    "__a__": "a",
+                    "__b__": "b",
+                    "__answer__": "answer"
+                }
+            }
+        },
+        "removeObject": {
+            "type": "objects",
+            "name": "removeObject",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Remove object",
+                "discription": "Remove object by ID",
+                "text": {
+                    "__none__": "",
+                    "__id__": "ID",
+                    "__path__": "path"
+                }
+            }
+        },
+        "forObjectsGroup": {
+            "type": "loop",
+            "name": "forObjectsGroup",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "group"
+                ],
+                "outputs": [
+                    "iterator",
+                    "id",
+                    "after"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "group": {
+                    "code": "group",
+                    "name": "__group__",
+                    "type": "text",
+                    "value": null,
+                    "standard": "object"
+                }
+            },
+            "outputs": {
+                "iterator": {
+                    "code": "iterator",
+                    "name": "__iterator__",
+                    "type": "iterator"
+                },
+
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                },
+
+                "after": {
+                    "code": "after",
+                    "name": "__after__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "For objects group",
+                "discription": "For object in group",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__iterator__": "iterator",
+                    "__after__": "after iterators",
+                    "__name__": "name",
+                    "__group__": "group",
+                    "__id__": "ID"
+                }
+            }
+        },
+        "connectText": {
+            "type": "text",
+            "name": "connectText",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text1",
+                    "text2"
+                ],
+                "outputs": [
+                    "path",
+                    "text"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "text1": {
+                    "code": "text1",
+                    "name": "__text1__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+                "text2": {
+                    "code": "text2",
+                    "name": "__text2__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text"
+                }
+            },
+            "display": {
+                "name": "Connect text",
+                "discription": "Connect text",
+                "text": {
+                    "__none__": "",
+                    "__id__": "ID",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__text1__": "first text",
+                    "__text2__": "second text"
+                }
+            }
+        },
+
+        "sliceText": {
+            "type": "text",
+            "name": "sliceText",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text",
+                    "start",
+                    "end"
+                ],
+                "outputs": [
+                    "path",
+                    "text"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+                "start": {
+                    "code": "start",
+                    "name": "__start__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "end": {
+                    "code": "end",
+                    "name": "__end__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text"
+                }
+            },
+            "display": {
+                "name": "Slice text",
+                "discription": "Slice text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__start__": "start",
+                    "__end__": "end"
+                }
+            }
+        },
+        "getByIndex": {
+            "type": "set",
+            "name": "getByIndex",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "index"
+                ],
+                "outputs": [
+                    "path",
+                    "element"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list",
+                    "value": null,
+                    "standard": []
+                },
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "Get by index",
+                "discription": "Get by index",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__list__": "list",
+                    "__index__": "index",
+                    "__element__": "element"
+                }
+            }
+        },
+        "deleteByIndex": {
+            "type": "set",
+            "name": "deleteByIndex",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "index"
+                ],
+                "outputs": [
+                    "path",
+                    "list"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list",
+                    "value": null,
+                    "standard": []
+                },
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list"
+                }
+            },
+            "display": {
+                "name": "Delete by index",
+                "discription": "Delete by index",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__list__": "list",
+                    "__index__": "index"
+                }
+            }
+        },
+        "getIndexOfElement": {
+            "type": "set",
+            "name": "getIndexOfElement",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "element"
+                ],
+                "outputs": [
+                    "path",
+                    "index"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list",
+                    "value": null,
+                    "standard": []
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "Get index of element",
+                "discription": "Get index of element",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__list__": "list",
+                    "__index__": "index",
+                    "__element__": "element"
+                }
+            }
+        },
+        "sliceList": {
+            "type": "set",
+            "name": "sliceList",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "start",
+                    "end"
+                ],
+                "outputs": [
+                    "path",
+                    "list"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list",
+                    "value": null,
+                    "standard": []
+                },
+                "start": {
+                    "code": "start",
+                    "name": "__start__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "end": {
+                    "code": "end",
+                    "name": "__end__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list"
+                }
+            },
+            "display": {
+                "name": "Slice list",
+                "discription": "Slice list",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__list__": "list",
+                    "__start__": "start",
+                    "__end__": "end"
+                }
+            }
+        },
+        "getByKey": {
+            "type": "set",
+            "name": "getByKey",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "dict",
+                    "key"
+                ],
+                "outputs": [
+                    "path",
+                    "element"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict",
+                    "value": null,
+                    "standard": {}
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "Get by key",
+                "discription": "Get by key",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__dict__": "dict",
+                    "__key__": "key",
+                    "__element__": "element"
+                }
+            }
+        },
+        "removeByKey": {
+            "type": "set",
+            "name": "removeByKey",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "dict",
+                    "key"
+                ],
+                "outputs": [
+                    "path",
+                    "dict"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict",
+                    "value": null,
+                    "standard": {}
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict"
+                }
+            },
+            "display": {
+                "name": "Remove by key",
+                "discription": "Remove by key",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__dict__": "dict",
+                    "__key__": "key",
+                    "__element__": "element"
+                }
+            }
+        },
+        "getKeyOfElement": {
+            "type": "set",
+            "name": "getKeyOfElement",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "dict",
+                    "element"
+                ],
+                "outputs": [
+                    "path",
+                    "key"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict",
+                    "value": null,
+                    "standard": {}
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text"
+                }
+            },
+            "display": {
+                "name": "Get key of element",
+                "discription": "Get key of element",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__dict__": "dict",
+                    "__key__": "key",
+                    "__element__": "element"
+                }
+            }
+        }
+    }
+}
