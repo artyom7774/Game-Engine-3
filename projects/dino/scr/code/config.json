@@ -73,10 +73,12 @@
         "set": {
             "name": "Set",
             "nodes": [
+                "addListElement",
                 "getByIndex",
                 "deleteByIndex",
                 "getIndexOfElement",
                 "sliceList",
+                "addDictElement",
                 "getByKey",
                 "removeByKey",
                 "getKeyOfElement"
@@ -2748,6 +2750,146 @@
             "display": {
                 "name": "Get key of element",
                 "discription": "Get key of element",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__dict__": "dict",
+                    "__key__": "key",
+                    "__element__": "element"
+                }
+            }
+        },
+        "addListElement": {
+            "type": "set",
+            "name": "addListElement",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "element"
+                ],
+                "outputs": [
+                    "path",
+                    "list"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list",
+                    "value": null,
+                    "standard": []
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list"
+                }
+            },
+            "display": {
+                "name": "Add list element",
+                "discription": "Add list element",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__list__": "list",
+                    "__key__": "key",
+                    "__element__": "element"
+                }
+            }
+        },
+        "addDictElement": {
+            "type": "set",
+            "name": "addDictElement",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "dict",
+                    "key",
+                    "element"
+                ],
+                "outputs": [
+                    "path",
+                    "dict"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict",
+                    "value": null,
+                    "standard": {}
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict"
+                }
+            },
+            "display": {
+                "name": "Add dict element",
+                "discription": "Add dict element",
                 "text": {
                     "__none__": "",
                     "__path__": "path",

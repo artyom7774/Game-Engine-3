@@ -4,6 +4,8 @@ from PyQt5.QtGui import QIcon
 
 from engine.vector.float import Vec2f
 
+from scr.modules.functions.project import getColor
+
 from scr.variables import *
 
 import random
@@ -86,21 +88,21 @@ class CreateNode(QDialog):
             config = json.load(file)
 
         self.objects["widgets"]["nodes"] = QTreeWidgetItem(self.objects["nodes"])
-        self.objects["widgets"]["nodes"].setIcon(0, QIcon("scr/files/sprites/dir.png"))
+        self.objects["widgets"]["nodes"].setIcon(0, QIcon(getColor("dir")))
         self.objects["widgets"]["nodes"].setText(0, translate("Nodes"))
         self.objects["widgets"]["nodes"].setData(0, 1000, {"level": 0, "path": "nodes"})
         self.objects["widgets"]["nodes"].setExpanded(True)
 
         for key, value in config["groups"].items():
             self.objects["widgets"][f"nodes/{key}"] = QTreeWidgetItem(self.objects["widgets"]["nodes"])
-            self.objects["widgets"][f"nodes/{key}"].setIcon(0, QIcon("scr/files/sprites/dir.png"))
+            self.objects["widgets"][f"nodes/{key}"].setIcon(0, QIcon(getColor("dir")))
             self.objects["widgets"][f"nodes/{key}"].setText(0, translate(value["name"]))
             self.objects["widgets"][f"nodes/{key}"].setData(0, 1000, {"level": 1, "path": f"nodes/{key}"})
             self.objects["widgets"][f"nodes/{key}"].setExpanded(True)
 
             for node in value["nodes"]:
                 self.objects["widgets"][f"nodes/{key}/{element}"] = QTreeWidgetItem(self.objects["widgets"][f"nodes/{key}"])
-                self.objects["widgets"][f"nodes/{key}/{element}"].setIcon(0, QIcon("scr/files/sprites/func.png"))
+                self.objects["widgets"][f"nodes/{key}/{element}"].setIcon(0, QIcon(getColor("func")))
                 self.objects["widgets"][f"nodes/{key}/{element}"].setText(0, translate(config["nodes"][node]["display"]["name"]))
                 self.objects["widgets"][f"nodes/{key}/{element}"].setData(0, 1000, {"level": 2, "path": f"nodes/{key}/{element}", "name": node, "node": config["nodes"][node]})
 

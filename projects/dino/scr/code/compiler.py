@@ -112,6 +112,11 @@ class Compiler:
         while len(queue) > 0:
             id = queue[0]
 
+            if str(id) not in self.nodes["objects"]:
+                queue.pop(0)
+
+                continue
+
             var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
 
             if type(var) == list:

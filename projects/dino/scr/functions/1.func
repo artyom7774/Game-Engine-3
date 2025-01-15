@@ -1133,7 +1133,7 @@
             "type": "number",
             "width": 8,
             "x": 69,
-            "y": 18
+            "y": 14
         },
         "716477946": {
             "display": {
@@ -2886,7 +2886,7 @@
             },
             "type": "logic",
             "width": 10,
-            "x": 80,
+            "x": 79,
             "y": 13
         },
         "779036943": {
@@ -3073,10 +3073,7 @@
                     "name": "__path__",
                     "standard": null,
                     "type": "path",
-                    "value": {
-                        "id": 108084516,
-                        "name": "path"
-                    }
+                    "value": null
                 },
                 "text": {
                     "code": "text",
@@ -3192,10 +3189,7 @@
                     "name": "__path__",
                     "standard": null,
                     "type": "path",
-                    "value": {
-                        "id": 439438532,
-                        "name": "path"
-                    }
+                    "value": null
                 },
                 "text": {
                     "code": "text",
@@ -3311,10 +3305,7 @@
                     "name": "__path__",
                     "standard": null,
                     "type": "path",
-                    "value": {
-                        "id": 949482682,
-                        "name": "path"
-                    }
+                    "value": null
                 },
                 "text": {
                     "code": "text",
@@ -3407,7 +3398,7 @@
             "type": "another",
             "width": 8,
             "x": -1,
-            "y": 60
+            "y": 73
         },
         "458443677": {
             "display": {
@@ -3503,10 +3494,7 @@
                     "name": "__path__",
                     "standard": null,
                     "type": "path",
-                    "value": {
-                        "id": 458443677,
-                        "name": "path"
-                    }
+                    "value": null
                 },
                 "text": {
                     "code": "text",
@@ -3610,6 +3598,252 @@
             "width": 10,
             "x": 9,
             "y": 73
+        },
+        "936849571": {
+            "display": {
+                "discription": "Add list element",
+                "name": "Add list element",
+                "text": {
+                    "__element__": "element",
+                    "__key__": "key",
+                    "__list__": "list",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 936849571,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 867322075,
+                        "name": "path"
+                    }
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "standard": [],
+                    "type": "list",
+                    "value": {
+                        "id": 867322075,
+                        "name": "answer"
+                    }
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "standard": "False",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "addListElement",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "element"
+                ],
+                "outputs": [
+                    "path",
+                    "list"
+                ]
+            },
+            "type": "set",
+            "width": 8,
+            "x": 9,
+            "y": 80
+        },
+        "287008743": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 287008743,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 936849571,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 936849571,
+                        "name": "list"
+                    }
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 19,
+            "y": 80
+        },
+        "821387728": {
+            "display": {
+                "discription": "Add dict element",
+                "name": "Add dict element",
+                "text": {
+                    "__dict__": "dict",
+                    "__element__": "element",
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 5,
+            "id": 821387728,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 649136201,
+                        "name": "path"
+                    }
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "standard": {},
+                    "type": "dict",
+                    "value": {
+                        "id": 649136201,
+                        "name": "answer"
+                    }
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "asgerh",
+                    "type": "text",
+                    "value": null
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "standard": "'abc'",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "addDictElement",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "dict",
+                    "key",
+                    "element"
+                ],
+                "outputs": [
+                    "path",
+                    "dict"
+                ]
+            },
+            "type": "set",
+            "width": 10,
+            "x": 9,
+            "y": 49
+        },
+        "920795461": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 920795461,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 821387728,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 821387728,
+                        "name": "dict"
+                    }
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 21,
+            "y": 49
         }
     }
 }

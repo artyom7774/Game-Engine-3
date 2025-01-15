@@ -422,6 +422,9 @@ class Compile:
         allObjects = {}
 
         for obj in functions.project.getAllProjectObjects(project, False):
+            if obj.endswith(".txt"):
+                continue
+                
             type, variables = functions.main.files.Scene.loadObjectFile(project, -1, json.load(open(obj)))
 
             variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")

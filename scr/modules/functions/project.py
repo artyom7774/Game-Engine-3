@@ -40,6 +40,11 @@ def getAllProjectScenes(project, onlyFileName: bool = False) -> typing.List[str]
     while len(queue) > 0:
         path = f"projects/{project.selectProject}/project/scenes/{queue[0]}"
 
+        if queue[0].endswith("EMPTY.txt"):
+            queue.pop(0)
+
+            continue
+
         if path[path.rfind("/"):].find("%scene%") != -1:
             answer.append(path)
 
