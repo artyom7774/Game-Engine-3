@@ -5,51 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4aabb1d5-bc1e-45a8-b587-1369a102e97a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/scr/modules/dialogs/file/create_from_template_project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/project/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/project/collision.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/project/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/project/functions/1.func" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/project/objects/block.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/project/objects/block.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/GE3 project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/compiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/program/set/deleteByIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/program/set/deleteByIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/program/set/getByIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/program/set/getByIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/program/set/getByKey.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/program/set/getByKey.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/program/set/getIndexOfElement.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/program/set/getIndexOfElement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/program/set/getKeyOfElement.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/program/set/getKeyOfElement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/program/set/removeByKey.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/program/set/removeByKey.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/program/set/sliceList.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/program/set/sliceList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/program/text/sliceText.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/program/text/sliceText.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/collision.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/compiling.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/compiling.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/functions/1.func" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/dino/scr/functions/2.func" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/project/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/project/functions/1.func" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/code/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/scr/code/program/set/deleteByIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/code/program/set/deleteByIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/scr/code/program/set/getByIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/code/program/set/getByIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/scr/code/program/set/getByKey.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/code/program/set/getByKey.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/scr/code/program/set/getIndexOfElement.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/code/program/set/getIndexOfElement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/scr/code/program/set/getKeyOfElement.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/code/program/set/getKeyOfElement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/scr/code/program/set/removeByKey.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/code/program/set/removeByKey.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/scr/code/program/set/sliceList.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/code/program/set/sliceList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/scr/code/program/text/sliceText.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/code/program/text/sliceText.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/test/scr/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/functions/1.func" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/program/set/deleteByIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/set/deleteByIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/program/set/getByIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/set/getByIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/program/set/getByKey.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/set/getByKey.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/program/set/getIndexOfElement.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/set/getIndexOfElement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/program/set/getKeyOfElement.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/set/getKeyOfElement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/program/set/removeByKey.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/set/removeByKey.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/program/set/sliceList.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/set/sliceList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/program/text/sliceText.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/text/sliceText.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/settings/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/settings/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/code/create_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/code/create_node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/help/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/help/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/help/about.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/help/about.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/modules/functions/menu/compile.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/menu/compile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/bundles/json/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/bundles/json/ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/cash/image.png" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/cash/image.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/file/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/file/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/menu/file.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/menu/file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/modules/functions/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/project.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,6 +79,7 @@
       <recent name="C:\Users\k123\Desktop\ge3\projects\abc\project\files" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\scr\files\templates" />
       <recent name="C:\Users\k123\Desktop\ge3\scr\code\sprites\types" />
     </key>
   </component>

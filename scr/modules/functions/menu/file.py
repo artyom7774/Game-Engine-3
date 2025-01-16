@@ -1,10 +1,15 @@
-from scr.modules.dialogs import CreateProject, OpenProject, Settings
+from scr.modules.dialogs import CreateProject, CreateFromTemplateProject, OpenProject, Settings
 
 from scr.modules import functions
 
 
 def create(project) -> None:
     project.dialog = CreateProject(project, parent=project)
+    project.dialog.exec_()
+
+
+def createFromTemplate(project) -> None:
+    project.dialog = CreateFromTemplateProject(project, parent=project)
     project.dialog.exec_()
 
 
