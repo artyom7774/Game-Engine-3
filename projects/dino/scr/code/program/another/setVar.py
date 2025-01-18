@@ -16,11 +16,19 @@ def setVar(program, compiler, path: str, nodes: dict, id: int, variables: dict) 
     else:
         gl = nodes["objects"][str(id)]["inputs"]["global"]["standard"]
 
-    if nodes["objects"][str(id)]["inputs"]["value"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"] is not None:
-        value = nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"]
+    try:
+        if nodes["objects"][str(id)]["inputs"]["value"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"] is not None:
+            value = eval(nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"])
 
-    else:
-        value = nodes["objects"][str(id)]["inputs"]["value"]["standard"]
+        else:
+            value = eval(nodes["objects"][str(id)]["inputs"]["value"]["standard"])
+
+    except BaseException:
+        if nodes["objects"][str(id)]["inputs"]["value"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"] is not None:
+            value = nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"]
+
+        else:
+            value = nodes["objects"][str(id)]["inputs"]["value"]["standard"]
 
     if gl:
         type = variables["globals"][name]["type"]

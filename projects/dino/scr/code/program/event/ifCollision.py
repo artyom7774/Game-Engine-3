@@ -14,10 +14,10 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
         group = nodes["objects"][str(id)]["inputs"]["group"]["standard"]
 
     if nodes["objects"][str(id)]["inputs"]["append"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] is not None:
-        append = (nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] == True)
+        append = (nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] == "True")
 
     else:
-        append = (nodes["objects"][str(id)]["inputs"]["append"]["standard"] == True)
+        append = (nodes["objects"][str(id)]["inputs"]["append"]["standard"] == "True")
 
     answer = program.objects.getById(ids).collisionGetID(0, 0, append, group)
 
@@ -31,5 +31,8 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
     else:
         for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
             queue.append(name["id"])
+
+        for ids, connector in nodes["objects"][str(id)]["outputs"]["id_in_group"]["value"].items():
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = -1
 
     return queue

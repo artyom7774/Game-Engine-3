@@ -18,4 +18,7 @@ def forDictElements(program, compiler, path: str, nodes: dict, id: int, variable
         for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
             compiler.queue(name["id"])
 
+    for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+        queue.append(name["id"])
+
     return {"queue": queue, "timer": timer}

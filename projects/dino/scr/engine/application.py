@@ -181,7 +181,7 @@ class Application:
         self.objects.draw()
 
     def update(self) -> None:
-        self.doCollisionsUpdate = False
+        self.doCollisionsUpdate = True
 
         self.mouse = pygame.mouse.get_pos()
 

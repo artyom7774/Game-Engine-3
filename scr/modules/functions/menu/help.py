@@ -1,10 +1,26 @@
+from PyQt5.QtWidgets import QMessageBox
+
 from scr.modules.dialogs import About
-from scr.modules.dialogs import Help
+
+from scr.variables import *
+
+import webbrowser
+import threading
 
 
 def help_(project) -> None:
-    project.dialog = Help(project, parent=project)
-    project.dialog.exec_()
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Information)
+    msg.setText(translate("Go to the project website?"))
+    msg.setWindowTitle(translate("Go to the site"))
+    msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+
+    result = msg.exec_()
+
+    if result == QMessageBox.Yes:
+        thr = threading.Thread(target=lambda: webbrowser.open("https://artyom7774.github.io"))
+        thr.daemon = True
+        thr.start()
 
 
 def about(project) -> None:

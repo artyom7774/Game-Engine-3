@@ -5,7 +5,7 @@ import socket
 import sys
 import os
 
-SOCKET_ID = 18943
+SOCKET_ID = 53094
 
 VARIABLES = {
     "globals": {'speed': {'name': 'speed', 'type': 'number', 'value': 3.5}, 'start': {'name': 'start', 'type': 'number', 'value': 864}, 'last': {'name': 'last', 'type': 'number', 'value': 0}, 'new': {'name': 'new', 'type': 'number', 'value': 1}, 'score': {'name': 'score', 'type': 'number', 'value': 0}, 'gameover': {'name': 'gameover', 'type': 'number', 'value': 0}, 'var': {'name': 'var', 'type': 'list', 'value': [1, '2', True]}, 'dc': {'name': 'dc', 'type': 'dict', 'value': {'var': 1, 'a': 1}}},

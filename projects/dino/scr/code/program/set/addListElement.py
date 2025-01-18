@@ -11,10 +11,18 @@ def addListElement(program, compiler, path: str, nodes: dict, id: int, variables
         list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["standard"])
 
     if nodes["objects"][str(id)]["inputs"]["element"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"] is not None:
-        element = eval(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+            element = eval(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+
+        else:
+            element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]))
 
     else:
-        element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+            element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+
+        else:
+            element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["standard"]))
 
     list_.append(element)
 

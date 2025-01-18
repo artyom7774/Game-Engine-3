@@ -217,13 +217,17 @@ class CodeNodeConnectorComboBox(QComboBox):
 
         self.currentIndexChanged.connect(self.indexChange)
 
-    def save(self) -> None:
+    def save(self, full: bool = False) -> None:
         self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = self.index
+
+        if full:
+            with open(self.project.selectFile, "w", encoding="utf-8") as file:
+                json.dump(self.project.objects["main"]["function"], file, indent=4)
 
     def indexChange(self, index) -> None:
         self.index = index
 
-        self.save()
+        self.save(True)
 
 
 class CodeNodeConnector(QLabel):

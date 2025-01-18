@@ -178,6 +178,33 @@ def getVar(program, compiler, path: str, nodes: dict, id: int, variables: dict) 
 
     return queue
 
+def len_(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["element"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"] is not None:
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+            element = eval(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+
+        else:
+            element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]))
+
+    else:
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+            element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+
+        else:
+            element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["standard"]))
+
+    answer = len(element) if type(element) in (list, tuple, dict) else 1
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
 import random
 
 
@@ -224,11 +251,19 @@ def setVar(program, compiler, path: str, nodes: dict, id: int, variables: dict) 
     else:
         gl = nodes["objects"][str(id)]["inputs"]["global"]["standard"]
 
-    if nodes["objects"][str(id)]["inputs"]["value"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"] is not None:
-        value = nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"]
+    try:
+        if nodes["objects"][str(id)]["inputs"]["value"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"] is not None:
+            value = eval(nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"])
 
-    else:
-        value = nodes["objects"][str(id)]["inputs"]["value"]["standard"]
+        else:
+            value = eval(nodes["objects"][str(id)]["inputs"]["value"]["standard"])
+
+    except BaseException:
+        if nodes["objects"][str(id)]["inputs"]["value"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"] is not None:
+            value = nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"]
+
+        else:
+            value = nodes["objects"][str(id)]["inputs"]["value"]["standard"]
 
     if gl:
         type = variables["globals"][name]["type"]
@@ -283,6 +318,9 @@ def forDictElements(program, compiler, path: str, nodes: dict, id: int, variable
         for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
             compiler.queue(name["id"])
 
+    for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+        queue.append(name["id"])
+
     return {"queue": queue, "timer": timer}
 
 def forListElements(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
@@ -304,6 +342,9 @@ def forListElements(program, compiler, path: str, nodes: dict, id: int, variable
 
         for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
             compiler.queue(name["id"])
+
+    for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+        queue.append(name["id"])
 
     return {"queue": queue, "timer": timer}
 
@@ -330,6 +371,9 @@ def forObjectsGroup(program, compiler, path: str, nodes: dict, id: int, variable
 
         for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
             compiler.queue(name["id"])
+
+    for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+        queue.append(name["id"])
 
     return queue
 
@@ -392,10 +436,10 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
         group = nodes["objects"][str(id)]["inputs"]["group"]["standard"]
 
     if nodes["objects"][str(id)]["inputs"]["append"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] is not None:
-        append = (nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] == True)
+        append = (nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] == "True")
 
     else:
-        append = (nodes["objects"][str(id)]["inputs"]["append"]["standard"] == True)
+        append = (nodes["objects"][str(id)]["inputs"]["append"]["standard"] == "True")
 
     answer = program.objects.getById(ids).collisionGetID(0, 0, append, group)
 
@@ -409,6 +453,9 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
     else:
         for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
             queue.append(name["id"])
+
+        for ids, connector in nodes["objects"][str(id)]["outputs"]["id_in_group"]["value"].items():
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = -1
 
     return queue
 
@@ -881,10 +928,18 @@ def addListElement(program, compiler, path: str, nodes: dict, id: int, variables
         list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["standard"])
 
     if nodes["objects"][str(id)]["inputs"]["element"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"] is not None:
-        element = eval(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+            element = eval(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+
+        else:
+            element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]))
 
     else:
-        element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+            element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+
+        else:
+            element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["standard"]))
 
     list_.append(element)
 

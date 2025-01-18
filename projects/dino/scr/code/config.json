@@ -67,6 +67,7 @@
                 "getVar",
                 "random_",
                 "decodeHolder",
+                "len_",
                 "exit_"
             ]
         },
@@ -2895,6 +2896,63 @@
                     "__path__": "path",
                     "__dict__": "dict",
                     "__key__": "key",
+                    "__element__": "element"
+                }
+            }
+        },
+        "len_": {
+            "type": "another",
+            "name": "len_",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "element"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "Len",
+                "discription": "Return len of object",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__answer__": "answer",
                     "__element__": "element"
                 }
             }
