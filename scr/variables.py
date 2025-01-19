@@ -127,8 +127,7 @@ def loader(path):
 size = {}
 
 SYSTEM = platform.system()
-
-print(f"LOG: program runned on \"{SYSTEM} {platform.release()}\"")
+RELEASE = platform.release()
 
 IMAGE_FORMATES = "jpeg jpg jpe jfif png ico tiff tif eps svg".split()
 BLOCKED_FORMATES = "cfg obj objc func".split()

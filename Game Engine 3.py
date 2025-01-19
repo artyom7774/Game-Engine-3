@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import QApplication
 
 from scr.main import Main
 
+from scr.variables import *
+
 import traceback
 import hjson
 import json
@@ -11,8 +13,6 @@ import os
 # SETTINGS
 
 DEBUG = False
-
-print(f"LOG: debug mode = {DEBUG}")
 
 
 def bundlesSiteInit():
@@ -38,11 +38,14 @@ def application() -> None:
 def main() -> None:
     bundlesSiteInit()
 
-    with open("scr/files/logs/log.txt", "w+", encoding="utf-8") as file:
+    with open("scr/files/logs/log.txt", "w+", encoding="utf-8", buffering=1) as file:
         try:
             if not DEBUG:
                 sys.stdout = file
                 sys.stderr = file
+
+            print(f"LOG: debug mode = {DEBUG}")
+            print(f"LOG: program runned on \"{SYSTEM} {RELEASE}\"")
 
             application()
 
