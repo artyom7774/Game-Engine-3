@@ -81,7 +81,7 @@ class SettingsFunctions:
             }
             """
 
-        with open("scr/files/settings/settings.json", "w") as file:
+        with open("scr/files/settings/settings.json", "w", encoding="utf-8") as file:
             json.dump(SETTINGS, file, indent=4)
 
         project.init()

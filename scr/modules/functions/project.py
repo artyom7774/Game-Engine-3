@@ -69,7 +69,7 @@ def getAllProjectPrograms(project, onlyFileName: bool = False) -> typing.List[st
         if os.path.isfile(path):
             if not path.endswith("EMPTY.txt"):
                 try:
-                    json.load(open(path))
+                    json.load(open(path, "r", encoding="utf-8"))
 
                 except BaseException:
                     pass

@@ -121,7 +121,7 @@ class Main(QMainWindow):
 
             if response.status_code == 200:
                 lastVersion = json.loads(response.text)["version"]
-                nowVersion = json.load(open("scr/files/version.json", "r"))["version"]
+                nowVersion = json.load(open("scr/files/version.json", "r", encoding="utf-8"))["version"]
 
                 print(f"LOG: last version = {lastVersion}, now version = {nowVersion}")
 
@@ -266,7 +266,7 @@ class Main(QMainWindow):
 
         # VERSION LOG
 
-        self.objects["version_log"] = VersionLogScrollArea(self, json.load(open("scr/files/updates.json")))
+        self.objects["version_log"] = VersionLogScrollArea(self, json.load(open("scr/files/updates.json", "r", encoding="utf-8")))
 
         # PROJECT TREE
 
@@ -391,7 +391,7 @@ class Main(QMainWindow):
 
         self.objects["help_pages"] = {}
 
-        for name, value in json.load(open("scr/site/help.json")).items():
+        for name, value in json.load(open("scr/site/help.json", encoding="utf-8")).items():
             self.objects["help_pages"][value["name"]] = dict(value)
 
         help_program_action = QAction(translate("Program"), self)

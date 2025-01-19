@@ -389,7 +389,7 @@ class Compile:
             for element in os.listdir(scene):
                 objectPath = f"{scene}/{element}"
 
-                type, variables = functions.main.files.Scene.loadObjectFile(project, objectPath[:objectPath.rfind(".")][objectPath.rfind("-") + 1:], json.load(open(objectPath)))
+                type, variables = functions.main.files.Scene.loadObjectFile(project, objectPath[:objectPath.rfind(".")][objectPath.rfind("-") + 1:], json.load(open(objectPath, "r", encoding="utf-8")))
 
                 variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
 
@@ -398,10 +398,10 @@ class Compile:
                     "variables": variables
                 }
 
-                objects_variables[scene][element] = json.load(open(objectPath))["variables"]
+                objects_variables[scene][element] = json.load(open(objectPath, "r", encoding="utf-8"))["variables"]
 
             if os.path.exists(scenePath):
-                focus = json.load(open(scenePath))["Scene"]["focus"]["value"]
+                focus = json.load(open(scenePath, "r", encoding="utf-8"))["Scene"]["focus"]["value"]
 
             else:
                 focus = None
@@ -425,7 +425,7 @@ class Compile:
             if obj.endswith(".txt"):
                 continue
                 
-            type, variables = functions.main.files.Scene.loadObjectFile(project, -1, json.load(open(obj)))
+            type, variables = functions.main.files.Scene.loadObjectFile(project, -1, json.load(open(obj, "r", encoding="utf-8")))
 
             variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
 
@@ -474,7 +474,7 @@ class Compile:
 
         program = program.replace("%ENGINE_VERSION%", str(json.load(open("scr/files/version.json", encoding="utf-8"))["version"]))
 
-        program = program.replace("%COMPILER%", str(open("scr/code/compiler.py").read()))
+        program = program.replace("%COMPILER%", str(open("scr/code/compiler.py", "r", encoding="utf-8").read()))
 
         with open(output, "w", encoding="utf-8") as file:
             file.write(program)

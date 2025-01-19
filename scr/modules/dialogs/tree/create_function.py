@@ -26,7 +26,7 @@ class CreateFunctionFunctions:
             return 0
 
         try:
-            with open(f"scr/files/using/{name}", "w") as file:
+            with open(f"scr/files/using/{name}", "w", encoding="utf-8") as file:
                 pass
 
         except BaseException:
@@ -42,7 +42,7 @@ class CreateFunctionFunctions:
 
         # CREATE
 
-        with open(f"{path}/{name}.func", "w") as file:
+        with open(f"{path}/{name}.func", "w", encoding="utf-8") as file:
             file.write(CODE_BASE_FILE)
 
         project.init()

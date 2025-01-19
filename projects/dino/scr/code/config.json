@@ -1221,7 +1221,7 @@
                 "answer": {
                     "code": "answer",
                     "name": "__answer__",
-                    "type": "Any"
+                    "type": "number"
                 }
             },
             "display": {

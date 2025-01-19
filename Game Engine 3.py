@@ -10,7 +10,7 @@ import os
 
 # SETTINGS
 
-DEBUG = True
+DEBUG = False
 
 print(f"LOG: debug mode = {DEBUG}")
 

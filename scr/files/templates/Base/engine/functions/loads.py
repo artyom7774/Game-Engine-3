@@ -7,7 +7,7 @@ def loadAnimationFile(path: str) -> dict:
 
     using_focus = False
 
-    with open(path, "r") as file:
+    with open(path, "r", encoding="utf-8") as file:
         for line in file.read().split("\n"):
             if line == "@ focus = True":
                 using_focus = True
@@ -36,7 +36,7 @@ def loadSettingFile(game, path: str) -> None:
     if path == "":
         return 0
 
-    with open(path, "r") as file:
+    with open(path, "r", encoding="utf-8") as file:
         settings = file.read().split("\n")
 
     i = 0

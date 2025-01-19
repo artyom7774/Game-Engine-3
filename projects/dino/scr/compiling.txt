@@ -441,7 +441,9 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
     else:
         append = (nodes["objects"][str(id)]["inputs"]["append"]["standard"] == "True")
 
-    answer = program.objects.getById(ids).collisionGetID(0, 0, append, group)
+    obj = program.objects.getById(ids)
+
+    answer = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]
 
     if answer[0]:
         for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():

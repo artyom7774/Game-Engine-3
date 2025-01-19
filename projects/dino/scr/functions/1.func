@@ -2934,10 +2934,7 @@
                     "name": "__path__",
                     "standard": null,
                     "type": "path",
-                    "value": {
-                        "id": 779036943,
-                        "name": "path"
-                    }
+                    "value": null
                 },
                 "name": {
                     "code": "name",
@@ -3351,10 +3348,7 @@
                     "name": "__path__",
                     "standard": null,
                     "type": "path",
-                    "value": {
-                        "id": 779036943,
-                        "name": "path"
-                    }
+                    "value": null
                 },
                 "name": {
                     "code": "name",

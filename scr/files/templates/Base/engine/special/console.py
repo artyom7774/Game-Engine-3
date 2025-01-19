@@ -55,7 +55,7 @@ class Table:
 
     def load(self):
         if self.file is not None:
-            with open(self.file, "r", encoding="utf-8") as file:
+            with open(self.file, "r", encoding="utf-8", encoding="utf-8") as file:
                 reader = csv.reader(file)
                 for i, row in enumerate(reader):
 

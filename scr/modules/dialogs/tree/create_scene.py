@@ -24,7 +24,7 @@ class CreateSceneFunctions:
             return 0
 
         try:
-            with open(f"scr/files/using/{name}", "w") as file:
+            with open(f"scr/files/using/{name}", "w", encoding="utf-8") as file:
                 pass
 
         except BaseException:
