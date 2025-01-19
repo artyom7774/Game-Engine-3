@@ -12,7 +12,8 @@ import os
 
 # SETTINGS
 
-DEBUG = False
+FORCED = False
+DEBUG = True if (os.getenv("PYCHARM_HOSTED") == "1" or FORCED) else False
 
 
 def bundlesSiteInit():
