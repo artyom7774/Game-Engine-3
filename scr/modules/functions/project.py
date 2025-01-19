@@ -21,7 +21,8 @@ def getAllProjectObjects(project, onlyFileName: bool = False) -> typing.List[str
         path = f"projects/{project.selectProject}/project/objects/{queue[0]}"
 
         if os.path.isfile(path):
-            answer.append(path)
+            if not path.endswith("EMPTY.txt"):
+                answer.append(path)
 
         else:
             for element in os.listdir(path):
@@ -66,14 +67,15 @@ def getAllProjectPrograms(project, onlyFileName: bool = False) -> typing.List[st
         path = f"projects/{project.selectProject}/project/functions/{queue[0]}"
 
         if os.path.isfile(path):
-            try:
-                json.load(open(path))
+            if not path.endswith("EMPTY.txt"):
+                try:
+                    json.load(open(path))
 
-            except BaseException:
-                pass
+                except BaseException:
+                    pass
 
-            else:
-                answer.append(path)
+                else:
+                    answer.append(path)
 
         else:
             for element in os.listdir(path):
@@ -98,7 +100,7 @@ def createProjectDirecroryByTemplate(project, name: str, template: str) -> None:
 
         if os.path.isfile(path):
             if path.endswith("EMPTY.txt"):
-                os.remove(path)
+                pass
 
         else:
             for element in os.listdir(path):
@@ -123,7 +125,7 @@ def createProjectDirectory(project, name: str) -> None:
 
         if os.path.isfile(path):
             if path.endswith("EMPTY.txt"):
-                os.remove(path)
+                pass
 
         else:
             for element in os.listdir(path):
