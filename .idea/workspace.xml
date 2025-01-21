@@ -4,8 +4,135 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aabb1d5-bc1e-45a8-b587-1369a102e97a" name="Changes" comment="">
+    <list default="true" id="63b9e141-b681-4943-9a61-afd675b9e146" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Game-Engine-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Game-Engine-3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game Engine 3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game Engine 3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/cash/scenes-%scene%1-setting.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/cash/scenes-%scene%1-setting.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/collision.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/functions/1.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/objects/apple.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/objects/apple.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/objects/body.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/objects/body.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/objects/brick.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/objects/brick.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/objects/camera.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/objects/camera.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/objects/head.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/objects/head.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/project.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/project.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-10.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-10.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-11.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-11.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-12.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-12.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-13.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-13.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-14.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-14.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-15.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-15.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-16.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-16.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-17.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-17.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-18.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-18.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-19.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-19.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-2.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-2.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-20.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-20.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-21.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-21.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-22.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-22.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-23.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-23.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-24.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-24.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-25.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-25.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-26.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-26.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-27.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-27.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-28.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-28.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-29.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-29.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-3.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-3.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-30.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-30.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-31.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-31.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-32.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-32.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-33.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-33.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-34.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-34.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-35.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-35.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-36.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-36.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-37.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-37.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-38.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-38.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-39.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-39.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-4.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-4.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-40.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-40.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-41.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-41.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-42.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-42.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-43.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-43.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-44.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-44.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-45.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-45.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-46.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-46.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-47.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-47.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-48.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-48.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-49.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-49.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-5.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-5.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-50.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-50.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-51.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-51.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-52.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-52.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-53.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-53.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-54.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-54.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-55.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-55.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-56.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-56.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-57.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-57.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-58.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-58.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-59.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-59.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-6.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-6.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-60.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-60.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-61.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-61.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-62.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-62.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-63.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-63.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-64.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-64.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-65.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-65.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-66.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-66.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-67.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-67.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-68.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-68.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-69.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-69.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-7.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-7.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-70.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-70.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-71.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-71.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-72.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-72.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-73.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-73.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-74.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-74.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-75.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-75.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-76.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-76.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-77.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-77.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-78.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-78.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-79.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-79.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-8.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-8.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-80.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-80.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-9.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/brick-9.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/camera-0.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/project/scenes/%scene%1/camera-0.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/GE3 project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/GE3 project.spec" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/GE3 project.spec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/Analysis-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/EXE-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/PKG-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/PYZ-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/PYZ-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/warn-GE3 project.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/warn-GE3 project.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/xref-GE3 project.html" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/build/GE3 project/xref-GE3 project.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/code/program/another/len.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/code/program/another/len.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/collision.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/compiling.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/compiling.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/Snake/scr/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/Snake/scr/functions/1.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/dino/project/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/project/functions/1.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/dino/project/project.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/project/project.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/dino/project/scenes/%scene%1/player-0.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/project/scenes/%scene%1/player-0.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/dino/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/GE3 project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/program/another/len.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/program/another/len.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/dino/scr/code/program/event/ifCollision.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/code/program/event/ifCollision.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/dino/scr/compiling.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/compiling.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/dino/scr/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/dino/scr/functions/1.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/project/project/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/project/project/collision.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/project/project/project.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/project/project/project.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/test/project/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/project/functions/1.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/test/scr/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/test/scr/functions/1.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/code/program/another/len.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/another/len.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/code/program/event/ifCollision.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/event/ifCollision.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/bundles/json/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/bundles/json/ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/settings/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/settings/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/cash/scenes-%scene%1-setting.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/templates/Base/project/cash/scenes-%scene%1-setting.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/objects/player.obj" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/templates/Base/project/objects/player.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/project.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/templates/Base/project/project.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/file/create_from_template_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/file/create_from_template_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/menu/compile.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/menu/compile.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,115 +148,27 @@
     &quot;assignee&quot;: &quot;artyom7774&quot;
   }
 }</component>
-  <component name="GitToolBoxStore">
-    <option name="projectConfigVersion" value="5" />
-  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/artyom7774/Game-Engine-3.git&quot;,
     &quot;accountId&quot;: &quot;ffe1f757-4373-4da8-8443-a7aa801162c8&quot;
   }
 }</component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
 }</component>
-  <component name="ProjectId" id="2lVtGI1HqWdGU7bs9eGN1YMaOJh" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2ruKFfZaUHlytcIbLDkUTSv5oOM" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Batch.setup.executor&quot;: &quot;Run&quot;,
-    &quot;Python.1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.GE3 project.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.Game Engine 3.executor&quot;: &quot;Run&quot;,
-    &quot;Python.compile.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.negative_color.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/37529/Desktop/github/Game-Engine-3/projects/project/project/scenes&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;
-    ]
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\projects\project\project\scenes" />
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\projects\project\project\objects" />
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\projects\project\project\functions" />
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\projects\project\project\files" />
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\projects\project\project\cash" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\scr\files\templates" />
-      <recent name="C:\Users\k123\Desktop\ge3\scr\code\sprites\types" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Python.Game Engine 3">
-    <configuration name="GE3 project" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="ge3" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (Game-Engine-3)" />
-      <option name="WORKING_DIRECTORY" value="C:\Users\k123\Desktop\ge3\projects\GE3\scr" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/projects/GE3/scr/GE3 project.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Game Engine 3" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="Game-Engine-3" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (Game-Engine-3)" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Game Engine 3.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Python.GE3 project" />
-      <item itemvalue="Python.Game Engine 3" />
-    </list>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -140,11 +179,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4aabb1d5-bc1e-45a8-b587-1369a102e97a" name="Changes" comment="" />
-      <created>1725276999110</created>
+      <changelist id="63b9e141-b681-4943-9a61-afd675b9e146" name="Changes" comment="" />
+      <created>1737403418938</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1725276999110</updated>
+      <updated>1737403418938</updated>
     </task>
     <servers />
   </component>

@@ -648,7 +648,7 @@ def compile(project) -> None:
 def compileAndRun(project) -> None:
     project.compiling = True
 
-    logger(project, "Compiling")
+    logger(project, "Compiling and run")
 
     thr = threading.Thread(target=lambda: Compile.compileAndRun(project))
     thr.start()

@@ -70,7 +70,7 @@
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": -84
+                    "value": -47
                 }
             },
             "type": "dict"

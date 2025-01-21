@@ -436,14 +436,16 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
         group = nodes["objects"][str(id)]["inputs"]["group"]["standard"]
 
     if nodes["objects"][str(id)]["inputs"]["append"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] is not None:
-        append = (nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] == "True")
+        append = (nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] == True)
 
     else:
-        append = (nodes["objects"][str(id)]["inputs"]["append"]["standard"] == "True")
+        append = (nodes["objects"][str(id)]["inputs"]["append"]["standard"] == True)
 
     obj = program.objects.getById(ids)
 
     answer = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]
+
+    print(answer)
 
     if answer[0]:
         for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():

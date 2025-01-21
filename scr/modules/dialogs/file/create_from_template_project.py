@@ -56,7 +56,7 @@ class CreateFromTemplateProject(QDialog):
         self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
 
         self.template = "scr/files/templates"
-        self.templates = list(sorted([translate(name) for name in os.listdir(self.template)], key=lambda x: 0 if x == translate("Base") else 1))
+        self.templates = list(sorted([name for name in os.listdir(self.template)], key=lambda x: 0 if x == translate("Base") else 1))
 
         self.objects = {}
 
@@ -87,7 +87,7 @@ class CreateFromTemplateProject(QDialog):
 
         self.objects["template_combobox"] = QComboBox(parent=self)
         self.objects["template_combobox"].setCurrentIndex(0)
-        self.objects["template_combobox"].addItems(self.templates)
+        self.objects["template_combobox"].addItems([translate(element) for element in self.templates])
         self.objects["template_combobox"].setGeometry(210, 45, 300, 25)
         self.objects["template_combobox"].setFont(FONT)
         self.objects["template_combobox"].show()

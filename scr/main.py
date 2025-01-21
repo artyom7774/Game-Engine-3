@@ -348,8 +348,8 @@ class Main(QMainWindow):
         self.menues["file_menu"] = self.menubar.addMenu(translate("File"))
 
         self.menues["file_menu"].addAction(file_create_action)
-        # self.menues["file_menu"].addAction(file_create_from_template)
-        # self.menues["file_menu"].addSeparator()
+        self.menues["file_menu"].addAction(file_create_from_template)
+        self.menues["file_menu"].addSeparator()
         self.menues["file_menu"].addAction(file_open_action)
         self.menues["file_menu"].addAction(file_close_action)
         self.menues["file_menu"].addSeparator()
