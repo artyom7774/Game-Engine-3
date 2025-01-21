@@ -6,6 +6,7 @@ from scr.modules import functions
 
 from scr.variables import *
 
+import subprocess
 import threading
 import socket
 import shutil
@@ -504,7 +505,12 @@ class Compile:
             pathPythonExecutable = f"{pathPython}/python/Scripts/python.exe"
             pathPyInstaller = f"{pathPython}/python/Scripts/pyinstaller.exe"
 
-            os.system(f"cd \"{pathProject}\" && {pathPythonExecutable} {pathPyInstaller} -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\"")
+            # os.system(f"cd \"{pathProject}\" && {pathPythonExecutable} {pathPyInstaller} -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\"")
+
+            command = f"cd \"{pathProject}\" && {pathPythonExecutable} {pathPyInstaller} -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\""
+            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+            stdout, stderr = process.communicate()
 
             if os.path.exists(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe"):
                 os.remove(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")
@@ -648,7 +654,7 @@ def compile(project) -> None:
 def compileAndRun(project) -> None:
     project.compiling = True
 
-    logger(project, "Compiling and run")
+    logger(project, "Compiling")
 
     thr = threading.Thread(target=lambda: Compile.compileAndRun(project))
     thr.start()

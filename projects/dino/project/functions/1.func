@@ -170,7 +170,7 @@
             },
             "type": "objects",
             "width": 6,
-            "x": 26,
+            "x": 22,
             "y": -17
         },
         "37335569": {
@@ -3838,53 +3838,6 @@
             "width": 6,
             "x": 21,
             "y": 49
-        },
-        "920893321": {
-            "display": {
-                "discription": "...",
-                "name": "Write text",
-                "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__text__": "text"
-                }
-            },
-            "height": 3,
-            "id": 920893321,
-            "inputs": {
-                "path": {
-                    "code": "path",
-                    "name": "__path__",
-                    "standard": null,
-                    "type": "path",
-                    "value": {
-                        "id": 40537722,
-                        "name": "path_false"
-                    }
-                },
-                "text": {
-                    "code": "text",
-                    "name": "__text__",
-                    "standard": "",
-                    "type": "text",
-                    "value": {
-                        "id": 40537722,
-                        "name": "id_in_group"
-                    }
-                }
-            },
-            "name": "writeText",
-            "outputs": {
-                "path": {
-                    "code": "path",
-                    "name": "__path__",
-                    "type": "path"
-                }
-            },
-            "type": "text",
-            "width": 6,
-            "x": 23,
-            "y": -21
         }
     }
 }

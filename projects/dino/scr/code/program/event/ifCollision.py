@@ -23,8 +23,6 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
 
     answer = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]
 
-    print(answer)
-
     if answer[0]:
         for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
             queue.append(name["id"])

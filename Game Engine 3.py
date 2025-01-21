@@ -10,10 +10,10 @@ import json
 import sys
 import os
 
-# DEBUG
+# SETTINGS
 
 FORCED = False
-DEBUG = True if (os.getenv("PYCHARM_HOSTED") == "1" or FORCED) else False
+DEBUG = True if (os.getenv("PYCHARM_HOSTED") == "1" and not FORCED) else False
 
 
 def bundlesSiteInit():

@@ -23,41 +23,8 @@
             ]
         }
     },
-    "variables": {
-        "var": {
-            "name": "var",
-            "type": "number",
-            "value": 0
-        },
-        "underfined": {
-            "name": "underfined",
-            "type": "text",
-            "value": ""
-        }
-    },
+    "variables": {},
     "animator": {},
-    "DynamicObject": {
-        "speed": {
-            "name": "Moving speed",
-            "value": 5,
-            "type": "int"
-        },
-        "gravity": {
-            "name": "Object gravity",
-            "value": 300,
-            "type": "int"
-        },
-        "jumpPower": {
-            "name": "Power jump",
-            "value": 22,
-            "type": "int"
-        },
-        "slidingStep": {
-            "name": "Braking power",
-            "value": 1000000.0,
-            "type": "int"
-        }
-    },
     "StaticObject": {
         "pos": {
             "name": "Object position",
@@ -65,12 +32,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": -180
+                    "value": 0
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": -84
+                    "value": 0
                 }
             },
             "type": "dict"
@@ -91,12 +58,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 41
+                    "value": 32
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 43
+                    "value": 32
                 }
             },
             "type": "dict"
@@ -134,12 +101,34 @@
         },
         "group": {
             "name": "Name of object group",
-            "value": "player",
+            "value": "object",
             "type": "str"
         },
         "layer": {
             "name": "Object layer",
             "value": 0,
+            "type": "int"
+        }
+    },
+    "DynamicObject": {
+        "speed": {
+            "name": "Moving speed",
+            "value": 5,
+            "type": "int"
+        },
+        "gravity": {
+            "name": "Object gravity",
+            "value": 300,
+            "type": "int"
+        },
+        "jumpPower": {
+            "name": "Power jump",
+            "value": 10,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 1000000.0,
             "type": "int"
         }
     }
