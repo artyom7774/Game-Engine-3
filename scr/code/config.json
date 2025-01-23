@@ -68,7 +68,8 @@
                 "random_",
                 "decodeHolder",
                 "len_",
-                "exit_"
+                "exit_",
+                "python"
             ]
         },
         "set": {
@@ -2954,6 +2955,96 @@
                     "__path__": "path",
                     "__answer__": "answer",
                     "__element__": "element"
+                }
+            }
+        },
+        "python": {
+            "type": "another",
+            "name": "python",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text",
+                    "list",
+                    "dict"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list",
+                    "value": null,
+                    "standard": []
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict",
+                    "value": null,
+                    "standard": {}
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "list"
+                }
+            },
+            "display": {
+                "name": "Python",
+                "discription": "Run python code",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text",
+                    "__list__": "list",
+                    "__dict__": "dict",
+                    "__answer__": "answer"
+                }
+            },
+
+            "special": {
+                "inputs": {
+                    "list": {
+                        "invisible": true
+                    },
+                    "dict": {
+                        "invisible": true
+                    },
+                    "text": {
+                        "type": "text-box",
+                        "height": 3
+                    }
                 }
             }
         }

@@ -504,13 +504,18 @@ class Compile:
 
             pathPythonExecutable = f"{pathPython}/python/Scripts/python.exe"
             pathPyInstaller = f"{pathPython}/python/Scripts/pyinstaller.exe"
+            pathProgram = os.path.abspath(sys.argv[0])
+
+            pathProgram = pathProgram[:pathProgram.rfind("\\")]
 
             # os.system(f"cd \"{pathProject}\" && {pathPythonExecutable} {pathPyInstaller} -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\"")
 
-            command = f"cd \"{pathProject}\" && {pathPythonExecutable} {pathPyInstaller} -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\""
-            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            command = f"cd \"{pathProgram}\" && cd \"{pathProject}\" && \"{pathPythonExecutable}\" \"{pathPyInstaller}\" -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\""
 
-            stdout, stderr = process.communicate()
+            result = subprocess.run(command, shell=True, capture_output=True, check=True, text=True)
+
+            print(result.stdout)
+            print(result.stderr)
 
             if os.path.exists(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe"):
                 os.remove(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")

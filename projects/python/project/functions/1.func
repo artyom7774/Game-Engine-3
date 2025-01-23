@@ -1,0 +1,94 @@
+{
+    "variables": {},
+    "objects": {
+        "770631245": {
+            "display": {
+                "discription": "Run python code",
+                "name": "Python",
+                "text": {
+                    "__answer__": "answer",
+                    "__dict__": "dict",
+                    "__list__": "list",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 5,
+            "id": 770631245,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "def run(project, *args, **kwargs):\n    pass\n\n\nrun()",
+                    "type": "text",
+                    "value": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "standard": [],
+                    "type": "list",
+                    "value": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "standard": {},
+                    "type": "dict",
+                    "value": null
+                }
+            },
+            "name": "python",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "list"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text",
+                    "list",
+                    "dict"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "special": {
+                "inputs": {
+                    "dict": {
+                        "invisible": true
+                    },
+                    "list": {
+                        "invisible": true
+                    },
+                    "text": {
+                        "height": 3,
+                        "type": "text-box"
+                    }
+                }
+            },
+            "type": "another",
+            "width": 10,
+            "x": 23,
+            "y": 7
+        }
+    }
+}

@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QToolTip, QLineEdit, QPushButton, QComboBox
-from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon
+from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QTextEdit, QToolTip, QLineEdit, QPushButton, QComboBox
+from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon, QTextCursor
 from PyQt5.Qt import Qt, QPoint, QTimer, QSize
 
 from scr.modules.dialogs import CreateNode
@@ -18,7 +18,6 @@ import typing
 import random
 import math
 import copy
-import re
 
 
 def isCurrectNode(obj: dict):
@@ -199,6 +198,56 @@ class CodeNodeConnectorLineEdit(QLineEdit):
         event.accept()
 
 
+class CodeNodeConnectorTextBox(QTextEdit):
+    def __init__(self, parent, project, id, input) -> None:
+        super().__init__(parent)
+
+        self.project = project
+        self.use = False
+        self.id = id
+        self.input = input
+
+        self.setAlignment(Qt.AlignLeft)
+
+        cursor = self.textCursor()
+        cursor.movePosition(QTextCursor.Start)
+
+        self.setTextCursor(cursor)
+
+        self.setContentsMargins(0, 0, 0, 0)
+
+    def save(self) -> None:
+        text = self.toPlainText()
+        type = self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["type"]
+
+        if TypeCurrect.currect_(type, text):
+            self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = TypeSet.set_(type, text)
+
+    def focusInEvent(self, event) -> None:
+        self.use = True
+        event.accept()
+
+    def focusOutEvent(self, event) -> None:
+        self.use = False
+        self.save()
+        event.accept()
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Tab:
+            cursor = self.textCursor()
+            cursor.insertText(" " * 4)
+
+            event.accept()
+
+        elif event.key() in (Qt.Key_Return, Qt.Key_Enter):
+            self.insertPlainText("\n")
+
+            event.accept()
+
+        else:
+            super().keyPressEvent(event)
+
+
 class CodeNodeConnectorComboBox(QComboBox):
     def __init__(self, parent, project, id, input) -> None:
         QComboBox.__init__(self, parent)
@@ -254,6 +303,9 @@ class CodeNodeConnector(QLabel):
         self.inputLeftText = None
         self.inputLeftRama = None
 
+        invisible = False if ("special" not in self.node or input["code"] not in self.node["special"]["inputs"] or "invisible" not in self.node["special"]["inputs"][input["code"]]) else self.node["special"]["inputs"][input["code"]]["invisible"]
+        type = None if ("special" not in self.node or input["code"] not in self.node["special"]["inputs"] or "type" not in self.node["special"]["inputs"][input["code"]]) else self.node["special"]["inputs"][input["code"]]["type"]
+
         if input is not None:
             self.left = QLabel(self)
             self.left.setGeometry(0, 9, 10, 10)
@@ -271,29 +323,48 @@ class CodeNodeConnector(QLabel):
             else:
                 self.left.show()
 
-            if input["type"] not in CODE_CONNECTOR_NO_HAVE_INPUT_TYPES:
-                if input["type"] == "choose":
-                    self.inputLeftText = CodeNodeConnectorComboBox(project.objects["main"]["code"], self.project, id, input)
-                    self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
-                    self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 3, self.width() - 40, 14)
-                    self.inputLeftText.setStyleSheet("background-color: rgba(63, 64, 66, 0); border: 0px")
-                    self.inputLeftText.setFont(MFONT)
-                    self.inputLeftText.show()
+            if input["type"] not in CODE_CONNECTOR_NO_HAVE_INPUT_TYPES and not invisible:
+                if type is not None:
+                    if type == "text-box":
+                        height = self.node["special"]["inputs"][input["code"]]["height"]
+
+                        self.inputLeftText = CodeNodeConnectorTextBox(project.objects["main"]["code"], self.project, id, input)
+                        self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
+                        self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 4, self.width() - 40, 14 + 25 * (height - 1))
+                        self.inputLeftText.setStyleSheet("background-color: rgba(63, 64, 66, 0); border: 0px")
+                        self.inputLeftText.setPlainText(str(input["standard"]))
+                        self.inputLeftText.setFont(MFONT)
+                        self.inputLeftText.show()
+
+                    self.inputLeftRama = QLabel(project.objects["main"]["code"])
+                    self.inputLeftRama.setAttribute(Qt.WA_TransparentForMouseEvents)
+                    self.inputLeftRama.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 6, self.width() - 40, 18 + 25 * (height - 1))
+                    self.inputLeftRama.setStyleSheet("border: 1px solid #cecac9;")
+                    self.inputLeftRama.show()
 
                 else:
-                    self.inputLeftText = CodeNodeConnectorLineEdit(project.objects["main"]["code"], self.project, id, input)
-                    self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
-                    self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 4, self.width() - 40, 14)
-                    self.inputLeftText.setStyleSheet("background-color: rgba(63, 64, 66, 0); border: 0px")
-                    self.inputLeftText.setText(str(input["standard"]))
-                    self.inputLeftText.setFont(MFONT)
-                    self.inputLeftText.show()
+                    if input["type"] == "choose":
+                        self.inputLeftText = CodeNodeConnectorComboBox(project.objects["main"]["code"], self.project, id, input)
+                        self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
+                        self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 3, self.width() - 40, 14)
+                        self.inputLeftText.setStyleSheet("background-color: rgba(63, 64, 66, 0); border: 0px")
+                        self.inputLeftText.setFont(MFONT)
+                        self.inputLeftText.show()
 
-                self.inputLeftRama = QLabel(project.objects["main"]["code"])
-                self.inputLeftRama.setAttribute(Qt.WA_TransparentForMouseEvents)
-                self.inputLeftRama.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 6, self.width() - 40, 18)
-                self.inputLeftRama.setStyleSheet("border: 1px solid #cecac9;")
-                self.inputLeftRama.show()
+                    else:
+                        self.inputLeftText = CodeNodeConnectorLineEdit(project.objects["main"]["code"], self.project, id, input)
+                        self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
+                        self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 4, self.width() - 40, 14)
+                        self.inputLeftText.setStyleSheet("background-color: rgba(63, 64, 66, 0); border: 0px")
+                        self.inputLeftText.setText(str(input["standard"]))
+                        self.inputLeftText.setFont(MFONT)
+                        self.inputLeftText.show()
+
+                    self.inputLeftRama = QLabel(project.objects["main"]["code"])
+                    self.inputLeftRama.setAttribute(Qt.WA_TransparentForMouseEvents)
+                    self.inputLeftRama.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 6, self.width() - 40, 18)
+                    self.inputLeftRama.setStyleSheet("border: 1px solid #cecac9;")
+                    self.inputLeftRama.show()
 
             self.leftText = translate(node["display"]["text"][input["name"]])
 

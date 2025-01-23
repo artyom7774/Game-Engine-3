@@ -5,8 +5,6 @@ from scr.main import Main
 from scr.variables import *
 
 import traceback
-import hjson
-import json
 import sys
 import os
 
@@ -14,19 +12,6 @@ import os
 
 FORCED = False
 DEBUG = True if (os.getenv("PYCHARM_HOSTED") == "1" and not FORCED) else False
-
-
-def bundlesSiteInit():
-    bundles = "scr/files/bundles"
-
-    for path in os.listdir(bundles):
-        file = f"{bundles}/{path}"
-
-        if os.path.isfile(file):
-            bundle = hjson.load(open(file, encoding="utf-8"))
-
-            with open(f"{bundles}/json/{path.replace('.hjson', '.json')}", "w+", encoding="utf-8") as f:
-                json.dump(bundle, f, indent=4)
 
 
 def application() -> None:
@@ -37,8 +22,6 @@ def application() -> None:
 
 
 def main() -> None:
-    bundlesSiteInit()
-
     with open("scr/files/logs/log.txt", "w+", encoding="utf-8", buffering=1) as file:
         try:
             if not DEBUG:

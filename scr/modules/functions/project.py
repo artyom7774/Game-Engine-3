@@ -89,8 +89,6 @@ def getAllProjectPrograms(project, onlyFileName: bool = False) -> typing.List[st
 def createProjectDirecroryByTemplate(project, name: str, template: str) -> None:
     shutil.copytree(f"scr/files/templates/{template}", f"projects/{name}/")
 
-    shutil.rmtree(f"projects/{name}/engine/")
-
     shutil.copytree("engine/", f"projects/{name}/engine/")
 
     queue = os.listdir(f"projects/{name}/")

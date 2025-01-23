@@ -39,6 +39,8 @@ def close(project) -> None:
 
     functions.project.projectClose(project)
 
+    project.menues["project_menu"].setDisabled(True)
+
     project.initialization()
 
 

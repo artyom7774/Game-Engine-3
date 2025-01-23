@@ -49,7 +49,7 @@
         },
         "focus": {
             "name": "Name focus object",
-            "value": "",
+            "value": "1-0.objc",
             "type": "str"
         }
     }
