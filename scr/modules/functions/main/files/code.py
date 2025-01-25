@@ -1,6 +1,8 @@
-from PyQt5.QtWidgets import QLabel, QMenu, QAction, QTreeWidget, QTreeWidgetItem, QTextEdit, QToolTip, QLineEdit, QPushButton, QComboBox
+from PyQt5.QtWidgets import QLabel, QMenu, QAction, QVBoxLayout, QTreeWidget, QTreeWidgetItem, QTextEdit, QDialog, QToolTip, QLineEdit, QPushButton, QComboBox
 from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon, QTextCursor
 from PyQt5.Qt import Qt, QPoint, QTimer, QSize
+
+from PyQt5.Qsci import QsciScintilla, QsciLexerPython
 
 from scr.modules.dialogs import CreateNode
 from scr.modules.functions.algorithm import bezierCurveDeep, bezierCurveWidth
@@ -157,6 +159,52 @@ class TypeCurrect:
         return True
 
 
+class TextEditor(QDialog):
+    def __init__(self, project, input, id):
+        super().__init__()
+
+        self.project = project
+        self.input = input
+        self.id = id
+
+        self.setWindowTitle(translate("Text Editor"))
+
+        self.setGeometry(0, 0, int(size["width"] * 0.8), int(size["height"] * 0.8))
+        self.move((size["width"] - self.width()) // 2, (size["height"] - self.height()) // 2)
+
+        self.layout = QVBoxLayout()
+
+        self.editor = QsciScintilla(self)
+        self.editor.setFont(QFont("Courier", 10))
+
+        lexer = QsciLexerPython()
+        lexer.setFont(QFont("Courier", 10))
+
+        self.editor.setLexer(lexer)
+
+        self.editor.setText(str(self.input["standard"]))
+
+        self.editor.setWrapMode(QsciScintilla.WrapWord)
+
+        self.editor.setTabWidth(4)
+
+        self.layout.addWidget(self.editor)
+
+        self.setLayout(self.layout)
+
+    def closeEvent(self, event):
+        text = self.editor.text()
+        type = self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["type"]
+
+        if TypeCurrect.currect_(type, text):
+            self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = TypeSet.set_(type, text)
+
+        with open(self.project.selectFile, "w", encoding="utf-8") as file:
+            json.dump(self.project.objects["main"]["function"], file, indent=4)
+
+        self.project.init()
+
+
 class CodeNodeStroke(QLabel):
     def __init__(self, parent):
         QLabel.__init__(self, parent)
@@ -199,7 +247,7 @@ class CodeNodeConnectorLineEdit(QLineEdit):
 
 
 class CodeNodeConnectorTextBox(QTextEdit):
-    def __init__(self, parent, project, id, input) -> None:
+    def __init__(self, parent, project, id, input, heigth_) -> None:
         super().__init__(parent)
 
         self.project = project
@@ -207,12 +255,24 @@ class CodeNodeConnectorTextBox(QTextEdit):
         self.id = id
         self.input = input
 
+        self.heigth_ = heigth_
+
         self.setAlignment(Qt.AlignLeft)
 
         cursor = self.textCursor()
         cursor.movePosition(QTextCursor.Start)
 
+        self.setTabStopDistance(20)
+
         self.setTextCursor(cursor)
+
+        self.button = QPushButton(project.objects["main"]["code"])
+        self.button.setStyleSheet(f"border: 1px solid #cecac9; color: #{'cecac9' if SETTINGS['theme'] == 'dark' else '686b71'};")
+        self.button.setText(translate("Text Editor"))
+        self.button.setFont(MFONT)
+        self.button.show()
+
+        self.button.clicked.connect(lambda: self.editor())
 
         self.setContentsMargins(0, 0, 0, 0)
 
@@ -223,23 +283,52 @@ class CodeNodeConnectorTextBox(QTextEdit):
         if TypeCurrect.currect_(type, text):
             self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = TypeSet.set_(type, text)
 
+    def init(self):
+        self.button.setGeometry(self.x(), self.y() + 25 * (self.heigth_ - 1), self.width(), 16 + 4)
+
+        self.button.raise_()
+
+    def editor(self):
+        self.project.dialog = TextEditor(self.project, self.input, self.id)
+        self.project.dialog.exec_()
+
+    def setGeometry(self, x, y, w, h):
+        super().setGeometry(x, y, w, h)
+
+        self.button.setGeometry(self.x(), self.y() + 25 * (self.heigth_ - 1), self.width(), 16 + 4)
+
+    def move(self, x, y):
+        super().move(x, y)
+
+        self.button.move(self.x(), self.y() + 25 * (self.heigth_ - 1))
+
+    def deleteLater(self):
+        self.button.deleteLater()
+
+        super().deleteLater()
+
+    def show(self) -> None:
+        super().show()
+
+    def hide(self) -> None:
+        super().hide()
+
+        self.button.hide()
+
     def focusInEvent(self, event) -> None:
         self.use = True
+
         event.accept()
 
     def focusOutEvent(self, event) -> None:
         self.use = False
+
         self.save()
+
         event.accept()
 
     def keyPressEvent(self, event):
-        if event.key() == Qt.Key_Tab:
-            cursor = self.textCursor()
-            cursor.insertText(" " * 4)
-
-            event.accept()
-
-        elif event.key() in (Qt.Key_Return, Qt.Key_Enter):
+        if event.key() in (Qt.Key_Return, Qt.Key_Enter):
             self.insertPlainText("\n")
 
             event.accept()
@@ -328,17 +417,19 @@ class CodeNodeConnector(QLabel):
                     if type == "text-box":
                         height = self.node["special"]["inputs"][input["code"]]["height"]
 
-                        self.inputLeftText = CodeNodeConnectorTextBox(project.objects["main"]["code"], self.project, id, input)
+                        self.inputLeftText = CodeNodeConnectorTextBox(project.objects["main"]["code"], self.project, id, input, height)
                         self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
-                        self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 4, self.width() - 40, 14 + 25 * (height - 1))
+                        self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 4, self.width() - 40, 14 + 25 * (height - 2))
                         self.inputLeftText.setStyleSheet("background-color: rgba(63, 64, 66, 0); border: 0px")
                         self.inputLeftText.setPlainText(str(input["standard"]))
                         self.inputLeftText.setFont(MFONT)
                         self.inputLeftText.show()
 
+                        self.inputLeftText.init()
+
                     self.inputLeftRama = QLabel(project.objects["main"]["code"])
                     self.inputLeftRama.setAttribute(Qt.WA_TransparentForMouseEvents)
-                    self.inputLeftRama.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 6, self.width() - 40, 18 + 25 * (height - 1))
+                    self.inputLeftRama.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 6, self.width() - 40, 18 + 25 * (height - 2))
                     self.inputLeftRama.setStyleSheet("border: 1px solid #cecac9;")
                     self.inputLeftRama.show()
 
@@ -448,7 +539,7 @@ class CodeNode(QTreeWidget):
         # CONNECTORS
 
         if "sorting" in self.node and "outputs" in self.node["sorting"]:
-            self.node["outputs"] = dict(sorted(self.node["outputs"].items(),key=lambda x: self.node["sorting"]["outputs"].index(x[1]["code"])))
+            self.node["outputs"] = dict(sorted(self.node["outputs"].items(), key=lambda x: self.node["sorting"]["outputs"].index(x[1]["code"])))
 
         else:
             self.node["outputs"] = dict(sorted(self.node["outputs"].items(), key=lambda x: self.project.objects["main"]["config"]["sorting"].index(x[1]["type"])))
