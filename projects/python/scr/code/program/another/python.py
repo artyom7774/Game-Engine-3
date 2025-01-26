@@ -1,5 +1,6 @@
 import functools
 import typing
+import random
 import re
 
 
@@ -12,20 +13,53 @@ else:
 
 
 class PythonFunctions:
-    functions = ["decodeHolder", "exit"]
+    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText"]
 
     @staticmethod
-    def decodeHolder(text, program, variables):
+    def decodeHolder(text, program, variables, path):
         return decodeHolders(text, variables)
 
     @staticmethod
-    def exit(program, variables):
-        return program.exit()
+    def exit(program, variables, path):
+        program.exit()
+
+    @staticmethod
+    def getVar(name, global_, program, variables, path):
+        if global_:
+            return variables["globals"][name]["value"]
+
+        else:
+            return variables["locals"][path][name]["value"]
+
+    @staticmethod
+    def setVar(name, global_, value, program, variables, path):
+        if global_:
+            variables["globals"][name]["value"] = value
+
+        else:
+            variables["locals"][path][name]["value"] = value
+
+    @staticmethod
+    def objectsGroup(group, program, variables, path):
+        return program.objects.getByGroup(group)
+
+    @staticmethod
+    def random(a, b, program, variables, path):
+        return a if a == b else random.randint(a, b)
+
+    @staticmethod
+    def writeText(text, program, variables, path):
+        answer = ">>> " + str(text).rstrip() + "\n"
+
+        program.print(answer)
+
+        print(answer)
 
 
 class PythonCodeExecutor:
     program = None
     variables = None
+    path = None
 
     contest = {}
 
@@ -34,7 +68,7 @@ class PythonCodeExecutor:
     @classmethod
     def init(cls):
         for func in PythonFunctions.functions:
-            cls.contest[func] = functools.partial(getattr(PythonFunctions, func), program=cls.program, variables=cls.variables)
+            cls.contest[func] = functools.partial(getattr(PythonFunctions, func), program=cls.program, variables=cls.variables, path=cls.path)
 
     @classmethod
     def add(cls, program):
@@ -84,6 +118,8 @@ def python(program, compiler, path: str, nodes: dict, id: int, variables: dict) 
     if PythonCodeExecutor.program is None:
         PythonCodeExecutor.variables = variables
         PythonCodeExecutor.program = program
+
+        PythonCodeExecutor.path = path
 
     PythonCodeExecutor.add(text)
 

@@ -147,7 +147,7 @@
                 "text": {
                     "code": "text",
                     "name": "__text__",
-                    "standard": "def run(program, args, kwargs):\n\tprint(decodeHolder(\"%math(%global_var(var) + 1)\"))\n",
+                    "standard": "def run(program, args, kwargs):\n\twriteText(random(1, 5))\n",
                     "type": "text",
                     "value": null
                 },
