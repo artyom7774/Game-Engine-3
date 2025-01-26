@@ -8,7 +8,8 @@
         "3.3.0",
         "3.4.0",
         "3.4.1",
-        "3.4.2"
+        "3.4.2",
+        "3.5.0"
     ],
 
     "updates": {
@@ -55,6 +56,11 @@
         "3.4.2": {
             "name": "3.4.2",
             "text": "- update help menu\n- fixed bug with write text on console\n- delete help menu\n- new variable types: dict, list\n- add nodes for using lists and dicts\n- another nodes\n- light theme"
+        },
+
+        "3.5.0": {
+            "name": "3.5.0",
+            "text": "- new node for write code on python"
         }
     }
 }

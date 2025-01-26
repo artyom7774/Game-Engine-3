@@ -13,7 +13,7 @@ else:
 
 
 class PythonFunctions:
-    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText"]
+    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar"]
 
     @staticmethod
     def decodeHolder(text, program, variables, path):
@@ -54,6 +54,77 @@ class PythonFunctions:
         program.print(answer)
 
         print(answer)
+
+    @staticmethod
+    def displayText(text, x, y, program, variables, path):
+        program.afterDrawing.append(lambda: program.linkEngine.print_text(program.screen, x, y, str(text)))
+
+    @staticmethod
+    def collision(ids, group, append, program, variables, path):
+        obj = program.objects.getById(ids)
+
+        answer = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]
+
+        return answer
+
+    @staticmethod
+    def createObject(name, x, y, program, variables, path):
+        if not name.endswith(".obj"):
+            name += ".obj"
+
+        type = program.allObjects[name]["type"]
+        variables = program.allObjects[name]["variables"]
+
+        variables["pos"] = [x, y]
+
+        obj = getattr(program.linkEngine.objects, type)(program, **variables)
+
+        program.objects.add(obj)
+
+        return obj.id
+
+    @staticmethod
+    def getObjectIDByName(name, program, variables, path):
+        name = name + ".objc" if not name.endswith(".objc") else name
+
+        answer = program.objectIDByName[program.scene][name] if name in program.objectIDByName[program.scene] else -1
+
+        return answer
+
+    @staticmethod
+    def getObjectPos(ids, program, variables, path):
+        return program.objects.getById(ids).pos.get()
+
+    @staticmethod
+    def getObjectVar(ids, name, program, variables, path):
+        answer = variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)]][name]["value"]
+
+    @staticmethod
+    def jump(ids, program, variables, path):
+        obj = program.objects.getById(int(ids))
+
+        obj.moveByType("jump")
+
+    @staticmethod
+    def moveObject(ids, angle, power, program, variables, path):
+        obj = program.objects.getById(int(ids))
+
+        obj.moveByAngle(angle, power)
+
+    @staticmethod
+    def removeObject(ids, program, variables, path):
+        program.objects.removeById(ids)
+
+    @staticmethod
+    def setObjectPos(ids, x, y, program, variables, path):
+        obj = program.objects.getById(int(ids))
+
+        obj.pos.x = x
+        obj.pos.y = y
+
+    @staticmethod
+    def setObjectVar(ids, name, value, program, variables, path):
+        variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)]][name]["value"] = value
 
 
 class PythonCodeExecutor:

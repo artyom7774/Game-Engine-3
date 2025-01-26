@@ -169,7 +169,7 @@ class TextEditor(QDialog):
 
         self.setWindowTitle(translate("Text Editor"))
 
-        self.setGeometry(0, 0, int(size["width"] * 0.8), int(size["height"] * 0.8))
+        self.setGeometry(0, 0, int(size["width"] * 0.55), int(size["height"] * 0.7))
         self.move((size["width"] - self.width()) // 2, (size["height"] - self.height()) // 2)
 
         self.layout = QVBoxLayout()

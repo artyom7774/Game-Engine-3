@@ -24,6 +24,7 @@ def setObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: 
 
     obj = program.objects.getById(int(ids))
 
-    obj.move(x - obj.pos.x, y - obj.pos.y)
+    obj.pos.x = x
+    obj.pos.y = y
 
     return queue

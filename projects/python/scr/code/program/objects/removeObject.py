@@ -5,11 +5,11 @@ def removeObject(program, compiler, path: str, nodes: dict, id: int, variables: 
         queue.append(name["id"])
 
     if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
-        id = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
 
     else:
-        id = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
 
-    program.objects.removeById(id)
+    program.objects.removeById(ids)
 
     return queue
