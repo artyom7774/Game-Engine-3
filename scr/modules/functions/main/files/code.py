@@ -15,6 +15,7 @@ from engine.vector.int import Vec2i, Vec4i
 from scr.variables import *
 
 import dataclasses
+import qdarktheme
 import pyperclip
 import typing
 import random
@@ -177,8 +178,18 @@ class TextEditor(QDialog):
         self.editor = QsciScintilla(self)
         self.editor.setFont(QFont("Courier", 10))
 
+        palette = self.project.palette()
+
         lexer = QsciLexerPython()
         lexer.setFont(QFont("Courier", 10))
+
+        self.editor.setPaper(palette.base().color())
+
+        self.editor.setMarginsBackgroundColor(palette.base().color())
+        self.editor.setMarginsForegroundColor(palette.text().color())
+
+        self.editor.setMarginWidth(0, "0000")
+        self.editor.setMarginType(0, QsciScintilla.MarginType.NumberMargin)
 
         self.editor.setLexer(lexer)
 
