@@ -20,3 +20,4 @@ QScintilla==2.14.1
 requests==2.32.3
 six==1.17.0
 urllib3==2.3.0
+pyinstaller==6.10.0
