@@ -1,6 +1,5 @@
 import functools
 import typing
-import numba
 import math
 
 from engine.functions.cache import cache
@@ -118,8 +117,3 @@ def bezierCurveWidth(x0: int, y0: int, x1: int, y1: int, x2: int, y2: int, x3: i
     answer.append([x3, y3])
 
     return answer
-
-
-@numba.njit(cache=True, fastmath=True)
-def pow(x: int, y: int) -> int:
-    return x ** y

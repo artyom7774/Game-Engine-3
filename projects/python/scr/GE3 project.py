@@ -5,7 +5,7 @@ import socket
 import sys
 import os
 
-SOCKET_ID = 9725
+SOCKET_ID = 35944
 
 VARIABLES = {
     "globals": {'var': {'name': 'var', 'type': 'number', 'value': 9}},
