@@ -590,10 +590,10 @@ class Scene:
         painter = QPainter(qpixmap)
         painter.setFont(SFONT)
 
-        painter.setPen(QPen(QColor(255, 255, 255) if SETTINGS["theme"] == "dark" else QColor(218, 220, 224), 1))
+        painter.setPen(QPen(QColor(255, 255, 255) if SETTINGS["theme"] == "dark" else QColor(70, 70, 70), 1))
 
         painter.drawText(
-            5, project.objects["center_rama"].height() - 8, f"X, Y: {project.cash['file'][project.selectFile].camera.pos.x}  {project.cash['file'][project.selectFile].camera.pos.y}"
+            5, project.objects["center_rama"].height() - 8, f"X, Y: {int(project.cash['file'][project.selectFile].camera.pos.x)}  {int(project.cash['file'][project.selectFile].camera.pos.y)}"
         )
 
         painter.end()

@@ -120,10 +120,31 @@ class Game(engine.Application):
         if self.socket is not None:
             self.socket.sendall(text.encode())
 
+        else:
+            print(text)
+
     def update(self) -> None:
         super().update()
 
         for key, value in self.programs.items():
+            if self.programs[key].error:
+                info = self.programs[key].information
+
+                self.print(f"FATAL ERROR: {info['message']}\\n")
+                self.print(f"Name: {info['display']['name']}\\nX, Y: {info['pos'][0]}, {info['pos'][1]}\\n")
+                self.print("Inputs:\\n")
+
+                text = ""
+
+                for code, ivalue in info["inputs"].items():
+                    line = f"{info['display']['text'][ivalue['name']]} = {ivalue['standard'] if ivalue['value'] is None else ivalue['value']}"
+
+                    text = text + line + "\\n"
+
+                self.print(text)
+
+                exit(0)
+
             self.programs[key].update()
     
     def tpsStart(self):
@@ -263,6 +284,8 @@ class Logger(QDialog):
         self.send(data.decode().rstrip())
 
     def send(self, text: str) -> None:
+        text = text.replace("FATAL ERROR", translate("FATAL ERROR"))
+
         self.objects["text"].append(text)
 
     def closeEvent(self, event):

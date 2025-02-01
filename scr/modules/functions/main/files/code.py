@@ -66,7 +66,7 @@ class CodeLiner:
 
     node: dict = None
 
-    start: Vec2f = None
+    start: Vec2i = None
 
 
 class TypeSet:
@@ -180,13 +180,22 @@ class TextEditor(QDialog):
 
         palette = self.project.palette()
 
+        self.editor.setCaretForegroundColor(palette.text().color())
+        self.editor.setMarginsBackgroundColor(palette.base().color())
+        self.editor.setMarginsForegroundColor(palette.text().color())
+        self.editor.setFoldMarginColors(palette.base().color(), palette.text().color())
+        self.editor.setEdgeColor(palette.text().color())
+        self.editor.setSelectionBackgroundColor(palette.highlight().color())
+        self.editor.setSelectionForegroundColor(palette.highlightedText().color())
+        self.editor.setPaper(palette.base().color())
+        self.editor.setColor(palette.text().color())
+        self.editor.setFont(QFont("Courier", 10))
+
         lexer = QsciLexerPython()
         lexer.setFont(QFont("Courier", 10))
 
-        self.editor.setPaper(palette.base().color())
-
-        self.editor.setMarginsBackgroundColor(palette.base().color())
-        self.editor.setMarginsForegroundColor(palette.text().color())
+        lexer.setDefaultPaper(palette.base().color())
+        lexer.setPaper(palette.base().color())
 
         self.editor.setMarginWidth(0, "0000")
         self.editor.setMarginType(0, QsciScintilla.MarginType.NumberMargin)
@@ -470,7 +479,7 @@ class CodeNodeConnector(QLabel):
 
             self.leftText = translate(node["display"]["text"][input["name"]])
 
-            self.project.objects["main"]["liner"].points["inputs"].append([{"id": id, "number": number, "keys": self.keys, "node": self.node}, Vec2f(parent.x() + self.x() + 5, parent.y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": id, "number": number, "keys": self.keys, "node": self.node}, Vec2i(parent.x() + self.x() + 5, parent.y() + self.y() + self.height() // 2)])
 
         if output is not None:
             self.right = QLabel(self)
@@ -481,7 +490,7 @@ class CodeNodeConnector(QLabel):
 
             self.rightText = translate(node["display"]["text"][output["name"]])
 
-            self.project.objects["main"]["liner"].points["outputs"].append([{"id": id, "number": number, "keys": self.keys, "connector": output["type"]}, Vec2f(parent.x() + self.x() + self.width() - 5, parent.y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["outputs"].append([{"id": id, "number": number, "keys": self.keys, "connector": output["type"]}, Vec2i(parent.x() + self.x() + self.width() - 5, parent.y() + self.y() + self.height() // 2)])
 
         self.show()
 
@@ -489,12 +498,12 @@ class CodeNodeConnector(QLabel):
         self.move(0, (self.number + 1) * CODE_GRID_CELL_SIZE)
 
         if self.left is not None:
-            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "node": self.node}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "node": self.node}, Vec2i(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
             self.left.move(0, 9)
 
         if self.right is not None:
-            self.project.objects["main"]["liner"].points["outputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2f(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["outputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2i(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
             self.right.move(self.width() - 12, 9)
 
@@ -520,10 +529,10 @@ class CodeNode(QTreeWidget):
         self.connectors = {}
 
         self.setGeometry(
-            (self.node["x"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].x) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE,
-            (self.node["y"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].y - self.node["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + (self.node["height"] - 2),
-            self.node["width"] * CODE_GRID_CELL_SIZE + 3,
-            self.node["height"] * CODE_GRID_CELL_SIZE + 3
+            int((self.node["x"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].x) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE),
+            int((self.node["y"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].y - self.node["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + (self.node["height"] - 2)),
+            int(self.node["width"] * CODE_GRID_CELL_SIZE + 3),
+            int(self.node["height"] * CODE_GRID_CELL_SIZE + 3)
         )
 
         self.bg = QLabel(self)
@@ -627,8 +636,8 @@ class CodeNode(QTreeWidget):
 
     def updateObjectGeometry(self) -> None:
         self.move(
-            (self.node["x"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].x) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE,
-            (self.node["y"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].y - self.node["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + (self.node["height"] - 2)
+            int((self.node["x"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].x) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE),
+            int((self.node["y"] * CODE_GRID_CELL_SIZE - self.project.cash["file"][self.project.selectFile].y - self.node["height"] - 1) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE + (self.node["height"] - 2))
         )
 
         for key, connector in self.connectors.items():
@@ -757,7 +766,7 @@ class CodeLabel(QLabel):
                                 element["pos"]["finish"]
                             ]
 
-                            self.project.objects["main"]["liner"].start = Vec2f(find[1].x, find[1].y)
+                            self.project.objects["main"]["liner"].start = Vec2i(find[1].x, find[1].y)
                             self.project.objects["main"]["liner"].node = find
 
                             self.project.objects["main"]["function"]["objects"][str(element["start"]["id"])]["inputs"][element["key"]]["value"] = None
@@ -775,7 +784,7 @@ class CodeLabel(QLabel):
                     break
 
             if find is not None:
-                self.project.objects["main"]["liner"].start = Vec2f(find[1].x, find[1].y)
+                self.project.objects["main"]["liner"].start = Vec2i(find[1].x, find[1].y)
                 self.project.objects["main"]["liner"].node = find
 
             else:
@@ -1211,7 +1220,7 @@ class Code:
 
         project.objects["main"]["liner"].points = {"inputs": [], "outputs": []}
 
-        pos = Vec2f(project.cash["file"][project.selectFile].x, project.cash["file"][project.selectFile].y)
+        pos = Vec2i(project.cash["file"][project.selectFile].x, project.cash["file"][project.selectFile].y)
 
         try:
             with open(project.selectFile, "r", encoding="utf-8") as file:
@@ -1243,6 +1252,8 @@ class Code:
         # UI
 
         painter.setPen(QPen(QColor(255, 255, 255), 2))
+
+        painter.setPen(QPen(QColor(255, 255, 255) if SETTINGS["theme"] == "dark" else QColor(70, 70, 70), 1))
 
         painter.drawText(
             5, project.objects["center_rama"].height() - 8, f"X, Y: {pos.x}  {pos.y}"

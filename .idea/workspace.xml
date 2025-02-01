@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63b9e141-b681-4943-9a61-afd675b9e146" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/python/project/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/python/project/functions/1.func" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/python/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/python/scr/GE3 project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/python/scr/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/python/scr/functions/1.func" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/modules/functions/main/files/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/main/files/code.py" afterDir="false" />
-    </list>
+    <list default="true" id="63b9e141-b681-4943-9a61-afd675b9e146" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,14 +37,22 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Python.Game Engine 3.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.application.executor&quot;: &quot;Run&quot;,
+    &quot;Python.setup.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/37529/Desktop/github/Game-Engine-3/create&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/37529/Desktop/github/Game-Engine-3/create&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\create" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\engine\classes" />
+      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\engine\vector" />
+      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\engine\vector\source" />
     </key>
   </component>
   <component name="RunManager">

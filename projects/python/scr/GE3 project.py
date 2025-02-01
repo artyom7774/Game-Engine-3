@@ -5,7 +5,7 @@ import socket
 import sys
 import os
 
-SOCKET_ID = 18489
+SOCKET_ID = 9725
 
 VARIABLES = {
     "globals": {'var': {'name': 'var', 'type': 'number', 'value': 9}},
@@ -40,6 +40,9 @@ class Compiler:
 
         self.tpsc = 0
         self.tpsNow = 0
+
+        self.information = {}
+        self.error = False
 
         self.settings = settings
 
@@ -137,7 +140,21 @@ class Compiler:
 
                 continue
 
-            var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
+            try:
+                var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
+
+            except Exception as e:
+                self.error = True
+
+                self.information = {
+                    "inputs": self.nodes["objects"][str(id)]["inputs"],
+                    "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
+                    "display": self.nodes["objects"][str(id)]["display"],
+                    "message": e,
+                    "id": id
+                }
+
+                return 0
 
             if type(var) == list:
                 for element in var:
@@ -292,10 +309,31 @@ class Game(engine.Application):
         if self.socket is not None:
             self.socket.sendall(text.encode())
 
+        else:
+            print(text)
+
     def update(self) -> None:
         super().update()
 
         for key, value in self.programs.items():
+            if self.programs[key].error:
+                info = self.programs[key].information
+
+                self.print(f"FATAL ERROR: {info['message']}\n")
+                self.print(f"Name: {info['display']['name']}\nX, Y: {info['pos'][0]}, {info['pos'][1]}\n")
+                self.print("Inputs:\n")
+
+                text = ""
+
+                for code, ivalue in info["inputs"].items():
+                    line = f"{info['display']['text'][ivalue['name']]} = {ivalue['standard'] if ivalue['value'] is None else ivalue['value']}"
+
+                    text = text + line + "\n"
+
+                self.print(text)
+
+                exit(0)
+
             self.programs[key].update()
     
     def tpsStart(self):

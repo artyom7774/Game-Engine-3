@@ -10,6 +10,7 @@ import typing
 import ctypes
 import sys
 
+
 ctypes.windll.shcore.SetProcessDpiAwareness(True)
 
 pygame.init()

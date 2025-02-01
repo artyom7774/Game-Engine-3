@@ -21,6 +21,9 @@ class Compiler:
         self.tpsc = 0
         self.tpsNow = 0
 
+        self.information = {}
+        self.error = False
+
         self.settings = settings
 
         self.nodesSortedByTypes = {}
@@ -117,7 +120,21 @@ class Compiler:
 
                 continue
 
-            var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
+            try:
+                var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
+
+            except Exception as e:
+                self.error = True
+
+                self.information = {
+                    "inputs": self.nodes["objects"][str(id)]["inputs"],
+                    "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
+                    "display": self.nodes["objects"][str(id)]["display"],
+                    "message": e,
+                    "id": id
+                }
+
+                return 0
 
             if type(var) == list:
                 for element in var:
