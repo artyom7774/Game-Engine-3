@@ -5,5 +5,8 @@ python -m cProfile -s tottime "Game Engine 3.py"
 INSTALL:
 pyinstaller "Game Engine 3.spec"
 
-COMPILE PYX:
+COMPILE .pyx:
 python setup.py build_ext --inplace
+
+GET INSTALLED MODULES:
+pip freeze > requirements.txt

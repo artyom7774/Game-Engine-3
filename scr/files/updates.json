@@ -60,7 +60,7 @@
 
         "3.5.0": {
             "name": "3.5.0",
-            "text": "- new node for write code on python\n- using more than 1 functions in project\n- debugger for run project\n- optimization for engine by 2 times"
+            "text": "- new node for write code on python\n- using more than one functions in project\n- debugger for run project\n- engine has been optimized by 2 times"
         }
     }
 }

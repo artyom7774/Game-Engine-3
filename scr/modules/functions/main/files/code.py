@@ -1049,7 +1049,7 @@ class CodeAdditionsVarsType(QTreeWidget):
         with open(self.path, "r", encoding="utf-8") as file:
             text = json.load(file)
 
-        name = "underfined"
+        name = "undefined"
         plus = 0
 
         while (name if plus == 0 else f"{name} ({plus})") in text["variables"]:

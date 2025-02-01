@@ -29,8 +29,8 @@
             "type": "number",
             "value": 0
         },
-        "underfined": {
-            "name": "underfined",
+        "undefined": {
+            "name": "undefined",
             "type": "text",
             "value": ""
         }
