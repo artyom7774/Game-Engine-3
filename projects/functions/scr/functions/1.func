@@ -1,0 +1,280 @@
+{
+    "variables": {},
+    "objects": {
+        "308707406": {
+            "display": {
+                "discription": "starts at the start of the game",
+                "name": "On start game",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 308707406,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 2,
+            "y": 13
+        },
+        "888106714": {
+            "display": {
+                "discription": "call function",
+                "name": "Call function",
+                "text": {
+                    "__name__": "name",
+                    "__none__": "",
+                    "__params__": "params",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 888106714,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 845523727,
+                        "name": "iterator"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "abc",
+                    "type": "text",
+                    "value": null
+                },
+                "params": {
+                    "code": "params",
+                    "name": "__params__",
+                    "standard": [],
+                    "type": "list",
+                    "value": null
+                }
+            },
+            "name": "callFunction",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "params"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 8,
+            "x": 20,
+            "y": 13
+        },
+        "558537202": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 558537202,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 318270223,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "Hello World",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 10,
+            "y": 8
+        },
+        "845523727": {
+            "display": {
+                "discription": "For N times every x frames",
+                "name": "For N times",
+                "text": {
+                    "__after__": "after iterators",
+                    "__index__": "index",
+                    "__iterator__": "iterator",
+                    "__n__": "N",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__x__": "X"
+                }
+            },
+            "height": 4,
+            "id": 845523727,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 308707406,
+                        "name": "path"
+                    }
+                },
+                "n": {
+                    "code": "n",
+                    "name": "__n__",
+                    "standard": 10,
+                    "type": "number",
+                    "value": null
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "standard": 5,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "for_",
+            "outputs": {
+                "iterator": {
+                    "code": "iterator",
+                    "name": "__iterator__",
+                    "type": "iterator"
+                },
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "type": "number"
+                },
+                "after": {
+                    "code": "after",
+                    "name": "__after__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "n",
+                    "x"
+                ],
+                "outputs": [
+                    "iterator",
+                    "index",
+                    "after"
+                ]
+            },
+            "type": "loop",
+            "width": 8,
+            "x": 10,
+            "y": 13
+        },
+        "318270223": {
+            "display": {
+                "discription": "Function",
+                "name": "Function",
+                "text": {
+                    "__name__": "name",
+                    "__none__": "",
+                    "__params__": "params",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 318270223,
+            "inputs": {
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "abc",
+                    "type": "text",
+                    "value": null
+                },
+                "params": {
+                    "code": "params",
+                    "name": "__params__",
+                    "standard": [],
+                    "type": "list",
+                    "value": null
+                }
+            },
+            "name": "functionEvent",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "params": {
+                    "code": "params",
+                    "name": "__params__",
+                    "type": "list"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "params"
+                ],
+                "outputs": [
+                    "path",
+                    "params"
+                ]
+            },
+            "special": {
+                "inputs": {
+                    "params": {
+                        "invisible": true,
+                        "invisible-input": true
+                    }
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 2,
+            "y": 8
+        }
+    }
+}

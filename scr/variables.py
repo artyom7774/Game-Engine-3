@@ -7,6 +7,7 @@ import importlib.util
 import platform
 import random
 import pygame
+import orjson
 import json
 import os
 
@@ -112,6 +113,31 @@ class Size:
     @staticmethod
     def x(var) -> int:
         return round(size["width"] * (var / 100))
+
+
+def load(fp, *args, **kwargs):
+    try:
+        return orjson.loads(fp.read())
+
+    except:
+        return json.load(fp, *args, **kwargs)
+
+
+def loads(s, *args, **kwargs):
+    try:
+        return orjson.loads(s)
+
+    except:
+        return json.loads(s, *args, **kwargs)
+
+
+def dump(obj, fp, *args, **kwargs):
+    data = orjson.dumps(obj, *args, **kwargs)
+    fp.write(data.decode('utf-8'))
+
+
+def dumps(obj, *args, **kwargs):
+    return orjson.dumps(obj, *args, **kwargs).decode()
 
 
 def loader(path):

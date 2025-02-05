@@ -5,6 +5,8 @@ import shutil
 import os
 import sysconfig
 
+EXTENSION = ".pyd"
+
 
 class CustomBuildExt(build_ext):
     def get_ext_filename(self, ext_name):
@@ -12,7 +14,7 @@ class CustomBuildExt(build_ext):
 
         ext_suffix = sysconfig.get_config_var("EXT_SUFFIX")
         if ext_suffix and filename.endswith(ext_suffix):
-            filename = filename[: -len(ext_suffix)] + ".pyd"
+            filename = filename[: -len(ext_suffix)] + EXTENSION
 
         return filename
 

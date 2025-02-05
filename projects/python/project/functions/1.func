@@ -55,7 +55,7 @@
                 "text": {
                     "code": "text",
                     "name": "__text__",
-                    "standard": "def run(program, args, kwargs):\n\tcreateObject(\"player.obj\", getVar(\"var\", True), 0)\n",
+                    "standard": "def run(program, args, kwargs):\n\tcreateObject(\"player.obj\", getVar(\"var\", True) * 0, 0)\n",
                     "type": "text",
                     "value": null
                 },

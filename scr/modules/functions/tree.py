@@ -6,7 +6,13 @@ from scr.modules.functions.project import projectTreeGetPath, projectTreeGetFile
 
 from scr.variables import *
 
-import win32clipboard
+try:
+    import win32clipboard
+
+except BaseException:
+    win32clipboard = None
+
+import subprocess
 import shutil
 import typing
 import os
@@ -97,9 +103,7 @@ def copy(project) -> None:
         os.system(f"powershell -command \"Get-Item \"{os.getcwd()}/{path}\" | Set-Clipboard\"")
 
     elif SYSTEM == "Linux":
-        # TODO
-
-        print("ERROR: system (Linux) not supported this operation")
+        os.system(f"echo -n '{os.path.join(os.getcwd(), path)}' | xclip -selection clipboard")
 
     else:
         print("ERROR: system (Unknown) not supported this operation")
@@ -120,9 +124,19 @@ def paste(project) -> None:
             win32clipboard.CloseClipboard()
 
     def LinuxGetPath() -> typing.Any:
-        # TODO
+        try:
+            result = subprocess.check_output("xclip -o -selection clipboard", shell=True).decode('utf-8').strip()
 
-        return 0
+            if os.path.exists(result):
+                return result
+
+            else:
+                return None
+
+        except Exception as e:
+            print(f"ERROR: can't getting clipboard data: {e}")
+
+            return None
 
     def createCopyFile(path) -> str:
         index = 1

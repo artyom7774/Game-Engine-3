@@ -412,19 +412,34 @@ class CodeNodeConnector(QLabel):
         self.inputLeftText = None
         self.inputLeftRama = None
 
-        invisible = False if ("special" not in self.node or input["code"] not in self.node["special"]["inputs"] or "invisible" not in self.node["special"]["inputs"][input["code"]]) else self.node["special"]["inputs"][input["code"]]["invisible"]
-        type = None if ("special" not in self.node or input["code"] not in self.node["special"]["inputs"] or "type" not in self.node["special"]["inputs"][input["code"]]) else self.node["special"]["inputs"][input["code"]]["type"]
+        invisibleInput = False
+        invisible = False
+        type = None
+
+        if "special" in self.node:
+            if input["code"] in self.node["special"]["inputs"]:
+                special = self.node["special"]["inputs"][input["code"]]
+
+                if "invisible-input" in special:
+                    invisibleInput = special["invisible-input"]
+
+                if "invisible" in special:
+                    invisible = special["invisible"]
+
+                if "type" in special:
+                    type = special["type"]
 
         if input is not None:
             self.left = QLabel(self)
             self.left.setGeometry(0, 9, 10, 10)
             self.left.setAttribute(Qt.WA_TranslucentBackground)
 
-            if input["value"] is not None:
-                self.left.setPixmap(QPixmap(project.objects["main"]["config"]["connectors"]["sprites"][project.objects["main"]["function"]["objects"][str(input["value"]["id"])]["outputs"][input["value"]["name"]]["type"]]))
+            if not invisibleInput:
+                if input["value"] is not None:
+                    self.left.setPixmap(QPixmap(project.objects["main"]["config"]["connectors"]["sprites"][project.objects["main"]["function"]["objects"][str(input["value"]["id"])]["outputs"][input["value"]["name"]]["type"]]))
 
-            else:
-                self.left.setPixmap(QPixmap(project.objects["main"]["config"]["connectors"]["sprites"][input["type"]]))
+                else:
+                    self.left.setPixmap(QPixmap(project.objects["main"]["config"]["connectors"]["sprites"][input["type"]]))
 
             if self.node["type"] == "event" and self.input["type"] == "path":
                 self.left.hide()

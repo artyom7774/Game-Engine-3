@@ -26,7 +26,10 @@ class Compiler:
 
         self.settings = settings
 
+        self.debug = True
+
         self.nodesSortedByTypes = {}
+        self.nodesFunctionsSortedByName = {}
 
         self.timer = []
 
@@ -46,6 +49,12 @@ class Compiler:
 
         for id, node in self.nodes["objects"].items():
             self.nodesSortedByTypes[node["type"]][node["name"]].append(id)
+
+            if node["type"] == "event" and node["name"] == "functionEvent":
+                if node["inputs"]["name"]["standard"] not in self.nodesFunctionsSortedByName:
+                    self.nodesFunctionsSortedByName[node["inputs"]["name"]["standard"]] = []
+
+                self.nodesFunctionsSortedByName[node["inputs"]["name"]["standard"]].append(id)
 
         for id, node in self.nodes["objects"].items():
             for ids, second in self.nodes["objects"].items():
@@ -120,21 +129,25 @@ class Compiler:
 
                 continue
 
-            try:
+            if self.debug:
                 var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
 
-            except Exception as e:
-                self.error = True
+            else:
+                try:
+                    var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
 
-                self.information = {
-                    "inputs": self.nodes["objects"][str(id)]["inputs"],
-                    "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
-                    "display": self.nodes["objects"][str(id)]["display"],
-                    "message": e,
-                    "id": id
-                }
+                except Exception as e:
+                    self.error = True
 
-                return 0
+                    self.information = {
+                        "inputs": self.nodes["objects"][str(id)]["inputs"],
+                        "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
+                        "display": self.nodes["objects"][str(id)]["display"],
+                        "message": e,
+                        "id": id
+                    }
+
+                    return 0
 
             if type(var) == list:
                 for element in var:
@@ -204,3 +217,6 @@ class Compiler:
         for id in self.nodesSortedByTypes["event"]["everyTick"]:
             if self.project.fpsc % self.nodes["objects"][id]["inputs"]["N"]["standard"] == 0:
                 self.start(id)
+
+    def functionsByName(self, name):
+        return self.nodesFunctionsSortedByName[name]

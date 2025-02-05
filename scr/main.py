@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QLabel, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
-from PyQt5.QtGui import QKeySequence, QPixmap, QImage, QColor
+from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
+from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QIcon, Qt
 
 from scr.modules.widgets import TabFileBar, VersionLogScrollArea
@@ -147,7 +147,15 @@ class Main(QMainWindow):
             print("ERROR: can't download now project version, bad internet connection")
 
     def install(self) -> None:
-        os.system("setup.bat")
+        if SYSTEM == "Windows":
+            os.system("setup.bat")
+
+        elif SYSTEM == "Linux":
+            os.system("chmod +x setup.sh")
+            os.system("./setup.sh")
+
+        else:
+            print("ERROR: system (Unknown) not supported install python")
 
         with open("python/.gitignore", "w", encoding="utf-8") as file:
             file.write("*")

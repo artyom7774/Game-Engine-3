@@ -11,7 +11,11 @@ import ctypes
 import sys
 
 
-ctypes.windll.shcore.SetProcessDpiAwareness(True)
+try:
+    ctypes.windll.shcore.SetProcessDpiAwareness(True)
+
+except AttributeError:
+    pass
 
 pygame.init()
 

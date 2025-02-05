@@ -1,11 +1,11 @@
-# MADE BY GAME ENGINE 3.4.2
+# MADE BY GAME ENGINE 3.5.1
 
 import engine
 import socket
 import sys
 import os
 
-SOCKET_ID = 9725
+SOCKET_ID = 21360
 
 VARIABLES = {
     "globals": {'var': {'name': 'var', 'type': 'number', 'value': 9}},
@@ -14,7 +14,7 @@ VARIABLES = {
 }
 
 SETTINGS = {'name': 'GE3 project', 'icon': '', 'debug': False, 'fps': 60, 'tps': 20, 'start_scene': 'projects/python/project/scenes/%scene%1', 'width': 500, 'height': 500}
-PROGRAMS = {'projects/python/project/functions/1.func': {'variables': {}, 'objects': {'526881689': {'display': {'discription': 'starts at the start of the game', 'name': 'On start game', 'text': {'__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 526881689, 'inputs': {}, 'name': 'onStartGame', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 15, 'y': 7}, '902224121': {'display': {'discription': 'Run python code', 'name': 'Python', 'text': {'__answer__': 'answer', '__dict__': 'dict', '__list__': 'list', '__none__': '', '__path__': 'path', '__text__': 'text'}}, 'height': 5, 'id': 902224121, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 526881689, 'name': 'path'}}, 'text': {'code': 'text', 'name': '__text__', 'standard': 'def run(program, args, kwargs):\n\tcreateObject("player.obj", getVar("var", True), 0)\n', 'type': 'text', 'value': None}, 'list': {'code': 'list', 'name': '__list__', 'standard': [], 'type': 'list', 'value': None}, 'dict': {'code': 'dict', 'name': '__dict__', 'standard': {}, 'type': 'dict', 'value': None}}, 'name': 'python', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}, 'answer': {'code': 'answer', 'name': '__answer__', 'type': 'list'}}, 'sorting': {'inputs': ['path', 'text', 'list', 'dict'], 'outputs': ['path', 'answer']}, 'special': {'inputs': {'dict': {'invisible': True}, 'list': {'invisible': True}, 'text': {'height': 3, 'type': 'text-box'}}}, 'type': 'another', 'width': 10, 'x': 23, 'y': 7}}}}
+PROGRAMS = {'projects/python/project/functions/1.func': {'variables': {}, 'objects': {'526881689': {'display': {'discription': 'starts at the start of the game', 'name': 'On start game', 'text': {'__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 526881689, 'inputs': {}, 'name': 'onStartGame', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 15, 'y': 7}, '902224121': {'display': {'discription': 'Run python code', 'name': 'Python', 'text': {'__answer__': 'answer', '__dict__': 'dict', '__list__': 'list', '__none__': '', '__path__': 'path', '__text__': 'text'}}, 'height': 5, 'id': 902224121, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 526881689, 'name': 'path'}}, 'text': {'code': 'text', 'name': '__text__', 'standard': 'def run(program, args, kwargs):\n\tcreateObject("player.obj", getVar("var", True) * 0, 0)\n', 'type': 'text', 'value': None}, 'list': {'code': 'list', 'name': '__list__', 'standard': [], 'type': 'list', 'value': None}, 'dict': {'code': 'dict', 'name': '__dict__', 'standard': {}, 'type': 'dict', 'value': None}}, 'name': 'python', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}, 'answer': {'code': 'answer', 'name': '__answer__', 'type': 'list'}}, 'sorting': {'inputs': ['path', 'text', 'list', 'dict'], 'outputs': ['path', 'answer']}, 'special': {'inputs': {'dict': {'invisible': True}, 'list': {'invisible': True}, 'text': {'height': 3, 'type': 'text-box'}}}, 'type': 'another', 'width': 10, 'x': 23, 'y': 7}}}}
 OBJECTS = {'player.obj': {'type': 'DynamicObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 40, 43], 'sprite': ['assets/player.png', 0, 0, -1, -1], 'group': 'player', 'layer': 0, 'speed': 5, 'gravity': 300, 'jumpPower': 15, 'slidingStep': 1000000.0}}}
 SCENES = {'projects/python/project/scenes/%scene%1': {'objects': {'player-0.objc': {'type': 'DynamicObject', 'variables': {'pos': [-61, -136], 'hitbox': [0, 0, 40, 43], 'sprite': ['assets/player.png', 0, 0, -1, -1], 'group': 'player', 'layer': 0, 'speed': 5, 'gravity': 300, 'jumpPower': 15, 'slidingStep': 1000000.0}}}, 'focus': 'player-0.objc'}}
 
@@ -46,7 +46,10 @@ class Compiler:
 
         self.settings = settings
 
+        self.debug = True
+
         self.nodesSortedByTypes = {}
+        self.nodesFunctionsSortedByName = {}
 
         self.timer = []
 
@@ -66,6 +69,12 @@ class Compiler:
 
         for id, node in self.nodes["objects"].items():
             self.nodesSortedByTypes[node["type"]][node["name"]].append(id)
+
+            if node["type"] == "event" and node["name"] == "functionEvent":
+                if node["inputs"]["name"]["standard"] not in self.nodesFunctionsSortedByName:
+                    self.nodesFunctionsSortedByName[node["inputs"]["name"]["standard"]] = []
+
+                self.nodesFunctionsSortedByName[node["inputs"]["name"]["standard"]].append(id)
 
         for id, node in self.nodes["objects"].items():
             for ids, second in self.nodes["objects"].items():
@@ -140,21 +149,25 @@ class Compiler:
 
                 continue
 
-            try:
+            if self.debug:
                 var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
 
-            except Exception as e:
-                self.error = True
+            else:
+                try:
+                    var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
 
-                self.information = {
-                    "inputs": self.nodes["objects"][str(id)]["inputs"],
-                    "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
-                    "display": self.nodes["objects"][str(id)]["display"],
-                    "message": e,
-                    "id": id
-                }
+                except Exception as e:
+                    self.error = True
 
-                return 0
+                    self.information = {
+                        "inputs": self.nodes["objects"][str(id)]["inputs"],
+                        "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
+                        "display": self.nodes["objects"][str(id)]["display"],
+                        "message": e,
+                        "id": id
+                    }
+
+                    return 0
 
             if type(var) == list:
                 for element in var:
@@ -224,6 +237,9 @@ class Compiler:
         for id in self.nodesSortedByTypes["event"]["everyTick"]:
             if self.project.fpsc % self.nodes["objects"][id]["inputs"]["N"]["standard"] == 0:
                 self.start(id)
+
+    def functionsByName(self, name):
+        return self.nodesFunctionsSortedByName[name]
 
 
 class Tps:

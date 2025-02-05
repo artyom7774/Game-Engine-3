@@ -57,7 +57,7 @@ class CollisionTable(QTableWidget):
 
                 layout = QVBoxLayout()
 
-                if row == col:
+                if row == col and False:
                     cross = QLabel()
                     cross.setPixmap(CollisionTable.createСrossPixMap(self.widths[str(col)] - 1, 40 - 1))
 
