@@ -1,8 +1,9 @@
-from PyQt5.QtWidgets import QLabel, QTreeWidget, QTreeWidgetItem, QWidget, QHBoxLayout, QSizePolicy, QSpacerItem, QPushButton
+from PyQt5.QtWidgets import QLabel, QCheckBox, QTreeWidget, QTreeWidgetItem, QWidget, QHBoxLayout, QSizePolicy, QSpacerItem, QPushButton
 
 from scr.modules.widgets import FocusLineEdit, FocusComboBox
 
 from scr.modules.functions.main.files.code import CodeAdditionsVarsType
+from scr.modules.dialogs import animatorCreateDialog
 
 from engine.vector.int import Vec4i
 
@@ -12,11 +13,18 @@ import math
 import json
 import os
 
+SORTING_OBJECT_TYPES = {
+    "StaticObject": 1,
+    "DynamicObject": 2
+}
+
 
 class Object:
     class ObjectTreeWidgetItem(QWidget):
         def __init__(self, project, obj: dict, temp: dict, path: str, parent=None) -> None:
             QWidget.__init__(self, parent)
+
+            self.project = project
 
             self.complited = 0
 
@@ -35,11 +43,27 @@ class Object:
 
                 self.value.saveAllValues = lambda: Object.function(self.value, project, save, temp, path, init=False)
 
+            elif temp["type"] == "bool":
+                self.value = QCheckBox(project)
+                self.value.setFixedHeight(20)
+                self.value.setChecked(bool(temp["value"]))
+
+                self.value.clicked.connect(lambda: Object.function(self.value, project, save, temp, path, init=False))
+
             elif temp["type"] == "choose":
                 self.value = FocusComboBox(releasedFocusFunction=lambda: Object.function(self.value, project, save, temp, path))
                 self.value.currentIndexChanged.connect(lambda: self.value.clearFocus())
                 self.value.addItems([translate(element) for element in temp["choose"]["input"]])
                 self.value.setCurrentIndex([temp["value"] == element for i, element in enumerate(temp["choose"]["output"])].index(True))
+
+                self.value.saveAllValues = lambda: Object.function(self.value, project, save, temp, path, init=False)
+
+            elif temp["type"] == "animator":
+                self.value = QPushButton(self)
+                self.value.setText(translate("Animation"))
+                self.value.setFixedHeight(20)
+
+                self.value.clicked.connect(lambda: animatorCreateDialog(self.project))
 
                 self.value.saveAllValues = lambda: Object.function(self.value, project, save, temp, path, init=False)
 
@@ -194,6 +218,8 @@ class Object:
         if include(project, obj, "type", class_) == -1:
             pass
 
+        obj = dict(sorted(obj.items(), key=lambda x: -1 if x[0] not in SORTING_OBJECT_TYPES else SORTING_OBJECT_TYPES[x[0]]))
+
         for key, value in obj.items():
             if key == "type":
                 continue
@@ -312,5 +338,5 @@ class Object:
     @staticmethod
     def saveAllValues(project):
         for widget in project.objects["main"]["widgets"]:
-            if hasattr(widget.value, "saveAllValues"):
+            if hasattr(widget, "value") and hasattr(widget.value, "saveAllValues"):
                 widget.value.saveAllValues()

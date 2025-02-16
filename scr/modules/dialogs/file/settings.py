@@ -9,6 +9,21 @@ import threading
 
 class SettingsFunctions:
     @staticmethod
+    def newRunProgram() -> None:
+        if SYSTEM == "Windows":
+            if DIVELOP:
+                os.system("venv\Scripts\python.exe \"Game Engine 3.py\"")
+
+            else:
+                os.system("\"Game Engine 3.exe\"")
+
+        elif SYSTEM == "Linux":
+            pass
+
+        else:
+            print("ERROR: system (Unknown) not supported this opperation")
+
+    @staticmethod
     def confirm(project, dialog, event) -> None:
         global BUTTON_RED_STYLE, BUTTON_BLUE_STYLE
 
@@ -27,66 +42,15 @@ class SettingsFunctions:
 
         qdarktheme.setup_theme(theme=SETTINGS["theme"])
 
-        if SETTINGS["theme"] == "dark":
-            BUTTON_RED_STYLE = """
-            QPushButton {
-                color: red;
-            }
-            QPushButton:hover {
-                background-color: #3B2727;
-            }
-            QPushButton:pressed {
-                background-color: #F66060;
-                color: black;
-            }
-            """
-
-            BUTTON_BLUE_STYLE = """
-            QPushButton {
-                color: #8ab4f7;
-            }
-            QPushButton:hover {
-                background-color: #272e3b;
-            }
-            QPushButton:pressed {
-                background-color: #5f9af4;
-                color: black;
-            }
-            """
-
-        else:
-            BUTTON_RED_STYLE = """
-            QPushButton {
-                color: red;
-            }
-            QPushButton:hover {
-                background-color: #F0E0E0;
-            }
-            QPushButton:pressed {
-                background-color: #F66060;
-                color: black;
-            }
-            """
-
-            BUTTON_BLUE_STYLE = """
-            QPushButton {
-                color: #1E90FF;
-            }
-            QPushButton:hover {
-                background-color: #E0E8F0;
-            }
-            QPushButton:pressed {
-                background-color: #ADD8E6;
-                color: black;
-            }
-            """
-
         with open("scr/files/settings/settings.json", "w", encoding="utf-8") as file:
             json.dump(SETTINGS, file, indent=4)
 
-        project.init()
+        thr = threading.Thread(target=lambda: SettingsFunctions.newRunProgram())
+        thr.start()
 
         dialog.close()
+
+        project.close()
 
     @staticmethod
     def cancel(project, dialog, event) -> None:
@@ -125,7 +89,7 @@ class Settings(QDialog):
         self.project = project
 
         self.setWindowTitle(translate("Settings"))
-        self.setFixedSize(1280, 800)
+        self.setFixedSize(1280, 720)
 
         desktop = QtWidgets.QApplication.desktop()
         self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
@@ -169,7 +133,7 @@ class Settings(QDialog):
         # COMFIRM
 
         self.objects["confirm_button"] = QPushButton(parent=self, text=translate("Confirm"))
-        self.objects["confirm_button"].setGeometry(20, 740, 300, 40)
+        self.objects["confirm_button"].setGeometry(20, 740 - 80, 300, 40)
         self.objects["confirm_button"].setFont(FONT)
         self.objects["confirm_button"].show()
 
@@ -179,7 +143,7 @@ class Settings(QDialog):
         self.objects["confirm_button"].setStyleSheet(BUTTON_BLUE_STYLE)
 
         self.objects["cancel_button"] = QPushButton(parent=self, text=translate("Cancel"))
-        self.objects["cancel_button"].setGeometry(340, 740, 300, 40)
+        self.objects["cancel_button"].setGeometry(340, 740 - 80, 300, 40)
         self.objects["cancel_button"].setFont(FONT)
         self.objects["cancel_button"].show()
 
@@ -191,7 +155,7 @@ class Settings(QDialog):
         # RESET SETTINGS
 
         self.objects["reset_button"] = QPushButton(parent=self, text=translate("Reset settings"))
-        self.objects["reset_button"].setGeometry(960, 740, 300, 40)
+        self.objects["reset_button"].setGeometry(960, 740 - 80, 300, 40)
         self.objects["reset_button"].setFont(FONT)
         self.objects["reset_button"].show()
 
@@ -203,7 +167,7 @@ class Settings(QDialog):
         # REINSTALL PYTHON
 
         self.objects["reset_button"] = QPushButton(parent=self, text=translate("Reinstall python"))
-        self.objects["reset_button"].setGeometry(960, 680, 300, 40)
+        self.objects["reset_button"].setGeometry(960, 680 - 80, 300, 40)
         self.objects["reset_button"].setFont(FONT)
         self.objects["reset_button"].show()
 

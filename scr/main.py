@@ -72,7 +72,8 @@ class Main(QMainWindow):
 
         self.initialization()
 
-        self.versionUpdateMessage()
+        if not FLAGS["not-view-version-update"]:
+            self.versionUpdateMessage()
 
         self.customClickEvent()
 

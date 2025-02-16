@@ -51,17 +51,14 @@ class CreateObjectFunctions:
 
         out = {
             "dependences": objects["dependences"],
-            "dependence": objects["dependences"][objects["standard"]["type"]]
+            "dependence": objects["dependences"][objects["standard"]["type"]],
+            "type": {
+                "name": objects["name"]["type"],
+                "value": objects["standard"]["type"],
+                "type": objects["type"]["type"]
+            },
+            "variables": {}
         }
-
-        out["type"] = {
-            "name": objects["name"]["type"],
-            "value": objects["standard"]["type"],
-            "type": objects["type"]["type"]
-        }
-
-        out["variables"] = {}
-        out["animator"] = dict(ANIMATOR_BASE_VALUE)
 
         if out["type"]["type"] == "choose":
             out["type"]["choose"] = objects["specials"]["choose"]["type"]

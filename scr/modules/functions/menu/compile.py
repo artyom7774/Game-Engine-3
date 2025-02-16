@@ -17,10 +17,18 @@ import os
 PROGRAM = \
 """# MADE BY GAME ENGINE %ENGINE_VERSION%
 
+import tkinter
 import engine
 import socket
 import sys
 import os
+            
+root = tkinter.Tk()
+
+width = root.winfo_screenwidth()
+height = root.winfo_screenheight()
+
+root.destroy()
 
 SOCKET_ID = %SOCKET_ID%
 
@@ -56,6 +64,8 @@ class Tps:
 
 class Game(engine.Application):
     def __init__(self):
+        global width, height
+    
         engine.Application.__init__(self)
 
         self.objects.collisions = engine.Collision("collision.cfg")
@@ -63,6 +73,10 @@ class Game(engine.Application):
         self.setDebug(SETTINGS["debug"])
 
         self.setSize(SETTINGS["width"], SETTINGS["height"])
+
+        if SETTINGS["full_screen_mode"]:
+            self.setDisplaySize(width, height)
+        
         self.setName(SETTINGS["name"])
         self.setIcon(SETTINGS["icon"])
 

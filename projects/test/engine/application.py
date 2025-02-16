@@ -9,8 +9,15 @@ import pygame
 import typing
 import ctypes
 import sys
+import os
 
-ctypes.windll.shcore.SetProcessDpiAwareness(True)
+os.environ["SDL_VIDEO_CENTERED"] = "1"
+
+try:
+    ctypes.windll.shcore.SetProcessDpiAwareness(True)
+
+except AttributeError:
+    pass
 
 pygame.init()
 
@@ -92,10 +99,10 @@ class Application:
 
     def init(self) -> None:
         if self.visiable:
-            self.surface = pygame.display.set_mode((self.usingWidth, self.usingHeight))
+            self.surface = pygame.display.set_mode((self.displayWidth, self.displayHeight))
 
         else:
-            self.surface = pygame.display.set_mode((self.usingWidth, self.usingHeight), pygame.HIDDEN)
+            self.surface = pygame.display.set_mode((self.displayWidth, self.displayHeight), pygame.HIDDEN)
 
         self.screen = pygame.Surface((self.usingWidth, self.usingHeight))
         self.clock = pygame.time.Clock()
@@ -124,6 +131,8 @@ class Application:
     def setSize(self, width: int = None, height: int = None) -> None:
         self.setDisplaySize(width, height)
         self.setUsingSize(width, height)
+
+        self.init()
 
     def setUsingSize(self, width: int = None, height: int = None) -> None:
         self.usingWidth = width if width is not None else self.usingWidth
@@ -181,7 +190,7 @@ class Application:
         self.objects.draw()
 
     def update(self) -> None:
-        self.doCollisionsUpdate = False
+        self.doCollisionsUpdate = True
 
         self.mouse = pygame.mouse.get_pos()
 

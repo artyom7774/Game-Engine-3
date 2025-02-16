@@ -1,10 +1,11 @@
-from PyQt5.QtWidgets import QTreeWidget, QWidget, QSpacerItem, QSizePolicy, QHBoxLayout, QLabel, QTreeWidgetItem, QCheckBox, QMenu, QAction
+from PyQt5.QtWidgets import QTreeWidget, QPushButton, QWidget, QSpacerItem, QSizePolicy, QHBoxLayout, QLabel, QTreeWidgetItem, QCheckBox, QMenu, QAction
 from PyQt5.QtGui import QPixmap, QImage, QCursor, QPainter, QPen, QColor
 from PyQt5.Qt import Qt, QTimer, QPoint
 
-from scr.modules.dialogs import CreateSceneObject
+from scr.modules.dialogs import CreateSceneObject, animatorCreateDialog
 
 from scr.modules.dialogs.tree.create_object import CreateObjectFunctions
+from scr.modules.functions.main.files import Object
 from scr.modules.functions.main.files.object import Object as ObjectTypingClass
 
 from scr.modules.widgets import FocusLineEdit, FocusComboBox
@@ -169,6 +170,8 @@ class SceneAdditions:
         def __init__(self, project, obj: dict, temp: dict, path: str, file: str, type: str = "object", parent=None) -> None:
             QWidget.__init__(self, parent)
 
+            self.project = project
+
             self.complited = 0
 
             layout = QHBoxLayout()
@@ -214,8 +217,18 @@ class SceneAdditions:
 
             elif temp["type"] == "bool":
                 self.value = QCheckBox(parent=project)
-                self.value.stateChanged.connect(lambda: self.focusOutCheckBox(project, save, temp, path))
                 self.value.setChecked(bool(temp["value"]))
+
+                self.value.stateChanged.connect(lambda: self.focusOutCheckBox(project, save, temp, path))
+
+            elif temp["type"] == "animator":
+                self.value = QPushButton(self)
+                self.value.setText(translate("Animation"))
+                self.value.setFixedHeight(20)
+
+                self.value.clicked.connect(lambda: animatorCreateDialog(self.project, save))
+
+                self.value.saveAllValues = lambda: ObjectTypingClass.function(self.value, project, save, temp, path, init=False)
 
             elif temp["type"] == "none":
                 pass
@@ -248,7 +261,7 @@ class SceneAdditions:
             self.focusOut(project)
 
         def focusOutCheckBox(self, project, save, temp, path) -> None:
-            ObjectTypingClass.function(self.value, project, project.cash["file"][project.selectFile].settings, temp, path)
+            ObjectTypingClass.function(self.value, project, save, temp, path)
 
             self.focusOut(project)
 
@@ -336,19 +349,19 @@ class Scene:
 
         try:
             if project.selectFile not in project.application:
-                project.application[project.selectFile] = project.engine.Application(usingWidth=project.desktop.width(), usingHeight=project.desktop.height(), visiable=False, debug=False, autoUpdateScreen=False)
+                project.application[project.selectFile] = project.engine.Application(usingWidth=project.desktop.width(), usingHeight=project.desktop.height(), visiable=False, debug=False, autoUpdateScreen=False, forcedViewObject=True)
 
-                project.cash["file"][project.selectFile].camera = project.engine.objects.DynamicObject(project.application[project.selectFile], (0, 0), (0, 0, 1, 1), group="__mouse__", gravity=0, layer=1e9)
+                project.cash["file"][project.selectFile].camera = project.engine.objects.DynamicObject(project.application[project.selectFile], (0, 0), (0, 0, 1, 1), group="__mouse__", gravity=0, layer=int(1e9))
 
                 project.application[project.selectFile].objects.add(project.cash["file"][project.selectFile].camera)
 
-                project.application[project.selectFile].objects.add(project.engine.objects.StaticObject(project.application[project.selectFile], (0, -100000), (0, 0, 1, 200000), group="__debug__", layer=1e9))
-                project.application[project.selectFile].objects.add(project.engine.objects.StaticObject(project.application[project.selectFile], (-100000, 0), (0, 0, 200000, 1), group="__debug__", layer=1e9))
+                project.application[project.selectFile].objects.add(project.engine.objects.StaticObject(project.application[project.selectFile], (0, -100000), (0, 0, 1, 200000), group="__debug__", layer=int(1e9)))
+                project.application[project.selectFile].objects.add(project.engine.objects.StaticObject(project.application[project.selectFile], (-100000, 0), (0, 0, 200000, 1), group="__debug__", layer=int(1e9)))
 
                 project.application[project.selectFile].setCamera(project.engine.camera.FocusCamera(project.application[project.selectFile], project.cash["file"][project.selectFile].camera))
 
-        except TypeError:
-            pass
+        except TypeError as e:
+            print(e)
 
         else:
             try:
@@ -410,6 +423,9 @@ class Scene:
                 type, variables = Scene.loadObjectFile(project, file[:file.rfind(".")][file.rfind("-") + 1:], json.load(f))
 
                 obj = getattr(project.engine.objects, type)(application, **variables, id=id, variables={"file": f"{project.selectFile}/{file}"})
+
+                if hasattr(obj, "gravity"):
+                    obj.gravity = 0
 
                 application.objects.add(obj)
 
@@ -568,7 +584,7 @@ class Scene:
             application.objects.add(project.engine.objects.StaticObject(
                 application, [x - projectSettings["values"]["width"]["value"] // 2, y - projectSettings["values"]["height"]["value"] // 2],
                 [0, 0, projectSettings["values"]["width"]["value"], projectSettings["values"]["height"]["value"]],
-                group="__debug_center_rama__", layer=1e9 + 2
+                group="__debug_center_rama__", layer=int(1e9 + 2)
             ))
 
         # VISIABLE

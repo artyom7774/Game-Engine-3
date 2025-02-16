@@ -152,11 +152,17 @@ def loader(path):
 
 size = {}
 
+FLAGS = {
+    "not-view-version-update": False
+}
+
 SYSTEM = platform.system()
 RELEASE = platform.release()
 
 IMAGE_FORMATES = "jpeg jpg jpe jfif png ico tiff tif eps svg".split()
 BLOCKED_FORMATES = "cfg obj objc func".split()
+
+DIVELOP = True if os.getenv("PYCHARM_HOSTED") == "1" else False
 
 DONT_OPEN_FORMATES = ()
 
@@ -171,10 +177,6 @@ OBJECT_CURRECT_TEST = ["type", "type/name", "type/value", "type/type", "StaticOb
 NODE_CURRECT_TEST = ["display", "id", "width", "height", "x", "y", "name", "inputs", "outputs", "type"]
 
 SOCKET_ID = random.randint(2**10, 2**16 - 1)
-
-ANIMATOR_BASE_VALUE = {
-
-}
 
 SPRITES = {
     "dir": "scr/files/sprites/dir.png",

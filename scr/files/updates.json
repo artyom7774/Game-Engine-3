@@ -9,7 +9,9 @@
         "3.4.0",
         "3.4.1",
         "3.4.2",
-        "3.5.0"
+        "3.5.0",
+        "3.5.1",
+        "3.6.0"
     ],
 
     "updates": {
@@ -30,7 +32,7 @@
 
         "3.1.0": {
             "name": "3.1.0",
-            "text": "- fixed bug with visiable versions\n- optimize run project\n- project site with help menu: https://artyom7774.github.io\n- fixed bug with save (executable) project\n- create collision editor"
+            "text": "- fixed bug with visiable versions\n- optimize engine\n- project site with help menu: https://artyom7774.github.io\n- fixed bug with save (executable) project\n- create collision editor"
         },
 
         "3.2.0": {
@@ -60,12 +62,22 @@
 
         "3.5.0": {
             "name": "3.5.0",
-            "text": "- new node for write code on python\n- using more than one functions in project\n- debugger for run project\n- engine has been optimized by 2 times"
+            "text": "- new node for write code on python\n- using more than one functions in project\n- debugger for run project\n- optimized engine (by 2 times)"
         },
 
         "3.5.1": {
             "name": "3.5.1",
             "text": "- node for run function and initializate function"
+        },
+
+        "3.6.0": {
+            "name": "3.6.0",
+            "text": "- mode for full screen in settings\n- param for invisible object (working in run project)\n- optimized engine"
+        },
+
+        "3.7.0": {
+            "name": "3.6.0",
+            "text": "- changed object physics\n- animations"
         }
     }
 }

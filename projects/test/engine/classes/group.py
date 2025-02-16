@@ -137,7 +137,7 @@ class ObjectGroup:
         px = self.game.camera.x()
         py = self.game.camera.y()
 
-        for obj in sorted(self.objects, key=lambda x: x.drawPriority):
+        for obj in sorted(self.objects, key=lambda x: x.drawPriority + x.pos.y * (10 ** -16)):
             if obj.sprite is not None:
                 sprite = None
 

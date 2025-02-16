@@ -42,7 +42,6 @@ class CreateSceneObjectFunctions:
 
         shutil.copyfile(path, out)
 
-        # поменять на Vec2f
         position = [
             position.x() - project.objects["main"]["scene"].width() // 2 + project.cash["file"][project.selectFile].camera.pos.x,
             position.y() - project.objects["main"]["scene"].height() // 2 + project.cash["file"][project.selectFile].camera.pos.y
