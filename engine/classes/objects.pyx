@@ -237,7 +237,7 @@ cdef class DynamicObject(StaticObject):
             pass
 
         if self.collision(0, 1):
-            self.vectors["__fall__"].power = 1
+            self.vectors["__fall__"].power = 0
 
         else:
             self.vectors["__fall__"].power += self.gravity / 1000
@@ -252,7 +252,13 @@ cdef class DynamicObject(StaticObject):
             pos.x += x
             pos.y += y
 
-            vector.power -= vector.decreaseSpeed
+            # vector.power -= vector.decreaseSpeed
+
+            x = max(0, abs(x) - self.slidingStep) * (1 if x >= 0 else -1)
+            y = max(0, abs(y) - self.gravity / 1000) * (1 if y >= 0 else -1)
+
+            vector.power = math.sqrt(x ** 2 + y ** 2)
+            vector.angle = math.atan2(y, x)
 
             if vector.power <= FLOAT_PRECISION and name != "__fall__":
                 rem.append(name)

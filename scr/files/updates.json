@@ -11,8 +11,7 @@
         "3.4.2",
         "3.5.0",
         "3.5.1",
-        "3.6.0",
-        "3.7.0"
+        "3.6.0"
     ],
 
     "updates": {
@@ -73,12 +72,7 @@
 
         "3.6.0": {
             "name": "3.6.0",
-            "text": "- mode for full screen in settings\n- param for invisible object (working in run project)\n- optimized engine"
-        },
-
-        "3.7.0": {
-            "name": "3.7.0",
-            "text": "- changed object physics\n- animations"
+            "text": "- mode for full screen in settings\n- param for invisible object (working in run project)\n- optimized engine\n- changed object physics\n- animations"
         }
     }
 }

@@ -154,14 +154,16 @@ class ObjectGroup:
         py = self.game.camera.y()
 
         for obj in sorted(self.objects, key=lambda x: x.drawPriority):
-            if obj.sprite is not None:
-                sprite = None
+            sprite = None
 
+            if obj.sprite is not None:
                 if type(obj.sprite) == Sprite:
                     sprite = obj.sprite.get()
 
                 elif type(obj.sprite) == list:
                     alphaRect(self.game.screen, obj.sprite, SquareHitbox([obj.pos.x, obj.pos.y, obj.hitbox.width, obj.hitbox.height]))
+
+                    continue
 
                 elif type(obj.sprite) == types.FunctionType:
                     obj.sprite()
@@ -171,15 +173,13 @@ class ObjectGroup:
                 else:
                     sprite = obj.sprite.get(obj)
 
-            if obj.sprite is not None and sprite is not None and type(obj.sprite) != list:
-                obj.sprite.pos.x = 0
-                obj.sprite.pos.y = 0
+            if not obj.invisible or self.game.forcedViewObject:
+                if obj.sprite is not None and sprite is not None and type(obj.sprite) != list:
+                    obj.sprite.pos.x = 0
+                    obj.sprite.pos.y = 0
 
-                if self.game.usingWidth + 200 > obj.pos.x + obj.sprite.pos.x + px > -200 and self.game.usingHeight + 200 > obj.pos.y + obj.sprite.pos.y + py > -200:
-                    self.game.screen.blit(sprite, (obj.pos.x + obj.sprite.pos.x + px, obj.pos.y + obj.sprite.pos.y + py))
-
-                # else:
-                #     print(f"not visiable: {obj.sprite.pos.x} {obj.sprite.pos.y}")
+                    if self.game.usingWidth + 200 > obj.pos.x + obj.sprite.pos.x + px > -200 and self.game.usingHeight + 200 > obj.pos.y + obj.sprite.pos.y + py > -200:
+                        self.game.screen.blit(sprite, (obj.pos.x + obj.sprite.pos.x + px, obj.pos.y + obj.sprite.pos.y + py))
 
             if self.game.debug or (obj.group.startswith("__") and obj.group.endswith("__") and not obj.group == "__debug_unvisiable__"):
                 pygame.draw.rect(

@@ -10510,7 +10510,7 @@ static PyObject *__pyx_pf_6engine_7classes_7objects_13DynamicObject_6update(stru
  *             pass
  * 
  *         if self.collision(0, 1):             # <<<<<<<<<<<<<<
- *             self.vectors["__fall__"].power = 1
+ *             self.vectors["__fall__"].power = 0
  * 
  */
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_collision); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 239, __pyx_L1_error)
@@ -10525,7 +10525,7 @@ static PyObject *__pyx_pf_6engine_7classes_7objects_13DynamicObject_6update(stru
     /* "engine/classes/objects.pyx":240
  * 
  *         if self.collision(0, 1):
- *             self.vectors["__fall__"].power = 1             # <<<<<<<<<<<<<<
+ *             self.vectors["__fall__"].power = 0             # <<<<<<<<<<<<<<
  * 
  *         else:
  */
@@ -10535,14 +10535,14 @@ static PyObject *__pyx_pf_6engine_7classes_7objects_13DynamicObject_6update(stru
     }
     __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_v_self->vectors, __pyx_n_s_fall); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 240, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_power, __pyx_int_1) < 0) __PYX_ERR(0, 240, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_power, __pyx_int_0) < 0) __PYX_ERR(0, 240, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
     /* "engine/classes/objects.pyx":239
  *             pass
  * 
  *         if self.collision(0, 1):             # <<<<<<<<<<<<<<
- *             self.vectors["__fall__"].power = 1
+ *             self.vectors["__fall__"].power = 0
  * 
  */
     goto __pyx_L5;
@@ -15618,7 +15618,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *             pass
  * 
  *         if self.collision(0, 1):             # <<<<<<<<<<<<<<
- *             self.vectors["__fall__"].power = 1
+ *             self.vectors["__fall__"].power = 0
  * 
  */
   __pyx_tuple__13 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 239, __pyx_L1_error)

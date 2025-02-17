@@ -227,57 +227,45 @@ cdef class DynamicObject(StaticObject):
     def __repr__(self):
         return f"DynamicObject(id = {self.id} pos = {self.pos})"
 
-        def update(self, collisions: list = None):
+    def update(self, collisions: list = None):
         if collisions is None:
             collisions = []
 
         super().update(collisions)
 
-        cdef bint collideRight = self.collision(1, 0)
-        cdef bint collideLeft = self.collision(-1, 0)
-        cdef bint collideFloor = self.collision(0, 1)
-        cdef bint collideCeiling = self.collision(0, -1)
+        if self.collision(0, -1):
+            pass
 
+        if self.collision(0, 1):
+            self.vectors["__fall__"].power = 0
+
+        else:
+            self.vectors["__fall__"].power += self.gravity / 1000
+
+        pos = Vec2f()
         rem = []
 
         for name, vector in self.vectors.items():
             x = vector.power * math.sin(math.radians(vector.angle))
             y = vector.power * math.cos(math.radians(vector.angle))
 
-            # Обработка горизонтальных столкновений
-            if (collideRight and x > 0) or (collideLeft and x < 0):
-                vector.power = abs(y)
-                vector.angle = 0 if y < 0 else 180
+            pos.x += x
+            pos.y += y
 
-            # Обработка вертикальных столкновений
-            if (collideFloor and y > 0) or (collideCeiling and y < 0):
-                vector.power = abs(x)
-                vector.angle = 90 if x > 0 else 270
+            # vector.power -= vector.decreaseSpeed
 
-            if abs(vector.power) <= FLOAT_PRECISION and name not in ("__fall__",):
+            x = max(0, abs(x) - self.slidingStep) * (1 if x >= 0 else -1)
+            y = max(0, abs(y) - self.gravity / 1000) * (1 if y >= 0 else -1)
+
+            vector.power = math.sqrt(x ** 2 + y ** 2)
+            vector.angle = math.atan2(y, x)
+
+            if vector.power <= FLOAT_PRECISION and name != "__fall__":
                 rem.append(name)
 
         for name in rem:
             self.vectors.pop(name)
 
-        # Обновление гравитации: при соприкосновении с полом сбрасываем силу падения,
-        # иначе увеличиваем силу гравитации. При этом обязательно устанавливаем угол вниз (0),
-        # чтобы гравитация не добавляла горизонтального смещения.
-        if collideFloor:
-            self.vectors["__fall__"].power = 0
-        else:
-            self.vectors["__fall__"].angle = 0  # угол 0 соответствует движению вниз
-            self.vectors["__fall__"].power += self.gravity / 1000
-
-        pos = Vec2f()
-
-        for name, vector in self.vectors.items():
-            x = vector.power * math.sin(math.radians(vector.angle))
-            y = vector.power * math.cos(math.radians(vector.angle))
-            pos.x += x
-            pos.y += y
-
-        print(pos.x, pos.y)
         self.move(pos.x, pos.y)
 
     def moveByAngle(self, angle: float, speed: float = None, slidingStep: float = None, name: str = "vector", specifical: bool = False):

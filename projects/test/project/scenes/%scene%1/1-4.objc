@@ -139,7 +139,7 @@
         },
         "invisible": {
             "name": "Invisible",
-            "value": true,
+            "value": false,
             "type": "bool"
         }
     }

@@ -74,7 +74,7 @@
         "gravity": 1000,
         "jumpPower": 10,
         "slidingStep": 1e6,
-        "invisible": true,
+        "invisible": false,
         "animation": {
             "groups": {
                 "group": {

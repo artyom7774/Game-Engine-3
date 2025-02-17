@@ -5,12 +5,10 @@
             "StaticObject"
         ]
     },
-    "dependence": [
-        "StaticObject"
-    ],
+    "dependence": [],
     "type": {
         "name": "Object type",
-        "value": "DynamicObject",
+        "value": "StaticObject",
         "type": "choose",
         "choose": {
             "input": [
@@ -139,7 +137,7 @@
         },
         "invisible": {
             "name": "Invisible",
-            "value": true,
+            "value": false,
             "type": "bool"
         }
     }
