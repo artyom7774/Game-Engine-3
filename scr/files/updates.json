@@ -72,7 +72,7 @@
 
         "3.6.0": {
             "name": "3.6.0",
-            "text": "- mode for full screen in settings\n- param for invisible object (working in run project)\n- optimized engine\n- changed object physics\n- animations"
+            "text": "- mode for full screen in settings\n- param for invisible object (working in run project)\n- optimized engine\n- changed object physics\n- animations (in progress...)"
         }
     }
 }
