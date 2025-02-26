@@ -11,7 +11,7 @@ import os
 
 class CreateObjectFunctions:
     @staticmethod
-    def create(project, dialog, event, name: str = None, logger: bool = True, load: str = "engine/files/objects.json", save: str = None) -> None:
+    def create(project, dialog, event, name: str = None, logger: bool = True, loadFile: str = "engine/files/objects.json", save: str = None) -> None:
         if save is None:
             path = projectTreeGetFilePath(projectTreeGetPath(project.objects["tree_project"].selectedItems()[0]))
 
@@ -46,8 +46,8 @@ class CreateObjectFunctions:
 
         # CREATE
 
-        with open(load, "r", encoding="utf-8") as file:
-            objects = json.load(file)
+        with open(loadFile, "r", encoding="utf-8") as file:
+            objects = load(file)
 
         out = {
             "dependences": objects["dependences"],
@@ -85,11 +85,11 @@ class CreateObjectFunctions:
 
         if name == "":
             with open(f"{path}", "w", encoding="utf-8") as file:
-                json.dump(out, file, indent=4)
+                dump(out, file, indent=4)
 
         else:
             with open(f"{path}/{name}.obj", "w", encoding="utf-8") as file:
-                json.dump(out, file, indent=4)
+                dump(out, file, indent=4)
 
         project.init()
 

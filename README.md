@@ -10,4 +10,3 @@
 - unpack the archive
 - activate program (after the first activation, python and the necessary libraries will be installed)
 <br>
-You can find projects maked on GE3 on this repository: https://github.com/artyom7774/Game-Engine-3-projects

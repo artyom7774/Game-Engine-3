@@ -220,7 +220,7 @@ class TextEditor(QDialog):
             self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = TypeSet.set_(type, text)
 
         with open(self.project.selectFile, "w", encoding="utf-8") as file:
-            json.dump(self.project.objects["main"]["function"], file, indent=4)
+            dump(self.project.objects["main"]["function"], file, indent=4)
 
         self.project.init()
 
@@ -380,7 +380,7 @@ class CodeNodeConnectorComboBox(QComboBox):
 
         if full:
             with open(self.project.selectFile, "w", encoding="utf-8") as file:
-                json.dump(self.project.objects["main"]["function"], file, indent=4)
+                dump(self.project.objects["main"]["function"], file, indent=4)
 
     def indexChange(self, index) -> None:
         self.index = index
@@ -741,7 +741,7 @@ class CodeLabel(QLabel):
                     flag = max(flag, connector.inputLeftText.use)
 
         if flag:
-            json.dump(self.project.objects["main"]["function"], open(self.project.selectFile, "w", encoding="utf-8"), indent=4)
+            dump(self.project.objects["main"]["function"], open(self.project.selectFile, "w", encoding="utf-8"), indent=4)
 
         self.setFocus()
 
@@ -787,7 +787,7 @@ class CodeLabel(QLabel):
                             self.project.objects["main"]["function"]["objects"][str(element["start"]["id"])]["inputs"][element["key"]]["value"] = None
 
                             with open(self.project.selectFile, "w", encoding="utf-8") as file:
-                                json.dump(self.project.objects["main"]["function"], file, indent=4)
+                                dump(self.project.objects["main"]["function"], file, indent=4)
 
                             # self.stop = True
 
@@ -831,7 +831,7 @@ class CodeLabel(QLabel):
             self.project.objects["main"]["function"]["objects"][str(self.project.objects["main"]["replacer"].node)]["y"] = (self.nowPoint.y() + self.project.cash["file"][self.project.selectFile].y) // CODE_GRID_CELL_SIZE
 
             with open(self.project.selectFile, "w", encoding="utf-8") as file:
-                json.dump(self.project.objects["main"]["function"], file, indent=4)
+                dump(self.project.objects["main"]["function"], file, indent=4)
 
             self.project.objects["main"]["replacer"].node = None
 
@@ -867,7 +867,7 @@ class CodeLabel(QLabel):
                         }
 
                         with open(self.project.selectFile, "w", encoding="utf-8") as file:
-                            json.dump(self.project.objects["main"]["function"], file, indent=4)
+                            dump(self.project.objects["main"]["function"], file, indent=4)
 
             else:
                 pass
@@ -945,7 +945,7 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.style = f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}"
 
         with open("scr/code/config.json", "r", encoding="utf-8") as file:
-            self.config = json.load(file)
+            self.config = load(file)
 
         self.project = parent
 
@@ -973,7 +973,7 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.plusButton.show()
 
         with open(self.path, "r", encoding="utf-8") as file:
-            self.variables = json.load(file)["variables"]
+            self.variables = load(file)["variables"]
 
         self.setRootIsDecorated(False)
 
@@ -1019,14 +1019,14 @@ class CodeAdditionsVarsType(QTreeWidget):
 
     def removeVariableFunction(self, name):
         with open(self.path, "r", encoding="utf-8") as file:
-            text = json.load(file)
+            text = load(file)
 
         self.variables.pop(name)
 
         text["variables"] = self.variables
 
         with open(self.path, "w", encoding="utf-8") as file:
-            json.dump(text, file, indent=4)
+            dump(text, file, indent=4)
 
         self.project.init()
 
@@ -1062,7 +1062,7 @@ class CodeAdditionsVarsType(QTreeWidget):
 
     def new(self) -> None:
         with open(self.path, "r", encoding="utf-8") as file:
-            text = json.load(file)
+            text = load(file)
 
         name = "undefined"
         plus = 0
@@ -1079,13 +1079,13 @@ class CodeAdditionsVarsType(QTreeWidget):
         }
 
         with open(self.path, "w", encoding="utf-8") as file:
-            json.dump(text, file, indent=4)
+            dump(text, file, indent=4)
 
         self.project.init()
 
     def functionName(self, name: str) -> None:
         with open(self.path, "r", encoding="utf-8") as file:
-            text = json.load(file)
+            text = load(file)
 
         try:
             name = text["variables"][name]["name"]
@@ -1106,13 +1106,13 @@ class CodeAdditionsVarsType(QTreeWidget):
         text["variables"].pop(name)
 
         with open(self.path, "w", encoding="utf-8") as file:
-            json.dump(text, file, indent=4)
+            dump(text, file, indent=4)
 
         self.project.init()
 
     def functionType(self, name: str) -> None:
         with open(self.path, "r", encoding="utf-8") as file:
-            text = json.load(file)
+            text = load(file)
 
         index = self.project.objects["main"][f"additions_element_type_{name}"].currentIndex()
 
@@ -1122,13 +1122,13 @@ class CodeAdditionsVarsType(QTreeWidget):
         text["variables"][name]["value"] = self.config["standardVariablesTypes"][new]
 
         with open(self.path, "w", encoding="utf-8") as file:
-            json.dump(text, file, indent=4)
+            dump(text, file, indent=4)
 
         self.project.init()
 
     def functionValue(self, name: str) -> None:
         with open(self.path, "r", encoding="utf-8") as file:
-            text = json.load(file)
+            text = load(file)
 
         value = self.project.objects["main"][f"additions_element_value_{name}"].text()
 
@@ -1136,7 +1136,7 @@ class CodeAdditionsVarsType(QTreeWidget):
             text["variables"][name]["value"] = TypeSet.set_(text["variables"][name]["type"], value)
 
         with open(self.path, "w", encoding="utf-8") as file:
-            json.dump(text, file, indent=4)
+            dump(text, file, indent=4)
 
         self.project.init()
 
@@ -1223,7 +1223,7 @@ class Code:
             project.objects["main"]["nodes"] = {}
 
         with open("scr/code/config.json", "r", encoding="utf-8") as file:
-            project.objects["main"]["config"] = json.load(file)
+            project.objects["main"]["config"] = load(file)
 
         CodeAdditions.init(project)
 
@@ -1239,7 +1239,7 @@ class Code:
 
         try:
             with open(project.selectFile, "r", encoding="utf-8") as file:
-                project.objects["main"]["function"] = json.load(file)
+                project.objects["main"]["function"] = load(file)
 
         except json.JSONDecodeError:
             return 0
@@ -1495,7 +1495,7 @@ class Code:
 
         for id, node in project.objects["main"]["function"]["objects"].items():
             if node["x"] * CODE_GRID_CELL_SIZE < x + project.cash["file"][project.selectFile].x < (node["x"] + node["width"]) * CODE_GRID_CELL_SIZE and node["y"] * CODE_GRID_CELL_SIZE < y + project.cash["file"][project.selectFile].y < (node["y"] + node["height"]) * CODE_GRID_CELL_SIZE:
-                pyperclip.copy(json.dumps(node))
+                pyperclip.copy(dumps(node))
 
                 break
 
@@ -1504,7 +1504,7 @@ class Code:
     @staticmethod
     def pasteNode(project, position) -> None:
         try:
-            node = json.loads(pyperclip.paste())
+            node = loads(pyperclip.paste())
 
         except BaseException:
             MessageBox.error(translate("This text is not node"))
@@ -1526,7 +1526,7 @@ class Code:
         project.objects["main"]["function"]["objects"][node["id"]] = node
 
         with open(project.selectFile, "w", encoding="utf-8") as file:
-            json.dump(project.objects["main"]["function"], file, indent=4)
+            dump(project.objects["main"]["function"], file, indent=4)
 
         project.init()
 
@@ -1554,6 +1554,6 @@ class Code:
         project.objects["main"]["function"]["objects"].pop(str(select["id"]))
 
         with open(project.selectFile, "w", encoding="utf-8") as file:
-            json.dump(project.objects["main"]["function"], file, indent=4)
+            dump(project.objects["main"]["function"], file, indent=4)
 
         project.init()

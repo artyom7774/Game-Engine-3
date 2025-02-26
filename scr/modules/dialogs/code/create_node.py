@@ -27,12 +27,12 @@ class CreateNodeFunctions:
         node["y"] = pos.y
 
         with open(project.selectFile, "r", encoding="utf-8") as file:
-            function = json.load(file)
+            function = load(file)
 
         function["objects"][node["id"]] = node
 
         with open(project.selectFile, "w", encoding="utf-8") as file:
-            json.dump(function, file, indent=4)
+            dump(function, file, indent=4)
 
         dialog.close()
 
@@ -85,7 +85,7 @@ class CreateNode(QDialog):
         self.objects["widgets"] = {}
 
         with open("scr/code/config.json", "r", encoding="utf-8") as file:
-            config = json.load(file)
+            config = load(file)
 
         self.objects["widgets"]["nodes"] = QTreeWidgetItem(self.objects["nodes"])
         self.objects["widgets"]["nodes"].setIcon(0, QIcon(getColor("dir")))

@@ -5,12 +5,10 @@
             "StaticObject"
         ]
     },
-    "dependence": [
-        "StaticObject"
-    ],
+    "dependence": [],
     "type": {
         "name": "Object type",
-        "value": "DynamicObject",
+        "value": "StaticObject",
         "type": "choose",
         "choose": {
             "input": [
@@ -32,7 +30,7 @@
         },
         "gravity": {
             "name": "Object gravity",
-            "value": 300,
+            "value": 1000,
             "type": "int"
         },
         "jumpPower": {
@@ -95,7 +93,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets/player.png"
+                    "value": ""
                 },
                 "X offset": {
                     "name": "X offset",
@@ -122,7 +120,7 @@
         },
         "group": {
             "name": "Name of object group",
-            "value": "player",
+            "value": "object",
             "type": "str"
         },
         "layer": {
@@ -133,13 +131,59 @@
         "animation": {
             "name": "Animation",
             "value": {
-                "groups": {}
+                "groups": {
+                    "group-0": {
+                        "name": "group",
+                        "sprites": [
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/1.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png",
+                            "assets\/icon.png"
+                        ],
+                        "settings": {
+                            "repeat": false,
+                            "fpsPerFrame": "10",
+                            "standard": false
+                        }
+                    },
+                    "group-1": {
+                        "name": "group-1",
+                        "sprites": [
+                            "assets\/1.png",
+                            "assets\/1.png",
+                            "assets\/1.png",
+                            "assets\/1.png",
+                            "assets\/1.png"
+                        ],
+                        "settings": {
+                            "repeat": false,
+                            "fpsPerFrame": 10,
+                            "standard": false
+                        }
+                    }
+                }
             },
             "type": "animator"
         },
         "invisible": {
             "name": "Invisible",
-            "value": true,
+            "value": false,
             "type": "bool"
         }
     }

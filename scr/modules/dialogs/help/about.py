@@ -28,7 +28,7 @@ class About(QDialog):
             element.deleteLater()
 
         self.objects["name"] = QLabel(parent=self)
-        self.objects["name"].setText(f"Game Engine 3 v{json.load(open('scr/files/version.json', 'r', encoding='utf-8'))['version']}")
+        self.objects["name"].setText(f"Game Engine 3 v{load(open('scr/files/version.json', 'r', encoding='utf-8'))['version']}")
         self.objects["name"].setGeometry(40, 10, 300, 40)
         self.objects["name"].setFont(BIG_HELP_FONT)
         self.objects["name"].show()

@@ -91,7 +91,7 @@ class SceneLabel(QLabel):
                 pass
 
         with open(self.project.cash["file"][self.project.selectFile].settings, "r", encoding="utf-8") as file:
-            self.sceneSettings = json.load(file)
+            self.sceneSettings = load(file)
 
     def updateCameraObject(self) -> None:
         if self.x() < QCursor.pos().x() - self.project.x() < self.x() + self.width() and self.y() < QCursor.pos().y() - self.project.y() - 40 < self.y() + self.height():
@@ -339,13 +339,13 @@ class Scene:
         project.cash["file"][project.selectFile].settings = f"projects/{project.selectProject}/project/cash/{'-'.join(project.selectFile.split('/')[3:])}-setting.json"
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            project.objects["main"]["project_settings"] = json.load(file)
+            project.objects["main"]["project_settings"] = load(file)
 
         if not os.path.exists(project.cash["file"][project.selectFile].settings):
             CreateObjectFunctions.create(project, None, None, "", False, "engine/files/scene.json", project.cash["file"][project.selectFile].settings)
 
         with open(project.cash["file"][project.selectFile].settings, "r", encoding="utf-8") as file:
-            project.objects["main"]["scene_settings"] = json.load(file)
+            project.objects["main"]["scene_settings"] = load(file)
 
         try:
             if project.selectFile not in project.application:
@@ -420,7 +420,7 @@ class Scene:
 
         for file in var:
             with open(f"{project.selectFile}/{file}", "r") as f:
-                type, variables = Scene.loadObjectFile(project, file[:file.rfind(".")][file.rfind("-") + 1:], json.load(f))
+                type, variables = Scene.loadObjectFile(project, file[:file.rfind(".")][file.rfind("-") + 1:], load(f))
 
                 obj = getattr(project.engine.objects, type)(application, **variables, id=id, variables={"file": f"{project.selectFile}/{file}"})
 
@@ -643,7 +643,7 @@ class Scene:
                 continue
 
             with open(path, "r") as file:
-                sceneSettings = json.load(file)
+                sceneSettings = load(file)
 
             name = sceneSettings["Scene"]["focus"]["value"]
 
@@ -663,7 +663,7 @@ class Scene:
             sceneSettings["Scene"]["focus"]["value"] = name
 
             with open(path, "w") as file:
-                json.dump(sceneSettings, file, indent=4)
+                dump(sceneSettings, file, indent=4)
 
     @staticmethod
     def createSceneObject(project, position) -> None:
@@ -738,7 +738,7 @@ class Scene:
 
         try:
             with open(copyName, "r") as file:
-                obj = json.load(file)
+                obj = load(file)
 
         except FileNotFoundError or OSError:
             MessageBox.error(translate("Path is not difined (object must was copyed on scene)"))
@@ -753,7 +753,7 @@ class Scene:
         shutil.copyfile(copyName, path)
 
         with open(path, "r") as file:
-            obj = json.load(file)
+            obj = load(file)
 
         width = project.objects["main"]["scene_settings"]["Scene"]["grid"]["value"]["x"]["value"]
         height = project.objects["main"]["scene_settings"]["Scene"]["grid"]["value"]["y"]["value"]
@@ -767,7 +767,7 @@ class Scene:
             obj["StaticObject"]["pos"]["value"]["y"]["value"] = pos.y - project.objects["main"]["scene"].height() // 2
 
         with open(path, "w") as file:
-            json.dump(obj, file, indent=4)
+            dump(obj, file, indent=4)
 
         project.init()
 
@@ -837,13 +837,13 @@ class Scene:
             return 0
 
         with open(project.cash["file"][project.selectFile].selectObject.variables["file"], "r") as file:
-            obj = json.load(file)
+            obj = load(file)
 
         obj["StaticObject"]["pos"]["value"]["x"]["value"] += directions[direction][0]
         obj["StaticObject"]["pos"]["value"]["y"]["value"] += directions[direction][1]
 
         with open(project.cash["file"][project.selectFile].selectObject.variables["file"], "w") as file:
-            json.dump(obj, file, indent=4)
+            dump(obj, file, indent=4)
 
         select = project.application[project.selectFile].objects.getByGroup("__debug_select__")[0]
 

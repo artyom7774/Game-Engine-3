@@ -8,7 +8,7 @@ from scr.variables import *
 
 import os
 
-CODE_BASE_FILE = json.dumps({"variables": {}, "objects": {}}, indent=4)
+CODE_BASE_FILE = dumps({"variables": {}, "objects": {}}, indent=4)
 
 
 class CreateFunctionFunctions:

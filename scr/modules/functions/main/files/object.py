@@ -148,7 +148,7 @@ class Object:
 
         try:
             with open(file, "r", encoding="utf-8") as f:
-                obj = json.load(f)
+                obj = load(f)
 
         except FileNotFoundError:
             return 0
@@ -238,11 +238,11 @@ class Object:
     @staticmethod
     def function(obj, project, save: str, last: dict, path: str, init: bool = True) -> None:
         with open(f"engine/files/objects.json", "r", encoding="utf-8") as file:
-            objects = json.load(file)
+            objects = load(file)
 
         try:
             with open(save, "r", encoding="utf-8") as f:
-                file = json.load(f)
+                file = load(f)
 
         except BaseException:
             return 0
@@ -330,7 +330,7 @@ class Object:
 
         if doing and temp["value"] != last["value"]:
             with open(save, "w", encoding="utf-8") as f:
-                json.dump(file, f, indent=4)
+                dump(file, f, indent=4)
 
             if init:
                 project.init()

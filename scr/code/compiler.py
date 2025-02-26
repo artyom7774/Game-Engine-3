@@ -82,7 +82,7 @@ class Compiler:
                     value["value"] = {}
 
         # print(self.nodesSortedByTypes)
-        # print(json.dumps(self.nodes, indent=4))
+        # print(dumps(self.nodes, indent=4))
 
         self.init()
 

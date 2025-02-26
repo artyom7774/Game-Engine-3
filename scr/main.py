@@ -100,7 +100,7 @@ class Main(QMainWindow):
 
                     if "function" in self.objects["main"]:
                         with open(self.selectFile, "w", encoding="utf-8") as file:
-                            json.dump(self.objects["main"]["function"], file, indent=4)
+                            dump(self.objects["main"]["function"], file, indent=4)
 
             except BaseException:
                 pass
@@ -121,9 +121,10 @@ class Main(QMainWindow):
             response = requests.get(url)
 
             if response.status_code == 200:
-                lastVersion = json.loads(response.text)["version"]
-                nowVersion = json.load(open("scr/files/version.json", "r", encoding="utf-8"))["version"]
+                lastVersion = loads(response.text)["version"]
+                nowVersion = load(open("scr/files/version.json", "r", encoding="utf-8"))["version"]
 
+                print(f"LOG: last version = {lastVersion}, now version = {nowVersion}")
                 print(f"LOG: last version = {lastVersion}, now version = {nowVersion}")
 
                 if lastVersion != nowVersion:
@@ -259,6 +260,7 @@ class Main(QMainWindow):
 
         if not all([os.path.exists(element) for element in request]):
             thr = threading.Thread(target=lambda: self.install())
+            thr.daemon = True
             thr.start()
 
         # TAB FILE BAR
@@ -275,7 +277,7 @@ class Main(QMainWindow):
 
         # VERSION LOG
 
-        self.objects["version_log"] = VersionLogScrollArea(self, json.load(open("scr/files/updates.json", "r", encoding="utf-8")))
+        self.objects["version_log"] = VersionLogScrollArea(self, load(open("scr/files/updates.json", "r", encoding="utf-8")))
 
         # PROJECT TREE
 
@@ -400,7 +402,7 @@ class Main(QMainWindow):
 
         self.objects["help_pages"] = {}
 
-        for name, value in json.load(open("scr/site/help.json", encoding="utf-8")).items():
+        for name, value in load(open("scr/site/help.json", encoding="utf-8")).items():
             self.objects["help_pages"][value["name"]] = dict(value)
 
         help_program_action = QAction(translate("Program"), self)

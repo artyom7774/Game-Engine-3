@@ -314,7 +314,7 @@ class Compile:
         project.compiling = False
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            projectSettings = json.load(file)
+            projectSettings = load(file)
 
         if Compile.compile(project, executable=False):
             return 1
@@ -343,6 +343,9 @@ class Compile:
         pathPython = pathPython[:pathPython.rfind('\\')]
         pathPython = f"{pathPython}/python/Scripts/python.exe"
 
+        print(f"LOG: python path: {pathPython}")
+        print(sys.executable)
+
         thr = threading.Thread(target=lambda: os.system(f"cd \"{pathProject}\" && \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""))
         thr.daemon = True
         thr.start()
@@ -356,7 +359,7 @@ class Compile:
         engine = f"projects/{project.selectProject}/scr/engine"
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            projectSettings = json.load(file)
+            projectSettings = load(file)
 
         names = {
             "function": f"projects/{project.selectProject}/scr/functions",
@@ -390,7 +393,7 @@ class Compile:
         shutil.copyfile(f"projects/{project.selectProject}/project/collision.cfg", names["collision"])
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            projectSettingsCfg = json.load(file)
+            projectSettingsCfg = load(file)
 
         if f"projects/{project.selectProject}/project/" + projectSettingsCfg["values"]["start_scene"]["value"] == "":
             MessageBox.error("Project start scene is empty")
@@ -408,7 +411,7 @@ class Compile:
 
         for program in functions.project.getAllProjectPrograms(project, False):
             with open(program, "r", encoding="utf-8") as file:
-                programs[program] = json.load(file)
+                programs[program] = load(file)
 
                 locals_variables[program] = programs[program]["variables"]
 
@@ -427,7 +430,7 @@ class Compile:
             for element in os.listdir(scene):
                 objectPath = f"{scene}/{element}"
 
-                type, variables = functions.main.files.Scene.loadObjectFile(project, objectPath[:objectPath.rfind(".")][objectPath.rfind("-") + 1:], json.load(open(objectPath, "r", encoding="utf-8")))
+                type, variables = functions.main.files.Scene.loadObjectFile(project, objectPath[:objectPath.rfind(".")][objectPath.rfind("-") + 1:], load(open(objectPath, "r", encoding="utf-8")))
 
                 variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
 
@@ -436,10 +439,10 @@ class Compile:
                     "variables": variables
                 }
 
-                objects_variables[scene][element] = json.load(open(objectPath, "r", encoding="utf-8"))["variables"]
+                objects_variables[scene][element] = load(open(objectPath, "r", encoding="utf-8"))["variables"]
 
             if os.path.exists(scenePath):
-                focus = json.load(open(scenePath, "r", encoding="utf-8"))["Scene"]["focus"]["value"]
+                focus = load(open(scenePath, "r", encoding="utf-8"))["Scene"]["focus"]["value"]
 
             else:
                 focus = None
@@ -463,7 +466,7 @@ class Compile:
             if obj.endswith(".txt"):
                 continue
                 
-            type, variables = functions.main.files.Scene.loadObjectFile(project, -1, json.load(open(obj, "r", encoding="utf-8")))
+            type, variables = functions.main.files.Scene.loadObjectFile(project, -1, load(open(obj, "r", encoding="utf-8")))
 
             variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
 
@@ -510,7 +513,7 @@ class Compile:
         program = program.replace("%PROJECT_SCENES%", str(scenes))
         program = program.replace("%PROJECT_OBJECTS%", str(allObjects))
 
-        program = program.replace("%ENGINE_VERSION%", str(json.load(open("scr/files/version.json", encoding="utf-8"))["version"]))
+        program = program.replace("%ENGINE_VERSION%", str(load(open("scr/files/version.json", encoding="utf-8"))["version"]))
 
         program = program.replace("%COMPILER%", str(open("scr/code/compiler.py", "r", encoding="utf-8").read()))
 
@@ -537,7 +540,7 @@ class Compile:
             pathProject = f"projects/{project.selectProject}/scr"
 
             pathPython = os.path.abspath(os.path.abspath(sys.argv[0]))
-            pathPython = pathPython[:pathPython.rfind('\\')]
+            pathPython = pathPython[:pathPython.rfind("\\")]
 
             pathPythonExecutable = f"{pathPython}/python/Scripts/python.exe"
             pathPyInstaller = f"{pathPython}/python/Scripts/pyinstaller.exe"
@@ -576,7 +579,7 @@ class Compile:
         Compile.compile(project)
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            projectSettings = json.load(file)
+            projectSettings = load(file)
 
         path = f"projects/{project.selectProject}/scr"
 
@@ -589,7 +592,7 @@ class Compile:
         Compile.compile(project, executable=False)
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            projectSettings = json.load(file)
+            projectSettings = load(file)
 
         path = f"projects/{project.selectProject}"
 
@@ -622,7 +625,7 @@ class Compile:
         Compile.compile(project)
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            projectSettings = json.load(file)
+            projectSettings = load(file)
 
         path = f"projects/{project.selectProject}/scr"
 

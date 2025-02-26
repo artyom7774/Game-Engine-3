@@ -31,12 +31,12 @@ class ConfigButtonStartSceneFunctions:
         scene = scenes[dialog.objects["choose_combobox"].currentIndex()].replace(f"projects/{project.selectProject}/project/", "")
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            config = json.load(file)
+            config = load(file)
 
         config["values"]["start_scene"]["value"] = scene
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "w", encoding="utf-8") as file:
-            json.dump(config, file, indent=4)
+            dump(config, file, indent=4)
 
         project.init()
 
@@ -105,7 +105,7 @@ class Config:
     @staticmethod
     def test(project) -> None:
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            config = json.load(file)
+            config = load(file)
 
         if os.path.exists(f"projects/{project.selectProject}/project/" + config["values"]["start_scene"]["value"]):
             pass
@@ -114,7 +114,7 @@ class Config:
             config["values"]["start_scene"]["value"] = ""
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "w", encoding="utf-8") as file:
-            json.dump(config, file, indent=4)
+            dump(config, file, indent=4)
 
     @staticmethod
     def get(file: dict) -> dict:
@@ -128,7 +128,7 @@ class Config:
     @staticmethod
     def init(project) -> None:
         with open(project.selectFile, "r", encoding="utf-8") as file:
-            config = json.load(file)
+            config = load(file)
 
         project.objects["main"]["globals"] = ConfigAdditionsVarsType(
             project,
@@ -211,12 +211,12 @@ class Config:
 
         try:
             with open(name, "r", encoding="utf-8") as file:
-                config = json.load(file)
+                config = load(file)
 
             config["values"][key] = value
 
             with open(name, "w", encoding="utf-8") as file:
-                json.dump(config, file, indent=4)
+                dump(config, file, indent=4)
 
         except PermissionError:
             pass

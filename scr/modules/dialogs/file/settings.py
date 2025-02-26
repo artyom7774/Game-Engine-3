@@ -43,7 +43,7 @@ class SettingsFunctions:
         qdarktheme.setup_theme(theme=SETTINGS["theme"])
 
         with open("scr/files/settings/settings.json", "w", encoding="utf-8") as file:
-            json.dump(SETTINGS, file, indent=4)
+            dump(SETTINGS, file, indent=4)
 
         thr = threading.Thread(target=lambda: SettingsFunctions.newRunProgram())
         thr.start()

@@ -145,7 +145,7 @@ class Collision:
 
         for path in getAllProjectObjects(project, onlyFileName=False):
             with open(path, "r", encoding="utf-8") as file:
-                obj = json.load(file)
+                obj = load(file)
 
             if obj["StaticObject"]["group"]["value"] not in project.objects["main"]["groups"]:
                 project.objects["main"]["groups"].append(obj["StaticObject"]["group"]["value"])

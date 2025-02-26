@@ -7,7 +7,7 @@ import importlib.util
 import platform
 import random
 import pygame
-import orjson
+import ujson
 import json
 import os
 
@@ -107,37 +107,28 @@ class MessageBox:
 
 class Size:
     @staticmethod
-    def y(var) -> int:
-        return round((size["height"] + PLUS) * (var / 100))
-
-    @staticmethod
     def x(var) -> int:
         return round(size["width"] * (var / 100))
 
+    @staticmethod
+    def y(var) -> int:
+        return round((size["height"] + PLUS) * (var / 100))
+
 
 def load(fp, *args, **kwargs):
-    try:
-        return orjson.loads(fp.read())
-
-    except:
-        return json.load(fp, *args, **kwargs)
+    return ujson.loads(fp.read())
 
 
 def loads(s, *args, **kwargs):
-    try:
-        return orjson.loads(s)
-
-    except:
-        return json.loads(s, *args, **kwargs)
+    return ujson.loads(s)
 
 
 def dump(obj, fp, *args, **kwargs):
-    data = orjson.dumps(obj, *args, **kwargs)
-    fp.write(data.decode('utf-8'))
+    fp.write(ujson.dumps(obj, *args, **kwargs))
 
 
 def dumps(obj, *args, **kwargs):
-    return orjson.dumps(obj, *args, **kwargs).decode()
+    return ujson.dumps(obj, *args, **kwargs)
 
 
 def loader(path):

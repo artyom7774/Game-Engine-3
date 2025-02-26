@@ -71,9 +71,25 @@
         "group": "object",
         "layer": 0,
         "speed": 5,
-        "gravity": 300,
+        "gravity": 1000,
         "jumpPower": 10,
-        "slidingStep": 1e6
+        "slidingStep": 1e6,
+        "invisible": false,
+        "animation": {
+            "groups": {
+                "group": {
+                    "name": "group",
+                    "sprites": [
+
+                    ],
+                    "settings": {
+                        "repeat": false,
+                        "fpsPerFrame": 10,
+                        "standard": false
+                    }
+                }
+            }
+        }
     },
     "name": {
         "type": "Object type",
@@ -85,7 +101,9 @@
         "speed": "Moving speed",
         "gravity": "Object gravity",
         "jumpPower": "Power jump",
-        "slidingStep": "Braking power"
+        "slidingStep": "Braking power",
+        "invisible": "Invisible",
+        "animation": "Animation"
     },
     "type": {
         "type": "choose",
@@ -97,7 +115,9 @@
         "speed": "int",
         "gravity": "int",
         "jumpPower": "int",
-        "slidingStep": "int"
+        "slidingStep": "int",
+        "invisible": "bool",
+        "animation": "animator"
     },
     "specials": {
         "choose": {
@@ -119,7 +139,9 @@
             "hitbox",
             "sprite",
             "group",
-            "layer"
+            "layer",
+            "animation",
+            "invisible"
         ],
         "DynamicObject": [
             "speed",

@@ -74,7 +74,13 @@ class ObjectGroup:
 
         self.collisions = Collision()
 
-        self.objects = objects
+        self.objects = []
+
+        for obj in self.objects:
+            self.add(obj)
+
+        self.objectById = {}
+        self.objectByGroup = {}
 
         self.maxLenghtObject = -INF
         self.minLenghtObject = +INF
@@ -91,35 +97,45 @@ class ObjectGroup:
         self.updateMaxLenghtObject(obj)
 
         if isinstance(obj, DynamicObject):
-            return self.objects.insert(0, obj)
+            self.objects.insert(0, obj)
 
-        self.objects.append(obj)
+        else:
+            self.objects.append(obj)
+
+        self.objectById[obj.id] = obj
+
+        if obj.group not in self.objectByGroup:
+            self.objectByGroup[obj.group] = {}
+
+        self.objectByGroup[obj.group][obj.id] = obj
 
     def remove(self, obj: VObject) -> None:
         self.objects.remove(obj)
 
-    def getById(self, id: int) -> VObject:
-        for element in self.objects:
-            if element.id == id:
-                return element
+        if obj.id in self.objectById:
+            self.objectById.pop(obj.id)
+            self.objectByGroup[obj.group].pop(obj.id)
 
-        return None
+    def getById(self, id: int) -> VObject:
+        return self.objectById.get(id)
 
     def removeByGroup(self, group: str) -> None:
-        for element in self.objects:
-            if element.group == group:
-                self.objects.remove(element)
+        if group not in self.objectByGroup:
+            return
+
+        objects = list(self.objectByGroup[group].values())
+
+        for obj in objects:
+            self.remove(obj)
 
     def removeById(self, id: int) -> None:
-        for element in self.objects:
-            if element.id == id:
-                self.objects.remove(element)
-                return 0
+        if id not in self.objectById:
+            return
 
-        raise IndexError(f"id {id} not found in group")
+        self.remove(self.objectById[id])
 
     def getByGroup(self, group) -> typing.List[VObject]:
-        return [element for element in self.objects if element.group == group]
+        return [element for element in self.objectByGroup[group].values()]
 
     def updateMinLenghtObject(self, obj: VObject) -> None:
         self.minLenghtObject = min(self.minLenghtObject, obj.hitbox.width + obj.hitbox.height)
@@ -137,15 +153,17 @@ class ObjectGroup:
         px = self.game.camera.x()
         py = self.game.camera.y()
 
-        for obj in sorted(self.objects, key=lambda x: x.drawPriority + x.pos.y * (10 ** -16)):
-            if obj.sprite is not None:
-                sprite = None
+        for obj in sorted(self.objects, key=lambda x: x.drawPriority):
+            sprite = None
 
+            if obj.sprite is not None:
                 if type(obj.sprite) == Sprite:
                     sprite = obj.sprite.get()
 
                 elif type(obj.sprite) == list:
                     alphaRect(self.game.screen, obj.sprite, SquareHitbox([obj.pos.x, obj.pos.y, obj.hitbox.width, obj.hitbox.height]))
+
+                    continue
 
                 elif type(obj.sprite) == types.FunctionType:
                     obj.sprite()
@@ -155,15 +173,13 @@ class ObjectGroup:
                 else:
                     sprite = obj.sprite.get(obj)
 
-            if obj.sprite is not None and sprite is not None and type(obj.sprite) != list:
-                obj.sprite.pos.x = 0
-                obj.sprite.pos.y = 0
+            if not obj.invisible or self.game.forcedViewObject:
+                if obj.sprite is not None and sprite is not None and type(obj.sprite) != list:
+                    obj.sprite.pos.x = 0
+                    obj.sprite.pos.y = 0
 
-                if self.game.usingWidth + 200 > obj.pos.x + obj.sprite.pos.x + px > -200 and self.game.usingHeight + 200 > obj.pos.y + obj.sprite.pos.y + py > -200:
-                    self.game.screen.blit(sprite, (obj.pos.x + obj.sprite.pos.x + px, obj.pos.y + obj.sprite.pos.y + py))
-
-                # else:
-                #     print(f"not visiable: {obj.sprite.pos.x} {obj.sprite.pos.y}")
+                    if self.game.usingWidth + 200 > obj.pos.x + obj.sprite.pos.x + px > -200 and self.game.usingHeight + 200 > obj.pos.y + obj.sprite.pos.y + py > -200:
+                        self.game.screen.blit(sprite, (obj.pos.x + obj.sprite.pos.x + px, obj.pos.y + obj.sprite.pos.y + py))
 
             if self.game.debug or (obj.group.startswith("__") and obj.group.endswith("__") and not obj.group == "__debug_unvisiable__"):
                 pygame.draw.rect(

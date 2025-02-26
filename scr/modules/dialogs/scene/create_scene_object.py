@@ -55,13 +55,13 @@ class CreateSceneObjectFunctions:
             position[1] = position[1] // height * height
 
         with open(out, "r", encoding="utf-8") as f:
-            obj = json.load(f)
+            obj = load(f)
 
         obj["StaticObject"]["pos"]["value"]["x"]["value"] = position[0]
         obj["StaticObject"]["pos"]["value"]["y"]["value"] = position[1]
 
         with open(out, "w") as f:
-            json.dump(obj, f)
+            dump(obj, f)
 
         project.init()
 

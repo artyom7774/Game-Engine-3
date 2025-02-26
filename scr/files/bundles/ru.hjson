@@ -1,4 +1,4 @@
-// RU TRANSLATE VERSION = 1.0.0
+// RU TRANSLATE VERSION = 3.6.1
 
 {
     "Project": "Проект"
@@ -291,4 +291,8 @@
     "Invisible": "Невидимость"
     "Animation": "Анимация"
     "Create group": "Создать группу"
+    "Repeat:": "Повторение:"
+    "Base animation:": "Базавая анимация:"
+    "FPS per frame:": "FPS на кадр:"
+    "Create frame": "Создать кадр"
 }
