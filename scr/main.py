@@ -12,7 +12,6 @@ import webbrowser
 import qdarktheme
 import threading
 import requests
-import pynput
 import ctypes
 
 
@@ -75,39 +74,7 @@ class Main(QMainWindow):
         if not FLAGS["not-view-version-update"]:
             self.versionUpdateMessage()
 
-        self.customClickEvent()
-
         self.init()
-
-    def customClickEvent(self) -> None:
-        def function() -> None:
-            with pynput.mouse.Listener(on_click=click) as listener:
-                listener.join()
-
-        def click(x, y, button, pressed) -> None:
-            if not pressed:
-                return 0
-
-            if not self.selectFile.endswith(".func"):
-                return 0
-
-            try:
-                if "main" in self.objects and "nodes" in self.objects["main"]:
-                    for id, node in self.objects["main"]["nodes"].items():
-                        for key, connector in node.connectors.items():
-                            if connector.inputLeftText is not None:
-                                connector.inputLeftText.save()
-
-                    if "function" in self.objects["main"]:
-                        with open(self.selectFile, "w", encoding="utf-8") as file:
-                            dump(self.objects["main"]["function"], file, indent=4)
-
-            except BaseException:
-                pass
-
-        thr = threading.Thread(target=lambda: function())
-        thr.daemon = True
-        # thr.start()
 
     def versionUpdateMessage(self) -> None:
         def function():
@@ -124,7 +91,6 @@ class Main(QMainWindow):
                 lastVersion = loads(response.text)["version"]
                 nowVersion = load(open("scr/files/version.json", "r", encoding="utf-8"))["version"]
 
-                print(f"LOG: last version = {lastVersion}, now version = {nowVersion}")
                 print(f"LOG: last version = {lastVersion}, now version = {nowVersion}")
 
                 if lastVersion != nowVersion:

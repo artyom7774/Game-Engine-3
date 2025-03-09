@@ -1,0 +1,2061 @@
+{
+    "variables": {},
+    "objects": {
+        "670551399": {
+            "display": {
+                "discription": "starts at the start of the game",
+                "name": "On start game",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 670551399,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 2,
+            "y": 2
+        },
+        "142247843": {
+            "display": {
+                "discription": "get object ID by name, return -1 if object name is not found",
+                "name": "Get object ID by name",
+                "text": {
+                    "__id__": "ID",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 142247843,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 670551399,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "player-0",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "getObjectIDByName",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+            "type": "objects",
+            "width": 6,
+            "x": 10,
+            "y": 2
+        },
+        "805258674": {
+            "display": {
+                "discription": "starts while key pressed",
+                "name": "Keyboard press",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 805258674,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "d",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardPress",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 10.0,
+            "y": 9.0
+        },
+        "892175058": {
+            "display": {
+                "discription": "move object",
+                "name": "Move object",
+                "text": {
+                    "__angle__": "angle",
+                    "__id__": "ID",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__power__": "power"
+                }
+            },
+            "height": 5,
+            "id": 892175058,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 805258674,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                },
+                "angle": {
+                    "code": "angle",
+                    "name": "__angle__",
+                    "standard": 90,
+                    "type": "number",
+                    "value": null
+                },
+                "power": {
+                    "code": "power",
+                    "name": "__power__",
+                    "standard": 3,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "moveObject",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "angle",
+                    "power"
+                ]
+            },
+            "type": "objects",
+            "width": 10,
+            "x": 18.0,
+            "y": 9.0
+        },
+        "835087824": {
+            "display": {
+                "discription": "starts while key pressed",
+                "name": "Keyboard press",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 835087824,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "a",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardPress",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 10,
+            "y": 16
+        },
+        "541048766": {
+            "display": {
+                "discription": "move object",
+                "name": "Move object",
+                "text": {
+                    "__angle__": "angle",
+                    "__id__": "ID",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__power__": "power"
+                }
+            },
+            "height": 5,
+            "id": 541048766,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 835087824,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                },
+                "angle": {
+                    "code": "angle",
+                    "name": "__angle__",
+                    "standard": 270,
+                    "type": "number",
+                    "value": null
+                },
+                "power": {
+                    "code": "power",
+                    "name": "__power__",
+                    "standard": 3,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "moveObject",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "angle",
+                    "power"
+                ]
+            },
+            "type": "objects",
+            "width": 10,
+            "x": 18,
+            "y": 16
+        },
+        "246678052": {
+            "display": {
+                "discription": "If collision",
+                "name": "If collision",
+                "text": {
+                    "__append__": "use contact",
+                    "__group__": "group name",
+                    "__id__": "ID",
+                    "__id_in_group__": "ID object of group",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__path_false__": "path if false",
+                    "__path_true__": "path if true"
+                }
+            },
+            "height": 5,
+            "id": 246678052,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 537107486,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                },
+                "group": {
+                    "code": "group",
+                    "name": "__group__",
+                    "standard": "platform",
+                    "type": "text",
+                    "value": null
+                },
+                "append": {
+                    "code": "append",
+                    "name": "__append__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                }
+            },
+            "name": "ifCollision",
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                },
+                "id_in_group": {
+                    "code": "id_in_group",
+                    "name": "__id_in_group__",
+                    "type": "number"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "group",
+                    "append"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false",
+                    "id_in_group"
+                ]
+            },
+            "type": "logic",
+            "width": 10,
+            "x": 18,
+            "y": 23
+        },
+        "429048066": {
+            "display": {
+                "discription": "jump",
+                "name": "Jump",
+                "text": {
+                    "__angle__": "angle",
+                    "__id__": "ID",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__power__": "power"
+                }
+            },
+            "height": 3,
+            "id": 429048066,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 246678052,
+                        "name": "path_true"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                }
+            },
+            "name": "jump",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id"
+                ]
+            },
+            "type": "objects",
+            "width": 6,
+            "x": 30,
+            "y": 23
+        },
+        "686662826": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 686662826,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "c",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 10.0,
+            "y": 30.0
+        },
+        "483585828": {
+            "display": {
+                "discription": "move object",
+                "name": "Move object",
+                "text": {
+                    "__angle__": "angle",
+                    "__id__": "ID",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__power__": "power"
+                }
+            },
+            "height": 5,
+            "id": 483585828,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 101889225,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                },
+                "angle": {
+                    "code": "angle",
+                    "name": "__angle__",
+                    "standard": 0,
+                    "type": "number",
+                    "value": null
+                },
+                "power": {
+                    "code": "power",
+                    "name": "__power__",
+                    "standard": 5,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "moveObject",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "angle",
+                    "power"
+                ]
+            },
+            "type": "objects",
+            "width": 10,
+            "x": 30.0,
+            "y": 30.0
+        },
+        "136142743": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 136142743,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 993274621,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "isDirectionRight",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "False",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 42,
+            "y": 16
+        },
+        "645027114": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 645027114,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 86565456,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "isDirectionRight",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "True",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 42,
+            "y": 9
+        },
+        "101889225": {
+            "display": {
+                "discription": "Run python code",
+                "name": "Python",
+                "text": {
+                    "__answer__": "answer",
+                    "__dict__": "dict",
+                    "__list__": "list",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 5,
+            "id": 101889225,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 686662826,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "def run(program, args, kwargs):\n\tmoveObject(getVar(\"playerID\", True), 90 if getVar(\"isDirectionRight\", True) else 270, 20.0)\n",
+                    "type": "text",
+                    "value": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "standard": [],
+                    "type": "list",
+                    "value": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "standard": {},
+                    "type": "dict",
+                    "value": null
+                }
+            },
+            "name": "python",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "list"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text",
+                    "list",
+                    "dict"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "special": {
+                "inputs": {
+                    "dict": {
+                        "invisible": true
+                    },
+                    "list": {
+                        "invisible": true
+                    },
+                    "text": {
+                        "height": 3,
+                        "type": "text-box"
+                    }
+                }
+            },
+            "type": "another",
+            "width": 10,
+            "x": 18,
+            "y": 30
+        },
+        "384110857": {
+            "display": {
+                "discription": "Set var by name",
+                "name": "Set var",
+                "text": {
+                    "__global__": "global",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "value"
+                }
+            },
+            "height": 5,
+            "id": 384110857,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 142247843,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "playerID",
+                    "type": "text",
+                    "value": null
+                },
+                "global": {
+                    "code": "global",
+                    "name": "__global__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "",
+                    "type": "Any",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                }
+            },
+            "name": "setVar",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "global",
+                    "value"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 10,
+            "x": 18,
+            "y": 2
+        },
+        "86565456": {
+            "display": {
+                "discription": "mirror animation",
+                "name": "Mirror animation",
+                "text": {
+                    "__horizontal__": "horizontal",
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__vertical__": "vertical"
+                }
+            },
+            "height": 5,
+            "id": 86565456,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 892175058,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                },
+                "horizontal": {
+                    "code": "horizontal",
+                    "name": "__horizontal__",
+                    "standard": false,
+                    "type": "logic",
+                    "value": null
+                },
+                "vertical": {
+                    "code": "vertical",
+                    "name": "__vertical__",
+                    "standard": false,
+                    "type": "logic",
+                    "value": null
+                }
+            },
+            "name": "mirrorAnimation",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "horizontal",
+                    "vertical"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "animation",
+            "width": 10,
+            "x": 30.0,
+            "y": 9.0
+        },
+        "993274621": {
+            "display": {
+                "discription": "mirror animation",
+                "name": "Mirror animation",
+                "text": {
+                    "__horizontal__": "horizontal",
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__vertical__": "vertical"
+                }
+            },
+            "height": 5,
+            "id": 993274621,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 541048766,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                },
+                "horizontal": {
+                    "code": "horizontal",
+                    "name": "__horizontal__",
+                    "standard": true,
+                    "type": "logic",
+                    "value": null
+                },
+                "vertical": {
+                    "code": "vertical",
+                    "name": "__vertical__",
+                    "standard": false,
+                    "type": "logic",
+                    "value": null
+                }
+            },
+            "name": "mirrorAnimation",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "horizontal",
+                    "vertical"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "animation",
+            "width": 10,
+            "x": 30,
+            "y": 16
+        },
+        "537107486": {
+            "display": {
+                "discription": "starts on key click",
+                "name": "Keyboard click",
+                "text": {
+                    "__key__": "key",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 537107486,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "space",
+                    "type": "text",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "keyboardClick",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 10,
+            "y": 23
+        },
+        "206597720": {
+            "display": {
+                "discription": "start every N frames",
+                "name": "Every N frame",
+                "text": {
+                    "__n__": "N",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 206597720,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "N": {
+                    "code": "N",
+                    "name": "__n__",
+                    "standard": 1,
+                    "type": "number",
+                    "value": null,
+                    "visible": false
+                }
+            },
+            "name": "everyFrame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 2,
+            "y": -12
+        },
+        "964011922": {
+            "display": {
+                "discription": "get resulting vector",
+                "name": "Get resulting vector",
+                "text": {
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__x__": "X",
+                    "__y__": "Y"
+                }
+            },
+            "height": 4,
+            "id": 964011922,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 206597720,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                }
+            },
+            "name": "getResultVector",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number"
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "type": "number"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id"
+                ],
+                "outputs": [
+                    "path",
+                    "x",
+                    "y"
+                ]
+            },
+            "type": "objects",
+            "width": 8,
+            "x": 18,
+            "y": -12
+        },
+        "960636457": {
+            "display": {
+                "discription": "If",
+                "name": "If",
+                "text": {
+                    "__a__": "A",
+                    "__b__": "B",
+                    "__none__": "",
+                    "__operation__": "operation",
+                    "__path__": "path",
+                    "__path_false__": "path if false",
+                    "__path_true__": "path if true"
+                }
+            },
+            "height": 5,
+            "id": 960636457,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 964011922,
+                        "name": "path"
+                    }
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "standard": "None",
+                    "type": "Any",
+                    "value": {
+                        "id": 964011922,
+                        "name": "y"
+                    }
+                },
+                "operation": {
+                    "choose": {
+                        "options": [
+                            "0. ==",
+                            "1. !=",
+                            "2. <=",
+                            "3. >=",
+                            "4. <",
+                            "5. >"
+                        ]
+                    },
+                    "code": "operation",
+                    "name": "__operation__",
+                    "standard": 0,
+                    "type": "choose",
+                    "value": null
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "standard": "0",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "if_",
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "a",
+                    "operation",
+                    "b"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "type": "logic",
+            "width": 10,
+            "x": 33,
+            "y": -19
+        },
+        "157415547": {
+            "display": {
+                "discription": "If",
+                "name": "If",
+                "text": {
+                    "__a__": "A",
+                    "__b__": "B",
+                    "__none__": "",
+                    "__operation__": "operation",
+                    "__path__": "path",
+                    "__path_false__": "path if false",
+                    "__path_true__": "path if true"
+                }
+            },
+            "height": 5,
+            "id": 157415547,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 960636457,
+                        "name": "path_true"
+                    }
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "standard": "None",
+                    "type": "Any",
+                    "value": {
+                        "id": 964011922,
+                        "name": "x"
+                    }
+                },
+                "operation": {
+                    "choose": {
+                        "options": [
+                            "0. ==",
+                            "1. !=",
+                            "2. <=",
+                            "3. >=",
+                            "4. <",
+                            "5. >"
+                        ]
+                    },
+                    "code": "operation",
+                    "name": "__operation__",
+                    "standard": 0,
+                    "type": "choose",
+                    "value": null
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "standard": "0",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "if_",
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "a",
+                    "operation",
+                    "b"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "type": "logic",
+            "width": 10,
+            "x": 45,
+            "y": -26
+        },
+        "331142831": {
+            "display": {
+                "discription": "stop animation",
+                "name": "Stop animation",
+                "text": {
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 331142831,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 157415547,
+                        "name": "path_true"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                }
+            },
+            "name": "stopAnimation",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "animation",
+            "width": 6,
+            "x": 57,
+            "y": -28
+        },
+        "640717874": {
+            "display": {
+                "discription": "run animation",
+                "name": "Run animation",
+                "text": {
+                    "__animation__": "animation",
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 640717874,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 157415547,
+                        "name": "path_false"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                },
+                "animation": {
+                    "code": "animation",
+                    "name": "__animation__",
+                    "standard": "run",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "runAnimation",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "animation"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "animation",
+            "width": 8,
+            "x": 57,
+            "y": -23
+        },
+        "223023355": {
+            "display": {
+                "discription": "If",
+                "name": "If",
+                "text": {
+                    "__a__": "A",
+                    "__b__": "B",
+                    "__none__": "",
+                    "__operation__": "operation",
+                    "__path__": "path",
+                    "__path_false__": "path if false",
+                    "__path_true__": "path if true"
+                }
+            },
+            "height": 5,
+            "id": 223023355,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 960636457,
+                        "name": "path_false"
+                    }
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "standard": "None",
+                    "type": "Any",
+                    "value": {
+                        "id": 964011922,
+                        "name": "y"
+                    }
+                },
+                "operation": {
+                    "choose": {
+                        "options": [
+                            "0. ==",
+                            "1. !=",
+                            "2. <=",
+                            "3. >=",
+                            "4. <",
+                            "5. >"
+                        ]
+                    },
+                    "code": "operation",
+                    "name": "__operation__",
+                    "standard": 4,
+                    "type": "choose",
+                    "value": null
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "standard": "0",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "if_",
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "a",
+                    "operation",
+                    "b"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "type": "logic",
+            "width": 10,
+            "x": 45,
+            "y": -11
+        },
+        "291654880": {
+            "display": {
+                "discription": "run animation",
+                "name": "Run animation",
+                "text": {
+                    "__animation__": "animation",
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 291654880,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 223023355,
+                        "name": "path_true"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                },
+                "animation": {
+                    "code": "animation",
+                    "name": "__animation__",
+                    "standard": "jump",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "runAnimation",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "animation"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "animation",
+            "width": 8,
+            "x": 57,
+            "y": -13
+        },
+        "358440581": {
+            "display": {
+                "discription": "run animation",
+                "name": "Run animation",
+                "text": {
+                    "__animation__": "animation",
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 358440581,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 223023355,
+                        "name": "path_false"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 142247843,
+                        "name": "id"
+                    }
+                },
+                "animation": {
+                    "code": "animation",
+                    "name": "__animation__",
+                    "standard": "fall",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "runAnimation",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "animation"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "animation",
+            "width": 8,
+            "x": 57,
+            "y": -8
+        },
+        "478831266": {
+            "display": {
+                "discription": "Connect text",
+                "name": "Connect text",
+                "text": {
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text1__": "first text",
+                    "__text2__": "second text",
+                    "__text__": "text"
+                }
+            },
+            "height": 4,
+            "id": 478831266,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "text1": {
+                    "code": "text1",
+                    "name": "__text1__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 964011922,
+                        "name": "x"
+                    }
+                },
+                "text2": {
+                    "code": "text2",
+                    "name": "__text2__",
+                    "standard": " ",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "connectText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text1",
+                    "text2"
+                ],
+                "outputs": [
+                    "path",
+                    "text"
+                ]
+            },
+            "type": "text",
+            "width": 8,
+            "x": 31,
+            "y": -2
+        },
+        "16069096": {
+            "display": {
+                "discription": "Connect text",
+                "name": "Connect text",
+                "text": {
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text1__": "first text",
+                    "__text2__": "second text",
+                    "__text__": "text"
+                }
+            },
+            "height": 4,
+            "id": 16069096,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 478831266,
+                        "name": "path"
+                    }
+                },
+                "text1": {
+                    "code": "text1",
+                    "name": "__text1__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 478831266,
+                        "name": "text"
+                    }
+                },
+                "text2": {
+                    "code": "text2",
+                    "name": "__text2__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 964011922,
+                        "name": "y"
+                    }
+                }
+            },
+            "name": "connectText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text1",
+                    "text2"
+                ],
+                "outputs": [
+                    "path",
+                    "text"
+                ]
+            },
+            "type": "text",
+            "width": 8,
+            "x": 41,
+            "y": -2
+        },
+        "296078284": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 296078284,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 16069096,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 16069096,
+                        "name": "text"
+                    }
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 51.0,
+            "y": -2.0
+        },
+        "432985192": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 432985192,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "idle",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 68,
+            "y": -28
+        },
+        "696939707": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 696939707,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "run",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 68,
+            "y": -23
+        },
+        "587205962": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 587205962,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "jump",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 68,
+            "y": -13
+        },
+        "519766465": {
+            "display": {
+                "discription": "...",
+                "name": "Write text",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 3,
+            "id": 519766465,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "fall",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 68,
+            "y": -8
+        }
+    }
+}

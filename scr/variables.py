@@ -153,7 +153,7 @@ RELEASE = platform.release()
 IMAGE_FORMATES = "jpeg jpg jpe jfif png ico tiff tif eps svg".split()
 BLOCKED_FORMATES = "cfg obj objc func".split()
 
-DIVELOP = True if os.getenv("PYCHARM_HOSTED") == "1" else False
+DIVELOP = False
 
 DONT_OPEN_FORMATES = ()
 

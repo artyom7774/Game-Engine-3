@@ -1,0 +1,219 @@
+{
+    "variables": {},
+    "objects": {
+        "544977811": {
+            "display": {
+                "discription": "starts at the start of the game",
+                "name": "On start game",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 544977811,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 5,
+            "y": 12
+        },
+        "675703014": {
+            "display": {
+                "discription": "run animation",
+                "name": "Run animation",
+                "text": {
+                    "__animation__": "animation",
+                    "__id__": "id",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 675703014,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 317551970,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 317551970,
+                        "name": "id"
+                    }
+                },
+                "animation": {
+                    "code": "animation",
+                    "name": "__animation__",
+                    "standard": "group-0",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "runAnimation",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "animation"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "animation",
+            "width": 8,
+            "x": 21,
+            "y": 19
+        },
+        "317551970": {
+            "display": {
+                "discription": "get object ID by name, return -1 if object name is not found",
+                "name": "Get object ID by name",
+                "text": {
+                    "__id__": "ID",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 317551970,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 544977811,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "player-0",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "getObjectIDByName",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+            "type": "objects",
+            "width": 6,
+            "x": 13,
+            "y": 12
+        },
+        "826661845": {
+            "display": {
+                "discription": "mirror animation",
+                "name": "Mirror animation",
+                "text": {
+                    "__horizontal__": "horizontal",
+                    "__id__": "id",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__vertical__": "vertical"
+                }
+            },
+            "height": 5,
+            "id": 826661845,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 317551970,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 317551970,
+                        "name": "id"
+                    }
+                },
+                "horizontal": {
+                    "code": "horizontal",
+                    "name": "__horizontal__",
+                    "standard": false,
+                    "type": "logic",
+                    "value": null
+                },
+                "vertical": {
+                    "code": "vertical",
+                    "name": "__vertical__",
+                    "standard": false,
+                    "type": "logic",
+                    "value": null
+                }
+            },
+            "name": "mirrorAnimation",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "horizontal",
+                    "vertical"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "animation",
+            "width": 10,
+            "x": 21,
+            "y": 12
+        }
+    }
+}

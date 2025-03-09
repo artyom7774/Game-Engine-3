@@ -509,7 +509,7 @@ class AnimatorFunctions:
             dialog.init()
 
         else:
-            dialog.object["StaticObject"]["animation"]["value"]["groups"][dialog.selectGroup]["settings"]["fpsPerFrame"] = value
+            dialog.object["StaticObject"]["animation"]["value"]["groups"][dialog.selectGroup]["settings"]["fpsPerFrame"] = int(value)
 
             AnimatorFunctions.save(project, dialog)
 

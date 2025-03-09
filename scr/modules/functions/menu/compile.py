@@ -43,6 +43,8 @@ PROGRAMS = %PROJECT_PROGRAMS%
 OBJECTS = %PROJECT_OBJECTS%
 SCENES = %PROJECT_SCENES%
 
+DEBUG = %DEBUG%
+
 %COMPILER%
 
 class Tps:
@@ -107,7 +109,7 @@ class Game(engine.Application):
             self.socket = None
         
         for key, value in PROGRAMS.items():
-            self.programs[key] = Compiler(self, key, value, self.settings)
+            self.programs[key] = Compiler(self, key, value, self.settings, DEBUG)
 
         self.counter = threading.Thread(target=lambda: self.tpsStart())
         self.counter.daemon = True
@@ -184,8 +186,14 @@ class Game(engine.Application):
         for key, value in SCENES[scene]["objects"].items():
             type = value["type"]
             variables = value["variables"]
+            
+            variables["animator"] = engine.Animator(self, None, variables["animation"])
 
             obj = getattr(engine.objects, type)(self, **variables)
+            
+            obj.animator.obj = obj
+            
+            obj.animator.init()
 
             if scene not in self.objectIDByName:
                 self.objectIDByName[scene] = {}
@@ -344,7 +352,6 @@ class Compile:
         pathPython = f"{pathPython}/python/Scripts/python.exe"
 
         print(f"LOG: python path: {pathPython}")
-        print(sys.executable)
 
         thr = threading.Thread(target=lambda: os.system(f"cd \"{pathProject}\" && \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""))
         thr.daemon = True
@@ -458,7 +465,7 @@ class Compile:
                     "focus": focus
                 }
 
-        # ALL OBJECTS
+        # LOAD OBJECTS
 
         allObjects = {}
 
@@ -517,6 +524,8 @@ class Compile:
 
         program = program.replace("%COMPILER%", str(open("scr/code/compiler.py", "r", encoding="utf-8").read()))
 
+        program = program.replace("%DEBUG%", str(DIVELOP))
+
         with open(output, "w", encoding="utf-8") as file:
             file.write(program)
 
@@ -554,8 +563,8 @@ class Compile:
 
             result = subprocess.run(command, shell=True, capture_output=True, check=True, text=True)
 
-            print(result.stdout)
-            print(result.stderr)
+            project.dialog.logSignal.emit(result.stdout)
+            project.dialog.logSignal.emit(result.stderr)
 
             if os.path.exists(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe"):
                 os.remove(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")

@@ -8,7 +8,7 @@ import os
 
 
 class Compiler:
-    def __init__(self, project, path: str, nodes: typing.Dict[str, dict], settings: dict) -> None:
+    def __init__(self, project, path: str, nodes: typing.Dict[str, dict], settings: dict, debug: bool = True) -> None:
         self.project = project
 
         self.program = None
@@ -26,7 +26,7 @@ class Compiler:
 
         self.settings = settings
 
-        self.debug = True
+        self.debug = debug
 
         self.nodesSortedByTypes = {}
         self.nodesFunctionsSortedByName = {}
@@ -147,7 +147,7 @@ class Compiler:
                         "id": id
                     }
 
-                    return 0
+                    return
 
             if type(var) == list:
                 for element in var:

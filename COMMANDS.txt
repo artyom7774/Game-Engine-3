@@ -6,7 +6,7 @@ INSTALL:
 pyinstaller "Game Engine 3.spec"
 
 COMPILE .pyx:
-python setup.py build_ext --inplace
+python setup.py build_ext --inplace -v
 
 GET INSTALLED MODULES:
 pip freeze > requirements.txt

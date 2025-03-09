@@ -15,7 +15,6 @@ from engine.vector.int import Vec2i, Vec4i
 from scr.variables import *
 
 import dataclasses
-import qdarktheme
 import pyperclip
 import typing
 import random
@@ -528,8 +527,14 @@ class CodeNodeConnector(QLabel):
 
 
 class CodeNode(QTreeWidget):
+    font = None
+
     def __init__(self, parent, node: dict) -> None:
         QTreeWidget.__init__(self, parent.objects["main"]["code"])
+
+        if self.font is None:
+            self.font = QFont()
+            self.font.setBold(True)
 
         self.setHeaderHidden(True)
         self.show()
@@ -561,7 +566,39 @@ class CodeNode(QTreeWidget):
         painter = QPainter(qpixmap)
         painter.setPen(QPen(QColor(self.project.objects["main"]["config"]["colors"][self.node["type"]]["second"]), 1))
 
-        painter.setFont(LBFONT)
+        """
+        def get_max_font_width(width, text):
+            if not text or width <= 0:
+                return 0
+
+            font = QFont()
+            max_size = 0
+            
+            low = 1
+            high = 1000
+
+            while low <= high:
+                mid = (low + high) // 2
+                
+                font.setPointSize(mid)
+                metrics = QFontMetrics(font)
+                
+                text_width = metrics.horizontalAdvance(text)
+
+                if text_width <= width:
+                    max_size = mid
+                    low = mid + 1
+                    
+                else:
+                    high = mid - 1
+
+            return max_size
+
+        """
+
+        self.font.setPointSize(8) # динамический размер
+
+        painter.setFont(self.font)
 
         painter.drawImage(2, 2, QImage(self.project.objects["main"]["config"]["icons"][self.node["type"]]))
 

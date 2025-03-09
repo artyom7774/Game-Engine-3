@@ -3,6 +3,7 @@ from PyQt5 import QtWidgets
 
 from scr.variables import *
 
+import subprocess
 import qdarktheme
 import threading
 
@@ -12,10 +13,10 @@ class SettingsFunctions:
     def newRunProgram() -> None:
         if SYSTEM == "Windows":
             if DIVELOP:
-                os.system("venv\Scripts\python.exe \"Game Engine 3.py\"")
+                subprocess.run(["venv/Scripts/python.exe", "Game Engine 3.py"])
 
             else:
-                os.system("\"Game Engine 3.exe\"")
+                subprocess.run(["Game Engine 3.exe"])
 
         elif SYSTEM == "Linux":
             pass

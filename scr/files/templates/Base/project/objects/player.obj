@@ -108,6 +108,30 @@
             "name": "Object layer",
             "value": 0,
             "type": "int"
+        },
+        "animation": {
+            "name": "Animation",
+            "value": {
+                "groups": {
+                    "group-0": {
+                        "name": "group",
+                        "sprites": [
+
+                        ],
+                        "settings": {
+                            "repeat": false,
+                            "fpsPerFrame": "10",
+                            "standard": false
+                        }
+                    }
+                }
+            },
+            "type": "animator"
+        },
+        "invisible": {
+            "name": "Invisible",
+            "value": false,
+            "type": "bool"
         }
     },
     "DynamicObject": {

@@ -814,6 +814,8 @@ class Scene:
         if "sprite" in answer and answer["sprite"] != "":
             answer["sprite"][0] = f"projects/{project.selectProject}/project/{answer['sprite'][0]}"
 
+        # print(answer["sprite"])
+
         return obj["type"]["value"], answer
 
     @staticmethod
