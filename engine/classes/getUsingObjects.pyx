@@ -11,36 +11,6 @@ else:
     pass
 
 
-def binaryLeft(objects, distance: float) -> int:
-    cdef int left = 0
-    cdef int right = len(objects) - 1
-    cdef int mid
-
-    while left < right:
-        mid = (left + right) // 2
-        if objects[mid].distance < distance:
-            left = mid + 1
-        else:
-            right = mid
-
-    return left if objects[left].distance >= distance else 0
-
-
-def binaryRight(objects, distance: float) -> int:
-    cdef int left = 0
-    cdef int right = len(objects) - 1
-    cdef int mid
-
-    while left < right:
-        mid = (left + right + 1) // 2
-        if objects[mid].distance > distance:
-            right = mid - 1
-        else:
-            left = mid
-
-    return right if objects[right].distance <= distance else len(objects) - 1
-
-
 cdef class GetUsingObjects:
     @staticmethod
     def getUsingObjectsBase(game, group) -> None:
@@ -51,21 +21,104 @@ cdef class GetUsingObjects:
 
     @staticmethod
     def getUsingObjectsCircle(game, group) -> None:
-        cdef list sortedObjects = []
+        def binaryLeft(objects, distance: float) -> int:
+            cdef int left = 0
+            cdef int right = len(objects) - 1
+            cdef int mid
+
+            while left < right:
+                mid = (left + right) // 2
+                if objects[mid].distance < distance:
+                    left = mid + 1
+
+                else:
+                    right = mid
+
+            return left if objects[left].distance >= distance else 0
+
+        def binaryRight(objects, distance: float) -> int:
+            cdef int left = 0
+            cdef int right = len(objects) - 1
+            cdef int mid
+
+            while left < right:
+                mid = (left + right + 1) // 2
+                if objects[mid].distance > distance:
+                    right = mid - 1
+
+                else:
+                    left = mid
+
+            return right if objects[right].distance <= distance else len(objects) - 1
+
         cdef list dynamicsObjects = []
 
         for obj in group.objects:
             if type(obj) == DynamicObject:
                 dynamicsObjects.append(obj)
-            else:
-                sortedObjects.append(obj)
 
         game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.distance)
 
         for obj in dynamicsObjects:
             l = binaryLeft(game.cash["object_sorted_by_distance"], obj.distance - group.maxLenghtObject)
             r = binaryRight(game.cash["object_sorted_by_distance"], obj.distance + group.maxLenghtObject) + 1
+
             GetUsingObjects.getUsingObjectsIteration(game, game.cash["object_sorted_by_distance"][l:r], obj)
+
+    @staticmethod
+    def getUsingObjectsSquare(game, group) -> None:
+        def binaryLeft(objects, x: float) -> int:
+            cdef int left = 0
+            cdef int right = len(objects) - 1
+            cdef int mid
+
+            while left < right:
+                mid = (left + right) // 2
+                if objects[mid].pos.x < x:
+                    left = mid + 1
+
+                else:
+                    right = mid
+
+            return left if objects[left].pos.x >= x else 0
+
+        def binaryRight(objects, x: float) -> int:
+            cdef int left = 0
+            cdef int right = len(objects) - 1
+            cdef int mid
+
+            while left < right:
+                mid = (left + right + 1) // 2
+                if objects[mid].pos.x > x:
+                    right = mid - 1
+
+                else:
+                    left = mid
+
+            return right if objects[right].pos.x <= x else len(objects) - 1
+
+        cdef list dynamicsObjects = []
+
+        for obj in group.objects:
+            if type(obj) == DynamicObject:
+                dynamicsObjects.append(obj)
+
+        game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
+
+        for obj in dynamicsObjects:
+            resulting = obj.getVectorsPower()
+
+            l = binaryLeft(game.cash["object_sorted_by_distance"], obj.pos.x - resulting.x - group.maxLenghtObject)
+            r = binaryRight(game.cash["object_sorted_by_distance"], obj.pos.x + resulting.x + group.maxLenghtObject) + 1
+
+            objectsBefore = game.cash["object_sorted_by_distance"][l:r]
+            objectsAfter = []
+
+            for before in objectsBefore:
+                if not (obj.pos.y + obj.hitbox.y + obj.hitbox.height + group.maxLenghtObject < before.pos.y + before.hitbox.y or before.pos.y + before.hitbox.y + before.hitbox.height + group.maxLenghtObject < obj.pos.y + obj.hitbox.y):
+                    objectsAfter.append(before)
+
+            GetUsingObjects.getUsingObjectsIteration(game, objectsAfter, obj)
 
     @staticmethod
     def getUsingObjectsIteration(game, objects, obj) -> None:

@@ -213,7 +213,12 @@ class TextEditor(QDialog):
 
     def closeEvent(self, event):
         text = self.editor.text()
-        type = self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["type"]
+
+        try:
+            type = self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["type"]
+
+        except KeyError:
+            return
 
         if TypeCurrect.currect_(type, text):
             self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = TypeSet.set_(type, text)

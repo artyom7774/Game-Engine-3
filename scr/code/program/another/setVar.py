@@ -37,7 +37,7 @@ def setVar(program, compiler, path: str, nodes: dict, id: int, variables: dict) 
         type = variables["locals"][path][name]["type"]
 
     if type == "number":
-        value = float(value)
+        value = float(value) if float(value) - int(value) != 0 else int(value)
 
     if gl:
         variables["globals"][name]["value"] = value

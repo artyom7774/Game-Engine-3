@@ -36,6 +36,8 @@ def main() -> None:
         except Exception as e:
             traceback.print_exc(file=file)
 
+            print("LOG: scr/files/logs/log.txt")
+
         finally:
             sys.stdout = sys.__stdout__
             sys.stderr = sys.__stderr__

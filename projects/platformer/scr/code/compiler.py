@@ -147,7 +147,7 @@ class Compiler:
                         "id": id
                     }
 
-                    return 0
+                    return
 
             if type(var) == list:
                 for element in var:

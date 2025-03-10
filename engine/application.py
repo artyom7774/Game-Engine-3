@@ -206,7 +206,7 @@ class Application:
         #     pygame.display.set_caption(str(round(self.clock.get_fps())))
 
         if self.doCollisionsUpdate:
-            engine.classes.getUsingObjects.GetUsingObjects.getUsingObjectsCircle(self, self.objects)
+            engine.classes.getUsingObjects.GetUsingObjects.getUsingObjectsSquare(self, self.objects)
 
     def logic(self) -> None:
         for event in pygame.event.get():
