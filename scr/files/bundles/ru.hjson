@@ -301,4 +301,6 @@
     "horizontal": "горизонталь"
     "vertical": "вертикаль"
     "Get resulting vector": "Получить результирующий вектор"
+    "Get mouse pos": "Получить позицию мыши"
+    "Mass": "Масса"
 }

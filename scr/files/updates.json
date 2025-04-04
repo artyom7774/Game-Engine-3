@@ -14,7 +14,9 @@
         "3.6.0",
         "3.7.0",
         "3.7.1",
-        "3.7.2"
+        "3.7.2",
+        "3.7.3",
+	"3.8.0"
     ],
 
     "updates": {
@@ -91,6 +93,16 @@
         "3.7.2": {
             "name": "3.7.2",
             "text": "- optimize engine"
+        },
+
+        "3.7.3": {
+            "name": "3.7.3",
+            "text": "- new nodes: get mouse pos\n- new functions for python node: run animation, stop animation, mirror animation, get resulting vector, get mouse pos\n- fixbug with compiling project"
+        },
+
+        "3.8.0": {
+            "name": "3.8.0",
+            "text": "- update physic\n- add mass for object"
         }
     }
 }

@@ -634,7 +634,7 @@ class Compile:
         Compile.compile(project)
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            projectSettings = load(file)
+            projectSettings = json.load(file)
 
         path = f"projects/{project.selectProject}/scr"
 
