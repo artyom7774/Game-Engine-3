@@ -169,12 +169,13 @@ cdef class StaticObject:
                             self.moveByAngle(90, speedX - self.getVectorsPower().x)
                             obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
 
-                        if y > 0 and (obj["object"].pos.x + obj["object"].hitbox.x < self.pos.x + self.hitbox.x + self.hitbox.width) and (self.pos.x + self.hitbox.x < obj["object"].pos.x + obj["object"].hitbox.x + obj["object"].hitbox.width) and (self.pos.y + self.hitbox.y + self.hitbox.height <= obj["object"].pos.y + obj["object"].hitbox.y):
-                            self.moveByAngle(180, speedY - self.getVectorsPower().y)
-                            obj["object"].moveByAngle(180, speedY - obj["object"].getVectorsPower().y)
+                        if y > 0:
+                            pass
 
                         if y < 0:
-                            pass
+                            # print(self.group, speedY)
+
+                            obj["object"].vectors["__fall__"].power = speedY - obj["object"].getVectorsPower().y
 
                     if allowFunctions:
                         flag = True
@@ -281,7 +282,7 @@ cdef class DynamicObject(StaticObject):
 
         if self.collision(0, 1):
             if self.wasJump <= 0:
-                self.vectors["__fall__"].power = 0
+                pass # self.vectors["__fall__"].power = 0
 
         else:
             self.vectors["__fall__"].power += self.gravity / 1000
