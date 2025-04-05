@@ -13,6 +13,7 @@ from engine.vector.int import Vec2i, Vec4i
 
 from engine.variables import *
 
+import typing
 import random
 import typing
 import math
@@ -138,7 +139,7 @@ cdef class StaticObject:
 
         self.distance = sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 
-    def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False) -> bool:
+    def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
         hitbox = self.getEditHitbox(x, y, append)
 
         if self.id not in self.game.cash["collisions"]:
@@ -147,7 +148,7 @@ cdef class StaticObject:
         flag = False
 
         for obj in self.game.cash["collisions"][self.id]:
-            if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+            if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height) and (filter is None or filter(obj["object"])):
                 if allowFunctions:
                     if obj["functions"] is not None:
                         for element in obj["functions"]["functions"]:
@@ -155,27 +156,23 @@ cdef class StaticObject:
 
                 if obj["functions"] is not None and "collision" in obj["functions"]["types"]:
                     if isinstance(obj["object"], DynamicObject) and isinstance(self, DynamicObject):
-                        # после того как объект был найден проверять для этого же объект дальше, если ли ещё динамические объекты
-                        # и высчитывать общую массу и общий импульс
-
                         speedX = (self.mass * self.getVectorsPower().x + obj["object"].mass * obj["object"].getVectorsPower().x) / (self.mass + obj["object"].mass)
                         speedY = (self.mass * self.getVectorsPower().y + obj["object"].mass * obj["object"].getVectorsPower().y) / (self.mass + obj["object"].mass)
 
-                        if x > 0:
+                        print(self.group, self.getVectorsPower().y)
+
+                        if Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
                             self.moveByAngle(90, speedX - self.getVectorsPower().x)
                             obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
 
-                        if x < 0:
+                        if Collision.rect(self.pos.x + hitbox.x - 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
                             self.moveByAngle(90, speedX - self.getVectorsPower().x)
                             obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
 
                         if y > 0:
                             pass
 
-                        if y < 0:
-                            print(self.group, speedY)
-
-                            # self.vectors["__fall__"].power = speedY
+                        if abs(self.getVectorsPower().y) > FLOAT_PRECISION and Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y - 1, hitbox.width - 2, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
                             obj["object"].vectors["__fall__"].power = speedY - obj["object"].getVectorsPower().y
 
                     if allowFunctions:
@@ -229,10 +226,6 @@ cdef class DynamicObject(StaticObject):
     cdef public float jumpPower
     cdef public float slidingStep
     cdef public float speed
-    cdef public bint wasJump
-
-    def __cinit__(self, *args, **kwargs):
-        self.wasJump = 0
 
     def __init__(
         self, game: object,
@@ -276,14 +269,14 @@ cdef class DynamicObject(StaticObject):
 
         super().update(collisions)
 
-        self.wasJump -= 1
-
         if self.collision(0, -1):
             pass
 
         if self.collision(0, 1):
-            if self.wasJump <= 0:
-                pass # self.vectors["__fall__"].power = 0
+            if self.vectors["__fall__"].power > 0:
+                # TODO: делать проверку что объект коссаеться не любого объекта а исключительно статического
+
+                self.vectors["__fall__"].power = 0
 
         else:
             self.vectors["__fall__"].power += self.gravity / 1000
@@ -322,8 +315,6 @@ cdef class DynamicObject(StaticObject):
     def moveByType(self, move: str, power: float = None) -> None:
         if move == "jump":
             self.vectors["__fall__"].power = -self.jumpPower if power is None else power
-
-            self.wasJump = 5
 
         else:
             raise NameError(f"move type {move} is not defined")

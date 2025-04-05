@@ -13,7 +13,7 @@ height = root.winfo_screenheight()
 
 root.destroy()
 
-SOCKET_ID = 64338
+SOCKET_ID = 11336
 
 VARIABLES = {
     "globals": {},
