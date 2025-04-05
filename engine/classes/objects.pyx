@@ -285,6 +285,33 @@ cdef class DynamicObject(StaticObject):
 
         self.move(pos.x, pos.y)
 
+    def getObjectStructure(self, x, y, append, phitbox: typing.List[int], now: VObject, visited: typing.Optional[set] = None) -> typing.List[VObject]:
+        if visited is None:
+            visited = set()
+
+        if now.id in visited:
+            return []
+
+        visited.add(now.id)
+
+        hitbox = now.getEditHitbox(x, y, append)
+
+        objects = []
+
+        for obj in self.game.cash["collisions"][now.id]:
+            if (isinstance(obj["object"], DynamicObject) and "collision" in obj["functions"]["types"]):
+                if Collision.rect(now.pos.x + hitbox.x + phitbox[0], now.pos.y + hitbox.y + phitbox[1], hitbox.width + phitbox[2], hitbox.height + phitbox[3], obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+                    objects.append(obj["object"])
+
+                    objects.extend(
+                        self.getObjectStructure(
+                            x, y, append, phitbox,
+                            obj["object"], visited
+                        )
+                    )
+
+        return objects
+
     def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
         hitbox = self.getEditHitbox(x, y, append)
 
@@ -301,7 +328,39 @@ cdef class DynamicObject(StaticObject):
                             getattr(self.game.functions, element.replace("function::", "").replace("()", ""))(self.game, self, obj)
 
                 if obj["functions"] is not None and "collision" in obj["functions"]["types"]:
-                    if isinstance(obj["object"], DynamicObject) and isinstance(self, DynamicObject):
+                    if isinstance(obj["object"], DynamicObject) and isinstance(self, DynamicObject) and self.group == "player":
+                        right = self.getObjectStructure(x, y, append, [1, 1, 0, -2], self)
+                        left = self.getObjectStructure(x, y, append, [-1, 1, 0, -2], self)
+                        up = self.getObjectStructure(x, y, append, [1, -1, -2, 0], self)
+
+                        if len(right) >= 1:
+                            right.append(self)
+
+                            speedX = sum([obj.mass * obj.getVectorsPower().x for obj in right]) / sum([obj.mass for obj in right])
+
+                            for obj in right:
+                                obj.moveByAngle(90, speedX - obj.getVectorsPower().x)
+
+                        if len(left) >= 1:
+                            left.append(self)
+
+                            speedX = sum([obj.mass * obj.getVectorsPower().x for obj in left]) / sum([obj.mass for obj in left])
+
+                            for obj in left:
+                                obj.moveByAngle(90, speedX - obj.getVectorsPower().x)
+
+                        if abs(self.getVectorsPower().y) > FLOAT_PRECISION and len(up) >= 1:
+                            up.append(self)
+
+                            speedY = sum([obj.mass * obj.getVectorsPower().y for obj in up]) / sum([obj.mass for obj in up])
+
+                            for obj in up:
+                                if obj.id == self.id:
+                                    continue
+
+                                obj.vectors["__fall__"].power = speedY - obj.getVectorsPower().y
+
+                        """
                         speedX = (self.mass * self.getVectorsPower().x + obj["object"].mass * obj["object"].getVectorsPower().x) / (self.mass + obj["object"].mass)
                         speedY = (self.mass * self.getVectorsPower().y + obj["object"].mass * obj["object"].getVectorsPower().y) / (self.mass + obj["object"].mass)
 
@@ -318,6 +377,7 @@ cdef class DynamicObject(StaticObject):
 
                         if abs(self.getVectorsPower().y) > FLOAT_PRECISION and Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y - 1, hitbox.width - 2, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
                             obj["object"].vectors["__fall__"].power = speedY - obj["object"].getVectorsPower().y
+                        """
 
                     if allowFunctions:
                         flag = True

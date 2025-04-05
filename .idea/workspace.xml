@@ -6,12 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="63b9e141-b681-4943-9a61-afd675b9e146" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/objects.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.obj" beforeDir="false" afterPath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,9 +121,6 @@
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="SDK_NAME" value="Python 3.11 (Game-Engine-3) (2)" />
       <option name="WORKING_DIRECTORY" value="E:\divelop\Game-Engine-3" />
