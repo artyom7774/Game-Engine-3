@@ -155,24 +155,6 @@ cdef class StaticObject:
                             getattr(self.game.functions, element.replace("function::", "").replace("()", ""))(self.game, self, obj)
 
                 if obj["functions"] is not None and "collision" in obj["functions"]["types"]:
-                    if isinstance(obj["object"], DynamicObject) and isinstance(self, DynamicObject):
-                        speedX = (self.mass * self.getVectorsPower().x + obj["object"].mass * obj["object"].getVectorsPower().x) / (self.mass + obj["object"].mass)
-                        speedY = (self.mass * self.getVectorsPower().y + obj["object"].mass * obj["object"].getVectorsPower().y) / (self.mass + obj["object"].mass)
-
-                        if Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                            self.moveByAngle(90, speedX - self.getVectorsPower().x)
-                            obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
-
-                        if Collision.rect(self.pos.x + hitbox.x - 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                            self.moveByAngle(90, speedX - self.getVectorsPower().x)
-                            obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
-
-                        if y > 0:
-                            pass
-
-                        if abs(self.getVectorsPower().y) > FLOAT_PRECISION and Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y - 1, hitbox.width - 2, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                            obj["object"].vectors["__fall__"].power = speedY - obj["object"].getVectorsPower().y
-
                     if allowFunctions:
                         flag = True
 
@@ -302,6 +284,48 @@ cdef class DynamicObject(StaticObject):
             self.vectors.pop(name)
 
         self.move(pos.x, pos.y)
+
+    def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
+        hitbox = self.getEditHitbox(x, y, append)
+
+        if self.id not in self.game.cash["collisions"]:
+            return False
+
+        flag = False
+
+        for obj in self.game.cash["collisions"][self.id]:
+            if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height) and (filter is None or filter(obj["object"])):
+                if allowFunctions:
+                    if obj["functions"] is not None:
+                        for element in obj["functions"]["functions"]:
+                            getattr(self.game.functions, element.replace("function::", "").replace("()", ""))(self.game, self, obj)
+
+                if obj["functions"] is not None and "collision" in obj["functions"]["types"]:
+                    if isinstance(obj["object"], DynamicObject) and isinstance(self, DynamicObject):
+                        speedX = (self.mass * self.getVectorsPower().x + obj["object"].mass * obj["object"].getVectorsPower().x) / (self.mass + obj["object"].mass)
+                        speedY = (self.mass * self.getVectorsPower().y + obj["object"].mass * obj["object"].getVectorsPower().y) / (self.mass + obj["object"].mass)
+
+                        if Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+                            self.moveByAngle(90, speedX - self.getVectorsPower().x)
+                            obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
+
+                        if Collision.rect(self.pos.x + hitbox.x - 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+                            self.moveByAngle(90, speedX - self.getVectorsPower().x)
+                            obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
+
+                        if y > 0:
+                            pass
+
+                        if abs(self.getVectorsPower().y) > FLOAT_PRECISION and Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y - 1, hitbox.width - 2, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+                            obj["object"].vectors["__fall__"].power = speedY - obj["object"].getVectorsPower().y
+
+                    if allowFunctions:
+                        flag = True
+
+                    else:
+                        return True
+
+        return flag
 
     def moveByAngle(self, angle: float, speed: float = None, slidingStep: float = None, name: str = "vector", specifical: int = None):
         id = random.randint(1, 1000000000) if specifical is None else int(specifical)
