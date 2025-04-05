@@ -159,8 +159,6 @@ cdef class StaticObject:
                         speedX = (self.mass * self.getVectorsPower().x + obj["object"].mass * obj["object"].getVectorsPower().x) / (self.mass + obj["object"].mass)
                         speedY = (self.mass * self.getVectorsPower().y + obj["object"].mass * obj["object"].getVectorsPower().y) / (self.mass + obj["object"].mass)
 
-                        print(self.group, self.getVectorsPower().y)
-
                         if Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
                             self.moveByAngle(90, speedX - self.getVectorsPower().x)
                             obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
@@ -274,8 +272,6 @@ cdef class DynamicObject(StaticObject):
 
         if self.collision(0, 1):
             if self.vectors["__fall__"].power > 0:
-                # TODO: делать проверку что объект коссаеться не любого объекта а исключительно статического
-
                 self.vectors["__fall__"].power = 0
 
         else:
