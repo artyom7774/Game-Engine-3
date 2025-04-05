@@ -6,15 +6,32 @@
   <component name="ChangeListManager">
     <list default="true" id="63b9e141-b681-4943-9a61-afd675b9e146" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/getUsingObjects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/hitbox.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/objects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/vector/float.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/vector/int.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.obj" beforeDir="false" afterPath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.obj" beforeDir="false" afterPath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.obj" beforeDir="false" afterPath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.obj" beforeDir="false" afterPath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.obj" beforeDir="false" afterPath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/getUsingObjects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/hitbox.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/float.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/int.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/getUsingObjects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/hitbox.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/vector/float.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/vector/int.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/version.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,32 +69,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.GE3 project.executor": "Run",
-    "Python.Game Engine 3.executor": "Debug",
-    "Python.animator.executor": "Debug",
-    "Python.application.executor": "Run",
-    "Python.compile.executor": "Debug",
-    "Python.main.executor": "Debug",
-    "Python.program.executor": "Run",
-    "Python.scene.executor": "Debug",
-    "Python.scratch.executor": "Run",
-    "Python.setup.executor": "Run",
-    "Python.test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/divelop/Game-Engine-3",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.GE3 project.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Game Engine 3.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.animator.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.application.executor&quot;: &quot;Run&quot;,
+    &quot;Python.compile.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.main.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.program.executor&quot;: &quot;Run&quot;,
+    &quot;Python.scene.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.setup.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/divelop/Game-Engine-3&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\divelop\Game-Engine-3\scr\files\templates\Base\project\scenes" />
@@ -121,6 +138,9 @@
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="SDK_NAME" value="Python 3.11 (Game-Engine-3) (2)" />
       <option name="WORKING_DIRECTORY" value="E:\divelop\Game-Engine-3" />

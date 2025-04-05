@@ -333,7 +333,7 @@ cdef class DynamicObject(StaticObject):
                         left = self.getObjectStructure(x, y, append, [-1, 1, 0, -2], self)
                         up = self.getObjectStructure(x, y, append, [1, -1, -2, 0], self)
 
-                        if len(right) >= 1:
+                        if x > 0 and len(right) >= 1:
                             right.append(self)
 
                             speedX = sum([obj.mass * obj.getVectorsPower().x for obj in right]) / sum([obj.mass for obj in right])
@@ -341,7 +341,7 @@ cdef class DynamicObject(StaticObject):
                             for obj in right:
                                 obj.moveByAngle(90, speedX - obj.getVectorsPower().x)
 
-                        if len(left) >= 1:
+                        if x < 0 and len(left) >= 1:
                             left.append(self)
 
                             speedX = sum([obj.mass * obj.getVectorsPower().x for obj in left]) / sum([obj.mass for obj in left])

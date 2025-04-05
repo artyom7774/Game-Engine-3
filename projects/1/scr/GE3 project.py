@@ -1,4 +1,4 @@
-# MADE BY GAME ENGINE 3.7.3
+# MADE BY GAME ENGINE 3.8.0
 
 import tkinter
 import engine
@@ -13,7 +13,7 @@ height = root.winfo_screenheight()
 
 root.destroy()
 
-SOCKET_ID = 39316
+SOCKET_ID = 20584
 
 VARIABLES = {
     "globals": {},
