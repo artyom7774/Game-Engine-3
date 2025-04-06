@@ -104,6 +104,11 @@
             "value": "player",
             "type": "str"
         },
+        "mass": {
+            "name": "Mass",
+            "value": 1000,
+            "type": "int"
+        },
         "layer": {
             "name": "Object layer",
             "value": 0,
