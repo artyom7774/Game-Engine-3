@@ -17,6 +17,8 @@ from engine.classes.sprite import Sprite
 from engine.classes import objects
 from engine.classes import camera
 
+from engine.profiler import profile
+
 from engine.functions.alpha import alphaRect
 from engine.functions.cache import cache
 

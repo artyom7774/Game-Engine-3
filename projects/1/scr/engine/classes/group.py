@@ -159,7 +159,7 @@ class ObjectGroup:
         px = self.game.camera.x()
         py = self.game.camera.y()
 
-        for obj in sorted(self.objects, key=lambda x: x.drawPriority):
+        for obj in sorted(self.objects, key=lambda x: x.layer):
             sprite = None
 
             if obj.sprite is not None:
@@ -193,4 +193,14 @@ class ObjectGroup:
                 pygame.draw.rect(
                     self.game.screen, (255, 0, 0) if "debug_color" not in obj.specials else obj.specials["debug_color"],
                     (math.trunc(obj.pos.x) + obj.hitbox.x + px, math.trunc(obj.pos.y) + obj.hitbox.y + py, obj.hitbox.width, obj.hitbox.height), 1
+                )
+
+            if self.game.debug and type(obj) == DynamicObject:
+                moving = obj.getVectorsPower() * 6
+
+                # print(moving)
+
+                pygame.draw.line(
+                    self.game.screen, (255, 0, 0) if "debug_color" not in obj.specials else obj.specials["debug_color"],
+                    (px + obj.pos.x + obj.hitbox.x + obj.hitbox.width / 2, py + obj.pos.y + obj.hitbox.y + obj.hitbox.height / 2), (px + obj.pos.x + obj.hitbox.x + obj.hitbox.width / 2 + moving.x, py + obj.pos.y + obj.hitbox.y + obj.hitbox.height / 2 + moving.y), 1
                 )

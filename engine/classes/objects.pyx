@@ -23,7 +23,7 @@ cdef class StaticObject:
     cdef public object procesionPos
     cdef public object pos
     cdef public object hitbox
-    cdef public int drawPriority
+    cdef public int layer
     cdef public object sprite
     cdef public float distance
     cdef public int mass
@@ -76,7 +76,7 @@ cdef class StaticObject:
         self.pos = pos if type(pos) == Vec2f else Vec2f(*pos)
         self.hitbox = hitbox if type(hitbox) == SquareHitbox else SquareHitbox(hitbox)
         self.mass = mass
-        self.drawPriority = layer
+        self.layer = layer
         self.invisible = invisible
         self.sprite = sprite if type(sprite) != list else Sprite(self.game, self, *sprite)
         self.distance = sqrt(self.pos.x ** 2 + self.pos.y ** 2)
@@ -198,6 +198,18 @@ cdef class StaticObject:
             hitbox.y += 1
 
         return hitbox
+
+    def getParameter(self, name: str) -> None:
+        if name == "hitbox":
+            return self.hitbox.get()
+
+        return getattr(self, name)
+
+    def setParameter(self, name: str, value: typing.Any) -> None:
+        if name == "hitbox":
+            self.hitbox = SquareHitbox(value)
+
+        setattr(self, name, value)
 
 
 cdef class DynamicObject(StaticObject):
@@ -339,7 +351,7 @@ cdef class DynamicObject(StaticObject):
                             speedX = sum([obj.mass * obj.getVectorsPower().x for obj in right]) / sum([obj.mass for obj in right])
 
                             for obj in right:
-                                obj.moveByAngle(90, speedX - obj.getVectorsPower().x)
+                                obj.moveByAngle(90, speedX - obj.getVectorsPower().x, float(INF))
 
                         if x < 0 and len(left) >= 1:
                             left.append(self)
@@ -347,7 +359,7 @@ cdef class DynamicObject(StaticObject):
                             speedX = sum([obj.mass * obj.getVectorsPower().x for obj in left]) / sum([obj.mass for obj in left])
 
                             for obj in left:
-                                obj.moveByAngle(90, speedX - obj.getVectorsPower().x)
+                                obj.moveByAngle(90, speedX - obj.getVectorsPower().x, float(INF))
 
                         if abs(self.getVectorsPower().y) > FLOAT_PRECISION and len(up) >= 1:
                             up.append(self)

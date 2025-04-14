@@ -58,6 +58,8 @@
                 "createObject",
                 "removeObject",
                 "getResultingVector",
+                "getObjectParameter",
+                "setObjectParameter",
                 "jump"
             ]
         },
@@ -81,7 +83,8 @@
                 "python",
                 "functionEvent",
                 "callFunction",
-                "getMousePos"
+                "getMousePos",
+                "getTimePassed"
             ]
         },
         "set": {
@@ -260,14 +263,15 @@
             "name": "jump",
             "x": null,
             "y": null,
-            "width": 6,
-            "height": 3,
+            "width": 8,
+            "height": 4,
             "id": null,
 
             "sorting": {
                 "inputs": [
                     "path",
-                    "id"
+                    "id",
+                    "power"
                 ]
             },
 
@@ -285,6 +289,13 @@
                     "type": "number",
                     "value": null,
                     "standard": -1
+                },
+                "power": {
+                    "code": "power",
+                    "name": "__power__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 10
                 }
             },
             "outputs": {
@@ -3474,6 +3485,183 @@
                     "__path__": "path",
                     "__x__": "X",
                     "__y__": "Y"
+                }
+            }
+        },
+        "setObjectParameter": {
+            "type": "objects",
+            "name": "setObjectParameter",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "choose",
+                    "value": null,
+                    "standard": 0,
+                    "choose": {
+                        "options": [
+                            "0. Hitbox",
+                            "1. Group",
+                            "2. Mass",
+                            "3. Layer",
+                            "4. Invisible",
+                            "5. Moving speed",
+                            "6. Gravity",
+                            "7. Power jump",
+                            "8. Braking power"
+                        ]
+                    }
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Set object parameter",
+                "discription": "Set object parameter",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__id__": "ID",
+                    "__name__": "Name",
+                    "__value__": "Value"
+                }
+            }
+        },
+        "getObjectParameter": {
+            "type": "objects",
+            "name": "getObjectParameter",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "choose",
+                    "value": null,
+                    "standard": 0,
+                    "choose": {
+                        "options": [
+                            "0. Hitbox",
+                            "1. Group",
+                            "2. Mass",
+                            "3. Layer",
+                            "4. Invisible",
+                            "5. Moving speed",
+                            "6. Gravity",
+                            "7. Power jump",
+                            "8. Braking power"
+                        ]
+                    }
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "Get object parameter",
+                "discription": "get object parameter",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__id__": "ID",
+                    "__name__": "Name",
+                    "__value__": "Value"
+                }
+            }
+        },
+        "getTimePassed": {
+            "type": "another",
+            "name": "getTimePassed",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "time_passed": {
+                    "code": "time_passed",
+                    "name": "__time_passed__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "Passed frame time",
+                "discription": "get time passed",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__time_passed__": "Time passed"
                 }
             }
         }

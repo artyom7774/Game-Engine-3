@@ -58,6 +58,8 @@ class Application:
         self.fps = fps
         self.tps = tps
 
+        self.dt = 1
+
         self.mouse = pygame.mouse.get_pos()
         self.click = [0, 0, 0, 0, 0]
 
@@ -93,8 +95,6 @@ class Application:
 
         self.lastDrawing = []
         self.afterDrawing = []
-
-        self.capacity = 0
 
         self.init()
 
@@ -280,7 +280,7 @@ class Application:
 
         self.fpsc += 1
 
-        self.capacity = self.clock.tick(self.fps)
+        self.dt = self.clock.tick(self.fps) / 1000
 
         self.lastDrawing = []
         self.afterDrawing = []

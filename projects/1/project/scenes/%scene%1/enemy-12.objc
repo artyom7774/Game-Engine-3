@@ -42,7 +42,7 @@
         },
         "slidingStep": {
             "name": "Braking power",
-            "value": 1000000.0,
+            "value": 0.3,
             "type": "int"
         }
     },

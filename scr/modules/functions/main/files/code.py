@@ -374,7 +374,7 @@ class CodeNodeConnectorComboBox(QComboBox):
 
         self.index = self.input["standard"]
 
-        self.addItems(self.input["choose"]["options"])
+        self.addItems([translate(element) for element in self.input["choose"]["options"]])
         self.setCurrentIndex(self.input["standard"])
 
         self.currentIndexChanged.connect(self.indexChange)

@@ -127,7 +127,7 @@
         },
         "mass": {
             "name": "Mass",
-            "value": 10000,
+            "value": 1000,
             "type": "int"
         },
         "layer": {

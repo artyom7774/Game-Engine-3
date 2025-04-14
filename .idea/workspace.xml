@@ -4,137 +4,125 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63b9e141-b681-4943-9a61-afd675b9e146" name="Changes" comment="">
+    <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/engine/profiler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scr/code/program/another/getTimePassed.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Game-Engine-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Game-Engine-3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game Engine 3.spec" beforeDir="false" afterPath="$PROJECT_DIR$/Game Engine 3.spec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/getUsingObjects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/hitbox.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/float.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/int.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/collision.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/functions/1.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/objects/enemy.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/objects/enemy.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/objects/player.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/objects/player.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/objects/stone.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/objects/stone.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/1-13.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/1-13.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-11.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-11.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-12.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-12.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-13.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-13.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-14.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-14.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-15.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-15.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-16.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-16.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-1.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-1.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-10.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-10.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-11.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-11.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-110.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-110.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-111.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-111.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-112.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-112.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-113.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-113.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-114.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-114.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-115.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-115.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-116.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-116.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-117.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-117.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-118.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-118.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-12.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-12.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-13.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-13.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-14.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-14.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-15.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-15.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-16.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-16.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-17.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-17.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-18.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-18.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-19.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-19.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-2.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-2.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-3.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-3.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-4.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-4.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-5.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-5.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-6.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-6.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-7.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-7.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-8.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-8.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-9.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-9.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/code/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/getMousePos.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/code/program/another/getMousePos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/jump.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/code/program/objects/jump.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/collision.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/compiling.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/compiling.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/getUsingObjects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/hitbox.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/vector/float.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/vector/int.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/functions/1.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/code/program/another/getMousePos.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/another/getMousePos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/code/program/objects/jump.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/objects/jump.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/scenes/%scene%1/player-0.objc" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/templates/Base/project/scenes/%scene%1/player-0.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/updates.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/updates.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/version.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/main/files/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/main/files/code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/variables.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;artyom7774&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/artyom7774/Game-Engine-3.git&quot;,
-    &quot;accountId&quot;: &quot;ffe1f757-4373-4da8-8443-a7aa801162c8&quot;
-  }
-}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
 }</component>
-  <component name="ProjectId" id="2ruKFfZaUHlytcIbLDkUTSv5oOM" />
+  <component name="ProjectId" id="2vPs1LOHBBPF08xSQQsKz9r3wzX" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Python.GE3 project.executor&quot;: &quot;Run&quot;,
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
     &quot;Python.Game Engine 3.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.animator.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.application.executor&quot;: &quot;Run&quot;,
-    &quot;Python.compile.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.main.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.program.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scene.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.setup.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.getTimePassed.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/divelop/Game-Engine-3&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;
-    ]
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\divelop\Game-Engine-3\scr\files\templates\Base\project\scenes" />
-      <recent name="E:\divelop\github\Game-Engine-3\projects\test\project\assets" />
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\engine\classes" />
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\engine" />
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\create" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\engine\classes" />
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\engine\vector" />
-      <recent name="C:\Users\37529\Desktop\github\Game-Engine-3\engine\vector\source" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Python.Game Engine 3">
-    <configuration name="GE3 project" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="Game-Engine-3" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (Game-Engine-3)" />
-      <option name="WORKING_DIRECTORY" value="E:\divelop\github\Game-Engine-3\projects\test\scr" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/projects/test/scr/GE3 project.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Game Engine 3" type="PythonConfigurationType" factoryName="Python" activateToolWindowBeforeRun="false" nameIsGenerated="true">
-      <module name="Game-Engine-3" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (Game-Engine-3) (2)" />
-      <option name="WORKING_DIRECTORY" value="E:\divelop\Game-Engine-3" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Game Engine 3.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Python.GE3 project" />
-      <item itemvalue="Python.Game Engine 3" />
-    </list>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -145,36 +133,15 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="63b9e141-b681-4943-9a61-afd675b9e146" name="Changes" comment="" />
-      <created>1737403418938</created>
+      <changelist id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="" />
+      <created>1744057826828</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1737403418938</updated>
+      <updated>1744057826828</updated>
     </task>
     <servers />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.func" />
-    <option featureType="com.intellij.fileTypeFactory" implementationName="*.spec" />
-    <option featureType="com.intellij.fileTypeFactory" implementationName="*.obj" />
-    <option featureType="com.intellij.fileTypeFactory" implementationName="*.cfg" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="PythonConfigurationType">
-        <watch expression="application" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

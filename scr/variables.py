@@ -11,7 +11,7 @@ import ujson
 import json
 import os
 
-DIVELOP = False
+DIVELOP = True
 
 pygame.init()
 
