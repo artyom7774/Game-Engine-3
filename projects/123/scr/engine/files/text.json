@@ -1,0 +1,117 @@
+{
+    "dependences": {
+        "Text": [],
+        "Field": [
+            "Text"
+        ]
+    },
+    "standard": {
+        "type": "Text",
+        "pos": {
+            "x": {
+                "name": "X",
+                "type": "int",
+                "value": 0
+            },
+            "y": {
+                "name": "Y",
+                "type": "int",
+                "value": 0
+            }
+        },
+        "hitbox": {
+            "X offset": {
+                "name": "X offset",
+                "type": "int",
+                "value": 0
+            },
+            "Y offset": {
+                "name": "Y offset",
+                "type": "int",
+                "value": 0
+            },
+            "width": {
+                "name": "Width",
+                "type": "int",
+                "value": 32
+            },
+            "height": {
+                "name": "Height",
+                "type": "int",
+                "value": 32
+            }
+        },
+        "group": "object",
+        "layer": 0,
+        "invisible": false,
+        "font": "Arial",
+        "message": "Text",
+        "fontSize": 13,
+        "alignment": {
+            "vertical": {
+                "name": "Vertical",
+                "type": "bool",
+                "value": false
+            },
+            "horizontal": {
+                "name": "Horizontal",
+                "type": "bool",
+                "value": false
+            }
+        }
+    },
+    "name": {
+        "type": "Text type",
+        "pos": "Text position",
+        "hitbox": "Text hitbox",
+        "group": "Name of object group",
+        "layer": "Object layer",
+        "invisible": "Invisible",
+        "font": "Font type",
+        "message": "Message",
+        "fontSize": "Font size",
+        "alignment": "Alignment text"
+    },
+    "type": {
+        "type": "choose",
+        "pos": "dict",
+        "hitbox": "dict",
+        "group": "str",
+        "layer": "int",
+        "invisible": "bool",
+        "font": "font",
+        "message": "str",
+        "fontSize": "int",
+        "alignment": "dict"
+    },
+    "specials": {
+        "choose": {
+            "type": {
+                "input": [
+                    "Text",
+                    "Text field"
+                ],
+                "output": [
+                    "Text",
+                    "Field"
+                ]
+            }
+        }
+    },
+    "objects": {
+        "Text": [
+            "pos",
+            "hitbox",
+            "group",
+            "layer",
+            "invisible",
+            "font",
+            "message",
+            "fontSize",
+            "alignment"
+        ],
+        "Field": [
+
+        ]
+    }
+}

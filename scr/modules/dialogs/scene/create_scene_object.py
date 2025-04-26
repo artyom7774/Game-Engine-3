@@ -61,7 +61,7 @@ class CreateSceneObjectFunctions:
         obj["StaticObject"]["pos"]["value"]["y"]["value"] = position[1]
 
         with open(out, "w") as f:
-            dump(obj, f)
+            dump(obj, f, indent=4)
 
         project.init()
 

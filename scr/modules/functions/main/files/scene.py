@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QTreeWidget, QPushButton, QWidget, QSpacerItem, QSiz
 from PyQt5.QtGui import QPixmap, QImage, QCursor, QPainter, QPen, QColor
 from PyQt5.Qt import Qt, QTimer, QPoint
 
-from scr.modules.dialogs import CreateSceneObject, animatorCreateDialog
+from scr.modules.dialogs import CreateSceneObject, CreateInterfaceObject, animatorCreateDialog
 
 from scr.modules.dialogs.tree.create_object import CreateObjectFunctions
 from scr.modules.functions.main.files import Object
@@ -490,6 +490,9 @@ class Scene:
         project.objects["main"]["scene_menu_new_action"] = QAction(translate("Create object"), project)
         project.objects["main"]["scene_menu_new_action"].triggered.connect(lambda: Scene.createSceneObject(project, position))
 
+        project.objects["main"]["scene_menu_new_interface_action"] = QAction(translate("Create interface object"), project)
+        project.objects["main"]["scene_menu_new_interface_action"].triggered.connect(lambda: Scene.createInterfaceObject(project, position))
+
         project.objects["main"]["scene_menu_copy_action"] = QAction(translate("Copy"), project)
         project.objects["main"]["scene_menu_copy_action"].triggered.connect(lambda: Scene.copyObject(project))
 
@@ -511,6 +514,7 @@ class Scene:
             project.objects["main"]["scene_menu_delete_action"].setDisabled(True)
 
         project.objects["main"]["scene_menu"].addAction(project.objects["main"]["scene_menu_new_action"])
+        project.objects["main"]["scene_menu"].addAction(project.objects["main"]["scene_menu_new_interface_action"])
         project.objects["main"]["scene_menu"].addSeparator()
         project.objects["main"]["scene_menu"].addAction(project.objects["main"]["scene_menu_copy_action"])
         project.objects["main"]["scene_menu"].addAction(project.objects["main"]["scene_menu_paste_action"])
@@ -664,6 +668,11 @@ class Scene:
 
             with open(path, "w") as file:
                 dump(sceneSettings, file, indent=4)
+
+    @staticmethod
+    def createInterfaceObject(project, position) -> None:
+        project.dialog = CreateInterfaceObject(project, position, parent=project)
+        project.dialog.exec_()
 
     @staticmethod
     def createSceneObject(project, position) -> None:

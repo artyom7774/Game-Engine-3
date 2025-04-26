@@ -12,6 +12,27 @@ import os
 import re
 
 
+def getAllProjectInterface(project, onlyFileName: bool = False) -> typing.List[str]:
+    answer = []
+
+    queue = os.listdir(f"projects/{project.selectProject}/project/ui/")
+
+    while len(queue) > 0:
+        path = f"projects/{project.selectProject}/project/ui/{queue[0]}"
+
+        if os.path.isfile(path):
+            if not path.endswith("EMPTY.txt"):
+                answer.append(path)
+
+        else:
+            for element in os.listdir(path):
+                queue.append(queue[0] + "/" + element)
+
+        queue.pop(0)
+
+    return answer if not onlyFileName else [element[element.rfind("/") + 1:] for element in answer]
+
+
 def getAllProjectObjects(project, onlyFileName: bool = False) -> typing.List[str]:
     answer = []
 
@@ -267,6 +288,12 @@ def projectTreeProjectMenuOpen(project, position) -> None:
             project.objects["tree_project_menu_new_menu_object_action"].triggered.connect(lambda: functions.tree.createObject(project))
             project.objects["tree_project_menu_new_menu"].addAction(project.objects["tree_project_menu_new_menu_object_action"])
 
+        if len(path) > 1 and path[1] == "ui":
+            project.objects["tree_project_menu_new_menu_text_action"] = QAction(translate("Text"), project)
+            project.objects["tree_project_menu_new_menu_text_action"].setIcon(QIcon(getColor("text")))
+            project.objects["tree_project_menu_new_menu_text_action"].triggered.connect(lambda: functions.tree.createText(project))
+            project.objects["tree_project_menu_new_menu"].addAction(project.objects["tree_project_menu_new_menu_text_action"])
+
         if len(path) > 1:
             project.objects["tree_project_menu_new_menu_file_action"] = QAction(translate("File"), project)
             project.objects["tree_project_menu_new_menu_file_action"].setIcon(QIcon(getColor("file")))
@@ -417,6 +444,9 @@ def centerMenuInit(project, update: bool = False) -> None:
         elif project.selectFile.endswith(".obj") or project.selectFile.endswith(".objc"):
             functions.main.files.Object.init(project)
 
+        elif project.selectFile.endswith(".text") or project.selectFile.endswith(".textc"):
+            functions.main.files.ObjectText.init(project)
+
         elif any([project.selectFile.endswith(element) for element in IMAGE_FORMATES]):
             functions.main.files.Image.init(project)
 
@@ -449,6 +479,11 @@ def projectTreeInit(project) -> None:
         path = f"{queue[0][0].replace(directory, '')}"
 
         if not os.path.isfile(directory + queue[0][0]):
+            if queue[0][0] == "cash":
+                queue.pop(0)
+
+                continue
+
             for file in os.listdir(directory + queue[0][0]):
                 queue.append([queue[0][0] + "/" + file, "file" if os.path.isfile(directory + "/" + queue[0][0] + "/" + file) else "dir"])
 

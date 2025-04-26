@@ -3,8 +3,11 @@ from PyQt5.QtGui import QFont
 
 from scr.modules.translate import Translate
 
+from tkinter import font
+
 import importlib.util
 import platform
+import tkinter
 import random
 import pygame
 import ujson
@@ -167,6 +170,8 @@ CODE_CONNECTOR_NO_HAVE_INPUT_TYPES = ["path"]
 OBJECT_CURRECT_TEST = ["type", "type/name", "type/value", "type/type", "StaticObject", "StaticObject/pos", "StaticObject/hitbox", "StaticObject/sprite", "StaticObject/group", "StaticObject/layer"]
 NODE_CURRECT_TEST = ["display", "id", "width", "height", "x", "y", "name", "inputs", "outputs", "type"]
 
+FONT_LIST = "@MS Gothic | @MS PGothic | @MS UI Gothic | @Malgun Gothic | @Malgun Gothic Semilight | @Microsoft JhengHei | @Microsoft JhengHei Light | @Microsoft JhengHei UI | @Microsoft JhengHei UI Light | @Microsoft YaHei | @Microsoft YaHei Light | @Microsoft YaHei UI | @Microsoft YaHei UI Light | @MingLiU-ExtB | @MingLiU_HKSCS-ExtB | @NSimSun | @PMingLiU-ExtB | @SimSun | @SimSun-ExtB | @SimSun-ExtG | @Yu Gothic | @Yu Gothic Light | @Yu Gothic Medium | @Yu Gothic UI | @Yu Gothic UI Light | @Yu Gothic UI Semibold | @Yu Gothic UI Semilight | Arabic Transparent | Arial | Arial Baltic | Arial Black | Arial CE | Arial CYR | Arial Cyr | Arial Greek | Arial TUR | Bahnschrift | Bahnschrift Condensed | Bahnschrift Light | Bahnschrift Light Condensed | Bahnschrift Light SemiCondensed | Bahnschrift SemiBold | Bahnschrift SemiBold Condensed | Bahnschrift SemiBold SemiConden | Bahnschrift SemiCondensed | Bahnschrift SemiLight | Bahnschrift SemiLight Condensed | Bahnschrift SemiLight SemiConde | Calibri | Calibri Light | Cambria | Cambria Math | Candara | Candara Light | Cascadia Code | Cascadia Code ExtraLight | Cascadia Code Light | Cascadia Code SemiBold | Cascadia Code SemiLight | Cascadia Mono | Cascadia Mono ExtraLight | Cascadia Mono Light | Cascadia Mono SemiBold | Cascadia Mono SemiLight | Comic Sans MS | Consolas | Constantia | Corbel | Corbel Light | Courier | Courier | Courier New | Courier New Baltic | Courier New CE | Courier New CYR | Courier New Cyr | Courier New Greek | Courier New TUR | Ebrima | Fixedsys | Franklin Gothic Medium | Gabriola | Gadugi | Georgia | HoloLens MDL2 Assets | Impact | Ink Free | Javanese Text | Leelawadee UI | Leelawadee UI Semilight | Lucida Console | Lucida Sans Unicode | MS Gothic | MS PGothic | MS Sans Serif | MS Serif | MS UI Gothic | MV Boli | Malgun Gothic | Malgun Gothic Semilight | Marlett | Microsoft Himalaya | Microsoft JhengHei | Microsoft JhengHei Light | Microsoft JhengHei UI | Microsoft JhengHei UI Light | Microsoft New Tai Lue | Microsoft PhagsPa | Microsoft Sans Serif | Microsoft Tai Le | Microsoft YaHei | Microsoft YaHei Light | Microsoft YaHei UI | Microsoft YaHei UI Light | Microsoft Yi Baiti | MingLiU-ExtB | MingLiU_HKSCS-ExtB | Modern | Mongolian Baiti | Myanmar Text | NSimSun | Nirmala UI | Nirmala UI Semilight | PMingLiU-ExtB | Palatino Linotype | Roman | Script | Segoe MDL2 Assets | Segoe Print | Segoe Script | Segoe UI | Segoe UI Black | Segoe UI Emoji | Segoe UI Historic | Segoe UI Light | Segoe UI Semibold | Segoe UI Semilight | Segoe UI Symbol | SimSun | SimSun-ExtB | SimSun-ExtG | Sitka Banner | Sitka Display | Sitka Heading | Sitka Small | Sitka Subheading | Sitka Text | Small Fonts | Sylfaen | Symbol | System | Tahoma | Terminal | Times New Roman | Times New Roman Baltic | Times New Roman CE | Times New Roman CYR | Times New Roman Cyr | Times New Roman Greek | Times New Roman TUR | Trebuchet MS | Verdana | Webdings | Wingdings | Yu Gothic | Yu Gothic Light | Yu Gothic Medium | Yu Gothic UI | Yu Gothic UI Light | Yu Gothic UI Semibold | Yu Gothic UI Semilight".split(" | ")
+
 SOCKET_ID = random.randint(2**10, 2**16 - 1)
 
 SPRITES = {
@@ -180,7 +185,9 @@ SPRITES = {
     "objc": "scr/files/sprites/obj.png",
     "json": "scr/files/sprites/json.png",
     "scene-light": "scr/files/sprites/scene-light.png",
-    "dir-light": "scr/files/sprites/dir-light.png"
+    "dir-light": "scr/files/sprites/dir-light.png",
+    "text": "scr/files/sprites/text.png",
+    "textc": "scr/files/sprites/text.png"
 }
 
 for element in IMAGE_FORMATES:

@@ -1,6 +1,6 @@
 from PyQt5.Qt import QIcon
 
-from scr.modules.dialogs import CreateDir, CreateScene, CreateFunction, CreateFile, RenameObject, CreateObject
+from scr.modules.dialogs import CreateDir, CreateScene, CreateFunction, CreateFile, RenameObject, CreateObject, CreateText
 
 from scr.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath, getColor
 
@@ -41,6 +41,11 @@ def createFile(project) -> None:
 
 def createObject(project) -> None:
     project.dialog = CreateObject(project, parent=project)
+    project.dialog.exec_()
+
+
+def createText(project) -> None:
+    project.dialog = CreateText(project, parent=project)
     project.dialog.exec_()
 
 

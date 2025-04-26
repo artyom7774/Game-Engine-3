@@ -5,92 +5,272 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/engine/profiler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scr/code/program/another/getTimePassed.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Game-Engine-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Game-Engine-3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game Engine 3.spec" beforeDir="false" afterPath="$PROJECT_DIR$/Game Engine 3.spec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game Engine 3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game Engine 3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/getUsingObjects.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/getUsingObjects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/getUsingObjects.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/hitbox.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/hitbox.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/hitbox.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/sprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/sprite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/profiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/profiler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/ui/text.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/ui/text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/vector/float.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/float.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/float.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/vector/int.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/int.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/int.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/collision.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/functions/1.func" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/objects/enemy.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/objects/enemy.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/objects/player.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/objects/player.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/objects/stone.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/objects/stone.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/1-13.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/1-13.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-11.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-11.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-12.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-12.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-13.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-13.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-14.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-14.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-15.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-15.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-16.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-16.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-1.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-1.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-10.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-10.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-11.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-11.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-110.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-110.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-111.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-111.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-112.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-112.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-113.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-113.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-114.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-114.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-115.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-115.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-116.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-116.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-117.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-117.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-118.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-118.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-12.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-12.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-13.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-13.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-14.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-14.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-15.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-15.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-16.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-16.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-17.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-17.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-18.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-18.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-19.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-19.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-2.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-2.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-3.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-3.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-4.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-4.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-5.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-5.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-6.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-6.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-7.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-7.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-8.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-8.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-9.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-9.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/code/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/getMousePos.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/code/program/another/getMousePos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/jump.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/code/program/objects/jump.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/collision.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/compiling.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/compiling.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/getUsingObjects.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/group.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/hitbox.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/vector/float.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/vector/int.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/functions/1.func" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/program/another/getMousePos.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/another/getMousePos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/program/objects/jump.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/objects/jump.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/application.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/animation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/animator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/camera.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/collision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/getUsingObjects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/getUsingObjects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/getUsingObjects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/group.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/hitbox.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/hitbox.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/hitbox.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/objects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/objects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/objects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/particles.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/sprite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/texture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/files/objects.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/files/scene.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/fonts/arial.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/functions/alpha.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/functions/cache.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/functions/loads.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/special/console.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/special/table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/ui/button.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/ui/layout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/ui/lbutton.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/ui/surface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/ui/text.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/variables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/angle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/float.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/float.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/float.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/int.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/int.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/int.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/assets/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/assets/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/assets/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/assets/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/cash/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/cash/scenes-%scene%1-setting.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/collision.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/files/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/functions/1.func" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/functions/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/objects/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/objects/enemy.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/objects/player.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/objects/stone.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/project.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/1-13.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-1.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-11.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-12.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-13.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-14.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-15.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-16.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-2.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-3.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-4.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-5.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-6.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-7.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/enemy-8.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-0.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-1.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-10.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-11.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-110.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-111.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-112.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-113.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-114.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-115.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-116.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-117.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-118.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-12.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-13.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-14.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-15.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-16.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-17.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-18.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-19.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-2.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-3.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-4.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-5.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-6.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-7.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-8.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/%scene%1/stone-9.objc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/scenes/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/assets/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/assets/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/assets/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/assets/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/compiler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/animation/mirrorAnimation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/animation/runAnimation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/animation/stopAnimation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/callFunction.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/decodeHolder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/exit_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/functionEvent.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/getMousePos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/getTimePassed.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/getVar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/len.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/python.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/random_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/another/setVar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/everyFrame.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/everyTick.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/forDictElements.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/forListElements.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/forObjectsGroup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/for_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/keyboardClick.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/keyboardPress.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/mouseLeftClick.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/mouseRightClick.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/event/onStartGame.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/logic/ifCollision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/logic/if_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/numbers/divide.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/numbers/minus.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/numbers/multiply.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/numbers/plus.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/createObject.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/getObjectIDByName.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/getObjectParameter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/getObjectPos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/getObjectVar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/getResultingVector.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/jump.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/moveObject.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/removeObject.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/setObjectParameter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/setObjectPos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/objects/setObjectVar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/set/addDictElement.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/set/addListElement.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/set/deleteByIndex.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/set/getByIndex.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/set/getByKey.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/set/getIndexOfElement.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/set/getKeyOfElement.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/set/removeByKey.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/set/sliceList.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/text/connectText.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/text/displayText.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/text/sliceText.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/program/text/writeText.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/connectors/any.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/connectors/choose.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/connectors/dict.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/connectors/iterator.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/connectors/list.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/connectors/logic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/connectors/number.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/connectors/path.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/connectors/text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/types/event.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/types/logic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/types/loop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/types/number.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/types/objects.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/types/set.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/code/sprites/types/text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/collision.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/compiling.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/application.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/animation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/animator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/camera.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/collision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/getUsingObjects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/getUsingObjects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/getUsingObjects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/group.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/hitbox.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/hitbox.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/hitbox.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/objects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/particles.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/sprite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/texture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/files/objects.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/files/scene.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/fonts/arial.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/functions/alpha.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/functions/cache.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/functions/loads.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/profiler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/special/console.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/special/table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/ui/button.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/ui/layout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/ui/lbutton.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/ui/surface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/ui/text.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/variables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/angle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/float.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/float.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/float.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/int.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/int.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/vector/int.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/files/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/functions/1.func" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/scr/functions/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/code/program/another/getTimePassed.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/another/getTimePassed.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/code/program/another/python.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/another/python.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/code/program/objects/getObjectParameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/objects/getObjectParameter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/code/program/objects/setObjectParameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/objects/setObjectParameter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/scenes/%scene%1/player-0.objc" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/templates/Base/project/scenes/%scene%1/player-0.objc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/settings/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/settings/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/assets/player.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/cash/scenes-%scene%1-setting.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/collision.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/files/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/functions/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/objects/player.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/project.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/templates/Base/project/scenes/%scene%1/player-0.objc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/files/updates.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/updates.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/version.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/modules/functions/main/files/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/main/files/code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/scene/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/scene/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/scene/create_scene_object.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/scene/create_scene_object.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/tree/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/tree/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/main/files/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/main/files/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/main/files/scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/main/files/scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/main/files/text.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/main/files/text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/menu/compile.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/menu/compile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/tree.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/variables.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,16 +293,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Game Engine 3.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.getTimePassed.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.1.executor": "Run",
+    "Python.Game Engine 3.executor": "Debug",
+    "Python.getTimePassed.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "E:/divelop/Game-Engine-3/Game Engine 3.py"
   }
-}</component>
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Game Engine 3" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Game-Engine-3" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (Game-Engine-3) (2)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Game Engine 3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

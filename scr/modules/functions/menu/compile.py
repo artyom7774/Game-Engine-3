@@ -187,13 +187,15 @@ class Game(engine.Application):
             type = value["type"]
             variables = value["variables"]
             
-            variables["animator"] = engine.Animator(self, None, variables["animation"])
+            if "animation" in variables:
+                variables["animator"] = engine.Animator(self, None, variables["animation"])
 
             obj = getattr(engine.objects, type)(self, **variables)
             
-            obj.animator.obj = obj
+            if "animation" in variables:
+                obj.animator.obj = obj
             
-            obj.animator.init()
+                obj.animator.init()
 
             if scene not in self.objectIDByName:
                 self.objectIDByName[scene] = {}
@@ -439,7 +441,8 @@ class Compile:
 
                 type, variables = functions.main.files.Scene.loadObjectFile(project, objectPath[:objectPath.rfind(".")][objectPath.rfind("-") + 1:], load(open(objectPath, "r", encoding="utf-8")))
 
-                variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
+                if "sprite" in variables:
+                    variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
 
                 objects[element] = {
                     "type": type,

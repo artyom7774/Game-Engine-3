@@ -1,4 +1,4 @@
-// RU TRANSLATE VERSION = 3.8.1
+// RU TRANSLATE VERSION = 3.8.2
 
 {
     "Project": "Проект"
@@ -288,7 +288,7 @@
     "Remove by key": "Удалить по ключу"
     "Get key of element": "Найти ключ элемента"
     "Full screen": "Полноэкранный режим"
-    "Invisible": "Невидемый"
+    "Invisible": "Невидимый"
     "Animation": "Анимация"
     "Create group": "Создать группу"
     "Repeat:": "Повторение:"
@@ -315,4 +315,18 @@
     "7. Power jump": "7. Сила прыжка"
     "8. Braking power": "8. Сила торможения"
     "Passed frame time": "Пройденное время кадра"
+    "Text position": "Позиция текста"
+    "Text hitbox": "Хитбокс текста"
+    "Text type": "Тип текста"
+    "Text name": "Имя текста"
+    "Create interface object": "Создать объект интерфейса"
+    "Font type": "Тип шрифта"
+    "Font size": "Размер шрифта"
+    "Message": "Сообщение"
+    "Alignment text": "Выравнивание текста"
+    "Vertical": "Вертикаль"
+    "Horizontal": "Горизонталь"
+    "Text field": "Текстовое поле"
+    "Choose font": "Выбор шрифта"
+    "Font": "Шрифт"
 }

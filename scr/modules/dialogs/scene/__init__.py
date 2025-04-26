@@ -1,1 +1,2 @@
 from .create_scene_object import CreateSceneObject
+from .create_interface_object import CreateInterfaceObject

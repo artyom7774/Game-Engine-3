@@ -5,6 +5,7 @@ from .scene import Scene, SceneHash, SceneAdditions
 from .code import Code, CodeHash
 
 from .text import Text
+from .objtext import ObjectText
 
 from .image import Image
 

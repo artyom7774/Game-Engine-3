@@ -4,6 +4,7 @@ from scr.main import Main
 
 from scr.variables import *
 
+import subprocess
 import traceback
 import sys
 import os
@@ -36,7 +37,15 @@ def main() -> None:
         except Exception as e:
             traceback.print_exc(file=file)
 
-            print("LOG: scr/files/logs/log.txt")
+            if not DEBUG:
+                if SYSTEM == "Windows":
+                    subprocess.run(["notepad.exe", "scr/files/logs/log.txt"])
+
+                elif SYSTEM == "Linux":
+                    subprocess.run(["gedit", "scr/files/logs/log.txt"])
+
+                else:
+                    print("LOG: scr/files/logs/log.txt")
 
         finally:
             sys.stdout = sys.__stdout__
