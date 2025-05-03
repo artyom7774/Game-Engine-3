@@ -1,0 +1,160 @@
+{
+    "variables": {},
+    "objects": {
+        "744477046": {
+            "display": {
+                "discription": "starts at the start of the game",
+                "name": "On start game",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 744477046,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 8.0,
+            "y": 6.0
+        },
+        "698081566": {
+            "display": {
+                "discription": "get object ID by name, return -1 if object name is not found",
+                "name": "Get object ID by name",
+                "text": {
+                    "__id__": "ID",
+                    "__name__": "name",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 698081566,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 744477046,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "1-0.textc",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "getObjectIDByName",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+            "type": "objects",
+            "width": 6,
+            "x": 16.0,
+            "y": 6.0
+        },
+        "253694529": {
+            "display": {
+                "discription": "Set object parameter",
+                "name": "Set object parameter",
+                "text": {
+                    "__id__": "ID",
+                    "__name__": "Name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "Value"
+                }
+            },
+            "height": 5,
+            "id": 253694529,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 698081566,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 698081566,
+                        "name": "id"
+                    }
+                },
+                "name": {
+                    "choose": {
+                        "options": [
+                            "0. Hitbox",
+                            "1. Group",
+                            "2. Mass",
+                            "3. Layer",
+                            "4. Invisible",
+                            "5. Moving speed",
+                            "6. Gravity",
+                            "7. Power jump",
+                            "8. Braking power",
+                            "9. Message",
+                            "10. Font size",
+                            "11. Font color",
+                            "12. Alignment"
+                        ]
+                    },
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": 9,
+                    "type": "choose",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "Hello!",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setObjectParameter",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "objects",
+            "width": 10,
+            "x": 24,
+            "y": 6
+        }
+    }
+}

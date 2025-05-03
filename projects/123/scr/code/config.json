@@ -3527,7 +3527,11 @@
                             "5. Moving speed",
                             "6. Gravity",
                             "7. Power jump",
-                            "8. Braking power"
+                            "8. Braking power",
+                            "9. Message",
+                            "10. Font size",
+                            "11. Font color",
+                            "12. Alignment"
                         ]
                     }
                 },
@@ -3597,7 +3601,11 @@
                             "5. Moving speed",
                             "6. Gravity",
                             "7. Power jump",
-                            "8. Braking power"
+                            "8. Braking power",
+                            "9. Message",
+                            "10. Font size",
+                            "11. Font color",
+                            "12. Alignment"
                         ]
                     }
                 }

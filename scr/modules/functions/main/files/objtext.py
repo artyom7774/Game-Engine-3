@@ -1,26 +1,43 @@
-from PyQt5.QtWidgets import QLabel, QCheckBox, QComboBox, QTreeWidget, QDialog, QTreeWidgetItem, QWidget, QHBoxLayout, QSizePolicy, QSpacerItem, QPushButton
-from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QLabel, QColorDialog, QCheckBox, QComboBox, QTreeWidget, QDialog, QTreeWidgetItem, QWidget, QHBoxLayout, QSizePolicy, QSpacerItem, QPushButton
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor, QPixmap, QImage
+from PyQt5 import QtWidgets
 
 from scr.modules.widgets import FocusLineEdit, FocusComboBox
 
 from scr.modules.functions.main.files.code import CodeAdditionsVarsType
+
+from PIL import Image
 
 from engine.vector.int import Vec4i
 
 from scr.variables import *
 
 import math
-import json
 import os
 
 SORTING_TEXT_TYPES = {
-    "Text": 1
+    "Text": 1,
+    "Field": 2
 }
 
 
 def fontCreateDialog(project, widget, path: str = None, value: str = None):
-    project.dialog = ChooseFont(project, project, path, value, widget)
+    project.dialog = ChooseFontDialog(project, project, path, value, widget)
     project.dialog.exec_()
+
+
+def colorCreateDialog(project, widget, path: str = None, value: str = None):
+    color = QColorDialog.getColor(QColor(value), None, translate("Color"))
+
+    if color.isValid():
+        color = color.name()
+
+        widget.out = color
+
+        widget.saveAllValues()
+
+        project.init()
 
 
 class ChooseFontFunction:
@@ -37,7 +54,7 @@ class ChooseFontFunction:
         project.init()
 
 
-class ChooseFont(QDialog):
+class ChooseFontDialog(QDialog):
     def __init__(self, project, parent, key, value, widget) -> None:
         QDialog.__init__(self, parent)
 
@@ -53,6 +70,8 @@ class ChooseFont(QDialog):
 
         desktop = QtWidgets.QApplication.desktop()
         self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
+
+        self.application = None
 
         self.objects = {}
 
@@ -77,6 +96,8 @@ class ChooseFont(QDialog):
         self.objects["choose_combobox"].addItems(FONT_LIST)
         self.objects["choose_combobox"].setCurrentIndex(FONT_LIST.index(self.value))
 
+        self.objects["choose_combobox"].currentIndexChanged.connect(lambda: self.fontVisiable())
+
         # CHOOSE
 
         self.objects["choose_button"] = QPushButton(parent=self, text=translate("Choose"))
@@ -89,6 +110,32 @@ class ChooseFont(QDialog):
         self.objects["choose_button"].show()
 
         self.objects["choose_button"].clicked.connect(lambda event: ChooseFontFunction.choose(self.project, self, event, self.widget))
+
+        # FONT
+
+        self.objects["font"] = QLabel(self)
+        self.objects["font"].setGeometry(20, 50, 560, 280)
+        self.objects["font"].show()
+
+        # APPLICATION
+
+        self.application = self.project.engine.Application(autoUpdateScreen=False, visiable=False)
+        self.application.setSize(560, 280)
+
+        self.application.setCamera(self.project.engine.camera.StaticCamera(self.application, 0, 0))
+
+        self.fontVisiable()
+
+    def fontVisiable(self):
+        self.application.objects.removeByGroup("font")
+
+        self.application.objects.add(self.project.engine.objects.Text(self.application, (0, 0), (0, 0, 560, 280), group="font", font=FONT_LIST[self.objects["choose_combobox"].currentIndex()], message="Example", fontSize=60, fontColor="#000000", alignment=["center", "center"]))
+
+        self.application.frame(screenFillColor=(248, 249, 250))
+
+        qpixmap = QPixmap(ObjectText.getVisiableScreen(QImage(self.application.screen.get_buffer(), 560, 280, QImage.Format_RGB32), 560, 280))
+
+        self.objects["font"].setPixmap(qpixmap)
 
 
 class ObjectText:
@@ -122,7 +169,7 @@ class ObjectText:
 
                 self.value.clicked.connect(lambda: ObjectText.function(self.value, project, save, temp, path, init=False))
 
-            elif temp["type"] == "choose":
+            elif temp["type"] in ("choose", "choosing"):
                 self.value = FocusComboBox(releasedFocusFunction=lambda: ObjectText.function(self.value, project, save, temp, path))
                 self.value.currentIndexChanged.connect(lambda: self.value.clearFocus())
                 self.value.addItems([translate(element) for element in temp["choose"]["input"]])
@@ -136,6 +183,15 @@ class ObjectText:
                 self.value.setFixedHeight(20)
 
                 self.value.clicked.connect(lambda: fontCreateDialog(self.project, self.value, path, temp["value"]))
+
+                self.value.saveAllValues = lambda: ObjectText.function(self.value, project, save, temp, path, init=False)
+
+            elif temp["type"] == "color":
+                self.value = QPushButton(self)
+                self.value.setFixedHeight(20)
+                self.value.setStyleSheet(f"background-color: {temp['value']};")
+
+                self.value.clicked.connect(lambda: colorCreateDialog(self.project, self.value, path, temp["value"]))
 
                 self.value.saveAllValues = lambda: ObjectText.function(self.value, project, save, temp, path, init=False)
 
@@ -322,6 +378,12 @@ class ObjectText:
         if last["type"] == "font":
             text = obj.text()
 
+        elif last["type"] == "color":
+            if not hasattr(obj, "out"):
+                return
+
+            text = obj.out
+
         elif last["type"] == "bool":
             text = obj.isChecked()
 
@@ -351,6 +413,11 @@ class ObjectText:
 
             doing = True
 
+        if last["type"] == "color":
+            temp["value"] = text
+
+            doing = True
+
         if last["type"] == "path":
             if text == "" or (os.path.exists(f"projects/{project.selectProject}/project/{text}") and any([text.endswith(element) for element in IMAGE_FORMATES])):
                 temp["value"] = text
@@ -375,6 +442,11 @@ class ObjectText:
 
                 else:
                     temp["value"] = float(text)
+
+        if last["type"] == "choosing":
+            temp["value"] = text
+
+            doing = True
 
         if last["type"] == "choose":
             temp["value"] = text
@@ -420,3 +492,18 @@ class ObjectText:
         for widget in project.objects["main"]["widgets"]:
             if hasattr(widget, "value") and hasattr(widget.value, "saveAllValues"):
                 widget.value.saveAllValues()
+
+    @staticmethod
+    def getVisiableScreen(image, width, height) -> Image.Image:
+        def center(image: QImage, newWidth: int, newHeight: int) -> QImage:
+            width = image.width()
+            height = image.height()
+
+            left = (width - newWidth) // 2
+            top = (height - newHeight) // 2
+            right = left + newWidth
+            bottom = top + newHeight
+
+            return image.copy(left, top, newWidth, newHeight)
+
+        return center(image, width, height)

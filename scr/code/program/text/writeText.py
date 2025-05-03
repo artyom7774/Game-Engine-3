@@ -16,6 +16,4 @@ def writeText(program, compiler, path: str, nodes: dict, id: int, variables: dic
 
     program.print(answer)
 
-    print(answer)
-
     return queue

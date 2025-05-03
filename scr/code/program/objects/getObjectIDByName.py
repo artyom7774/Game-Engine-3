@@ -10,8 +10,6 @@ def getObjectIDByName(program, compiler, path: str, nodes: dict, id: int, variab
     else:
         name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
 
-    name = name + ".objc" if not name.endswith(".objc") else name
-
     answer = program.objectIDByName[program.scene][name] if name in program.objectIDByName[program.scene] else -1
 
     for ids, connector in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():

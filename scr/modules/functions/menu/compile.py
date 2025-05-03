@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QDialog, QPushButton, QTextEdit, QFileDialog, QLineEdit
-from PyQt5.QtCore import pyqtSignal, QTimer
+from PyQt5.QtWidgets import QDialog, QTableWidget, QPushButton, QTextEdit, QFileDialog, QLineEdit
+from PyQt5.QtCore import pyqtSignal, QTimer, QSocketNotifier
 from PyQt5 import QtWidgets, QtCore, Qt
 
 from scr.modules import functions
@@ -10,6 +10,7 @@ import subprocess
 import threading
 import socket
 import shutil
+import typing
 import json
 import sys
 import os
@@ -20,9 +21,10 @@ PROGRAM = \
 import tkinter
 import engine
 import socket
+import json
 import sys
 import os
-            
+
 root = tkinter.Tk()
 
 width = root.winfo_screenwidth()
@@ -31,6 +33,7 @@ height = root.winfo_screenheight()
 root.destroy()
 
 SOCKET_ID = %SOCKET_ID%
+SOCKET_GLOBAL_ID = %SOCKET_GLOBAL_ID%
 
 VARIABLES = {
     "globals": %PROJECT_GLOBAL_VARIABLES%,
@@ -67,7 +70,7 @@ class Tps:
 class Game(engine.Application):
     def __init__(self):
         global width, height
-    
+
         engine.Application.__init__(self)
 
         self.objects.collisions = engine.Collision("collision.cfg")
@@ -78,7 +81,7 @@ class Game(engine.Application):
 
         if SETTINGS["full_screen_mode"]:
             self.setDisplaySize(width, height)
-        
+
         self.setName(SETTINGS["name"])
         self.setIcon(SETTINGS["icon"])
 
@@ -104,10 +107,17 @@ class Game(engine.Application):
         try:
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.socket.connect(("localhost", SOCKET_ID))
-        
+
         except BaseException:
             self.socket = None
-        
+
+        try:
+            self.global_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.global_socket.connect(("localhost", SOCKET_GLOBAL_ID))
+
+        except BaseException:
+            self.global_socket = None
+
         for key, value in PROGRAMS.items():
             self.programs[key] = Compiler(self, key, value, self.settings, DEBUG)
 
@@ -142,6 +152,14 @@ class Game(engine.Application):
     def update(self) -> None:
         super().update()
 
+        if self.global_socket is not None:
+            try:
+                data = json.dumps(VARIABLES["globals"])
+                self.global_socket.sendall(data.encode())
+
+            except BaseException:
+                pass
+
         for key, value in self.programs.items():
             if self.programs[key].error:
                 info = self.programs[key].information
@@ -162,7 +180,7 @@ class Game(engine.Application):
                 exit(0)
 
             self.programs[key].update()
-    
+
     def tpsStart(self):
         def function(tps):
             for key, value in PROGRAMS.items():
@@ -173,7 +191,7 @@ class Game(engine.Application):
     def mouseLeftClick(self):
         for key, value in PROGRAMS.items():
             self.programs[key].event("mouseLeftClick")
-            
+
     def mouseRightClick(self):
         for key, value in PROGRAMS.items():
             self.programs[key].event("mouseRightClick")
@@ -194,7 +212,7 @@ class Game(engine.Application):
             
             if "animation" in variables:
                 obj.animator.obj = obj
-            
+    
                 obj.animator.init()
 
             if scene not in self.objectIDByName:
@@ -228,6 +246,105 @@ class LoggerTextEdit(QTextEdit):
         self.project.objects["text"].clearFocus()
 
 
+class SocketHandler(QtCore.QObject):
+    dataReceived = pyqtSignal(str)
+    connectionClosed = pyqtSignal()
+
+    def __init__(self, port: int, parent=None):
+        QtCore.QObject.__init__(self, parent)
+
+        self.port = port
+        self.host = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.host.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+        try:
+            self.host.bind(("localhost", port))
+            self.host.listen(1)
+            self.host.setblocking(False)
+
+        except OSError:
+            print(f"ERROR: can't create socket on port {port}")
+
+        self.accept_notifier = QSocketNotifier(self.host.fileno(), QSocketNotifier.Read, self)
+        self.accept_notifier.activated.connect(self.accept_connection)
+
+        self.conn = None
+        self.addr = None
+
+        self.notifier = None
+
+    def accept_connection(self, fd):
+        try:
+            self.conn, self.addr = self.host.accept()
+
+            self.conn.setblocking(False)
+
+            self.notifier = QSocketNotifier(self.conn.fileno(), QSocketNotifier.Read, self)
+            self.notifier.activated.connect(self.read_from_connection)
+
+            self.accept_notifier.setEnabled(False)
+
+        except Exception as e:
+            print("Accept error:", e)
+
+    def read_from_connection(self, fd):
+        try:
+            data = self.conn.recv(1024)
+
+            if data:
+                self.dataReceived.emit(data.decode().rstrip())
+
+            else:
+                self.notifier.setEnabled(False)
+
+                self.conn.close()
+
+                self.connectionClosed.emit()
+
+                print(f"Connection on port {self.port} closed")
+
+        except Exception as e:
+            if hasattr(e, "errno") and e.errno == 10054:
+                self.notifier.setEnabled(False)
+
+                self.conn.close()
+
+                self.connectionClosed.emit()
+
+            else:
+                print("LOG: error reading connection:", e)
+
+    def close(self):
+        try:
+            if self.conn is not None:
+                self.conn.close()
+
+            if self.host is not None:
+                self.host.close()
+
+        except Exception as e:
+            print("Error closing socket:", e)
+
+
+class GlobalsTable(QTableWidget):
+    def __init__(self, parent=None):
+        QTableWidget.__init__(self, parent)
+        self.setColumnCount(2)
+        self.setHorizontalHeaderLabels([translate("Name") + " ", translate("Value")])
+
+        self.verticalHeader().setVisible(False)
+        self.verticalHeader().setDefaultSectionSize(20)
+        self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+    def set(self, data):
+        self.setRowCount(0)
+        self.setRowCount(len(data))
+
+        for i, (name, value) in enumerate(data):
+            self.setItem(i, 0, QtWidgets.QTableWidgetItem(str(name)))
+            self.setItem(i, 1, QtWidgets.QTableWidgetItem(str(value)))
+
+
 class Logger(QDialog):
     logSignal = pyqtSignal(str)
 
@@ -244,76 +361,65 @@ class Logger(QDialog):
         self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
 
         self.objects = {}
-
         self.init()
 
-        self.host = None
+        self.logSocket = SocketHandler(SOCKET_ID, parent=self)
+        self.logSocket.dataReceived.connect(self.handleLogData)
 
-        self.conn = None
-        self.addr = None
-
-        thr = threading.Thread(target=lambda: self.connect())
-        thr.daemon = True
-        thr.start()
+        self.globalSocket = SocketHandler(SOCKET_GLOBAL_ID, parent=self)
+        self.globalSocket.dataReceived.connect(self.handleGlobalData)
 
         self.logSignal.connect(self.send)
 
-        self.project.objects["main"]["timer"] = QTimer(project)
-        self.project.objects["main"]["timer"].timeout.connect(lambda: self.text())
-        self.project.objects["main"]["timer"].start(1000 // 24)
-
-    def connect(self) -> None:
-        try:
-            self.host = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.host.bind(("localhost", SOCKET_ID))
-            self.host.listen(1)
-
-        except OSError:
-            print("ERROR: can't create socket")
-
-        try:
-            self.conn, self.addr = self.host.accept()
-
-        except BaseException:
-            return 0
-
-        print("LOG: program connected")
-
     def init(self) -> None:
-        self.objects["empty"] = QPushButton(parent=self)
+        self.objects["empty"] = QtWidgets.QPushButton(parent=self)
         self.objects["empty"].setGeometry(0, 0, 0, 0)
 
         self.objects["text"] = LoggerTextEdit(self)
-        self.objects["text"].setGeometry(10, 10, self.width() - 20, self.height() - 55)
-        self.objects["text"].setTextColor(Qt.Qt.red)
+        self.objects["text"].setGeometry(10, 10, self.width() - 20 - 220, self.height() - 55)
+        self.objects["text"].setTextColor(QtCore.Qt.red)
         self.objects["text"].setFont(FONT)
         self.objects["text"].show()
 
         self.objects["entry"] = QLineEdit(self)
         self.objects["entry"].setGeometry(10, self.height() - 37, self.width() - 20, 29)
-        self.objects["entry"].setStyleSheet(f"background-color: #{'1c1d1f' if SETTINGS['theme'] == 'dark' else 'ffffff'};")
+        self.objects["entry"].setStyleSheet(
+            f"background-color: #{'1c1d1f' if SETTINGS['theme'] == 'dark' else 'ffffff'};")
         self.objects["entry"].setFont(FONT)
         self.objects["entry"].show()
 
-    def text(self) -> None:
-        if self.conn is None:
-            return 0
+        self.objects["globals"] = GlobalsTable(self)
+        self.objects["globals"].setGeometry(10 + (self.width() - 20 - 220) + 10, 10, 210, self.height() - 55)
+        self.objects["globals"].setStyleSheet(
+            f"background-color: #{'1c1d1f' if SETTINGS['theme'] == 'dark' else 'ffffff'};")
+        self.objects["globals"].setFont(FONT)
+        self.objects["globals"].show()
 
+    def handleLogData(self, text: str) -> None:
+        self.logSignal.emit(text)
+
+    def handleGlobalData(self, text: str) -> None:
         try:
-            data = self.conn.recv(1024)
+            data = json.loads(text)
 
-        except ConnectionResetError:
+        except json.JSONDecodeError:
             return 0
 
-        self.send(data.decode().rstrip())
+        self.objects["globals"].set([[value["name"], value["value"]] for key, value in data.items()])
 
-    def send(self, text: str) -> None:
+        # print(data)
+
+    def send(self, text: typing.Union[typing.List, str]) -> None:
         text = text.replace("FATAL ERROR", translate("FATAL ERROR"))
-
         self.objects["text"].append(text)
 
     def closeEvent(self, event):
-        self.host.close()
+        try:
+            self.logSocket.close()
+            self.globalSocket.close()
+
+        except Exception as e:
+            print("Error closing sockets:", e)
 
         event.accept()
 
@@ -329,7 +435,8 @@ class Compile:
         if Compile.compile(project, executable=False):
             return 1
 
-        with open(f"projects/{project.selectProject}/scr/{projectSettings['values']['name']['value']}.py", "r", encoding="utf-8") as file:
+        with open(f"projects/{project.selectProject}/scr/{projectSettings['values']['name']['value']}.py", "r",
+                  encoding="utf-8") as file:
             text = file.read()
 
         """
@@ -355,7 +462,8 @@ class Compile:
 
         print(f"LOG: python path: {pathPython}")
 
-        thr = threading.Thread(target=lambda: os.system(f"cd \"{pathProject}\" && \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""))
+        thr = threading.Thread(target=lambda: os.system(
+            f"cd \"{pathProject}\" && \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""))
         thr.daemon = True
         thr.start()
 
@@ -459,7 +567,8 @@ class Compile:
 
             if focus is None or focus == "":
                 project.dialog.send(
-                    translate("WARNING") + ": " + translate("Scene") + f" ({scene}) " + translate("can not download:") + " " + translate("name focus object is not defined")
+                    translate("WARNING") + ": " + translate("Scene") + f" ({scene}) " + translate(
+                        "can not download:") + " " + translate("name focus object is not defined")
                 )
 
             else:
@@ -475,8 +584,9 @@ class Compile:
         for obj in functions.project.getAllProjectObjects(project, False):
             if obj.endswith(".txt"):
                 continue
-                
-            type, variables = functions.main.files.Scene.loadObjectFile(project, -1, load(open(obj, "r", encoding="utf-8")))
+
+            type, variables = functions.main.files.Scene.loadObjectFile(project, -1,
+                                                                        load(open(obj, "r", encoding="utf-8")))
 
             variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
 
@@ -492,7 +602,8 @@ class Compile:
         projectSettingsStandard = projectSettings
         projectSettings = functions.main.files.Config.get(projectSettings)
 
-        if not any([scene == f"projects/{project.selectProject}/project/" + projectSettings["start_scene"] for scene in scenes.keys()]):
+        if not any([scene == f"projects/{project.selectProject}/project/" + projectSettings["start_scene"] for scene in
+                    scenes.keys()]):
             project.dialog.logSignal.emit(
                 translate("ERROR") + ": " + translate("project start scene is not found") + "\n"
             )
@@ -508,11 +619,13 @@ class Compile:
         # MAKE PROJECT
 
         useProjectSettings = dict(projectSettings)
-        useProjectSettings["start_scene"] = f"projects/{project.selectProject}/project/" + useProjectSettings["start_scene"]
+        useProjectSettings["start_scene"] = f"projects/{project.selectProject}/project/" + useProjectSettings[
+            "start_scene"]
 
         program = PROGRAM
 
         program = program.replace("%SOCKET_ID%", str(SOCKET_ID))
+        program = program.replace("%SOCKET_GLOBAL_ID%", str(SOCKET_GLOBAL_ID))
 
         program = program.replace("%PROJECT_GLOBAL_VARIABLES%", str(projectSettingsStandard["variables"]))
         program = program.replace("%PROJECT_LOCAL_VARIABLES%", str(locals_variables))
@@ -523,7 +636,8 @@ class Compile:
         program = program.replace("%PROJECT_SCENES%", str(scenes))
         program = program.replace("%PROJECT_OBJECTS%", str(allObjects))
 
-        program = program.replace("%ENGINE_VERSION%", str(load(open("scr/files/version.json", encoding="utf-8"))["version"]))
+        program = program.replace("%ENGINE_VERSION%",
+                                  str(load(open("scr/files/version.json", encoding="utf-8"))["version"]))
 
         program = program.replace("%COMPILER%", str(open("scr/code/compiler.py", "r", encoding="utf-8").read()))
 
@@ -572,7 +686,8 @@ class Compile:
             if os.path.exists(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe"):
                 os.remove(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")
 
-            shutil.copy2(f"{pathProject}/dist/{projectSettingsCfg['values']['name']['value']}.exe", f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")
+            shutil.copy2(f"{pathProject}/dist/{projectSettingsCfg['values']['name']['value']}.exe",
+                         f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")
 
             try:
                 project.dialog.logSignal.emit(
@@ -629,7 +744,8 @@ class Compile:
         shutil.copytree(path, f"{folder}/{name}" if index is None else f"{folder}/{name} ({index})")
 
         project.dialog.logSignal.emit(
-            translate("LOG") + ": " + translate("project save") + " " + f"({name} ({index}))" if index is not None else f"({name})"
+            translate("LOG") + ": " + translate(
+                "project save") + " " + f"({name} ({index}))" if index is not None else f"({name})"
         )
 
     @staticmethod
@@ -641,7 +757,8 @@ class Compile:
 
         path = f"projects/{project.selectProject}/scr"
 
-        loads = ["functions", "assets", "engine", "files", "code", f"{projectSettings['values']['name']['value']}.py", f"{projectSettings['values']['name']['value']}.exe", "collision.cfg"]
+        loads = ["functions", "assets", "engine", "files", "code", f"{projectSettings['values']['name']['value']}.py",
+                 f"{projectSettings['values']['name']['value']}.exe", "collision.cfg"]
 
         folder = QFileDialog.getExistingDirectory(project, translate("Choose path"), "/home")
 

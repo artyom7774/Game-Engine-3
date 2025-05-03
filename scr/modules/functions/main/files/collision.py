@@ -143,12 +143,27 @@ class Collision:
 
         project.objects["main"]["groups"] = project.objects["main"]["adds"]
 
-        for path in getAllProjectObjects(project, onlyFileName=False):
+        for path in getAllProjectObjects(project, onlyFileName=False) + getAllProjectInterface(project, onlyFileName=False):
             with open(path, "r", encoding="utf-8") as file:
                 obj = load(file)
 
-            if obj["StaticObject"]["group"]["value"] not in project.objects["main"]["groups"]:
-                project.objects["main"]["groups"].append(obj["StaticObject"]["group"]["value"])
+            queue = [obj["type"]["value"]]
+
+            group = None
+
+            while queue:
+                element = queue.pop(0)
+
+                if element in obj and "group" in obj[element]:
+                    group = element
+
+                    break
+
+                for value in obj["dependences"][element]:
+                    queue.append(value)
+
+            if group is not None and obj[group]["group"]["value"] not in project.objects["main"]["groups"]:
+                project.objects["main"]["groups"].append(obj[group]["group"]["value"])
 
         project.objects["main"]["table"] = CollisionTable(project, project.objects["main"]["groups"], Collision.function)
         project.objects["main"]["table"].setGeometry(project.objects["center_rama"].x(), project.objects["center_rama"].y(), project.objects["center_rama"].width(), project.objects["center_rama"].height())

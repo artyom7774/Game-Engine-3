@@ -94,7 +94,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets\/camera.png"
+                    "value": ""
                 },
                 "X offset": {
                     "name": "X offset",
@@ -121,7 +121,7 @@
         },
         "group": {
             "name": "Name of object group",
-            "value": "camera",
+            "value": "object",
             "type": "str"
         },
         "mass": {
@@ -153,7 +153,7 @@
         },
         "invisible": {
             "name": "Invisible",
-            "value": true,
+            "value": false,
             "type": "bool"
         }
     }

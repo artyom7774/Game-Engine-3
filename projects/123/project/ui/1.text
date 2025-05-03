@@ -1,16 +1,15 @@
 {
+    "main": "Text",
     "dependences": {
         "Text": [],
         "Field": [
             "Text"
         ]
     },
-    "dependence": [
-        "Text"
-    ],
+    "dependence": [],
     "type": {
         "name": "Text type",
-        "value": "Field",
+        "value": "Text",
         "type": "choose",
         "choose": {
             "input": [
@@ -57,12 +56,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 32
+                    "value": 100
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 32
+                    "value": 100
                 }
             },
             "type": "dict"
@@ -84,7 +83,7 @@
         },
         "font": {
             "name": "Font type",
-            "value": "Arial",
+            "value": "Ink Free",
             "type": "font"
         },
         "message": {
@@ -94,21 +93,50 @@
         },
         "fontSize": {
             "name": "Font size",
-            "value": 13,
+            "value": 30,
             "type": "int"
+        },
+        "fontColor": {
+            "name": "Font color",
+            "value": "#ac24a1",
+            "type": "color"
         },
         "alignment": {
             "name": "Alignment text",
             "value": {
                 "vertical": {
                     "name": "Vertical",
-                    "type": "bool",
-                    "value": false
+                    "type": "choosing",
+                    "value": "center",
+                    "choose": {
+                        "input": [
+                            "Up",
+                            "Center",
+                            "Down"
+                        ],
+                        "output": [
+                            "up",
+                            "center",
+                            "down"
+                        ]
+                    }
                 },
                 "horizontal": {
                     "name": "Horizontal",
-                    "type": "bool",
-                    "value": false
+                    "type": "choosing",
+                    "value": "center",
+                    "choose": {
+                        "input": [
+                            "Left",
+                            "Center",
+                            "Right"
+                        ],
+                        "output": [
+                            "left",
+                            "center",
+                            "right"
+                        ]
+                    }
                 }
             },
             "type": "dict"

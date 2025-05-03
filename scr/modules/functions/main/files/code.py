@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QLabel, QMenu, QAction, QVBoxLayout, QTreeWidget, QTreeWidgetItem, QTextEdit, QDialog, QToolTip, QLineEdit, QPushButton, QComboBox
 from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon, QTextCursor
 from PyQt5.Qt import Qt, QPoint, QTimer, QSize
+from PyQt5 import QtWidgets
 
 from PyQt5.Qsci import QsciScintilla, QsciLexerPython
 
@@ -399,6 +400,7 @@ class CodeNodeConnector(QLabel):
         self.project = project
 
         self.setGeometry(0, (number + 1) * CODE_GRID_CELL_SIZE, parent.width(), CODE_GRID_CELL_SIZE)
+
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         self.number = number
@@ -545,6 +547,7 @@ class CodeNode(QTreeWidget):
         self.show()
 
         self.setAttribute(Qt.WA_TransparentForMouseEvents)
+
         self.setStyleSheet(f"border-width: 0px; border-radius: 0px; background-color: rgba{'(63, 64, 66, 220)' if SETTINGS['theme'] == 'dark' else '(218, 220, 224, 220)'};")
 
         self.project = parent
@@ -601,7 +604,7 @@ class CodeNode(QTreeWidget):
 
         """
 
-        self.font.setPointSize(8) # динамический размер
+        self.font.setPointSize(8)
 
         painter.setFont(self.font)
 

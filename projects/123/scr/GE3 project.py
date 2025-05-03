@@ -3,9 +3,10 @@
 import tkinter
 import engine
 import socket
+import json
 import sys
 import os
-            
+
 root = tkinter.Tk()
 
 width = root.winfo_screenwidth()
@@ -13,18 +14,19 @@ height = root.winfo_screenheight()
 
 root.destroy()
 
-SOCKET_ID = 61762
+SOCKET_ID = 22290
+SOCKET_GLOBAL_ID = 22291
 
 VARIABLES = {
-    "globals": {},
-    "locals": {},
+    "globals": {'undefined': {'name': 'undefined', 'type': 'text', 'value': ''}},
+    "locals": {'projects/123/project/functions/1.func': {}},
     "objects": {'projects/123/project/scenes/%scene%1': {'1-0.textc': {}, 'camera-0.objc': {}}}
 }
 
 SETTINGS = {'name': 'GE3 project', 'icon': '', 'debug': True, 'fps': 60, 'tps': 20, 'start_scene': 'projects/123/project/scenes/%scene%1', 'width': 500, 'height': 500, 'full_screen_mode': False}
-PROGRAMS = {}
-OBJECTS = {'camera.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 32, 32], 'sprite': ['', 0, 0, -1, -1], 'group': 'camera', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}}
-SCENES = {'projects/123/project/scenes/%scene%1': {'objects': {'1-0.textc': {'type': 'Text', 'variables': {'pos': [5.0, 2.0], 'hitbox': [0, 0, 32, 32], 'group': 'object', 'layer': 0, 'invisible': False, 'font': 'Arial', 'message': 'Text', 'fontSize': 13, 'alignment': [True, True]}}, 'camera-0.objc': {'type': 'StaticObject', 'variables': {'pos': [-94.0, -62.0], 'hitbox': [0, 0, 32, 32], 'sprite': ['', 0, 0, -1, -1], 'group': 'camera', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}}, 'focus': 'camera-0.objc'}}
+PROGRAMS = {'projects/123/project/functions/1.func': {'variables': {}, 'objects': {'744477046': {'display': {'discription': 'starts at the start of the game', 'name': 'On start game', 'text': {'__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 744477046, 'inputs': {}, 'name': 'onStartGame', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 8.0, 'y': 6.0}, '698081566': {'display': {'discription': 'get object ID by name, return -1 if object name is not found', 'name': 'Get object ID by name', 'text': {'__id__': 'ID', '__name__': 'name', '__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 698081566, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 744477046, 'name': 'path'}}, 'name': {'code': 'name', 'name': '__name__', 'standard': '1-0.textc', 'type': 'text', 'value': None}}, 'name': 'getObjectIDByName', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}, 'id': {'code': 'id', 'name': '__id__', 'type': 'number'}}, 'type': 'objects', 'width': 6, 'x': 16.0, 'y': 6.0}, '253694529': {'display': {'discription': 'Set object parameter', 'name': 'Set object parameter', 'text': {'__id__': 'ID', '__name__': 'Name', '__none__': '', '__path__': 'path', '__value__': 'Value'}}, 'height': 5, 'id': 253694529, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 698081566, 'name': 'path'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 698081566, 'name': 'id'}}, 'name': {'choose': {'options': ['0. Hitbox', '1. Group', '2. Mass', '3. Layer', '4. Invisible', '5. Moving speed', '6. Gravity', '7. Power jump', '8. Braking power', '9. Message', '10. Font size', '11. Font color', '12. Alignment']}, 'code': 'name', 'name': '__name__', 'standard': 9, 'type': 'choose', 'value': None}, 'value': {'code': 'value', 'name': '__value__', 'standard': 'Hello!', 'type': 'Any', 'value': None}}, 'name': 'setObjectParameter', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'objects', 'width': 10, 'x': 24, 'y': 6}}}}
+OBJECTS = {'1.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 32, 32], 'sprite': ['', 0, 0, -1, -1], 'group': 'object', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'camera.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 32, 32], 'sprite': ['', 0, 0, -1, -1], 'group': 'camera', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}}
+SCENES = {'projects/123/project/scenes/%scene%1': {'objects': {'1-0.textc': {'type': 'Field', 'variables': {'pos': [40, 40], 'hitbox': [0, 0, 240, 100], 'group': 'object', 'layer': 0, 'invisible': False, 'font': 'Ink Free', 'message': '...', 'fontSize': 48, 'fontColor': '#ac24a1', 'alignment': ['up', 'left']}}, 'camera-0.objc': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 32, 32], 'sprite': ['assets/camera.png', 0, 0, -1, -1], 'group': 'camera', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': True}}}, 'focus': 'camera-0.objc'}}
 
 DEBUG = True
 
@@ -272,7 +274,7 @@ class Tps:
 class Game(engine.Application):
     def __init__(self):
         global width, height
-    
+
         engine.Application.__init__(self)
 
         self.objects.collisions = engine.Collision("collision.cfg")
@@ -283,7 +285,7 @@ class Game(engine.Application):
 
         if SETTINGS["full_screen_mode"]:
             self.setDisplaySize(width, height)
-        
+
         self.setName(SETTINGS["name"])
         self.setIcon(SETTINGS["icon"])
 
@@ -309,10 +311,17 @@ class Game(engine.Application):
         try:
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.socket.connect(("localhost", SOCKET_ID))
-        
+
         except BaseException:
             self.socket = None
-        
+
+        try:
+            self.global_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.global_socket.connect(("localhost", SOCKET_GLOBAL_ID))
+
+        except BaseException:
+            self.global_socket = None
+
         for key, value in PROGRAMS.items():
             self.programs[key] = Compiler(self, key, value, self.settings, DEBUG)
 
@@ -347,6 +356,14 @@ class Game(engine.Application):
     def update(self) -> None:
         super().update()
 
+        if self.global_socket is not None:
+            try:
+                data = json.dumps(VARIABLES["globals"])
+                self.global_socket.sendall(data.encode())
+
+            except BaseException:
+                pass
+
         for key, value in self.programs.items():
             if self.programs[key].error:
                 info = self.programs[key].information
@@ -367,7 +384,7 @@ class Game(engine.Application):
                 exit(0)
 
             self.programs[key].update()
-    
+
     def tpsStart(self):
         def function(tps):
             for key, value in PROGRAMS.items():
@@ -378,7 +395,7 @@ class Game(engine.Application):
     def mouseLeftClick(self):
         for key, value in PROGRAMS.items():
             self.programs[key].event("mouseLeftClick")
-            
+
     def mouseRightClick(self):
         for key, value in PROGRAMS.items():
             self.programs[key].event("mouseRightClick")
@@ -399,7 +416,7 @@ class Game(engine.Application):
             
             if "animation" in variables:
                 obj.animator.obj = obj
-            
+    
                 obj.animator.init()
 
             if scene not in self.objectIDByName:

@@ -50,6 +50,7 @@ class CreateObjectFunctions:
             objects = load(file)
 
         out = {
+            "main": objects["main"],
             "dependences": objects["dependences"],
             "dependence": objects["dependences"][objects["standard"]["type"]],
             "type": {

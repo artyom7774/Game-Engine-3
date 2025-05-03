@@ -12,4 +12,4 @@ rem create python venv and install modules
 
 "python/Scripts/python.exe" "setup\get-pip.py"
 
-"python/Scripts/pip" install --no-cache-dir pygame pyinstaller pillow numpy hjson
+"python/Scripts/pip" install --no-cache-dir pygame pyinstaller pillow numpy hjson matplotlib==3.10.1

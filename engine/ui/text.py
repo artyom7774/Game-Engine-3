@@ -1,5 +1,3 @@
-import os.path
-
 from engine.classes.hitbox import SquareHitbox
 from engine.vector.int import Vec4i
 
@@ -8,12 +6,19 @@ from engine.functions.cache import cache
 from PIL.ImageFont import FreeTypeFont
 from PIL import ImageFont
 
+from matplotlib import font_manager
+
 import typing
 import pygame
 import os
 
 BASE_FONT = "engine/fonts/arial.ttf"
 BASE_FONT_COLOR = (255, 255, 255)
+
+
+@cache
+def find_system_font(name: str) -> str:
+    return pygame.font.match_font(name)
 
 
 @cache
@@ -26,7 +31,15 @@ def get_font(font_type: str, font_size: int) -> pygame.font.Font:
 
 @cache
 def get_ttf(font_type: str, font_size: int) -> FreeTypeFont:
-    return ImageFont.truetype(font_type, font_size)
+    if os.path.exists(font_type):
+        return ImageFont.truetype(font_type, font_size)
+
+    if find_system_font(font_type.lower()) is not None:
+        ImageFont.truetype(find_system_font(font_type.lower()), font_size)
+
+    print(f"WARNING: {font_type} is not found")
+
+    return ImageFont.load_default()
 
 
 def print_text(

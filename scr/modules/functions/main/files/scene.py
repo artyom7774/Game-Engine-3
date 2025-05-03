@@ -4,8 +4,10 @@ from PyQt5.Qt import Qt, QTimer, QPoint
 
 from scr.modules.dialogs import CreateSceneObject, CreateInterfaceObject, animatorCreateDialog
 
+from scr.modules.functions.main.files.objtext import ObjectText, fontCreateDialog, colorCreateDialog
+
 from scr.modules.dialogs.tree.create_object import CreateObjectFunctions
-from scr.modules.functions.main.files import Object
+
 from scr.modules.functions.main.files.object import Object as ObjectTypingClass
 
 from scr.modules.widgets import FocusLineEdit, FocusComboBox
@@ -22,9 +24,28 @@ import dataclasses
 import pyperclip
 import shutil
 import typing
-import json
 import math
 import re
+
+
+def isCurrectText(obj: dict):
+    def func(obj, path):
+        if len(path) == 0:
+            return obj, []
+
+        var = obj[path[0]]
+        path.pop(0)
+
+        return var, path
+
+    for element in TEXT_CURRECT_TEST:
+        try:
+            func(obj, element.split("/"))
+
+        except BaseException:
+            return False
+
+    return True
 
 
 def isCurrectObject(obj: dict):
@@ -200,10 +221,26 @@ class SceneAdditions:
                 self.value.saveAllValues = lambda: ObjectTypingClass.function(self.value, project, save, temp, path, init=False)
 
             elif temp["type"] == "choose":
-                self.value = FocusComboBox(releasedFocusFunction=lambda: ObjectTypingClass.function(self.value, project, save, temp, path))
+                if obj["main"] == "StaticObject":
+                    self.value = FocusComboBox(releasedFocusFunction=lambda: ObjectTypingClass.function(self.value, project, save, temp, path))
+
+                elif obj["main"] == "Text":
+                    self.value = FocusComboBox(releasedFocusFunction=lambda: ObjectText.function(self.value, project, save, temp, path))
+
+                else:
+                    pass
+
                 self.value.currentIndexChanged.connect(lambda: self.value.clearFocus())
                 self.value.addItems([translate(element) for element in temp["choose"]["input"]])
                 self.value.setCurrentIndex([temp["value"] == element for i, element in enumerate(temp["choose"]["output"])].index(True))
+
+            elif temp["type"] == "choosing":
+                self.value = FocusComboBox(releasedFocusFunction=lambda: ObjectText.function(self.value, project, save, temp, path))
+                self.value.currentIndexChanged.connect(lambda: self.value.clearFocus())
+                self.value.addItems([translate(element) for element in temp["choose"]["input"]])
+                self.value.setCurrentIndex([temp["value"] == element for i, element in enumerate(temp["choose"]["output"])].index(True))
+
+                self.value.saveAllValues = lambda: ObjectText.function(self.value, project, save, temp, path, init=False)
 
             elif temp["type"] == "dict":
                 project.objects["main"]["object_tree_objects"][path] = QTreeWidgetItem(project.objects["main"]["object_tree_objects"][path[:path.rfind("/")]])
@@ -229,6 +266,24 @@ class SceneAdditions:
                 self.value.clicked.connect(lambda: animatorCreateDialog(self.project, save))
 
                 self.value.saveAllValues = lambda: ObjectTypingClass.function(self.value, project, save, temp, path, init=False)
+
+            elif temp["type"] == "font":
+                self.value = QPushButton(self)
+                self.value.setText(temp["value"])
+                self.value.setFixedHeight(20)
+
+                self.value.clicked.connect(lambda: fontCreateDialog(self.project, self.value, path, temp["value"]))
+
+                self.value.saveAllValues = lambda: ObjectText.function(self.value, project, save, temp, path, init=False)
+
+            elif temp["type"] == "color":
+                self.value = QPushButton(self)
+                self.value.setFixedHeight(20)
+                self.value.setStyleSheet(f"background-color: {temp['value']};")
+
+                self.value.clicked.connect(lambda: colorCreateDialog(self.project, self.value, path, temp["value"]))
+
+                self.value.saveAllValues = lambda: ObjectText.function(self.value, project, save, temp, path, init=False)
 
             elif temp["type"] == "none":
                 pass
@@ -754,7 +809,7 @@ class Scene:
 
             return 0
 
-        if not isCurrectObject(obj):
+        if not isCurrectObject(obj) and not isCurrectText(obj):
             MessageBox.error(translate("This text is not object"))
 
             return 0
@@ -768,12 +823,12 @@ class Scene:
         height = project.objects["main"]["scene_settings"]["Scene"]["grid"]["value"]["y"]["value"]
 
         if project.objects["main"]["scene_settings"]["Scene"]["snap"]["value"]:
-            obj["StaticObject"]["pos"]["value"]["x"]["value"] = (pos.x - project.objects["main"]["scene"].width() // 2) // width * width
-            obj["StaticObject"]["pos"]["value"]["y"]["value"] = (pos.y - project.objects["main"]["scene"].height() // 2) // height * height
+            obj[obj["main"]]["pos"]["value"]["x"]["value"] = (pos.x - project.objects["main"]["scene"].width() // 2) // width * width
+            obj[obj["main"]]["pos"]["value"]["y"]["value"] = (pos.y - project.objects["main"]["scene"].height() // 2) // height * height
 
         else:
-            obj["StaticObject"]["pos"]["value"]["x"]["value"] = pos.x - project.objects["main"]["scene"].width() // 2
-            obj["StaticObject"]["pos"]["value"]["y"]["value"] = pos.y - project.objects["main"]["scene"].height() // 2
+            obj[obj["main"]]["pos"]["value"]["x"]["value"] = pos.x - project.objects["main"]["scene"].width() // 2
+            obj[obj["main"]]["pos"]["value"]["y"]["value"] = pos.y - project.objects["main"]["scene"].height() // 2
 
         with open(path, "w") as file:
             dump(obj, file, indent=4)
@@ -813,6 +868,9 @@ class Scene:
         answer = {}
 
         for element in obj["dependence"] + [obj["type"]["value"]]:
+            if element not in obj:
+                continue
+
             for key, value in obj[element].items():
                 if value["type"] == "dict":
                     answer[key] = [elem["value"] for elem in value["value"].values()]

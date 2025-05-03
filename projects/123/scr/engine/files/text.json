@@ -1,4 +1,6 @@
 {
+    "main": "Text",
+
     "dependences": {
         "Text": [],
         "Field": [
@@ -47,16 +49,41 @@
         "font": "Arial",
         "message": "Text",
         "fontSize": 13,
+        "fontColor": "#000000",
         "alignment": {
             "vertical": {
                 "name": "Vertical",
-                "type": "bool",
-                "value": false
+                "type": "choosing",
+                "value": "up",
+                "choose": {
+                    "input": [
+                        "Up",
+                        "Center",
+                        "Down"
+                    ],
+                    "output": [
+                        "up",
+                        "center",
+                        "down"
+                    ]
+                }
             },
             "horizontal": {
                 "name": "Horizontal",
-                "type": "bool",
-                "value": false
+                "type": "choosing",
+                "value": "left",
+                "choose": {
+                    "input": [
+                        "Left",
+                        "Center",
+                        "Right"
+                    ],
+                    "output": [
+                        "left",
+                        "center",
+                        "right"
+                    ]
+                }
             }
         }
     },
@@ -70,6 +97,7 @@
         "font": "Font type",
         "message": "Message",
         "fontSize": "Font size",
+        "fontColor": "Font color",
         "alignment": "Alignment text"
     },
     "type": {
@@ -82,6 +110,7 @@
         "font": "font",
         "message": "str",
         "fontSize": "int",
+        "fontColor": "color",
         "alignment": "dict"
     },
     "specials": {
@@ -94,6 +123,32 @@
                 "output": [
                     "Text",
                     "Field"
+                ]
+            },
+
+            "vertical": {
+                "input": [
+                    "Up",
+                    "Center",
+                    "Down"
+                ],
+                "output": [
+                    "up",
+                    "center",
+                    "down"
+                ]
+            },
+
+            "horizontal": {
+                "input": [
+                    "Left",
+                    "Center",
+                    "Right"
+                ],
+                "output": [
+                    "left",
+                    "center",
+                    "right"
                 ]
             }
         }
@@ -108,6 +163,7 @@
             "font",
             "message",
             "fontSize",
+            "fontColor",
             "alignment"
         ],
         "Field": [

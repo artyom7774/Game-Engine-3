@@ -1,7 +1,7 @@
 import typing
 
-OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "speed", "gravity", "jumpPower", "slidingStep"]
-OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "float", "float"]
+OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "speed", "gravity", "jumpPower", "slidingStep", "message", "fontSize", "fontColor", "alignment"]
+OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "float", "float", "text", "int", "text", "list"]
 
 
 def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
@@ -43,6 +43,8 @@ def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, varia
 
     else:
         value = decode(operation, nodes["objects"][str(id)]["inputs"]["value"]["standard"])
+
+    print(OBJECT_PARAMETERS[operation], value)
 
     program.objects.getById(ids).setParameter(OBJECT_PARAMETERS[operation], value)
 

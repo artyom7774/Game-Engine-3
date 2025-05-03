@@ -1,4 +1,6 @@
 {
+    "main": "StaticObject",
+
     "dependences": {
         "StaticObject": [],
         "DynamicObject": [

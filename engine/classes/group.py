@@ -114,6 +114,8 @@ class ObjectGroup:
 
         if obj.id in self.objectById:
             self.objectById.pop(obj.id)
+
+        if obj.id in self.objectByGroup[obj.group]:
             self.objectByGroup[obj.group].pop(obj.id)
 
     def getById(self, id: int) -> VObject:

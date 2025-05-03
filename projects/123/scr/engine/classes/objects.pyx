@@ -11,6 +11,8 @@ from engine.vector.angle import AngleVector
 from engine.vector.float import Vec2f, Vec4f
 from engine.vector.int import Vec2i, Vec4i
 
+from engine.ui.text import print_text, get_font, get_ttf
+
 from engine.variables import *
 
 import pygame
@@ -143,15 +145,13 @@ cdef class StaticObject:
 
     def draw(self, px, py):
         if self.sprite is not None:
-            sprite = self.sprite.get()
+            if self.game.usingWidth + self.sprite.pos.x + self.sprite.size.x > self.pos.x + px > -self.sprite.pos.x - self.sprite.size.x and self.game.usingHeight + self.sprite.pos.y + self.sprite.size.y > self.pos.y + py > -self.sprite.pos.y - self.sprite.size.y:
+                sprite = self.sprite.get()
 
-        else:
-            sprite = None
-
-        if not self.invisible or self.game.forcedViewObject:
-            if sprite is not None:
-                if self.game.usingWidth + 200 > self.pos.x + self.sprite.pos.x + px > -200 and self.game.usingHeight + 200 > self.pos.y + self.sprite.pos.y + py > -200:
-                    self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x + px, self.pos.y + self.sprite.pos.y + py))
+                if not self.invisible or self.game.forcedViewObject:
+                    if sprite is not None:
+                        if self.game.usingWidth + 200 > self.pos.x + self.sprite.pos.x + px > -200 and self.game.usingHeight + 200 > self.pos.y + self.sprite.pos.y + py > -200:
+                            self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x + px, self.pos.y + self.sprite.pos.y + py))
 
         if self.game.debug or (self.group.startswith("__") and self.group.endswith("__") and not self.group == "__debug_unvisiable__"):
             pygame.draw.rect(
@@ -357,7 +357,7 @@ cdef class DynamicObject(StaticObject):
 
             pygame.draw.line(
                 self.game.screen, (255, 0, 0) if "debug_color" not in self.specials else self.specials["debug_color"],
-                (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2), (px + obj.pos.x + obj.hitbox.x + obj.hitbox.width / 2 + moving.x, py + obj.pos.y + obj.hitbox.y + obj.hitbox.height / 2 + moving.y), 1
+                (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2), (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2 + moving.x, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2 + moving.y), 1
             )
 
     def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
@@ -471,7 +471,14 @@ cdef class Text(StaticObject):
     cdef public str font
     cdef public str message
     cdef public int fontSize
+    cdef public str fontColor
     cdef public object alignment
+    cdef public str vertical
+    cdef public str horizontal
+    cdef public int tx
+    cdef public int ty
+    cdef public int hstep
+    cdef public object fontClass
 
     def __init__(
         self, game: object,
@@ -484,6 +491,7 @@ cdef class Text(StaticObject):
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
+        fontColor: str = "#FFFFFF",
         alignment: typing.List[bool] = None,
         variables: typing.Dict[str, typing.Any] = None,
         specials: typing.Dict[str, typing.Any] = None,
@@ -495,18 +503,48 @@ cdef class Text(StaticObject):
             self.alignment = alignment
 
         else:
-            self.alignment = [False, False]
+            self.alignment = ["center", "center"]
 
         self.font = font
         self.message = message
         self.fontSize = fontSize
+        self.fontColor = fontColor
         self.alignment = alignment
 
-    def draw(self, px, py):
-        if not self.invisible or self.game.forcedViewObject:
-            # DRAW
+        self.fontClass = get_font(self.font, self.fontSize)
 
-            pass
+        self.vertical = alignment[0]
+        self.horizontal = alignment[1]
+
+        self.hstep = self.fontClass.size("Ag")[1]
+
+        self.tx = 0
+        self.ty = 0
+
+    def draw(self, px, py):
+        width, height = self.fontClass.size(self.message)
+
+        if self.game.usingWidth + width > self.pos.x + px > -width and self.game.usingHeight + height > self.pos.y + py > -height:
+            if not self.invisible or self.game.forcedViewObject:
+                if self.horizontal == "center":
+                    self.tx = self.hitbox.width / 2 - width / 2
+
+                if self.horizontal == "left":
+                    self.tx = 4
+
+                if self.horizontal == "right":
+                    self.tx = self.hitbox.width - width - 4
+
+                if self.vertical == "center":
+                    self.ty = (self.hitbox.height - self.hstep) / 2
+
+                if self.vertical == "up":
+                    self.ty = 2
+
+                if self.vertical == "down":
+                    self.ty = self.hitbox.height - self.hstep - 2
+
+                print_text(self.game.screen, self.pos.x + self.tx + px, self.pos.y + self.ty + py, self.message, self.fontSize, self.font, self.fontColor, 255)
 
         if self.game.debug or (self.group.startswith("__") and self.group.endswith("__") and not self.group == "__debug_unvisiable__"):
             pygame.draw.rect(
@@ -516,6 +554,10 @@ cdef class Text(StaticObject):
 
 
 cdef class Field(Text):
+    cdef object out
+    cdef object text
+    cdef str splitSymbol
+
     def __init__(
         self, game: object,
         pos: typing.Union[typing.List[float], Vec2f, Vec2i],
@@ -527,21 +569,102 @@ cdef class Field(Text):
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
+        fontColor: str = "#FFFFFF",
         alignment: typing.List[bool] = None,
         variables: typing.Dict[str, typing.Any] = None,
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        Text.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, None, font, message, fontSize, alignment, variables, specials)
+        Text.__init__(self, game, pos, hitbox, group, layer, id, invisible, font, message, fontSize, fontColor, alignment, variables, specials)
+
+        self.splitSymbol = "ꙮ"
+
+        self.text = list(self.message)
+
+        for i in range(len(self.text)):
+            if self.text[i] == " " and self.text[i - 1] not in (" ", "~") and i > 0:
+                self.text[i] = self.splitSymbol
+
+        self.text = ("".join(self.text)).split(self.splitSymbol)
+
+        self.hstep = self.fontClass.size("Ag")[1]
+
+        self.out = []
 
     def draw(self, px, py):
         if not self.invisible or self.game.forcedViewObject:
-            # DRAW
+            self.init()
 
-            pass
+            if self.vertical == "center":
+                ty = (self.hitbox.height - len(self.out) * self.hstep) / 2
+
+            elif self.vertical == "up":
+                ty = 2
+
+            elif self.vertical == "down":
+                ty = self.hitbox.height - len(self.out) * self.hstep - 2
+
+            else:
+                raise NameError(f"horizontal {self.horizontal} is not difined")
+
+            for i, element in enumerate(self.out):
+                if self.horizontal == "center":
+                    print_text(self.game.screen, self.pos.x + (self.hitbox.width / 2 - self.fontClass.size(element)[0] / 2) + px, self.pos.y + i * self.hstep + ty + py, element, self.fontSize, self.font, self.fontColor, 255)
+
+                elif self.horizontal == "left":
+                    print_text(self.game.screen, self.pos.x + 4 + px, self.pos.y + i * self.hstep + ty + py, element, self.fontSize, self.font, self.fontColor, 255)
+
+                elif self.horizontal == "right":
+                    print_text(self.game.screen, (self.pos.x + self.hitbox.width) - self.fontClass.size(element)[0] - 4 + px, self.pos.y + i * self.hstep + ty + py, element, self.fontSize, self.font, self.fontColor, 25)
+
+                else:
+                    raise NameError(f"horizontal {self.horizontal} is not difined")
 
         if self.game.debug or (self.group.startswith("__") and self.group.endswith("__") and not self.group == "__debug_unvisiable__"):
             pygame.draw.rect(
                 self.game.screen, (255, 0, 0) if "debug_color" not in self.specials else self.specials["debug_color"],
                 (math.trunc(self.pos.x) + self.hitbox.x + px, math.trunc(self.pos.y) + self.hitbox.y + py, self.hitbox.width, self.hitbox.height), 1
             )
+
+    def init(self) -> None:
+        self.text = list(self.message)
+
+        for i in range(len(self.text)):
+            if self.text[i] == " " and self.text[i - 1] not in (" ", "~") and i > 0:
+                self.text[i] = self.splitSymbol
+
+        self.text = ("".join(self.text)).split(self.splitSymbol)
+
+        l = 0
+        r = len(self.text) - 1
+
+        if self.text[0] == "/t":
+            self.out = [" " * 4]
+
+        else:
+            self.out = [self.text[0]]
+
+        while l < r:
+            if self.fontClass.size(self.out[-1] + self.text[l + 1] + " ")[0] < self.hitbox.width:
+                if self.text[l + 1] == "/n":
+                    self.out.append("")
+
+                elif self.text[l + 1] == "/t":
+                    self.out[len(self.out) - 1] += " " * 4
+
+                elif len(self.out[len(self.out) - 1]) == 0:
+                    self.out[len(self.out) - 1] += f"{self.text[l + 1]}"
+
+                else:
+                    self.out[len(self.out) - 1] += f" {self.text[l + 1]}"
+
+                l += 1
+
+            else:
+                self.out.append("")
+
+        # self.ay = self.hitbox.height / 2 - (self.fontClass.size("Ag")[1] / 2 * len(self.out))
+
+        var = (len(self.out) - self.hitbox.height // self.hstep) * self.hstep
+
+        return var if var > 0 else 0
