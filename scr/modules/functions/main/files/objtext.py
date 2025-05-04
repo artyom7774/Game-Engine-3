@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel, QColorDialog, QCheckBox, QComboBox, QTreeWidget, QDialog, QTreeWidgetItem, QWidget, QHBoxLayout, QSizePolicy, QSpacerItem, QPushButton
+from PyQt5.QtWidgets import QLabel, QScrollBar, QColorDialog, QCheckBox, QComboBox, QTreeWidget, QDialog, QTreeWidgetItem, QWidget, QHBoxLayout, QSizePolicy, QSpacerItem, QPushButton
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QPixmap, QImage
 from PyQt5 import QtWidgets
@@ -378,6 +378,9 @@ class ObjectText:
         if last["type"] == "font":
             text = obj.text()
 
+        if last["type"] == "scroll":
+            text = obj.value()
+
         elif last["type"] == "color":
             if not hasattr(obj, "out"):
                 return
@@ -444,6 +447,11 @@ class ObjectText:
                     temp["value"] = float(text)
 
         if last["type"] == "choosing":
+            temp["value"] = text
+
+            doing = True
+
+        if last["type"] == "scroll":
             temp["value"] = text
 
             doing = True

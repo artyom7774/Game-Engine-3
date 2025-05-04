@@ -56,12 +56,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 100
+                    "value": 32
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 100
+                    "value": 32
                 }
             },
             "type": "dict"
@@ -83,7 +83,7 @@
         },
         "font": {
             "name": "Font type",
-            "value": "Ink Free",
+            "value": "Arial",
             "type": "font"
         },
         "message": {
@@ -93,12 +93,17 @@
         },
         "fontSize": {
             "name": "Font size",
-            "value": 30,
+            "value": 13,
+            "type": "int"
+        },
+        "alpha": {
+            "name": "Alpha",
+            "value": 255,
             "type": "int"
         },
         "fontColor": {
             "name": "Font color",
-            "value": "#ac24a1",
+            "value": "#000000",
             "type": "color"
         },
         "alignment": {
@@ -107,7 +112,7 @@
                 "vertical": {
                     "name": "Vertical",
                     "type": "choosing",
-                    "value": "center",
+                    "value": "up",
                     "choose": {
                         "input": [
                             "Up",
@@ -124,7 +129,7 @@
                 "horizontal": {
                     "name": "Horizontal",
                     "type": "choosing",
-                    "value": "center",
+                    "value": "left",
                     "choose": {
                         "input": [
                             "Left",

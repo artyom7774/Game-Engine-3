@@ -69,12 +69,20 @@ class CreateTextFunctions:
                 if element not in out:
                     out[element] = {}
 
-                if objects["type"] == "choose":
+                if objects["type"][value] in ("choose", "choosing"):
                     out[element][value] = {
                         "name": objects["name"][value],
                         "value": objects["standard"][value],
                         "type": objects["type"][value],
                         "choose": objects["specials"]["choose"][value]
+                    }
+
+                elif objects["type"][value] == "scroll":
+                    out[element][value] = {
+                        "name": objects["name"][value],
+                        "value": objects["standard"][value],
+                        "type": objects["type"][value],
+                        "scroll": objects["specials"]["scroll"][value]
                     }
 
                 else:

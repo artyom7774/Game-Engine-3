@@ -1,4 +1,4 @@
-OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "speed", "gravity", "jumpPower", "slidingStep", "message", "fontSize", "fontColor", "alignment"]
+OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "speed", "gravity", "jumpPower", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor"]
 
 
 def getObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:

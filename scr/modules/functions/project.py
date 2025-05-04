@@ -294,6 +294,11 @@ def projectTreeProjectMenuOpen(project, position) -> None:
             project.objects["tree_project_menu_new_menu_text_action"].triggered.connect(lambda: functions.tree.createText(project))
             project.objects["tree_project_menu_new_menu"].addAction(project.objects["tree_project_menu_new_menu_text_action"])
 
+            project.objects["tree_project_menu_new_menu_button_action"] = QAction(translate("Button"), project)
+            project.objects["tree_project_menu_new_menu_button_action"].setIcon(QIcon(getColor("btn")))
+            project.objects["tree_project_menu_new_menu_button_action"].triggered.connect(lambda: functions.tree.createButton(project))
+            project.objects["tree_project_menu_new_menu"].addAction(project.objects["tree_project_menu_new_menu_button_action"])
+
         if len(path) > 1:
             project.objects["tree_project_menu_new_menu_file_action"] = QAction(translate("File"), project)
             project.objects["tree_project_menu_new_menu_file_action"].setIcon(QIcon(getColor("file")))
@@ -446,6 +451,9 @@ def centerMenuInit(project, update: bool = False) -> None:
 
         elif project.selectFile.endswith(".text") or project.selectFile.endswith(".textc"):
             functions.main.files.ObjectText.init(project)
+
+        elif project.selectFile.endswith(".btn") or project.selectFile.endswith(".btnc"):
+            functions.main.files.Button.init(project)
 
         elif any([project.selectFile.endswith(element) for element in IMAGE_FORMATES]):
             functions.main.files.Image.init(project)

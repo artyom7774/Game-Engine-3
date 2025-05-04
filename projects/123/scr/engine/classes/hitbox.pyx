@@ -3,6 +3,7 @@ from engine.vector.int import Vec4i
 
 import typing
 
+
 cdef class SquareHitbox:
     cdef public int x, y, width, height
 

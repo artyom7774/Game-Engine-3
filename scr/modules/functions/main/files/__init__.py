@@ -6,6 +6,7 @@ from .code import Code, CodeHash
 
 from .text import Text
 from .objtext import ObjectText
+from .button import Button
 
 from .image import Image
 

@@ -3530,8 +3530,10 @@
                             "8. Braking power",
                             "9. Message",
                             "10. Font size",
-                            "11. Font color",
-                            "12. Alignment"
+                            "11. Alignment",
+                            "12. Font color",
+                            "13. Background color",
+                            "14. Rama color"
                         ]
                     }
                 },
@@ -3604,8 +3606,10 @@
                             "8. Braking power",
                             "9. Message",
                             "10. Font size",
-                            "11. Font color",
-                            "12. Alignment"
+                            "11. Alignment",
+                            "12. Font color",
+                            "13. Background color",
+                            "14. Rama color"
                         ]
                     }
                 }

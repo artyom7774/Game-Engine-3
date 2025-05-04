@@ -50,6 +50,7 @@
         "message": "Text",
         "fontSize": 13,
         "fontColor": "#000000",
+        "alpha": 255,
         "alignment": {
             "vertical": {
                 "name": "Vertical",
@@ -97,6 +98,7 @@
         "font": "Font type",
         "message": "Message",
         "fontSize": "Font size",
+        "alpha": "Alpha",
         "fontColor": "Font color",
         "alignment": "Alignment text"
     },
@@ -110,6 +112,7 @@
         "font": "font",
         "message": "str",
         "fontSize": "int",
+        "alpha": "int",
         "fontColor": "color",
         "alignment": "dict"
     },
@@ -163,6 +166,7 @@
             "font",
             "message",
             "fontSize",
+            "alpha",
             "fontColor",
             "alignment"
         ],

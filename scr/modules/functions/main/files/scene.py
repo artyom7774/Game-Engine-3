@@ -4,6 +4,7 @@ from PyQt5.Qt import Qt, QTimer, QPoint
 
 from scr.modules.dialogs import CreateSceneObject, CreateInterfaceObject, animatorCreateDialog
 
+from scr.modules.functions.main.files.button import Button
 from scr.modules.functions.main.files.objtext import ObjectText, fontCreateDialog, colorCreateDialog
 
 from scr.modules.dialogs.tree.create_object import CreateObjectFunctions
@@ -226,6 +227,9 @@ class SceneAdditions:
 
                 elif obj["main"] == "Text":
                     self.value = FocusComboBox(releasedFocusFunction=lambda: ObjectText.function(self.value, project, save, temp, path))
+
+                elif obj["main"] == "Button":
+                    self.value = FocusComboBox(releasedFocusFunction=lambda: Button.function(self.value, project, save, temp, path))
 
                 else:
                     pass

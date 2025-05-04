@@ -1,11 +1,18 @@
 import typing
 
-OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "speed", "gravity", "jumpPower", "slidingStep", "message", "fontSize", "fontColor", "alignment"]
-OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "float", "float", "text", "int", "text", "list"]
+OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "speed", "gravity", "jumpPower", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor"]
+OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "float", "float", "text", "int", "list", "eval", "list", "list"]
 
 
 def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
     def decode(operation, text: str) -> typing.Any:
+        if OBJECT_PARAMETERS_TYPES[operation] == "eval":
+            try:
+                return eval(text)
+
+            except BaseException:
+                return text
+
         if OBJECT_PARAMETERS_TYPES[operation] == "list":
             return eval(text)
 

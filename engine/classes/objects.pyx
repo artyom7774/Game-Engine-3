@@ -11,6 +11,7 @@ from engine.vector.angle import AngleVector
 from engine.vector.float import Vec2f, Vec4f
 from engine.vector.int import Vec2i, Vec4i
 
+from engine.functions.alpha import alphaRect
 from engine.ui.text import print_text, get_font, get_ttf
 
 from engine.variables import *
@@ -20,6 +21,11 @@ import typing
 import random
 import typing
 import math
+
+
+def hex_to_rgb(color: str) -> typing.List[int]:
+    color = color.lstrip('#')
+    return list(int(color[i:i+2], 16) for i in (0, 2, 4))
 
 
 cdef class StaticObject:
@@ -471,6 +477,7 @@ cdef class Text(StaticObject):
     cdef public str font
     cdef public str message
     cdef public int fontSize
+    cdef public int alpha
     cdef public str fontColor
     cdef public object alignment
     cdef public str vertical
@@ -491,6 +498,7 @@ cdef class Text(StaticObject):
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
+        alpha: int = 255,
         fontColor: str = "#FFFFFF",
         alignment: typing.List[bool] = None,
         variables: typing.Dict[str, typing.Any] = None,
@@ -508,6 +516,7 @@ cdef class Text(StaticObject):
         self.font = font
         self.message = message
         self.fontSize = fontSize
+        self.alpha = alpha
         self.fontColor = fontColor
         self.alignment = alignment
 
@@ -544,7 +553,7 @@ cdef class Text(StaticObject):
                 if self.vertical == "down":
                     self.ty = self.hitbox.height - self.hstep - 2
 
-                print_text(self.game.screen, self.pos.x + self.tx + px, self.pos.y + self.ty + py, self.message, self.fontSize, self.font, self.fontColor, 255)
+                print_text(self.game.screen, self.pos.x + self.tx + px, self.pos.y + self.ty + py, self.message, self.fontSize, self.font, self.fontColor, self.alpha)
 
         if self.game.debug or (self.group.startswith("__") and self.group.endswith("__") and not self.group == "__debug_unvisiable__"):
             pygame.draw.rect(
@@ -609,13 +618,13 @@ cdef class Field(Text):
 
             for i, element in enumerate(self.out):
                 if self.horizontal == "center":
-                    print_text(self.game.screen, self.pos.x + (self.hitbox.width / 2 - self.fontClass.size(element)[0] / 2) + px, self.pos.y + i * self.hstep + ty + py, element, self.fontSize, self.font, self.fontColor, 255)
+                    print_text(self.game.screen, self.pos.x + (self.hitbox.width / 2 - self.fontClass.size(element)[0] / 2) + px, self.pos.y + i * self.hstep + ty + py, element, self.fontSize, self.font, self.fontColor, self.alpha)
 
                 elif self.horizontal == "left":
-                    print_text(self.game.screen, self.pos.x + 4 + px, self.pos.y + i * self.hstep + ty + py, element, self.fontSize, self.font, self.fontColor, 255)
+                    print_text(self.game.screen, self.pos.x + 4 + px, self.pos.y + i * self.hstep + ty + py, element, self.fontSize, self.font, self.fontColor, self.alpha)
 
                 elif self.horizontal == "right":
-                    print_text(self.game.screen, (self.pos.x + self.hitbox.width) - self.fontClass.size(element)[0] - 4 + px, self.pos.y + i * self.hstep + ty + py, element, self.fontSize, self.font, self.fontColor, 25)
+                    print_text(self.game.screen, (self.pos.x + self.hitbox.width) - self.fontClass.size(element)[0] - 4 + px, self.pos.y + i * self.hstep + ty + py, element, self.fontSize, self.font, self.fontColor, self.alpha)
 
                 else:
                     raise NameError(f"horizontal {self.horizontal} is not difined")
@@ -668,3 +677,117 @@ cdef class Field(Text):
         var = (len(self.out) - self.hitbox.height // self.hstep) * self.hstep
 
         return var if var > 0 else 0
+
+
+cdef class Button(StaticObject):
+    cdef public str font
+    cdef public str message
+    cdef public int fontSize
+    cdef public int alpha
+    cdef public object fontColor
+    cdef public object ramaColor
+    cdef public object backgroundColor
+    cdef public object alignment
+    cdef public str vertical
+    cdef public str horizontal
+    cdef public int tx
+    cdef public int ty
+    cdef public int hstep
+    cdef public object fontClass
+
+    def __init__(
+        self, game: object,
+        pos: typing.Union[typing.List[float], Vec2f, Vec2i],
+        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f, Vec4i],
+        group: str = None,
+        layer: int = 0,
+        id: int = None,
+        invisible: bool = False,
+        font: str = "Arial",
+        message: str = "Text",
+        fontSize: int = 13,
+        alpha: int = 255,
+        ramaColor: typing.List[str] = ["#000000", "#000000", "#000000"],
+        fontColor: typing.List[str] = ["#FFFFFF", "#FFFFFF", "#FFFFFF"],
+        backgroundColor: typing.List[str] = ["#AAAAAA", "#888888", "#444444"],
+        alignment: typing.List[bool] = None,
+        variables: typing.Dict[str, typing.Any] = None,
+        specials: typing.Dict[str, typing.Any] = None,
+        *args, **kwargs
+    ) -> None:
+        StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, None, variables, specials)
+
+        if alignment is not None:
+            self.alignment = alignment
+
+        else:
+            self.alignment = ["center", "center"]
+
+        self.font = font
+        self.message = message
+        self.fontSize = fontSize
+        self.alpha = alpha
+        self.alignment = alignment
+
+        self.ramaColor = ramaColor
+        self.fontColor = fontColor
+        self.backgroundColor = backgroundColor
+
+        self.fontClass = get_font(self.font, self.fontSize)
+
+        self.vertical = alignment[0]
+        self.horizontal = alignment[1]
+
+        self.hstep = self.fontClass.size("Ag")[1]
+
+        self.tx = 0
+        self.ty = 0
+
+    def draw(self, px, py):
+        width, height = self.fontClass.size(self.message)
+
+        if self.pos.x + px < self.game.mouse[0] < self.pos.x + px + self.hitbox.width:
+            if self.pos.y + py < self.game.mouse[1] < self.pos.y + py + self.hitbox.height:
+                if pygame.mouse.get_pressed()[0]:
+                    active = 2
+
+                else:
+                    active = 1
+
+            else:
+                active = 0
+
+        else:
+            active = 0
+
+        if not self.invisible or self.game.forcedViewObject:
+            alphaRect(self.game.screen, hex_to_rgb(self.backgroundColor[active]) + [self.alpha], SquareHitbox([self.pos.x + px, self.pos.y + py, self.hitbox.width, self.hitbox.height]))
+            alphaRect(self.game.screen, hex_to_rgb(self.ramaColor[active]) + [self.alpha], SquareHitbox([self.pos.x + px, self.pos.y + py, self.hitbox.width, self.hitbox.height]), 1)
+
+        if self.game.usingWidth + width > self.pos.x + px > -width and self.game.usingHeight + height > self.pos.y + py > -height:
+            if not self.invisible or self.game.forcedViewObject:
+                if self.horizontal == "center":
+                    self.tx = self.hitbox.width / 2 - width / 2
+
+                if self.horizontal == "left":
+                    self.tx = 4
+
+                if self.horizontal == "right":
+                    self.tx = self.hitbox.width - width - 4
+
+                if self.vertical == "center":
+                    self.ty = (self.hitbox.height - self.hstep) / 2
+
+                if self.vertical == "up":
+                    self.ty = 2
+
+                if self.vertical == "down":
+                    self.ty = self.hitbox.height - self.hstep - 2
+
+                print_text(self.game.screen, self.pos.x + self.tx + px, self.pos.y + self.ty + py, self.message, self.fontSize, self.font, self.fontColor[active], self.alpha)
+
+        if self.game.debug or (self.group.startswith("__") and self.group.endswith("__") and not self.group == "__debug_unvisiable__"):
+            pygame.draw.rect(
+                self.game.screen, (255, 0, 0) if "debug_color" not in self.specials else self.specials["debug_color"],
+                (math.trunc(self.pos.x) + self.hitbox.x + px, math.trunc(self.pos.y) + self.hitbox.y + py, self.hitbox.width, self.hitbox.height), 1
+            )

@@ -6,8 +6,6 @@ from engine.functions.cache import cache
 from PIL.ImageFont import FreeTypeFont
 from PIL import ImageFont
 
-from matplotlib import font_manager
-
 import typing
 import pygame
 import os

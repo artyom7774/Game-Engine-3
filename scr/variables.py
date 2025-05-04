@@ -204,7 +204,9 @@ SPRITES = {
     "scene-light": "scr/files/sprites/scene-light.png",
     "dir-light": "scr/files/sprites/dir-light.png",
     "text": "scr/files/sprites/text.png",
-    "textc": "scr/files/sprites/text.png"
+    "textc": "scr/files/sprites/text.png",
+    "btn": "scr/files/sprites/text.png",
+    "btnc": "scr/files/sprites/text.png"
 }
 
 for element in IMAGE_FORMATES:

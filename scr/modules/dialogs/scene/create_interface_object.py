@@ -35,10 +35,10 @@ class CreateInterfaceObjectFunctions:
 
         for file in files:
             for element in files:
-                if element.endswith(f"{index}.textc"):
+                if element.endswith(f"{index}.{extension}c"):
                     index += 1
 
-        out = f"{project.selectFile}/{name}-{index}.textc"
+        out = f"{project.selectFile}/{name}-{index}.{extension}c"
 
         shutil.copyfile(path, out)
 
@@ -57,8 +57,13 @@ class CreateInterfaceObjectFunctions:
         with open(out, "r", encoding="utf-8") as f:
             obj = load(f)
 
-        obj["Text"]["pos"]["value"]["x"]["value"] = position[0]
-        obj["Text"]["pos"]["value"]["y"]["value"] = position[1]
+        if "Text" in obj:
+            obj["Text"]["pos"]["value"]["x"]["value"] = position[0]
+            obj["Text"]["pos"]["value"]["y"]["value"] = position[1]
+
+        if "Button" in obj:
+            obj["Button"]["pos"]["value"]["x"]["value"] = position[0]
+            obj["Button"]["pos"]["value"]["y"]["value"] = position[1]
 
         with open(out, "w") as f:
             dump(obj, f, indent=4)

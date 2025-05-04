@@ -18,7 +18,7 @@
         "3.7.3",
         "3.8.0",
         "3.8.1",
-        "3.9.0"
+        "3.8.2"
     ],
 
     "updates": {
@@ -112,8 +112,8 @@
             "text": "- update physic\n- new nodes: get object parameter, set object parameter, get time passed\n- new parameter for node jump: power"
         },
 
-        "3.9.0": {
-            "name": "3.9.0",
+        "3.8.2": {
+            "name": "3.8.2",
             "text": "- new objects: text, field\n- update node: set object parameter, get object parameter\n- fixed bug with run project\n- run project have menu with all globals variables"
         }
     }
