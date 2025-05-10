@@ -14,7 +14,9 @@ import ujson
 import json
 import os
 
-DIVELOP = True
+DIVELOP = os.getenv("PYCHARM_HOSTED") == "1"
+
+print(f"LOG: divelop mode = {DIVELOP}")
 
 pygame.init()
 
@@ -27,7 +29,7 @@ PLUS = 64 + 8 - 1
 # MINI FONT
 
 MFONT = QFont("scr/files/fonts/mini.ttf")
-MFONT.setPointSize(7)
+MFONT.setPointSize(9)
 
 # BASE FONT
 

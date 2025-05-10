@@ -1,0 +1,160 @@
+{
+    "dependences": {
+        "StaticObject": [],
+        "DynamicObject": [
+            "StaticObject"
+        ]
+    },
+    "dependence": [],
+    "type": {
+        "name": "Object type",
+        "value": "StaticObject",
+        "type": "choose",
+        "choose": {
+            "input": [
+                "Static object",
+                "Dynamic object"
+            ],
+            "output": [
+                "StaticObject",
+                "DynamicObject"
+            ]
+        }
+    },
+    "variables": {},
+    "main": "StaticObject",
+    "StaticObject": {
+        "pos": {
+            "name": "Object position",
+            "value": {
+                "x": {
+                    "name": "X",
+                    "type": "int",
+                    "value": 0
+                },
+                "y": {
+                    "name": "Y",
+                    "type": "int",
+                    "value": 0
+                }
+            },
+            "type": "dict"
+        },
+        "hitbox": {
+            "name": "Object hitbox",
+            "value": {
+                "X offset": {
+                    "name": "X offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "Y offset": {
+                    "name": "Y offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "width": {
+                    "name": "Width",
+                    "type": "int",
+                    "value": 36
+                },
+                "height": {
+                    "name": "Height",
+                    "type": "int",
+                    "value": 36
+                }
+            },
+            "type": "dict"
+        },
+        "sprite": {
+            "name": "Object sprite",
+            "value": {
+                "path": {
+                    "name": "Path to image",
+                    "type": "path",
+                    "value": "assets\/bricks\/10.png"
+                },
+                "X offset": {
+                    "name": "X offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "Y offset": {
+                    "name": "Y offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "width": {
+                    "name": "Width",
+                    "type": "int",
+                    "value": 36
+                },
+                "height": {
+                    "name": "Height",
+                    "type": "int",
+                    "value": 36
+                }
+            },
+            "type": "dict"
+        },
+        "group": {
+            "name": "Name of object group",
+            "value": "brick",
+            "type": "str"
+        },
+        "mass": {
+            "name": "Mass",
+            "value": 1000,
+            "type": "int"
+        },
+        "layer": {
+            "name": "Object layer",
+            "value": 0,
+            "type": "int"
+        },
+        "animation": {
+            "name": "Animation",
+            "value": {
+                "groups": {
+                    "group": {
+                        "name": "group",
+                        "sprites": [],
+                        "settings": {
+                            "repeat": false,
+                            "fpsPerFrame": 10,
+                            "standard": false
+                        }
+                    }
+                }
+            },
+            "type": "animator"
+        },
+        "invisible": {
+            "name": "Invisible",
+            "value": false,
+            "type": "bool"
+        }
+    },
+    "DynamicObject": {
+        "speed": {
+            "name": "Moving speed",
+            "value": 5,
+            "type": "int"
+        },
+        "gravity": {
+            "name": "Object gravity",
+            "value": 1000,
+            "type": "int"
+        },
+        "jumpPower": {
+            "name": "Power jump",
+            "value": 10,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 1000000.0,
+            "type": "int"
+        }
+    }
+}

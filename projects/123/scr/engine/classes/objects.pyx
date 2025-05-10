@@ -241,9 +241,7 @@ cdef class StaticObject:
 cdef class DynamicObject(StaticObject):
     cdef public dict vectors
     cdef public float gravity
-    cdef public float jumpPower
     cdef public float slidingStep
-    cdef public float speed
 
     def __init__(
         self, game: object,
@@ -253,12 +251,10 @@ cdef class DynamicObject(StaticObject):
         group: str = None,
         mass: int = 1000,
         layer: int = 0,
-        speed: float = 5,
         id: int = None,
         invisible: bool = False,
         animator: typing.Any = None,
         gravity: float = 300,
-        jumpPower: float = 10,
         slidingStep: float = INF,
         variables: typing.Dict[str, typing.Any] = None,
         specials: typing.Dict[str, typing.Any] = None,
@@ -271,9 +267,7 @@ cdef class DynamicObject(StaticObject):
         }
 
         self.gravity = gravity
-        self.jumpPower = jumpPower
         self.slidingStep = slidingStep
-        self.speed = speed
 
     def __str__(self):
         return f"DynamicObject(id = {self.id} pos = {self.pos})"

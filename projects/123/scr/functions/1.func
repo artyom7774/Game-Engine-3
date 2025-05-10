@@ -76,7 +76,7 @@
             "x": 16,
             "y": 6
         },
-        "559733524": {
+        "503394493": {
             "display": {
                 "discription": "Set object parameter",
                 "name": "Set object parameter",
@@ -89,14 +89,17 @@
                 }
             },
             "height": 5,
-            "id": 559733524,
+            "id": 503394493,
             "inputs": {
                 "path": {
                     "code": "path",
                     "name": "__path__",
                     "standard": null,
                     "type": "path",
-                    "value": null
+                    "value": {
+                        "id": 698081566,
+                        "name": "path"
+                    }
                 },
                 "id": {
                     "code": "id",
@@ -116,21 +119,19 @@
                             "2. Mass",
                             "3. Layer",
                             "4. Invisible",
-                            "5. Moving speed",
-                            "6. Gravity",
-                            "7. Power jump",
-                            "8. Braking power",
-                            "9. Message",
-                            "10. Font size",
-                            "11. Alignment",
-                            "12. Font color",
-                            "13. Background color",
-                            "14. Rama color"
+                            "5. Gravity",
+                            "6. Braking power",
+                            "7. Message",
+                            "8. Font size",
+                            "9. Alignment",
+                            "10. Font color",
+                            "11. Background color",
+                            "12. Rama color"
                         ]
                     },
                     "code": "name",
                     "name": "__name__",
-                    "standard": 13,
+                    "standard": 11,
                     "type": "choose",
                     "value": null
                 },
@@ -152,8 +153,8 @@
             },
             "type": "objects",
             "width": 10,
-            "x": 24.0,
-            "y": 6.0
+            "x": 24,
+            "y": 6
         }
     }
 }

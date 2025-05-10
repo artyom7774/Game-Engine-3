@@ -1,0 +1,439 @@
+# MADE BY GAME ENGINE 3.8.1
+
+import tkinter
+import engine
+import socket
+import json
+import sys
+import os
+
+root = tkinter.Tk()
+
+width = root.winfo_screenwidth()
+height = root.winfo_screenheight()
+
+root.destroy()
+
+SOCKET_ID = 18864
+SOCKET_GLOBAL_ID = 18865
+
+VARIABLES = {
+    "globals": {},
+    "locals": {'projects/game/project/functions/player.func': {}},
+    "objects": {'projects/game/project/scenes/%scene%1': {'1.objc': {}, '10.objc': {}, '11.objc': {}, '12.objc': {}, '13.objc': {}, '14.objc': {}, '15.objc': {}, '16.objc': {}, '17.objc': {}, '18.objc': {}, '19.objc': {}, '2.objc': {}, '20.objc': {}, '21.objc': {}, '22.objc': {}, '23.objc': {}, '24.objc': {}, '25.objc': {}, '26.objc': {}, '27.objc': {}, '28.objc': {}, '29.objc': {}, '3.objc': {}, '30.objc': {}, '31.objc': {}, '32.objc': {}, '33.objc': {}, '34.objc': {}, '35.objc': {}, '36.objc': {}, '37.objc': {}, '38.objc': {}, '39.objc': {}, '4.objc': {}, '40.objc': {}, '41.objc': {}, '42.objc': {}, '43.objc': {}, '44.objc': {}, '45.objc': {}, '46.objc': {}, '47.objc': {}, '48.objc': {}, '49.objc': {}, '5.objc': {}, '50.objc': {}, '51.objc': {}, '52.objc': {}, '53.objc': {}, '54.objc': {}, '55.objc': {}, '56.objc': {}, '57.objc': {}, '58.objc': {}, '59.objc': {}, '6.objc': {}, '60.objc': {}, '61.objc': {}, '62.objc': {}, '63.objc': {}, '64.objc': {}, '65.objc': {}, '66.objc': {}, '67.objc': {}, '68.objc': {}, '69.objc': {}, '7.objc': {}, '70.objc': {}, '71.objc': {}, '72.objc': {}, '73.objc': {}, '74.objc': {}, '75.objc': {}, '76.objc': {}, '77.objc': {}, '78.objc': {}, '79.objc': {}, '8.objc': {}, '80.objc': {}, '9.objc': {}, 'player.objc': {}}}
+}
+
+SETTINGS = {'name': 'GE3 project', 'icon': '', 'debug': False, 'fps': 60, 'tps': 20, 'start_scene': 'projects/game/project/scenes/%scene%1', 'width': 500, 'height': 500, 'full_screen_mode': False}
+PROGRAMS = {'projects/game/project/functions/player.func': {'variables': {}, 'objects': {'200336404': {'display': {'discription': 'starts at the start of the game', 'name': 'On start game', 'text': {'__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 200336404, 'inputs': {}, 'name': 'onStartGame', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 5, 'y': 4}, '617109133': {'display': {'discription': 'starts on key click', 'name': 'Keyboard click', 'text': {'__key__': 'key', '__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 617109133, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': None}, 'key': {'code': 'key', 'name': '__key__', 'standard': 'space', 'type': 'text', 'value': None, 'visible': False}}, 'name': 'keyboardClick', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 13, 'y': 9}, '591942680': {'display': {'discription': 'get object ID by name, return -1 if object name is not found', 'name': 'Get object ID by name', 'text': {'__id__': 'ID', '__name__': 'name', '__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 591942680, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 179640466, 'name': 'path'}}, 'name': {'code': 'name', 'name': '__name__', 'standard': 'player.objc', 'type': 'text', 'value': None}}, 'name': 'getObjectIDByName', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}, 'id': {'code': 'id', 'name': '__id__', 'type': 'number'}}, 'type': 'objects', 'width': 6, 'x': 13, 'y': -18}, '922283224': {'display': {'discription': 'jump', 'name': 'Jump', 'text': {'__angle__': 'angle', '__id__': 'ID', '__name__': 'name', '__none__': '', '__path__': 'path', '__power__': 'power'}}, 'height': 4, 'id': 922283224, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 617109133, 'name': 'path'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 866574838, 'name': 'id'}}, 'power': {'code': 'power', 'name': '__power__', 'standard': 9, 'type': 'number', 'value': None}}, 'name': 'jump', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'id', 'power']}, 'type': 'objects', 'width': 8, 'x': 21, 'y': 9}, '935269751': {'display': {'discription': 'starts while key pressed', 'name': 'Keyboard press', 'text': {'__key__': 'key', '__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 935269751, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': None}, 'key': {'code': 'key', 'name': '__key__', 'standard': 'd', 'type': 'text', 'value': None, 'visible': False}}, 'name': 'keyboardPress', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 13, 'y': 16}, '106459967': {'display': {'discription': 'move object', 'name': 'Move object', 'text': {'__angle__': 'angle', '__id__': 'ID', '__name__': 'name', '__none__': '', '__path__': 'path', '__power__': 'power'}}, 'height': 5, 'id': 106459967, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 935269751, 'name': 'path'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 866574838, 'name': 'id'}}, 'angle': {'code': 'angle', 'name': '__angle__', 'standard': 90, 'type': 'number', 'value': None}, 'power': {'code': 'power', 'name': '__power__', 'standard': 4, 'type': 'number', 'value': None}}, 'name': 'moveObject', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'id', 'angle', 'power']}, 'type': 'objects', 'width': 10, 'x': 21, 'y': 16}, '592957990': {'display': {'discription': 'starts while key pressed', 'name': 'Keyboard press', 'text': {'__key__': 'key', '__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 592957990, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': None}, 'key': {'code': 'key', 'name': '__key__', 'standard': 'a', 'type': 'text', 'value': None, 'visible': False}}, 'name': 'keyboardPress', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 13, 'y': 23}, '83702176': {'display': {'discription': 'move object', 'name': 'Move object', 'text': {'__angle__': 'angle', '__id__': 'ID', '__name__': 'name', '__none__': '', '__path__': 'path', '__power__': 'power'}}, 'height': 5, 'id': 83702176, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 592957990, 'name': 'path'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 866574838, 'name': 'id'}}, 'angle': {'code': 'angle', 'name': '__angle__', 'standard': 270, 'type': 'number', 'value': None}, 'power': {'code': 'power', 'name': '__power__', 'standard': 4, 'type': 'number', 'value': None}}, 'name': 'moveObject', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'id', 'angle', 'power']}, 'type': 'objects', 'width': 10, 'x': 21, 'y': 23}, '845033571': {'display': {'discription': 'mirror animation', 'name': 'Mirror animation', 'text': {'__horizontal__': 'horizontal', '__id__': 'ID', '__none__': '', '__path__': 'path', '__vertical__': 'vertical'}}, 'height': 5, 'id': 845033571, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 106459967, 'name': 'path'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 866574838, 'name': 'id'}}, 'horizontal': {'code': 'horizontal', 'name': '__horizontal__', 'standard': False, 'type': 'logic', 'value': None}, 'vertical': {'code': 'vertical', 'name': '__vertical__', 'standard': False, 'type': 'logic', 'value': None}}, 'name': 'mirrorAnimation', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'id', 'horizontal', 'vertical'], 'outputs': ['path']}, 'type': 'animation', 'width': 10, 'x': 33, 'y': 16}, '438198620': {'display': {'discription': 'mirror animation', 'name': 'Mirror animation', 'text': {'__horizontal__': 'horizontal', '__id__': 'ID', '__none__': '', '__path__': 'path', '__vertical__': 'vertical'}}, 'height': 5, 'id': 438198620, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 83702176, 'name': 'path'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 866574838, 'name': 'id'}}, 'horizontal': {'code': 'horizontal', 'name': '__horizontal__', 'standard': True, 'type': 'logic', 'value': None}, 'vertical': {'code': 'vertical', 'name': '__vertical__', 'standard': False, 'type': 'logic', 'value': None}}, 'name': 'mirrorAnimation', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'id', 'horizontal', 'vertical'], 'outputs': ['path']}, 'type': 'animation', 'width': 10, 'x': 33, 'y': 23}, '365493856': {'display': {'discription': 'start every N frames', 'name': 'Every N frame', 'text': {'__n__': 'N', '__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 365493856, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': None}, 'N': {'code': 'N', 'name': '__n__', 'standard': 1, 'type': 'number', 'value': None, 'visible': False}}, 'name': 'everyFrame', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 5, 'y': -13}, '657220794': {'display': {'discription': 'get resulting vector', 'name': 'Get resulting vector', 'text': {'__id__': 'ID', '__none__': '', '__path__': 'path', '__x__': 'X', '__y__': 'Y'}}, 'height': 4, 'id': 657220794, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 365493856, 'name': 'path'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 591942680, 'name': 'id'}}}, 'name': 'getResultingVector', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}, 'x': {'code': 'x', 'name': '__x__', 'type': 'number'}, 'y': {'code': 'y', 'name': '__y__', 'type': 'number'}}, 'sorting': {'inputs': ['path', 'id'], 'outputs': ['path', 'x', 'y']}, 'type': 'objects', 'width': 8, 'x': 13, 'y': -13}, '744648363': {'display': {'discription': 'If', 'name': 'If', 'text': {'__a__': 'A', '__b__': 'B', '__none__': '', '__operation__': 'operation', '__path__': 'path', '__path_false__': 'path if false', '__path_true__': 'path if true'}}, 'height': 5, 'id': 744648363, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 657220794, 'name': 'path'}}, 'a': {'code': 'a', 'name': '__a__', 'standard': 'None', 'type': 'Any', 'value': {'id': 657220794, 'name': 'y'}}, 'operation': {'choose': {'options': ['0. ==', '1. !=', '2. <=', '3. >=', '4. <', '5. >']}, 'code': 'operation', 'name': '__operation__', 'standard': 0, 'type': 'choose', 'value': None}, 'b': {'code': 'b', 'name': '__b__', 'standard': '0', 'type': 'Any', 'value': None}}, 'name': 'if_', 'outputs': {'path_true': {'code': 'path_true', 'name': '__path_true__', 'type': 'path'}, 'path_false': {'code': 'path_false', 'name': '__path_false__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'a', 'operation', 'b'], 'outputs': ['path_true', 'path_false']}, 'type': 'logic', 'width': 10, 'x': 23, 'y': -13}, '652214842': {'display': {'discription': 'If', 'name': 'If', 'text': {'__a__': 'A', '__b__': 'B', '__none__': '', '__operation__': 'operation', '__path__': 'path', '__path_false__': 'path if false', '__path_true__': 'path if true'}}, 'height': 5, 'id': 652214842, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 744648363, 'name': 'path_false'}}, 'a': {'code': 'a', 'name': '__a__', 'standard': 'None', 'type': 'Any', 'value': {'id': 657220794, 'name': 'y'}}, 'operation': {'choose': {'options': ['0. ==', '1. !=', '2. <=', '3. >=', '4. <', '5. >']}, 'code': 'operation', 'name': '__operation__', 'standard': 5, 'type': 'choose', 'value': None}, 'b': {'code': 'b', 'name': '__b__', 'standard': '0', 'type': 'Any', 'value': None}}, 'name': 'if_', 'outputs': {'path_true': {'code': 'path_true', 'name': '__path_true__', 'type': 'path'}, 'path_false': {'code': 'path_false', 'name': '__path_false__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'a', 'operation', 'b'], 'outputs': ['path_true', 'path_false']}, 'type': 'logic', 'width': 10, 'x': 35, 'y': -6}, '382376126': {'display': {'discription': 'run animation', 'name': 'Run animation', 'text': {'__animation__': 'animation', '__id__': 'ID', '__none__': '', '__path__': 'path'}}, 'height': 4, 'id': 382376126, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 652214842, 'name': 'path_true'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 591942680, 'name': 'id'}}, 'animation': {'code': 'animation', 'name': '__animation__', 'standard': 'fall', 'type': 'text', 'value': None}}, 'name': 'runAnimation', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'id', 'animation'], 'outputs': ['path']}, 'type': 'animation', 'width': 8, 'x': 47, 'y': -6}, '858187432': {'display': {'discription': 'run animation', 'name': 'Run animation', 'text': {'__animation__': 'animation', '__id__': 'ID', '__none__': '', '__path__': 'path'}}, 'height': 4, 'id': 858187432, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 652214842, 'name': 'path_false'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 591942680, 'name': 'id'}}, 'animation': {'code': 'animation', 'name': '__animation__', 'standard': 'jump', 'type': 'text', 'value': None}}, 'name': 'runAnimation', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'id', 'animation'], 'outputs': ['path']}, 'type': 'animation', 'width': 8, 'x': 47, 'y': 0}, '634339047': {'display': {'discription': 'If', 'name': 'If', 'text': {'__a__': 'A', '__b__': 'B', '__none__': '', '__operation__': 'operation', '__path__': 'path', '__path_false__': 'path if false', '__path_true__': 'path if true'}}, 'height': 5, 'id': 634339047, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 744648363, 'name': 'path_true'}}, 'a': {'code': 'a', 'name': '__a__', 'standard': 'None', 'type': 'Any', 'value': {'id': 657220794, 'name': 'x'}}, 'operation': {'choose': {'options': ['0. ==', '1. !=', '2. <=', '3. >=', '4. <', '5. >']}, 'code': 'operation', 'name': '__operation__', 'standard': 0, 'type': 'choose', 'value': None}, 'b': {'code': 'b', 'name': '__b__', 'standard': '0', 'type': 'Any', 'value': None}}, 'name': 'if_', 'outputs': {'path_true': {'code': 'path_true', 'name': '__path_true__', 'type': 'path'}, 'path_false': {'code': 'path_false', 'name': '__path_false__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'a', 'operation', 'b'], 'outputs': ['path_true', 'path_false']}, 'type': 'logic', 'width': 10, 'x': 35, 'y': -13}, '629244791': {'display': {'discription': 'run animation', 'name': 'Run animation', 'text': {'__animation__': 'animation', '__id__': 'ID', '__none__': '', '__path__': 'path'}}, 'height': 4, 'id': 629244791, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 877043100, 'name': 'path_true'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 591942680, 'name': 'id'}}, 'animation': {'code': 'animation', 'name': '__animation__', 'standard': 'idle', 'type': 'text', 'value': None}}, 'name': 'runAnimation', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'id', 'animation'], 'outputs': ['path']}, 'type': 'animation', 'width': 8, 'x': 59, 'y': -19}, '168906276': {'display': {'discription': 'run animation', 'name': 'Run animation', 'text': {'__animation__': 'animation', '__id__': 'ID', '__none__': '', '__path__': 'path'}}, 'height': 4, 'id': 168906276, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 634339047, 'name': 'path_false'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 591942680, 'name': 'id'}}, 'animation': {'code': 'animation', 'name': '__animation__', 'standard': 'run', 'type': 'text', 'value': None}}, 'name': 'runAnimation', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'id', 'animation'], 'outputs': ['path']}, 'type': 'animation', 'width': 8, 'x': 47, 'y': -19}, '877043100': {'display': {'discription': 'If collision', 'name': 'If collision', 'text': {'__append__': 'use contact', '__group__': 'group name', '__id__': 'ID', '__id_in_group__': 'ID object of group', '__none__': '', '__path__': 'path', '__path_false__': 'path if false', '__path_true__': 'path if true'}}, 'height': 5, 'id': 877043100, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 634339047, 'name': 'path_true'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 591942680, 'name': 'id'}}, 'group': {'code': 'group', 'name': '__group__', 'standard': 'brick', 'type': 'text', 'value': None}, 'append': {'code': 'append', 'name': '__append__', 'standard': True, 'type': 'logic', 'value': None}}, 'name': 'ifCollision', 'outputs': {'path_true': {'code': 'path_true', 'name': '__path_true__', 'type': 'path'}, 'path_false': {'code': 'path_false', 'name': '__path_false__', 'type': 'path'}, 'id_in_group': {'code': 'id_in_group', 'name': '__id_in_group__', 'type': 'number'}}, 'sorting': {'inputs': ['path', 'id', 'group', 'append'], 'outputs': ['path_true', 'path_false', 'id_in_group']}, 'type': 'logic', 'width': 10, 'x': 47, 'y': -13}, '994852837': {'display': {'discription': 'run animation', 'name': 'Run animation', 'text': {'__animation__': 'animation', '__id__': 'ID', '__none__': '', '__path__': 'path'}}, 'height': 4, 'id': 994852837, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 877043100, 'name': 'path_false'}}, 'id': {'code': 'id', 'name': '__id__', 'standard': -1, 'type': 'number', 'value': {'id': 591942680, 'name': 'id'}}, 'animation': {'code': 'animation', 'name': '__animation__', 'standard': 'fall', 'type': 'text', 'value': None}}, 'name': 'runAnimation', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'sorting': {'inputs': ['path', 'id', 'animation'], 'outputs': ['path']}, 'type': 'animation', 'width': 8, 'x': 59, 'y': -13}, '179640466': {'display': {'discription': 'starts at the start of the game', 'name': 'On start game', 'text': {'__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 179640466, 'inputs': {}, 'name': 'onStartGame', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 5, 'y': -18}, '866574838': {'display': {'discription': 'get object ID by name, return -1 if object name is not found', 'name': 'Get object ID by name', 'text': {'__id__': 'ID', '__name__': 'name', '__none__': '', '__path__': 'path'}}, 'height': 3, 'id': 866574838, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 200336404, 'name': 'path'}}, 'name': {'code': 'name', 'name': '__name__', 'standard': 'player.objc', 'type': 'text', 'value': None}}, 'name': 'getObjectIDByName', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}, 'id': {'code': 'id', 'name': '__id__', 'type': 'number'}}, 'type': 'objects', 'width': 6, 'x': 13, 'y': 4}}}}
+OBJECTS = {'projects/game/project/objects/player.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 32, 32], 'sprite': ['', 0, 0, -1, -1], 'group': 'player', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'fall': {'name': 'group', 'sprites': ['assets/player/fall.png'], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}, 'idle': {'name': 'group', 'sprites': ['assets/player/idle.png'], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': True}}, 'jump': {'name': 'group', 'sprites': ['assets/player/jump.png'], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}, 'run': {'name': 'group', 'sprites': ['assets/player/run_1.png', 'assets/player/run_2.png'], 'settings': {'repeat': True, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/1.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/1.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/10.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/10.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/11.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/12.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/12.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/2.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/2.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/3.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/3.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/4.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/4.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/5.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/5.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/6.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/6.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/7.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/8.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/8.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'projects/game/project/objects/bricks/9.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/9.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}}
+SCENES = {'projects/game/project/scenes/%scene%1': {'objects': {'1.objc': {'type': 'StaticObject', 'variables': {'pos': [-684.0, -324.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/1.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '10.objc': {'type': 'StaticObject', 'variables': {'pos': [-612.0, -252.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '11.objc': {'type': 'StaticObject', 'variables': {'pos': [-648.0, -252.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/10.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '12.objc': {'type': 'StaticObject', 'variables': {'pos': [-684.0, -252.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/9.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '13.objc': {'type': 'StaticObject', 'variables': {'pos': [-144.0, -72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/6.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '14.objc': {'type': 'StaticObject', 'variables': {'pos': [180.0, -72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/8.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '15.objc': {'type': 'StaticObject', 'variables': {'pos': [-108.0, -72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '16.objc': {'type': 'StaticObject', 'variables': {'pos': [-36.0, -72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '17.objc': {'type': 'StaticObject', 'variables': {'pos': [-72.0, -72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '18.objc': {'type': 'StaticObject', 'variables': {'pos': [36.0, -72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '19.objc': {'type': 'StaticObject', 'variables': {'pos': [0.0, -72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '2.objc': {'type': 'StaticObject', 'variables': {'pos': [-648.0, -324.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/2.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '20.objc': {'type': 'StaticObject', 'variables': {'pos': [72.0, -72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '21.objc': {'type': 'StaticObject', 'variables': {'pos': [108.0, -72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '22.objc': {'type': 'StaticObject', 'variables': {'pos': [144.0, -72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '23.objc': {'type': 'StaticObject', 'variables': {'pos': [-144.0, -36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/10.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '24.objc': {'type': 'StaticObject', 'variables': {'pos': [-144.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/10.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '25.objc': {'type': 'StaticObject', 'variables': {'pos': [-144.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/10.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '26.objc': {'type': 'StaticObject', 'variables': {'pos': [-144.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/10.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '27.objc': {'type': 'StaticObject', 'variables': {'pos': [180.0, -36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/12.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '28.objc': {'type': 'StaticObject', 'variables': {'pos': [180.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/12.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '29.objc': {'type': 'StaticObject', 'variables': {'pos': [180.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/12.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '3.objc': {'type': 'StaticObject', 'variables': {'pos': [-612.0, -324.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/3.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '30.objc': {'type': 'StaticObject', 'variables': {'pos': [180.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/12.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '31.objc': {'type': 'StaticObject', 'variables': {'pos': [-72.0, -36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '32.objc': {'type': 'StaticObject', 'variables': {'pos': [-108.0, -36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '33.objc': {'type': 'StaticObject', 'variables': {'pos': [-108.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '34.objc': {'type': 'StaticObject', 'variables': {'pos': [-72.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '35.objc': {'type': 'StaticObject', 'variables': {'pos': [-72.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '36.objc': {'type': 'StaticObject', 'variables': {'pos': [-108.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '37.objc': {'type': 'StaticObject', 'variables': {'pos': [-108.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '38.objc': {'type': 'StaticObject', 'variables': {'pos': [-72.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '39.objc': {'type': 'StaticObject', 'variables': {'pos': [-36.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '4.objc': {'type': 'StaticObject', 'variables': {'pos': [-576.0, -324.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/4.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '40.objc': {'type': 'StaticObject', 'variables': {'pos': [-36.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '41.objc': {'type': 'StaticObject', 'variables': {'pos': [-36.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '42.objc': {'type': 'StaticObject', 'variables': {'pos': [-36.0, -36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '43.objc': {'type': 'StaticObject', 'variables': {'pos': [0.0, -36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '44.objc': {'type': 'StaticObject', 'variables': {'pos': [0.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '45.objc': {'type': 'StaticObject', 'variables': {'pos': [0.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '46.objc': {'type': 'StaticObject', 'variables': {'pos': [0.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '47.objc': {'type': 'StaticObject', 'variables': {'pos': [36.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '48.objc': {'type': 'StaticObject', 'variables': {'pos': [36.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '49.objc': {'type': 'StaticObject', 'variables': {'pos': [36.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '5.objc': {'type': 'StaticObject', 'variables': {'pos': [-684.0, -288.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/5.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '50.objc': {'type': 'StaticObject', 'variables': {'pos': [36.0, -36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '51.objc': {'type': 'StaticObject', 'variables': {'pos': [72.0, -36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '52.objc': {'type': 'StaticObject', 'variables': {'pos': [72.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '53.objc': {'type': 'StaticObject', 'variables': {'pos': [72.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '54.objc': {'type': 'StaticObject', 'variables': {'pos': [72.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '55.objc': {'type': 'StaticObject', 'variables': {'pos': [108.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '56.objc': {'type': 'StaticObject', 'variables': {'pos': [108.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '57.objc': {'type': 'StaticObject', 'variables': {'pos': [108.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '58.objc': {'type': 'StaticObject', 'variables': {'pos': [108.0, -36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '59.objc': {'type': 'StaticObject', 'variables': {'pos': [144.0, -36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '6.objc': {'type': 'StaticObject', 'variables': {'pos': [-648.0, -288.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/6.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '60.objc': {'type': 'StaticObject', 'variables': {'pos': [144.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '61.objc': {'type': 'StaticObject', 'variables': {'pos': [144.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '62.objc': {'type': 'StaticObject', 'variables': {'pos': [144.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '63.objc': {'type': 'StaticObject', 'variables': {'pos': [288.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/6.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '64.objc': {'type': 'StaticObject', 'variables': {'pos': [468.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/8.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '65.objc': {'type': 'StaticObject', 'variables': {'pos': [324.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '66.objc': {'type': 'StaticObject', 'variables': {'pos': [360.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '67.objc': {'type': 'StaticObject', 'variables': {'pos': [432.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '68.objc': {'type': 'StaticObject', 'variables': {'pos': [396.0, 0.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '69.objc': {'type': 'StaticObject', 'variables': {'pos': [288.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/10.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '7.objc': {'type': 'StaticObject', 'variables': {'pos': [-612.0, -288.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/7.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '70.objc': {'type': 'StaticObject', 'variables': {'pos': [288.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/10.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '71.objc': {'type': 'StaticObject', 'variables': {'pos': [468.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/12.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '72.objc': {'type': 'StaticObject', 'variables': {'pos': [468.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/12.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '73.objc': {'type': 'StaticObject', 'variables': {'pos': [324.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '74.objc': {'type': 'StaticObject', 'variables': {'pos': [360.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '75.objc': {'type': 'StaticObject', 'variables': {'pos': [396.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '76.objc': {'type': 'StaticObject', 'variables': {'pos': [432.0, 36.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '77.objc': {'type': 'StaticObject', 'variables': {'pos': [432.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '78.objc': {'type': 'StaticObject', 'variables': {'pos': [396.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '79.objc': {'type': 'StaticObject', 'variables': {'pos': [360.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '8.objc': {'type': 'StaticObject', 'variables': {'pos': [-576.0, -288.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/8.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '80.objc': {'type': 'StaticObject', 'variables': {'pos': [324.0, 72.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/11.png', 0, 0, 36, 36], 'group': 'none', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, '9.objc': {'type': 'StaticObject', 'variables': {'pos': [-576.0, -252.0], 'hitbox': [0, 0, 36, 36], 'sprite': ['assets/bricks/12.png', 0, 0, 36, 36], 'group': 'brick', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False}}, 'player.objc': {'type': 'DynamicObject', 'variables': {'pos': [-36.0, -180.0], 'hitbox': [0, 0, 40, 55], 'sprite': ['assets/player/idle.png', 0, 0, 40, 55], 'group': 'player', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'fall': {'name': 'group', 'sprites': ['assets/player/fall.png'], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}, 'idle': {'name': 'group', 'sprites': ['assets/player/idle.png'], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': True}}, 'jump': {'name': 'group', 'sprites': ['assets/player/jump.png'], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}, 'run': {'name': 'group', 'sprites': ['assets/player/run_1.png', 'assets/player/run_2.png'], 'settings': {'repeat': True, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False, 'gravity': 500, 'slidingStep': 0.5}}}, 'focus': 'player.objc'}}
+
+DEBUG = True
+
+import importlib.util
+
+import threading
+import pygame
+import typing
+import json
+import os
+
+
+class Compiler:
+    def __init__(self, project, path: str, nodes: typing.Dict[str, dict], settings: dict, debug: bool = True) -> None:
+        self.project = project
+
+        self.program = None
+        self.counter = None
+
+        self.path = path
+
+        self.nodes = nodes
+
+        self.tpsc = 0
+        self.tpsNow = 0
+
+        self.information = {}
+        self.error = False
+
+        self.settings = settings
+
+        self.debug = debug
+
+        self.nodesSortedByTypes = {}
+        self.nodesFunctionsSortedByName = {}
+
+        self.timer = []
+
+        try:
+            with open("scr/code/config.json", "r", encoding="utf-8") as file:
+                self.config = json.load(file)
+
+        except FileNotFoundError:
+            with open("code/config.json", "r", encoding="utf-8") as file:
+                self.config = json.load(file)
+
+        for name, node in self.config["nodes"].items():
+            self.nodesSortedByTypes[node["type"]] = {}
+
+        for name, node in self.config["nodes"].items():
+            self.nodesSortedByTypes[node["type"]][node["name"]] = []
+
+        for id, node in self.nodes["objects"].items():
+            self.nodesSortedByTypes[node["type"]][node["name"]].append(id)
+
+            if node["type"] == "event" and node["name"] == "functionEvent":
+                if node["inputs"]["name"]["standard"] not in self.nodesFunctionsSortedByName:
+                    self.nodesFunctionsSortedByName[node["inputs"]["name"]["standard"]] = []
+
+                self.nodesFunctionsSortedByName[node["inputs"]["name"]["standard"]].append(id)
+
+        for id, node in self.nodes["objects"].items():
+            for ids, second in self.nodes["objects"].items():
+                if id == ids:
+                    continue
+
+                for name, connector in second["inputs"].items():
+                    if connector["value"] is not None and connector["value"]["id"] == node["id"]:
+                        path = connector["value"]["name"]
+
+                        if "value" not in node["outputs"][path]:
+                            node["outputs"][path]["value"] = {}
+
+                        if connector["value"]["id"] == int(id):
+                            node["outputs"][path]["value"][ids] = {"id": int(ids), "name": name}
+
+        for id, node in self.nodes["objects"].items():
+            for key, value in node["inputs"].items():
+                if value["value"] is not None:
+                    value["value"]["value"] = None
+
+        for id, node in self.nodes["objects"].items():
+            for key, value in node["outputs"].items():
+                if "value" not in value:
+                    value["value"] = {}
+
+        # print(self.nodesSortedByTypes)
+        # print(dumps(self.nodes, indent=4))
+
+        self.init()
+
+    def init(self):
+        text = ""
+
+        try:
+            os.listdir("scr/code/program")
+
+        except FileNotFoundError:
+            path = "code/program"
+
+        else:
+            path = "scr/code/program"
+
+        for dir in os.listdir(path):
+            for module in os.listdir(f"{path}/{dir}"):
+                with open(f"{path}/{dir}/{module}", "r", encoding="utf-8") as f:
+                    text = text + f.read() + "\n"
+
+        thr = threading.Thread(target=lambda: open("compiling.txt", "w", encoding="utf-8").write(text))
+        thr.start()
+
+        name = "program"
+        spec = importlib.util.spec_from_loader(name, loader=None)
+
+        self.program = importlib.util.module_from_spec(spec)
+
+        exec(text, self.program.__dict__)
+
+        self.event("onStartGame")
+
+    def queue(self, id: int = None, queue: list = None) -> None:
+        if queue is None:
+            queue = []
+
+        queue = queue + [id] if id is not None else queue
+
+        while len(queue) > 0:
+            id = queue[0]
+
+            if str(id) not in self.nodes["objects"]:
+                queue.pop(0)
+
+                continue
+
+            if self.debug:
+                var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
+
+            else:
+                try:
+                    var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
+
+                except Exception as e:
+                    self.error = True
+
+                    self.information = {
+                        "inputs": self.nodes["objects"][str(id)]["inputs"],
+                        "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
+                        "display": self.nodes["objects"][str(id)]["display"],
+                        "message": e,
+                        "id": id
+                    }
+
+                    return
+
+            if type(var) == list:
+                for element in var:
+                    queue.append(element)
+
+            elif type(var) == dict:
+                for element in var["queue"]:
+                    queue.append(element)
+
+                for element in var["timer"]:
+                    self.timer.append(element)
+
+            else:
+                pass
+
+            queue.pop(0)
+
+    def get(self, event: str) -> list:
+        return self.nodesSortedByTypes["event"][event]
+
+    def event(self, event: str) -> None:
+        for id in self.nodesSortedByTypes["event"][event]:
+            self.queue(id)
+
+    def start(self, id):
+        self.queue(id)
+
+    def update(self) -> None:
+        remove = []
+
+        for i, element in enumerate(self.timer):
+            element["timer"] -= 1
+
+            if element["timer"] == 0:
+                element["timer"] = element["tmax"]
+
+                element["count"] -= 1
+
+                if "index" in self.nodes["objects"][str(element["id"])]["outputs"]:
+                    element["iter"] += 1
+
+                    for ids, connector in self.nodes["objects"][str(element["id"])]["outputs"]["index"]["value"].items():
+                        self.nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = element["iter"]
+
+                self.queue(queue=[element["id"] for element in self.nodes["objects"][str(element["id"])]["outputs"][element["connector"]]["value"].values()])
+
+            if element["count"] == 0:
+                if "after" in self.nodes["objects"][str(element["id"])]["outputs"]:
+                    self.queue(queue=[element["id"] for element in self.nodes["objects"][str(element["id"])]["outputs"]["after"]["value"].values()])
+
+                remove.append(element)
+
+        for element in remove:
+            self.timer.remove(element)
+
+        for id in self.nodesSortedByTypes["event"]["everyFrame"]:
+            if self.project.fpsc % self.nodes["objects"][id]["inputs"]["N"]["standard"] == 0:
+                self.start(id)
+
+        self.project.updateCustonCaption(f"FPS = {round(self.project.clock.get_fps())} TPS = {self.tpsNow}")
+
+    def tps(self, tps: int):
+        self.tpsc += 1
+
+        self.tpsNow = tps
+
+        for id in self.nodesSortedByTypes["event"]["everyTick"]:
+            if self.project.fpsc % self.nodes["objects"][id]["inputs"]["N"]["standard"] == 0:
+                self.start(id)
+
+    def functionsByName(self, name):
+        return self.nodesFunctionsSortedByName[name]
+
+
+class Tps:
+    def __init__(self, maxTps: int = 20, function: typing.Callable = None):
+        self.maxTps = maxTps
+
+        self.function = function
+
+        self.start()
+
+    def start(self):
+        clock = pygame.time.Clock()
+
+        while True:
+            clock.tick(self.maxTps)
+
+            self.function(round(clock.get_fps()))
+
+
+class Game(engine.Application):
+    def __init__(self):
+        global width, height
+
+        engine.Application.__init__(self)
+
+        self.objects.collisions = engine.Collision("collision.cfg")
+
+        self.setDebug(SETTINGS["debug"])
+
+        self.setSize(SETTINGS["width"], SETTINGS["height"])
+
+        if SETTINGS["full_screen_mode"]:
+            self.setDisplaySize(width, height)
+
+        self.setName(SETTINGS["name"])
+        self.setIcon(SETTINGS["icon"])
+
+        self.setFps(SETTINGS["fps"])
+        self.setTps(SETTINGS["tps"])
+
+        self.setCamera(engine.camera.StaticCamera(self, 0, 0))
+
+        self.objectIDByName = {}
+        self.objectNameByID = {}
+
+        self.scene = None
+
+        self.loadScene(SETTINGS["start_scene"])
+
+        self.programs = {}
+
+        self.allObjects = OBJECTS
+        self.linkEngine = engine
+
+        self.settings = {"settings": SETTINGS, "programs": PROGRAMS, "scenes": SCENES, "variables": VARIABLES}
+
+        try:
+            self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket.connect(("localhost", SOCKET_ID))
+
+        except BaseException:
+            self.socket = None
+
+        try:
+            self.global_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.global_socket.connect(("localhost", SOCKET_GLOBAL_ID))
+
+        except BaseException:
+            self.global_socket = None
+
+        for key, value in PROGRAMS.items():
+            self.programs[key] = Compiler(self, key, value, self.settings, DEBUG)
+
+        self.counter = threading.Thread(target=lambda: self.tpsStart())
+        self.counter.daemon = True
+        self.counter.start()
+
+        self.setMouseEvent(0, lambda: self.mouseLeftClick())
+        self.setMouseEvent(2, lambda: self.mouseRightClick())
+
+        keys = {"click": [], "press": []}
+
+        for name, program in PROGRAMS.items():
+            for id in self.programs[name].get("keyboardClick"):
+                node = PROGRAMS[name]["objects"][id]
+
+                self.setKeyEvent(["KEYDOWN", node["inputs"]["key"]["standard"]], lambda temp=id: self.programs[name].start(temp))
+
+        for name, program in PROGRAMS.items():
+            for id in self.programs[name].get("keyboardPress"):
+                node = PROGRAMS[name]["objects"][id]
+
+                self.setKeyEvent(["PRESS", node["inputs"]["key"]["standard"]], lambda temp=id: self.programs[name].start(temp))
+
+    def print(self, text: str) -> None:
+        if self.socket is not None:
+            self.socket.sendall(text.encode())
+
+        else:
+            print(text)
+
+    def update(self) -> None:
+        super().update()
+
+        if self.global_socket is not None:
+            try:
+                data = json.dumps(VARIABLES["globals"])
+                self.global_socket.sendall(data.encode())
+
+            except BaseException:
+                pass
+
+        for key, value in self.programs.items():
+            if self.programs[key].error:
+                info = self.programs[key].information
+
+                self.print(f"FATAL ERROR: {info['message']}\n")
+                self.print(f"Name: {info['display']['name']}\nX, Y: {info['pos'][0]}, {info['pos'][1]}\n")
+                self.print("Inputs:\n")
+
+                text = ""
+
+                for code, ivalue in info["inputs"].items():
+                    line = f"{info['display']['text'][ivalue['name']]} = {ivalue['standard'] if ivalue['value'] is None else ivalue['value']}"
+
+                    text = text + line + "\n"
+
+                self.print(text)
+
+                exit(0)
+
+            self.programs[key].update()
+
+    def tpsStart(self):
+        def function(tps):
+            for key, value in PROGRAMS.items():
+                self.programs[key].tps(tps)
+
+        tps = Tps(SETTINGS["tps"], lambda tps: function(tps))
+
+    def mouseLeftClick(self):
+        for key, value in PROGRAMS.items():
+            self.programs[key].event("mouseLeftClick")
+
+    def mouseRightClick(self):
+        for key, value in PROGRAMS.items():
+            self.programs[key].event("mouseRightClick")
+
+    def loadScene(self, scene):
+        self.objects.empty()
+
+        self.scene = scene
+
+        for key, value in SCENES[scene]["objects"].items():
+            type = value["type"]
+            variables = value["variables"]
+            
+            if "animation" in variables:
+                variables["animator"] = engine.Animator(self, None, variables["animation"])
+
+            obj = getattr(engine.objects, type)(self, **variables)
+            
+            if "animation" in variables:
+                obj.animator.obj = obj
+    
+                obj.animator.init()
+
+            if scene not in self.objectIDByName:
+                self.objectIDByName[scene] = {}
+
+            if scene not in self.objectNameByID:
+                self.objectNameByID[scene] = {}
+
+            self.objectIDByName[scene][key] = obj.id
+            self.objectNameByID[scene][str(obj.id)] = key
+
+            self.objects.add(obj)
+
+            if SCENES[scene]["focus"] is not None and key == SCENES[scene]["focus"]:
+                self.setCamera(engine.camera.FocusCamera(self, obj))
+
+
+if __name__ == "__main__":
+    game = Game()
+    game.start()

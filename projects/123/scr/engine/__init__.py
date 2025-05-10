@@ -10,7 +10,6 @@ from engine.classes.group import ObjectGroup, ParticleGroup
 
 from engine.classes.animator import Animator
 
-from engine.classes.animation import Animation
 from engine.classes.texture import Texture
 from engine.classes.sprite import Sprite
 

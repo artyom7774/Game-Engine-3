@@ -72,9 +72,7 @@
         },
         "group": "object",
         "layer": 0,
-        "speed": 5,
         "gravity": 1000,
-        "jumpPower": 10,
         "slidingStep": 1e6,
         "mass": 1000,
         "invisible": false,
@@ -101,9 +99,7 @@
         "sprite": "Object sprite",
         "group": "Name of object group",
         "layer": "Object layer",
-        "speed": "Moving speed",
         "gravity": "Object gravity",
-        "jumpPower": "Power jump",
         "slidingStep": "Braking power",
         "invisible": "Invisible",
         "animation": "Animation",
@@ -116,9 +112,7 @@
         "sprite": "dict",
         "group": "str",
         "layer": "int",
-        "speed": "int",
         "gravity": "int",
-        "jumpPower": "int",
         "slidingStep": "int",
         "invisible": "bool",
         "animation": "animator",
@@ -150,9 +144,7 @@
             "invisible"
         ],
         "DynamicObject": [
-            "speed",
             "gravity",
-            "jumpPower",
             "slidingStep"
         ]
     }

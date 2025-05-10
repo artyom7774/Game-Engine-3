@@ -318,7 +318,7 @@ class CodeNodeConnectorTextBox(QTextEdit):
         self.project.dialog.exec_()
 
     def setGeometry(self, x, y, w, h):
-        super().setGeometry(x, y, w, h)
+        super().setGeometry(x, y - 1, w, h)
 
         self.button.setGeometry(self.x(), self.y() + 25 * (self.heigth_ - 1), self.width(), 16 + 4)
 
@@ -486,7 +486,7 @@ class CodeNodeConnector(QLabel):
                     else:
                         self.inputLeftText = CodeNodeConnectorLineEdit(project.objects["main"]["code"], self.project, id, input)
                         self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
-                        self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 4, self.width() - 40, 14)
+                        self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 3, self.width() - 40, 14)
                         self.inputLeftText.setStyleSheet("background-color: rgba(63, 64, 66, 0); border: 0px")
                         self.inputLeftText.setText(str(input["standard"]))
                         self.inputLeftText.setFont(MFONT)
@@ -529,7 +529,7 @@ class CodeNodeConnector(QLabel):
             self.right.move(self.width() - 12, 9)
 
         if self.inputLeftText is not None:
-            self.inputLeftText.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 4 - (self.input["type"] == "choose"))
+            self.inputLeftText.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 3 - (self.input["type"] == "choose"))
             self.inputLeftRama.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 6)
 
 
@@ -1013,7 +1013,7 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.setHeaderLabels([translate("Name"), translate("Type"), translate("Value")])
 
         self.plusButton = QPushButton(self)
-        self.plusButton.setGeometry(6, self.height() - 30, self.width() - 12, 25)
+        self.plusButton.setGeometry(6, self.height() - 30, self.width() - 13, 25)
         self.plusButton.setText(name)
         self.plusButton.show()
 
@@ -1237,42 +1237,46 @@ class CodeAdditions:
 class Code:
     @staticmethod
     def init(project) -> None:
-        project.objects["main"]["code"] = CodeLabel(
-            parent=project,
-            releasedFunction=lambda x, y: Code.update(project)
-        )
+        try:
+            project.objects["main"]["code"] = CodeLabel(
+                parent=project,
+                releasedFunction=lambda x, y: Code.update(project)
+            )
 
-        project.objects["main"]["code"].setGeometry(project.objects["center_rama"].x() + 2, project.objects["center_rama"].y() + 2, project.objects["center_rama"].width() - 4, project.objects["center_rama"].height() - 4)
-        project.objects["main"]["code"].show()
+            project.objects["main"]["code"].setGeometry(project.objects["center_rama"].x() + 2, project.objects["center_rama"].y() + 2, project.objects["center_rama"].width() - 4, project.objects["center_rama"].height() - 4)
+            project.objects["main"]["code"].show()
 
-        project.objects["main"]["code"].setContextMenuPolicy(Qt.CustomContextMenu)
+            project.objects["main"]["code"].setContextMenuPolicy(Qt.CustomContextMenu)
 
-        project.objects["main"]["code"].customContextMenuRequested.connect(
-            lambda pos: Code.menu(project, pos)
-        )
+            project.objects["main"]["code"].customContextMenuRequested.connect(
+                lambda pos: Code.menu(project, pos)
+            )
 
-        if project.cash["file"][project.selectFile].lastToolTipPoses is None:
-            project.cash["file"][project.selectFile].lastToolTipPoses = []
+            if project.cash["file"][project.selectFile].lastToolTipPoses is None:
+                project.cash["file"][project.selectFile].lastToolTipPoses = []
 
-        if "replacer" not in project.objects["main"]:
-            project.objects["main"]["replacer"] = CodeReplacer()
+            if "replacer" not in project.objects["main"]:
+                project.objects["main"]["replacer"] = CodeReplacer()
 
-        project.objects["main"]["liner"] = CodeLiner()
+            project.objects["main"]["liner"] = CodeLiner()
 
-        if project.objects["main"]["liner"].points is None:
-            project.objects["main"]["liner"].points = {"inputs": [], "outputs": []}
+            if project.objects["main"]["liner"].points is None:
+                project.objects["main"]["liner"].points = {"inputs": [], "outputs": []}
 
-        project.objects["main"]["liner"].cash = {"outputsPointPosses": {}}
+            project.objects["main"]["liner"].cash = {"outputsPointPosses": {}}
 
-        if "nodes" not in project.objects["main"]:
-            project.objects["main"]["nodes"] = {}
+            if "nodes" not in project.objects["main"]:
+                project.objects["main"]["nodes"] = {}
 
-        with open("scr/code/config.json", "r", encoding="utf-8") as file:
-            project.objects["main"]["config"] = load(file)
+            with open("scr/code/config.json", "r", encoding="utf-8") as file:
+                project.objects["main"]["config"] = load(file)
 
-        CodeAdditions.init(project)
+            CodeAdditions.init(project)
 
-        Code.update(project)
+            Code.update(project)
+
+        except BaseException:
+            return
 
     @staticmethod
     def update(project, call: str = "") -> None:

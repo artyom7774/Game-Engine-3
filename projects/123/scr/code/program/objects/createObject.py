@@ -22,9 +22,6 @@ def createObject(program, compiler, path: str, nodes: dict, id: int, variables: 
     else:
         y = float(nodes["objects"][str(id)]["inputs"]["y"]["standard"])
 
-    if not name.endswith(".obj"):
-        name += ".obj"
-
     type = program.allObjects[name]["type"]
     variables = program.allObjects[name]["variables"]
 

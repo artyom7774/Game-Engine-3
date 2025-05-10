@@ -50,7 +50,6 @@ class CreateObjectFunctions:
             objects = load(file)
 
         out = {
-            "main": objects["main"],
             "dependences": objects["dependences"],
             "dependence": objects["dependences"][objects["standard"]["type"]],
             "type": {
@@ -60,6 +59,9 @@ class CreateObjectFunctions:
             },
             "variables": {}
         }
+
+        if "main" in objects:
+            out["main"] = objects["main"]
 
         if out["type"]["type"] == "choose":
             out["type"]["choose"] = objects["specials"]["choose"]["type"]

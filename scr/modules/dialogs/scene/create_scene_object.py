@@ -26,7 +26,7 @@ class CreateSceneObjectFunctions:
 
         extension = path[path.rfind(".") + 1:]
 
-        name = name.replace(f".{extension}", "")
+        name = ""
 
         files = os.listdir(project.selectFile)
         files.sort()
@@ -35,10 +35,10 @@ class CreateSceneObjectFunctions:
 
         for file in files:
             for element in files:
-                if element.endswith(f"{index}.objc"):
+                if element.endswith(f"{index}.{extension}c"):
                     index += 1
 
-        out = f"{project.selectFile}/{name}-{index}.objc"
+        out = f"{project.selectFile}/{index}.{extension}c"
 
         shutil.copyfile(path, out)
 

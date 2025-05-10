@@ -103,7 +103,7 @@
         },
         "fontColor": {
             "name": "Font color",
-            "value": "#000000",
+            "value": "#00f9f9",
             "type": "color"
         },
         "alignment": {

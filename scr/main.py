@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, 
 from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QIcon, Qt
 
-from scr.modules.widgets import TabFileBar, VersionLogScrollArea
+from scr.modules.widgets import TabFileBar, VersionLogScrollArea, TreeProject
 
 from scr.modules import functions
 
@@ -93,7 +93,7 @@ class Main(QMainWindow):
 
                 print(f"LOG: last version = {lastVersion}, now version = {nowVersion}")
 
-                if lastVersion != nowVersion:
+                if lastVersion[0] <= nowVersion[0] and lastVersion[2] <= nowVersion[2] and lastVersion[4] < nowVersion[4]:
                     msg = QMessageBox()
                     msg.setWindowTitle(f"{translate('Update')} {nowVersion} -> {lastVersion}")
                     msg.setText(translate("A new version of the project has been released. Please update the product"))
@@ -247,9 +247,12 @@ class Main(QMainWindow):
 
         # PROJECT TREE
 
-        self.objects["tree_project"] = QTreeWidget(self)
+        self.objects["tree_project"] = TreeProject(self, self)
         self.objects["tree_project"].setHeaderHidden(True)
         self.objects["tree_project"].header().setFont(FONT)
+
+        self.objects["tree_project"].setDragEnabled(True)
+        self.objects["tree_project"].setAcceptDrops(True)
 
         self.objects["tree_project"].setContextMenuPolicy(Qt.CustomContextMenu)
 

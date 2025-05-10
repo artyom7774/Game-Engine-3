@@ -792,7 +792,7 @@ class Scene:
         index = 1
 
         while True:
-            newName = f"{name[:name.rfind('.')]}{index}.{name[name.rfind('.') + 1:]}"
+            newName = f"{index}.{name[name.rfind('.') + 1:]}"
 
             if os.path.exists(f"{project.selectFile}/{newName}"):
                 index += 1

@@ -1,7 +1,7 @@
 import typing
 
-OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "speed", "gravity", "jumpPower", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor"]
-OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "float", "float", "text", "int", "list", "eval", "list", "list"]
+OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "gravity", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor"]
+OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "text", "int", "list", "eval", "list", "list"]
 
 
 def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:

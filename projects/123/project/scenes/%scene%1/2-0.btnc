@@ -78,7 +78,7 @@
         },
         "font": {
             "name": "Font type",
-            "value": "Ink Free",
+            "value": "Times New Roman",
             "type": "font"
         },
         "message": {

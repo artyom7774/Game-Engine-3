@@ -1,0 +1,186 @@
+{
+    "main": "StaticObject",
+    "dependences": {
+        "StaticObject": [],
+        "DynamicObject": [
+            "StaticObject"
+        ]
+    },
+    "dependence": [],
+    "type": {
+        "name": "Object type",
+        "value": "StaticObject",
+        "type": "choose",
+        "choose": {
+            "input": [
+                "Static object",
+                "Dynamic object"
+            ],
+            "output": [
+                "StaticObject",
+                "DynamicObject"
+            ]
+        }
+    },
+    "variables": {},
+    "DynamicObject": {
+        "gravity": {
+            "name": "Object gravity",
+            "value": 1000,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 1000000.0,
+            "type": "int"
+        }
+    },
+    "StaticObject": {
+        "pos": {
+            "name": "Object position",
+            "value": {
+                "x": {
+                    "name": "X",
+                    "type": "int",
+                    "value": 0
+                },
+                "y": {
+                    "name": "Y",
+                    "type": "int",
+                    "value": 0
+                }
+            },
+            "type": "dict"
+        },
+        "hitbox": {
+            "name": "Object hitbox",
+            "value": {
+                "X offset": {
+                    "name": "X offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "Y offset": {
+                    "name": "Y offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "width": {
+                    "name": "Width",
+                    "type": "int",
+                    "value": 32
+                },
+                "height": {
+                    "name": "Height",
+                    "type": "int",
+                    "value": 32
+                }
+            },
+            "type": "dict"
+        },
+        "sprite": {
+            "name": "Object sprite",
+            "value": {
+                "path": {
+                    "name": "Path to image",
+                    "type": "path",
+                    "value": ""
+                },
+                "X offset": {
+                    "name": "X offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "Y offset": {
+                    "name": "Y offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "width": {
+                    "name": "Width",
+                    "type": "int",
+                    "value": -1
+                },
+                "height": {
+                    "name": "Height",
+                    "type": "int",
+                    "value": -1
+                }
+            },
+            "type": "dict"
+        },
+        "group": {
+            "name": "Name of object group",
+            "value": "player",
+            "type": "str"
+        },
+        "mass": {
+            "name": "Mass",
+            "value": 1000,
+            "type": "int"
+        },
+        "layer": {
+            "name": "Object layer",
+            "value": 0,
+            "type": "int"
+        },
+        "animation": {
+            "name": "Animation",
+            "value": {
+                "groups": {
+                    "fall": {
+                        "name": "group",
+                        "sprites": [
+                            "assets\/player\/fall.png"
+                        ],
+                        "settings": {
+                            "repeat": false,
+                            "fpsPerFrame": 10,
+                            "standard": false
+                        }
+                    },
+                    "idle": {
+                        "name": "group",
+                        "sprites": [
+                            "assets\/player\/idle.png"
+                        ],
+                        "settings": {
+                            "repeat": false,
+                            "fpsPerFrame": 10,
+                            "standard": true
+                        }
+                    },
+                    "jump": {
+                        "name": "group",
+                        "sprites": [
+                            "assets\/player\/jump.png"
+                        ],
+                        "settings": {
+                            "repeat": false,
+                            "fpsPerFrame": 10,
+                            "standard": false
+                        }
+                    },
+                    "run": {
+                        "name": "group",
+                        "sprites": [
+                            "assets\/player\/run_1.png",
+                            "assets\/player\/run_2.png"
+                        ],
+                        "settings": {
+                            "repeat": true,
+                            "fpsPerFrame": 10,
+                            "standard": false
+                        }
+                    }
+                }
+            },
+            "type": "animator"
+        },
+        "invisible": {
+            "name": "Invisible",
+            "value": false,
+            "type": "bool"
+        }
+    }
+}

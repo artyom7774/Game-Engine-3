@@ -3524,16 +3524,14 @@
                             "2. Mass",
                             "3. Layer",
                             "4. Invisible",
-                            "5. Moving speed",
-                            "6. Gravity",
-                            "7. Power jump",
-                            "8. Braking power",
-                            "9. Message",
-                            "10. Font size",
-                            "11. Alignment",
-                            "12. Font color",
-                            "13. Background color",
-                            "14. Rama color"
+                            "5. Gravity",
+                            "6. Braking power",
+                            "7. Message",
+                            "8. Font size",
+                            "9. Alignment",
+                            "10. Font color",
+                            "11. Background color",
+                            "12. Rama color"
                         ]
                     }
                 },
@@ -3600,16 +3598,14 @@
                             "2. Mass",
                             "3. Layer",
                             "4. Invisible",
-                            "5. Moving speed",
-                            "6. Gravity",
-                            "7. Power jump",
-                            "8. Braking power",
-                            "9. Message",
-                            "10. Font size",
-                            "11. Alignment",
-                            "12. Font color",
-                            "13. Background color",
-                            "14. Rama color"
+                            "5. Gravity",
+                            "6. Braking power",
+                            "7. Message",
+                            "8. Font size",
+                            "9. Alignment",
+                            "10. Font color",
+                            "11. Background color",
+                            "12. Rama color"
                         ]
                     }
                 }

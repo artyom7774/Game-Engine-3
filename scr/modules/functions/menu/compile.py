@@ -581,16 +581,17 @@ class Compile:
 
         allObjects = {}
 
-        for obj in functions.project.getAllProjectObjects(project, False):
+        for obj in functions.project.getAllProjectObjects(project, False) + functions.project.getAllProjectInterface(project, False):
             if obj.endswith(".txt"):
                 continue
 
-            type, variables = functions.main.files.Scene.loadObjectFile(project, -1,
-                                                                        load(open(obj, "r", encoding="utf-8")))
+            type, variables = functions.main.files.Scene.loadObjectFile(project, -1, load(open(obj, "r", encoding="utf-8")))
 
-            variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
+            if "sprite" in variables:
+                variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
 
             name = obj.replace(f"projects/{project.selectProject}/project/objects/", "")
+            name = obj.replace(f"projects/{project.selectProject}/project/ui/", "")
 
             allObjects[name] = {
                 "type": type,
@@ -602,8 +603,7 @@ class Compile:
         projectSettingsStandard = projectSettings
         projectSettings = functions.main.files.Config.get(projectSettings)
 
-        if not any([scene == f"projects/{project.selectProject}/project/" + projectSettings["start_scene"] for scene in
-                    scenes.keys()]):
+        if not any([scene == f"projects/{project.selectProject}/project/" + projectSettings["start_scene"] for scene in scenes.keys()]):
             project.dialog.logSignal.emit(
                 translate("ERROR") + ": " + translate("project start scene is not found") + "\n"
             )
@@ -619,8 +619,7 @@ class Compile:
         # MAKE PROJECT
 
         useProjectSettings = dict(projectSettings)
-        useProjectSettings["start_scene"] = f"projects/{project.selectProject}/project/" + useProjectSettings[
-            "start_scene"]
+        useProjectSettings["start_scene"] = f"projects/{project.selectProject}/project/" + useProjectSettings["start_scene"]
 
         program = PROGRAM
 
@@ -636,8 +635,7 @@ class Compile:
         program = program.replace("%PROJECT_SCENES%", str(scenes))
         program = program.replace("%PROJECT_OBJECTS%", str(allObjects))
 
-        program = program.replace("%ENGINE_VERSION%",
-                                  str(load(open("scr/files/version.json", encoding="utf-8"))["version"]))
+        program = program.replace("%ENGINE_VERSION%", str(load(open("scr/files/version.json", encoding="utf-8"))["version"]))
 
         program = program.replace("%COMPILER%", str(open("scr/code/compiler.py", "r", encoding="utf-8").read()))
 

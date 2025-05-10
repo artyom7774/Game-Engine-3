@@ -6,3 +6,5 @@ from .tabFileBar import TabFileBar
 from .versionLogScrollArea import VersionLogScrollArea
 
 from .collisionTable import CollisionTable
+
+from .treeProject import TreeProject

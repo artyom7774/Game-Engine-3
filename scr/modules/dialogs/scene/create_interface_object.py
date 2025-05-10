@@ -26,7 +26,7 @@ class CreateInterfaceObjectFunctions:
 
         extension = path[path.rfind(".") + 1:]
 
-        name = name.replace(f".{extension}", "")
+        name = ""
 
         files = os.listdir(project.selectFile)
         files.sort()
@@ -38,7 +38,7 @@ class CreateInterfaceObjectFunctions:
                 if element.endswith(f"{index}.{extension}c"):
                     index += 1
 
-        out = f"{project.selectFile}/{name}-{index}.{extension}c"
+        out = f"{project.selectFile}/{index}.{extension}c"
 
         shutil.copyfile(path, out)
 

@@ -7,12 +7,6 @@ from scr.variables import *
 import subprocess
 import traceback
 import sys
-import os
-
-# SETTINGS
-
-FORCED = False
-DEBUG = True if (os.getenv("PYCHARM_HOSTED") == "1" and not FORCED) else False
 
 
 def application() -> None:
@@ -25,11 +19,10 @@ def application() -> None:
 def main() -> None:
     with open("scr/files/logs/log.txt", "w+", encoding="utf-8", buffering=1) as file:
         try:
-            if not DEBUG:
+            if not DIVELOP:
                 sys.stdout = file
                 sys.stderr = file
 
-            print(f"LOG: debug mode = {DEBUG}")
             print(f"LOG: program runned on \"{SYSTEM} {RELEASE}\"")
 
             application()
@@ -37,7 +30,7 @@ def main() -> None:
         except Exception as e:
             traceback.print_exc(file=file)
 
-            if not DEBUG:
+            if not DIVELOP:
                 if SYSTEM == "Windows":
                     subprocess.run(["notepad.exe", "scr/files/logs/log.txt"])
 

@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QDialog, QApplication, QMenu, QLabel, QWidget, QScrollArea, QFrame, QGridLayout, QSizePolicy, QVBoxLayout, QLineEdit, QTreeWidgetItem, QComboBox, QCheckBox, QPushButton, QTreeWidget
 from PyQt5.QtCore import Qt, QMimeData, pyqtSignal
 from PyQt5.QtGui import QPixmap, QImage, QDrag
+from PyQt5 import QtCore
 
 from PyQt5 import QtWidgets
 
@@ -155,6 +156,16 @@ class AnimatorCreateFrame(QDialog):
         self.objects["sprite_entry"].setFont(FONT)
         self.objects["sprite_entry"].show()
 
+        # LOG TEXT
+
+        self.objects["log_label"] = QLabel(parent=self, text="")
+        self.objects["log_label"].setGeometry(0, 310, 600, 20)
+        self.objects["log_label"].setFont(FONT)
+        self.objects["log_label"].show()
+
+        self.objects["log_label"].setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.objects["log_label"].setStyleSheet("color: red;")
+
         # CREATE
 
         self.objects["create_button"] = QPushButton(parent=self, text=translate("Create"))
@@ -172,9 +183,13 @@ class AnimatorCreateFrame(QDialog):
         path = self.objects["sprite_entry"].text()
 
         if not os.path.exists(f"projects/{self.project.selectProject}/project/{path}"):
+            self.objects["log_label"].setText("File is not found")
+
             return
 
         if path[path.rfind(".") + 1:] not in IMAGE_FORMATES:
+            self.objects["log_label"].setText("Image formate is not possible")
+
             return
 
         self.dialog.object["StaticObject"]["animation"]["value"]["groups"][self.dialog.selectGroup]["sprites"].append(path)

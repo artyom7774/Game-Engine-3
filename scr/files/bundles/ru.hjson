@@ -1,4 +1,4 @@
-// RU TRANSLATE VERSION = 3.8.2
+// RU TRANSLATE VERSION = 3.9.0 beta
 
 {
     "Project": "Проект"
@@ -333,20 +333,22 @@
     "2. Mass": "2. Масса"
     "3. Layer": "3. Слой объекта"
     "4. Invisible": "4. Невидемый"
-    "5. Moving speed": "5. Скорость передвижения"
-    "6. Gravity": "6. Гравитация объекта"
-    "7. Power jump": "7. Сила прыжка"
-    "8. Braking power": "8. Сила торможения"
-    "9. Message": "9. Сообщение"
-    "10. Font size": "10. Размер шрифта"
-    "11. Alignment": "11. Выравнивание"
-    "12. Font color": "12. Цвет шрифта"
-    "13. Background color": "13. Цвет фона"
-    "14. Rama color": "14. Цвет рамки"
+    "5. Gravity": "5. Гравитация объекта"
+    "6. Braking power": "6. Сила торможения"
+    "7. Message": "7. Сообщение"
+    "8. Font size": "8. Размер шрифта"
+    "9. Alignment": "9. Выравнивание"
+    "10. Font color": "10. Цвет шрифта"
+    "11. Background color": "11. Цвет фона"
+    "12. Rama color": "12. Цвет рамки"
     "Alpha": "Прозрачность"
     "Button": "Кнопка"
     "Rama color": "Цвет рамки"
     "Background color": "Цвет фона"
     "Mouse": "Мышка"
     "Click": "Нажатие"
+    "Path to sprite": "Путь до спрайта"
+    "File is not found": "Файл не найден"
+    "Image formate is not possible": "Формат изображения не поддерживаеться"
+    "Project name already exist": "Имя проекта уже существует"
 }
