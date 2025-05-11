@@ -529,7 +529,7 @@ class CodeNodeConnector(QLabel):
             self.right.move(self.width() - 12, 9)
 
         if self.inputLeftText is not None:
-            self.inputLeftText.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 3 - (self.input["type"] == "choose"))
+            self.inputLeftText.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 3)
             self.inputLeftRama.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 6)
 
 

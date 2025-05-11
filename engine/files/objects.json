@@ -5,6 +5,10 @@
         "StaticObject": [],
         "DynamicObject": [
             "StaticObject"
+        ],
+        "Particle": [
+            "StaticObject",
+            "DynamicObject"
         ]
     },
     "standard": {
@@ -76,6 +80,8 @@
         "slidingStep": 1e6,
         "mass": 1000,
         "invisible": false,
+        "liveTime": 60,
+        "minusSpriteSizePerFrame": 0.01,
         "animation": {
             "groups": {
                 "group": {
@@ -103,7 +109,9 @@
         "slidingStep": "Braking power",
         "invisible": "Invisible",
         "animation": "Animation",
-        "mass": "Mass"
+        "mass": "Mass",
+        "liveTime": "Live time",
+        "minusSpriteSizePerFrame": "Minus size per frame"
     },
     "type": {
         "type": "choose",
@@ -116,18 +124,22 @@
         "slidingStep": "int",
         "invisible": "bool",
         "animation": "animator",
-        "mass": "int"
+        "mass": "int",
+        "liveTime": "int",
+        "minusSpriteSizePerFrame": "int"
     },
     "specials": {
         "choose": {
             "type": {
                 "input": [
                     "Static object",
-                    "Dynamic object"
+                    "Dynamic object",
+                    "Particle"
                 ],
                 "output": [
                     "StaticObject",
-                    "DynamicObject"
+                    "DynamicObject",
+                    "Particle"
                 ]
             }
         }
@@ -146,6 +158,10 @@
         "DynamicObject": [
             "gravity",
             "slidingStep"
+        ],
+        "Particle": [
+            "liveTime",
+            "minusSpriteSizePerFrame"
         ]
     }
 }

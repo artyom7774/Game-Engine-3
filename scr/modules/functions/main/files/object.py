@@ -15,7 +15,8 @@ import os
 
 SORTING_OBJECT_TYPES = {
     "StaticObject": 1,
-    "DynamicObject": 2
+    "DynamicObject": 2,
+    "Particle": 3
 }
 
 

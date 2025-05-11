@@ -1,39 +1,58 @@
 {
-    "main": "StaticObject",
     "dependences": {
         "StaticObject": [],
         "DynamicObject": [
             "StaticObject"
+        ],
+        "Particle": [
+            "StaticObject",
+            "DynamicObject"
         ]
     },
     "dependence": [
-        "StaticObject"
+        "StaticObject",
+        "DynamicObject"
     ],
     "type": {
         "name": "Object type",
-        "value": "DynamicObject",
+        "value": "Particle",
         "type": "choose",
         "choose": {
             "input": [
                 "Static object",
-                "Dynamic object"
+                "Dynamic object",
+                "Particle"
             ],
             "output": [
                 "StaticObject",
-                "DynamicObject"
+                "DynamicObject",
+                "Particle"
             ]
         }
     },
     "variables": {},
+    "main": "StaticObject",
     "DynamicObject": {
         "gravity": {
             "name": "Object gravity",
-            "value": 500,
+            "value": 0,
             "type": "int"
         },
         "slidingStep": {
             "name": "Braking power",
             "value": 0.3,
+            "type": "int"
+        }
+    },
+    "Particle": {
+        "liveTime": {
+            "name": "Live time",
+            "value": 100,
+            "type": "int"
+        },
+        "minusSpriteSizePerFrame": {
+            "name": "Minus size per frame",
+            "value": 0.03,
             "type": "int"
         }
     },
@@ -86,7 +105,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": ""
+                    "value": "assets\/brick_dust.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -101,19 +120,19 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": -1
+                    "value": 8
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": -1
+                    "value": 8
                 }
             },
             "type": "dict"
         },
         "group": {
             "name": "Name of object group",
-            "value": "player",
+            "value": "object",
             "type": "str"
         },
         "mass": {
@@ -130,47 +149,11 @@
             "name": "Animation",
             "value": {
                 "groups": {
-                    "fall": {
+                    "group": {
                         "name": "group",
-                        "sprites": [
-                            "assets\/player\/fall.png"
-                        ],
+                        "sprites": [],
                         "settings": {
                             "repeat": false,
-                            "fpsPerFrame": 10,
-                            "standard": false
-                        }
-                    },
-                    "idle": {
-                        "name": "group",
-                        "sprites": [
-                            "assets\/player\/idle.png"
-                        ],
-                        "settings": {
-                            "repeat": false,
-                            "fpsPerFrame": 10,
-                            "standard": true
-                        }
-                    },
-                    "jump": {
-                        "name": "group",
-                        "sprites": [
-                            "assets\/player\/jump.png"
-                        ],
-                        "settings": {
-                            "repeat": false,
-                            "fpsPerFrame": 10,
-                            "standard": false
-                        }
-                    },
-                    "run": {
-                        "name": "group",
-                        "sprites": [
-                            "assets\/player\/run_1.png",
-                            "assets\/player\/run_2.png"
-                        ],
-                        "settings": {
-                            "repeat": true,
                             "fpsPerFrame": 10,
                             "standard": false
                         }

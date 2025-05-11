@@ -105,6 +105,7 @@ cdef class GetUsingObjects:
                 dynamicsObjects.append(obj)
 
         game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
+        game.cash["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cash["object_sorted_by_distance"]))
 
         for obj in dynamicsObjects:
             resulting = obj.getVectorsPower()

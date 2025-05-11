@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QComboBox
+from PyQt5.QtCore import Qt
 
 import typing
 

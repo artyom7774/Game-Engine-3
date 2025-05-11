@@ -1,5 +1,4 @@
 {
-    "main": "StaticObject",
     "dependences": {
         "StaticObject": [],
         "DynamicObject": [
@@ -25,15 +24,16 @@
         }
     },
     "variables": {},
+    "main": "StaticObject",
     "DynamicObject": {
         "gravity": {
             "name": "Object gravity",
-            "value": 500,
+            "value": 0,
             "type": "int"
         },
         "slidingStep": {
             "name": "Braking power",
-            "value": 0.3,
+            "value": 1000000.0,
             "type": "int"
         }
     },
@@ -44,12 +44,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": 0
+                    "value": -396.0
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": 0
+                    "value": -360.0
                 }
             },
             "type": "dict"
@@ -70,12 +70,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 32
+                    "value": 20
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 32
+                    "value": 20
                 }
             },
             "type": "dict"
@@ -86,7 +86,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": ""
+                    "value": "assets\/color.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -101,19 +101,19 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": -1
+                    "value": 20
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": -1
+                    "value": 20
                 }
             },
             "type": "dict"
         },
         "group": {
             "name": "Name of object group",
-            "value": "player",
+            "value": "jump-collision",
             "type": "str"
         },
         "mass": {
@@ -123,54 +123,18 @@
         },
         "layer": {
             "name": "Object layer",
-            "value": 0,
+            "value": 10,
             "type": "int"
         },
         "animation": {
             "name": "Animation",
             "value": {
                 "groups": {
-                    "fall": {
+                    "group": {
                         "name": "group",
-                        "sprites": [
-                            "assets\/player\/fall.png"
-                        ],
+                        "sprites": [],
                         "settings": {
                             "repeat": false,
-                            "fpsPerFrame": 10,
-                            "standard": false
-                        }
-                    },
-                    "idle": {
-                        "name": "group",
-                        "sprites": [
-                            "assets\/player\/idle.png"
-                        ],
-                        "settings": {
-                            "repeat": false,
-                            "fpsPerFrame": 10,
-                            "standard": true
-                        }
-                    },
-                    "jump": {
-                        "name": "group",
-                        "sprites": [
-                            "assets\/player\/jump.png"
-                        ],
-                        "settings": {
-                            "repeat": false,
-                            "fpsPerFrame": 10,
-                            "standard": false
-                        }
-                    },
-                    "run": {
-                        "name": "group",
-                        "sprites": [
-                            "assets\/player\/run_1.png",
-                            "assets\/player\/run_2.png"
-                        ],
-                        "settings": {
-                            "repeat": true,
                             "fpsPerFrame": 10,
                             "standard": false
                         }
@@ -181,7 +145,7 @@
         },
         "invisible": {
             "name": "Invisible",
-            "value": false,
+            "value": true,
             "type": "bool"
         }
     }

@@ -6,71 +6,84 @@
   <component name="ChangeListManager">
     <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game Engine 3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game Engine 3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/getUsingObjects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/hitbox.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/objects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/vector/float.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/vector/int.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.obj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/getUsingObjects.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/getUsingObjects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/getUsingObjects.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/classes/hitbox.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/hitbox.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/getUsingObjects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/getUsingObjects.pyx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/hitbox.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/objects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/sprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/sprite.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/files/objects.json" beforeDir="false" afterPath="$PROJECT_DIR$/engine/files/objects.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/vector/float.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/float.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/float.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/vector/int.c" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/int.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/engine/vector/int.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/123/project/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/project/functions/1.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/123/project/project.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/project/project.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/GE3 project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/code/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/code/program/objects/getObjectParameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/code/program/objects/getObjectParameter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/code/program/objects/setObjectParameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/code/program/objects/setObjectParameter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/compiling.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/compiling.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/classes/getUsingObjects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/classes/getUsingObjects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/classes/getUsingObjects.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/classes/hitbox.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/classes/hitbox.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/classes/hitbox.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/classes/objects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/classes/objects.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/classes/objects.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/files/objects.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/files/objects.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/vector/float.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/vector/float.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/classes/sprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/classes/sprite.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/vector/float.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/vector/int.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/vector/int.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/123/scr/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/engine/vector/int.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/123/scr/functions/1.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/scr/functions/1.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/project/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/collision.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/project/functions/player.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/functions/player.func" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/project/objects/player.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/player.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/project/project.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/project.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/project/scenes/%scene%1/player.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/scenes/%scene%1/player.objc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/GE3 project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/code/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/scr/code/program/objects/createObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/code/program/objects/createObject.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/code/program/objects/getObjectParameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/code/program/objects/getObjectParameter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/code/program/objects/setObjectParameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/code/program/objects/setObjectParameter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/scr/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/collision.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/compiling.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/compiling.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/classes/getUsingObjects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/classes/getUsingObjects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/classes/getUsingObjects.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/classes/hitbox.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/classes/hitbox.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/classes/getUsingObjects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/classes/getUsingObjects.pyx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/classes/hitbox.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/classes/objects.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/classes/objects.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/classes/objects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/classes/sprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/classes/sprite.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/files/objects.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/files/objects.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/vector/float.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/vector/float.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/vector/float.pyd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/vector/int.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/vector/int.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/engine/vector/int.pyd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/game/scr/functions/player.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/scr/functions/player.func" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/code/program/objects/getObjectParameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/objects/getObjectParameter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/code/program/objects/setObjectParameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/program/objects/setObjectParameter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/settings/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/settings/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/files/updates.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/updates.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/version.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/file/create_from_template_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/file/create_from_template_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/file/create_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/file/create_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/main/files/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/main/files/code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/main/files/object.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/main/files/object.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/functions/main/files/scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/main/files/scene.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/modules/functions/menu/compile.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/menu/compile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/variables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/widgets/focusComboBox.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/widgets/focusComboBox.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -3531,7 +3531,10 @@
                             "9. Alignment",
                             "10. Font color",
                             "11. Background color",
-                            "12. Rama color"
+                            "12. Rama color",
+                            "13. Sprite hitbox",
+                            "14. liveTime",
+                            "15. minusSpriteSizePerFrame"
                         ]
                     }
                 },
@@ -3605,7 +3608,10 @@
                             "9. Alignment",
                             "10. Font color",
                             "11. Background color",
-                            "12. Rama color"
+                            "12. Rama color",
+                            "13. Sprite hitbox",
+                            "14. liveTime",
+                            "15. minusSpriteSizePerFrame"
                         ]
                     }
                 }

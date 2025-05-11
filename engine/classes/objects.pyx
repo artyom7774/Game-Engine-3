@@ -44,6 +44,7 @@ cdef class StaticObject:
     cdef public object collisions
     cdef public bint invisible
     cdef public object animator
+    cdef public bint doCollisionUpdate
 
     def __init__(
         self, game: object,
@@ -72,6 +73,8 @@ cdef class StaticObject:
         else:
             self.specials = {}
 
+        self.doCollisionUpdate = True
+
         self.game = game
         self.collisions = self.game.objects.collisions.get(group)
 
@@ -97,6 +100,9 @@ cdef class StaticObject:
 
     def __repr__(self):
         return f"StaticObject(id = {self.id} pos = {self.pos})"
+
+    def destroy(self):
+        self.game.objects.removeById(self.id)
 
     def update(self, collisions: typing.List["VObject"] = None) -> None:
         if self.animator is not None:
@@ -229,13 +235,17 @@ cdef class StaticObject:
         if name == "hitbox":
             return self.hitbox.get()
 
+        if name == "spriteHitbox":
+            return self.sprite.pos.get() + [self.sprite.width, self.sprite.height]
+
         return getattr(self, name)
 
     def setParameter(self, name: str, value: typing.Any) -> None:
         if name == "hitbox":
             self.hitbox = SquareHitbox(value)
 
-        setattr(self, name, value)
+        else:
+            setattr(self, name, value)
 
 
 cdef class DynamicObject(StaticObject):
@@ -261,6 +271,8 @@ cdef class DynamicObject(StaticObject):
         *args, **kwargs
     ) -> None:
         StaticObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, variables, specials)
+
+        self.doCollisionUpdate = True
 
         self.vectors = {
             "__fall__": AngleVector(0, 0)
@@ -350,7 +362,7 @@ cdef class DynamicObject(StaticObject):
     def draw(self, px, py):
         super().draw(px, py)
 
-        if self.game.debug:
+        if self.game.debug and type(self) == DynamicObject:
             moving = self.getVectorsPower() * 6
 
             # print(moving)
@@ -467,6 +479,55 @@ cdef class DynamicObject(StaticObject):
         return pos
 
 
+cdef class Particle(DynamicObject):
+    cdef public int liveTime
+    cdef public float minusSpriteSizePerFrame
+    cdef public float spriteSize
+
+    def __init__(
+        self, game: object,
+        pos: typing.Union[typing.List[float], Vec2f],
+        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f],
+        sprite: VSprite = None,
+        group: str = None,
+        mass: int = 1000,
+        layer: int = 0,
+        id: int = None,
+        invisible: bool = False,
+        animator: typing.Any = None,
+        gravity: float = 300,
+        slidingStep: float = INF,
+        liveTime: int = 60,
+        minusSpriteSizePerFrame: float = 0.01,
+        variables: typing.Dict[str, typing.Any] = None,
+        specials: typing.Dict[str, typing.Any] = None,
+        *args, **kwargs
+    ) -> None:
+        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, gravity, slidingStep, variables, specials)
+
+        self.doCollisionUpdate = False
+
+        self.liveTime = liveTime
+        self.minusSpriteSizePerFrame = minusSpriteSizePerFrame
+
+        self.spriteSize = 1
+
+    def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
+        return False
+
+    def update(self, collisions: list = None):
+        super().update(collisions)
+
+        self.spriteSize -= self.minusSpriteSizePerFrame
+        self.liveTime -= 1
+
+        if self.liveTime <= 0:
+            self.destroy()
+
+        if self.sprite is not None:
+            self.sprite.resize(round(self.sprite.width * self.spriteSize), round(self.sprite.height * self.spriteSize))
+
+
 cdef class Text(StaticObject):
     cdef public str font
     cdef public str message
@@ -500,6 +561,8 @@ cdef class Text(StaticObject):
         *args, **kwargs
     ) -> None:
         StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, None, variables, specials)
+
+        self.doCollisionUpdate = False
 
         if alignment is not None:
             self.alignment = alignment
@@ -579,6 +642,8 @@ cdef class Field(Text):
         *args, **kwargs
     ) -> None:
         Text.__init__(self, game, pos, hitbox, group, layer, id, invisible, font, message, fontSize, fontColor, alignment, variables, specials)
+
+        self.doCollisionUpdate = False
 
         self.splitSymbol = "ꙮ"
 
@@ -710,6 +775,8 @@ cdef class Button(StaticObject):
         *args, **kwargs
     ) -> None:
         StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, None, variables, specials)
+
+        self.doCollisionUpdate = False
 
         if alignment is not None:
             self.alignment = alignment

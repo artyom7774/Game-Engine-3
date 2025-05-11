@@ -60,7 +60,7 @@ class Sprite:
             self.height = -1
 
         if self.size is not None and self.image is not None:
-            self.image = pygame.transform.scale(self.image, (
+            self.imageReturn = pygame.transform.scale(self.image, (
                 self.width if self.width > 0 else self.image.get_width(),
                 self.height if self.height > 0 else self.image.get_height()
             ))
@@ -71,13 +71,13 @@ class Sprite:
     def resize(self, width: int, height: int) -> None:
         self.width, self.height = width, height
 
-        self.image = pygame.transform.scale(self.image, (self.width, self.height))
+        self.imageReturn = pygame.transform.scale(self.image, (self.width, self.height))
 
     def flip(self, horizontal: bool = False, vertical: bool = False) -> None:
-        if self.image is None:
+        if self.imageReturn is None:
             return
 
-        self.image = pygame.transform.flip(self.image, horizontal, vertical)
+        self.imageReturn = pygame.transform.flip(self.image, horizontal, vertical)
 
     def get(self) -> pygame.Surface:
-        return self.image
+        return self.imageReturn

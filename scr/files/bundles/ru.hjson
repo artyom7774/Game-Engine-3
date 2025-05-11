@@ -341,6 +341,9 @@
     "10. Font color": "10. Цвет шрифта"
     "11. Background color": "11. Цвет фона"
     "12. Rama color": "12. Цвет рамки"
+    "13. Sprite hitbox": "13. Хитбокс спрайта"
+    "14. liveTime": "14. Время жизни"
+    "15. minusSpriteSizePerFrame": "15. Уменьшение размера каждый кадр"
     "Alpha": "Прозрачность"
     "Button": "Кнопка"
     "Rama color": "Цвет рамки"
@@ -351,4 +354,7 @@
     "File is not found": "Файл не найден"
     "Image formate is not possible": "Формат изображения не поддерживаеться"
     "Project name already exist": "Имя проекта уже существует"
+    "Particle": "Частица"
+    "Live time": "Время жизни"
+    "Minus size per frame": "Уменьшение размера каждый кадр"
 }

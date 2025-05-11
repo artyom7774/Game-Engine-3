@@ -590,8 +590,9 @@ class Compile:
             if "sprite" in variables:
                 variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
 
-            name = obj.replace(f"projects/{project.selectProject}/project/objects/", "")
-            name = obj.replace(f"projects/{project.selectProject}/project/ui/", "")
+            name = obj
+            name = name.replace(f"projects/{project.selectProject}/project/objects/", "")
+            name = name.replace(f"projects/{project.selectProject}/project/ui/", "")
 
             allObjects[name] = {
                 "type": type,

@@ -44,6 +44,7 @@ cdef class StaticObject:
     cdef public object collisions
     cdef public bint invisible
     cdef public object animator
+    cdef public object spriteHitbox
 
     def __init__(
         self, game: object,
@@ -235,7 +236,14 @@ cdef class StaticObject:
         if name == "hitbox":
             self.hitbox = SquareHitbox(value)
 
-        setattr(self, name, value)
+        elif name == "spriteHitbox":
+            x, y, width, height = value
+
+            self.sprite.pos = Vec2i(x, y)
+            self.sprite.resize(width, height)
+
+        else:
+            setattr(self, name, value)
 
 
 cdef class DynamicObject(StaticObject):

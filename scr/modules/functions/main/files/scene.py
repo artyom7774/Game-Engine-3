@@ -528,7 +528,7 @@ class Scene:
                 project.cash["file"][project.selectFile].selectLink = obj.id
 
                 application.objects.add(project.engine.objects.StaticObject(
-                    application, obj.pos, obj.hitbox, group="__debug_select__"
+                    application, obj.pos, obj.hitbox, group="__debug_select__", layer=int(1e9)+2
                 ))
 
                 # print("create")
