@@ -70,7 +70,7 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 20
+                    "value": 38
                 },
                 "height": {
                     "name": "Height",
@@ -101,7 +101,7 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 20
+                    "value": 38
                 },
                 "height": {
                     "name": "Height",

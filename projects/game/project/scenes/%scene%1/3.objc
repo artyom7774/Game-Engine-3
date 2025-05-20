@@ -3,26 +3,81 @@
         "StaticObject": [],
         "DynamicObject": [
             "StaticObject"
+        ],
+        "KinematicObject": [
+            "StaticObject",
+            "DynamicObject"
+        ],
+        "Particle": [
+            "StaticObject",
+            "DynamicObject"
         ]
     },
-    "dependence": [],
+    "dependence": [
+        "StaticObject",
+        "DynamicObject"
+    ],
     "type": {
         "name": "Object type",
-        "value": "StaticObject",
+        "value": "KinematicObject",
         "type": "choose",
         "choose": {
             "input": [
                 "Static object",
-                "Dynamic object"
+                "Dynamic object",
+                "Kinematic object",
+                "Particle"
             ],
             "output": [
                 "StaticObject",
-                "DynamicObject"
+                "DynamicObject",
+                "KinematicObject",
+                "Particle"
             ]
         }
     },
-    "variables": {},
+    "variables": {
+        "direction": {
+            "name": "direction",
+            "type": "text",
+            "value": "right"
+        },
+        "maxMove": {
+            "name": "maxMove",
+            "type": "number",
+            "value": 180
+        },
+        "lastMove": {
+            "name": "lastMove",
+            "type": "number",
+            "value": 180
+        }
+    },
     "main": "StaticObject",
+    "DynamicObject": {
+        "gravity": {
+            "name": "Object gravity",
+            "value": 0,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 1000000.0,
+            "type": "int"
+        }
+    },
+    "Particle": {
+        "liveTime": {
+            "name": "Live time",
+            "value": 60,
+            "type": "int"
+        },
+        "minusSpriteSizePerFrame": {
+            "name": "Minus size per frame",
+            "value": 0.01,
+            "type": "int"
+        }
+    },
     "StaticObject": {
         "pos": {
             "name": "Object position",
@@ -30,12 +85,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": -612.0
+                    "value": 1332.0
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": -324.0
+                    "value": 0.0
                 }
             },
             "type": "dict"
@@ -99,7 +154,7 @@
         },
         "group": {
             "name": "Name of object group",
-            "value": "brick",
+            "value": "platform",
             "type": "str"
         },
         "mass": {
@@ -133,28 +188,6 @@
             "name": "Invisible",
             "value": false,
             "type": "bool"
-        }
-    },
-    "DynamicObject": {
-        "speed": {
-            "name": "Moving speed",
-            "value": 5,
-            "type": "int"
-        },
-        "gravity": {
-            "name": "Object gravity",
-            "value": 1000,
-            "type": "int"
-        },
-        "jumpPower": {
-            "name": "Power jump",
-            "value": 10,
-            "type": "int"
-        },
-        "slidingStep": {
-            "name": "Braking power",
-            "value": 1000000.0,
-            "type": "int"
         }
     }
 }

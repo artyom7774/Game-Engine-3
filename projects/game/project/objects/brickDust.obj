@@ -4,6 +4,10 @@
         "DynamicObject": [
             "StaticObject"
         ],
+        "KinematicObject": [
+            "StaticObject",
+            "DynamicObject"
+        ],
         "Particle": [
             "StaticObject",
             "DynamicObject"
@@ -21,11 +25,13 @@
             "input": [
                 "Static object",
                 "Dynamic object",
+                "Kinematic object",
                 "Particle"
             ],
             "output": [
                 "StaticObject",
                 "DynamicObject",
+                "KinematicObject",
                 "Particle"
             ]
         }
@@ -89,12 +95,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 32
+                    "value": 8
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 32
+                    "value": 8
                 }
             },
             "type": "dict"
@@ -142,7 +148,7 @@
         },
         "layer": {
             "name": "Object layer",
-            "value": 0,
+            "value": -1,
             "type": "int"
         },
         "animation": {

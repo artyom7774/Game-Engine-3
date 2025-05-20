@@ -101,10 +101,11 @@ cdef class GetUsingObjects:
         cdef list dynamicsObjects = []
 
         for obj in group.objects:
-            if type(obj) == DynamicObject:
+            if isinstance(obj, DynamicObject):
                 dynamicsObjects.append(obj)
 
         game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
+        game.cash["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cash["object_sorted_by_distance"]))
 
         for obj in dynamicsObjects:
             resulting = obj.getVectorsPower()
@@ -116,7 +117,7 @@ cdef class GetUsingObjects:
             objectsAfter = []
 
             for before in objectsBefore:
-                if not (obj.pos.y + obj.hitbox.y + obj.hitbox.height + group.maxLenghtObject < before.pos.y + before.hitbox.y or before.pos.y + before.hitbox.y + before.hitbox.height + group.maxLenghtObject < obj.pos.y + obj.hitbox.y):
+                if not (obj.pos.y + obj.hitbox.y + obj.hitbox.height + group.maxLengthObject < before.pos.y + before.hitbox.y or before.pos.y + before.hitbox.y + before.hitbox.height + group.maxLenghtObject < obj.pos.y + obj.hitbox.y):
                     objectsAfter.append(before)
 
             GetUsingObjects.getUsingObjectsIterationSquare(game, objectsAfter, obj)

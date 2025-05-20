@@ -114,7 +114,7 @@
 
         "3.9.0": {
             "name": "3.9.0",
-            "text": "- new objects: text, field, button, particle\n- update node: set object parameter, get object parameter\n- fixed bug with run project\n- run project have menu with all globals variables\n- update checking for new version\n- increase font for nodes\n- open notepad when there is an error\n- remove jump power and speed parameters for dynamic object"
+            "text": "- new objects: text, field, button, particle, kinematic object\n- update node: set object parameter, get object parameter, move object with braking, on button press\n- new functions for python node: setObjectParameter, getObjectParameter, moveObjectWithBraking, getTimePassed\n- fixed bug with run project\n- run project have menu with all globals variables\n- update checking for new version\n- increase font for nodes\n- open notepad when there is an error\n- remove jump power and speed parameters for dynamic object\n- update run menu\n- update install python menu"
         }
     }
 }

@@ -23,6 +23,7 @@ def main() -> None:
                 sys.stdout = file
                 sys.stderr = file
 
+            print(f"LOG: divelop mode = {DIVELOP}")
             print(f"LOG: program runned on \"{SYSTEM} {RELEASE}\"")
 
             application()

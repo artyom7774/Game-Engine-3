@@ -383,15 +383,13 @@ class Logger(QDialog):
 
         self.objects["entry"] = QLineEdit(self)
         self.objects["entry"].setGeometry(10, self.height() - 37, self.width() - 20, 29)
-        self.objects["entry"].setStyleSheet(
-            f"background-color: #{'1c1d1f' if SETTINGS['theme'] == 'dark' else 'ffffff'};")
+        self.objects["entry"].setStyleSheet(f"background-color: #{'1c1d1f' if SETTINGS['theme'] == 'dark' else 'ffffff'};")
         self.objects["entry"].setFont(FONT)
         self.objects["entry"].show()
 
         self.objects["globals"] = GlobalsTable(self)
         self.objects["globals"].setGeometry(10 + (self.width() - 20 - 220) + 10, 10, 210, self.height() - 55)
-        self.objects["globals"].setStyleSheet(
-            f"background-color: #{'1c1d1f' if SETTINGS['theme'] == 'dark' else 'ffffff'};")
+        self.objects["globals"].setStyleSheet(f"background-color: #{'1c1d1f' if SETTINGS['theme'] == 'dark' else 'ffffff'};")
         self.objects["globals"].setFont(FONT)
         self.objects["globals"].show()
 
@@ -435,8 +433,7 @@ class Compile:
         if Compile.compile(project, executable=False):
             return 1
 
-        with open(f"projects/{project.selectProject}/scr/{projectSettings['values']['name']['value']}.py", "r",
-                  encoding="utf-8") as file:
+        with open(f"projects/{project.selectProject}/scr/{projectSettings['values']['name']['value']}.py", "r", encoding="utf-8") as file:
             text = file.read()
 
         """
@@ -462,8 +459,7 @@ class Compile:
 
         print(f"LOG: python path: {pathPython}")
 
-        thr = threading.Thread(target=lambda: os.system(
-            f"cd \"{pathProject}\" && \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""))
+        thr = threading.Thread(target=lambda: os.system(f"cd \"{pathProject}\" && \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""))
         thr.daemon = True
         thr.start()
 
@@ -677,7 +673,7 @@ class Compile:
 
             command = f"cd \"{pathProgram}\" && cd \"{pathProject}\" && \"{pathPythonExecutable}\" \"{pathPyInstaller}\" -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\""
 
-            result = subprocess.run(command, shell=True, capture_output=True, check=True, text=True)
+            result = subprocess.run(command, shell=False, capture_output=True, check=True, text=True)
 
             project.dialog.logSignal.emit(result.stdout)
             project.dialog.logSignal.emit(result.stderr)
@@ -685,8 +681,7 @@ class Compile:
             if os.path.exists(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe"):
                 os.remove(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")
 
-            shutil.copy2(f"{pathProject}/dist/{projectSettingsCfg['values']['name']['value']}.exe",
-                         f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")
+            shutil.copy2(f"{pathProject}/dist/{projectSettingsCfg['values']['name']['value']}.exe", f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")
 
             try:
                 project.dialog.logSignal.emit(

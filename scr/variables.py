@@ -16,8 +16,6 @@ import os
 
 DIVELOP = os.getenv("PYCHARM_HOSTED") == "1"
 
-print(f"LOG: divelop mode = {DIVELOP}")
-
 pygame.init()
 
 
@@ -185,6 +183,7 @@ CODE_CONNECTOR_NO_HAVE_INPUT_TYPES = ["path"]
 
 OBJECT_CURRECT_TEST = ["type", "type/name", "type/value", "type/type", "StaticObject", "StaticObject/pos", "StaticObject/hitbox", "StaticObject/sprite", "StaticObject/group", "StaticObject/layer"]
 TEXT_CURRECT_TEST = ["type", "type/name", "type/value", "type/type", "Text", "Text/pos", "Text/hitbox", "Text/group", "Text/layer"]
+BUTTON_CURRECT_TEST = ["type", "type/name", "type/value", "type/type", "Button"]
 
 NODE_CURRECT_TEST = ["display", "id", "width", "height", "x", "y", "name", "inputs", "outputs", "type"]
 

@@ -37,9 +37,9 @@ class Sprite:
         try:
             if type(path) == str:
                 if path not in self.cache:
-                    self.cache[path] = lambda: pygame.image.load(path).convert_alpha()
+                    self.cache[path] = pygame.image.load(path).convert_alpha()
 
-                self.image = self.cache[path]()
+                self.image = self.cache[path]
 
             else:
                 self.image = path

@@ -4,10 +4,10 @@ from engine.vector.int import Vec2i
 import typing
 
 OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "gravity", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor", "spriteHitbox", "liveTime", "minusSpriteSizePerFrame"]
-OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "text", "int", "list", "eval", "list", "list", "list", "float", "float"]
+OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "text", "int", "list", "eval", "eval", "eval", "list", "float", "float"]
 
 
-def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     def decode(operation, text: str) -> typing.Any:
         if OBJECT_PARAMETERS_TYPES[operation] == "eval":
             try:

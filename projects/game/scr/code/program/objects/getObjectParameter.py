@@ -1,7 +1,7 @@
 OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "gravity", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor", "spriteHitbox", "liveTime", "minusSpriteSizePerFrame"]
 
 
-def getObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():

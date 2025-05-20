@@ -116,7 +116,7 @@ cdef class GetUsingObjects:
             objectsAfter = []
 
             for before in objectsBefore:
-                if not (obj.pos.y + obj.hitbox.y + obj.hitbox.height + group.maxLenghtObject < before.pos.y + before.hitbox.y or before.pos.y + before.hitbox.y + before.hitbox.height + group.maxLenghtObject < obj.pos.y + obj.hitbox.y):
+                if not (obj.pos.y + obj.hitbox.y + obj.hitbox.height + group.maxLengthObject < before.pos.y + before.hitbox.y or before.pos.y + before.hitbox.y + before.hitbox.height + group.maxLengthObject < obj.pos.y + obj.hitbox.y):
                     objectsAfter.append(before)
 
             GetUsingObjects.getUsingObjectsIterationSquare(game, objectsAfter, obj)

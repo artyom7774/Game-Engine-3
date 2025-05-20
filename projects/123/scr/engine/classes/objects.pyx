@@ -44,7 +44,7 @@ cdef class StaticObject:
     cdef public object collisions
     cdef public bint invisible
     cdef public object animator
-    cdef public object spriteHitbox
+    cdef public bint doCollisionUpdate
 
     def __init__(
         self, game: object,
@@ -73,6 +73,8 @@ cdef class StaticObject:
         else:
             self.specials = {}
 
+        self.doCollisionUpdate = True
+
         self.game = game
         self.collisions = self.game.objects.collisions.get(group)
 
@@ -98,6 +100,9 @@ cdef class StaticObject:
 
     def __repr__(self):
         return f"StaticObject(id = {self.id} pos = {self.pos})"
+
+    def destroy(self):
+        self.game.objects.removeById(self.id)
 
     def update(self, collisions: typing.List["VObject"] = None) -> None:
         if self.animator is not None:
@@ -230,17 +235,14 @@ cdef class StaticObject:
         if name == "hitbox":
             return self.hitbox.get()
 
+        if name == "spriteHitbox":
+            return self.sprite.pos.get() + [self.sprite.width, self.sprite.height]
+
         return getattr(self, name)
 
     def setParameter(self, name: str, value: typing.Any) -> None:
         if name == "hitbox":
             self.hitbox = SquareHitbox(value)
-
-        elif name == "spriteHitbox":
-            x, y, width, height = value
-
-            self.sprite.pos = Vec2i(x, y)
-            self.sprite.resize(width, height)
 
         else:
             setattr(self, name, value)
@@ -250,6 +252,8 @@ cdef class DynamicObject(StaticObject):
     cdef public dict vectors
     cdef public float gravity
     cdef public float slidingStep
+    cdef public int lastKinematicMoving
+    cdef public bint doKinematic
 
     def __init__(
         self, game: object,
@@ -269,6 +273,11 @@ cdef class DynamicObject(StaticObject):
         *args, **kwargs
     ) -> None:
         StaticObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, variables, specials)
+
+        self.doCollisionUpdate = True
+
+        self.lastKinematicMoving = 0
+        self.doKinematic = True
 
         self.vectors = {
             "__fall__": AngleVector(0, 0)
@@ -332,6 +341,9 @@ cdef class DynamicObject(StaticObject):
         if now.id in visited:
             return []
 
+        if now.id not in self.game.cash["collisions"]:
+            return []
+
         visited.add(now.id)
 
         hitbox = now.getEditHitbox(x, y, append)
@@ -358,7 +370,7 @@ cdef class DynamicObject(StaticObject):
     def draw(self, px, py):
         super().draw(px, py)
 
-        if self.game.debug:
+        if self.game.debug and type(self) == DynamicObject:
             moving = self.getVectorsPower() * 6
 
             # print(moving)
@@ -376,6 +388,12 @@ cdef class DynamicObject(StaticObject):
 
         flag = False
 
+        maxKinematicX = 0
+        maxKinematicY = 0
+
+        maxKinematicDirectionX = 1
+        maxKinematicDirectionY = 1
+
         for obj in self.game.cash["collisions"][self.id]:
             if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height) and (filter is None or filter(obj["object"])):
                 if allowFunctions:
@@ -385,61 +403,59 @@ cdef class DynamicObject(StaticObject):
 
                 if obj["functions"] is not None and "collision" in obj["functions"]["types"]:
                     if isinstance(obj["object"], DynamicObject) and isinstance(self, DynamicObject) and self.group == "player":
-                        right = self.getObjectStructure(x, y, append, [1, 1, 0, -2], self)
-                        left = self.getObjectStructure(x, y, append, [-1, 1, 0, -2], self)
-                        up = self.getObjectStructure(x, y, append, [1, -1, -2, 0], self)
+                        if isinstance(obj["object"], KinematicObject):
+                            x, y = obj["object"].getVectorsPower().get()
 
-                        if x > 0 and len(right) >= 1:
-                            right.append(self)
+                            if abs(x) >= maxKinematicX:
+                                maxKinematicDirectionX = 1 if x >= 0 else -1
+                                maxKinematicX = abs(x)
 
-                            speedX = sum([obj.mass * obj.getVectorsPower().x for obj in right]) / sum([obj.mass for obj in right])
+                            if y < 0 and abs(y) >= maxKinematicY:
+                                maxKinematicDirectionY = 1 if y >= 0 else -1
+                                maxKinematicY = abs(y)
 
-                            for obj in right:
-                                obj.moveByAngle(90, speedX - obj.getVectorsPower().x, float(INF))
+                        else:
+                            right = self.getObjectStructure(x, y, append, [1, 1, 0, -2], self)
+                            left = self.getObjectStructure(x, y, append, [-1, 1, 0, -2], self)
+                            up = self.getObjectStructure(x, y, append, [1, -1, -2, 0], self)
 
-                        if x < 0 and len(left) >= 1:
-                            left.append(self)
+                            if x > 0 and len(right) >= 1:
+                                right.append(self)
 
-                            speedX = sum([obj.mass * obj.getVectorsPower().x for obj in left]) / sum([obj.mass for obj in left])
+                                speedX = sum([obj.mass * obj.getVectorsPower().x for obj in right]) / sum([obj.mass for obj in right])
 
-                            for obj in left:
-                                obj.moveByAngle(90, speedX - obj.getVectorsPower().x, float(INF))
+                                for obj in right:
+                                    obj.moveByAngle(90, speedX - obj.getVectorsPower().x, float(INF))
 
-                        if abs(self.getVectorsPower().y) > FLOAT_PRECISION and len(up) >= 1:
-                            up.append(self)
+                            if x < 0 and len(left) >= 1:
+                                left.append(self)
 
-                            speedY = sum([obj.mass * obj.getVectorsPower().y for obj in up]) / sum([obj.mass for obj in up])
+                                speedX = sum([obj.mass * obj.getVectorsPower().x for obj in left]) / sum([obj.mass for obj in left])
 
-                            for obj in up:
-                                if obj.id == self.id:
-                                    continue
+                                for obj in left:
+                                    obj.moveByAngle(90, speedX - obj.getVectorsPower().x, float(INF))
 
-                                obj.vectors["__fall__"].power = speedY - obj.getVectorsPower().y
+                            if abs(self.getVectorsPower().y) > FLOAT_PRECISION and len(up) >= 1:
+                                up.append(self)
 
-                        """
-                        speedX = (self.mass * self.getVectorsPower().x + obj["object"].mass * obj["object"].getVectorsPower().x) / (self.mass + obj["object"].mass)
-                        speedY = (self.mass * self.getVectorsPower().y + obj["object"].mass * obj["object"].getVectorsPower().y) / (self.mass + obj["object"].mass)
+                                speedY = sum([obj.mass * obj.getVectorsPower().y for obj in up]) / sum([obj.mass for obj in up])
 
-                        if Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                            self.moveByAngle(90, speedX - self.getVectorsPower().x)
-                            obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
+                                for obj in up:
+                                    if obj.id == self.id:
+                                        continue
 
-                        if Collision.rect(self.pos.x + hitbox.x - 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                            self.moveByAngle(90, speedX - self.getVectorsPower().x)
-                            obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
+                                    obj.vectors["__fall__"].power = speedY - obj.getVectorsPower().y
 
-                        if y > 0:
-                            pass
+                    flag = True
 
-                        if abs(self.getVectorsPower().y) > FLOAT_PRECISION and Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y - 1, hitbox.width - 2, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                            obj["object"].vectors["__fall__"].power = speedY - obj["object"].getVectorsPower().y
-                        """
+        if maxKinematicX * maxKinematicDirectionX != 0 or maxKinematicY * maxKinematicDirectionY != 0:
+            if self.game.fpsc > self.lastKinematicMoving:
+                self.lastKinematicMoving = self.game.fpsc - 1
 
-                    if allowFunctions:
-                        flag = True
+                self.move(x, y)
 
-                    else:
-                        return True
+                # self.pos.x += maxKinematicX * maxKinematicDirectionX
+                # self.pos.y += maxKinematicY * maxKinematicDirectionY
 
         return flag
 
@@ -475,6 +491,78 @@ cdef class DynamicObject(StaticObject):
         return pos
 
 
+cdef class KinematicObject(DynamicObject):
+    def __init__(
+        self, game: object,
+        pos: typing.Union[typing.List[float], Vec2f],
+        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f],
+        sprite: VSprite = None,
+        group: str = None,
+        mass: int = 1000,
+        layer: int = 0,
+        id: int = None,
+        invisible: bool = False,
+        animator: typing.Any = None,
+        gravity: float = 300,
+        slidingStep: float = INF,
+        variables: typing.Dict[str, typing.Any] = None,
+        specials: typing.Dict[str, typing.Any] = None,
+        *args, **kwargs
+    ) -> None:
+        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, gravity, slidingStep, variables, specials)
+
+        self.doCollisionUpdate = True
+
+
+cdef class Particle(DynamicObject):
+    cdef public int liveTime
+    cdef public float minusSpriteSizePerFrame
+    cdef public float spriteSize
+
+    def __init__(
+        self, game: object,
+        pos: typing.Union[typing.List[float], Vec2f],
+        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f],
+        sprite: VSprite = None,
+        group: str = None,
+        mass: int = 1000,
+        layer: int = 0,
+        id: int = None,
+        invisible: bool = False,
+        animator: typing.Any = None,
+        gravity: float = 300,
+        slidingStep: float = INF,
+        liveTime: int = 60,
+        minusSpriteSizePerFrame: float = 0.01,
+        variables: typing.Dict[str, typing.Any] = None,
+        specials: typing.Dict[str, typing.Any] = None,
+        *args, **kwargs
+    ) -> None:
+        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, gravity, slidingStep, variables, specials)
+
+        self.doCollisionUpdate = False
+
+        self.liveTime = liveTime
+        self.minusSpriteSizePerFrame = minusSpriteSizePerFrame
+
+        self.spriteSize = 1
+
+    def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
+        return False
+
+    def update(self, collisions: list = None):
+        super().update(collisions)
+
+        self.spriteSize -= self.minusSpriteSizePerFrame
+        self.liveTime -= 1
+
+        if self.liveTime <= 0:
+            self.destroy()
+
+        if self.sprite is not None:
+            self.sprite.resize(round(self.sprite.width * self.spriteSize), round(self.sprite.height * self.spriteSize))
+
+
 cdef class Text(StaticObject):
     cdef public str font
     cdef public str message
@@ -508,6 +596,8 @@ cdef class Text(StaticObject):
         *args, **kwargs
     ) -> None:
         StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, None, variables, specials)
+
+        self.doCollisionUpdate = False
 
         if alignment is not None:
             self.alignment = alignment
@@ -587,6 +677,8 @@ cdef class Field(Text):
         *args, **kwargs
     ) -> None:
         Text.__init__(self, game, pos, hitbox, group, layer, id, invisible, font, message, fontSize, fontColor, alignment, variables, specials)
+
+        self.doCollisionUpdate = False
 
         self.splitSymbol = "ꙮ"
 
@@ -696,6 +788,8 @@ cdef class Button(StaticObject):
     cdef public int ty
     cdef public int hstep
     cdef public object fontClass
+    cdef public bint pressed
+    cdef public bint event
 
     def __init__(
         self, game: object,
@@ -718,6 +812,8 @@ cdef class Button(StaticObject):
         *args, **kwargs
     ) -> None:
         StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, None, variables, specials)
+
+        self.doCollisionUpdate = False
 
         if alignment is not None:
             self.alignment = alignment
@@ -742,24 +838,41 @@ cdef class Button(StaticObject):
 
         self.hstep = self.fontClass.size("Ag")[1]
 
+        self.pressed = False
+        self.event = False
+
         self.tx = 0
         self.ty = 0
 
     def draw(self, px, py):
         width, height = self.fontClass.size(self.message)
 
+        if self.event:
+            self.event = False
+
         if self.pos.x + px < self.game.mouse[0] < self.pos.x + px + self.hitbox.width:
             if self.pos.y + py < self.game.mouse[1] < self.pos.y + py + self.hitbox.height:
                 if pygame.mouse.get_pressed()[0]:
+                    self.pressed = True
+
                     active = 2
 
                 else:
+                    if self.pressed:
+                        self.pressed = False
+
+                        self.event = True
+
                     active = 1
 
             else:
+                self.pressed = False
+
                 active = 0
 
         else:
+            self.pressed = False
+
             active = 0
 
         if not self.invisible or self.game.forcedViewObject:

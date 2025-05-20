@@ -1,4 +1,4 @@
-def functionEvent(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def functionEvent(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     if nodes["objects"][str(id)]["inputs"]["params"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["params"]["value"]["value"] is not None:

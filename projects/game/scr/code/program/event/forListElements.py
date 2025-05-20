@@ -1,4 +1,4 @@
-def forListElements(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def forListElements(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     timer = []
     queue = []
 

@@ -6,6 +6,10 @@
         "DynamicObject": [
             "StaticObject"
         ],
+        "KinematicObject": [
+            "StaticObject",
+            "DynamicObject"
+        ],
         "Particle": [
             "StaticObject",
             "DynamicObject"
@@ -134,11 +138,13 @@
                 "input": [
                     "Static object",
                     "Dynamic object",
+                    "Kinematic object",
                     "Particle"
                 ],
                 "output": [
                     "StaticObject",
                     "DynamicObject",
+                    "KinematicObject",
                     "Particle"
                 ]
             }
@@ -162,6 +168,9 @@
         "Particle": [
             "liveTime",
             "minusSpriteSizePerFrame"
+        ],
+        "KinematicObject": [
+
         ]
     }
 }

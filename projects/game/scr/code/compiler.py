@@ -115,7 +115,7 @@ class Compiler:
 
         self.event("onStartGame")
 
-    def queue(self, id: int = None, queue: list = None) -> None:
+    def queue(self, id: int = None, queue: list = None, params: dict = None) -> None:
         if queue is None:
             queue = []
 
@@ -129,25 +129,25 @@ class Compiler:
 
                 continue
 
-            if self.debug:
-                var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
-
-            else:
-                try:
+            try:
+                if params is None:
                     var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"])
 
-                except Exception as e:
-                    self.error = True
+                else:
+                    var = getattr(self.program, self.nodes["objects"][str(id)]["name"])(self.project, self, self.path, self.nodes, id, self.settings["variables"], **params)
 
-                    self.information = {
-                        "inputs": self.nodes["objects"][str(id)]["inputs"],
-                        "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
-                        "display": self.nodes["objects"][str(id)]["display"],
-                        "message": e,
-                        "id": id
-                    }
+            except Exception as e:
+                self.error = True
 
-                    return
+                self.information = {
+                    "inputs": self.nodes["objects"][str(id)]["inputs"],
+                    "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
+                    "display": self.nodes["objects"][str(id)]["display"],
+                    "message": e,
+                    "id": id
+                }
+
+                return
 
             if type(var) == list:
                 for element in var:
@@ -168,15 +168,19 @@ class Compiler:
     def get(self, event: str) -> list:
         return self.nodesSortedByTypes["event"][event]
 
-    def event(self, event: str) -> None:
+    def event(self, event: str, params: dict = None) -> None:
         for id in self.nodesSortedByTypes["event"][event]:
-            self.queue(id)
+            self.queue(id, params=params)
 
     def start(self, id):
         self.queue(id)
 
     def update(self) -> None:
         remove = []
+
+        for obj in self.project.objects.buttons:
+            if obj.event:
+                self.event("onButtonPress", params={"onButtonPressObjectID": obj.id})
 
         for i, element in enumerate(self.timer):
             element["timer"] -= 1

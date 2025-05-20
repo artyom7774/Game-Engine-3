@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, 
 from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QIcon, Qt
 
-from scr.modules.widgets import TabFileBar, VersionLogScrollArea, TreeProject
+from scr.modules.widgets import TabFileBar, VersionLogScrollArea, TreeProject, VisiableConsole
 
 from scr.modules import functions
 
@@ -115,15 +115,22 @@ class Main(QMainWindow):
             print("ERROR: can't download now project version, bad internet connection")
 
     def install(self) -> None:
+        title = f"{translate('Installing libraries')}"
+
         if SYSTEM == "Windows":
-            os.system("setup.bat")
+            command = "setup.bat"
 
         elif SYSTEM == "Linux":
-            os.system("chmod +x setup.sh")
-            os.system("./setup.sh")
+            command = "chmod +x setup.sh && ./setup.sh"
 
         else:
             print("ERROR: system (Unknown) not supported install python")
+
+            command = None
+
+        if command is not None:
+            self.dialog = VisiableConsole(title, command)
+            self.dialog.exec_()
 
         with open("python/.gitignore", "w", encoding="utf-8") as file:
             file.write("*")
@@ -220,15 +227,6 @@ class Main(QMainWindow):
 
         self.objects["project_tree_file_opened"] = {}
 
-        # INSTALL PYTHON
-
-        request = ["python", "python/Scripts/python.exe", "python/Scripts/pip.exe", "python/Scripts/pyinstaller.exe"]
-
-        if not all([os.path.exists(element) for element in request]):
-            thr = threading.Thread(target=lambda: self.install())
-            thr.daemon = True
-            thr.start()
-
         # TAB FILE BAR
 
         self.objects["tab_file_bar"] = TabFileBar(self, self)
@@ -251,8 +249,8 @@ class Main(QMainWindow):
         self.objects["tree_project"].setHeaderHidden(True)
         self.objects["tree_project"].header().setFont(FONT)
 
-        self.objects["tree_project"].setDragEnabled(True)
-        self.objects["tree_project"].setAcceptDrops(True)
+        # self.objects["tree_project"].setDragEnabled(True)
+        # self.objects["tree_project"].setAcceptDrops(True)
 
         self.objects["tree_project"].setContextMenuPolicy(Qt.CustomContextMenu)
 
@@ -281,7 +279,16 @@ class Main(QMainWindow):
         self.objects["status_bar"] = QStatusBar()
         self.setStatusBar(self.objects["status_bar"])
 
+        # INITIALIZATION
+
         self.init("initialization")
+
+        # INSTALL PYTHON
+
+        request = ["python", "python/Scripts/python.exe", "python/Scripts/pip.exe", "python/Scripts/pyinstaller.exe"]
+
+        if not all([os.path.exists(element) for element in request]):
+            self.install()
 
     def theme(self) -> None:
         if SETTINGS["theme"] == "light":

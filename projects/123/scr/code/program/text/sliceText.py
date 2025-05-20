@@ -1,4 +1,4 @@
-def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():

@@ -1,0 +1,54 @@
+{
+    "dependences": {
+        "Scene": []
+    },
+    "dependence": [],
+    "standard": {
+        "type": "Scene",
+        "visiable_grid": false,
+        "visiable_screen": true,
+        "snap": false,
+        "grid": {
+            "x": {
+                "name": "Width",
+                "type": "int",
+                "value": 32
+            },
+            "y": {
+                "name": "Height",
+                "type": "int",
+                "value": 32
+            }
+        },
+        "focus": "",
+        "camera_acceleration": true
+    },
+    "name": {
+        "type": "Scene type",
+        "grid": "Grid",
+        "visiable_grid": "Grid visiable",
+        "snap": "Snap to grid",
+        "camera_acceleration": "Camera acceleration",
+        "visiable_screen": "Visible screen",
+        "focus": "Name focus object"
+    },
+    "type": {
+        "type": "none",
+        "grid": "dict",
+        "visiable_grid": "bool",
+        "snap": "bool",
+        "camera_acceleration": "none",
+        "visiable_screen": "bool",
+        "focus": "str"
+    },
+    "objects": {
+        "Scene": [
+            "camera_acceleration",
+            "visiable_screen",
+            "visiable_grid",
+            "snap",
+            "grid",
+            "focus"
+        ]
+    }
+}

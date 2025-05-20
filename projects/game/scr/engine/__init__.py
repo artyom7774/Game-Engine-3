@@ -6,7 +6,7 @@ from engine.variables import *
 from engine.classes.hitbox import SquareHitbox
 
 from engine.classes.collision import Collision
-from engine.classes.group import ObjectGroup, ParticleGroup
+from engine.classes.group import ObjectGroup
 
 from engine.classes.animator import Animator
 
@@ -20,8 +20,6 @@ from engine.profiler import profile
 
 from engine.functions.alpha import alphaRect
 from engine.functions.cache import cache
-
-from engine.classes.particles import ImageParticle, ParticleFunction
 
 from engine.ui.surface import Surface
 from engine.ui.text import Label, TextField, print_text

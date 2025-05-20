@@ -1,4 +1,4 @@
-def callFunction(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def callFunction(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:

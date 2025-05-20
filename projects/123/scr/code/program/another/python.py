@@ -14,7 +14,7 @@ else:
 
 
 class PythonFunctions:
-    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos"]
+    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos", "setObjectParameter", "getObjectParameter", "getTimePassed", "moveObjectWithBraking"]
 
     @staticmethod
     def decodeHolder(text, program, variables, path):
@@ -108,9 +108,7 @@ class PythonFunctions:
 
     @staticmethod
     def moveObject(ids, angle, power, program, variables, path):
-        obj = program.objects.getById(int(ids))
-
-        obj.moveByAngle(angle, power)
+        program.objects.getById(int(ids)).moveByAngle(angle, power)
 
     @staticmethod
     def removeObject(ids, program, variables, path):
@@ -159,6 +157,10 @@ class PythonFunctions:
     def getTimePassed(ids, program, variables, path):
         return program.dt
 
+    @staticmethod
+    def moveObjectWithBraking(ids, angle, power, brakingPower, program, variables, path):
+        program.objects.getById(int(ids)).moveByAngle(angle, power, brakingPower)
+
 
 class PythonCodeExecutor:
     program = None
@@ -195,7 +197,7 @@ def pythonCheckHaveFunction(text):
     return bool(match)
 
 
-def python(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def python(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():

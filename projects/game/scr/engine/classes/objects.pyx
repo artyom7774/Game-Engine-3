@@ -146,16 +146,15 @@ cdef class StaticObject:
                     if self.collision(0, y):
                         useY = False
 
-            else:
-                self.pos.x += (abs(x) / step) * (1 if x >= 0 else -1) * useX
-                self.pos.y += (abs(y) / step) * (1 if y >= 0 else -1) * useY
+            self.pos.x += (abs(x) / step) * (1 if x >= 0 else -1) * useX
+            self.pos.y += (abs(y) / step) * (1 if y >= 0 else -1) * useY
 
         self.pos.x = round(self.pos.x)
         self.pos.y = round(self.pos.y)
 
         self.distance = sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 
-    def draw(self, px, py):
+    def draw(self, px: float, py: float):
         if self.sprite is not None:
             if self.game.usingWidth + self.sprite.pos.x + self.sprite.size.x > self.pos.x + px > -self.sprite.pos.x - self.sprite.size.x and self.game.usingHeight + self.sprite.pos.y + self.sprite.size.y > self.pos.y + py > -self.sprite.pos.y - self.sprite.size.y:
                 sprite = self.sprite.get()
@@ -166,10 +165,7 @@ cdef class StaticObject:
                             self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x + px, self.pos.y + self.sprite.pos.y + py))
 
         if self.game.debug or (self.group.startswith("__") and self.group.endswith("__") and not self.group == "__debug_unvisiable__"):
-            pygame.draw.rect(
-                self.game.screen, (255, 0, 0) if "debug_color" not in self.specials else self.specials["debug_color"],
-                (math.trunc(self.pos.x) + self.hitbox.x + px, math.trunc(self.pos.y) + self.hitbox.y + py, self.hitbox.width, self.hitbox.height), 1
-            )
+            self.hitbox.draw(self.game.screen, self.pos.x, self.pos.y, px, py)
 
     def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
         hitbox = self.getEditHitbox(x, y, append)
@@ -336,6 +332,9 @@ cdef class DynamicObject(StaticObject):
         if now.id in visited:
             return []
 
+        if now.id not in self.game.cash["collisions"]:
+            return []
+
         visited.add(now.id)
 
         hitbox = now.getEditHitbox(x, y, append)
@@ -346,31 +345,35 @@ cdef class DynamicObject(StaticObject):
             if obj is None or obj["functions"] is None:
                 continue
 
-            if (isinstance(obj["object"], DynamicObject) and "collision" in obj["functions"]["types"]):
-                if Collision.rect(now.pos.x + hitbox.x + phitbox[0], now.pos.y + hitbox.y + phitbox[1], hitbox.width + phitbox[2], hitbox.height + phitbox[3], obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                    objects.append(obj["object"])
+            if not (isinstance(obj["object"], DynamicObject) and "collision" in obj["functions"]["types"]):
+                continue
 
-                    objects.extend(
-                        self.getObjectStructure(
-                            x, y, append, phitbox,
-                            obj["object"], visited
-                        )
+            if isinstance(obj["object"], KinematicObject):
+                continue
+
+            if Collision.rect(now.pos.x + hitbox.x + phitbox[0], now.pos.y + hitbox.y + phitbox[1], hitbox.width + phitbox[2], hitbox.height + phitbox[3], obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+                objects.append(obj["object"])
+
+                objects.extend(
+                    self.getObjectStructure(
+                        x, y, append, phitbox,
+                        obj["object"], visited
                     )
+                )
 
         return objects
 
-    def draw(self, px, py):
+    def draw(self, px: float, py: float):
         super().draw(px, py)
 
-        if self.game.debug and type(self) == DynamicObject:
+        if self.game.debug:
             moving = self.getVectorsPower() * 6
 
-            # print(moving)
-
-            pygame.draw.line(
-                self.game.screen, (255, 0, 0) if "debug_color" not in self.specials else self.specials["debug_color"],
-                (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2), (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2 + moving.x, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2 + moving.y), 1
-            )
+            if abs(moving.x) > FLOAT_PRECISION or abs(moving.y) > FLOAT_PRECISION:
+                pygame.draw.line(
+                    self.game.screen, (255, 0, 0) if "debug_color" not in self.specials else self.specials["debug_color"],
+                    (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2), (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2 + moving.x, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2 + moving.y), 1
+                )
 
     def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
         hitbox = self.getEditHitbox(x, y, append)
@@ -388,7 +391,7 @@ cdef class DynamicObject(StaticObject):
                             getattr(self.game.functions, element.replace("function::", "").replace("()", ""))(self.game, self, obj)
 
                 if obj["functions"] is not None and "collision" in obj["functions"]["types"]:
-                    if isinstance(obj["object"], DynamicObject) and isinstance(self, DynamicObject) and self.group == "player":
+                    if isinstance(obj["object"], DynamicObject) and isinstance(self, DynamicObject):
                         right = self.getObjectStructure(x, y, append, [1, 1, 0, -2], self)
                         left = self.getObjectStructure(x, y, append, [-1, 1, 0, -2], self)
                         up = self.getObjectStructure(x, y, append, [1, -1, -2, 0], self)
@@ -420,30 +423,7 @@ cdef class DynamicObject(StaticObject):
 
                                 obj.vectors["__fall__"].power = speedY - obj.getVectorsPower().y
 
-                        """
-                        speedX = (self.mass * self.getVectorsPower().x + obj["object"].mass * obj["object"].getVectorsPower().x) / (self.mass + obj["object"].mass)
-                        speedY = (self.mass * self.getVectorsPower().y + obj["object"].mass * obj["object"].getVectorsPower().y) / (self.mass + obj["object"].mass)
-
-                        if Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                            self.moveByAngle(90, speedX - self.getVectorsPower().x)
-                            obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
-
-                        if Collision.rect(self.pos.x + hitbox.x - 1, self.pos.y + hitbox.y + 1, hitbox.width, hitbox.height - 2, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                            self.moveByAngle(90, speedX - self.getVectorsPower().x)
-                            obj["object"].moveByAngle(90, speedX - obj["object"].getVectorsPower().x)
-
-                        if y > 0:
-                            pass
-
-                        if abs(self.getVectorsPower().y) > FLOAT_PRECISION and Collision.rect(self.pos.x + hitbox.x + 1, self.pos.y + hitbox.y - 1, hitbox.width - 2, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
-                            obj["object"].vectors["__fall__"].power = speedY - obj["object"].getVectorsPower().y
-                        """
-
-                    if allowFunctions:
-                        flag = True
-
-                    else:
-                        return True
+                    flag = True
 
         return flag
 
@@ -479,6 +459,109 @@ cdef class DynamicObject(StaticObject):
         return pos
 
 
+cdef class KinematicObject(DynamicObject):
+    cdef public float kinematicMoveX
+    cdef public float kinematicMoveY
+
+    def __init__(
+        self, game: object,
+        pos: typing.Union[typing.List[float], Vec2f],
+        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f],
+        sprite: VSprite = None,
+        group: str = None,
+        mass: int = 1000,
+        layer: int = 0,
+        id: int = None,
+        invisible: bool = False,
+        animator: typing.Any = None,
+        gravity: float = 300,
+        slidingStep: float = INF,
+        variables: typing.Dict[str, typing.Any] = None,
+        specials: typing.Dict[str, typing.Any] = None,
+        *args, **kwargs
+    ) -> None:
+        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, gravity, slidingStep, variables, specials)
+
+        self.doCollisionUpdate = True
+
+        self.kinematicMoveX = 0
+        self.kinematicMoveY = 0
+
+    def __str__(self):
+        return f"KinematicObject(id = {self.id} pos = {self.pos})"
+
+    def __repr__(self):
+        return f"KinematicObject(id = {self.id} pos = {self.pos})"
+
+    def update(self):
+        super().update()
+
+        self.kinematicMoveX = 0
+        self.kinematicMoveY = 0
+
+    def move(self, x: float, y: float):
+        self.kinematicMoveX = x
+        self.kinematicMoveY = y
+
+        affected_objects = self.getAffectedObjects()
+
+        for obj in affected_objects:
+            if isinstance(obj, DynamicObject) and not isinstance(obj, KinematicObject):
+                if obj.id not in self.game.objects.movedByKinematic:
+                    self.game.objects.movedByKinematic[obj.id] = 1
+
+                    obj.move(x, y)
+
+        self.pos.x += x
+        self.pos.y += y
+
+    def getAffectedObjects(self) -> typing.List["VObject"]:
+        affected = []
+
+        if self.id not in self.game.cash["collisions"]:
+            return affected
+
+        hitbox = self.getEditHitbox(0, 0, True)
+
+        for obj in self.game.cash["collisions"][self.id]:
+            if obj is None or obj["object"] is None:
+                continue
+
+            if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+                affected.append(obj["object"])
+
+                if isinstance(obj["object"], DynamicObject) and not isinstance(obj["object"], KinematicObject):
+                    affected.extend(self.getStackedObjects(obj["object"], set([self.id])))
+
+        return affected
+
+    def getStackedObjects(self, obj: "VObject", visited: typing.Set[int]) -> typing.List["VObject"]:
+        stacked = []
+
+        # Mark current object as visited
+        visited.add(obj.id)
+
+        if obj.id not in self.game.cash["collisions"]:
+            return stacked
+
+        hitbox = obj.getEditHitbox(0, 0, True)
+
+        for collision in self.game.cash["collisions"][obj.id]:
+            if collision is None or collision["object"] is None:
+                continue
+
+            if collision["object"].id in visited:
+                continue
+
+            if Collision.rect(obj.pos.x + hitbox.x - 1, obj.pos.y + hitbox.y - 1, hitbox.width + 2, hitbox.height + 2, collision["object"].pos.x + collision["object"].hitbox.x, collision["object"].pos.y + collision["object"].hitbox.y, collision["object"].hitbox.width, collision["object"].hitbox.height):
+                if isinstance(collision["object"], DynamicObject) and not isinstance(collision["object"], KinematicObject):
+                    stacked.append(collision["object"])
+
+                    stacked.extend(self.getStackedObjects(collision["object"], visited))
+
+        return stacked
+
+
 cdef class Particle(DynamicObject):
     cdef public int liveTime
     cdef public float minusSpriteSizePerFrame
@@ -512,6 +595,12 @@ cdef class Particle(DynamicObject):
 
         self.spriteSize = 1
 
+    def __str__(self):
+        return f"Particle(id = {self.id} pos = {self.pos})"
+
+    def __repr__(self):
+        return f"Particle(id = {self.id} pos = {self.pos})"
+
     def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
         return False
 
@@ -521,7 +610,7 @@ cdef class Particle(DynamicObject):
         self.spriteSize -= self.minusSpriteSizePerFrame
         self.liveTime -= 1
 
-        if self.liveTime <= 0:
+        if self.liveTime <= 0 or self.spriteSize <= 0:
             self.destroy()
 
         if self.sprite is not None:
@@ -587,7 +676,13 @@ cdef class Text(StaticObject):
         self.tx = 0
         self.ty = 0
 
-    def draw(self, px, py):
+    def __str__(self):
+        return f"Text(id = {self.id} pos = {self.pos})"
+
+    def __repr__(self):
+        return f"Text(id = {self.id} pos = {self.pos})"
+
+    def draw(self, px: float, py: float):
         width, height = self.fontClass.size(self.message)
 
         if self.game.usingWidth + width > self.pos.x + px > -width and self.game.usingHeight + height > self.pos.y + py > -height:
@@ -659,7 +754,13 @@ cdef class Field(Text):
 
         self.out = []
 
-    def draw(self, px, py):
+    def __str__(self):
+        return f"Field(id = {self.id} pos = {self.pos})"
+
+    def __repr__(self):
+        return f"Field(id = {self.id} pos = {self.pos})"
+
+    def draw(self, px: float, py: float):
         if not self.invisible or self.game.forcedViewObject:
             self.init()
 
@@ -753,6 +854,8 @@ cdef class Button(StaticObject):
     cdef public int ty
     cdef public int hstep
     cdef public object fontClass
+    cdef public bint pressed
+    cdef public bint event
 
     def __init__(
         self, game: object,
@@ -801,24 +904,47 @@ cdef class Button(StaticObject):
 
         self.hstep = self.fontClass.size("Ag")[1]
 
+        self.pressed = False
+        self.event = False
+
         self.tx = 0
         self.ty = 0
 
-    def draw(self, px, py):
+    def __str__(self):
+        return f"Button(id = {self.id} pos = {self.pos})"
+
+    def __repr__(self):
+        return f"Button(id = {self.id} pos = {self.pos})"
+
+    def draw(self, px: float, py: float):
         width, height = self.fontClass.size(self.message)
+
+        if self.event:
+            self.event = False
 
         if self.pos.x + px < self.game.mouse[0] < self.pos.x + px + self.hitbox.width:
             if self.pos.y + py < self.game.mouse[1] < self.pos.y + py + self.hitbox.height:
                 if pygame.mouse.get_pressed()[0]:
+                    self.pressed = True
+
                     active = 2
 
                 else:
+                    if self.pressed:
+                        self.pressed = False
+
+                        self.event = True
+
                     active = 1
 
             else:
+                self.pressed = False
+
                 active = 0
 
         else:
+            self.pressed = False
+
             active = 0
 
         if not self.invisible or self.game.forcedViewObject:

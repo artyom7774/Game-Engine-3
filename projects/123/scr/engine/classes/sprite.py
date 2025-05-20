@@ -1,7 +1,6 @@
 from engine.vector.float import Vec2f
 from engine.vector.int import Vec2i
 
-import typing
 import pygame
 
 
@@ -33,6 +32,8 @@ class Sprite:
         else:
             raise ValueError("invalid number of arguments")
 
+        self.path = path
+
         try:
             if type(path) == str:
                 if path not in self.cache:
@@ -60,24 +61,28 @@ class Sprite:
             self.height = -1
 
         if self.size is not None and self.image is not None:
-            self.imageReturn = pygame.transform.scale(self.image, (
+            self.image = pygame.transform.scale(self.image, (
                 self.width if self.width > 0 else self.image.get_width(),
                 self.height if self.height > 0 else self.image.get_height()
             ))
 
+        if self.image is not None:
+            self.copyImage = self.image.copy()
+
     def copy(self) -> "Sprite":
-        return Sprite(self.game, self.obj, self.image, self.pos, self.size)
+        return Sprite(self.game, self.obj, self.path, self.pos, Vec2i(self.width, self.height))
 
     def resize(self, width: int, height: int) -> None:
         self.width, self.height = width, height
 
-        self.imageReturn = pygame.transform.scale(self.image, (self.width, self.height))
+        self.copyImage = pygame.transform.scale(self.image, (self.width, self.height))
 
     def flip(self, horizontal: bool = False, vertical: bool = False) -> None:
-        if self.imageReturn is None:
+        if self.image is None:
             return
 
-        self.imageReturn = pygame.transform.flip(self.image, horizontal, vertical)
+        self.image = pygame.transform.flip(self.image, horizontal, vertical)
+        self.copyImage = pygame.transform.flip(self.copyImage, horizontal, vertical)
 
     def get(self) -> pygame.Surface:
-        return self.imageReturn
+        return self.copyImage

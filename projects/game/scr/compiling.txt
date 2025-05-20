@@ -1,4 +1,4 @@
-def mirrorAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def mirrorAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -26,7 +26,7 @@ def mirrorAnimation(program, compiler, path: str, nodes: dict, id: int, variable
 
     return queue
 
-def runAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def runAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -48,7 +48,7 @@ def runAnimation(program, compiler, path: str, nodes: dict, id: int, variables: 
 
     return queue
 
-def stopAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def stopAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -64,7 +64,7 @@ def stopAnimation(program, compiler, path: str, nodes: dict, id: int, variables:
 
     return queue
 
-def callFunction(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def callFunction(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
@@ -196,7 +196,7 @@ def decodeHolders(text: str, variables: dict):
     return text
 
 
-def decodeHolder(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def decodeHolder(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -215,22 +215,7 @@ def decodeHolder(program, compiler, path: str, nodes: dict, id: int, variables: 
 
     return queue
 
-
-"""
-if __name__ == "__main__":
-    import time
-
-    start = time.time()
-
-    variables = {"locals": {"123": {"value": '65'}, "1": {"value": 2}}, "globals": {"1": {"value": True}}}
-    text = "%math(%local_var(123) + %local_var(1))"
-
-    print(decodeHolders(text, variables))
-
-    print(time.time() - start)
-"""
-
-def exit_(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def exit_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -240,7 +225,7 @@ def exit_(program, compiler, path: str, nodes: dict, id: int, variables: dict) -
 
     return queue
 
-def functionEvent(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def functionEvent(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     if nodes["objects"][str(id)]["inputs"]["params"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["params"]["value"]["value"] is not None:
@@ -260,7 +245,7 @@ def functionEvent(program, compiler, path: str, nodes: dict, id: int, variables:
 import pygame
 
 
-def getMousePos(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getMousePos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -276,7 +261,7 @@ def getMousePos(program, compiler, path: str, nodes: dict, id: int, variables: d
 
     return queue
 
-def getTimePassed(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getTimePassed(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -289,7 +274,7 @@ def getTimePassed(program, compiler, path: str, nodes: dict, id: int, variables:
 
     return queue
 
-def getVar(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -318,7 +303,7 @@ def getVar(program, compiler, path: str, nodes: dict, id: int, variables: dict) 
 
     return queue
 
-def len_(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def len_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -361,7 +346,7 @@ else:
 
 
 class PythonFunctions:
-    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos"]
+    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos", "setObjectParameter", "getObjectParameter", "getTimePassed", "moveObjectWithBraking"]
 
     @staticmethod
     def decodeHolder(text, program, variables, path):
@@ -455,9 +440,7 @@ class PythonFunctions:
 
     @staticmethod
     def moveObject(ids, angle, power, program, variables, path):
-        obj = program.objects.getById(int(ids))
-
-        obj.moveByAngle(angle, power)
+        program.objects.getById(int(ids)).moveByAngle(angle, power)
 
     @staticmethod
     def removeObject(ids, program, variables, path):
@@ -506,6 +489,10 @@ class PythonFunctions:
     def getTimePassed(ids, program, variables, path):
         return program.dt
 
+    @staticmethod
+    def moveObjectWithBraking(ids, angle, power, brakingPower, program, variables, path):
+        program.objects.getById(int(ids)).moveByAngle(angle, power, brakingPower)
+
 
 class PythonCodeExecutor:
     program = None
@@ -542,7 +529,7 @@ def pythonCheckHaveFunction(text):
     return bool(match)
 
 
-def python(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def python(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -597,7 +584,7 @@ def python(program, compiler, path: str, nodes: dict, id: int, variables: dict) 
 import random
 
 
-def random_(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def random_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -622,7 +609,7 @@ def random_(program, compiler, path: str, nodes: dict, id: int, variables: dict)
 
     return queue
 
-def setVar(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def setVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -671,7 +658,7 @@ def setVar(program, compiler, path: str, nodes: dict, id: int, variables: dict) 
 
     return queue
 
-def everyFrame(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def everyFrame(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -679,7 +666,7 @@ def everyFrame(program, compiler, path: str, nodes: dict, id: int, variables: di
 
     return queue
 
-def everyTick(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def everyTick(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -687,7 +674,7 @@ def everyTick(program, compiler, path: str, nodes: dict, id: int, variables: dic
 
     return queue
 
-def forDictElements(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def forDictElements(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     timer = []
     queue = []
 
@@ -712,7 +699,7 @@ def forDictElements(program, compiler, path: str, nodes: dict, id: int, variable
 
     return {"queue": queue, "timer": timer}
 
-def forListElements(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def forListElements(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     timer = []
     queue = []
 
@@ -737,7 +724,7 @@ def forListElements(program, compiler, path: str, nodes: dict, id: int, variable
 
     return {"queue": queue, "timer": timer}
 
-def forObjectsGroup(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def forObjectsGroup(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     if nodes["objects"][str(id)]["inputs"]["group"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"] is not None:
@@ -766,7 +753,7 @@ def forObjectsGroup(program, compiler, path: str, nodes: dict, id: int, variable
 
     return queue
 
-def for_(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def for_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     timer = []
     queue = []
 
@@ -809,7 +796,7 @@ def for_(program, compiler, path: str, nodes: dict, id: int, variables: dict) ->
 
     return {"queue": queue, "timer": timer}
 
-def keyboardClick(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def keyboardClick(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -817,7 +804,7 @@ def keyboardClick(program, compiler, path: str, nodes: dict, id: int, variables:
 
     return queue
 
-def keyboardPress(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def keyboardPress(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -825,7 +812,7 @@ def keyboardPress(program, compiler, path: str, nodes: dict, id: int, variables:
 
     return queue
 
-def mouseLeftClick(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def mouseLeftClick(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -833,7 +820,7 @@ def mouseLeftClick(program, compiler, path: str, nodes: dict, id: int, variables
 
     return queue
 
-def mouseRightClick(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def mouseRightClick(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -841,7 +828,18 @@ def mouseRightClick(program, compiler, path: str, nodes: dict, id: int, variable
 
     return queue
 
-def onStartGame(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def onButtonPress(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = kwargs["onButtonPressObjectID"]
+
+    return queue
+
+def onStartGame(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -849,7 +847,7 @@ def onStartGame(program, compiler, path: str, nodes: dict, id: int, variables: d
 
     return queue
 
-def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
@@ -859,10 +857,10 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
         ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
 
     if nodes["objects"][str(id)]["inputs"]["group"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"] is not None:
-        group = nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"]
+        groupList = nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"]
 
     else:
-        group = nodes["objects"][str(id)]["inputs"]["group"]["standard"]
+        groupList = nodes["objects"][str(id)]["inputs"]["group"]["standard"]
 
     if nodes["objects"][str(id)]["inputs"]["append"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] is not None:
         append = (nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] == True)
@@ -872,28 +870,31 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
 
     obj = program.objects.getById(ids)
 
-    answer = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]
+    for group in groupList.split(", "):
+        answer = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]
 
-    if answer[0]:
-        for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
-            queue.append(name["id"])
+        if answer[0]:
+            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.append(name["id"])
 
-        for ids, connector in nodes["objects"][str(id)]["outputs"]["id_in_group"]["value"].items():
-            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer[1].id
+            for ids, connector in nodes["objects"][str(id)]["outputs"]["id_in_group"]["value"].items():
+                nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer[1].id
 
-    else:
-        for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
-            queue.append(name["id"])
+            break
 
-        for ids, connector in nodes["objects"][str(id)]["outputs"]["id_in_group"]["value"].items():
-            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = -1
+        else:
+            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.append(name["id"])
+
+            for ids, connector in nodes["objects"][str(id)]["outputs"]["id_in_group"]["value"].items():
+                nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = -1
 
     return queue
 
 OPERATIONS = ["0. ==", "1. !=", "2. <=", "3. >=", "4. <", "5. >"]
 
 
-def if_(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def if_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     if nodes["objects"][str(id)]["inputs"]["a"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"] is not None:
@@ -914,20 +915,30 @@ def if_(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> 
     else:
         operation = int(nodes["objects"][str(id)]["inputs"]["operation"]["standard"])
 
-    if eval(f"{a} {OPERATIONS[operation][3:]} {b}"):
-        for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
-            queue.append(name["id"])
+    try:
+        if eval(f"{a} {OPERATIONS[operation][3:]} {b}"):
+            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.append(name["id"])
 
-    else:
-        for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
-            queue.append(name["id"])
+        else:
+            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.append(name["id"])
+
+    except BaseException:
+        if eval(f"'{a}' {OPERATIONS[operation][3:]} '{b}'"):
+            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.append(name["id"])
+
+        else:
+            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.append(name["id"])
 
     return queue
 
 import math
 
 
-def divide(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def divide(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -955,7 +966,7 @@ def divide(program, compiler, path: str, nodes: dict, id: int, variables: dict) 
 import math
 
 
-def minus(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def minus(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -983,7 +994,7 @@ def minus(program, compiler, path: str, nodes: dict, id: int, variables: dict) -
 import math
 
 
-def multiply(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def multiply(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1011,7 +1022,7 @@ def multiply(program, compiler, path: str, nodes: dict, id: int, variables: dict
 import math
 
 
-def plus(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def plus(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1036,7 +1047,7 @@ def plus(program, compiler, path: str, nodes: dict, id: int, variables: dict) ->
 
     return queue
 
-def createObject(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def createObject(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1076,7 +1087,7 @@ def createObject(program, compiler, path: str, nodes: dict, id: int, variables: 
 
     return queue
 
-def getObjectIDByName(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getObjectIDByName(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1098,7 +1109,7 @@ def getObjectIDByName(program, compiler, path: str, nodes: dict, id: int, variab
 OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "gravity", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor", "spriteHitbox", "liveTime", "minusSpriteSizePerFrame"]
 
 
-def getObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1129,7 +1140,7 @@ def getObjectParameter(program, compiler, path: str, nodes: dict, id: int, varia
 
     return queue
 
-def getObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1151,7 +1162,7 @@ def getObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: 
 
     return queue
 
-def getObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1176,7 +1187,7 @@ def getObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: 
 
     return queue
 
-def getResultingVector(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getResultingVector(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1198,7 +1209,7 @@ def getResultingVector(program, compiler, path: str, nodes: dict, id: int, varia
 
     return queue
 
-def jump(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def jump(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1222,7 +1233,7 @@ def jump(program, compiler, path: str, nodes: dict, id: int, variables: dict) ->
 
     return queue
 
-def moveObject(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def moveObject(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1252,7 +1263,41 @@ def moveObject(program, compiler, path: str, nodes: dict, id: int, variables: di
 
     return queue
 
-def removeObject(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def moveObjectWithBraking(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = str(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = str(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["angle"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["angle"]["value"]["value"] is not None:
+        angle = float(nodes["objects"][str(id)]["inputs"]["angle"]["value"]["value"])
+
+    else:
+        angle = float(nodes["objects"][str(id)]["inputs"]["angle"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["power"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["power"]["value"]["value"] is not None:
+        power = float(nodes["objects"][str(id)]["inputs"]["power"]["value"]["value"])
+
+    else:
+        power = float(nodes["objects"][str(id)]["inputs"]["power"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["slidingStep"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["slidingStep"]["value"]["value"] is not None:
+        slidingStep = float(nodes["objects"][str(id)]["inputs"]["slidingStep"]["value"]["value"])
+
+    else:
+        slidingStep = float(nodes["objects"][str(id)]["inputs"]["slidingStep"]["standard"])
+
+    program.objects.getById(int(ids)).moveByAngle(angle, power, slidingStep, specifical=id)
+
+    return queue
+
+def removeObject(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1274,10 +1319,10 @@ from engine.vector.int import Vec2i
 import typing
 
 OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "gravity", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor", "spriteHitbox", "liveTime", "minusSpriteSizePerFrame"]
-OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "text", "int", "list", "eval", "list", "list", "list", "float", "float"]
+OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "text", "int", "list", "eval", "eval", "eval", "list", "float", "float"]
 
 
-def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     def decode(operation, text: str) -> typing.Any:
         if OBJECT_PARAMETERS_TYPES[operation] == "eval":
             try:
@@ -1335,7 +1380,7 @@ def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, varia
 
     return queue
 
-def setObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def setObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1366,7 +1411,7 @@ def setObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: 
 
     return queue
 
-def setObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def setObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1399,7 +1444,7 @@ def setObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: 
 
     return queue
 
-def addDictElement(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def addDictElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1430,7 +1475,7 @@ def addDictElement(program, compiler, path: str, nodes: dict, id: int, variables
 
     return queue
 
-def addListElement(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def addListElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1463,7 +1508,7 @@ def addListElement(program, compiler, path: str, nodes: dict, id: int, variables
 
     return queue
 
-def deleteByIndex(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def deleteByIndex(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1488,7 +1533,7 @@ def deleteByIndex(program, compiler, path: str, nodes: dict, id: int, variables:
 
     return queue
 
-def getByIndex(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getByIndex(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1513,7 +1558,7 @@ def getByIndex(program, compiler, path: str, nodes: dict, id: int, variables: di
 
     return queue
 
-def getByKey(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getByKey(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1538,7 +1583,7 @@ def getByKey(program, compiler, path: str, nodes: dict, id: int, variables: dict
 
     return queue
 
-def getIndexOfElement(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getIndexOfElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1569,7 +1614,7 @@ def getIndexOfElement(program, compiler, path: str, nodes: dict, id: int, variab
 
     return queue
 
-def getKeyOfElement(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def getKeyOfElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1600,7 +1645,7 @@ def getKeyOfElement(program, compiler, path: str, nodes: dict, id: int, variable
 
     return queue
 
-def removeByKey(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def removeByKey(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1626,7 +1671,7 @@ def removeByKey(program, compiler, path: str, nodes: dict, id: int, variables: d
 
     return queue
 
-def sliceList(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def sliceList(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1657,7 +1702,7 @@ def sliceList(program, compiler, path: str, nodes: dict, id: int, variables: dic
 
     return queue
 
-def connectText(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def connectText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1682,7 +1727,7 @@ def connectText(program, compiler, path: str, nodes: dict, id: int, variables: d
 
     return queue
 
-def displayText(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def displayText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1710,7 +1755,7 @@ def displayText(program, compiler, path: str, nodes: dict, id: int, variables: d
 
     return queue
 
-def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -1741,7 +1786,7 @@ def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dic
 
     return queue
 
-def writeText(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def writeText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():

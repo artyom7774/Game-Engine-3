@@ -9,7 +9,8 @@
                 "mouseRightClick",
                 "mouseLeftClick",
                 "keyboardClick",
-                "keyboardPress"
+                "keyboardPress",
+                "onButtonPress"
             ]
         },
         "loops": {
@@ -52,6 +53,7 @@
                 "getObjectIDByName",
                 "setObjectPos",
                 "moveObject",
+                "moveObjectWithBraking",
                 "getObjectPos",
                 "setObjectVar",
                 "getObjectVar",
@@ -1476,6 +1478,83 @@
                     "__id__": "ID",
                     "__angle__": "angle",
                     "__power__": "power"
+                }
+            }
+        },
+        "moveObjectWithBraking": {
+            "type": "objects",
+            "name": "moveObjectWithBraking",
+            "x": null,
+            "y": null,
+            "width": 12,
+            "height": 6,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "angle",
+                    "power",
+                    "slidingStep"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+                "angle": {
+                    "code": "angle",
+                    "name": "__angle__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "power": {
+                    "code": "power",
+                    "name": "__power__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                },
+                "slidingStep": {
+                    "code": "slidingStep",
+                    "name": "__slidingStep__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1e9
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "Move object with braking",
+                "discription": "мove object with braking",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__name__": "name",
+                    "__id__": "ID",
+                    "__angle__": "angle",
+                    "__power__": "power",
+                    "__slidingStep__": "Braking force"
                 }
             }
         },
@@ -3532,7 +3611,9 @@
                             "10. Font color",
                             "11. Background color",
                             "12. Rama color",
-                            "13. Sprite hitbox"
+                            "13. Sprite hitbox",
+                            "14. liveTime",
+                            "15. minusSpriteSizePerFrame"
                         ]
                     }
                 },
@@ -3607,7 +3688,9 @@
                             "10. Font color",
                             "11. Background color",
                             "12. Rama color",
-                            "13. Sprite hitbox"
+                            "13. Sprite hitbox",
+                            "14. liveTime",
+                            "15. minusSpriteSizePerFrame"
                         ]
                     }
                 }
@@ -3672,6 +3755,45 @@
                     "__none__": "",
                     "__path__": "path",
                     "__time_passed__": "Time passed"
+                }
+            }
+        },
+        "onButtonPress": {
+            "type": "event",
+            "name": "onButtonPress",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "On button press",
+                "discription": "on button press",
+                "text": {
+                    "__none__": "",
+                    "__path__": "path",
+                    "__id__": "ID"
                 }
             }
         }

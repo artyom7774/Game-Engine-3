@@ -1,4 +1,4 @@
-def forObjectsGroup(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def forObjectsGroup(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     if nodes["objects"][str(id)]["inputs"]["group"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"] is not None:

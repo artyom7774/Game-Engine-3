@@ -35,7 +35,6 @@ class Application:
         if variables is None:
             variables = {}
 
-        self.particles = engine.ParticleGroup(self)
         self.objects = engine.ObjectGroup(self)
 
         self.objects.collisions = engine.Collision(collision)
@@ -187,7 +186,6 @@ class Application:
         return Image.frombytes("RGBA", self.screen.get_size(), pygame.image.tostring(self.screen, "RGBA"))
 
     def render(self) -> None:
-        self.particles.draw()
         self.objects.draw()
 
     def update(self) -> None:
@@ -197,7 +195,6 @@ class Application:
 
         self.camera.update()
 
-        self.particles.update()
         self.objects.update()
 
         self.click = [0] * 5

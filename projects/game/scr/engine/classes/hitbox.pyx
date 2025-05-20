@@ -1,6 +1,7 @@
 from engine.vector.float import Vec4f
 from engine.vector.int import Vec4i
 
+import pygame
 import typing
 
 
@@ -8,10 +9,7 @@ cdef class SquareHitbox:
     cdef public int x, y, width, height
 
     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]):
-        if isinstance(hitbox, (list, tuple)):
-            pass
-
-        else:
+        if not isinstance(hitbox, (list, tuple)):
             hitbox = hitbox.get()
 
         self.x = int(hitbox[0])
@@ -25,24 +23,8 @@ cdef class SquareHitbox:
     def __repr__(self) -> str:
         return f"SquareHitbox({self.x}, {self.y}, {self.width}, {self.height})"
 
-    def __getattr__(self, name):
-        if name == "x":
-            return int(self.x)
-
-        elif name == "y":
-            return int(self.y)
-
-        if name == "width":
-            return int(self.width)
-
-        elif name == "height":
-            return int(self.height)
-
-        else:
-            return super().__getattr__(name)
-
-    def contains(self, obj: "SquareHitbox") -> bool:
-        return self.x <= obj.x < self.x + self.width and self.y <= obj.y < self.y + self.height
+    def draw(self, screen: typing.Any, x: float, y: float, px: float, py: float) -> None:
+        pygame.draw.rect(screen, (255, 0, 0), (x + self.x + px, y + self.y + py, self.width, self.height), 1)
 
     def get(self) -> list:
         return [int(self.x), int(self.y), int(self.width), int(self.height)]

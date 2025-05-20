@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Please wait for the libraries to be installed..."
-
 # install python
 
 START_DIR=$(pwd)

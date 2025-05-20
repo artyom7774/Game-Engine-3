@@ -29,6 +29,26 @@ import math
 import re
 
 
+def isCurrectButton(obj: dict):
+    def func(obj, path):
+        if len(path) == 0:
+            return obj, []
+
+        var = obj[path[0]]
+        path.pop(0)
+
+        return var, path
+
+    for element in BUTTON_CURRECT_TEST:
+        try:
+            func(obj, element.split("/"))
+
+        except BaseException:
+            return False
+
+    return True
+
+
 def isCurrectText(obj: dict):
     def func(obj, path):
         if len(path) == 0:
@@ -528,7 +548,7 @@ class Scene:
                 project.cash["file"][project.selectFile].selectLink = obj.id
 
                 application.objects.add(project.engine.objects.StaticObject(
-                    application, obj.pos, obj.hitbox, group="__debug_select__", layer=int(1e9)+2
+                    application, obj.pos, obj.hitbox, group="__debug_select__", layer=int(1e9)+1
                 ))
 
                 # print("create")
@@ -813,7 +833,7 @@ class Scene:
 
             return 0
 
-        if not isCurrectObject(obj) and not isCurrectText(obj):
+        if not isCurrectObject(obj) and not isCurrectText(obj) and not isCurrectButton(obj):
             MessageBox.error(translate("This text is not object"))
 
             return 0

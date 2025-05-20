@@ -96,10 +96,7 @@
                     "name": "__path__",
                     "standard": null,
                     "type": "path",
-                    "value": {
-                        "id": 698081566,
-                        "name": "path"
-                    }
+                    "value": null
                 },
                 "id": {
                     "code": "id",
@@ -155,6 +152,356 @@
             "width": 10,
             "x": 24,
             "y": 6
+        },
+        "487285508": {
+            "display": {
+                "discription": "on button press",
+                "name": "On button press",
+                "text": {
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 3,
+            "id": 487285508,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                }
+            },
+            "name": "onButtonPress",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 8,
+            "y": 13
+        },
+        "134417241": {
+            "display": {
+                "discription": "Run python code",
+                "name": "Python",
+                "text": {
+                    "__answer__": "answer",
+                    "__dict__": "dict",
+                    "__list__": "list",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text__": "text"
+                }
+            },
+            "height": 5,
+            "id": 134417241,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 487285508,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "def run(program, args, kwargs):\n\tr1 = random(1, 9)\n\tr2 = random(1, 9)\n\tg1 = random(1, 9)\n\tg2 = random(1, 9)\n\tb1 = random(1, 9)\n\tb2 = random(1, 9)\n\n\tcolor = f\"#{r1}{r2}{g1}{g2}{b1}{b2}\"\n\n\treturn [color, color, color]\n",
+                    "type": "text",
+                    "value": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "standard": [],
+                    "type": "list",
+                    "value": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "standard": {},
+                    "type": "dict",
+                    "value": null
+                }
+            },
+            "name": "python",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "list"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text",
+                    "list",
+                    "dict"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "special": {
+                "inputs": {
+                    "dict": {
+                        "invisible": true
+                    },
+                    "list": {
+                        "invisible": true
+                    },
+                    "text": {
+                        "height": 3,
+                        "type": "text-box"
+                    }
+                }
+            },
+            "type": "another",
+            "width": 10,
+            "x": 16,
+            "y": 13
+        },
+        "894552209": {
+            "display": {
+                "discription": "Return random number in [A, B]",
+                "name": "Random",
+                "text": {
+                    "__a__": "A",
+                    "__answer__": "answer",
+                    "__b__": "B",
+                    "__none__": "",
+                    "__path__": "path"
+                }
+            },
+            "height": 4,
+            "id": 894552209,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "a": {
+                    "code": "a",
+                    "name": "__a__",
+                    "standard": 1,
+                    "type": "number",
+                    "value": null
+                },
+                "b": {
+                    "code": "b",
+                    "name": "__b__",
+                    "standard": 2,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "random_",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "a",
+                    "b"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "type": "another",
+            "width": 8,
+            "x": 38,
+            "y": 1
+        },
+        "559282153": {
+            "display": {
+                "discription": "Connect text",
+                "name": "Connect text",
+                "text": {
+                    "__id__": "ID",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__text1__": "first text",
+                    "__text2__": "second text",
+                    "__text__": "text"
+                }
+            },
+            "height": 4,
+            "id": 559282153,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                },
+                "text1": {
+                    "code": "text1",
+                    "name": "__text1__",
+                    "standard": "",
+                    "type": "text",
+                    "value": null
+                },
+                "text2": {
+                    "code": "text2",
+                    "name": "__text2__",
+                    "standard": "",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "connectText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "type": "text"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text1",
+                    "text2"
+                ],
+                "outputs": [
+                    "path",
+                    "text"
+                ]
+            },
+            "type": "text",
+            "width": 8,
+            "x": 47,
+            "y": 7
+        },
+        "197837680": {
+            "display": {
+                "discription": "Set object parameter",
+                "name": "Set object parameter",
+                "text": {
+                    "__id__": "ID",
+                    "__name__": "Name",
+                    "__none__": "",
+                    "__path__": "path",
+                    "__value__": "Value"
+                }
+            },
+            "height": 5,
+            "id": 197837680,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 134417241,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 487285508,
+                        "name": "id"
+                    }
+                },
+                "name": {
+                    "choose": {
+                        "options": [
+                            "0. Hitbox",
+                            "1. Group",
+                            "2. Mass",
+                            "3. Layer",
+                            "4. Invisible",
+                            "5. Gravity",
+                            "6. Braking power",
+                            "7. Message",
+                            "8. Font size",
+                            "9. Alignment",
+                            "10. Font color",
+                            "11. Background color",
+                            "12. Rama color",
+                            "13. Sprite hitbox",
+                            "14. liveTime",
+                            "15. minusSpriteSizePerFrame"
+                        ]
+                    },
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": 10,
+                    "type": "choose",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "",
+                    "type": "Any",
+                    "value": {
+                        "id": 134417241,
+                        "name": "answer"
+                    }
+                }
+            },
+            "name": "setObjectParameter",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "objects",
+            "width": 10,
+            "x": 28,
+            "y": 13
         }
     }
 }

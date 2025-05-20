@@ -1,68 +1,12 @@
-from engine.classes.objects import DynamicObject
+from engine.classes.objects import DynamicObject, Button
 
 from engine.classes.collision import Collision
 
 from engine.classes.hitbox import SquareHitbox
 
-from engine.classes.sprite import Sprite
-
-from engine.functions.alpha import alphaRect
-
 from engine.variables import *
 
 import typing
-import pygame
-import types
-import math
-
-
-class ParticleGroup:
-    def __init__(self, game, particles: typing.List[VParticle] = None) -> None:
-        if particles is None:
-            particles = []
-
-        self.game = game
-
-        self.particles = particles
-
-    def __len__(self) -> int:
-        return len(self.particles)
-
-    def add(self, particle: VParticle) -> None:
-        self.particles.append(particle.copy())
-
-    def remove(self, particle: VObject) -> None:
-        self.particles.remove(particle)
-
-    def getById(self, id: int) -> VParticle:
-        for particle in self.particles:
-            if particle.id == id:
-                return particle
-
-        raise NameError(f"id {id} isn't found")
-
-    def removeById(self, id: int) -> None:
-        for particle in self.particles:
-            if particle.id == id:
-                self.particles.remove(particle)
-                return 0
-
-        raise IndexError(f"id {id} not found in group")
-
-    def getByGroup(self, group: str) -> typing.List[VParticle]:
-        return [particle for particle in self.particles if particle.group == group]
-
-    def update(self):
-        for particle in self.particles:
-            particle.update()
-
-    def draw(self):
-        px = self.game.camera.x()
-        py = self.game.camera.y()
-
-        for particle in self.particles:
-            if self.game.width + particle.sprite.width > particle.pos.x + px > -particle.sprite.width and self.game.height + particle.sprite.height > particle.pos.y + py > -particle.sprite.height:
-                particle.draw(px, py)
 
 
 class ObjectGroup:
@@ -75,8 +19,12 @@ class ObjectGroup:
         self.collisions = Collision()
 
         self.objects = []
+        self.buttonObjects = []
 
         for obj in self.objects:
+            if type(obj) == Button:
+                self.buttonObjects.append(obj)
+
             self.add(obj)
 
         self.objectById = {}
@@ -102,6 +50,9 @@ class ObjectGroup:
         else:
             self.objects.append(obj)
 
+        if type(obj) == Button:
+            self.buttonObjects.append(obj)
+
         self.objectById[obj.id] = obj
 
         if obj.group not in self.objectByGroup:
@@ -111,6 +62,9 @@ class ObjectGroup:
 
     def remove(self, obj: VObject) -> None:
         self.objects.remove(obj)
+
+        if type(obj) == Button:
+            self.buttonObjects.remove(obj)
 
         if obj.id in self.objectById:
             self.objectById.pop(obj.id)

@@ -8,3 +8,5 @@ from .versionLogScrollArea import VersionLogScrollArea
 from .collisionTable import CollisionTable
 
 from .treeProject import TreeProject
+
+from .visiableConsole import VisiableConsole

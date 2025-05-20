@@ -82,12 +82,12 @@ class ObjectGroup:
         self.objectById = {}
         self.objectByGroup = {}
 
-        self.maxLenghtObject = -INF
-        self.minLenghtObject = +INF
+        self.maxLengthObject = -INF
+        self.minLengthObject = +INF
 
     def empty(self):
-        self.maxLenghtObject = -INF
-        self.minLenghtObject = +INF
+        self.maxLengthObject = -INF
+        self.minLengthObject = +INF
 
         for obj in self.objects:
             self.remove(obj)
@@ -141,7 +141,7 @@ class ObjectGroup:
         self.minLenghtObject = min(self.minLenghtObject, obj.hitbox.width + obj.hitbox.height)
 
     def updateMaxLenghtObject(self, obj: VObject) -> None:
-        self.maxLenghtObject = max(self.maxLenghtObject, obj.hitbox.width + obj.hitbox.height)
+        self.maxLengthObject = max(self.maxLengthObject, obj.hitbox.width + obj.hitbox.height)
 
     def update(self) -> None:
         right = [obj for obj in self.objects if not hasattr(obj, "getVectorsPower") or obj.getVectorsPower().x >= 0]

@@ -1,7 +1,7 @@
 OPERATIONS = ["0. ==", "1. !=", "2. <=", "3. >=", "4. <", "5. >"]
 
 
-def if_(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def if_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     if nodes["objects"][str(id)]["inputs"]["a"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"] is not None:
@@ -22,12 +22,22 @@ def if_(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> 
     else:
         operation = int(nodes["objects"][str(id)]["inputs"]["operation"]["standard"])
 
-    if eval(f"{a} {OPERATIONS[operation][3:]} {b}"):
-        for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
-            queue.append(name["id"])
+    try:
+        if eval(f"{a} {OPERATIONS[operation][3:]} {b}"):
+            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.append(name["id"])
 
-    else:
-        for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
-            queue.append(name["id"])
+        else:
+            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.append(name["id"])
+
+    except BaseException:
+        if eval(f"'{a}' {OPERATIONS[operation][3:]} '{b}'"):
+            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.append(name["id"])
+
+        else:
+            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.append(name["id"])
 
     return queue

@@ -105,7 +105,7 @@ def decodeHolders(text: str, variables: dict):
     return text
 
 
-def decodeHolder(program, compiler, path: str, nodes: dict, id: int, variables: dict) -> dict:
+def decodeHolder(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
     for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
@@ -123,18 +123,3 @@ def decodeHolder(program, compiler, path: str, nodes: dict, id: int, variables: 
         nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
 
     return queue
-
-
-"""
-if __name__ == "__main__":
-    import time
-
-    start = time.time()
-
-    variables = {"locals": {"123": {"value": '65'}, "1": {"value": 2}}, "globals": {"1": {"value": True}}}
-    text = "%math(%local_var(123) + %local_var(1))"
-
-    print(decodeHolders(text, variables))
-
-    print(time.time() - start)
-"""

@@ -1,4 +1,4 @@
-// RU TRANSLATE VERSION = 3.9.0 beta
+// RU TRANSLATE VERSION = 3.9.0
 
 {
     "Project": "Проект"
@@ -357,4 +357,10 @@
     "Particle": "Частица"
     "Live time": "Время жизни"
     "Minus size per frame": "Уменьшение размера каждый кадр"
+    "On button press": "При нажатии кнопки"
+    "Braking force": "Сила торможения"
+    "Move object with braking": "Переместить объект с торможением"
+    "Installing libraries": "Установка библиотек"
+    "Successfully": "Успешно"
+    "Kinematic object": "Кинематический объект"
 }
