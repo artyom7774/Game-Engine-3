@@ -35,7 +35,6 @@ class Application:
         if variables is None:
             variables = {}
 
-        self.particles = engine.ParticleGroup(self)
         self.objects = engine.ObjectGroup(self)
 
         self.objects.collisions = engine.Collision(collision)
@@ -117,7 +116,7 @@ class Application:
     def updateCaption(self) -> None:
         pygame.display.set_caption(self.name, self.icon)
 
-    def updateCustonCaption(self, text: str) -> None:
+    def updateCustomCaption(self, text: str) -> None:
         pygame.display.set_caption(text)
 
     def setDebug(self, debug: bool) -> None:
@@ -154,7 +153,7 @@ class Application:
         self.functions = functionClass
 
     def setKeyEvent(self, event: typing.List[str], func: typing.Callable) -> None:
-        # setKeyEvent(["KEYDOWN", "r"], self.place)
+        # setKeyEvent(["KEYDOWN", "r"], function)
 
         try:
             event[0] = getattr(pygame, event[0])
@@ -187,7 +186,6 @@ class Application:
         return Image.frombytes("RGBA", self.screen.get_size(), pygame.image.tostring(self.screen, "RGBA"))
 
     def render(self) -> None:
-        self.particles.draw()
         self.objects.draw()
 
     def update(self) -> None:
@@ -197,7 +195,6 @@ class Application:
 
         self.camera.update()
 
-        self.particles.update()
         self.objects.update()
 
         self.click = [0] * 5

@@ -3,6 +3,14 @@
         "StaticObject": [],
         "DynamicObject": [
             "StaticObject"
+        ],
+        "KinematicObject": [
+            "StaticObject",
+            "DynamicObject"
+        ],
+        "Particle": [
+            "StaticObject",
+            "DynamicObject"
         ]
     },
     "dependence": [],
@@ -12,17 +20,45 @@
         "type": "choose",
         "choose": {
             "input": [
-                "Static object",
-                "Dynamic object"
+                "object.name.staticObject",
+                "object.name.dynamicObject",
+                "object.name.kinematicObject",
+                "object.name.particle"
             ],
             "output": [
                 "StaticObject",
-                "DynamicObject"
+                "DynamicObject",
+                "KinematicObject",
+                "Particle"
             ]
         }
     },
     "variables": {},
     "main": "StaticObject",
+    "Particle": {
+        "liveTime": {
+            "name": "Live time",
+            "value": 60,
+            "type": "int"
+        },
+        "minusSpriteSizePerFrame": {
+            "name": "Minus size per frame",
+            "value": 0.01,
+            "type": "int"
+        }
+    },
+    "DynamicObject": {
+        "gravity": {
+            "name": "Object gravity",
+            "value": 1000,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 1000000.0,
+            "type": "int"
+        }
+    },
     "StaticObject": {
         "pos": {
             "name": "Object position",
@@ -30,12 +66,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": 1620.0
+                    "value": -896.0
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": 72.0
+                    "value": -32.0
                 }
             },
             "type": "dict"
@@ -56,12 +92,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 }
             },
             "type": "dict"
@@ -72,7 +108,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets\/bricks\/10.png"
+                    "value": "assets\/grass\/1.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -87,19 +123,19 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 }
             },
             "type": "dict"
         },
         "group": {
             "name": "Name of object group",
-            "value": "brick",
+            "value": "grass",
             "type": "str"
         },
         "mass": {
@@ -133,28 +169,6 @@
             "name": "Invisible",
             "value": false,
             "type": "bool"
-        }
-    },
-    "DynamicObject": {
-        "speed": {
-            "name": "Moving speed",
-            "value": 5,
-            "type": "int"
-        },
-        "gravity": {
-            "name": "Object gravity",
-            "value": 1000,
-            "type": "int"
-        },
-        "jumpPower": {
-            "name": "Power jump",
-            "value": 10,
-            "type": "int"
-        },
-        "slidingStep": {
-            "name": "Braking power",
-            "value": 1000000.0,
-            "type": "int"
         }
     }
 }

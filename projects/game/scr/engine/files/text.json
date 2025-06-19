@@ -120,8 +120,8 @@
         "choose": {
             "type": {
                 "input": [
-                    "Text",
-                    "Text field"
+                    "object.name.text",
+                    "object.name.field"
                 ],
                 "output": [
                     "Text",

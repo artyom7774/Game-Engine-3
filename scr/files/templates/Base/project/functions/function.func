@@ -3,11 +3,10 @@
     "objects": {
         "81376843": {
             "display": {
-                "discription": "starts at the start of the game",
-                "name": "On start game",
+                "name": "node.name.onStartGame",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
                 }
             },
             "height": 3,
@@ -28,12 +27,11 @@
         },
         "933700812": {
             "display": {
-                "discription": "...",
-                "name": "Write text",
+                "name": "node.name.writeText",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__text__": "text"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
                 }
             },
             "height": 3,

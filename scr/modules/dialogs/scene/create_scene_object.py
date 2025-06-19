@@ -102,7 +102,7 @@ class CreateSceneObject(QDialog):
         self.objects["project_combobox"].setFont(FONT)
         self.objects["project_combobox"].show()
 
-        self.objects["project_combobox"].addItems(functions.project.getAllProjectObjects(self.project, True))
+        self.objects["project_combobox"].addItems([element.replace(f"projects/{self.project.selectProject}/project/objects/", "") for element in functions.project.getAllProjectObjects(self.project, False)])
 
         # CREATE
 

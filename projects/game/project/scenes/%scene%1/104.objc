@@ -20,10 +20,10 @@
         "type": "choose",
         "choose": {
             "input": [
-                "Static object",
-                "Dynamic object",
-                "Kinematic object",
-                "Particle"
+                "object.name.staticObject",
+                "object.name.dynamicObject",
+                "object.name.kinematicObject",
+                "object.name.particle"
             ],
             "output": [
                 "StaticObject",
@@ -35,18 +35,6 @@
     },
     "variables": {},
     "main": "StaticObject",
-    "DynamicObject": {
-        "gravity": {
-            "name": "Object gravity",
-            "value": 0,
-            "type": "int"
-        },
-        "slidingStep": {
-            "name": "Braking power",
-            "value": 1000000.0,
-            "type": "int"
-        }
-    },
     "Particle": {
         "liveTime": {
             "name": "Live time",
@@ -59,6 +47,18 @@
             "type": "int"
         }
     },
+    "DynamicObject": {
+        "gravity": {
+            "name": "Object gravity",
+            "value": 1000,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 1000000.0,
+            "type": "int"
+        }
+    },
     "StaticObject": {
         "pos": {
             "name": "Object position",
@@ -66,12 +66,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": -648.0
+                    "value": -800.0
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": -324.0
+                    "value": -32.0
                 }
             },
             "type": "dict"
@@ -92,12 +92,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 }
             },
             "type": "dict"
@@ -108,7 +108,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets\/bricks\/2.png"
+                    "value": "assets\/grass\/1.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -123,19 +123,19 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 }
             },
             "type": "dict"
         },
         "group": {
             "name": "Name of object group",
-            "value": "brick",
+            "value": "grass",
             "type": "str"
         },
         "mass": {

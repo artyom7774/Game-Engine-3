@@ -1,3 +1,5 @@
+from engine.special.exception import EngineError
+
 import math
 
 
@@ -19,7 +21,10 @@ def divide(program, compiler, path: str, nodes: dict, id: int, variables: dict, 
     else:
         b = float(nodes["objects"][str(id)]["inputs"]["b"]["standard"])
 
-    answer = int(a // b) if math.trunc(round(a / b, 10)) == math.ceil(round(a / b, 10)) else round(a / b, 10)
+    if b == 0:
+        raise EngineError("division by zero")
+
+    answer = int(a / b) if math.trunc(round(a / b, 10)) == math.ceil(round(a / b, 10)) else round(a / b, 10)
 
     for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
         nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer

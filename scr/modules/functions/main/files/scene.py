@@ -348,7 +348,7 @@ class SceneAdditions:
             try:
                 select = project.application[project.selectFile].objects.getByGroup("__debug_select__")[0]
 
-            except KeyError:
+            except BaseException:
                 return
 
             except IndexError:
@@ -910,6 +910,28 @@ class Scene:
         return obj["type"]["value"], answer
 
     @staticmethod
+    def loadObjectFileFull(project, id: int, obj: dict) -> dict:
+        answer = {}
+
+        for element in obj["dependence"] + [obj["type"]["value"]]:
+            if element not in obj:
+                continue
+
+            for key, value in obj[element].items():
+                if value["type"] == "dict":
+                    answer[key] = [elem["value"] for elem in value["value"].values()]
+
+                else:
+                    answer[key] = value["value"]
+
+        if "sprite" in answer and answer["sprite"] != "":
+            answer["sprite"][0] = f"projects/{project.selectProject}/project/{answer['sprite'][0]}"
+
+        # print(answer["sprite"])
+
+        return obj["type"]["value"], answer, obj["variables"]
+
+    @staticmethod
     def toObjectMove(project, direction) -> None:
         application = project.application[project.selectFile]
 
@@ -932,8 +954,12 @@ class Scene:
         with open(project.cash["file"][project.selectFile].selectObject.variables["file"], "r") as file:
             obj = load(file)
 
-        obj["StaticObject"]["pos"]["value"]["x"]["value"] += directions[direction][0]
-        obj["StaticObject"]["pos"]["value"]["y"]["value"] += directions[direction][1]
+        try:
+            obj[obj["main"]]["pos"]["value"]["x"]["value"] += directions[direction][0]
+            obj[obj["main"]]["pos"]["value"]["y"]["value"] += directions[direction][1]
+
+        except KeyError:
+            return
 
         with open(project.cash["file"][project.selectFile].selectObject.variables["file"], "w") as file:
             dump(obj, file, indent=4)

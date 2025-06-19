@@ -1,3 +1,0 @@
-Any <-> block - {collision}
-player -> player - {collision}
-player -> bg - {function::test()}

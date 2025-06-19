@@ -2,19 +2,24 @@ import functools
 import typing
 import random
 import pygame
+import math
 import re
 
 
 if typing.TYPE_CHECKING:
-    def decodeHolders(text, variables):
+    def decodeHolders(*args):
         pass
+
+    class PerlinNoise:
+        def __init__(self, *args):
+            pass
 
 else:
     pass
 
 
 class PythonFunctions:
-    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos", "setObjectParameter", "getObjectParameter", "getTimePassed", "moveObjectWithBraking"]
+    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos", "setObjectParameter", "getObjectParameter", "getTimePassed", "moveObjectWithBraking", "getNoiseValue", "sin", "cos", "tan", "ctg", "degrees", "radians", "goToScene", "getSceneName", "playMusic", "stopMusic", "playSound"]
 
     @staticmethod
     def decodeHolder(text, program, variables, path):
@@ -82,6 +87,8 @@ class PythonFunctions:
 
         program.objects.add(obj)
 
+        program.settings["variables"]["objects"][program.scene][str(obj.id)] = program.allObjects[name]["vars"]
+
         return obj.id
 
     @staticmethod
@@ -98,7 +105,7 @@ class PythonFunctions:
 
     @staticmethod
     def getObjectVar(ids, name, program, variables, path):
-        answer = variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)]][name]["value"]
+        return variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)][name]["value"]
 
     @staticmethod
     def jump(ids, program, variables, path):
@@ -123,7 +130,7 @@ class PythonFunctions:
 
     @staticmethod
     def setObjectVar(ids, name, value, program, variables, path):
-        variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)]][name]["value"] = value
+        variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)][name]["value"] = value
 
     @staticmethod
     def getResultingVector(ids, program, variables, path):
@@ -160,6 +167,60 @@ class PythonFunctions:
     @staticmethod
     def moveObjectWithBraking(ids, angle, power, brakingPower, program, variables, path):
         program.objects.getById(int(ids)).moveByAngle(angle, power, brakingPower)
+
+    @staticmethod
+    def getNoiseValue(seed, x, y, octaves, frequency, amplitude, lacunarity, persistence, mn, mx, program, variables, path):
+        return PerlinNoise(seed).octave_noise(x + random.uniform(-0.1, 0.1), y + random.uniform(-0.1, 0.1), octaves, frequency, amplitude, lacunarity, persistence, mn, mx)
+
+    @staticmethod
+    def sin(x, program, variables, path):
+        return math.sin(x)
+
+    @staticmethod
+    def cos(x, program, variables, path):
+        return math.cos(x)
+
+    @staticmethod
+    def tan(x, program, variables, path):
+        return math.tan(x)
+
+    @staticmethod
+    def ctg(x, program, variables, path):
+        return 1 / math.tan(x)
+
+    @staticmethod
+    def degrees(radians, program, variables, path):
+        return math.degrees(radians)
+
+    @staticmethod
+    def radians(degrees, program, variables, path):
+        return math.radians(degrees)
+
+    @staticmethod
+    def goToScene(scene, program, variables, path):
+        program.loadScene(program.sceneNames[scene])
+
+    @staticmethod
+    def getSceneName(scene, program, variables, path):
+        scenes = {}
+
+        for key, value in program.sceneNames.items():
+            scenes[value] = key
+
+        return scenes[program.scene]
+
+    @staticmethod
+    def playMusic(music, program, variables, path):
+        pygame.mixer.music.load(program.music[music])
+        pygame.mixer.music.play(-1)
+
+    @staticmethod
+    def stopMusic(program, variables, path):
+        pygame.mixer.music.stop()
+
+    @staticmethod
+    def playSound(music, program, variables, path):
+        program.loadSound[music].play()
 
 
 class PythonCodeExecutor:

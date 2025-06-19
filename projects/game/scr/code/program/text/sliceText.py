@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -21,6 +24,9 @@ def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dic
 
     else:
         end = int(nodes["objects"][str(id)]["inputs"]["end"]["standard"])
+
+    if start > end:
+        raise EngineError(f"end position {end} must be bigger than start position {start}")
 
     answer = text[start:(None if end == -1 else end + 1)]
 

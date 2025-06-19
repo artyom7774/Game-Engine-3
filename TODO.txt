@@ -184,7 +184,43 @@
 117. [x] добавить для нода получения и установки параметров объектов параметры для текста:
 118. [x] при выборе шрифта ниже показываеться пример текста с данным шрифтом
 119. [ ] объекты слева можно перетаскивать на сцену
+120. [ ] для каждого нода события параметр приоритета
+121. [ ] обновить сайт:
+- новые ноды:
+getNoiseValue
+sinus
+cosine
+tangent
+cotangent
+degrees
+radians
+goToScene
+getSceneName
+playMusic
+stopMusic
+playSound
+wait
+break
+onLoadScene
+
+- новые функции:
+getNoiseValue
+sin
+cos
+tan
+ctg
+degrees
+radians
+goToScene
+getSceneName
+playMusic
+stopMusic
+playSound
+
+НА САЙТЕ В НОДЕ СОЗДАТЬ ОБЪЕКТ ПОСТАВИТЬ ПРАВИЛЬНЫЙ ТЕКСТ
+
+121. [ ] добавить на сайтменя со списком обновлений
 
 mading:
 
-now: 89 / 119
+now: 89 / 121

@@ -40,9 +40,15 @@ def setVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, 
         value = float(value) if float(value) - int(value) != 0 else int(value)
 
     if gl:
+        if name not in variables["globals"]:
+            EngineError(f"not found global variable with name = {name}")
+
         variables["globals"][name]["value"] = value
 
     else:
+        if name not in variables["locals"][path]:
+            EngineError(f"not found local variable with name = {name}")
+
         variables["locals"][path][name]["value"] = value
 
     return queue

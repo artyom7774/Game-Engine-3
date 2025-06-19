@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def setObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -5,10 +8,10 @@ def setObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: 
         queue.append(name["id"])
 
     if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
-        ids = str(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
 
     else:
-        ids = str(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
 
     if nodes["objects"][str(id)]["inputs"]["x"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"] is not None:
         x = float(nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"])
@@ -22,7 +25,10 @@ def setObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: 
     else:
         y = float(nodes["objects"][str(id)]["inputs"]["y"]["standard"])
 
-    obj = program.objects.getById(int(ids))
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
 
     obj.pos.x = x
     obj.pos.y = y

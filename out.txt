@@ -118,7 +118,7 @@
 116       def updateCaption(self) -> None:
 117           pygame.display.set_caption(self.name, self.icon)
 118   
-119       def updateCustonCaption(self, text: str) -> None:
+119       def updateCustomCaption(self, text: str) -> None:
 120           pygame.display.set_caption(text)
 121   
 122       def setDebug(self, debug: bool) -> None:
@@ -3602,7 +3602,7 @@
 211               if self.project.fpsc % self.nodes["objects"][id]["inputs"]["N"]["standard"] == 0:
 212                   self.start(id)
 213   
-214           self.project.updateCustonCaption(f"FPS = {round(self.project.clock.get_fps())} TPS = {self.tpsNow}")
+214           self.project.updateCustomCaption(f"FPS = {round(self.project.clock.get_fps())} TPS = {self.tpsNow}")
 215   
 216       def tps(self, tps: int):
 217           self.tpsc += 1
@@ -7383,7 +7383,7 @@
 53            self.objects["copyright"].setAlignment(Qt.AlignCenter)
 54            self.objects["copyright"].setFont(HELP_FONT)
 55            self.objects["copyright"].setGeometry(0, 370, 600, 30)
-56            self.objects["copyright"].setText(f"Copyright ©2023-{datetime.datetime.now().year}")
+56            self.objects["copyright"].setText(f"Copyright ©2024-{datetime.datetime.now().year}")
 57            self.objects["copyright"].show()
 58    
 ##### scr\modules\dialogs\help\help.py #####

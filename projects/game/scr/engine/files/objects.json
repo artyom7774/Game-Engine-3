@@ -136,10 +136,10 @@
         "choose": {
             "type": {
                 "input": [
-                    "Static object",
-                    "Dynamic object",
-                    "Kinematic object",
-                    "Particle"
+                    "object.name.staticObject",
+                    "object.name.dynamicObject",
+                    "object.name.kinematicObject",
+                    "object.name.particle"
                 ],
                 "output": [
                     "StaticObject",

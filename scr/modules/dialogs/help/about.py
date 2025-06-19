@@ -37,7 +37,7 @@ class About(QDialog):
         self.objects["site"].setFont(HELP_FONT)
         self.objects["site"].setGeometry(10, 45, 600, 40)
         self.objects["site"].setTextFormat(Qt.RichText)
-        self.objects["site"].setText("Site: <a href='https://artyom7774.github.io'>https://artyom7774.github.io</a>")
+        self.objects["site"].setText("Site: <a href='https://artyom7777.pythonanywhere.com/'>https://artyom7777.pythonanywhere.com/</a>")
         self.objects["site"].setOpenExternalLinks(True)
         self.objects["site"].show()
 
@@ -53,5 +53,5 @@ class About(QDialog):
         self.objects["copyright"].setAlignment(Qt.AlignCenter)
         self.objects["copyright"].setFont(HELP_FONT)
         self.objects["copyright"].setGeometry(0, 370, 600, 30)
-        self.objects["copyright"].setText(f"Copyright ©2023-{datetime.datetime.now().year}")
+        self.objects["copyright"].setText(f"Copyright ©2024-{datetime.datetime.now().year}")
         self.objects["copyright"].show()

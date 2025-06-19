@@ -1,3 +1,8 @@
+from engine.special.exception import EngineError
+
+import copy
+
+
 def createObject(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -22,6 +27,9 @@ def createObject(program, compiler, path: str, nodes: dict, id: int, variables: 
     else:
         y = float(nodes["objects"][str(id)]["inputs"]["y"]["standard"])
 
+    if name not in program.allObjects:
+        EngineError(f"not found object with name = {name}")
+
     type = program.allObjects[name]["type"]
     variables = program.allObjects[name]["variables"]
 
@@ -32,6 +40,8 @@ def createObject(program, compiler, path: str, nodes: dict, id: int, variables: 
     # print(obj.pos, obj.hitbox, len(program.objects.objects), variables)
 
     program.objects.add(obj)
+
+    program.settings["variables"]["objects"][program.scene][str(obj.id)] = copy.deepcopy(program.allObjects[name]["vars"])
 
     for ids, connector in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():
         nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.id

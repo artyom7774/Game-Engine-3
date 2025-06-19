@@ -1,0 +1,174 @@
+{
+    "dependences": {
+        "StaticObject": [],
+        "DynamicObject": [
+            "StaticObject"
+        ],
+        "KinematicObject": [
+            "StaticObject",
+            "DynamicObject"
+        ],
+        "Particle": [
+            "StaticObject",
+            "DynamicObject"
+        ]
+    },
+    "dependence": [],
+    "type": {
+        "name": "Object type",
+        "value": "StaticObject",
+        "type": "choose",
+        "choose": {
+            "input": [
+                "object.name.staticObject",
+                "object.name.dynamicObject",
+                "object.name.kinematicObject",
+                "object.name.particle"
+            ],
+            "output": [
+                "StaticObject",
+                "DynamicObject",
+                "KinematicObject",
+                "Particle"
+            ]
+        }
+    },
+    "variables": {},
+    "main": "StaticObject",
+    "Particle": {
+        "liveTime": {
+            "name": "Live time",
+            "value": 60,
+            "type": "int"
+        },
+        "minusSpriteSizePerFrame": {
+            "name": "Minus size per frame",
+            "value": 0.01,
+            "type": "int"
+        }
+    },
+    "DynamicObject": {
+        "gravity": {
+            "name": "Object gravity",
+            "value": 1000,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 1000000.0,
+            "type": "int"
+        }
+    },
+    "StaticObject": {
+        "pos": {
+            "name": "Object position",
+            "value": {
+                "x": {
+                    "name": "X",
+                    "type": "int",
+                    "value": -416.0
+                },
+                "y": {
+                    "name": "Y",
+                    "type": "int",
+                    "value": 64.0
+                }
+            },
+            "type": "dict"
+        },
+        "hitbox": {
+            "name": "Object hitbox",
+            "value": {
+                "X offset": {
+                    "name": "X offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "Y offset": {
+                    "name": "Y offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "width": {
+                    "name": "Width",
+                    "type": "int",
+                    "value": 256
+                },
+                "height": {
+                    "name": "Height",
+                    "type": "int",
+                    "value": 256
+                }
+            },
+            "type": "dict"
+        },
+        "sprite": {
+            "name": "Object sprite",
+            "value": {
+                "path": {
+                    "name": "Path to image",
+                    "type": "path",
+                    "value": "assets\/house\/floorDown.png"
+                },
+                "X offset": {
+                    "name": "X offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "Y offset": {
+                    "name": "Y offset",
+                    "type": "int",
+                    "value": 0
+                },
+                "width": {
+                    "name": "Width",
+                    "type": "int",
+                    "value": 256
+                },
+                "height": {
+                    "name": "Height",
+                    "type": "int",
+                    "value": 256
+                }
+            },
+            "type": "dict"
+        },
+        "group": {
+            "name": "Name of object group",
+            "value": "object",
+            "type": "str"
+        },
+        "mass": {
+            "name": "Mass",
+            "value": 1000,
+            "type": "int"
+        },
+        "layer": {
+            "name": "Object layer",
+            "value": 0,
+            "type": "int"
+        },
+        "animation": {
+            "name": "Animation",
+            "value": {
+                "groups": {
+                    "group": {
+                        "name": "group",
+                        "sprites": [],
+                        "settings": {
+                            "repeat": false,
+                            "fpsPerFrame": 10,
+                            "standard": false
+                        }
+                    }
+                }
+            },
+            "type": "animator"
+        },
+        "invisible": {
+            "name": "Invisible",
+            "value": false,
+            "type": "bool"
+        }
+    }
+}

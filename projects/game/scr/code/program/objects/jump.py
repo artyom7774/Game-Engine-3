@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def jump(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -5,10 +8,10 @@ def jump(program, compiler, path: str, nodes: dict, id: int, variables: dict, **
         queue.append(name["id"])
 
     if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
-        ids = str(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
 
     else:
-        ids = str(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
 
     if nodes["objects"][str(id)]["inputs"]["power"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["power"]["value"]["value"] is not None:
         power = float(nodes["objects"][str(id)]["inputs"]["power"]["value"]["value"])
@@ -16,7 +19,10 @@ def jump(program, compiler, path: str, nodes: dict, id: int, variables: dict, **
     else:
         power = float(nodes["objects"][str(id)]["inputs"]["power"]["standard"])
 
-    obj = program.objects.getById(int(ids))
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
 
     obj.vectors["__fall__"].power = -power
 

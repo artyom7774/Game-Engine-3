@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def stopAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -10,6 +13,11 @@ def stopAnimation(program, compiler, path: str, nodes: dict, id: int, variables:
     else:
         ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
 
-    program.objects.getById(ids).animator.stopAnimation()
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    obj.animator.stopAnimation()
 
     return queue

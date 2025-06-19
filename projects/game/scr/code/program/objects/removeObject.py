@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def removeObject(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -10,6 +13,7 @@ def removeObject(program, compiler, path: str, nodes: dict, id: int, variables: 
     else:
         ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
 
-    program.objects.removeById(ids)
+    if not program.objects.removeById(ids):
+        raise EngineError(f"not found object with id = {ids}")
 
     return queue

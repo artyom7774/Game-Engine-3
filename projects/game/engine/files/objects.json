@@ -5,6 +5,14 @@
         "StaticObject": [],
         "DynamicObject": [
             "StaticObject"
+        ],
+        "KinematicObject": [
+            "StaticObject",
+            "DynamicObject"
+        ],
+        "Particle": [
+            "StaticObject",
+            "DynamicObject"
         ]
     },
     "standard": {
@@ -72,12 +80,12 @@
         },
         "group": "object",
         "layer": 0,
-        "speed": 5,
         "gravity": 1000,
-        "jumpPower": 10,
         "slidingStep": 1e6,
         "mass": 1000,
         "invisible": false,
+        "liveTime": 60,
+        "minusSpriteSizePerFrame": 0.01,
         "animation": {
             "groups": {
                 "group": {
@@ -101,13 +109,13 @@
         "sprite": "Object sprite",
         "group": "Name of object group",
         "layer": "Object layer",
-        "speed": "Moving speed",
         "gravity": "Object gravity",
-        "jumpPower": "Power jump",
         "slidingStep": "Braking power",
         "invisible": "Invisible",
         "animation": "Animation",
-        "mass": "Mass"
+        "mass": "Mass",
+        "liveTime": "Live time",
+        "minusSpriteSizePerFrame": "Minus size per frame"
     },
     "type": {
         "type": "choose",
@@ -116,24 +124,28 @@
         "sprite": "dict",
         "group": "str",
         "layer": "int",
-        "speed": "int",
         "gravity": "int",
-        "jumpPower": "int",
         "slidingStep": "int",
         "invisible": "bool",
         "animation": "animator",
-        "mass": "int"
+        "mass": "int",
+        "liveTime": "int",
+        "minusSpriteSizePerFrame": "int"
     },
     "specials": {
         "choose": {
             "type": {
                 "input": [
-                    "Static object",
-                    "Dynamic object"
+                    "object.name.staticObject",
+                    "object.name.dynamicObject",
+                    "object.name.kinematicObject",
+                    "object.name.particle"
                 ],
                 "output": [
                     "StaticObject",
-                    "DynamicObject"
+                    "DynamicObject",
+                    "KinematicObject",
+                    "Particle"
                 ]
             }
         }
@@ -150,10 +162,15 @@
             "invisible"
         ],
         "DynamicObject": [
-            "speed",
             "gravity",
-            "jumpPower",
             "slidingStep"
+        ],
+        "Particle": [
+            "liveTime",
+            "minusSpriteSizePerFrame"
+        ],
+        "KinematicObject": [
+
         ]
     }
 }

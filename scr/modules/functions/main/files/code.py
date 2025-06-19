@@ -84,7 +84,7 @@ class TypeSet:
 
     @staticmethod
     def number(value: typing.Any):
-        return float(value) if math.trunc(float(value)) != math.ceil(float(value)) else int(float(value))
+        return float(value) if int(float(value)) - float(value) != 0 else int(float(value))
 
     @staticmethod
     def text(value: typing.Any):

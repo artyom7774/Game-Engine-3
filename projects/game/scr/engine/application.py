@@ -116,7 +116,7 @@ class Application:
     def updateCaption(self) -> None:
         pygame.display.set_caption(self.name, self.icon)
 
-    def updateCustonCaption(self, text: str) -> None:
+    def updateCustomCaption(self, text: str) -> None:
         pygame.display.set_caption(text)
 
     def setDebug(self, debug: bool) -> None:
@@ -153,7 +153,7 @@ class Application:
         self.functions = functionClass
 
     def setKeyEvent(self, event: typing.List[str], func: typing.Callable) -> None:
-        # setKeyEvent(["KEYDOWN", "r"], self.place)
+        # setKeyEvent(["KEYDOWN", "r"], function)
 
         try:
             event[0] = getattr(pygame, event[0])

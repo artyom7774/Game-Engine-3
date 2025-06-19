@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def getVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -17,9 +20,15 @@ def getVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, 
         gl = nodes["objects"][str(id)]["inputs"]["global"]["standard"]
 
     if gl:
+        if name not in variables["globals"]:
+            EngineError(f"not found global variable with name = {name}")
+
         answer = variables["globals"][name]["value"]
 
     else:
+        if name not in variables["locals"][path]:
+            EngineError(f"not found local variable with name = {name}")
+
         answer = variables["locals"][path][name]["value"]
 
     for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():

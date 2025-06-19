@@ -10,9 +10,40 @@ from scr.variables import *
 
 import webbrowser
 import qdarktheme
+import subprocess
+import traceback
 import threading
 import requests
 import ctypes
+import sys
+
+
+def exceptionHandler(func):
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+
+        except Exception as e:
+            with open("scr/files/logs/log.txt", "a+", encoding="utf-8", buffering=1) as file:
+                file.write(traceback.format_exc())
+
+            if not DIVELOP:
+                if SYSTEM == "Windows":
+                    subprocess.run(["notepad.exe", "scr/files/logs/log.txt"])
+
+                elif SYSTEM == "Linux":
+                    subprocess.run(["gedit", "scr/files/logs/log.txt"])
+
+                else:
+                    print("LOG: scr/files/logs/log.txt")
+
+                sys.exit()
+
+        finally:
+            sys.stdout = sys.__stdout__
+            sys.stderr = sys.__stderr__
+
+    return wrapper
 
 
 class FocusTreeWidget(QTreeWidget):
@@ -34,6 +65,16 @@ class Main(QMainWindow):
 
         except AttributeError:
             pass
+
+        for name in dir(self):
+            try:
+                attr = getattr(self, name)
+
+                if callable(attr) and not name.startswith("__"):
+                    setattr(self, name, exceptionHandler(attr))
+
+            except RuntimeError:
+                pass
 
         QMainWindow.__init__(self)
 
@@ -78,7 +119,7 @@ class Main(QMainWindow):
 
     def versionUpdateMessage(self) -> None:
         def function():
-            thr = threading.Thread(target=lambda: webbrowser.open("https://artyom7774.github.io"))
+            thr = threading.Thread(target=lambda: webbrowser.open("https://artyom7777.pythonanywhere.com/"))
             thr.daemon = True
             thr.start()
 
@@ -283,13 +324,6 @@ class Main(QMainWindow):
 
         self.init("initialization")
 
-        # INSTALL PYTHON
-
-        request = ["python", "python/Scripts/python.exe", "python/Scripts/pip.exe", "python/Scripts/pyinstaller.exe"]
-
-        if not all([os.path.exists(element) for element in request]):
-            self.install()
-
     def theme(self) -> None:
         if SETTINGS["theme"] == "light":
             pass
@@ -375,11 +409,6 @@ class Main(QMainWindow):
         # HELP MENU
 
         self.menues["help_menu"] = self.menubar.addMenu(translate("Help"))
-
-        self.objects["help_pages"] = {}
-
-        for name, value in load(open("scr/site/help.json", encoding="utf-8")).items():
-            self.objects["help_pages"][value["name"]] = dict(value)
 
         help_program_action = QAction(translate("Program"), self)
         help_program_action.triggered.connect(lambda: functions.menu.help.help_(self))

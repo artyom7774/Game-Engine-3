@@ -13,20 +13,17 @@
             "DynamicObject"
         ]
     },
-    "dependence": [
-        "StaticObject",
-        "DynamicObject"
-    ],
+    "dependence": [],
     "type": {
         "name": "Object type",
-        "value": "KinematicObject",
+        "value": "StaticObject",
         "type": "choose",
         "choose": {
             "input": [
-                "Static object",
-                "Dynamic object",
-                "Kinematic object",
-                "Particle"
+                "object.name.staticObject",
+                "object.name.dynamicObject",
+                "object.name.kinematicObject",
+                "object.name.particle"
             ],
             "output": [
                 "StaticObject",
@@ -36,36 +33,8 @@
             ]
         }
     },
-    "variables": {
-        "direction": {
-            "name": "direction",
-            "type": "text",
-            "value": "right"
-        },
-        "maxMove": {
-            "name": "maxMove",
-            "type": "number",
-            "value": 180
-        },
-        "lastMove": {
-            "name": "lastMove",
-            "type": "number",
-            "value": 180
-        }
-    },
+    "variables": {},
     "main": "StaticObject",
-    "DynamicObject": {
-        "gravity": {
-            "name": "Object gravity",
-            "value": 0,
-            "type": "int"
-        },
-        "slidingStep": {
-            "name": "Braking power",
-            "value": 1000000.0,
-            "type": "int"
-        }
-    },
     "Particle": {
         "liveTime": {
             "name": "Live time",
@@ -78,6 +47,18 @@
             "type": "int"
         }
     },
+    "DynamicObject": {
+        "gravity": {
+            "name": "Object gravity",
+            "value": 1000,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 1000000.0,
+            "type": "int"
+        }
+    },
     "StaticObject": {
         "pos": {
             "name": "Object position",
@@ -85,12 +66,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": 1296.0
+                    "value": -352.0
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": 0.0
+                    "value": 32.0
                 }
             },
             "type": "dict"
@@ -111,12 +92,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 36
+                    "value": 256
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 36
+                    "value": 256
                 }
             },
             "type": "dict"
@@ -127,7 +108,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets\/bricks\/2.png"
+                    "value": "assets\/dirt\/7.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -142,19 +123,19 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 36
+                    "value": 256
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 36
+                    "value": 256
                 }
             },
             "type": "dict"
         },
         "group": {
             "name": "Name of object group",
-            "value": "platform",
+            "value": "dirt",
             "type": "str"
         },
         "mass": {

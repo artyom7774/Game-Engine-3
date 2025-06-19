@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def callFunction(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -13,7 +16,12 @@ def callFunction(program, compiler, path: str, nodes: dict, id: int, variables: 
     else:
         params = list(nodes["objects"][str(id)]["inputs"]["params"]["standard"])
 
-    for ids in compiler.functionsByName(name):
+    functions = compiler.functionsByName(name)
+
+    if functions is None:
+        EngineError(f"not found function with name = {name}")
+
+    for ids in functions:
         nodes["objects"][str(ids)]["inputs"]["params"]["standard"] = params
 
         queue.append(ids)

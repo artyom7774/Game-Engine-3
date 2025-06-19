@@ -1,0 +1,2 @@
+LOG: divelop mode = False
+LOG: program runned on "Windows 10"

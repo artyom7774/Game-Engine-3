@@ -2912,8 +2912,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
  *     cdef public int x, y
  * 
  *     def __init__(self, int x=0, int y=0):             # <<<<<<<<<<<<<<
- *         self.x = x
- *         self.y = y
+ *         self.x = int(x)
+ *         self.y = int(y)
  */
 
 /* Python wrapper */
@@ -3024,16 +3024,16 @@ static int __pyx_pf_6engine_6vector_3int_5Vec2i___init__(struct __pyx_obj_6engin
   /* "engine/vector/int.pyx":5
  * 
  *     def __init__(self, int x=0, int y=0):
- *         self.x = x             # <<<<<<<<<<<<<<
- *         self.y = y
+ *         self.x = int(x)             # <<<<<<<<<<<<<<
+ *         self.y = int(y)
  * 
  */
   __pyx_v_self->x = __pyx_v_x;
 
   /* "engine/vector/int.pyx":6
  *     def __init__(self, int x=0, int y=0):
- *         self.x = x
- *         self.y = y             # <<<<<<<<<<<<<<
+ *         self.x = int(x)
+ *         self.y = int(y)             # <<<<<<<<<<<<<<
  * 
  *     def __str__(self):
  */
@@ -3043,8 +3043,8 @@ static int __pyx_pf_6engine_6vector_3int_5Vec2i___init__(struct __pyx_obj_6engin
  *     cdef public int x, y
  * 
  *     def __init__(self, int x=0, int y=0):             # <<<<<<<<<<<<<<
- *         self.x = x
- *         self.y = y
+ *         self.x = int(x)
+ *         self.y = int(y)
  */
 
   /* function exit code */
@@ -3053,7 +3053,7 @@ static int __pyx_pf_6engine_6vector_3int_5Vec2i___init__(struct __pyx_obj_6engin
 }
 
 /* "engine/vector/int.pyx":8
- *         self.y = y
+ *         self.y = int(y)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
  *         return f"Vec2i({int(self.x)}, {int(self.y)})"
@@ -3146,7 +3146,7 @@ static PyObject *__pyx_pf_6engine_6vector_3int_5Vec2i_2__str__(struct __pyx_obj_
   goto __pyx_L0;
 
   /* "engine/vector/int.pyx":8
- *         self.y = y
+ *         self.y = int(y)
  * 
  *     def __str__(self):             # <<<<<<<<<<<<<<
  *         return f"Vec2i({int(self.x)}, {int(self.y)})"

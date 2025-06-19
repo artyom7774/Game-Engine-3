@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def moveObjectWithBraking(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -5,10 +8,10 @@ def moveObjectWithBraking(program, compiler, path: str, nodes: dict, id: int, va
         queue.append(name["id"])
 
     if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
-        ids = str(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
 
     else:
-        ids = str(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
 
     if nodes["objects"][str(id)]["inputs"]["angle"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["angle"]["value"]["value"] is not None:
         angle = float(nodes["objects"][str(id)]["inputs"]["angle"]["value"]["value"])
@@ -28,6 +31,11 @@ def moveObjectWithBraking(program, compiler, path: str, nodes: dict, id: int, va
     else:
         slidingStep = float(nodes["objects"][str(id)]["inputs"]["slidingStep"]["standard"])
 
-    program.objects.getById(int(ids)).moveByAngle(angle, power, slidingStep, specifical=id)
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    obj.moveByAngle(angle, power, slidingStep, specifical=id)
 
     return queue

@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def getKeyOfElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -16,13 +19,16 @@ def getKeyOfElement(program, compiler, path: str, nodes: dict, id: int, variable
     else:
         element = str(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
 
-    answer = "NULL"
+    answer = None
 
     for key, value in dict_.items():
         if str(value) == str(element):
             answer = key
 
             break
+
+    if answer is None:
+        raise EngineError(f"not found element = {element} in dict = {dict_}")
 
     for ids, connector in nodes["objects"][str(id)]["outputs"]["key"]["value"].items():
         nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer

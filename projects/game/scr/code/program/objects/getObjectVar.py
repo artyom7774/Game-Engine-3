@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def getObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -16,7 +19,16 @@ def getObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: 
     else:
         ids = nodes["objects"][str(id)]["inputs"]["id"]["standard"]
 
-    answer = variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)]][name]["value"]
+    try:
+        variable = variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)]
+
+    except BaseException:
+        raise EngineError(f"not found object with id = {ids}")
+
+    if name not in variable:
+        raise EngineError(f"not found object variable with object id = {ids} and name = {name}")
+
+    answer = variable[name]["value"]
 
     for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
         nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer

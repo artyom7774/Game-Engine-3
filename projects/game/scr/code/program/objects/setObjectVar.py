@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def setObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -22,11 +25,20 @@ def setObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: 
     else:
         value = nodes["objects"][str(id)]["inputs"]["value"]["standard"]
 
-    type = variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)]][name]["type"]
+    try:
+        type = variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)][name]["type"]
+
+    except BaseException:
+        raise EngineError(f"not found object with id = {ids}")
 
     if type == "number":
         value = float(value)
 
-    variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)]][name]["value"] = value
+    variable = variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)]
+
+    if name not in variable:
+        raise EngineError(f"not found object variable with object id = {ids} and name = {name}")
+
+    variable[name]["value"] = value
 
     return queue

@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def getIndexOfElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -16,13 +19,16 @@ def getIndexOfElement(program, compiler, path: str, nodes: dict, id: int, variab
     else:
         element = str(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
 
-    answer = -1
+    answer = None
 
     for index, elem in enumerate(list_):
         if str(elem) == str(element):
             answer = index
 
             break
+
+    if answer is None:
+        raise EngineError(f"not found element = {element} in list = {list_}")
 
     for ids, connector in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
         nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer

@@ -1,9 +1,16 @@
 {
-    "main": "StaticObject",
     "dependences": {
         "StaticObject": [],
         "DynamicObject": [
             "StaticObject"
+        ],
+        "KinematicObject": [
+            "StaticObject",
+            "DynamicObject"
+        ],
+        "Particle": [
+            "StaticObject",
+            "DynamicObject"
         ]
     },
     "dependence": [
@@ -15,28 +22,21 @@
         "type": "choose",
         "choose": {
             "input": [
-                "Static object",
-                "Dynamic object"
+                "object.name.staticObject",
+                "object.name.dynamicObject",
+                "object.name.kinematicObject",
+                "object.name.particle"
             ],
             "output": [
                 "StaticObject",
-                "DynamicObject"
+                "DynamicObject",
+                "KinematicObject",
+                "Particle"
             ]
         }
     },
     "variables": {},
-    "DynamicObject": {
-        "gravity": {
-            "name": "Object gravity",
-            "value": 500,
-            "type": "int"
-        },
-        "slidingStep": {
-            "name": "Braking power",
-            "value": 0.3,
-            "type": "int"
-        }
-    },
+    "main": "StaticObject",
     "StaticObject": {
         "pos": {
             "name": "Object position",
@@ -44,12 +44,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": -36.0
+                    "value": -1070
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": -180.0
+                    "value": -150
                 }
             },
             "type": "dict"
@@ -70,12 +70,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 40
+                    "value": 100
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 55
+                    "value": 150
                 }
             },
             "type": "dict"
@@ -86,7 +86,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets\/player\/idle.png"
+                    "value": "assets\/player\/idle\/1.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -101,12 +101,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 40
+                    "value": 100
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 55
+                    "value": 150
                 }
             },
             "type": "dict"
@@ -130,13 +130,11 @@
             "name": "Animation",
             "value": {
                 "groups": {
-                    "fall": {
+                    "": {
                         "name": "group",
-                        "sprites": [
-                            "assets\/player\/fall.png"
-                        ],
+                        "sprites": [],
                         "settings": {
-                            "repeat": false,
+                            "repeat": true,
                             "fpsPerFrame": 10,
                             "standard": false
                         }
@@ -144,7 +142,7 @@
                     "idle": {
                         "name": "group",
                         "sprites": [
-                            "assets\/player\/idle.png"
+                            "assets\/player\/idle\/1.png"
                         ],
                         "settings": {
                             "repeat": false,
@@ -152,26 +150,19 @@
                             "standard": true
                         }
                     },
-                    "jump": {
+                    "walk": {
                         "name": "group",
                         "sprites": [
-                            "assets\/player\/jump.png"
-                        ],
-                        "settings": {
-                            "repeat": false,
-                            "fpsPerFrame": 10,
-                            "standard": false
-                        }
-                    },
-                    "run": {
-                        "name": "group",
-                        "sprites": [
-                            "assets\/player\/run_1.png",
-                            "assets\/player\/run_2.png"
+                            "assets\/player\/walk\/1.png",
+                            "assets\/player\/walk\/2.png",
+                            "assets\/player\/walk\/3.png",
+                            "assets\/player\/walk\/4.png",
+                            "assets\/player\/walk\/5.png",
+                            "assets\/player\/walk\/6.png"
                         ],
                         "settings": {
                             "repeat": true,
-                            "fpsPerFrame": 10,
+                            "fpsPerFrame": 6,
                             "standard": false
                         }
                     }
@@ -183,6 +174,30 @@
             "name": "Invisible",
             "value": false,
             "type": "bool"
+        }
+    },
+    "Particle": {
+        "liveTime": {
+            "name": "Live time",
+            "value": 60,
+            "type": "int"
+        },
+        "minusSpriteSizePerFrame": {
+            "name": "Minus size per frame",
+            "value": 0.01,
+            "type": "int"
+        }
+    },
+    "DynamicObject": {
+        "gravity": {
+            "name": "Object gravity",
+            "value": 300,
+            "type": "int"
+        },
+        "slidingStep": {
+            "name": "Braking power",
+            "value": 10000000000,
+            "type": "int"
         }
     }
 }

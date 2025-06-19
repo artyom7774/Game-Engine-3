@@ -14,6 +14,7 @@ import typing
 import json
 import sys
 import os
+import re
 
 PROGRAM = \
 """# MADE BY GAME ENGINE %ENGINE_VERSION%
@@ -45,6 +46,9 @@ SETTINGS = %PROJECT_SETTINGS%
 PROGRAMS = %PROJECT_PROGRAMS%
 OBJECTS = %PROJECT_OBJECTS%
 SCENES = %PROJECT_SCENES%
+MUSIC = %PROJECT_MUSIC%
+
+SCENE_BY_NAME = %PROJECT_SCENE_NAMES%
 
 DEBUG = %DEBUG%
 
@@ -94,13 +98,17 @@ class Game(engine.Application):
         self.objectNameByID = {}
 
         self.scene = None
-
-        self.loadScene(SETTINGS["start_scene"])
-
-        self.programs = {}
+        
+        self.linkEngine = engine
 
         self.allObjects = OBJECTS
-        self.linkEngine = engine
+        self.sceneNames = SCENE_BY_NAME
+        self.music = MUSIC
+        
+        self.loadSound = {}
+
+        for key, value in self.music.items():
+            self.loadSound[key] = pygame.mixer.Sound(value)
 
         self.settings = {"settings": SETTINGS, "programs": PROGRAMS, "scenes": SCENES, "variables": VARIABLES}
 
@@ -117,9 +125,13 @@ class Game(engine.Application):
 
         except BaseException:
             self.global_socket = None
-
+            
+        self.programs = {}
+        
         for key, value in PROGRAMS.items():
             self.programs[key] = Compiler(self, key, value, self.settings, DEBUG)
+            
+        self.loadScene(SETTINGS["start_scene"])
 
         self.counter = threading.Thread(target=lambda: self.tpsStart())
         self.counter.daemon = True
@@ -134,13 +146,13 @@ class Game(engine.Application):
             for id in self.programs[name].get("keyboardClick"):
                 node = PROGRAMS[name]["objects"][id]
 
-                self.setKeyEvent(["KEYDOWN", node["inputs"]["key"]["standard"]], lambda temp=id: self.programs[name].start(temp))
+                self.setKeyEvent(["KEYDOWN", node["inputs"]["key"]["standard"]], lambda command=self.programs[name], temp=id: command.start(temp))
 
         for name, program in PROGRAMS.items():
             for id in self.programs[name].get("keyboardPress"):
                 node = PROGRAMS[name]["objects"][id]
 
-                self.setKeyEvent(["PRESS", node["inputs"]["key"]["standard"]], lambda temp=id: self.programs[name].start(temp))
+                self.setKeyEvent(["PRESS", node["inputs"]["key"]["standard"]], lambda command=self.programs[name], temp=id: command.start(temp))
 
     def print(self, text: str) -> None:
         if self.socket is not None:
@@ -159,6 +171,9 @@ class Game(engine.Application):
 
             except BaseException:
                 pass
+                
+        if self.debug:
+            self.updateCustomCaption(f"FPS = {round(self.clock.get_fps())} TPS = {list(self.programs.values())[0].tpsNow}")
 
         for key, value in self.programs.items():
             if self.programs[key].error:
@@ -197,7 +212,8 @@ class Game(engine.Application):
             self.programs[key].event("mouseRightClick")
 
     def loadScene(self, scene):
-        self.objects.empty()
+        self.objects = engine.ObjectGroup(self)
+        self.objects.collisions = engine.Collision("collision.cfg")
 
         self.scene = scene
 
@@ -228,6 +244,9 @@ class Game(engine.Application):
 
             if SCENES[scene]["focus"] is not None and key == SCENES[scene]["focus"]:
                 self.setCamera(engine.camera.FocusCamera(self, obj))
+                
+        for name, program in self.programs.items():
+            program.event("onLoadScene")
 
 
 if __name__ == "__main__":
@@ -455,7 +474,7 @@ class Compile:
 
         pathPython = os.path.abspath(os.path.abspath(sys.argv[0]))
         pathPython = pathPython[:pathPython.rfind('\\')]
-        pathPython = f"{pathPython}/python/Scripts/python.exe"
+        pathPython = f"{pathPython}/python/python.exe"
 
         print(f"LOG: python path: {pathPython}")
 
@@ -479,6 +498,7 @@ class Compile:
             "assets": f"projects/{project.selectProject}/scr/assets",
             "files": f"projects/{project.selectProject}/scr/files",
             "code": f"projects/{project.selectProject}/scr/code",
+            "music": f"projects/{project.selectProject}/scr/music",
             "build": f"projects/{project.selectProject}/scr/build",
             "dist": f"projects/{project.selectProject}/scr/dict",
             "collision": f"projects/{project.selectProject}/scr/collision.cfg",
@@ -498,6 +518,7 @@ class Compile:
 
         shutil.copytree("engine", engine)
 
+        shutil.copytree(f"projects/{project.selectProject}/project/music", names["music"])
         shutil.copytree(f"projects/{project.selectProject}/project/functions", names["function"])
         shutil.copytree(f"projects/{project.selectProject}/project/assets", names["assets"])
         shutil.copytree(f"projects/{project.selectProject}/project/files", names["files"])
@@ -543,7 +564,7 @@ class Compile:
             for element in os.listdir(scene):
                 objectPath = f"{scene}/{element}"
 
-                type, variables = functions.main.files.Scene.loadObjectFile(project, objectPath[:objectPath.rfind(".")][objectPath.rfind("-") + 1:], load(open(objectPath, "r", encoding="utf-8")))
+                type, variables, _ = functions.main.files.Scene.loadObjectFileFull(project, objectPath[:objectPath.rfind(".")][objectPath.rfind("-") + 1:], load(open(objectPath, "r", encoding="utf-8")))
 
                 if "sprite" in variables:
                     variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
@@ -563,8 +584,7 @@ class Compile:
 
             if focus is None or focus == "":
                 project.dialog.send(
-                    translate("WARNING") + ": " + translate("Scene") + f" ({scene}) " + translate(
-                        "can not download:") + " " + translate("name focus object is not defined")
+                    translate("WARNING") + ": " + translate("Scene") + f" ({scene}) " + translate("can not download:") + " " + translate("name focus object is not defined")
                 )
 
             else:
@@ -581,7 +601,7 @@ class Compile:
             if obj.endswith(".txt"):
                 continue
 
-            type, variables = functions.main.files.Scene.loadObjectFile(project, -1, load(open(obj, "r", encoding="utf-8")))
+            type, variables, vars = functions.main.files.Scene.loadObjectFileFull(project, -1, load(open(obj, "r", encoding="utf-8")))
 
             if "sprite" in variables:
                 variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
@@ -592,8 +612,35 @@ class Compile:
 
             allObjects[name] = {
                 "type": type,
-                "variables": variables
+                "variables": variables,
+                "vars": vars
             }
+
+        # PROJECT SCENES NAMES
+
+        sceneFullNames = functions.project.getAllProjectScenes(project, False)
+        sceneNames = [re.sub("%.*?%", "", element) for element in functions.project.getAllProjectScenes(project, True)]
+
+        projectSceneNames = {}
+
+        for i in range(len(sceneNames)):
+            projectSceneNames[sceneNames[i]] = sceneFullNames[i]
+
+        # LOAD MUSIC PATHS
+
+        allMusic = {}
+
+        queue = os.listdir(f"projects/{project.selectProject}/project/music/")
+
+        while queue:
+            path = queue.pop(0)
+
+            if os.path.isdir(f"projects/{project.selectProject}/project/music/{path}"):
+                for element in os.listdir(f"projects/{project.selectProject}/project/music/{path}"):
+                    queue.append(element)
+
+            if os.path.isfile(f"projects/{project.selectProject}/project/music/{path}") and path[path.rfind(".") + 1:] in ("wav", "ogg", "mp3"):
+                allMusic[f"projects/{project.selectProject}/project/music/{path}".replace(f"projects/{project.selectProject}/project/", "")] = f"projects/{project.selectProject}/project/music/{path}".replace(f"projects/{project.selectProject}/project/", "")
 
         # CAN RUN PROJECT
 
@@ -631,6 +678,9 @@ class Compile:
         program = program.replace("%PROJECT_PROGRAMS%", str(programs))
         program = program.replace("%PROJECT_SCENES%", str(scenes))
         program = program.replace("%PROJECT_OBJECTS%", str(allObjects))
+        program = program.replace("%PROJECT_MUSIC%", str(allMusic))
+
+        program = program.replace("%PROJECT_SCENE_NAMES%", str(projectSceneNames))
 
         program = program.replace("%ENGINE_VERSION%", str(load(open("scr/files/version.json", encoding="utf-8"))["version"]))
 
@@ -663,17 +713,19 @@ class Compile:
             pathPython = os.path.abspath(os.path.abspath(sys.argv[0]))
             pathPython = pathPython[:pathPython.rfind("\\")]
 
-            pathPythonExecutable = f"{pathPython}/python/Scripts/python.exe"
+            pathPythonExecutable = f"{pathPython}/python/python.exe"
             pathPyInstaller = f"{pathPython}/python/Scripts/pyinstaller.exe"
             pathProgram = os.path.abspath(sys.argv[0])
 
             pathProgram = pathProgram[:pathProgram.rfind("\\")]
 
-            # os.system(f"cd \"{pathProject}\" && {pathPythonExecutable} {pathPyInstaller} -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\"")
+            diskName = pathProgram[:pathProgram.find(":")]
 
-            command = f"cd \"{pathProgram}\" && cd \"{pathProject}\" && \"{pathPythonExecutable}\" \"{pathPyInstaller}\" -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\""
+            command = f"{diskName}: && cd \"{pathProgram}\" && cd \"{pathProject}\" && \"{pathPythonExecutable}\" \"{pathPyInstaller}\" -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\""
 
-            result = subprocess.run(command, shell=False, capture_output=True, check=True, text=True)
+            print(command)
+
+            result = subprocess.run(command, shell=True, capture_output=True, check=True, text=True)
 
             project.dialog.logSignal.emit(result.stdout)
             project.dialog.logSignal.emit(result.stderr)
@@ -751,8 +803,7 @@ class Compile:
 
         path = f"projects/{project.selectProject}/scr"
 
-        loads = ["functions", "assets", "engine", "files", "code", f"{projectSettings['values']['name']['value']}.py",
-                 f"{projectSettings['values']['name']['value']}.exe", "collision.cfg"]
+        loads = ["functions", "assets", "engine", "files", "code", "music", f"{projectSettings['values']['name']['value']}.py", f"{projectSettings['values']['name']['value']}.exe", "collision.cfg"]
 
         folder = QFileDialog.getExistingDirectory(project, translate("Choose path"), "/home")
 

@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def getObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -10,12 +13,15 @@ def getObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: 
     else:
         ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
 
-    pos = program.objects.getById(ids).pos
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        raise EngineError(f"not found object with id = {ids}")
 
     for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = pos.x
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.pos.x
 
     for ids, connector in nodes["objects"][str(id)]["outputs"]["y"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = pos.y
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.pos.y
 
     return queue

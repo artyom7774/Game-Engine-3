@@ -1,8 +1,0 @@
-@ focus = False
-
-direction in (RIGHT) -> animation(move)
-direction in (LEFT) -> animation(move)
-direction in (RIGHT_UP, UP, LEFT_UP) -> animation(jump)
-direction in (RIGHT_DOWN, DOWN, LEFT_DOWN) -> animation(fall)
-
-direction in (NULL) -> animation(idle)

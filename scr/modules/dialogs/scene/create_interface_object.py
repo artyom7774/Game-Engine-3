@@ -107,7 +107,7 @@ class CreateInterfaceObject(QDialog):
         self.objects["project_combobox"].setFont(FONT)
         self.objects["project_combobox"].show()
 
-        self.objects["project_combobox"].addItems(functions.project.getAllProjectInterface(self.project, True))
+        self.objects["project_combobox"].addItems([element.replace(f"projects/{self.project.selectProject}/project/ui/", "") for element in functions.project.getAllProjectInterface(self.project, False)])
 
         # CREATE
 

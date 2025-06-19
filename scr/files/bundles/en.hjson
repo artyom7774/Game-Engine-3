@@ -1,0 +1,390 @@
+// EN TRANSLATE VERSION = 3.10.0
+
+{
+    // ANOTHER
+    "Project": "Project",
+    "undefined": "undefined",
+    "Assets": "Assets",
+    "Scenes": "Scenes",
+    "Scene": "Scene",
+    "Function": "Function",
+    "New": "New",
+    "Rename": "Rename",
+    "Delete": "Delete",
+    "File": "File",
+    "Directory": "Directory",
+    "Create": "Create",
+    "Open": "Open",
+    "Load": "Load",
+    "Close": "Close",
+    "Settings": "Settings",
+    "Copy": "Copy",
+    "Paste": "Paste",
+    "Confirm": "Confirm",
+    "Cancel": "Cancel",
+    "Create project": "Create project",
+    "Open project": "Open project",
+    "Project name": "Project name",
+    "Reset settings": "Reset settings",
+    "Directory name": "Directory name",
+    "Create directory": "Create directory",
+    "Language": "Language",
+    "Russian": "Russian",
+    "English": "English",
+    "Debugger": "Debugger",
+    "Max fps count": "Max fps count",
+    "Max tps count": "Max tps count",
+    "Path to project icon": "Path to project icon",
+    "Debug mode": "Debug mode",
+    "Impossible operation": "Impossible operation",
+    "Create file": "Create file",
+    "File name": "File name",
+    "File extension": "File extension",
+    "Create function": "Create function",
+    "Function name": "Function name",
+    "Create object": "Create object",
+    "Object name": "Object name",
+    "Create scene": "Create scene",
+    "Scene name": "Scene name",
+    "Rename object": "Rename object",
+    "New name": "New name",
+    "StaticObject": "StaticObject",
+    "DynamicObject": "DynamicObject",
+    "Object type": "Object type",
+    "Object position": "Object position",
+    "Object hitbox": "Object hitbox",
+    "Path to object sprite": "Path to object sprite",
+    "Name of object group": "Name of object group",
+    "Priority of draw": "Priority of draw",
+    "Moving speed": "Moving speed",
+    "Object gravity": "Object gravity",
+    "Power jump": "Power jump",
+    "Braking power": "Braking power",
+    "Width": "Width",
+    "Height": "Height",
+    "X offset": "X offset",
+    "Y offset": "Y offset",
+    "The path does not exist or this isn't a image": "The path does not exist or this isn't a image",
+    "Error": "Error",
+    "Can't open this file": "Can't open this file",
+    "This file already exists": "This file already exists",
+    "The target directory is inside the source directory": "The target directory is inside the source directory",
+    "Object": "Object",
+    "Help": "Help",
+    "scene": "scene",
+    "Run": "Run",
+    "Compile": "Compile",
+    "Compile and run": "Compile and run",
+    "Save project as": "Save project as",
+    "Save executable as": "Save executable as",
+    "Object sprite": "Object sprite",
+    "Path to image": "Path to image",
+    "Object layer": "Object layer",
+    "Grid": "Grid",
+    "Grid visiable": "Grid visiable",
+    "Snap to grid": "Snap to grid",
+    "Reinstall python": "Reinstall python",
+    "Visible screen": "Visible screen",
+    "Camera acceleration": "Camera acceleration",
+    "Choose": "Choose",
+    "Start scene": "Start scene",
+    "Window width": "Window width",
+    "Window height": "Window height",
+    "Choose scene": "Choose scene",
+    "In progress...": "In progress...",
+    "Name focus object": "Name focus object",
+    "Compile": "Compile",
+    "can not download:": "can not download:",
+    "Run": "Run",
+    "WARNING": "WARNING",
+    "ERROR": "ERROR",
+    "LOG": "LOG",
+    "name focus object is not defined": "name focus object is not defined",
+    "project start scene is not found": "project start scene is not found",
+    "can not run project": "can not run project",
+    "the project has been successfully compile": "the project has been successfully compile",
+    "the project has been successfully launched": "the project has been successfully launched",
+    "the project has been successfully created": "the project has been successfully created",
+    "Compile": "Compile",
+    "Compiling": "Compiling",
+    "compiling...": "compiling...",
+    "Save project": "Save project",
+    "Save executable project": "Save executable project",
+    "Creating": "Creating",
+    "project save": "project save",
+    "the path to save the project is not selected": "the path to save the project is not selected",
+    "Choose path": "Choose path",
+    "Create node": "Create node",
+    "Nodes": "Nodes",
+    "Events": "Events",
+    "On start game": "On start game",
+    "Write text": "Write text",
+    "Text": "Text",
+    "Path is not difined": "Path is not difined",
+    "This text is not object": "This text is not object",
+    "Path is not difined (object must was copyed on scene)": "Path is not difined (object must was copyed on scene)",
+    "This text is not node": "This text is not node",
+    "Numbers": "Numbers",
+    "Logic": "Logic",
+    "Another": "Another",
+    "Name": "Name",
+    "Type": "Type",
+    "Value": "Value",
+    "Create global variable": "Create global variable",
+    "Create local variable": "Create local variable",
+    "Can not open this image": "Can not open this image",
+    "Objects": "Objects",
+    "file exists in this directory": "file exists in this directory",
+    "index": "index",
+    "global": "global",
+    "New version": "New version",
+    "Update": "Update",
+    "A new version of the project has been released. Please update the product": "A new version of the project has been released. Please update the product",
+    "Control nodes": "Control nodes",
+    "Move node - middle mouse button": "Move node - middle mouse button",
+    "Delete - delete node": "Delete - delete node",
+    "Code": "Code",
+    "Program": "Program",
+    "Compile version of project NOT SUPPORTED write text node": "Compile version of project NOT SUPPORTED write text node",
+    "Run and compile project": "Run and compile project",
+    "To run or compile a program, you must click on the \"Project\" menu and click the \"Run\" or \"Compile\" button": "To run or compile a program, you must click on the \"Project\" menu and click the \"Run\" or \"Compile\" button",
+    "Loops": "Loops",
+    "name": "name",
+    "value": "value",
+    "iterator": "iterator",
+    "Create object group": "Create object group",
+    "Jump": "Jump",
+    "path if true": "path if true",
+    "path if false": "path if false",
+    "operation": "operation",
+    "Object animations": "Object animations",
+    "Object variables": "Object variables",
+    "Downloads": "Downloads",
+    "About": "About",
+    "Site": "Site",
+    "Set": "Set",
+    "Theme": "Theme",
+    "Light": "Light",
+    "Dark": "Dark",
+    "System": "System",
+    "Remove": "Remove",
+    "Create from template": "Create from template",
+    "Copy template": "Copy template",
+    "Template": "Template",
+    "Base": "Base",
+    "Go to the project website?": "Go to the project website?",
+    "Go to the site": "Go to the site",
+    "this may take up to 5 minutes": "this may take up to 5 minutes",
+    "Text Editor": "Text Editor",
+    "FATAL ERROR": "FATAL ERROR",
+    "params": "params",
+    "Full screen": "Full screen",
+    "Invisible": "Invisible",
+    "Animation": "Animation",
+    "Create group": "Create group",
+    "Repeat:": "Repeat:",
+    "Base animation:": "Base animation:",
+    "FPS per frame:": "FPS per frame:",
+    "Create frame": "Create frame",
+    "Run animation": "Run animation",
+    "Stop animation": "Stop animation",
+    "Mirror animation": "Mirror animation",
+    "horizontal": "horizontal",
+    "vertical": "vertical",
+    "Mass": "Mass",
+    "Text position": "Text position",
+    "Text hitbox": "Text hitbox",
+    "Text type": "Text type",
+    "Text name": "Text name",
+    "Create interface object": "Create interface object",
+    "Font type": "Font type",
+    "Font size": "Font size",
+    "Message": "Message",
+    "Alignment text": "Alignment text",
+    "Vertical": "Vertical",
+    "Horizontal": "Horizontal",
+    "Text field": "Text field",
+    "Choose font": "Choose font",
+    "Font": "Font",
+    "Color": "Color",
+    "Font color": "Font color",
+    "Up": "Up",
+    "Down": "Down",
+    "Left": "Left",
+    "Right": "Right",
+    "Center": "Center",
+    "Example": "Example",
+    "Alpha": "Alpha",
+    "Button": "Button",
+    "Rama color": "Rama color",
+    "Background color": "Background color",
+    "Mouse": "Mouse",
+    "Click": "Click",
+    "Path to sprite": "Path to sprite",
+    "File is not found": "File is not found",
+    "Image formate is not possible": "Image formate is not possible",
+    "Project name already exist": "Project name already exist",
+    "Braking force": "Braking force",
+    "Move object with braking": "Move object with braking",
+    "Installing libraries": "Installing libraries",
+    "Successfully": "Successfully"
+    "Music": "Music"
+
+    // OBJECT NAME
+    "object.name.staticObject": "Static object"
+    "object.name.dynamicObject": "Dynamic object"
+    "object.name.kinematicObject": "Kinematic object"
+    "object.name.particle": "Particle"
+    "object.name.text": "Text"
+    "object.name.field": "Text field"
+    "object.name.button": "Button"
+
+    // NODE NAME
+    "node.name.jump": "Jump"
+    "node.name.keyboardClick": "On key press"
+    "node.name.keyboardPress": "While key pressed"
+    "node.name.mouseLeftClick": "Left mouse button"
+    "node.name.mouseRightClick": "Right mouse button"
+    "node.name.decodeHolder": "Decode pattern"
+    "node.name.setVar": "Set variable"
+    "node.name.createObject": "Create object"
+    "node.name.getVar": "Get variable"
+    "node.name.if": "If"
+    "node.name.ifCollision": "If collision"
+    "node.name.exit": "Exit"
+    "node.name.for": "Repeat N times"
+    "node.name.forListElements": "For all list elements"
+    "node.name.forDictElements": "For all dictionary elements"
+    "node.name.random": "Random number"
+    "node.name.getObjectVar": "Get object variable"
+    "node.name.setObjectVar": "Set object variable"
+    "node.name.moveObject": "Move object"
+    "node.name.moveObjectWithBraking": "Move object with braking"
+    "node.name.setObjectPos": "Set object position"
+    "node.name.getObjectPos": "Get object position"
+    "node.name.getObjectIDByName": "Get object ID by name"
+    "node.name.onStartGame": "On game start"
+    "node.name.everyTick": "Every tick"
+    "node.name.everyFrame": "Every frame"
+    "node.name.displayText": "Display text"
+    "node.name.writeText": "Write text"
+    "node.name.plus": "A + B"
+    "node.name.minus": "A - B"
+    "node.name.multiply": "A * B"
+    "node.name.divide": "A / B"
+    "node.name.sin": "Sin"
+    "node.name.cos": "Cos"
+    "node.name.tan": "Tan"
+    "node.name.ctg": "Ctg"
+    "node.name.degrees": "Degrees"
+    "node.name.radians": "Radians"
+    "node.name.removeObject": "Remove object"
+    "node.name.forObjectsGroup": "For all objects in group"
+    "node.name.connectText": "Concatenate text"
+    "node.name.sliceText": "Split text"
+    "node.name.getByIndex": "Get by index"
+    "node.name.deleteByIndex": "Delete by index"
+    "node.name.getIndexOfElement": "Get element index"
+    "node.name.sliceList": "List slice"
+    "node.name.getByKey": "Get by key"
+    "node.name.removeByKey": "Remove by key"
+    "node.name.getKeyOfElement": "Get element key"
+    "node.name.addListElement": "Add list element"
+    "node.name.addDictElement": "Add dictionary element"
+    "node.name.len_": "Length"
+    "node.name.python": "Python"
+    "node.name.functionEvent": "Function"
+    "node.name.callFunction": "Call function"
+    "node.name.runAnimation": "Play animation"
+    "node.name.stopAnimation": "Stop animation"
+    "node.name.mirrorAnimation": "Mirror animation"
+    "node.name.getResultingVector": "Get resultant vector"
+    "node.name.getMousePos": "Get mouse position"
+    "node.name.setObjectParameter": "Set object parameter"
+    "node.name.getObjectParameter": "Get object parameter"
+    "node.name.getTimePassed": "Get frame time (1 / FPS)"
+    "node.name.onButtonPress": "On button press"
+    "node.name.getNoiseValue": "Get value of Perlin noise"
+    "node.name.goToScene": "Go to scene"
+    "node.name.getSceneName": "Get scene name"
+    "node.name.playMusic": "Play music"
+    "node.name.stopMusic": "Stop music"
+    "node.name.playSound": "Play sound"
+    "node.name.wait": "Wait"
+    "node.name.break": "Break loop"
+    "node.name.onLoadScene": "On load scene"
+    "node.name.ifKeyInDict": "If key in dict"
+    "node.name.ifElementInList": "If element in list"
+    "node.name.getAllObjectInGroup": "Get all object in group"
+    "node.name.distance": "Distance"
+    "node.name.absolute": "Modulus of number"
+
+    // NODE TEXT
+    "node.text.none": ""
+    "node.text.path": "path"
+    "node.text.text": "text"
+    "node.text.angle": "angle"
+    "node.text.power": "power"
+    "node.text.id": "ID"
+    "node.text.key": "key"
+    "node.text.a": "A"
+    "node.text.b": "B"
+    "node.text.answer": "answer"
+    "node.text.iterator": "iterator"
+    "node.text.after": "path after execution"
+    "node.text.name": "name"
+    "node.text.group": "group"
+    "node.text.text1": "text 1"
+    "node.text.text2": "text 2"
+    "node.text.start": "start"
+    "node.text.end": "end"
+    "node.text.list": "list"
+    "node.text.index": "index"
+    "node.text.element": "element"
+    "node.text.dict": "dictionary"
+    "node.text.params": "parameters"
+    "node.text.animation": "animation"
+    "node.text.horizontal": "horizontal"
+    "node.text.vertical": "vertical"
+    "node.text.x": "X"
+    "node.text.y": "Y"
+    "node.text.value": "value"
+    "node.text.timePassed": "time passed"
+    "node.text.minValue": "minimum value"
+    "node.text.maxValue": "maximum value"
+    "node.text.octaves": "octaves"
+    "node.text.frequency": "frequency"
+    "node.text.amplitude": "amplitude"
+    "node.text.lacunarity": "lacunarity"
+    "node.text.persistence": "persistence"
+    "node.text.seed": "seed"
+    "node.text.degrees": "degrees"
+    "node.text.radians": "radians"
+    "node.text.scene": "scene"
+    "node.text.volume": "volume"
+    "node.text.time": "time"
+    "node.text.global": "global"
+    "node.text.pathTrue": "path if true"
+    "node.text.pathFalse": "path if false"
+    "node.text.listObjectID": "list with object ID"
+    "node.text.objectID": "object ID"
+
+    // OBJECT PARAMETERS
+    "object.parameter.number.hitbox": "0. Hitbox"
+    "object.parameter.number.group": "1. Group"
+    "object.parameter.number.mass": "2. Mass"
+    "object.parameter.number.layer": "3. Layer"
+    "object.parameter.number.invisible": "4. Invisible"
+    "object.parameter.number.gravity": "5. Gravity"
+    "object.parameter.number.brakingPower": "6. Braking power"
+    "object.parameter.number.message": "7. Message"
+    "object.parameter.number.fontSize": "8. Font size"
+    "object.parameter.number.alignment": "9. Alignment"
+    "object.parameter.number.fontColor": "10. Font color"
+    "object.parameter.number.backgroundColor": "11. Background color"
+    "object.parameter.number.ramaColor": "12. Rama color"
+    "object.parameter.number.spriteHithox": "13. Sprite hitbox"
+    "object.parameter.number.liveTime": "14. Live time"
+    "object.parameter.number.minusSpriteSizePerFrame": "15. Minus sprite size per frame"
+    "object.parameter.number.alpha": "16. Transparency"
+}

@@ -1,5 +1,6 @@
 import importlib.util
 
+import traceback
 import threading
 import pygame
 import typing
@@ -81,6 +82,33 @@ class Compiler:
                 if "value" not in value:
                     value["value"] = {}
 
+        self.loopForBreak = {}
+        self.loopBreaking = {}
+
+        for id, node in self.nodes["objects"].items():
+            if node["name"] == "break_":
+                type = node["type"]
+                now = None
+
+                nowNode = node
+
+                while type != "loop":
+                    if nowNode["inputs"]["path"]["value"] is None:
+                        break
+
+                    now = nowNode["inputs"]["path"]["value"]["id"]
+                    type = self.nodes["objects"][str(now)]["type"]
+
+                    nowNode = self.nodes["objects"][str(now)]
+
+                if now is None or now == int(id):
+                    self.loopForBreak[id] = None
+
+                else:
+                    self.loopForBreak[id] = now
+
+        # print(self.loopForBreak)
+
         # print(self.nodesSortedByTypes)
         # print(dumps(self.nodes, indent=4))
 
@@ -143,7 +171,7 @@ class Compiler:
                     "inputs": self.nodes["objects"][str(id)]["inputs"],
                     "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
                     "display": self.nodes["objects"][str(id)]["display"],
-                    "message": e,
+                    "message": traceback.format_exc(),
                     "id": id
                 }
 
@@ -196,11 +224,15 @@ class Compiler:
                     for ids, connector in self.nodes["objects"][str(element["id"])]["outputs"]["index"]["value"].items():
                         self.nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = element["iter"]
 
-                self.queue(queue=[element["id"] for element in self.nodes["objects"][str(element["id"])]["outputs"][element["connector"]]["value"].values()])
+                if element["connector"] in self.nodes["objects"][str(element["id"])]["outputs"]:
+                    self.queue(queue=[element["id"] for element in self.nodes["objects"][str(element["id"])]["outputs"][element["connector"]]["value"].values()])
 
             if element["count"] == 0:
                 if "after" in self.nodes["objects"][str(element["id"])]["outputs"]:
                     self.queue(queue=[element["id"] for element in self.nodes["objects"][str(element["id"])]["outputs"]["after"]["value"].values()])
+
+                else:
+                    self.queue(queue=[element["id"] for element in self.nodes["objects"][str(element["id"])]["outputs"]["path"]["value"].values()])
 
                 remove.append(element)
 
@@ -210,8 +242,6 @@ class Compiler:
         for id in self.nodesSortedByTypes["event"]["everyFrame"]:
             if self.project.fpsc % self.nodes["objects"][id]["inputs"]["N"]["standard"] == 0:
                 self.start(id)
-
-        self.project.updateCustonCaption(f"FPS = {round(self.project.clock.get_fps())} TPS = {self.tpsNow}")
 
     def tps(self, tps: int):
         self.tpsc += 1
@@ -223,4 +253,4 @@ class Compiler:
                 self.start(id)
 
     def functionsByName(self, name):
-        return self.nodesFunctionsSortedByName[name]
+        return self.nodesFunctionsSortedByName.get(name)

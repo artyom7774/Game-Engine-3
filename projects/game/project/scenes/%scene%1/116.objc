@@ -3,6 +3,14 @@
         "StaticObject": [],
         "DynamicObject": [
             "StaticObject"
+        ],
+        "KinematicObject": [
+            "StaticObject",
+            "DynamicObject"
+        ],
+        "Particle": [
+            "StaticObject",
+            "DynamicObject"
         ]
     },
     "dependence": [],
@@ -12,12 +20,16 @@
         "type": "choose",
         "choose": {
             "input": [
-                "Static object",
-                "Dynamic object"
+                "object.name.staticObject",
+                "object.name.dynamicObject",
+                "object.name.kinematicObject",
+                "object.name.particle"
             ],
             "output": [
                 "StaticObject",
-                "DynamicObject"
+                "DynamicObject",
+                "KinematicObject",
+                "Particle"
             ]
         }
     },
@@ -30,12 +42,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": 1872.0
+                    "value": 512.0
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": 72.0
+                    "value": 8
                 }
             },
             "type": "dict"
@@ -56,12 +68,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 }
             },
             "type": "dict"
@@ -72,7 +84,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets\/bricks\/12.png"
+                    "value": "assets\/bridge\/base.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -87,19 +99,19 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": 36
+                    "value": 32
                 }
             },
             "type": "dict"
         },
         "group": {
             "name": "Name of object group",
-            "value": "brick",
+            "value": "bridge",
             "type": "str"
         },
         "mass": {
@@ -136,24 +148,26 @@
         }
     },
     "DynamicObject": {
-        "speed": {
-            "name": "Moving speed",
-            "value": 5,
-            "type": "int"
-        },
         "gravity": {
             "name": "Object gravity",
             "value": 1000,
             "type": "int"
         },
-        "jumpPower": {
-            "name": "Power jump",
-            "value": 10,
-            "type": "int"
-        },
         "slidingStep": {
             "name": "Braking power",
             "value": 1000000.0,
+            "type": "int"
+        }
+    },
+    "Particle": {
+        "liveTime": {
+            "name": "Live time",
+            "value": 60,
+            "type": "int"
+        },
+        "minusSpriteSizePerFrame": {
+            "name": "Minus size per frame",
+            "value": 0.01,
             "type": "int"
         }
     }

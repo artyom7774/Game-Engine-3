@@ -255,7 +255,11 @@ class AnimationContainerTile(QWidget):
             self.dialog.selectSprite = self.image_path
 
             if self.dialog.selectSprite is not None:
-                x, y, pixmap = Image.getPixmap(self.project, 1060, 460, self.dialog.selectSprite)
+                try:
+                    x, y, pixmap = Image.getPixmap(self.project, 1060, 460, self.dialog.selectSprite)
+
+                except TypeError:
+                    return
 
                 if "main_image" in self.dialog.objects:
                     self.dialog.objects["main_image"].hide()

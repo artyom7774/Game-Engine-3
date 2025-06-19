@@ -66,8 +66,14 @@ class Sprite:
                 self.height if self.height > 0 else self.image.get_height()
             ))
 
+        else:
+            self.image = None
+
         if self.image is not None:
             self.copyImage = self.image.copy()
+
+        else:
+            self.copyImage = None
 
     def copy(self) -> "Sprite":
         return Sprite(self.game, self.obj, self.path, self.pos, Vec2i(self.width, self.height))

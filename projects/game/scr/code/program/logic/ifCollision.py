@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -20,6 +23,9 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
         append = (nodes["objects"][str(id)]["inputs"]["append"]["standard"] == True)
 
     obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
 
     for group in groupList.split(", "):
         answer = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]

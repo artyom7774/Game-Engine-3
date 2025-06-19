@@ -161,8 +161,7 @@ cdef class StaticObject:
 
                 if not self.invisible or self.game.forcedViewObject:
                     if sprite is not None:
-                        if self.game.usingWidth + 200 > self.pos.x + self.sprite.pos.x + px > -200 and self.game.usingHeight + 200 > self.pos.y + self.sprite.pos.y + py > -200:
-                            self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x + px, self.pos.y + self.sprite.pos.y + py))
+                        self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x + px, self.pos.y + self.sprite.pos.y + py))
 
         if self.game.debug or (self.group.startswith("__") and self.group.endswith("__") and not self.group == "__debug_unvisiable__"):
             self.hitbox.draw(self.game.screen, self.pos.x, self.pos.y, px, py)
@@ -538,7 +537,6 @@ cdef class KinematicObject(DynamicObject):
     def getStackedObjects(self, obj: "VObject", visited: typing.Set[int]) -> typing.List["VObject"]:
         stacked = []
 
-        # Mark current object as visited
         visited.add(obj.id)
 
         if obj.id not in self.game.cash["collisions"]:

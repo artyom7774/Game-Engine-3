@@ -8,14 +8,13 @@ class TreeProject(QTreeWidget):
         super().__init__(parent)
         self.project = project
 
-        self.setDragEnabled(True)
-        self.setAcceptDrops(True)
+        # self.setDragEnabled(True)
+        # self.setAcceptDrops(True)
         self.setSelectionMode(QTreeWidget.SingleSelection)
         self.setDragDropMode(QTreeWidget.InternalMove)
         self.setDefaultDropAction(Qt.MoveAction)
 
-        # Включаем отслеживание положения при перетаскивании
-        self.setDropIndicatorShown(True)
+        # self.setDropIndicatorShown(True)
         self.setHeaderLabel("Project Structure")
 
     def startDrag(self, supportedActions):

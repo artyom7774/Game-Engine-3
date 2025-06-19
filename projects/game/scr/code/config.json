@@ -4,6 +4,7 @@
             "name": "Events",
             "nodes": [
                 "onStartGame",
+                "onLoadScene",
                 "everyFrame",
                 "everyTick",
                 "mouseRightClick",
@@ -37,14 +38,23 @@
                 "plus",
                 "minus",
                 "multiply",
-                "divide"
+                "divide",
+                "radians",
+                "degrees",
+                "sin",
+                "cos",
+                "tan",
+                "ctg",
+                "absolute"
             ]
         },
         "logic": {
             "name": "Logic",
             "nodes": [
                 "if_",
-                "ifCollision"
+                "ifCollision",
+                "ifKeyInDict",
+                "ifElementInList"
             ]
         },
         "objects": {
@@ -62,6 +72,7 @@
                 "getResultingVector",
                 "getObjectParameter",
                 "setObjectParameter",
+                "getAllObjectInGroup",
                 "jump"
             ]
         },
@@ -86,7 +97,12 @@
                 "functionEvent",
                 "callFunction",
                 "getMousePos",
-                "getTimePassed"
+                "getTimePassed",
+                "getNoiseValue",
+                "goToScene",
+                "getSceneName",
+                "wait",
+                "break_"
             ]
         },
         "set": {
@@ -101,6 +117,14 @@
                 "getByKey",
                 "removeByKey",
                 "getKeyOfElement"
+            ]
+        },
+        "music": {
+            "name": "Music",
+            "nodes": [
+                "playMusic",
+                "stopMusic",
+                "playSound"
             ]
         }
     },
@@ -140,6 +164,10 @@
         "set": {
             "first": "#9fa021",
             "second": "#cecac9"
+        },
+        "music": {
+            "first": "#e6e5e4",
+            "second": "#cecac9"
         }
     },
     "icons": {
@@ -151,7 +179,8 @@
         "another": "scr/code/sprites/types/event.png",
         "objects": "scr/code/sprites/types/objects.png",
         "animation": "scr/code/sprites/types/objects.png",
-        "set": "scr/code/sprites/types/set.png"
+        "set": "scr/code/sprites/types/set.png",
+        "music": "scr/code/sprites/types/music.png"
     },
     "connectors": {
         "sprites": {
@@ -308,15 +337,13 @@
                 }
             },
             "display": {
-                "name": "Jump",
-                "discription": "jump",
+                "name": "node.name.jump",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__name__": "name",
-                    "__id__": "ID",
-                    "__angle__": "angle",
-                    "__power__": "power"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id",
+                    "__angle__": "node.text.angle",
+                    "__power__": "node.text.power"
                 }
             }
         },
@@ -355,12 +382,11 @@
                 }
             },
             "display": {
-                "name": "Keyboard click",
-                "discription": "starts on key click",
+                "name": "node.name.keyboardClick",
                 "text": {
-                    "__none__": "",
-                    "__key__": "key",
-                    "__path__": "path"
+                    "__none__": "node.text.none",
+                    "__key__": "node.text.key",
+                    "__path__": "node.text.path"
                 }
             }
         },
@@ -399,12 +425,11 @@
                 }
             },
             "display": {
-                "name": "Keyboard press",
-                "discription": "starts while key pressed",
+                "name": "node.name.keyboardPress",
                 "text": {
-                    "__none__": "",
-                    "__key__": "key",
-                    "__path__": "path"
+                    "__none__": "node.text.none",
+                    "__key__": "node.text.key",
+                    "__path__": "node.text.path"
                 }
             }
         },
@@ -426,12 +451,11 @@
                 }
             },
             "display": {
-                "name": "Mouse left click",
-                "discription": "starts on left click",
+                "name": "node.name.mouseLeftClick",
                 "text": {
-                    "__none__": "",
-                    "__key__": "key",
-                    "__path__": "path"
+                    "__none__": "node.text.none",
+                    "__key__": "node.text.key",
+                    "__path__": "node.text.path"
                 }
             }
         },
@@ -453,11 +477,10 @@
                 }
             },
             "display": {
-                "name": "Mouse right click",
-                "discription": "starts on right click",
+                "name": "node.name.mouseRightClick",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
                 }
             }
         },
@@ -513,13 +536,12 @@
                 }
             },
             "display": {
-                "name": "Decode holder",
-                "discription": "Decode holder",
+                "name": "node.name.decodeHolder",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__text__": "text",
-                    "__answer__": "answer"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text",
+                    "__answer__": "node.text.answer"
                 }
             }
         },
@@ -586,14 +608,13 @@
                 }
             },
             "display": {
-                "name": "Set var",
-                "discription": "Set var by name",
+                "name": "node.name.setVar",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__value__": "value",
-                    "__name__": "name",
-                    "__global__": "global"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__value__": "node.text.value",
+                    "__name__": "node.text.name",
+                    "__global__": "node.text.global"
                 }
             }
         },
@@ -668,15 +689,14 @@
             },
 
             "display": {
-                "name": "Create object",
-                "discription": "Create object",
+                "name": "node.name.createObject",
                 "text": {
-                    "__none__": "",
-                    "__name__": "name",
-                    "__path__": "path",
-                    "__id__": "ID",
-                    "__x__": "X",
-                    "__y__": "Y"
+                    "__none__": "node.text.none",
+                    "__name__": "node.text.name",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id",
+                    "__x__": "node.text.x",
+                    "__y__": "node.text.y"
                 }
             }
         },
@@ -741,14 +761,13 @@
                 }
             },
             "display": {
-                "name": "Get var",
-                "discription": "Get var by name",
+                "name": "node.name.getVar",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__answer__": "answer",
-                    "__name__": "name",
-                    "__global__": "global"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__answer__": "node.text.answer",
+                    "__name__": "node.text.name",
+                    "__global__": "node.text.global"
                 }
             }
         },
@@ -826,16 +845,15 @@
                 }
             },
             "display": {
-                "name": "If",
-                "discription": "If",
+                "name": "node.name.if",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__a__": "A",
-                    "__b__": "B",
-                    "__operation__": "operation",
-                    "__path_true__": "path if true",
-                    "__path_false__": "path if false"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__a__": "node.text.a",
+                    "__b__": "node.text.b",
+                    "__operation__": "node.text.operation",
+                    "__path_true__": "node.text.pathTrue",
+                    "__path_false__": "node.text.pathFalse"
                 }
             }
         },
@@ -909,17 +927,16 @@
                 }
             },
             "display": {
-                "name": "If collision",
-                "discription": "If collision",
+                "name": "node.name.ifCollision",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__id__": "ID",
-                    "__group__": "group name",
-                    "__append__": "use contact",
-                    "__path_true__": "path if true",
-                    "__path_false__": "path if false",
-                    "__id_in_group__": "ID object of group"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id",
+                    "__group__": "node.text.group",
+                    "__append__": "node.text.append",
+                    "__path_true__": "node.text.pathTrue",
+                    "__path_false__": "node.text.pathFalse",
+                    "__id_in_group__": "node.text.idInGroup"
                 }
             }
         },
@@ -935,9 +952,6 @@
             "sorting": {
                 "inputs": [
                     "path"
-                ],
-                "outputs": [
-                    "path"
                 ]
             },
             "inputs": {
@@ -950,18 +964,13 @@
                 }
             },
             "outputs": {
-                "path": {
-                    "code": "path",
-                    "name": "__path__",
-                    "type": "path"
-                }
+
             },
             "display": {
-                "name": "Exit",
-                "discription": "Exit",
+                "name": "node.name.exit",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
                 }
             }
         },
@@ -1029,17 +1038,16 @@
                 }
             },
             "display": {
-                "name": "For N times",
-                "discription": "For N times every x frames",
+                "name": "node.name.for",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__iterator__": "iterator",
-                    "__after__": "after iterators",
-                    "__name__": "name",
-                    "__n__": "N",
-                    "__x__": "X",
-                    "__index__": "index"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__iterator__": "node.text.iterator",
+                    "__after__": "node.text.after",
+                    "__name__": "node.text.name",
+                    "__n__": "node.text.n",
+                    "__x__": "node.text.x",
+                    "__index__": "node.text.index"
                 }
             }
         },
@@ -1106,17 +1114,16 @@
                 }
             },
             "display": {
-                "name": "For list elements",
-                "discription": "For list elements",
+                "name": "node.name.forListElements",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__iterator__": "iterator",
-                    "__after__": "after iterators",
-                    "__name__": "name",
-                    "__element__": "element",
-                    "__list__": "list",
-                    "__index__": "index"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__iterator__": "node.text.iterator",
+                    "__after__": "node.text.after",
+                    "__name__": "node.text.name",
+                    "__element__": "node.text.element",
+                    "__list__": "node.text.list",
+                    "__index__": "node.text.index"
                 }
             }
         },
@@ -1183,17 +1190,16 @@
                 }
             },
             "display": {
-                "name": "For dict elements",
-                "discription": "For dict elements",
+                "name": "node.name.forDictElements",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__iterator__": "iterator",
-                    "__after__": "after iterators",
-                    "__name__": "name",
-                    "__element__": "element",
-                    "__dict__": "dict",
-                    "__key__": "key"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__iterator__": "node.text.iterator",
+                    "__after__": "node.text.after",
+                    "__name__": "node.text.name",
+                    "__element__": "node.text.element",
+                    "__dict__": "node.text.dict",
+                    "__key__": "node.text.key"
                 }
             }
         },
@@ -1257,14 +1263,13 @@
                 }
             },
             "display": {
-                "name": "Random",
-                "discription": "Return random number in [A, B]",
+                "name": "node.name.random",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__answer__": "answer",
-                    "__a__": "A",
-                    "__b__": "B"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__answer__": "node.text.answer",
+                    "__a__": "node.text.a",
+                    "__b__": "node.text.b"
                 }
             }
         },
@@ -1328,14 +1333,13 @@
                 }
             },
             "display": {
-                "name": "Get object var",
-                "discription": "Get object var by name",
+                "name": "node.name.getObjectVar",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__answer__": "answer",
-                    "__name__": "name",
-                    "__id__": "ID"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__answer__": "node.text.answer",
+                    "__name__": "node.text.name",
+                    "__id__": "node.text.id"
                 }
             }
         },
@@ -1402,14 +1406,13 @@
                 }
             },
             "display": {
-                "name": "Set object var",
-                "discription": "Set object var by name",
+                "name": "node.name.setObjectVar",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__name__": "name",
-                    "__id__": "ID",
-                    "__value__": "value"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__id__": "node.text.id",
+                    "__value__": "node.text.value"
                 }
             }
         },
@@ -1469,15 +1472,14 @@
                 }
             },
             "display": {
-                "name": "Move object",
-                "discription": "move object",
+                "name": "node.name.moveObject",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__name__": "name",
-                    "__id__": "ID",
-                    "__angle__": "angle",
-                    "__power__": "power"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__id__": "node.text.id",
+                    "__angle__": "node.text.angle",
+                    "__power__": "node.text.power"
                 }
             }
         },
@@ -1545,16 +1547,15 @@
                 }
             },
             "display": {
-                "name": "Move object with braking",
-                "discription": "мove object with braking",
+                "name": "node.name.moveObjectWithBraking",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__name__": "name",
-                    "__id__": "ID",
-                    "__angle__": "angle",
-                    "__power__": "power",
-                    "__slidingStep__": "Braking force"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__id__": "node.text.id",
+                    "__angle__": "node.text.angle",
+                    "__power__": "node.text.power",
+                    "__slidingStep__": "node.text.slidingStep"
                 }
             }
         },
@@ -1604,15 +1605,14 @@
                 }
             },
             "display": {
-                "name": "Set object pos",
-                "discription": "set object pos",
+                "name": "node.name.setObjectPos",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__name__": "name",
-                    "__id__": "ID",
-                    "__x__": "X",
-                    "__y__": "Y"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__id__": "node.text.id",
+                    "__x__": "node.text.x",
+                    "__y__": "node.text.y"
                 }
             }
         },
@@ -1658,15 +1658,14 @@
                 }
             },
             "display": {
-                "name": "Get object pos",
-                "discription": "get object pos",
+                "name": "node.name.getObjectPos",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__name__": "name",
-                    "__id__": "ID",
-                    "__x__": "X",
-                    "__y__": "Y"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__id__": "node.text.id",
+                    "__x__": "node.text.x",
+                    "__y__": "node.text.y"
                 }
             }
         },
@@ -1707,13 +1706,12 @@
                 }
             },
             "display": {
-                "name": "Get object ID by name",
-                "discription": "get object ID by name, return -1 if object name is not found",
+                "name": "node.name.getObjectIDByName",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__name__": "name",
-                    "__id__": "ID"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__id__": "node.text.id"
                 }
             }
         },
@@ -1734,11 +1732,10 @@
                 }
             },
             "display": {
-                "name": "On start game",
-                "discription": "starts at the start of the game",
+                "name": "node.name.onStartGame",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
                 }
             }
         },
@@ -1775,12 +1772,11 @@
                 }
             },
             "display": {
-                "name": "Every N ticks",
-                "discription": "start every N ticks",
+                "name": "node.name.everyTick",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__n__": "N"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__n__": "node.text.n"
                 }
             }
         },
@@ -1817,12 +1813,11 @@
                 }
             },
             "display": {
-                "name": "Every N frame",
-                "discription": "start every N frames",
+                "name": "node.name.everyFrame",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__n__": "N"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__n__": "node.text.n"
                 }
             }
         },
@@ -1872,14 +1867,13 @@
                 }
             },
             "display": {
-                "name": "Display text",
-                "discription": "...",
+                "name": "node.name.displayText",
                 "text": {
-                    "__none__": "",
-                    "__text__": "text",
-                    "__path__": "path",
-                    "__x__": "X",
-                    "__y__": "Y"
+                    "__none__": "node.text.none",
+                    "__text__": "node.text.text",
+                    "__path__": "node.text.path",
+                    "__x__": "node.text.x",
+                    "__y__": "node.text.y"
                 }
             }
         },
@@ -1915,12 +1909,11 @@
                 }
             },
             "display": {
-                "name": "Write text",
-                "discription": "...",
+                "name": "node.name.writeText",
                 "text": {
-                    "__none__": "",
-                    "__text__": "text",
-                    "__path__": "path"
+                    "__none__": "node.text.none",
+                    "__text__": "node.text.text",
+                    "__path__": "node.text.path"
                 }
             }
         },
@@ -1968,15 +1961,14 @@
                 }
             },
             "display": {
-                "name": "A + B",
-                "discription": "...",
+                "name": "node.name.plus",
                 "text": {
-                    "__none__": "",
-                    "__text__": "text",
-                    "__path__": "path",
-                    "__a__": "a",
-                    "__b__": "b",
-                    "__answer__": "answer"
+                    "__none__": "node.text.none",
+                    "__text__": "node.text.text",
+                    "__path__": "node.text.path",
+                    "__a__": "node.text.a",
+                    "__b__": "node.text.b",
+                    "__answer__": "node.text.answer"
                 }
             }
         },
@@ -2024,15 +2016,14 @@
                 }
             },
             "display": {
-                "name": "A - B",
-                "discription": "...",
+                "name": "node.name.minus",
                 "text": {
-                    "__none__": "",
-                    "__text__": "text",
-                    "__path__": "path",
-                    "__a__": "a",
-                    "__b__": "b",
-                    "__answer__": "answer"
+                    "__none__": "node.text.none",
+                    "__text__": "node.text.text",
+                    "__path__": "node.text.path",
+                    "__a__": "node.text.a",
+                    "__b__": "node.text.b",
+                    "__answer__": "node.text.answer"
                 }
             }
         },
@@ -2080,15 +2071,14 @@
                 }
             },
             "display": {
-                "name": "A * B",
-                "discription": "...",
+                "name": "node.name.multiply",
                 "text": {
-                    "__none__": "",
-                    "__text__": "text",
-                    "__path__": "path",
-                    "__a__": "a",
-                    "__b__": "b",
-                    "__answer__": "answer"
+                    "__none__": "node.text.none",
+                    "__text__": "node.text.text",
+                    "__path__": "node.text.path",
+                    "__a__": "node.text.a",
+                    "__b__": "node.text.b",
+                    "__answer__": "node.text.answer"
                 }
             }
         },
@@ -2136,15 +2126,14 @@
                 }
             },
             "display": {
-                "name": "A / B",
-                "discription": "...",
+                "name": "node.name.divide",
                 "text": {
-                    "__none__": "",
-                    "__text__": "text",
-                    "__path__": "path",
-                    "__a__": "a",
-                    "__b__": "b",
-                    "__answer__": "answer"
+                    "__none__": "node.text.none",
+                    "__text__": "node.text.text",
+                    "__path__": "node.text.path",
+                    "__a__": "node.text.a",
+                    "__b__": "node.text.b",
+                    "__answer__": "node.text.answer"
                 }
             }
         },
@@ -2180,12 +2169,11 @@
                 }
             },
             "display": {
-                "name": "Remove object",
-                "discription": "Remove object by ID",
+                "name": "node.name.removeObject",
                 "text": {
-                    "__none__": "",
-                    "__id__": "ID",
-                    "__path__": "path"
+                    "__none__": "node.text.none",
+                    "__id__": "node.text.id",
+                    "__path__": "node.text.path"
                 }
             }
         },
@@ -2197,7 +2185,6 @@
             "width": 8,
             "height": 4,
             "id": null,
-
             "sorting": {
                 "inputs": [
                     "path",
@@ -2231,13 +2218,11 @@
                     "name": "__iterator__",
                     "type": "iterator"
                 },
-
                 "id": {
                     "code": "id",
                     "name": "__id__",
                     "type": "number"
                 },
-
                 "after": {
                     "code": "after",
                     "name": "__after__",
@@ -2245,16 +2230,15 @@
                 }
             },
             "display": {
-                "name": "For objects group",
-                "discription": "For object in group",
+                "name": "node.name.forObjectsGroup",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__iterator__": "iterator",
-                    "__after__": "after iterators",
-                    "__name__": "name",
-                    "__group__": "group",
-                    "__id__": "ID"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__iterator__": "node.text.iterator",
+                    "__after__": "node.text.after",
+                    "__name__": "node.text.name",
+                    "__group__": "node.text.group",
+                    "__id__": "node.text.id"
                 }
             }
         },
@@ -2313,19 +2297,17 @@
                 }
             },
             "display": {
-                "name": "Connect text",
-                "discription": "Connect text",
+                "name": "node.name.connectText",
                 "text": {
-                    "__none__": "",
-                    "__id__": "ID",
-                    "__path__": "path",
-                    "__text__": "text",
-                    "__text1__": "first text",
-                    "__text2__": "second text"
+                    "__none__": "node.text.none",
+                    "__id__": "node.text.id",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text",
+                    "__text1__": "node.text.text1",
+                    "__text2__": "node.text.text2"
                 }
             }
         },
-
         "sliceText": {
             "type": "text",
             "name": "sliceText",
@@ -2389,14 +2371,13 @@
                 }
             },
             "display": {
-                "name": "Slice text",
-                "discription": "Slice text",
+                "name": "node.name.sliceText",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__text__": "text",
-                    "__start__": "start",
-                    "__end__": "end"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text",
+                    "__start__": "node.text.start",
+                    "__end__": "node.text.end"
                 }
             }
         },
@@ -2455,14 +2436,13 @@
                 }
             },
             "display": {
-                "name": "Get by index",
-                "discription": "Get by index",
+                "name": "node.name.getByIndex",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__list__": "list",
-                    "__index__": "index",
-                    "__element__": "element"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__list__": "node.text.list",
+                    "__index__": "node.text.index",
+                    "__element__": "node.text.element"
                 }
             }
         },
@@ -2521,13 +2501,12 @@
                 }
             },
             "display": {
-                "name": "Delete by index",
-                "discription": "Delete by index",
+                "name": "node.name.deleteByIndex",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__list__": "list",
-                    "__index__": "index"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__list__": "node.text.list",
+                    "__index__": "node.text.index"
                 }
             }
         },
@@ -2586,14 +2565,13 @@
                 }
             },
             "display": {
-                "name": "Get index of element",
-                "discription": "Get index of element",
+                "name": "node.name.getIndexOfElement",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__list__": "list",
-                    "__index__": "index",
-                    "__element__": "element"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__list__": "node.text.list",
+                    "__index__": "node.text.index",
+                    "__element__": "node.text.element"
                 }
             }
         },
@@ -2660,14 +2638,13 @@
                 }
             },
             "display": {
-                "name": "Slice list",
-                "discription": "Slice list",
+                "name": "node.name.sliceList",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__list__": "list",
-                    "__start__": "start",
-                    "__end__": "end"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__list__": "node.text.list",
+                    "__start__": "node.text.start",
+                    "__end__": "node.text.end"
                 }
             }
         },
@@ -2726,14 +2703,13 @@
                 }
             },
             "display": {
-                "name": "Get by key",
-                "discription": "Get by key",
+                "name": "node.name.getByKey",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__dict__": "dict",
-                    "__key__": "key",
-                    "__element__": "element"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__dict__": "node.text.dict",
+                    "__key__": "node.text.key",
+                    "__element__": "node.text.element"
                 }
             }
         },
@@ -2792,14 +2768,13 @@
                 }
             },
             "display": {
-                "name": "Remove by key",
-                "discription": "Remove by key",
+                "name": "node.name.removeByKey",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__dict__": "dict",
-                    "__key__": "key",
-                    "__element__": "element"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__dict__": "node.text.dict",
+                    "__key__": "node.text.key",
+                    "__element__": "node.text.element"
                 }
             }
         },
@@ -2858,14 +2833,13 @@
                 }
             },
             "display": {
-                "name": "Get key of element",
-                "discription": "Get key of element",
+                "name": "node.name.getKeyOfElement",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__dict__": "dict",
-                    "__key__": "key",
-                    "__element__": "element"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__dict__": "node.text.dict",
+                    "__key__": "node.text.key",
+                    "__element__": "node.text.element"
                 }
             }
         },
@@ -2924,14 +2898,13 @@
                 }
             },
             "display": {
-                "name": "Add list element",
-                "discription": "Add list element",
+                "name": "node.name.addListElement",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__list__": "list",
-                    "__key__": "key",
-                    "__element__": "element"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__list__": "node.text.list",
+                    "__key__": "node.text.key",
+                    "__element__": "node.text.element"
                 }
             }
         },
@@ -2998,14 +2971,13 @@
                 }
             },
             "display": {
-                "name": "Add dict element",
-                "discription": "Add dict element",
+                "name": "node.name.addDictElement",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__dict__": "dict",
-                    "__key__": "key",
-                    "__element__": "element"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__dict__": "node.text.dict",
+                    "__key__": "node.text.key",
+                    "__element__": "node.text.element"
                 }
             }
         },
@@ -3056,13 +3028,12 @@
                 }
             },
             "display": {
-                "name": "Len",
-                "discription": "Return len of object",
+                "name": "node.name.len_",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__answer__": "answer",
-                    "__element__": "element"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__answer__": "node.text.answer",
+                    "__element__": "node.text.element"
                 }
             }
         },
@@ -3129,18 +3100,16 @@
                 }
             },
             "display": {
-                "name": "Python",
-                "discription": "Run python code",
+                "name": "node.name.python",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__text__": "text",
-                    "__list__": "list",
-                    "__dict__": "dict",
-                    "__answer__": "answer"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text",
+                    "__list__": "node.text.list",
+                    "__dict__": "node.text.dict",
+                    "__answer__": "node.text.answer"
                 }
             },
-
             "special": {
                 "inputs": {
                     "list": {
@@ -3204,13 +3173,12 @@
                 }
             },
             "display": {
-                "name": "Function",
-                "discription": "Function",
+                "name": "node.name.functionEvent",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__name__": "name",
-                    "__params__": "params"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__params__": "node.text.params"
                 }
             },
             "special": {
@@ -3271,13 +3239,12 @@
                 }
             },
             "display": {
-                "name": "Call function",
-                "discription": "call function",
+                "name": "node.name.callFunction",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__name__": "name",
-                    "__params__": "params"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__params__": "node.text.params"
                 }
             }
         },
@@ -3330,13 +3297,12 @@
                 }
             },
             "display": {
-                "name": "Run animation",
-                "discription": "run animation",
+                "name": "node.name.runAnimation",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__id__": "ID",
-                    "__animation__": "animation"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id",
+                    "__animation__": "node.text.animation"
                 }
             }
         },
@@ -3381,12 +3347,11 @@
                 }
             },
             "display": {
-                "name": "Stop animation",
-                "discription": "stop animation",
+                "name": "node.name.stopAnimation",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__id__": "ID"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id"
                 }
             }
         },
@@ -3447,14 +3412,13 @@
                 }
             },
             "display": {
-                "name": "Mirror animation",
-                "discription": "mirror animation",
+                "name": "node.name.mirrorAnimation",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__id__": "ID",
-                    "__horizontal__": "horizontal",
-                    "__vertical__": "vertical"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id",
+                    "__horizontal__": "node.text.horizontal",
+                    "__vertical__": "node.text.vertical"
                 }
             }
         },
@@ -3511,14 +3475,13 @@
                 }
             },
             "display": {
-                "name": "Get resulting vector",
-                "discription": "get resulting vector",
+                "name": "node.name.getResultingVector",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__id__": "ID",
-                    "__x__": "X",
-                    "__y__": "Y"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id",
+                    "__x__": "node.text.x",
+                    "__y__": "node.text.y"
                 }
             }
         },
@@ -3557,13 +3520,12 @@
                 }
             },
             "display": {
-                "name": "Get mouse pos",
-                "discription": "get mouse pos",
+                "name": "node.name.getMousePos",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__x__": "X",
-                    "__y__": "Y"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__x__": "node.text.x",
+                    "__y__": "node.text.y"
                 }
             }
         },
@@ -3598,22 +3560,23 @@
                     "standard": 0,
                     "choose": {
                         "options": [
-                            "0. Hitbox",
-                            "1. Group",
-                            "2. Mass",
-                            "3. Layer",
-                            "4. Invisible",
-                            "5. Gravity",
-                            "6. Braking power",
-                            "7. Message",
-                            "8. Font size",
-                            "9. Alignment",
-                            "10. Font color",
-                            "11. Background color",
-                            "12. Rama color",
-                            "13. Sprite hitbox",
-                            "14. liveTime",
-                            "15. minusSpriteSizePerFrame"
+                            "object.parameter.number.hitbox",
+                            "object.parameter.number.group",
+                            "object.parameter.number.mass",
+                            "object.parameter.number.layer",
+                            "object.parameter.number.invisible",
+                            "object.parameter.number.gravity",
+                            "object.parameter.number.brakingPower",
+                            "object.parameter.number.message",
+                            "object.parameter.number.fontSize",
+                            "object.parameter.number.alignment",
+                            "object.parameter.number.fontColor",
+                            "object.parameter.number.backgroundColor",
+                            "object.parameter.number.ramaColor",
+                            "object.parameter.number.spriteHithox",
+                            "object.parameter.number.liveTime",
+                            "object.parameter.number.minusSpriteSizePerFrame",
+                            "object.parameter.number.alpha"
                         ]
                     }
                 },
@@ -3633,14 +3596,13 @@
                 }
             },
             "display": {
-                "name": "Set object parameter",
-                "discription": "Set object parameter",
+                "name": "node.name.setObjectParameter",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__id__": "ID",
-                    "__name__": "Name",
-                    "__value__": "Value"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id",
+                    "__name__": "node.text.name",
+                    "__value__": "node.text.value"
                 }
             }
         },
@@ -3675,22 +3637,23 @@
                     "standard": 0,
                     "choose": {
                         "options": [
-                            "0. Hitbox",
-                            "1. Group",
-                            "2. Mass",
-                            "3. Layer",
-                            "4. Invisible",
-                            "5. Gravity",
-                            "6. Braking power",
-                            "7. Message",
-                            "8. Font size",
-                            "9. Alignment",
-                            "10. Font color",
-                            "11. Background color",
-                            "12. Rama color",
-                            "13. Sprite hitbox",
-                            "14. liveTime",
-                            "15. minusSpriteSizePerFrame"
+                            "object.parameter.number.hitbox",
+                            "object.parameter.number.group",
+                            "object.parameter.number.mass",
+                            "object.parameter.number.layer",
+                            "object.parameter.number.invisible",
+                            "object.parameter.number.gravity",
+                            "object.parameter.number.brakingPower",
+                            "object.parameter.number.message",
+                            "object.parameter.number.fontSize",
+                            "object.parameter.number.alignment",
+                            "object.parameter.number.fontColor",
+                            "object.parameter.number.backgroundColor",
+                            "object.parameter.number.ramaColor",
+                            "object.parameter.number.spriteHithox",
+                            "object.parameter.number.liveTime",
+                            "object.parameter.number.minusSpriteSizePerFrame",
+                            "object.parameter.number.alpha"
                         ]
                     }
                 }
@@ -3708,14 +3671,13 @@
                 }
             },
             "display": {
-                "name": "Get object parameter",
-                "discription": "get object parameter",
+                "name": "node.name.getObjectParameter",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__id__": "ID",
-                    "__name__": "Name",
-                    "__value__": "Value"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id",
+                    "__name__": "node.text.name",
+                    "__value__": "node.text.value"
                 }
             }
         },
@@ -3749,12 +3711,11 @@
                 }
             },
             "display": {
-                "name": "Passed frame time",
-                "discription": "get time passed",
+                "name": "node.name.getTimePassed",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__time_passed__": "Time passed"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__time_passed__": "node.text.timePassed"
                 }
             }
         },
@@ -3788,12 +3749,986 @@
                 }
             },
             "display": {
-                "name": "On button press",
-                "discription": "on button press",
+                "name": "node.name.onButtonPress",
                 "text": {
-                    "__none__": "",
-                    "__path__": "path",
-                    "__id__": "ID"
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id"
+                }
+            }
+        },
+        "getNoiseValue": {
+            "type": "another",
+            "name": "getNoiseValue",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 12,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "seed",
+                    "x",
+                    "y",
+                    "min",
+                    "max",
+                    "octaves",
+                    "frequency",
+                    "amplitude",
+                    "lacunarity",
+                    "persistence"
+                ],
+                "outputs": [
+                    "path",
+                    "value"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "seed": {
+                    "code": "seed",
+                    "name": "__seed__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "y": {
+                    "code": "y",
+                    "name": "__y__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "min": {
+                    "code": "min",
+                    "name": "__min__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "max": {
+                    "code": "max",
+                    "name": "__max__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                },
+                "octaves": {
+                    "code": "octaves",
+                    "name": "__octaves__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 4
+                },
+                "frequency": {
+                    "code": "frequency",
+                    "name": "__frequency__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                },
+                "amplitude": {
+                    "code": "amplitude",
+                    "name": "__amplitude__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                },
+                "lacunarity": {
+                    "code": "lacunarity",
+                    "name": "__lacunarity__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 2
+                },
+                "persistence": {
+                    "code": "persistence",
+                    "name": "__persistence__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0.5
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.getNoiseValue",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__value__": "node.text.value",
+                    "__x__": "node.text.x",
+                    "__y__": "node.text.y",
+                    "__seed__": "node.text.seed",
+                    "__min__": "node.text.minValue",
+                    "__max__": "node.text.maxValue",
+                    "__octaves__": "node.text.octaves",
+                    "__frequency__": "node.text.frequency",
+                    "__amplitude__": "node.text.amplitude",
+                    "__lacunarity__": "node.text.lacunarity",
+                    "__persistence__": "node.text.persistence"
+                }
+            }
+        },
+        "sin": {
+            "type": "number",
+            "name": "sin",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.sin",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__x__": "node.text.x",
+                    "__answer__": "node.text.answer"
+                }
+            }
+        },
+        "cos": {
+            "type": "number",
+            "name": "cos",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.cos",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__x__": "node.text.x",
+                    "__answer__": "node.text.answer"
+                }
+            }
+        },
+        "tan": {
+            "type": "number",
+            "name": "tan",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.tan",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__x__": "node.text.x",
+                    "__answer__": "node.text.answer"
+                }
+            }
+        },
+        "ctg": {
+            "type": "number",
+            "name": "ctg",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.ctg",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__x__": "node.text.x",
+                    "__answer__": "node.text.answer"
+                }
+            }
+        },
+        "radians": {
+            "type": "number",
+            "name": "radians",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "degrees": {
+                    "code": "degrees",
+                    "name": "__degrees__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "radians": {
+                    "code": "radians",
+                    "name": "__radians__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.radians",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__degrees__": "node.text.degrees",
+                    "__radians__": "node.text.radians"
+                }
+            }
+        },
+        "degrees": {
+            "type": "number",
+            "name": "degrees",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "radians": {
+                    "code": "radians",
+                    "name": "__radians__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "degrees": {
+                    "code": "degrees",
+                    "name": "__degrees__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.degrees",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__degrees__": "node.text.degrees",
+                    "__radians__": "node.text.radians"
+                }
+            }
+        },
+        "goToScene": {
+            "type": "another",
+            "name": "goToScene",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "scene": {
+                    "code": "scene",
+                    "name": "__scene__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.goToScene",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__scene__": "node.text.scene"
+                }
+            }
+        },
+        "getSceneName": {
+            "type": "another",
+            "name": "getSceneName",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "text"
+                }
+            },
+            "display": {
+                "name": "node.name.getSceneName",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__answer__": "node.text.answer"
+                }
+            }
+        },
+        "playMusic": {
+            "type": "music",
+            "name": "playMusic",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "volume"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+                "volume": {
+                    "code": "volume",
+                    "name": "__volume__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.playMusic",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__volume__": "node.text.volume"
+                }
+            }
+        },
+        "stopMusic": {
+            "type": "music",
+            "name": "stopMusic",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.stopMusic",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name"
+                }
+            }
+        },
+        "playSound": {
+            "type": "music",
+            "name": "playSound",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "volume"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                },
+                "volume": {
+                    "code": "volume",
+                    "name": "__volume__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.playSound",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__volume__": "node.text.volume"
+                }
+            }
+        },
+        "wait": {
+            "type": "another",
+            "name": "wait",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "time": {
+                    "code": "time",
+                    "name": "__time__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 100
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.wait",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__time__": "node.text.time"
+                }
+            }
+        },
+        "break_": {
+            "type": "another",
+            "name": "break_",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                }
+            },
+            "outputs": {
+
+            },
+            "display": {
+                "name": "node.name.break",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            }
+        },
+        "onLoadScene": {
+            "type": "event",
+            "name": "onLoadScene",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {},
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.onLoadScene",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            }
+        },
+        "ifKeyInDict": {
+            "type": "logic",
+            "name": "ifKeyInDict",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "dict",
+                    "key"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict",
+                    "value": null,
+                    "standard": {}
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.ifKeyInDict",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__dict__": "node.text.dict",
+                    "__key__": "node.text.key",
+                    "__path_true__": "node.text.pathTrue",
+                    "__path_false__": "node.text.pathFalse"
+                }
+            }
+        },
+        "ifElementInList": {
+            "type": "logic",
+            "name": "ifElementInList",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "element"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list",
+                    "value": null,
+                    "standard": []
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.ifElementInList",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__dict__": "node.text.list",
+                    "__element__": "node.text.element",
+                    "__path_true__": "node.text.pathTrue",
+                    "__path_false__": "node.text.pathFalse"
+                }
+            }
+        },
+        "getAllObjectInGroup": {
+            "type": "objects",
+            "name": "getAllObjectInGroup",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "group"
+                ],
+                "outputs": [
+                    "path",
+                    "objects"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "group": {
+                    "code": "group",
+                    "name": "__group__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "objects": {
+                    "code": "objects",
+                    "name": "__listObjectID__",
+                    "type": "list"
+                }
+            },
+            "display": {
+                "name": "node.name.getAllObjectInGroup",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__group__": "node.text.group",
+                    "__element__": "node.text.element",
+                    "__listObjectID__": "node.text.listObjectID"
+                }
+            }
+        },
+        "absolute": {
+            "type": "number",
+            "name": "absolute",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "number"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "number": {
+                    "code": "number",
+                    "name": "__number__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.absolute",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__answer__": "node.text.answer",
+                    "__number__": "node.text.number"
                 }
             }
         }

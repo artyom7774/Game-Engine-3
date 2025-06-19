@@ -18,7 +18,6 @@ DIVELOP = os.getenv("PYCHARM_HOSTED") == "1"
 
 pygame.init()
 
-
 with open("scr/files/settings/settings.json", "r", encoding="utf-8") as file:
     SETTINGS = json.load(file)
 
@@ -169,7 +168,7 @@ FLAGS = {
 SYSTEM = platform.system()
 RELEASE = platform.release()
 
-IMAGE_FORMATES = "jpeg jpg jpe jfif png ico tiff tif eps svg".split()
+IMAGE_FORMATES = "jpeg jpg jpe jfif png ico tiff tif eps svgb bmp".split()
 BLOCKED_FORMATES = "cfg obj objc func".split()
 
 DONT_OPEN_FORMATES = ()

@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def mirrorAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -22,6 +25,11 @@ def mirrorAnimation(program, compiler, path: str, nodes: dict, id: int, variable
     else:
         vertical = bool(nodes["objects"][str(id)]["inputs"]["vertical"]["standard"])
 
-    program.objects.getById(ids).animator.flipAnimation(horizontal, vertical)
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    obj.animator.flipAnimation(horizontal, vertical)
 
     return queue

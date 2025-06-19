@@ -2,8 +2,8 @@ cdef class Vec2i:
     cdef public int x, y
 
     def __init__(self, int x=0, int y=0):
-        self.x = x
-        self.y = y
+        self.x = int(x)
+        self.y = int(y)
 
     def __str__(self):
         return f"Vec2i({int(self.x)}, {int(self.y)})"
