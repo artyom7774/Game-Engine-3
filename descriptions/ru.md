@@ -8,7 +8,7 @@
 
 ## Другие версии перевода
 
-- [English](README.md)
+- [English](descriptions/en.md)
 - [Русский](descriptions/ru.md)
 
 ## Ключевые особенности
