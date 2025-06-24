@@ -9,7 +9,7 @@
 ## Another translate versions
 
 - [English](README.md)
-- [Русский](README.ru.md)
+- [Русский](descriptions/ru.md)
 
 ## Key Features
 
