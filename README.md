@@ -6,7 +6,9 @@
 
 **Game Engine 3** is a powerful software framework for creating 2D games and applications with intuitive visual programming. The engine provides a user-friendly node-based editor that allows game creation without writing textual code.
 
-[Russian version](README.ru.md)
+## Another translate versions
+
+[Русская версия](README.ru.md)
 
 ## Key Features
 
