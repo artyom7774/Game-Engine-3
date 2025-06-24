@@ -484,8 +484,6 @@ class Compile:
 
         # """
 
-        return 0
-
     @staticmethod
     def compile(project, executable: bool = True) -> bool:
         engine = f"projects/{project.selectProject}/scr/engine"
@@ -593,7 +591,7 @@ class Compile:
                     "focus": focus
                 }
 
-        # LOAD OBJECTS
+        # LOAD OBJECTS AND INTERFACE
 
         allObjects = {}
 
@@ -723,8 +721,6 @@ class Compile:
 
             command = f"{diskName}: && cd \"{pathProgram}\" && cd \"{pathProject}\" && \"{pathPythonExecutable}\" \"{pathPyInstaller}\" -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\""
 
-            print(command)
-
             result = subprocess.run(command, shell=True, capture_output=True, check=True, text=True)
 
             project.dialog.logSignal.emit(result.stdout)
@@ -803,7 +799,7 @@ class Compile:
 
         path = f"projects/{project.selectProject}/scr"
 
-        loads = ["functions", "assets", "engine", "files", "code", "music", f"{projectSettings['values']['name']['value']}.py", f"{projectSettings['values']['name']['value']}.exe", "collision.cfg"]
+        loads = ["music", "functions", "assets", "engine", "files", "code", "music", f"{projectSettings['values']['name']['value']}.py", f"{projectSettings['values']['name']['value']}.exe", "collision.cfg"]
 
         folder = QFileDialog.getExistingDirectory(project, translate("Choose path"), "/home")
 
