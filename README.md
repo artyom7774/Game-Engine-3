@@ -8,6 +8,7 @@
 
 ## Another translate versions
 
+[English version](README.md)
 [Русская версия](README.ru.md)
 
 ## Key Features
