@@ -8,7 +8,7 @@
 
 ## Another translate versions
 
-- [English](descriptions/en.md)
+- [English](README.md)
 - [Русский](descriptions/ru.md)
 
 ## Key Features
