@@ -114,19 +114,19 @@ In the **collision.cfg** file, configure interactions between different object g
 ```
 Game Engine 3
 ├─ Game Engine Core
-│ ├─ Sprite Rendering (Pygame)
-│ ├─ Sprite and Texture Handling (Pillow)
-│ ├─ Physics Engine
-│ ├─ Collision System
-│ └─ Animation System
+│   ├─ Sprite Rendering (Pygame)
+│   ├─ Sprite and Texture Handling (Pillow)
+│   ├─ Physics Engine
+│   ├─ Collision System
+│   └─ Animation System
 ├─ Editor Interface
-│ ├─ Object Editor
-│ ├─ Scene Editor
-│ ├─ Node Editor
-│ └─ Project Execution and Compilation
+│   ├─ Object Editor
+│   ├─ Scene Editor
+│   ├─ Node Editor
+│   └─ Project Execution and Compilation
 └─ Website
-├─ First Project Documentation
-└─ Complete Node List with Usage Examples
+    ├─ First Project Documentation
+    └─ Complete Node List with Usage Examples
 ```
 
 ## Technical Details
