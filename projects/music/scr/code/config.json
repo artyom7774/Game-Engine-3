@@ -4,6 +4,7 @@
             "name": "Events",
             "nodes": [
                 "onStartGame",
+                "onLoadScene",
                 "everyFrame",
                 "everyTick",
                 "mouseRightClick",
@@ -43,14 +44,17 @@
                 "sin",
                 "cos",
                 "tan",
-                "ctg"
+                "ctg",
+                "absolute"
             ]
         },
         "logic": {
             "name": "Logic",
             "nodes": [
                 "if_",
-                "ifCollision"
+                "ifCollision",
+                "ifKeyInDict",
+                "ifElementInList"
             ]
         },
         "objects": {
@@ -68,6 +72,7 @@
                 "getResultingVector",
                 "getObjectParameter",
                 "setObjectParameter",
+                "getAllObjectInGroup",
                 "jump"
             ]
         },
@@ -3570,7 +3575,8 @@
                             "object.parameter.number.ramaColor",
                             "object.parameter.number.spriteHithox",
                             "object.parameter.number.liveTime",
-                            "object.parameter.number.minusSpriteSizePerFrame"
+                            "object.parameter.number.minusSpriteSizePerFrame",
+                            "object.parameter.number.alpha"
                         ]
                     }
                 },
@@ -3646,7 +3652,8 @@
                             "object.parameter.number.ramaColor",
                             "object.parameter.number.spriteHithox",
                             "object.parameter.number.liveTime",
-                            "object.parameter.number.minusSpriteSizePerFrame"
+                            "object.parameter.number.minusSpriteSizePerFrame",
+                            "object.parameter.number.alpha"
                         ]
                     }
                 }
@@ -4101,9 +4108,9 @@
                     "name": "__path__",
                     "type": "path"
                 },
-                "answer": {
-                    "code": "answer",
-                    "name": "__answer__",
+                "radians": {
+                    "code": "radians",
+                    "name": "__radians__",
                     "type": "number"
                 }
             },
@@ -4113,7 +4120,7 @@
                     "__none__": "node.text.none",
                     "__path__": "node.text.path",
                     "__degrees__": "node.text.degrees",
-                    "__answer__": "node.text.answer"
+                    "__radians__": "node.text.radians"
                 }
             }
         },
@@ -4147,9 +4154,9 @@
                     "name": "__path__",
                     "type": "path"
                 },
-                "answer": {
-                    "code": "answer",
-                    "name": "__answer__",
+                "degrees": {
+                    "code": "degrees",
+                    "name": "__degrees__",
                     "type": "number"
                 }
             },
@@ -4158,8 +4165,8 @@
                 "text": {
                     "__none__": "node.text.none",
                     "__path__": "node.text.path",
-                    "__radians__": "node.text.radians",
-                    "__answer__": "node.text.answer"
+                    "__degrees__": "node.text.degrees",
+                    "__radians__": "node.text.radians"
                 }
             }
         },
@@ -4449,6 +4456,279 @@
                 "text": {
                     "__none__": "node.text.none",
                     "__path__": "node.text.path"
+                }
+            }
+        },
+        "onLoadScene": {
+            "type": "event",
+            "name": "onLoadScene",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {},
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.onLoadScene",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            }
+        },
+        "ifKeyInDict": {
+            "type": "logic",
+            "name": "ifKeyInDict",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "dict",
+                    "key"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict",
+                    "value": null,
+                    "standard": {}
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.ifKeyInDict",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__dict__": "node.text.dict",
+                    "__key__": "node.text.key",
+                    "__path_true__": "node.text.pathTrue",
+                    "__path_false__": "node.text.pathFalse"
+                }
+            }
+        },
+        "ifElementInList": {
+            "type": "logic",
+            "name": "ifElementInList",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "element"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list",
+                    "value": null,
+                    "standard": []
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.ifElementInList",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__dict__": "node.text.list",
+                    "__element__": "node.text.element",
+                    "__path_true__": "node.text.pathTrue",
+                    "__path_false__": "node.text.pathFalse"
+                }
+            }
+        },
+        "getAllObjectInGroup": {
+            "type": "objects",
+            "name": "getAllObjectInGroup",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "group"
+                ],
+                "outputs": [
+                    "path",
+                    "objects"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "group": {
+                    "code": "group",
+                    "name": "__group__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "objects": {
+                    "code": "objects",
+                    "name": "__listObjectID__",
+                    "type": "list"
+                }
+            },
+            "display": {
+                "name": "node.name.getAllObjectInGroup",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__group__": "node.text.group",
+                    "__element__": "node.text.element",
+                    "__listObjectID__": "node.text.listObjectID"
+                }
+            }
+        },
+        "absolute": {
+            "type": "number",
+            "name": "absolute",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "number"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "number": {
+                    "code": "number",
+                    "name": "__number__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.absolute",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__answer__": "node.text.answer",
+                    "__number__": "node.text.number"
                 }
             }
         }

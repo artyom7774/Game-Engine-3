@@ -5,8 +5,8 @@ from engine.vector.int import Vec2i
 
 import typing
 
-OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "gravity", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor", "spriteHitbox", "liveTime", "minusSpriteSizePerFrame"]
-OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "text", "int", "list", "eval", "eval", "eval", "list", "float", "float"]
+OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "gravity", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor", "spriteHitbox", "liveTime", "minusSpriteSizePerFrame", "alpha"]
+OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "text", "int", "list", "eval", "eval", "eval", "list", "float", "float", "int"]
 
 
 def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
@@ -64,6 +64,9 @@ def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, varia
 
     if obj is None:
         EngineError(f"not found object with id = {ids}")
+
+    if OBJECT_PARAMETERS[operation] == "alpha":
+        value = min(255, max(0, value))
 
     if OBJECT_PARAMETERS[operation] == "spriteHitbox":
         if obj.sprite is not None:

@@ -61,7 +61,7 @@ class CreateNode(QDialog):
         data = item.data(column, 1000)
 
         if data["level"] != 2:
-            return 0
+            return
 
         self.objects["select"] = data["node"]
 
@@ -87,11 +87,34 @@ class CreateNode(QDialog):
         with open("scr/code/config.json", "r", encoding="utf-8") as file:
             config = load(file)
 
+        # BASIC NODES
+
+        self.objects["widgets"]["nodes"] = QTreeWidgetItem(self.objects["nodes"])
+        self.objects["widgets"]["nodes"].setIcon(0, QIcon(getColor("dir")))
+        self.objects["widgets"]["nodes"].setText(0, translate("Basic nodes"))
+        self.objects["widgets"]["nodes"].setData(0, 1000, {"level": 0, "path": "nodes"})
+        # self.objects["widgets"]["nodes"].setExpanded(True)
+
+        for key, value in config["basic"].items():
+            self.objects["widgets"][f"nodes/{key}"] = QTreeWidgetItem(self.objects["widgets"]["nodes"])
+            self.objects["widgets"][f"nodes/{key}"].setIcon(0, QIcon(getColor("dir")))
+            self.objects["widgets"][f"nodes/{key}"].setText(0, translate(value["name"]))
+            self.objects["widgets"][f"nodes/{key}"].setData(0, 1000, {"level": 1, "path": f"nodes/{key}"})
+            self.objects["widgets"][f"nodes/{key}"].setExpanded(True)
+
+            for node in value["nodes"]:
+                self.objects["widgets"][f"nodes/{key}/{element}"] = QTreeWidgetItem(self.objects["widgets"][f"nodes/{key}"])
+                self.objects["widgets"][f"nodes/{key}/{element}"].setIcon(0, QIcon(getColor("func")))
+                self.objects["widgets"][f"nodes/{key}/{element}"].setText(0, translate(config["nodes"][node]["display"]["name"]))
+                self.objects["widgets"][f"nodes/{key}/{element}"].setData(0, 1000, {"level": 2, "path": f"nodes/{key}/{element}", "name": node, "node": config["nodes"][node]})
+
+        # ALL NODES
+
         self.objects["widgets"]["nodes"] = QTreeWidgetItem(self.objects["nodes"])
         self.objects["widgets"]["nodes"].setIcon(0, QIcon(getColor("dir")))
         self.objects["widgets"]["nodes"].setText(0, translate("Nodes"))
         self.objects["widgets"]["nodes"].setData(0, 1000, {"level": 0, "path": "nodes"})
-        self.objects["widgets"]["nodes"].setExpanded(True)
+        # self.objects["widgets"]["nodes"].setExpanded(True)
 
         for key, value in config["groups"].items():
             self.objects["widgets"][f"nodes/{key}"] = QTreeWidgetItem(self.objects["widgets"]["nodes"])

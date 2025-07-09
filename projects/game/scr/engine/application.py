@@ -36,6 +36,7 @@ class Application:
             variables = {}
 
         self.objects = engine.ObjectGroup(self)
+        self.objects.init()
 
         self.objects.collisions = engine.Collision(collision)
 
@@ -203,12 +204,12 @@ class Application:
         #     pygame.display.set_caption(str(round(self.clock.get_fps())))
 
         if self.doCollisionsUpdate:
-            engine.classes.getUsingObjects.GetUsingObjects.getUsingObjectsSquare(self, self.objects)
+            engine.classes.getUsingObjects.GetUsingObjects.getUsingObjectsQuadTree(self, self.objects)
 
     def logic(self) -> None:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.play = False
+                self.exit()
 
             if event.type in self.events:
                 if event.key in self.events[event.type]:
@@ -298,4 +299,7 @@ class Application:
         sys.exit()
 
     def exit(self) -> None:
+        for key, value in engine.profiler.averange().items():
+            print(key, ":", value)
+
         self.play = False

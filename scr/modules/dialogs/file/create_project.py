@@ -17,7 +17,7 @@ class CreateProjectFunctions:
         if name == "":
             dialog.objects["log_label"].setText("Imposiable project name")
 
-            return 0
+            return
 
         try:
             with open(f"scr/files/using/{name}", "w", encoding="utf-8") as file:
@@ -26,13 +26,13 @@ class CreateProjectFunctions:
         except BaseException:
             dialog.objects["log_label"].setText("Imposiable project name")
 
-            return 0
+            return
 
         for element in os.listdir("projects/"):
             if element == name:
                 dialog.objects["log_label"].setText(translate("Project name already exist"))
 
-                return 0
+                return
 
         project.selectProject = name
 

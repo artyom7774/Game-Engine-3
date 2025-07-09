@@ -229,6 +229,9 @@
     "Installing libraries": "Установка библиотек"
     "Successfully": "Успешно"
     "Music": "Музыка"
+    "Basic nodes": "Основные ноды"
+    "Experimental nodes": "Экспериментальные ноды"
+    "Experimental": "Экспериментальные"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"

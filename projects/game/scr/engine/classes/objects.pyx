@@ -154,6 +154,8 @@ cdef class StaticObject:
 
         self.distance = sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 
+        self.game.objects.tree.update(self)
+
     def draw(self, px: float, py: float):
         if self.sprite is not None:
             if self.game.usingWidth + self.sprite.pos.x + self.sprite.size.x > self.pos.x + px > -self.sprite.pos.x - self.sprite.size.x and self.game.usingHeight + self.sprite.pos.y + self.sprite.size.y > self.pos.y + py > -self.sprite.pos.y - self.sprite.size.y:

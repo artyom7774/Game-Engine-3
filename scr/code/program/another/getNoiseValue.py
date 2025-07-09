@@ -8,6 +8,7 @@ import time
 
 class PerlinNoise:
     octave_noise_values_cache = {}
+    noise_stats = {}
     tables = {}
 
     def __init__(self, seed=0):
@@ -98,77 +99,46 @@ class PerlinNoise:
 
         return min_val + normalized * (max_val - min_val)
 
-    def octave_noise_values(self, octaves=4, frequency=1.0, amplitude=1.0, lacunarity=2.0, persistence=0.5, min_val=0.0, max_val=1.0):
-        string = f"{octaves}-{frequency}-{amplitude}-{lacunarity}-{persistence}-{min_val}-{max_val}"
-
-        if string in self.octave_noise_values_cache:
-            return self.octave_noise_values_cache[string]
-
-        minValue = 1e9
-        maxValue = -1e9
-
-        for x in range(0, 100):
-            for y in range(0, 100):
-                total = 0.0
-                max_amplitude = 0.0
-                current_amplitude = amplitude
-                current_frequency = frequency
-
-                for i in range(octaves):
-                    noise_val = self.noise(x, y, current_frequency, 1.0)
-                    total += noise_val * current_amplitude
-                    max_amplitude += current_amplitude
-                    current_amplitude *= persistence
-                    current_frequency *= lacunarity
-
-                # Нормализуем результат
-
-                if max_amplitude != 0:
-                    normalized = total / max_amplitude
-
-                else:
-                    normalized = 0
-
-                normalized = (normalized + 1) / 2
-
-                answer = min_val + normalized * (max_val - min_val)
-
-                minValue = min(minValue, answer)
-                maxValue = max(maxValue, answer)
-
-        self.octave_noise_values_cache[string] = (minValue, maxValue)
-
-        return minValue, maxValue
-
     def octave_noise(self, x, y, octaves=4, frequency=1.0, amplitude=1.0, lacunarity=2.0, persistence=0.5, min_val=0.0, max_val=1.0):
+        stats_key = (self.seed, octaves, frequency, amplitude, lacunarity, persistence)
+
         total = 0.0
-        max_amplitude = 0.0
         current_amplitude = amplitude
         current_frequency = frequency
 
         for i in range(octaves):
             noise_val = self.noise(x, y, current_frequency, 1.0)
             total += noise_val * current_amplitude
-            max_amplitude += current_amplitude
             current_amplitude *= persistence
             current_frequency *= lacunarity
 
-        # Нормализуем результат
-
-        if max_amplitude != 0:
-            normalized = total / max_amplitude
+        if stats_key not in self.noise_stats:
+            self.noise_stats[stats_key] = {"min": total, "max": total, "samples": 1}
 
         else:
-            normalized = 0
+            stats = self.noise_stats[stats_key]
 
-        normalized = (normalized + 1) / 2
+            stats["min"] = min(stats["min"], total)
+            stats["max"] = max(stats["max"], total)
 
-        minValue, maxValue = self.octave_noise_values(octaves, frequency, amplitude, lacunarity, persistence, 0, 1)
-        normalized = 0 + (normalized - minValue) * (1 - 0) / (maxValue - minValue)
+            stats["samples"] += 1
 
-        # print(normalized, minValue, maxValue)
+        stats = self.noise_stats[stats_key]
+        if stats["max"] != stats["min"]:
+            normalized = (total - stats["min"]) / (stats["max"] - stats["min"])
+
+        else:
+            normalized = 0.5
 
         return min_val + normalized * (max_val - min_val)
+
+    def reset_noise_stats(self):
+        self.noise_stats.clear()
+
+    def get_noise_stats(self, octaves=4, frequency=1.0, amplitude=1.0, lacunarity=2.0, persistence=0.5):
+        stats_key = (self.seed, octaves, frequency, amplitude, lacunarity, persistence)
+
+        return self.noise_stats.get(stats_key, None)
 
 
 def getNoiseValue(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:

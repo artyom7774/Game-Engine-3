@@ -126,7 +126,7 @@ class Object:
                 for key, value in temp["value"].items():
                     include(project, obj, f"{path}/{key}", class_)
 
-                return 0
+                return
 
             else:
                 project.objects["main"]["widgets"].append(widget)
@@ -152,7 +152,7 @@ class Object:
                 obj = load(f)
 
         except FileNotFoundError:
-            return 0
+            return
 
         if "object_variables" in project.objects["main"]:
             try:
@@ -246,7 +246,7 @@ class Object:
                 file = load(f)
 
         except BaseException:
-            return 0
+            return
 
         if last["type"] == "bool":
             text = obj.isChecked()

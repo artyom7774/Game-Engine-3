@@ -212,7 +212,7 @@ def projectTreeCloseDir(project, obj) -> None:
     path = projectTreeGetPath(obj)
 
     if len(path) == 1:
-        return 0
+        return
 
     project.objects["project_tree_file_opened"]["/".join(path[1:])] = False
 

@@ -34,20 +34,11 @@ class ObjectGroup:
 
         self.movedByKinematic = {}
 
-        self.maxLengthObject = -INF
-        self.minLengthObject = +INF
-
     def empty(self):
-        self.maxLengthObject = -INF
-        self.minLengthObject = +INF
-
         for obj in self.objects:
             self.remove(obj)
 
     def add(self, obj: VObject) -> None:
-        self.updateMinLengthObject(obj)
-        self.updateMaxLengthObject(obj)
-
         if isinstance(obj, Particle):
             self.particles.append(obj)
 
@@ -105,12 +96,6 @@ class ObjectGroup:
 
     def getByGroup(self, group) -> typing.List[VObject]:
         return [element for element in self.objectByGroup[group].values()] if self.objectByGroup.get(group) is not None else None
-
-    def updateMinLengthObject(self, obj: VObject) -> None:
-        self.minLengthObject = min(self.minLengthObject, obj.hitbox.width + obj.hitbox.height)
-
-    def updateMaxLengthObject(self, obj: VObject) -> None:
-        self.maxLengthObject = max(self.maxLengthObject, obj.hitbox.width + obj.hitbox.height)
 
     def update(self) -> None:
         right = [obj for obj in self.objects if not hasattr(obj, "getVectorsPower") or obj.getVectorsPower().x >= 0]

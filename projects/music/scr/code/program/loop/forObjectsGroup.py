@@ -1,3 +1,6 @@
+from engine.special.exception import EngineError
+
+
 def forObjectsGroup(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 

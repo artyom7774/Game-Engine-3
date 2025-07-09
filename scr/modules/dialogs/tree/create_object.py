@@ -27,7 +27,7 @@ class CreateObjectFunctions:
             if name == "":
                 dialog.objects["log_label"].setText("Imposiable object name")
 
-                return 0
+                return
 
             try:
                 with open(f"scr/files/using/{name}", "w", encoding="utf-8") as file:
@@ -36,13 +36,13 @@ class CreateObjectFunctions:
             except BaseException:
                 dialog.objects["log_label"].setText("Imposiable object name")
 
-                return 0
+                return
 
             for element in os.listdir(path):
                 if element == name:
                     dialog.objects["log_label"].setText("Object name already exist")
 
-                    return 0
+                    return
 
         # CREATE
 

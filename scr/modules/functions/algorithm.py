@@ -2,8 +2,6 @@ import functools
 import typing
 import math
 
-from engine.functions.cache import cache
-
 
 def cacheBezierCurve(func):
     cache = {}

@@ -2771,7 +2771,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 /* "engine/classes/hitbox.pyx":11
  *     cdef public int x, y, width, height
  * 
- *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]):             # <<<<<<<<<<<<<<
+ *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]) -> None:             # <<<<<<<<<<<<<<
  *         if not isinstance(hitbox, (list, tuple)):
  *             hitbox = hitbox.get()
  */
@@ -2873,7 +2873,7 @@ static int __pyx_pf_6engine_7classes_6hitbox_12SquareHitbox___init__(struct __py
 
   /* "engine/classes/hitbox.pyx":12
  * 
- *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]):
+ *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]) -> None:
  *         if not isinstance(hitbox, (list, tuple)):             # <<<<<<<<<<<<<<
  *             hitbox = hitbox.get()
  * 
@@ -2891,7 +2891,7 @@ static int __pyx_pf_6engine_7classes_6hitbox_12SquareHitbox___init__(struct __py
   if (__pyx_t_2) {
 
     /* "engine/classes/hitbox.pyx":13
- *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]):
+ *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]) -> None:
  *         if not isinstance(hitbox, (list, tuple)):
  *             hitbox = hitbox.get()             # <<<<<<<<<<<<<<
  * 
@@ -2926,7 +2926,7 @@ static int __pyx_pf_6engine_7classes_6hitbox_12SquareHitbox___init__(struct __py
 
     /* "engine/classes/hitbox.pyx":12
  * 
- *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]):
+ *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]) -> None:
  *         if not isinstance(hitbox, (list, tuple)):             # <<<<<<<<<<<<<<
  *             hitbox = hitbox.get()
  * 
@@ -3000,7 +3000,7 @@ static int __pyx_pf_6engine_7classes_6hitbox_12SquareHitbox___init__(struct __py
   /* "engine/classes/hitbox.pyx":11
  *     cdef public int x, y, width, height
  * 
- *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]):             # <<<<<<<<<<<<<<
+ *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]) -> None:             # <<<<<<<<<<<<<<
  *         if not isinstance(hitbox, (list, tuple)):
  *             hitbox = hitbox.get()
  */
@@ -3778,7 +3778,7 @@ static struct __pyx_obj_6engine_7classes_6hitbox_SquareHitbox *__pyx_pf_6engine_
  * cdef class SquareHitbox:
  *     cdef public int x, y, width, height             # <<<<<<<<<<<<<<
  * 
- *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]):
+ *     def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]) -> None:
  */
 
 /* Python wrapper */

@@ -27,7 +27,7 @@ class CreateButtonFunctions:
             if name == "":
                 dialog.objects["log_label"].setText("Imposiable button name")
 
-                return 0
+                return
 
             try:
                 with open(f"scr/files/using/{name}", "w", encoding="utf-8") as file:
@@ -36,13 +36,13 @@ class CreateButtonFunctions:
             except BaseException:
                 dialog.objects["log_label"].setText("Imposiable button name")
 
-                return 0
+                return
 
             for element in os.listdir(path):
                 if element == name:
                     dialog.objects["log_label"].setText("Button name already exist")
 
-                    return 0
+                    return
 
         # CREATE
 

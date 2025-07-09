@@ -74,14 +74,6 @@ class SettingsFunctions:
         dialog.objects["reset_button"].setDisabled(False)
         dialog.objects["reset_button"].setText(translate("Reinstall python"))
 
-    @staticmethod
-    def python(project, dialog, event) -> None:
-        dialog.objects["reset_button"].setDisabled(True)
-        dialog.objects["reset_button"].setText(translate("In progress..."))
-
-        thr = threading.Thread(target=lambda: SettingsFunctions.install(project, dialog, event))
-        thr.start()
-
 
 class Settings(QDialog):
     def __init__(self, project, parent=None) -> None:
@@ -161,18 +153,6 @@ class Settings(QDialog):
         self.objects["reset_button"].show()
 
         self.objects["reset_button"].clicked.connect(lambda event: SettingsFunctions.reset(self.project, self, event))
-
-        self.objects["reset_button"].released.connect(lambda: self.objects["empty"].setFocus())
-        self.objects["reset_button"].setStyleSheet(BUTTON_RED_STYLE)
-
-        # REINSTALL PYTHON
-
-        self.objects["reset_button"] = QPushButton(parent=self, text=translate("Reinstall python"))
-        self.objects["reset_button"].setGeometry(960, 680 - 80, 300, 40)
-        self.objects["reset_button"].setFont(FONT)
-        self.objects["reset_button"].show()
-
-        self.objects["reset_button"].clicked.connect(lambda event: SettingsFunctions.python(self.project, self, event))
 
         self.objects["reset_button"].released.connect(lambda: self.objects["empty"].setFocus())
         self.objects["reset_button"].setStyleSheet(BUTTON_RED_STYLE)

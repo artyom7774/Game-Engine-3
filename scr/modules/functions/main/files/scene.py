@@ -143,7 +143,7 @@ class SceneLabel(QLabel):
             self.position = None
 
         if self.draggingFunction is None:
-            return 0
+            return
 
         if self.sceneSettings["Scene"]["camera_acceleration"]["value"]:
             speed = math.sqrt(self.pos.x ** 2 + self.pos.y ** 2) / 15
@@ -522,7 +522,7 @@ class Scene:
         select = []
 
         if project.selectFile not in project.application:
-            return 0
+            return
 
         for obj in application.objects.objects:
             if obj.group.startswith("__") and obj.group.endswith("__"):
@@ -535,7 +535,7 @@ class Scene:
             application.objects.removeByGroup("__debug_select__")
 
         else:
-            return 0
+            return
 
         # print(select)
 
@@ -608,10 +608,10 @@ class Scene:
             application = project.application[project.selectFile]
 
         except KeyError:
-            return 0
+            return
 
         if Scene.updating:
-            return 0
+            return
 
         Scene.updating = True
 
@@ -678,9 +678,7 @@ class Scene:
         except KeyError:
             project.objects["tab_file_bar"].updateSelectFile()
 
-            print("error")
-
-            return 0
+            return
 
         qpixmap = QPixmap(Scene.getVisiableScreen(QImage(project.application[project.selectFile].screen.get_buffer(), project.desktop.width(), project.desktop.height(), QImage.Format_RGB32), project.objects["center_rama"].width(), project.objects["center_rama"].height()))
 
@@ -704,7 +702,7 @@ class Scene:
     @staticmethod
     def move(project, x, y) -> None:
         if project.selectFile == "":
-            return 0
+            return
 
         project.cash["file"][project.selectFile].camera.pos.x -= x
         project.cash["file"][project.selectFile].camera.pos.y -= y
@@ -783,7 +781,7 @@ class Scene:
     @staticmethod
     def copyObject(project) -> None:
         if project.objects["main"]["scene"].position is None:
-            return 0
+            return
 
         if project.cash["file"][project.selectFile].selectObject is not None:
             pyperclip.copy(project.cash["file"][project.selectFile].selectObject.variables["file"])
@@ -791,7 +789,7 @@ class Scene:
     @staticmethod
     def pasteObject(project) -> None:
         if project.objects["main"]["scene"].position is None:
-            return 0
+            return
 
         pos = Vec2f(
             project.objects["main"]["scene"].position.x + project.cash["file"][project.selectFile].camera.pos.x,
@@ -831,12 +829,12 @@ class Scene:
         except FileNotFoundError or OSError:
             MessageBox.error(translate("Path is not difined (object must was copyed on scene)"))
 
-            return 0
+            return
 
         if not isCurrectObject(obj) and not isCurrectText(obj) and not isCurrectButton(obj):
             MessageBox.error(translate("This text is not object"))
 
-            return 0
+            return
 
         shutil.copyfile(copyName, path)
 
@@ -862,7 +860,7 @@ class Scene:
     @staticmethod
     def deleteObject(project) -> None:
         if project.objects["main"]["scene"].position is None:
-            return 0
+            return
 
         if project.cash["file"][project.selectFile].selectObject is not None:
             try:
@@ -878,7 +876,7 @@ class Scene:
     @staticmethod
     def objectReleased(project) -> None:
         if project.selectFile.find("%scene%") == -1:
-            return 0
+            return
 
         project.application[project.selectFile].objects.removeByGroup("__debug_select__")
 
@@ -943,13 +941,13 @@ class Scene:
         }
 
         if project.selectFile not in project.cash["file"]:
-            return 0
+            return
 
         if project.cash["file"][project.selectFile] is None or project.cash["file"][project.selectFile].type != "scene":
-            return 0
+            return
 
         if project.cash["file"][project.selectFile].selectObject is None:
-            return 0
+            return
 
         with open(project.cash["file"][project.selectFile].selectObject.variables["file"], "r") as file:
             obj = load(file)

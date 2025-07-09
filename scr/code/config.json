@@ -1,4 +1,67 @@
 {
+    "basic": {
+        "events": {
+            "name": "Events",
+            "nodes": [
+                "onStartGame",
+                "everyFrame",
+                "keyboardClick",
+                "keyboardPress"
+            ]
+        },
+        "loops": {
+            "name": "Loops",
+            "nodes": [
+                "for_",
+                "forObjectsGroup"
+            ]
+        },
+        "text": {
+            "name": "Text",
+            "nodes": [
+                "writeText",
+                "displayText"
+            ]
+        },
+        "numbers": {
+            "name": "Numbers",
+            "nodes": [
+                "plus",
+                "minus",
+                "multiply",
+                "divide",
+                "absolute"
+            ]
+        },
+        "logic": {
+            "name": "Logic",
+            "nodes": [
+                "if_",
+                "ifCollision"
+            ]
+        },
+        "objects": {
+            "name": "Objects",
+            "nodes": [
+                "getObjectIDByName",
+                "setObjectPos",
+                "moveObject",
+                "getObjectPos",
+                "createObject",
+                "removeObject",
+                "jump"
+            ]
+        },
+        "another": {
+            "name": "Another",
+            "nodes": [
+                "setVar",
+                "getVar",
+                "random_",
+                "wait"
+            ]
+        }
+    },
     "groups": {
         "events": {
             "name": "Events",
@@ -98,7 +161,6 @@
                 "callFunction",
                 "getMousePos",
                 "getTimePassed",
-                "getNoiseValue",
                 "goToScene",
                 "getSceneName",
                 "wait",
@@ -125,6 +187,12 @@
                 "playMusic",
                 "stopMusic",
                 "playSound"
+            ]
+        },
+        "experimental": {
+            "name": "Experimental",
+            "nodes": [
+                "getNoiseValue"
             ]
         }
     },
@@ -177,6 +245,7 @@
         "text": "scr/code/sprites/types/text.png",
         "logic": "scr/code/sprites/types/logic.png",
         "another": "scr/code/sprites/types/event.png",
+        "experimental": "scr/code/sprites/types/event.png",
         "objects": "scr/code/sprites/types/objects.png",
         "animation": "scr/code/sprites/types/objects.png",
         "set": "scr/code/sprites/types/set.png",

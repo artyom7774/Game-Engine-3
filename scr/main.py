@@ -1,3 +1,5 @@
+import typing
+
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
 from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QIcon, Qt
@@ -14,11 +16,12 @@ import subprocess
 import traceback
 import threading
 import requests
+import typing
 import ctypes
 import sys
 
 
-def exceptionHandler(func):
+def exceptionHandler(func) -> typing.Callable:
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
@@ -37,11 +40,7 @@ def exceptionHandler(func):
                 else:
                     print("LOG: scr/files/logs/log.txt")
 
-                sys.exit()
-
-        finally:
-            sys.stdout = sys.__stdout__
-            sys.stderr = sys.__stderr__
+            sys.exit()
 
     return wrapper
 
@@ -200,7 +199,7 @@ class Main(QMainWindow):
             self.objects["tree_project"].hide()
 
         except BaseException:
-            return 0
+            return
 
         self.objects["tree_project"].hide()
         self.objects["tab_file_bar"].hide()
@@ -241,7 +240,7 @@ class Main(QMainWindow):
     def initialization(self) -> None:
         def tabFileBarCurrentChanged(index: int) -> None:
             if len(self.objects["tab_file_bar"].objects) == 0:
-                return 0
+                return
 
             self.selectFile = self.objects["tab_file_bar"].objects[index]["name"]
             functions.tree.open(self, self.selectFile)
@@ -334,7 +333,7 @@ class Main(QMainWindow):
         if self.selectProject == "":
             self.theme()
 
-            return 0
+            return
 
         functions.project.projectTreeInit(self)
         functions.project.centerMenuInit(self)

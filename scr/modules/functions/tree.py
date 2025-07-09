@@ -64,12 +64,12 @@ def open(project, path: str = None) -> None:
         update = False
 
     if os.path.isdir(path) and path.find("%scene%") == -1:
-        return 0
+        return
 
     if any([path.endswith(element) for element in DONT_OPEN_FORMATES]):
         MessageBox.imposiable("Can't open this file")
 
-        return 0
+        return
 
     icon = (getColor("scene") if path.find("%scene%") != -1 else getColor("dir")) if os.path.isdir(path) else (getColor(path[path.rfind(".") + 1:]) if path[path.rfind(".") + 1:] in SPRITES else getColor("file"))
 
@@ -167,18 +167,18 @@ def paste(project) -> None:
         input = LinuxGetPath()
 
         print("ERROR: system (Linux) not supported this operation")
-        return 0
+        return
 
     else:
         print("ERROR: system (Unknown) not supported this operation")
-        return 0
+        return
 
     output = projectTreeGetFilePath(projectTreeGetPath(project.objects["tree_project"].selectedItems()[0]))
 
     if input is None:
         MessageBox.imposiable("copy is not found")
 
-        return 0
+        return
 
     else:
         pass

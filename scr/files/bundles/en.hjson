@@ -229,6 +229,9 @@
     "Installing libraries": "Installing libraries",
     "Successfully": "Successfully"
     "Music": "Music"
+    "Basic nodes": "Basic nodes"
+    "Experimental nodes": "Experimental nodes"
+    "Experimental": "Experimental"
 
     // OBJECT NAME
     "object.name.staticObject": "Static object"

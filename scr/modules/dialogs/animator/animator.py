@@ -11,6 +11,7 @@ from PIL import Image as PImage
 
 from scr.variables import *
 
+import typing
 import numpy
 import math
 import os
@@ -37,7 +38,7 @@ class Image:
         return qimage
 
     @staticmethod
-    def getPixmap(project, maxWidth, maxHeight, file):
+    def getPixmap(project, maxWidth, maxHeight, file) -> typing.Union[None, typing.List[typing.Any]]:
         try:
             image = PImage.open(file)
 
@@ -46,7 +47,7 @@ class Image:
 
             project.objects["tab_file_bar"].pop(len(project.objects["tab_file_bar"].objects) - 1)
 
-            return 0
+            return
 
         capacity = 1
 
@@ -60,7 +61,7 @@ class Image:
             image = image.resize((math.trunc(image.width * capacity) + (math.trunc(image.width * capacity) < 1), math.trunc(image.height * capacity) + (math.trunc(image.height * capacity) < 1)), resample=PImage.NEAREST)
 
         else:
-            return 0
+            return
 
         x = (maxWidth - image.width) // 2
         y = (maxHeight - image.height) // 2
@@ -76,10 +77,10 @@ class Image:
     @staticmethod
     def init(project) -> None:
         if os.path.isdir(project.selectFile):
-            return 0
+            return
 
         if project.selectFile == "":
-            return 0
+            return
 
         maxWidth = project.objects["center_rama"].width()
         maxHeight = project.objects["center_rama"].height()
@@ -92,7 +93,7 @@ class Image:
 
             project.objects["tab_file_bar"].pop(len(project.objects["tab_file_bar"].objects) - 1)
 
-            return 0
+            return
 
         capacity = 1
 
@@ -106,7 +107,7 @@ class Image:
             image = image.resize((math.trunc(image.width * capacity) + (math.trunc(image.width * capacity) < 1), math.trunc(image.height * capacity) + (math.trunc(image.height * capacity) < 1)), resample=PImage.NEAREST)
 
         else:
-            return 0
+            return
 
         x = (maxWidth - image.width) // 2
         y = (maxHeight - image.height) // 2

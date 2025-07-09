@@ -22,8 +22,8 @@
             },
             "type": "event",
             "width": 6,
-            "x": 8,
-            "y": 10
+            "x": 7,
+            "y": -2
         },
         "734355482": {
             "display": {
@@ -126,8 +126,8 @@
             },
             "type": "text",
             "width": 6,
-            "x": 26,
-            "y": 4
+            "x": 27,
+            "y": -2
         },
         "345842357": {
             "display": {
@@ -217,7 +217,7 @@
             },
             "type": "logic",
             "width": 10,
-            "x": 34,
+            "x": 36,
             "y": -2
         },
         "144321903": {
@@ -260,8 +260,8 @@
             },
             "type": "text",
             "width": 6,
-            "x": 26,
-            "y": 10
+            "x": 27,
+            "y": 3
         },
         "944040246": {
             "display": {
@@ -289,7 +289,7 @@
             "outputs": {},
             "type": "another",
             "width": 6,
-            "x": 46,
+            "x": 48,
             "y": -2
         },
         "445318018": {
@@ -372,7 +372,7 @@
             "type": "loop",
             "width": 10,
             "x": 15,
-            "y": 4
+            "y": -2
         },
         "446492188": {
             "display": {
@@ -626,8 +626,8 @@
             },
             "type": "music",
             "width": 8,
-            "x": 42.0,
-            "y": 18.0
+            "x": 45,
+            "y": 18
         },
         "121614059": {
             "display": {
@@ -662,8 +662,75 @@
             },
             "type": "music",
             "width": 6,
-            "x": 38,
-            "y": 24
+            "x": 45,
+            "y": 23
+        },
+        "538904868": {
+            "display": {
+                "name": "node.name.onStartGame",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 538904868,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 11.0,
+            "y": 23.0
+        },
+        "993675220": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 993675220,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 538904868,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "123",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 24.0,
+            "y": 23.0
         }
     }
 }

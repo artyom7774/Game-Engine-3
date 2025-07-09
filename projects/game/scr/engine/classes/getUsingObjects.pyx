@@ -1,6 +1,8 @@
 from engine.classes.collision import Collision
 from engine.classes.objects import DynamicObject
 
+from engine import profiler
+
 from engine.variables import *
 
 import typing
@@ -15,6 +17,19 @@ else:
 
 cdef class GetUsingObjects:
     @staticmethod
+    @profiler.profile()
+    def getUsingObjectsQuadTree(game, group) -> None:
+        cdef list dynamicsObjects = []
+
+        for obj in group.objects:
+            if isinstance(obj, DynamicObject):
+                dynamicsObjects.append(obj)
+
+        for obj in dynamicsObjects:
+            GetUsingObjects.getUsingObjectsIterationSquare(game, game.objects.tree.getUsingObjects(obj), obj)
+
+    @staticmethod
+    @profiler.profile()
     def getUsingObjectsSquare(game, group) -> None:
         def binaryLeft(objects, x: float) -> int:
             cdef int left = 0

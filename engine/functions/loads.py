@@ -34,7 +34,7 @@ def loadAnimationFile(path: str) -> dict:
 
 def loadSettingFile(game, path: str) -> None:
     if path == "":
-        return 0
+        return
 
     with open(path, "r") as file:
         settings = file.read().split("\n")

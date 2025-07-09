@@ -10,10 +10,10 @@ class Text:
     @staticmethod
     def init(project) -> None:
         if os.path.isdir(project.selectFile):
-            return 0
+            return
 
         if project.selectFile == "":
-            return 0
+            return
 
         with open(project.selectFile, "r") as file:
             text = file.read()

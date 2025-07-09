@@ -8,7 +8,7 @@ import typing
 cdef class SquareHitbox:
     cdef public int x, y, width, height
 
-    def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]):
+    def __init__(self, hitbox: Union[list, tuple, Vec4f, Vec4i]) -> None:
         if not isinstance(hitbox, (list, tuple)):
             hitbox = hitbox.get()
 

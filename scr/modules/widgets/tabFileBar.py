@@ -23,68 +23,70 @@ class TabFileBar(QTabBar):
 
         self.tabCloseRequested.connect(self.pop)
 
-    def get(self) -> typing.Dict[str, typing.Dict[str, typing.Union[int, str]]]:
+    def get(self) -> typing.List[typing.Dict[str, str]]:
         return self.objects
 
-    def getNameByIndex(self, index: int):
-        try:
-            return self.objects[index]["name"]
+    def getNameByIndex(self, index: int) -> typing.Union[str, int]:
+        return self.objects[index]["name"]
 
-        except IndexError:
-            return -1
+    def add(self, name: str, visible: str, icon: QIcon = None) -> int:
+        exists = [i for i, element in enumerate(self.objects) if element["name"] == name]
 
-    def add(self, name: str, visiable: str, icon: QIcon = None) -> int:
-        if any([element["name"] == name for element in self.objects]):
-            self.setCurrentIndex([element["name"] == name for element in self.objects].index(True))
+        if exists:
+            self.setCurrentIndex(exists[0])
+            return
 
-            return 0
-
-        index = super().addTab(visiable)
+        index = super().addTab(visible)
 
         self.objects.append({
             "name": name,
-            "visiable": visiable
+            "visible": visible
         })
+
+        self.setTabIcon(index, icon if icon else QIcon())
+        self.setTabText(index, visible)
+
+        self.setCurrentIndex(len(self.objects) - 1)
 
         self.updateSelectFile()
 
-        self.setTabIcon(index, icon if icon else QIcon())
-        self.setTabText(index, visiable)
-
-        self.setCurrentIndex([element["name"] == name for element in self.objects].index(True))
-
-        return index
+        return len(self.objects) - 1
 
     def remove(self, name: str) -> None:
         for i, value in enumerate(self.objects):
             if value["name"] == name:
                 self.pop(i)
 
-                return 0
+                return
+
+        return None
 
     def removeAll(self) -> None:
-        for _ in range(len(self.objects)):
+        while self.objects:
             self.pop(0)
 
     def updateSelectFile(self) -> None:
         if self.count() == 0:
             self.project.objects["status_bar"].showMessage("")
-
             self.project.selectFile = ""
 
-        elif self.count() == 1:
-            self.project.selectFile = self.objects[0]["name"]
+            return
+
+        current_index = self.currentIndex()
+
+        if 0 <= current_index < len(self.objects):
+            self.project.selectFile = self.objects[current_index]["name"]
 
         else:
-            self.project.selectFile = self.objects[self.currentIndex()]["name"]
+            self.project.selectFile = self.objects[0]["name"] if self.objects else ""
 
     def pop(self, index: int) -> None:
+        if not 0 <= index < len(self.objects):
+            return
+
         self.objects.pop(index)
 
         super().removeTab(index)
-
-        # if self.currentIndex() + 1 >= index:
-        #     self.setCurrentIndex(index - 1)
 
         self.updateSelectFile()
 

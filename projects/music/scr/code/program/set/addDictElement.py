@@ -24,10 +24,10 @@ def addDictElement(program, compiler, path: str, nodes: dict, id: int, variables
         key = str(nodes["objects"][str(id)]["inputs"]["key"]["standard"])
 
     if nodes["objects"][str(id)]["inputs"]["element"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"] is not None:
-        element = eval(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+        element = eval(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str else nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]
 
     else:
-        element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+        element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"]) if type(nodes["objects"][str(id)]["inputs"]["element"]["standard"]) == str else nodes["objects"][str(id)]["inputs"]["element"]["standard"]
 
     dict_[key] = element
 

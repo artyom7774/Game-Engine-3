@@ -21,7 +21,7 @@ class CreateDirFunctions:
         if name == "":
             dialog.objects["log_label"].setText("Imposiable directory name")
 
-            return 0
+            return
 
         try:
             with open(f"scr/files/using/{name}", "w", encoding="utf-8") as file:
@@ -30,13 +30,13 @@ class CreateDirFunctions:
         except BaseException:
             dialog.objects["log_label"].setText("Imposiable directory name")
 
-            return 0
+            return
 
         for element in os.listdir(path):
             if element == name:
                 dialog.objects["log_label"].setText("Directory name already exist")
 
-                return 0
+                return
 
         # CREATE
 

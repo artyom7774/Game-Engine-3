@@ -21,17 +21,17 @@ class CreateFileFunctions:
         if name == "":
             dialog.objects["log_label"].setText("Imposiable file name")
 
-            return 0
+            return
 
         if dialog.objects["extension_entry"].text() in ("cfg", *BLOCKED_FORMATES):
             dialog.objects["log_label"].setText("Imposiable file extension")
 
-            return 0
+            return
 
         if name[-1] == ".":
             dialog.objects["log_label"].setText("File extension is not found")
 
-            return 0
+            return
 
         try:
             with open(f"scr/files/using/{name}", "w", encoding="utf-8") as file:
@@ -40,13 +40,13 @@ class CreateFileFunctions:
         except BaseException:
             dialog.objects["log_label"].setText("Imposiable File name")
 
-            return 0
+            return
 
         for element in os.listdir(path):
             if element == name:
                 dialog.objects["log_label"].setText("File name already exist")
 
-                return 0
+                return
 
         # CREATE
 

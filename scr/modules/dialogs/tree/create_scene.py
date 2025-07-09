@@ -21,7 +21,7 @@ class CreateSceneFunctions:
         if name == "":
             dialog.objects["log_label"].setText("Imposiable scene name")
 
-            return 0
+            return
 
         try:
             with open(f"scr/files/using/{name}", "w", encoding="utf-8") as file:
@@ -30,13 +30,13 @@ class CreateSceneFunctions:
         except BaseException:
             dialog.objects["log_label"].setText("Imposiable scene name")
 
-            return 0
+            return
 
         for element in os.listdir(path):
             if element == name:
                 dialog.objects["log_label"].setText("Scene name already exist")
 
-                return 0
+                return
 
         # CREATE
 

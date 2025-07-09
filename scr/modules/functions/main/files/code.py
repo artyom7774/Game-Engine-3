@@ -1,12 +1,11 @@
 from PyQt5.QtWidgets import QLabel, QMenu, QAction, QVBoxLayout, QTreeWidget, QTreeWidgetItem, QTextEdit, QDialog, QToolTip, QLineEdit, QPushButton, QComboBox
 from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon, QTextCursor
 from PyQt5.Qt import Qt, QPoint, QTimer, QSize
-from PyQt5 import QtWidgets
 
 from PyQt5.Qsci import QsciScintilla, QsciLexerPython
 
 from scr.modules.dialogs import CreateNode
-from scr.modules.functions.algorithm import bezierCurveDeep, bezierCurveWidth
+from scr.modules.functions.algorithm import bezierCurveWidth
 
 from scr.modules.widgets import FocusLineEdit, FocusComboBox
 
@@ -1136,7 +1135,7 @@ class CodeAdditionsVarsType(QTreeWidget):
             name = text["variables"][name]["name"]
 
         except KeyError:
-            return 0
+            return
 
         new = self.project.objects["main"][f"additions_element_name_{name}"].text()
 
@@ -1291,7 +1290,7 @@ class Code:
                 project.objects["main"]["function"] = load(file)
 
         except json.JSONDecodeError:
-            return 0
+            return
 
         # GRID
 
@@ -1426,7 +1425,7 @@ class Code:
             pass
 
         if project.objects["main"]["replacer"].node is None:
-            return 0
+            return
 
         # SELECTED
 
@@ -1440,7 +1439,7 @@ class Code:
         # POS
 
         if project.objects["main"]["code"].nowPoint.x() == 0 and project.objects["main"]["code"].nowPoint.y() == 0:
-            return 0
+            return
 
         x = (project.objects["main"]["code"].nowPoint.x() + project.cash["file"][project.selectFile].x) // CODE_GRID_CELL_SIZE * CODE_GRID_CELL_SIZE
         y = (project.objects["main"]["code"].nowPoint.y() + project.cash["file"][project.selectFile].y) // CODE_GRID_CELL_SIZE * CODE_GRID_CELL_SIZE
@@ -1558,12 +1557,12 @@ class Code:
         except BaseException:
             MessageBox.error(translate("This text is not node"))
 
-            return 0
+            return
 
         if not isCurrectNode(node):
             MessageBox.error(translate("This file is not node"))
 
-            return 0
+            return
 
         node["id"] = random.randint(1, 1000000000)
         node["x"] = (position.x() + project.cash["file"][project.selectFile].x) // CODE_GRID_CELL_SIZE
@@ -1591,7 +1590,7 @@ class Code:
                 break
 
         else:
-            return 0
+            return
 
         for id, node in project.objects["main"]["function"]["objects"].items():
             for i, name in enumerate(node["inputs"]):

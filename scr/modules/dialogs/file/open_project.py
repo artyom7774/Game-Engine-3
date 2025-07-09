@@ -11,11 +11,11 @@ import os
 
 class OpenProjectFunctions:
     @staticmethod
-    def open(project, dialog, event):
+    def open(project, dialog, event) -> None:
         name = dialog.objects["project_combobox"].currentText()
 
         if name == "":
-            return 0
+            return
 
         project.selectProject = name
 

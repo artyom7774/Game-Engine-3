@@ -124,7 +124,7 @@ cdef class StaticObject:
         self.procesionPos.y -= y
 
         if x == 0 and y == 0:
-            return 0
+            return
 
         self.game.doCollisionsUpdate = max(self.game.doCollisionsUpdate, x != 0 or y != 0)
 
@@ -153,6 +153,8 @@ cdef class StaticObject:
         self.pos.y = round(self.pos.y)
 
         self.distance = sqrt(self.pos.x ** 2 + self.pos.y ** 2)
+
+        self.game.objects.tree.update(self)
 
     def draw(self, px: float, py: float):
         if self.sprite is not None:

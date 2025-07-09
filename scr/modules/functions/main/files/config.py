@@ -26,7 +26,7 @@ class ConfigButtonStartSceneFunctions:
 
             dialog.close()
 
-            return 0
+            return
 
         scene = scenes[dialog.objects["choose_combobox"].currentIndex()].replace(f"projects/{project.selectProject}/project/", "")
 

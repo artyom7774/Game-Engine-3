@@ -213,6 +213,8 @@ class Game(engine.Application):
 
     def loadScene(self, scene):
         self.objects = engine.ObjectGroup(self)
+        self.objects.init()
+        
         self.objects.collisions = engine.Collision("collision.cfg")
 
         self.scene = scene
@@ -420,7 +422,7 @@ class Logger(QDialog):
             data = json.loads(text)
 
         except json.JSONDecodeError:
-            return 0
+            return
 
         self.objects["globals"].set([[value["name"], value["value"]] for key, value in data.items()])
 
@@ -532,7 +534,7 @@ class Compile:
 
             project.compiling = False
 
-            return 0
+            return
 
         output = f"projects/{project.selectProject}/scr/{projectSettingsCfg['values']['name']['value']}.py"
 
@@ -741,7 +743,7 @@ class Compile:
 
         project.compiling = False
 
-        return 0
+        return
 
     @staticmethod
     def compileAndRun(project) -> None:
@@ -775,7 +777,7 @@ class Compile:
                 translate("LOG") + ": " + translate("the path to save the project is not selected")
             )
 
-            return 0
+            return
 
         while os.path.exists(f"{folder}/{name}" if index is None else f"{folder}/{name} ({index})"):
             if index is None:
@@ -811,7 +813,7 @@ class Compile:
                 translate("LOG") + ": " + translate("the path to save the project is not selected")
             )
 
-            return 0
+            return
 
         while os.path.exists(f"{folder}/{name}" if index is None else f"{folder}/{name} ({index})"):
             if index is None:

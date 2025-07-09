@@ -1,12 +1,189 @@
-from engine.classes.objects import DynamicObject, KinematicObject, Particle, Button
+from engine.classes.objects import StaticObject, DynamicObject, KinematicObject, Particle, Button
 
 from engine.classes.collision import Collision
 
 from engine.classes.hitbox import SquareHitbox
 
+from engine import profiler
+
 from engine.variables import *
 
 import typing
+import random
+
+MAX_COUNT_NODE_OBJECTS = 20
+OBJECT_POS_PRECISION = 1
+MIN_NODE_SIZE = 100
+
+
+class QuadTreeNode:
+    def __init__(self, game, objects, rect) -> None:
+        self.game = game
+
+        self.id = random.randint(1, 1000000000)
+
+        self.objects = objects
+
+        self.rects = None
+        self.rect = rect
+
+        self.childrens = None
+
+        if len(self.objects) >= MAX_COUNT_NODE_OBJECTS:
+            self.divide()
+
+    def add(self, obj) -> None:
+        if self.childrens is None:
+            if str(obj.id) not in self.game.objects.tree.links:
+                self.game.objects.tree.links[str(obj.id)] = []
+
+            self.game.objects.tree.links[str(obj.id)].append(self)
+            self.objects.append(obj)
+
+            self.divide()
+
+            return
+
+        for i, rect in enumerate(self.rects):
+            if Collision.rect(*rect, obj.pos.x + obj.hitbox.x - OBJECT_POS_PRECISION, obj.pos.y + obj.hitbox.y - OBJECT_POS_PRECISION, obj.hitbox.width + 2 * OBJECT_POS_PRECISION, obj.hitbox.height + 2 * OBJECT_POS_PRECISION):
+                self.childrens[i].add(obj)
+
+    def remove(self, obj) -> None:
+        if self.childrens is None:
+            if obj in self.objects:
+                self.objects.remove(obj)
+
+            return
+
+        for i, rect in enumerate(self.rects):
+            if Collision.rect(*rect, obj.pos.x + obj.hitbox.x - OBJECT_POS_PRECISION, obj.pos.y + obj.hitbox.y - OBJECT_POS_PRECISION, obj.hitbox.width + 2 * OBJECT_POS_PRECISION, obj.hitbox.height + 2 * OBJECT_POS_PRECISION):
+                self.childrens[i].remove(obj)
+
+    def divide(self) -> None:
+        if len(self.objects) >= MAX_COUNT_NODE_OBJECTS and min(self.rect[2], self.rect[3]) // 2 >= MIN_NODE_SIZE:
+            for obj in self.objects:
+                self.game.objects.tree.links[str(obj.id)] = []
+
+            self.childrens = []
+
+            self.rects = [
+                [self.rect[0], self.rect[1], self.rect[2] // 2, self.rect[3] // 2],
+                [self.rect[0] + self.rect[2] // 2, self.rect[1], self.rect[2] // 2, self.rect[3] // 2],
+                [self.rect[0], self.rect[1] + self.rect[3] // 2, self.rect[2] // 2, self.rect[3] // 2],
+                [self.rect[0] + self.rect[2] // 2, self.rect[1] + self.rect[3] // 2, self.rect[2] // 2, self.rect[3] // 2]
+            ]
+
+            for rect in self.rects:
+                self.childrens.append(QuadTreeNode(self.game, list(filter(lambda obj: Collision.rect(*rect, obj.pos.x + obj.hitbox.x - OBJECT_POS_PRECISION, obj.pos.y + obj.hitbox.y - OBJECT_POS_PRECISION, obj.hitbox.width + 2 * OBJECT_POS_PRECISION, obj.hitbox.height + 2 * OBJECT_POS_PRECISION), self.objects)), rect))
+
+            self.objects = []
+
+    def getAnotherNodes(self, square: typing.List[int]) -> typing.List["QuadTreeNode"]:
+        if self.childrens is None:
+            return [self]
+
+        out = []
+
+        for i, rect in enumerate(self.rects):
+            if Collision.rect(*rect, *square):
+                out.extend(self.childrens[i].getAnotherNodes(square))
+
+        return out
+
+    def getAnotherObjects(self, square: typing.List[int]) -> typing.Set["VObject"]:
+        if self.childrens is None:
+            return set(self.objects)
+
+        out = set()
+
+        for i, rect in enumerate(self.rects):
+            if Collision.rect(*rect, *square):
+                out |= self.childrens[i].getAnotherObjects(square)
+
+        return out
+
+
+class QuadTree:
+    size = 1e3
+
+    def __init__(self, game) -> None:
+        self.game = game
+
+        self.root = None
+        self.links = {}
+
+        self.init()
+
+    def init(self) -> None:
+        self.root = QuadTreeNode(self.game, self.game.objects.objects, [-self.size, -self.size, 2 * self.size, 2 * self.size])
+
+    def resize(self, size) -> None:
+        if size < self.size:
+            return
+
+        self.size = 2 * size
+
+        self.init()
+
+    def update(self, obj) -> None:
+        if type(obj) != StaticObject:
+            return
+
+        objects = self.root.getAnotherNodes([obj.pos.x + obj.hitbox.x, obj.pos.y + obj.hitbox.y, obj.hitbox.width, obj.hitbox.height])
+        link = self.links[str(obj.id)]
+
+        if len(objects) == len(link) and [objects[i].id == link[i].id for i in range(len(objects))]:
+            return
+
+        self.links[str(obj.id)] = []
+
+        self.remove(obj)
+        self.add(obj)
+
+    def add(self, obj) -> None:
+        if type(obj) != StaticObject:
+            return
+
+        self.root.add(obj)
+
+    def remove(self, obj) -> None:
+        if type(obj) != StaticObject:
+            return
+
+        self.root.remove(obj)
+
+    @profiler.profile()
+    def getUsingDynamicObject(self, rect, obj) -> typing.List[VObject]:
+        dynamicsObjects = set()
+
+        for cobj in self.game.objects.objects:
+            if type(cobj) == StaticObject:
+                continue
+
+            if cobj.id == obj.id:
+                continue
+
+            base = [cobj.pos.x + cobj.hitbox.x - OBJECT_POS_PRECISION, cobj.pos.y + cobj.hitbox.y - OBJECT_POS_PRECISION, cobj.hitbox.width + 2 * OBJECT_POS_PRECISION, cobj.hitbox.height + 2 * OBJECT_POS_PRECISION]
+
+            if Collision.rect(*rect, *base):
+                dynamicsObjects.add(cobj)
+
+        return dynamicsObjects
+
+    def getUsingObjects(self, obj) -> typing.List[VObject]:
+        resulting = obj.getVectorsPower()
+
+        base = [obj.pos.x + obj.hitbox.x - OBJECT_POS_PRECISION, obj.pos.y + obj.hitbox.y - OBJECT_POS_PRECISION, obj.hitbox.width + 2 * OBJECT_POS_PRECISION, obj.hitbox.height + 2 * OBJECT_POS_PRECISION]
+        rect = [obj.pos.x + obj.hitbox.x + 2 * resulting.x - OBJECT_POS_PRECISION, obj.pos.y + obj.hitbox.y + 2 * resulting.y - OBJECT_POS_PRECISION, obj.hitbox.width + 2 * OBJECT_POS_PRECISION, obj.hitbox.height + 2 * OBJECT_POS_PRECISION]
+
+        full = [
+            min(base[0], rect[0]),
+            min(base[1], rect[1]),
+            max(base[0] + base[2], rect[0] + rect[2]) - min(base[0], rect[0]),
+            max(base[1] + base[3], rect[1] + rect[3]) - min(base[1], rect[1])
+        ]
+
+        return list(self.root.getAnotherObjects(full) | self.getUsingDynamicObject(full, obj))
 
 
 class ObjectGroup:
@@ -15,6 +192,8 @@ class ObjectGroup:
             objects = []
 
         self.game = game
+
+        self.tree = None
 
         self.collisions = Collision()
 
@@ -33,6 +212,9 @@ class ObjectGroup:
         self.objectByGroup = {}
 
         self.movedByKinematic = {}
+
+    def init(self):
+        self.tree = QuadTree(self.game)
 
     def empty(self):
         for obj in self.objects:
@@ -58,6 +240,10 @@ class ObjectGroup:
 
         self.objectByGroup[obj.group][obj.id] = obj
 
+        self.tree.add(obj)
+
+        self.tree.resize(abs(obj.pos.x) + abs(obj.pos.y))
+
     def remove(self, obj: VObject) -> None:
         if obj in self.objects:
             self.objects.remove(obj)
@@ -73,6 +259,8 @@ class ObjectGroup:
 
         if obj.id in self.objectByGroup[obj.group]:
             self.objectByGroup[obj.group].pop(obj.id)
+
+        self.tree.remove(obj)
 
     def getById(self, id: int) -> VObject:
         return self.objectById.get(id)
