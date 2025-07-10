@@ -528,7 +528,7 @@ class Scene:
             if obj.group.startswith("__") and obj.group.endswith("__"):
                 continue
 
-            if obj.pos.x + obj.hitbox.x < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.hitbox.x + obj.hitbox.width and obj.pos.y + obj.hitbox.y < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.hitbox.y + obj.hitbox.height:
+            if obj.pos.x + obj.hitbox.x - 5 < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.hitbox.x + obj.hitbox.width + 5 and obj.pos.y + obj.hitbox.y - 5 < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.hitbox.y + obj.hitbox.height + 5:
                 select.append(obj)
 
         if len(select) > 0:
@@ -543,12 +543,12 @@ class Scene:
             if obj.group.find("debug") != -1 and obj.group.startswith("__") and obj.group.endswith("__"):
                 continue
 
-            if obj.pos.x + obj.hitbox.x < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.hitbox.x + obj.hitbox.width and obj.pos.y + obj.hitbox.y < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.hitbox.y + obj.hitbox.height:
+            if obj.pos.x + obj.hitbox.x - 5 < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.hitbox.x + obj.hitbox.width + 5 and obj.pos.y + obj.hitbox.y - 5 < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.hitbox.y + obj.hitbox.height + 5:
                 project.cash["file"][project.selectFile].selectObject = obj
                 project.cash["file"][project.selectFile].selectLink = obj.id
 
                 application.objects.add(project.engine.objects.StaticObject(
-                    application, obj.pos, obj.hitbox, group="__debug_select__", layer=int(1e9)+1
+                    application, obj.pos, obj.hitbox, group="__debug_select__", layer=int(1e9) + 1
                 ))
 
                 # print("create")

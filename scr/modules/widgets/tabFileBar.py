@@ -26,7 +26,10 @@ class TabFileBar(QTabBar):
     def get(self) -> typing.List[typing.Dict[str, str]]:
         return self.objects
 
-    def getNameByIndex(self, index: int) -> typing.Union[str, int]:
+    def getNameByIndex(self, index: int) -> str:
+        if len(self.objects) - 1 < index:
+            return ""
+
         return self.objects[index]["name"]
 
     def add(self, name: str, visible: str, icon: QIcon = None) -> int:

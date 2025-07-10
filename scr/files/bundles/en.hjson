@@ -214,7 +214,7 @@
     "Right": "Right",
     "Center": "Center",
     "Example": "Example",
-    "Alpha": "Alpha",
+    "Alpha": "Opacity",
     "Button": "Button",
     "Rama color": "Rama color",
     "Background color": "Background color",
@@ -232,6 +232,9 @@
     "Basic nodes": "Basic nodes"
     "Experimental nodes": "Experimental nodes"
     "Experimental": "Experimental"
+    "Project version is outdated": "Project version is outdated"
+    "Update the project to a new version? Otherwise, the project may not work on this version. This may take some time.": "Update the project to a new version? Otherwise, the project may not work on this version. This may take some time."
+    "It isn't possible to update the version": "It isn't possible to update the version"
 
     // OBJECT NAME
     "object.name.staticObject": "Static object"

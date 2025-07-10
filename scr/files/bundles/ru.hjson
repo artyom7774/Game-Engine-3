@@ -214,7 +214,7 @@
     "Right": "Вправо"
     "Center": "Центр"
     "Example": "Пример"
-    "Alpha": "Прозрачность"
+    "Alpha": "Непрозрачность"
     "Button": "Кнопка"
     "Rama color": "Цвет рамки"
     "Background color": "Цвет фона"
@@ -232,6 +232,9 @@
     "Basic nodes": "Основные ноды"
     "Experimental nodes": "Экспериментальные ноды"
     "Experimental": "Экспериментальные"
+    "Project version is outdated": "Версия проекта устарела"
+    "Update the project to a new version? Otherwise, the project may not work on this version. This may take some time.": "Обновить проект до новой версии? В противном случие программа на этой версии может не работать. Это может занять некоторое время."
+    "It isn't possible to update the version": "Обновить версию невозможно"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"

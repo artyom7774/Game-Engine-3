@@ -1,7 +1,7 @@
 from PyQt5.Qt import QIcon, QTreeWidgetItem, QMenu, QAction
 from PyQt5 import QtWidgets
 
-from scr.modules import functions
+from scr.modules import functions, updating
 
 from scr.variables import *
 
@@ -151,6 +151,12 @@ def createProjectDirectory(project, name: str) -> None:
                 queue.append(queue[0] + "/" + element)
 
         queue.pop(0)
+
+    with open("scr/files/version.json", "r", encoding="utf-8") as file:
+        config = load(file)
+
+    with open(f"projects/{name}/version.json", "w", encoding="utf-8") as file:
+        json.dump({"version": config["version"]}, file, indent=4)
 
     project.selectProject = name
 
@@ -544,6 +550,77 @@ def projectTreeInit(project) -> None:
             project.objects["tree_project"].addTopLevelItem(project.objects["project_tree_file_objects"][path])
 
 
+def projectCheckVersion(project) -> None:
+    with open("scr/files/version.json", "r", encoding="utf-8") as file:
+        config = json.load(file)
+
+    if os.path.exists(f"projects/{project.selectProject}/version.json"):
+        with open(f"projects/{project.selectProject}/version.json", "r", encoding="utf-8") as file:
+            projectConfig = json.load(file)
+
+    else:
+        projectConfig = {
+            "version": "3.11.0"
+        }
+
+    if projectConfig["version"] == config["version"]:
+        return
+
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Information)
+    msg.setWindowTitle(translate("Project version is outdated"))
+    msg.setText(translate("Update the project to a new version? Otherwise, the project may not work on this version. This may take some time."))
+    msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+
+    result = msg.exec_()
+
+    if result == QMessageBox.Yes:
+        projectUpdateVersion(project, projectConfig)
+
+
+def projectUpdateVersion(project, projectConfig) -> None:
+    with open("scr/files/version.json", "r", encoding="utf-8") as file:
+        config = json.load(file)
+
+    if projectConfig["version"] not in updating.versionsUpdatingTree:
+        MessageBox.error(translate("It isn't possible to update the version"))
+
+        return
+
+    queue = [[[element], element] for element in updating.versionsUpdatingTree[projectConfig["version"]]]
+
+    find = False
+    value = None
+
+    while queue:
+        element = queue.pop(0)
+
+        if element[1] in updating.versionsUpdatingTree:
+            for value in updating.versionsUpdatingTree[element[1]]:
+                queue.append([element[0] + [value], value])
+
+        if element[1] == config["version"]:
+            value = [projectConfig["version"]] + element[0]
+            find = True
+
+            break
+
+    if not find:
+        MessageBox.error(translate("It isn't possible to update the version"))
+
+        return
+
+    for i in range(len(value) - 1):
+        name = f"{value[i]} -> {value[i + 1]}"
+
+        updating.versionsUpdatingFunctions[name](project.selectProject)
+
+    projectConfig["version"] = value[-1]
+
+    with open(f"projects/{project.selectProject}/version.json", "w", encoding="utf-8") as file:
+        json.dump(projectConfig, file, indent=4)
+
+
 def projectOpen(project) -> None:
     project.menues["project_menu"].setDisabled(False)
 
@@ -555,6 +632,8 @@ def projectOpen(project) -> None:
     project.application = {}
 
     project.engine = loader(f"engine/__init__.py")
+
+    projectCheckVersion(project)
 
 
 def projectClose(project) -> None:

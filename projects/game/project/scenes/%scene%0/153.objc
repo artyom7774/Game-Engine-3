@@ -96,7 +96,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets\/wall.png"
+                    "value": "assets/wall.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -157,6 +157,11 @@
             "name": "Invisible",
             "value": true,
             "type": "bool"
+        },
+        "alpha": {
+            "name": "Alpha",
+            "value": 255,
+            "type": "int"
         }
     },
     "Particle": {

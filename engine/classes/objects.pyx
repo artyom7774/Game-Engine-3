@@ -43,8 +43,11 @@ cdef class StaticObject:
     cdef public dict specials
     cdef public object collisions
     cdef public bint invisible
+    cdef public int alpha
     cdef public object animator
     cdef public bint doCollisionUpdate
+
+    cdef public int lastFrameUpdateNumber
 
     def __init__(
         self, game: object,
@@ -56,6 +59,7 @@ cdef class StaticObject:
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
+        alpha: int = 255,
         animator: typing.Any = None,
         variables: typing.Dict[str, typing.Any] = None,
         specials: typing.Dict[str, typing.Any] = None,
@@ -78,11 +82,7 @@ cdef class StaticObject:
         self.game = game
         self.collisions = self.game.objects.collisions.get(group)
 
-        if id is None:
-            self.id = random.randint(1, 1000000000)
-
-        else:
-            self.id = id
+        self.id = random.randint(1, 1000000000) if id is None else id
 
         self.group = group
         self.procesionPos = Vec2f(0, 0)
@@ -91,9 +91,12 @@ cdef class StaticObject:
         self.mass = mass
         self.layer = layer
         self.invisible = invisible
+        self.alpha = alpha
         self.sprite = sprite if type(sprite) != list else Sprite(self.game, self, *sprite)
         self.distance = sqrt(self.pos.x ** 2 + self.pos.y ** 2)
         self.animator = animator
+
+        self.lastFrameUpdateNumber = -1
 
     def __str__(self):
         return f"StaticObject(id = {self.id} pos = {self.pos})"
@@ -157,12 +160,20 @@ cdef class StaticObject:
         self.game.objects.tree.update(self)
 
     def draw(self, px: float, py: float):
+        if self.lastFrameUpdateNumber == self.game.fpsc:
+            return
+
+        self.lastFrameUpdateNumber = self.game.fpsc
+
         if self.sprite is not None:
             if self.game.usingWidth + self.sprite.pos.x + self.sprite.size.x > self.pos.x + px > -self.sprite.pos.x - self.sprite.size.x and self.game.usingHeight + self.sprite.pos.y + self.sprite.size.y > self.pos.y + py > -self.sprite.pos.y - self.sprite.size.y:
                 sprite = self.sprite.get()
 
                 if not self.invisible or self.game.forcedViewObject:
                     if sprite is not None:
+                        sprite = sprite.copy()
+                        sprite.set_alpha(min(255, max(0, self.alpha)))
+
                         self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x + px, self.pos.y + self.sprite.pos.y + py))
 
         if self.game.debug or (self.group.startswith("__") and self.group.endswith("__") and not self.group == "__debug_unvisiable__"):
@@ -260,6 +271,7 @@ cdef class DynamicObject(StaticObject):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
+        alpha: int = 255,
         animator: typing.Any = None,
         gravity: float = 300,
         slidingStep: float = INF,
@@ -267,7 +279,7 @@ cdef class DynamicObject(StaticObject):
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        StaticObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, variables, specials)
+        StaticObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, alpha, animator, variables, specials)
 
         self.doCollisionUpdate = True
 
@@ -355,12 +367,7 @@ cdef class DynamicObject(StaticObject):
             if Collision.rect(now.pos.x + hitbox.x + phitbox[0], now.pos.y + hitbox.y + phitbox[1], hitbox.width + phitbox[2], hitbox.height + phitbox[3], obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
                 objects.append(obj["object"])
 
-                objects.extend(
-                    self.getObjectStructure(
-                        x, y, append, phitbox,
-                        obj["object"], visited
-                    )
-                )
+                objects.extend(self.getObjectStructure(x, y, append, phitbox, obj["object"], visited))
 
         return objects
 
@@ -474,6 +481,7 @@ cdef class KinematicObject(DynamicObject):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
+        alpha: int = 255,
         animator: typing.Any = None,
         gravity: float = 300,
         slidingStep: float = INF,
@@ -481,7 +489,7 @@ cdef class KinematicObject(DynamicObject):
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, gravity, slidingStep, variables, specials)
+        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, alpha, animator, gravity, slidingStep, variables, specials)
 
         self.doCollisionUpdate = True
 
@@ -577,6 +585,7 @@ cdef class Particle(DynamicObject):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
+        alpha: int = 255,
         animator: typing.Any = None,
         gravity: float = 300,
         slidingStep: float = INF,
@@ -586,7 +595,7 @@ cdef class Particle(DynamicObject):
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, gravity, slidingStep, variables, specials)
+        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, alpha, animator, gravity, slidingStep, variables, specials)
 
         self.doCollisionUpdate = False
 
@@ -621,7 +630,6 @@ cdef class Text(StaticObject):
     cdef public str font
     cdef public str message
     cdef public int fontSize
-    cdef public int alpha
     cdef public str fontColor
     cdef public object alignment
     cdef public str vertical
@@ -639,17 +647,17 @@ cdef class Text(StaticObject):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
+        alpha: int = 255,
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
-        alpha: int = 255,
         fontColor: str = "#FFFFFF",
         alignment: typing.List[bool] = None,
         variables: typing.Dict[str, typing.Any] = None,
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, None, variables, specials)
+        StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, alpha, None, variables, specials)
 
         self.doCollisionUpdate = False
 
@@ -727,6 +735,7 @@ cdef class Field(Text):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
+        alpha: int = 255,
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
@@ -736,7 +745,7 @@ cdef class Field(Text):
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        Text.__init__(self, game, pos, hitbox, group, layer, id, invisible, font, message, fontSize, fontColor, alignment, variables, specials)
+        Text.__init__(self, game, pos, hitbox, group, layer, id, invisible, alpha, font, message, fontSize, fontColor, alignment, variables, specials)
 
         self.doCollisionUpdate = False
 
@@ -843,7 +852,6 @@ cdef class Button(StaticObject):
     cdef public str font
     cdef public str message
     cdef public int fontSize
-    cdef public int alpha
     cdef public object fontColor
     cdef public object ramaColor
     cdef public object backgroundColor
@@ -865,10 +873,10 @@ cdef class Button(StaticObject):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
+        alpha: int = 255,
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
-        alpha: int = 255,
         ramaColor: typing.List[str] = ["#000000", "#000000", "#000000"],
         fontColor: typing.List[str] = ["#FFFFFF", "#FFFFFF", "#FFFFFF"],
         backgroundColor: typing.List[str] = ["#AAAAAA", "#888888", "#444444"],
@@ -877,7 +885,7 @@ cdef class Button(StaticObject):
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, None, variables, specials)
+        StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, alpha, None, variables, specials)
 
         self.doCollisionUpdate = False
 

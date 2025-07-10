@@ -84,7 +84,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets\/bridge\/rightLeft.png"
+                    "value": "assets/bridge/rightLeft.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -145,6 +145,11 @@
             "name": "Invisible",
             "value": false,
             "type": "bool"
+        },
+        "alpha": {
+            "name": "Alpha",
+            "value": 255,
+            "type": "int"
         }
     },
     "DynamicObject": {

@@ -108,7 +108,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets\/house\/floorDown.png"
+                    "value": "assets/house/floorDown.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -169,6 +169,11 @@
             "name": "Invisible",
             "value": false,
             "type": "bool"
+        },
+        "alpha": {
+            "name": "Alpha",
+            "value": 255,
+            "type": "int"
         }
     }
 }
