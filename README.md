@@ -124,9 +124,11 @@ Game Engine 3
 │   ├─ Scene Editor
 │   ├─ Node Editor
 │   └─ Project Execution and Compilation
-└─ Website
-    ├─ First Project Documentation
-    └─ Complete Node List with Usage Examples
+├─ Website
+│   ├─ First Project Documentation
+│   └─ Complete Node List with Usage Examples
+└─ GELauncher
+    └─ Launcher for using Game Engine 3
 ```
 
 ## Technical Details
