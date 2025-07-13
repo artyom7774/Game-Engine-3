@@ -216,13 +216,36 @@ for element in IMAGE_FORMATES:
     SPRITES[f"{element}-light"] = "scr/files/sprites/image-light.png"
 
 BASE_SETTINGS = {
-    "language": "EN"
+    "language": "EN",
+    "theme": "Dark"
 }
 
 LANGUAGES = {
     "RU": "Русский",
-    "EN": "English"
+    "EN": "English",
+    "KZ": "Қазақша",
+    "AR": "العربية",
+    "FR": "Français",
+    "ES": "Español",
+    "ZH": "中文",
+    "HI": "हिन्दी",
+    "PT": "Português",
+    "JA": "日本語"
 }
+
+LANGUAGES_ICONS = {
+    "RU": "scr/files/sprites/languages/ru.jpg",
+    "EN": "scr/files/sprites/languages/en.jpg",
+    "KZ": "scr/files/sprites/languages/kz.jpg",
+    "AR": "scr/files/sprites/languages/ar.jpg",
+    "FR": "scr/files/sprites/languages/fr.jpg",
+    "ES": "scr/files/sprites/languages/es.jpg",
+    "ZH": "scr/files/sprites/languages/zh.jpg",
+    "HI": "scr/files/sprites/languages/hi.jpg",
+    "PT": "scr/files/sprites/languages/pt.jpg",
+    "JA": "scr/files/sprites/languages/ja.jpg"
+}
+
 
 THEMES = {
     "light": "Light",

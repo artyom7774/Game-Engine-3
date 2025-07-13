@@ -5,7 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/scr/files/bundles/ar.hjson" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scr/files/bundles/es.hjson" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scr/files/bundles/fr.hjson" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scr/files/bundles/hi.hjson" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scr/files/bundles/ja.hjson" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scr/files/bundles/kz.hjson" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scr/files/bundles/pt.hjson" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scr/files/bundles/zh.hjson" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMMANDS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/COMMANDS.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game Engine 3.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/getUsingObjects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/hitbox.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/objects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/vector/float.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/vector/int.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.exp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/bundles/en.hjson" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/bundles/en.hjson" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/bundles/ru.hjson" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/settings/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/settings/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/updates.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/updates.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/file/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/file/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/variables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start.spec" beforeDir="false" afterPath="$PROJECT_DIR$/start.spec" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +71,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.1.executor": "Run",
-    "Python.Game Engine 3.executor": "Run",
+    "Python.Game Engine 3.executor": "Debug",
     "Python.collision.executor": "Debug",
     "Python.getNoiseValue.executor": "Run",
     "Python.getTimePassed.executor": "Debug",
@@ -46,7 +84,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "E:/divelop/Game-Engine-3-Launcher",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "preferences.fileTypes"
   }
 }]]></component>
   <component name="RecentsManager">

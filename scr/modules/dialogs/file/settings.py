@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QDialog, QLabel, QComboBox, QPushButton
+from PyQt5.QtGui import QIcon
 from PyQt5 import QtWidgets
 
 from scr.variables import *
@@ -103,7 +104,11 @@ class Settings(QDialog):
         self.objects["language_label"].show()
 
         self.objects["language_combobox"] = QComboBox(parent=self)
+
         self.objects["language_combobox"].addItems([obj for obj in LANGUAGES.values()])
+        for i, name in enumerate(LANGUAGES):
+            self.objects["language_combobox"].setItemIcon(i, QIcon(LANGUAGES_ICONS[name]))
+
         self.objects["language_combobox"].setCurrentIndex([translate(obj).lower() == translate(LANGUAGES[SETTINGS["language"]]).lower() for obj in LANGUAGES.values()].index(True))
         self.objects["language_combobox"].setGeometry(210, 10, 300, 25)
         self.objects["language_combobox"].setFont(FONT)

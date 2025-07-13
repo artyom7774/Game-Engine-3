@@ -259,6 +259,7 @@ class Main(QMainWindow):
                 pass
 
         self.setWindowTitle("Game Engine 3")
+        self.setWindowIcon(QIcon("scr/files/sprites/logo.png"))
 
         self.selectProject = ""
         self.selectFile = ""
