@@ -1,0 +1,1298 @@
+{
+    "variables": {},
+    "objects": {
+        "81376843": {
+            "display": {
+                "name": "node.name.onStartGame",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 81376843,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 8,
+            "y": 10
+        },
+        "933700812": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 933700812,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 81376843,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "Hello World!",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 16.0,
+            "y": 10.0
+        },
+        "694051855": {
+            "display": {
+                "name": "node.name.onLoadScene",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 694051855,
+            "inputs": {},
+            "name": "onLoadScene",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 7.0,
+            "y": 20.0
+        },
+        "829998869": {
+            "display": {
+                "name": "node.name.getSceneName",
+                "text": {
+                    "__answer__": "node.text.answer",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 829998869,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 694051855,
+                        "name": "path"
+                    }
+                }
+            },
+            "name": "getSceneName",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "text"
+                }
+            },
+            "type": "another",
+            "width": 6,
+            "x": 15.0,
+            "y": 20.0
+        },
+        "901180366": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 901180366,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 829998869,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 829998869,
+                        "name": "answer"
+                    }
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 23.0,
+            "y": 20.0
+        },
+        "456979329": {
+            "display": {
+                "name": "node.name.onButtonPress",
+                "text": {
+                    "__id__": "node.text.id",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 456979329,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": null
+                }
+            },
+            "name": "onButtonPress",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 7.0,
+            "y": 26.0
+        },
+        "348806477": {
+            "display": {
+                "name": "node.name.setObjectParameter",
+                "text": {
+                    "__id__": "node.text.id",
+                    "__name__": "node.text.name",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__value__": "node.text.value"
+                }
+            },
+            "height": 5,
+            "id": 348806477,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 456979329,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 456979329,
+                        "name": "id"
+                    }
+                },
+                "name": {
+                    "choose": {
+                        "options": [
+                            "object.parameter.number.hitbox",
+                            "object.parameter.number.group",
+                            "object.parameter.number.mass",
+                            "object.parameter.number.layer",
+                            "object.parameter.number.invisible",
+                            "object.parameter.number.gravity",
+                            "object.parameter.number.brakingPower",
+                            "object.parameter.number.message",
+                            "object.parameter.number.fontSize",
+                            "object.parameter.number.alignment",
+                            "object.parameter.number.fontColor",
+                            "object.parameter.number.backgroundColor",
+                            "object.parameter.number.ramaColor",
+                            "object.parameter.number.spriteHithox",
+                            "object.parameter.number.liveTime",
+                            "object.parameter.number.minusSpriteSizePerFrame",
+                            "object.parameter.number.alpha"
+                        ]
+                    },
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": 7,
+                    "type": "choose",
+                    "value": null
+                },
+                "value": {
+                    "code": "value",
+                    "name": "__value__",
+                    "standard": "Clicked!",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "setObjectParameter",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "objects",
+            "width": 10,
+            "x": 15.0,
+            "y": 26.0
+        },
+        "103155749": {
+            "display": {
+                "name": "node.name.onStartGame",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 103155749,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 7.0,
+            "y": 33.0
+        },
+        "886144167": {
+            "display": {
+                "name": "node.name.radians",
+                "text": {
+                    "__degrees__": "node.text.degrees",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__radians__": "node.text.radians"
+                }
+            },
+            "height": 3,
+            "id": 886144167,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 103155749,
+                        "name": "path"
+                    }
+                },
+                "degrees": {
+                    "code": "degrees",
+                    "name": "__degrees__",
+                    "standard": 360,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "radians",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "radians": {
+                    "code": "radians",
+                    "name": "__radians__",
+                    "type": "number"
+                }
+            },
+            "type": "number",
+            "width": 6,
+            "x": 15.0,
+            "y": 33.0
+        },
+        "495009668": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 495009668,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 886144167,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 886144167,
+                        "name": "radians"
+                    }
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 23,
+            "y": 33
+        },
+        "134944543": {
+            "display": {
+                "name": "node.name.onStartGame",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 134944543,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 7,
+            "y": 38
+        },
+        "666644248": {
+            "display": {
+                "name": "node.name.degrees",
+                "text": {
+                    "__degrees__": "node.text.degrees",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__radians__": "node.text.radians"
+                }
+            },
+            "height": 3,
+            "id": 666644248,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 134944543,
+                        "name": "path"
+                    }
+                },
+                "radians": {
+                    "code": "radians",
+                    "name": "__radians__",
+                    "standard": 6.28,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "degrees",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "degrees": {
+                    "code": "degrees",
+                    "name": "__degrees__",
+                    "type": "number"
+                }
+            },
+            "type": "number",
+            "width": 6,
+            "x": 15.0,
+            "y": 38.0
+        },
+        "28336023": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 28336023,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 666644248,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 666644248,
+                        "name": "degrees"
+                    }
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 23,
+            "y": 38
+        },
+        "3296271": {
+            "display": {
+                "name": "node.name.onStartGame",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 3296271,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 7,
+            "y": 43
+        },
+        "359929783": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 359929783,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 269720602,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 269720602,
+                        "name": "answer"
+                    }
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 23,
+            "y": 43
+        },
+        "269720602": {
+            "display": {
+                "name": "node.name.ctg",
+                "text": {
+                    "__answer__": "node.text.answer",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__x__": "node.text.x"
+                }
+            },
+            "height": 3,
+            "id": 269720602,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 3296271,
+                        "name": "path"
+                    }
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__x__",
+                    "standard": 30,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "ctg",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "type": "number",
+            "width": 6,
+            "x": 15.0,
+            "y": 43.0
+        },
+        "454887753": {
+            "display": {
+                "name": "node.name.onStartGame",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 454887753,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 7,
+            "y": 48
+        },
+        "182183337": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 182183337,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 779872205,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 779872205,
+                        "name": "answer"
+                    }
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 23,
+            "y": 48
+        },
+        "779872205": {
+            "display": {
+                "name": "node.name.absolute",
+                "text": {
+                    "__answer__": "node.text.answer",
+                    "__none__": "node.text.none",
+                    "__number__": "node.text.number",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 779872205,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 454887753,
+                        "name": "path"
+                    }
+                },
+                "number": {
+                    "code": "number",
+                    "name": "__number__",
+                    "standard": -5,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "absolute",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "number"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "type": "number",
+            "width": 6,
+            "x": 15.0,
+            "y": 48.0
+        },
+        "469400021": {
+            "display": {
+                "name": "node.name.onStartGame",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 469400021,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 7,
+            "y": 53
+        },
+        "258192261": {
+            "display": {
+                "name": "node.name.addDictElement",
+                "text": {
+                    "__dict__": "node.text.dict",
+                    "__element__": "node.text.element",
+                    "__key__": "node.text.key",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 5,
+            "id": 258192261,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 469400021,
+                        "name": "path"
+                    }
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "standard": {},
+                    "type": "dict",
+                    "value": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "key",
+                    "type": "text",
+                    "value": null
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "standard": "value",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "addDictElement",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "type": "dict"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "dict",
+                    "key",
+                    "element"
+                ],
+                "outputs": [
+                    "path",
+                    "dict"
+                ]
+            },
+            "type": "set",
+            "width": 10,
+            "x": 15.0,
+            "y": 53.0
+        },
+        "286371037": {
+            "display": {
+                "name": "node.name.ifKeyInDict",
+                "text": {
+                    "__dict__": "node.text.dict",
+                    "__key__": "node.text.key",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__path_false__": "node.text.pathFalse",
+                    "__path_true__": "node.text.pathTrue"
+                }
+            },
+            "height": 4,
+            "id": 286371037,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 258192261,
+                        "name": "path"
+                    }
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "standard": {},
+                    "type": "dict",
+                    "value": {
+                        "id": 258192261,
+                        "name": "dict"
+                    }
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "standard": "key",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "ifKeyInDict",
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "dict",
+                    "key"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "type": "logic",
+            "width": 8,
+            "x": 27.0,
+            "y": 53.0
+        },
+        "646551896": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 646551896,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 286371037,
+                        "name": "path_true"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "true",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 37.0,
+            "y": 53.0
+        },
+        "241254062": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 241254062,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 286371037,
+                        "name": "path_false"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "false",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 37,
+            "y": 58
+        },
+        "780339478": {
+            "display": {
+                "name": "node.name.onStartGame",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 780339478,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 7,
+            "y": 63
+        },
+        "943314593": {
+            "display": {
+                "name": "node.name.addListElement",
+                "text": {
+                    "__element__": "node.text.element",
+                    "__key__": "node.text.key",
+                    "__list__": "node.text.list",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 4,
+            "id": 943314593,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 780339478,
+                        "name": "path"
+                    }
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "standard": [],
+                    "type": "list",
+                    "value": null
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "standard": "abc",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "addListElement",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "element"
+                ],
+                "outputs": [
+                    "path",
+                    "list"
+                ]
+            },
+            "type": "set",
+            "width": 8,
+            "x": 15.0,
+            "y": 63.0
+        },
+        "265092616": {
+            "display": {
+                "name": "node.name.ifElementInList",
+                "text": {
+                    "__list__": "node.text.list",
+                    "__element__": "node.text.element",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__path_false__": "node.text.pathFalse",
+                    "__path_true__": "node.text.pathTrue"
+                }
+            },
+            "height": 4,
+            "id": 265092616,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 943314593,
+                        "name": "path"
+                    }
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "standard": [],
+                    "type": "list",
+                    "value": {
+                        "id": 943314593,
+                        "name": "list"
+                    }
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "standard": "abc",
+                    "type": "Any",
+                    "value": null
+                }
+            },
+            "name": "ifElementInList",
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "element"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+            "type": "logic",
+            "width": 8,
+            "x": 25.0,
+            "y": 63.0
+        },
+        "787061567": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 787061567,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 265092616,
+                        "name": "path_true"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "true",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 35,
+            "y": 63
+        },
+        "303463738": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 303463738,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 265092616,
+                        "name": "path_false"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "false",
+                    "type": "text",
+                    "value": null
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 35,
+            "y": 68
+        }
+    }
+}

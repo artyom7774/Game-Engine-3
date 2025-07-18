@@ -296,7 +296,7 @@
     "node.name.removeByKey": "Remove by key"
     "node.name.getKeyOfElement": "Get element key"
     "node.name.addListElement": "Add list element"
-    "node.name.addDictElement": "Add dictionary element"
+    "node.name.addDictElement": "Add dict element"
     "node.name.len_": "Length"
     "node.name.python": "Python"
     "node.name.functionEvent": "Function"
@@ -323,7 +323,7 @@
     "node.name.ifElementInList": "If element in list"
     "node.name.getAllObjectInGroup": "Get all object in group"
     "node.name.distance": "Distance"
-    "node.name.absolute": "Modulus of number"
+    "node.name.absolute": "Absolute of number"
 
     // NODE TEXT
     "node.text.none": ""

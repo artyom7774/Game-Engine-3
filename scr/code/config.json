@@ -4679,7 +4679,7 @@
                 "text": {
                     "__none__": "node.text.none",
                     "__path__": "node.text.path",
-                    "__dict__": "node.text.list",
+                    "__list__": "node.text.list",
                     "__element__": "node.text.element",
                     "__path_true__": "node.text.pathTrue",
                     "__path_false__": "node.text.pathFalse"
