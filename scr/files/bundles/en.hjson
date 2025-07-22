@@ -247,8 +247,8 @@
 
     // NODE NAME
     "node.name.jump": "Jump"
-    "node.name.keyboardClick": "On key press"
-    "node.name.keyboardPress": "While key pressed"
+    "node.name.keyboardClick": "Keyboard click"
+    "node.name.keyboardPress": "Keyboard press"
     "node.name.mouseLeftClick": "Left mouse button"
     "node.name.mouseRightClick": "Right mouse button"
     "node.name.decodeHolder": "Decode pattern"
@@ -258,7 +258,7 @@
     "node.name.if": "If"
     "node.name.ifCollision": "If collision"
     "node.name.exit": "Exit"
-    "node.name.for": "Repeat N times"
+    "node.name.for": "For N times"
     "node.name.forListElements": "For all list elements"
     "node.name.forDictElements": "For all dictionary elements"
     "node.name.random": "Random number"
@@ -310,7 +310,7 @@
     "node.name.getObjectParameter": "Get object parameter"
     "node.name.getTimePassed": "Get frame time (1 / FPS)"
     "node.name.onButtonPress": "On button press"
-    "node.name.getNoiseValue": "Get value of Perlin noise"
+    "node.name.getNoiseValue": "Get noise value"
     "node.name.goToScene": "Go to scene"
     "node.name.getSceneName": "Get scene name"
     "node.name.playMusic": "Play music"

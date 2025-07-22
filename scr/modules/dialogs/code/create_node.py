@@ -114,7 +114,7 @@ class CreateNode(QDialog):
         self.objects["widgets"]["nodes"].setIcon(0, QIcon(getColor("dir")))
         self.objects["widgets"]["nodes"].setText(0, translate("Nodes"))
         self.objects["widgets"]["nodes"].setData(0, 1000, {"level": 0, "path": "nodes"})
-        # self.objects["widgets"]["nodes"].setExpanded(True)
+        self.objects["widgets"]["nodes"].setExpanded(True)
 
         for key, value in config["groups"].items():
             self.objects["widgets"][f"nodes/{key}"] = QTreeWidgetItem(self.objects["widgets"]["nodes"])

@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/scr/modules/updating/v3121to3122.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/version.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/123/project/functions/function.func" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/123/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/version.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/code/sprites/types/music.png" beforeDir="false" afterPath="$PROJECT_DIR$/scr/code/sprites/types/music.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scr/files/bundles/en.hjson" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/bundles/en.hjson" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/settings/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/settings/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/updates.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/updates.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/cash/image.png" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/cash/image.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/logs/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/logs/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/dialogs/code/create_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/dialogs/code/create_node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/updating/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/updating/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,25 +39,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.1.executor": "Run",
-    "Python.Game Engine 3.executor": "Debug",
-    "Python.collision.executor": "Debug",
-    "Python.getNoiseValue.executor": "Run",
-    "Python.getTimePassed.executor": "Debug",
-    "Python.program.executor": "Run",
-    "Python.scratch.executor": "Run",
-    "Python.start.executor": "Run",
-    "Python.text.executor": "Run",
-    "Python.variables.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/divelop/Game-Engine-3",
-    "settings.editor.selected.configurable": "preferences.fileTypes"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Game Engine 3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.collision.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.getNoiseValue.executor&quot;: &quot;Run&quot;,
+    &quot;Python.getTimePassed.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.program.executor&quot;: &quot;Run&quot;,
+    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.start.executor&quot;: &quot;Run&quot;,
+    &quot;Python.text.executor&quot;: &quot;Run&quot;,
+    &quot;Python.variables.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/divelop/Game-Engine-3&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\divelop\Game-Engine-3\scr\files\templates\Base" />

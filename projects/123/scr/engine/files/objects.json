@@ -1,0 +1,180 @@
+{
+    "main": "StaticObject",
+
+    "dependences": {
+        "StaticObject": [],
+        "DynamicObject": [
+            "StaticObject"
+        ],
+        "KinematicObject": [
+            "StaticObject",
+            "DynamicObject"
+        ],
+        "Particle": [
+            "StaticObject",
+            "DynamicObject"
+        ]
+    },
+    "standard": {
+        "type": "StaticObject",
+        "pos": {
+            "x": {
+                "name": "X",
+                "type": "int",
+                "value": 0
+            },
+            "y": {
+                "name": "Y",
+                "type": "int",
+                "value": 0
+            }
+        },
+        "hitbox": {
+            "X offset": {
+                "name": "X offset",
+                "type": "int",
+                "value": 0
+            },
+            "Y offset": {
+                "name": "Y offset",
+                "type": "int",
+                "value": 0
+            },
+            "width": {
+                "name": "Width",
+                "type": "int",
+                "value": 32
+            },
+            "height": {
+                "name": "Height",
+                "type": "int",
+                "value": 32
+            }
+        },
+        "sprite": {
+            "path": {
+                "name": "Path to image",
+                "type": "path",
+                "value": ""
+            },
+            "X offset": {
+                "name": "X offset",
+                "type": "int",
+                "value": 0
+            },
+            "Y offset": {
+                "name": "Y offset",
+                "type": "int",
+                "value": 0
+            },
+            "width": {
+                "name": "Width",
+                "type": "int",
+                "value": -1
+            },
+            "height": {
+                "name": "Height",
+                "type": "int",
+                "value": -1
+            }
+        },
+        "group": "object",
+        "layer": 0,
+        "gravity": 1000,
+        "slidingStep": 1e6,
+        "mass": 1000,
+        "invisible": false,
+        "alpha": 255,
+        "liveTime": 60,
+        "minusSpriteSizePerFrame": 0.01,
+        "animation": {
+            "groups": {
+                "group": {
+                    "name": "group",
+                    "sprites": [
+
+                    ],
+                    "settings": {
+                        "repeat": false,
+                        "fpsPerFrame": 10,
+                        "standard": false
+                    }
+                }
+            }
+        }
+    },
+    "name": {
+        "type": "Object type",
+        "pos": "Object position",
+        "hitbox": "Object hitbox",
+        "sprite": "Object sprite",
+        "group": "Name of object group",
+        "layer": "Object layer",
+        "gravity": "Object gravity",
+        "slidingStep": "Braking power",
+        "invisible": "Invisible",
+        "animation": "Animation",
+        "mass": "Mass",
+        "liveTime": "Live time",
+        "minusSpriteSizePerFrame": "Minus size per frame",
+        "alpha": "Alpha"
+    },
+    "type": {
+        "type": "choose",
+        "pos": "dict",
+        "hitbox": "dict",
+        "sprite": "dict",
+        "group": "str",
+        "layer": "int",
+        "gravity": "int",
+        "slidingStep": "int",
+        "invisible": "bool",
+        "animation": "animator",
+        "mass": "int",
+        "liveTime": "int",
+        "minusSpriteSizePerFrame": "int",
+        "alpha": "int"
+    },
+    "specials": {
+        "choose": {
+            "type": {
+                "input": [
+                    "object.name.staticObject",
+                    "object.name.dynamicObject",
+                    "object.name.kinematicObject",
+                    "object.name.particle"
+                ],
+                "output": [
+                    "StaticObject",
+                    "DynamicObject",
+                    "KinematicObject",
+                    "Particle"
+                ]
+            }
+        }
+    },
+    "objects": {
+        "StaticObject": [
+            "pos",
+            "hitbox",
+            "sprite",
+            "group",
+            "mass",
+            "layer",
+            "animation",
+            "invisible",
+            "alpha"
+        ],
+        "DynamicObject": [
+            "gravity",
+            "slidingStep"
+        ],
+        "Particle": [
+            "liveTime",
+            "minusSpriteSizePerFrame"
+        ],
+        "KinematicObject": [
+
+        ]
+    }
+}

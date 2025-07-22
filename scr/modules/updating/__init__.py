@@ -6,10 +6,14 @@ versionsUpdatingTree = {
     ],
     "3.12.0": [
         "3.12.1"
+    ],
+    "3.12.1": [
+        "3.12.2"
     ]
 }
 
 versionsUpdatingFunctions = {
     "3.11.0 -> 3.12.0": lambda name: v3110to3120.updating(name),
-    "3.12.0 -> 3.12.1": lambda name: v3120to3121.updating(name)
+    "3.12.0 -> 3.12.1": lambda name: v3120to3121.updating(name),
+    "3.12.1 -> 3.12.2": lambda name: v3120to3121.updating(name)
 }

@@ -132,6 +132,9 @@ class Game(engine.Application):
             self.programs[key] = Compiler(self, key, value, self.settings, DEBUG)
             
         self.loadScene(SETTINGS["start_scene"])
+        
+        for key, value in PROGRAMS.items():
+            self.programs[key].init()
 
         self.counter = threading.Thread(target=lambda: self.tpsStart())
         self.counter.daemon = True

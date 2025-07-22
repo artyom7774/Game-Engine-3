@@ -1,0 +1,2761 @@
+from engine.special.exception import EngineError
+
+
+def mirrorAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["horizontal"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["horizontal"]["value"]["value"] is not None:
+        horizontal = bool(nodes["objects"][str(id)]["inputs"]["horizontal"]["value"]["value"])
+
+    else:
+        horizontal = bool(nodes["objects"][str(id)]["inputs"]["horizontal"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["vertical"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["vertical"]["value"]["value"] is not None:
+        vertical = bool(nodes["objects"][str(id)]["inputs"]["vertical"]["value"]["value"])
+
+    else:
+        vertical = bool(nodes["objects"][str(id)]["inputs"]["vertical"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    obj.animator.flipAnimation(horizontal, vertical)
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def runAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["animation"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["animation"]["value"]["value"] is not None:
+        animation = str(nodes["objects"][str(id)]["inputs"]["animation"]["value"]["value"])
+
+    else:
+        animation = str(nodes["objects"][str(id)]["inputs"]["animation"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    obj.animator.runAnimation(animation)
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def stopAnimation(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    obj.animator.stopAnimation()
+
+    return queue
+
+def break_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    remove = []
+
+    for i, element in enumerate(compiler.timer):
+        if element["id"] == compiler.loopForBreak[str(id)]:
+            remove.append(i)
+
+    for i in remove[::-1]:
+        compiler.timer.pop(i)
+
+    compiler.loopBreaking[str(compiler.loopForBreak[str(id)])] = True
+
+    for name in nodes["objects"][str(compiler.loopForBreak[str(id)])]["outputs"]["after"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def callFunction(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["params"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["params"]["value"]["value"] is not None:
+        params = list(nodes["objects"][str(id)]["inputs"]["params"]["value"]["value"])
+
+    else:
+        params = list(nodes["objects"][str(id)]["inputs"]["params"]["standard"])
+
+    functions = compiler.functionsByName(name)
+
+    if functions is None:
+        EngineError(f"not found function with name = {name}")
+
+    for ids in functions:
+        nodes["objects"][str(ids)]["inputs"]["params"]["standard"] = params
+
+        queue.append(ids)
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+HOLDERS_LIST = ["%math", "%local_var", "%global_var"]
+
+
+def replace(s, old, new):
+    pos = s.rfind(old)
+
+    if pos == -1:
+        return s
+
+    return str(s[:pos]) + str(new) + str(s[pos + len(old):])
+
+
+class Holders:
+    @staticmethod
+    def math(text, variables):
+        try:
+            ntext = text
+
+            while ntext.startswith("\'"):
+                ntext = ntext[1:]
+
+            while ntext.endswith("\'"):
+                ntext = ntext[:-1]
+
+            return eval(ntext)
+
+        except Exception as e:
+            try:
+                return eval(text)
+
+            except Exception as e:
+                return text
+
+    @staticmethod
+    def local_var(text, variables):
+        try:
+            return "\'" + variables["locals"][text]["value"] + "\'" if isinstance(variables["locals"][text]["value"], str) else variables["locals"][text]["value"]
+
+        except:
+            return "null"
+
+    @staticmethod
+    def global_var(text, variables):
+        try:
+            return "\'" + variables["globals"][text]["value"] + "\'" if isinstance(variables["globals"][text]["value"], str) else variables["globals"][text]["value"]
+
+        except:
+            return "null"
+
+
+def decodeHolders(text: str, variables: dict):
+    types = []
+
+    for i, symbol in enumerate(text):
+        if text[i] == "(":
+            valueEndIndex = text.find(")", i, -1)
+
+            name = text[text.rfind("%", 0, i):i]
+            value = text[i:valueEndIndex + 1]
+
+            if name not in HOLDERS_LIST:
+                continue
+
+            if value == -1:
+                continue
+
+            countOpenBracket = value.count("(")
+            countEndBracket = value.count(")")
+
+            while countOpenBracket - countEndBracket > 0:
+                valueEndIndex += 1
+
+                if text[valueEndIndex] not in (")", "("):
+                    continue
+
+                if text[valueEndIndex] == ")":
+                    countEndBracket += 1
+
+                else:
+                    countOpenBracket += 1
+
+                value = text[i:valueEndIndex + 1]
+
+            types.append([text.rfind("%", 0, i), value.count("%"), name, value[1:-1]])
+
+    types.sort(key=lambda x: x[1] * 1e9 + x[0])
+
+    # for element in types:
+    #     print(*element)
+
+    # print(types)
+
+    # print("-->", text)
+
+    for i, element in enumerate(types):
+        value = getattr(Holders, element[2][1:])(element[3], variables)
+
+        text = replace(text, f"{element[2]}({element[3]})", value)
+
+        for elem in types[i:]:
+            elem[3] = elem[3].replace(f"{element[2]}({element[3]})", str(value))
+
+        # print("-->", text)
+
+    return text
+
+
+def decodeHolder(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["text"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"] is not None:
+        text = str(nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"])
+
+    else:
+        text = str(nodes["objects"][str(id)]["inputs"]["text"]["standard"])
+
+    answer = decodeHolders(text, variables)
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+def exit_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    program.exit()
+
+    return queue
+
+def functionEvent(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    if nodes["objects"][str(id)]["inputs"]["params"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["params"]["value"]["value"] is not None:
+        params = list(nodes["objects"][str(id)]["inputs"]["params"]["value"]["value"])
+
+    else:
+        params = list(nodes["objects"][str(id)]["inputs"]["params"]["standard"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["params"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = params
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+import pygame
+
+
+def getMousePos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    x, y = pygame.mouse.get_pos()
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = x
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["y"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = y
+
+    return queue
+
+from engine.special.exception import EngineError
+
+import functools
+import random
+import math
+import time
+
+
+class PerlinNoise:
+    octave_noise_values_cache = {}
+    noise_stats = {}
+    tables = {}
+
+    def __init__(self, seed=0):
+        self.seed = seed
+
+        if self.seed in self.tables:
+            self.p = self.tables[self.seed]
+
+        else:
+            self.p = self.generate_permutation_table()
+
+    def generate_permutation_table(self):
+        random.seed(self.seed)
+
+        p = list(range(256))
+        random.shuffle(p)
+
+        full_table = p + p
+        self.tables[self.seed] = full_table
+
+        return full_table
+
+    def _fade(self, t):
+        return t * t * t * (t * (t * 6 - 15) + 10)
+
+    def _lerp(self, a, b, t):
+        ft = t * 3.1415
+        f = (1 - math.cos(ft)) * 0.5
+        return a * (1 - f) + b * f
+
+        # return a + t * (b - a)
+
+    def _grad(self, hash_val, x, y):
+        h = hash_val & 3
+
+        if h == 0:
+            return x + y
+
+        elif h == 1:
+            return -x + y
+
+        elif h == 2:
+            return x - y
+
+        else:
+            return -x - y
+
+    def noise(self, x, y, frequency=1.0, amplitude=1.0):
+        x *= frequency
+        y *= frequency
+
+        X = int(x) & 255
+        Y = int(y) & 255
+
+        x -= int(x)
+        y -= int(y)
+
+        u = self._fade(x)
+        v = self._fade(y)
+
+        A = self.p[X] + Y
+        AA = self.p[A & 255]
+        AB = self.p[(A + 1) & 255]
+        B = self.p[(X + 1) & 255] + Y
+        BA = self.p[B & 255]
+        BB = self.p[(B + 1) & 255]
+
+        res = self._lerp(
+            self._lerp(
+                self._grad(AA, x, y),
+                self._grad(BA, x - 1, y),
+                u
+            ),
+            self._lerp(
+                self._grad(AB, x, y - 1),
+                self._grad(BB, x - 1, y - 1),
+                u
+            ),
+            v
+        )
+
+        return res * amplitude
+
+    def noise_with_range(self, x, y, frequency=1.0, min_val=0.0, max_val=1.0):
+        noise_val = self.noise(x, y, frequency, 1.0)
+
+        normalized = (noise_val + 1) / 2
+
+        return min_val + normalized * (max_val - min_val)
+
+    def octave_noise(self, x, y, octaves=4, frequency=1.0, amplitude=1.0, lacunarity=2.0, persistence=0.5, min_val=0.0, max_val=1.0):
+        stats_key = (self.seed, octaves, frequency, amplitude, lacunarity, persistence)
+
+        total = 0.0
+        current_amplitude = amplitude
+        current_frequency = frequency
+
+        for i in range(octaves):
+            noise_val = self.noise(x, y, current_frequency, 1.0)
+            total += noise_val * current_amplitude
+            current_amplitude *= persistence
+            current_frequency *= lacunarity
+
+        if stats_key not in self.noise_stats:
+            self.noise_stats[stats_key] = {"min": total, "max": total, "samples": 1}
+
+        else:
+            stats = self.noise_stats[stats_key]
+
+            stats["min"] = min(stats["min"], total)
+            stats["max"] = max(stats["max"], total)
+
+            stats["samples"] += 1
+
+        stats = self.noise_stats[stats_key]
+        if stats["max"] != stats["min"]:
+            normalized = (total - stats["min"]) / (stats["max"] - stats["min"])
+
+        else:
+            normalized = 0.5
+
+        return min_val + normalized * (max_val - min_val)
+
+    def reset_noise_stats(self):
+        self.noise_stats.clear()
+
+    def get_noise_stats(self, octaves=4, frequency=1.0, amplitude=1.0, lacunarity=2.0, persistence=0.5):
+        stats_key = (self.seed, octaves, frequency, amplitude, lacunarity, persistence)
+
+        return self.noise_stats.get(stats_key, None)
+
+
+def getNoiseValue(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["seed"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["seed"]["value"]["value"] is not None:
+        seed = int(nodes["objects"][str(id)]["inputs"]["seed"]["value"]["value"])
+
+    else:
+        seed = int(nodes["objects"][str(id)]["inputs"]["seed"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["x"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"] is not None:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"])
+
+    else:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["y"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["y"]["value"]["value"] is not None:
+        y = float(nodes["objects"][str(id)]["inputs"]["y"]["value"]["value"])
+
+    else:
+        y = float(nodes["objects"][str(id)]["inputs"]["y"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["min"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["min"]["value"]["value"] is not None:
+        mn = float(nodes["objects"][str(id)]["inputs"]["min"]["value"]["value"])
+
+    else:
+        mn = float(nodes["objects"][str(id)]["inputs"]["min"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["max"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["max"]["value"]["value"] is not None:
+        mx = float(nodes["objects"][str(id)]["inputs"]["max"]["value"]["value"])
+
+    else:
+        mx = float(nodes["objects"][str(id)]["inputs"]["max"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["octaves"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["octaves"]["value"]["value"] is not None:
+        octaves = int(nodes["objects"][str(id)]["inputs"]["octaves"]["value"]["value"])
+
+    else:
+        octaves = int(nodes["objects"][str(id)]["inputs"]["octaves"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["frequency"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["frequency"]["value"]["value"] is not None:
+        frequency = float(nodes["objects"][str(id)]["inputs"]["frequency"]["value"]["value"])
+
+    else:
+        frequency = float(nodes["objects"][str(id)]["inputs"]["frequency"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["amplitude"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["amplitude"]["value"]["value"] is not None:
+        amplitude = float(nodes["objects"][str(id)]["inputs"]["amplitude"]["value"]["value"])
+
+    else:
+        amplitude = float(nodes["objects"][str(id)]["inputs"]["amplitude"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["lacunarity"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["lacunarity"]["value"]["value"] is not None:
+        lacunarity = float(nodes["objects"][str(id)]["inputs"]["lacunarity"]["value"]["value"])
+
+    else:
+        lacunarity = float(nodes["objects"][str(id)]["inputs"]["lacunarity"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["persistence"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["persistence"]["value"]["value"] is not None:
+        persistence = float(nodes["objects"][str(id)]["inputs"]["persistence"]["value"]["value"])
+
+    else:
+        persistence = float(nodes["objects"][str(id)]["inputs"]["persistence"]["standard"])
+
+    if mn > mx:
+        raise EngineError("maximum value must be bigger then minimum")
+
+    if octaves <= 0:
+        raise EngineError("octaves must be bigger than 0")
+
+    if frequency <= 0:
+        raise EngineError("frequency must be bigger than 0")
+
+    if amplitude <= 0:
+        raise EngineError("amplitude must be bigger than 0")
+
+    if lacunarity <= 0:
+        raise EngineError("lacunarity must be bigger than 0")
+
+    noise = PerlinNoise(seed)
+
+    answer = noise.octave_noise(x + random.uniform(-0.1, 0.1), y + random.uniform(-0.1, 0.1), octaves, frequency, amplitude, lacunarity, persistence, mn, mx)
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["value"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+def getSceneName(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    scenes = {}
+
+    for key, value in program.sceneNames.items():
+        scenes[value] = key
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = scenes[program.scene]
+
+    return queue
+
+def getTimePassed(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    time_passed = program.dt
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["time_passed"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = time_passed
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def getVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["global"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["global"]["value"]["value"] is not None:
+        gl = nodes["objects"][str(id)]["inputs"]["global"]["value"]["value"]
+
+    else:
+        gl = nodes["objects"][str(id)]["inputs"]["global"]["standard"]
+
+    if gl:
+        if name not in variables["globals"]:
+            EngineError(f"not found global variable with name = {name}")
+
+        answer = variables["globals"][name]["value"]
+
+    else:
+        if name not in variables["locals"][path]:
+            EngineError(f"not found local variable with name = {name}")
+
+        answer = variables["locals"][path][name]["value"]
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+def goToScene(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["scene"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["scene"]["value"]["value"] is not None:
+        scene = str(nodes["objects"][str(id)]["inputs"]["scene"]["value"]["value"])
+
+    else:
+        scene = str(nodes["objects"][str(id)]["inputs"]["scene"]["standard"])
+
+    program.loadScene(program.sceneNames[scene])
+
+    return queue
+
+def len_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["element"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"] is not None:
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+            element = eval(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+
+        else:
+            element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]))
+
+    else:
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+            element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+
+        else:
+            element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["standard"]))
+
+    answer = len(element) if type(element) in (list, tuple, dict) else 1
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+import functools
+import typing
+import random
+import pygame
+import math
+import re
+
+
+if typing.TYPE_CHECKING:
+    def decodeHolders(*args):
+        pass
+
+    class PerlinNoise:
+        def __init__(self, *args):
+            pass
+
+else:
+    pass
+
+
+class PythonFunctions:
+    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos", "setObjectParameter", "getObjectParameter", "getTimePassed", "moveObjectWithBraking", "getNoiseValue", "sin", "cos", "tan", "ctg", "degrees", "radians", "goToScene", "getSceneName", "playMusic", "stopMusic", "playSound"]
+
+    @staticmethod
+    def decodeHolder(text, program, variables, path):
+        return decodeHolders(text, variables)
+
+    @staticmethod
+    def exit(program, variables, path):
+        program.exit()
+
+    @staticmethod
+    def getVar(name, global_, program, variables, path):
+        if global_:
+            return variables["globals"][name]["value"]
+
+        else:
+            return variables["locals"][path][name]["value"]
+
+    @staticmethod
+    def setVar(name, global_, value, program, variables, path):
+        if global_:
+            variables["globals"][name]["value"] = value
+
+        else:
+            variables["locals"][path][name]["value"] = value
+
+    @staticmethod
+    def objectsGroup(group, program, variables, path):
+        return program.objects.getByGroup(group)
+
+    @staticmethod
+    def random(a, b, program, variables, path):
+        return a if a == b else random.randint(a, b)
+
+    @staticmethod
+    def writeText(text, program, variables, path):
+        answer = ">>> " + str(text).rstrip() + "\n"
+
+        program.print(answer)
+
+        print(answer)
+
+    @staticmethod
+    def displayText(text, x, y, program, variables, path):
+        program.afterDrawing.append(lambda: program.linkEngine.print_text(program.screen, x, y, str(text)))
+
+    @staticmethod
+    def collision(ids, group, append, program, variables, path):
+        obj = program.objects.getById(ids)
+
+        answer = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]
+
+        return answer
+
+    @staticmethod
+    def createObject(name, x, y, program, variables, path):
+        if not name.endswith(".obj"):
+            name += ".obj"
+
+        type = program.allObjects[name]["type"]
+        variables = program.allObjects[name]["variables"]
+
+        variables["pos"] = [x, y]
+
+        obj = getattr(program.linkEngine.objects, type)(program, **variables)
+
+        program.objects.add(obj)
+
+        program.settings["variables"]["objects"][program.scene][str(obj.id)] = program.allObjects[name]["vars"]
+
+        return obj.id
+
+    @staticmethod
+    def getObjectIDByName(name, program, variables, path):
+        name = name + ".objc" if not name.endswith(".objc") else name
+
+        answer = program.objectIDByName[program.scene][name] if name in program.objectIDByName[program.scene] else -1
+
+        return answer
+
+    @staticmethod
+    def getObjectPos(ids, program, variables, path):
+        return program.objects.getById(ids).pos.get()
+
+    @staticmethod
+    def getObjectVar(ids, name, program, variables, path):
+        return variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)][name]["value"]
+
+    @staticmethod
+    def jump(ids, program, variables, path):
+        obj = program.objects.getById(int(ids))
+
+        obj.moveByType("jump")
+
+    @staticmethod
+    def moveObject(ids, angle, power, program, variables, path):
+        program.objects.getById(int(ids)).moveByAngle(angle, power)
+
+    @staticmethod
+    def removeObject(ids, program, variables, path):
+        program.objects.removeById(ids)
+
+    @staticmethod
+    def setObjectPos(ids, x, y, program, variables, path):
+        obj = program.objects.getById(int(ids))
+
+        obj.pos.x = x
+        obj.pos.y = y
+
+    @staticmethod
+    def setObjectVar(ids, name, value, program, variables, path):
+        variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)][name]["value"] = value
+
+    @staticmethod
+    def getResultingVector(ids, program, variables, path):
+        return program.objects.getById(ids).getVectorsPower().get()
+
+    @staticmethod
+    def runAnimation(ids, animation, program, variables, path):
+        program.objects.getById(ids).animator.runAnimation(animation)
+
+    @staticmethod
+    def stopAnimation(ids, animation, program, variables, path):
+        program.objects.getById(ids).animator.stopAnimation()
+
+    @staticmethod
+    def mirrorAnimation(ids, horizontal, vertical, program, variables, path):
+        program.objects.getById(ids).animator.flipAnimation(horizontal, vertical)
+
+    @staticmethod
+    def getMousePos(program, variables, path):
+        return pygame.mouse.get_pos()
+
+    @staticmethod
+    def setObjectParameter(ids, name, value, program, variables, path):
+        program.objects.getById(ids).setParameter(name, value)
+
+    @staticmethod
+    def getObjectParameter(ids, name, program, variables, path):
+        return program.objects.getById(ids).getParameter(name)
+
+    @staticmethod
+    def getTimePassed(ids, program, variables, path):
+        return program.dt
+
+    @staticmethod
+    def moveObjectWithBraking(ids, angle, power, brakingPower, program, variables, path):
+        program.objects.getById(int(ids)).moveByAngle(angle, power, brakingPower)
+
+    @staticmethod
+    def getNoiseValue(seed, x, y, octaves, frequency, amplitude, lacunarity, persistence, mn, mx, program, variables, path):
+        return PerlinNoise(seed).octave_noise(x + random.uniform(-0.1, 0.1), y + random.uniform(-0.1, 0.1), octaves, frequency, amplitude, lacunarity, persistence, mn, mx)
+
+    @staticmethod
+    def sin(x, program, variables, path):
+        return math.sin(x)
+
+    @staticmethod
+    def cos(x, program, variables, path):
+        return math.cos(x)
+
+    @staticmethod
+    def tan(x, program, variables, path):
+        return math.tan(x)
+
+    @staticmethod
+    def ctg(x, program, variables, path):
+        return 1 / math.tan(x)
+
+    @staticmethod
+    def degrees(radians, program, variables, path):
+        return math.degrees(radians)
+
+    @staticmethod
+    def radians(degrees, program, variables, path):
+        return math.radians(degrees)
+
+    @staticmethod
+    def goToScene(scene, program, variables, path):
+        program.loadScene(program.sceneNames[scene])
+
+    @staticmethod
+    def getSceneName(scene, program, variables, path):
+        scenes = {}
+
+        for key, value in program.sceneNames.items():
+            scenes[value] = key
+
+        return scenes[program.scene]
+
+    @staticmethod
+    def playMusic(music, program, variables, path):
+        pygame.mixer.music.load(program.music[music])
+        pygame.mixer.music.play(-1)
+
+    @staticmethod
+    def stopMusic(program, variables, path):
+        pygame.mixer.music.stop()
+
+    @staticmethod
+    def playSound(music, program, variables, path):
+        program.loadSound[music].play()
+
+
+class PythonCodeExecutor:
+    program = None
+    variables = None
+    path = None
+
+    contest = {}
+
+    inited = False
+
+    @classmethod
+    def init(cls):
+        for func in PythonFunctions.functions:
+            cls.contest[func] = functools.partial(getattr(PythonFunctions, func), program=cls.program, variables=cls.variables, path=cls.path)
+
+    @classmethod
+    def add(cls, program):
+        if not cls.inited:
+            cls.init()
+
+        exec(program, cls.contest)
+
+    @classmethod
+    def run(cls, program, args, kwargs):
+        return cls.contest["run"](program, args=args, kwargs=kwargs)
+
+
+@functools.lru_cache(None)
+def pythonCheckHaveFunction(text):
+    pattern = r'\bdef\s+run\s*\('
+
+    match = re.search(pattern, text)
+
+    return bool(match)
+
+
+def python(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["text"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"] is not None:
+        text = str(nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"])
+
+    else:
+        text = (str(nodes["objects"][str(id)]["inputs"]["text"]["standard"]))
+
+    if nodes["objects"][str(id)]["inputs"]["list"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"] is not None:
+        list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"])
+
+    else:
+        list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["dict"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"] is not None:
+        dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"])
+
+    else:
+        dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["standard"])
+
+    if PythonCodeExecutor.program is None:
+        PythonCodeExecutor.variables = variables
+        PythonCodeExecutor.program = program
+
+        PythonCodeExecutor.path = path
+
+    PythonCodeExecutor.add(text)
+
+    if pythonCheckHaveFunction(text):
+        listOutput = PythonCodeExecutor.run(program, list_, dict_)
+
+    else:
+        listOutput = []
+
+    if listOutput is None:
+        listOutput = []
+
+    elif not isinstance(listOutput, list):
+        listOutput = [listOutput]
+
+    else:
+        pass
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = listOutput
+
+    return queue
+
+import random
+
+
+def random_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["a"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"] is not None:
+        a = int(nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"])
+
+    else:
+        a = int(nodes["objects"][str(id)]["inputs"]["a"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["b"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"] is not None:
+        b = int(nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"])
+
+    else:
+        b = int(nodes["objects"][str(id)]["inputs"]["b"]["standard"])
+
+    answer = a if a == b else (random.randint(a, b) if a < b else random.randint(b, a))
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+def setVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["global"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["global"]["value"]["value"] is not None:
+        gl = nodes["objects"][str(id)]["inputs"]["global"]["value"]["value"]
+
+    else:
+        gl = nodes["objects"][str(id)]["inputs"]["global"]["standard"]
+
+    try:
+        if nodes["objects"][str(id)]["inputs"]["value"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"] is not None:
+            value = eval(nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"])
+
+        else:
+            value = eval(nodes["objects"][str(id)]["inputs"]["value"]["standard"])
+
+    except BaseException:
+        if nodes["objects"][str(id)]["inputs"]["value"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"] is not None:
+            value = nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"]
+
+        else:
+            value = nodes["objects"][str(id)]["inputs"]["value"]["standard"]
+
+    if gl:
+        type = variables["globals"][name]["type"]
+
+    else:
+        type = variables["locals"][path][name]["type"]
+
+    if type == "number":
+        value = float(value) if float(value) - int(value) != 0 else int(value)
+
+    if gl:
+        if name not in variables["globals"]:
+            EngineError(f"not found global variable with name = {name}")
+
+        variables["globals"][name]["value"] = value
+
+    else:
+        if name not in variables["locals"][path]:
+            EngineError(f"not found local variable with name = {name}")
+
+        variables["locals"][path][name]["value"] = value
+
+    return queue
+
+def wait(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    timer = []
+    queue = []
+
+    if nodes["objects"][str(id)]["inputs"]["time"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["time"]["value"]["value"] is not None:
+        time = int(float(nodes["objects"][str(id)]["inputs"]["time"]["value"]["value"]))
+
+    else:
+        time = int(float(nodes["objects"][str(id)]["inputs"]["time"]["standard"]))
+
+    """
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = pos.x
+    """
+
+    timer.append({"id": id, "count": 1, "timer": time, "tmax": time, "connector": "iterator", "iter": 0})
+
+    return {"queue": queue, "timer": timer}
+
+def everyFrame(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+def everyTick(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+def keyboardClick(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+def keyboardPress(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+def mouseLeftClick(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+def mouseRightClick(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+def onButtonPress(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = kwargs["onButtonPressObjectID"]
+
+    return queue
+
+def onLoadScene(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+def onStartGame(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["group"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"] is not None:
+        groupList = nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"]
+
+    else:
+        groupList = nodes["objects"][str(id)]["inputs"]["group"]["standard"]
+
+    if nodes["objects"][str(id)]["inputs"]["append"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] is not None:
+        append = (nodes["objects"][str(id)]["inputs"]["append"]["value"]["value"] == True)
+
+    else:
+        append = (nodes["objects"][str(id)]["inputs"]["append"]["standard"] == True)
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    for group in groupList.split(", "):
+        answer = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]
+
+        if answer[0]:
+            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.append(name["id"])
+
+            for ids, connector in nodes["objects"][str(id)]["outputs"]["id_in_group"]["value"].items():
+                nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer[1].id
+
+            break
+
+        else:
+            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.append(name["id"])
+
+            for ids, connector in nodes["objects"][str(id)]["outputs"]["id_in_group"]["value"].items():
+                nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = -1
+
+    return queue
+
+def ifElementInList(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    if nodes["objects"][str(id)]["inputs"]["list"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"] is not None:
+        list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"])
+
+    else:
+        list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["element"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"] is not None:
+        element = str(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+
+    else:
+        element = str(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+
+    find = False
+
+    for index, elem in enumerate(list_):
+        if str(elem) == str(element):
+            find = True
+
+            break
+
+    if find:
+        for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+            queue.append(name["id"])
+
+    else:
+        for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+            queue.append(name["id"])
+
+    return queue
+
+def ifKeyInDict(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    if nodes["objects"][str(id)]["inputs"]["dict"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"] is not None:
+        dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"])
+
+    else:
+        dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["key"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["key"]["value"]["value"] is not None:
+        key = str(nodes["objects"][str(id)]["inputs"]["key"]["value"]["value"])
+
+    else:
+        key = str(nodes["objects"][str(id)]["inputs"]["key"]["standard"])
+
+    if key in dict_:
+        for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+            queue.append(name["id"])
+
+    else:
+        for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+            queue.append(name["id"])
+
+    return queue
+
+OPERATIONS = ["0. ==", "1. !=", "2. <=", "3. >=", "4. <", "5. >"]
+
+
+def if_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    if nodes["objects"][str(id)]["inputs"]["a"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"] is not None:
+        a = nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"]
+
+    else:
+        a = nodes["objects"][str(id)]["inputs"]["a"]["standard"]
+
+    if nodes["objects"][str(id)]["inputs"]["b"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"] is not None:
+        b = nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"]
+
+    else:
+        b = nodes["objects"][str(id)]["inputs"]["b"]["standard"]
+
+    if nodes["objects"][str(id)]["inputs"]["operation"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["operation"]["value"]["value"] is not None:
+        operation = int(nodes["objects"][str(id)]["inputs"]["operation"]["value"]["value"])
+
+    else:
+        operation = int(nodes["objects"][str(id)]["inputs"]["operation"]["standard"])
+
+    try:
+        if eval(f"{a} {OPERATIONS[operation][3:]} {b}"):
+            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.append(name["id"])
+
+        else:
+            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.append(name["id"])
+
+    except BaseException:
+        if eval(f"'{a}' {OPERATIONS[operation][3:]} '{b}'"):
+            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.append(name["id"])
+
+        else:
+            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.append(name["id"])
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def forDictElements(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    timer = []
+    queue = []
+
+    try:
+        if nodes["objects"][str(id)]["inputs"]["dict"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"] is not None:
+            dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"])
+
+        else:
+            dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["standard"])
+
+    except BaseException:
+        raise EngineError("type of dict is not currect")
+
+    compiler.loopBreaking[str(id)] = False
+
+    for key, value in dict_.items():
+        for ids, connector in nodes["objects"][str(id)]["outputs"]["key"]["value"].items():
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = key
+
+        for ids, connector in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = value
+
+        for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
+            compiler.queue(name["id"])
+
+        if compiler.loopBreaking.get(str(id), False):
+            break
+
+    else:
+        for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+            queue.append(name["id"])
+
+    return {"queue": queue, "timer": timer}
+
+from engine.special.exception import EngineError
+
+
+def forListElements(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    timer = []
+    queue = []
+
+    try:
+        if nodes["objects"][str(id)]["inputs"]["list"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"] is not None:
+            list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"])
+
+        else:
+            list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["standard"])
+
+    except BaseException:
+        raise EngineError("type of list is not currect")
+
+    compiler.loopBreaking[str(id)] = False
+
+    for i, element in enumerate(list_):
+        for ids, connector in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = i
+
+        for ids, connector in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = element
+
+        for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
+            compiler.queue(name["id"])
+
+        if compiler.loopBreaking.get(str(id), False):
+            break
+
+    else:
+        for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+            queue.append(name["id"])
+
+    return {"queue": queue, "timer": timer}
+
+from engine.special.exception import EngineError
+
+
+def forObjectsGroup(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    if nodes["objects"][str(id)]["inputs"]["group"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"] is not None:
+        group = str(nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"])
+
+    else:
+        group = str(nodes["objects"][str(id)]["inputs"]["group"]["standard"])
+
+    """
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = pos.x
+    """
+
+    objects = program.objects.getByGroup(group)
+
+    if objects is None:
+        EngineError(f"group of objects {group} newer existed")
+
+    n = len(objects)
+
+    compiler.loopBreaking[str(id)] = False
+
+    for i, obj in enumerate(objects):
+        for ids, connector in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.id
+
+        for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
+            compiler.queue(name["id"])
+
+        if compiler.loopBreaking.get(str(id), False):
+            break
+
+    else:
+        for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+            queue.append(name["id"])
+
+    return queue
+
+def for_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    timer = []
+    queue = []
+
+    if nodes["objects"][str(id)]["inputs"]["n"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["n"]["value"]["value"] is not None:
+        n = int(float(nodes["objects"][str(id)]["inputs"]["n"]["value"]["value"]))
+
+    else:
+        n = int(float(nodes["objects"][str(id)]["inputs"]["n"]["standard"]))
+
+    if nodes["objects"][str(id)]["inputs"]["x"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"] is not None:
+        x = int(float(nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"]))
+
+    else:
+        x = int(float(nodes["objects"][str(id)]["inputs"]["x"]["standard"]))
+
+    """
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = pos.x
+    """
+
+    if nodes["objects"][str(id)]["inputs"]["n"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["n"]["value"]["value"] is not None:
+        nodes["objects"][str(id)]["inputs"]["n"]["value"]["value"] -= 1
+
+    compiler.loopBreaking[str(id)] = False
+
+    if x == 0:
+        for i in range(n):
+            for ids, connector in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
+                nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = i
+
+            for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
+                compiler.queue(name["id"])
+
+            if compiler.loopBreaking.get(str(id), False):
+                break
+
+        else:
+            for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+                queue.append(name["id"])
+
+    else:
+        for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
+            queue.append(name["id"])
+
+        for ids, connector in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = 0
+
+        timer.append({"id": id, "count": n - 1, "timer": x, "tmax": x, "connector": "iterator", "iter": 0})
+
+    return {"queue": queue, "timer": timer}
+
+import pygame
+
+
+def playMusic(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["volume"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["volume"]["value"]["value"] is not None:
+        volume = float(nodes["objects"][str(id)]["inputs"]["volume"]["value"]["value"])
+
+    else:
+        volume = float(nodes["objects"][str(id)]["inputs"]["volume"]["standard"])
+
+    pygame.mixer.music.load(program.music[name])
+
+    pygame.mixer.music.set_volume(volume)
+    pygame.mixer.music.play(-1)
+
+    return queue
+
+import pygame
+
+
+def playSound(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["volume"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["volume"]["value"]["value"] is not None:
+        volume = float(nodes["objects"][str(id)]["inputs"]["volume"]["value"]["value"])
+
+    else:
+        volume = float(nodes["objects"][str(id)]["inputs"]["volume"]["standard"])
+
+    program.loadSound[name].set_volume(volume)
+    program.loadSound[name].play()
+
+    return queue
+
+import pygame
+
+
+def stopMusic(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    pygame.mixer.music.stop()
+
+    return queue
+
+import math
+
+
+def absolute(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["number"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["number"]["value"]["value"] is not None:
+        x = float(nodes["objects"][str(id)]["inputs"]["number"]["value"]["value"])
+
+    else:
+        x = float(nodes["objects"][str(id)]["inputs"]["number"]["standard"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = abs(x)
+
+    return queue
+
+import math
+
+
+def cos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["x"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"] is not None:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"])
+
+    else:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["standard"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = math.cos(x)
+
+    return queue
+
+import math
+
+
+def ctg(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["x"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"] is not None:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"])
+
+    else:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["standard"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = 1 / math.tan(x)
+
+    return queue
+
+import math
+
+
+def degrees(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["radians"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["radians"]["value"]["value"] is not None:
+        radians = float(nodes["objects"][str(id)]["inputs"]["radians"]["value"]["value"])
+
+    else:
+        radians = float(nodes["objects"][str(id)]["inputs"]["radians"]["standard"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = math.degrees(radians)
+
+    return queue
+
+from engine.special.exception import EngineError
+
+import math
+
+
+def divide(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["a"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"] is not None:
+        a = float(nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"])
+
+    else:
+        a = float(nodes["objects"][str(id)]["inputs"]["a"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["b"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"] is not None:
+        b = float(nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"])
+
+    else:
+        b = float(nodes["objects"][str(id)]["inputs"]["b"]["standard"])
+
+    if b == 0:
+        raise EngineError("division by zero")
+
+    answer = int(a / b) if math.trunc(round(a / b, 10)) == math.ceil(round(a / b, 10)) else round(a / b, 10)
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+import math
+
+
+def minus(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["a"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"] is not None:
+        a = float(nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"])
+
+    else:
+        a = float(nodes["objects"][str(id)]["inputs"]["a"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["b"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"] is not None:
+        b = float(nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"])
+
+    else:
+        b = float(nodes["objects"][str(id)]["inputs"]["b"]["standard"])
+
+    answer = int(a - b) if math.trunc(round(a - b, 10)) == math.ceil(round(a - b, 10)) else round(a - b, 10)
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+import math
+
+
+def multiply(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["a"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"] is not None:
+        a = float(nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"])
+
+    else:
+        a = float(nodes["objects"][str(id)]["inputs"]["a"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["b"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"] is not None:
+        b = float(nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"])
+
+    else:
+        b = float(nodes["objects"][str(id)]["inputs"]["b"]["standard"])
+
+    answer = int(a * b) if math.trunc(round(a * b, 10)) == math.ceil(round(a * b, 10)) else round(a * b, 10)
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+import math
+
+
+def plus(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["a"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"] is not None:
+        a = float(nodes["objects"][str(id)]["inputs"]["a"]["value"]["value"])
+
+    else:
+        a = float(nodes["objects"][str(id)]["inputs"]["a"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["b"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"] is not None:
+        b = float(nodes["objects"][str(id)]["inputs"]["b"]["value"]["value"])
+
+    else:
+        b = float(nodes["objects"][str(id)]["inputs"]["b"]["standard"])
+
+    answer = int(a + b) if math.trunc(round(a + b, 10)) == math.ceil(round(a + b, 10)) else round(a + b, 10)
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+import math
+
+
+def radians(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["degrees"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["degrees"]["value"]["value"] is not None:
+        degrees = float(nodes["objects"][str(id)]["inputs"]["degrees"]["value"]["value"])
+
+    else:
+        degrees = float(nodes["objects"][str(id)]["inputs"]["degrees"]["standard"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = math.radians(degrees)
+
+    return queue
+
+import math
+
+
+def sin(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["x"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"] is not None:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"])
+
+    else:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["standard"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = math.sin(x)
+
+    return queue
+
+import math
+
+
+def tan(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["x"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"] is not None:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"])
+
+    else:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["standard"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = math.tan(x)
+
+    return queue
+
+from engine.special.exception import EngineError
+
+import copy
+
+
+def createObject(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["x"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"] is not None:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"])
+
+    else:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["y"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["y"]["value"]["value"] is not None:
+        y = float(nodes["objects"][str(id)]["inputs"]["y"]["value"]["value"])
+
+    else:
+        y = float(nodes["objects"][str(id)]["inputs"]["y"]["standard"])
+
+    if name not in program.allObjects:
+        EngineError(f"not found object with name = {name}")
+
+    type = program.allObjects[name]["type"]
+    variables = program.allObjects[name]["variables"]
+
+    variables["pos"] = [x, y]
+
+    obj = getattr(program.linkEngine.objects, type)(program, **variables)
+
+    # print(obj.pos, obj.hitbox, len(program.objects.objects), variables)
+
+    program.objects.add(obj)
+
+    program.settings["variables"]["objects"][program.scene][str(obj.id)] = copy.deepcopy(program.allObjects[name]["vars"])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.id
+
+    return queue
+
+def getAllObjectInGroup(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["group"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"] is not None:
+        group = str(nodes["objects"][str(id)]["inputs"]["group"]["value"]["value"])
+
+    else:
+        group = str(nodes["objects"][str(id)]["inputs"]["group"]["standard"])
+
+    """
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = pos.x
+    """
+
+    group = program.objects.getByGroup(group)
+
+    objects = [obj.id for obj in group] if group is not None else []
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["objects"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = objects
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def getObjectIDByName(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    answer = program.objectIDByName[program.scene][name] if name in program.objectIDByName[program.scene] else None
+    
+    print(answer)
+
+    if answer is None:
+        raise EngineError(f"not found object with name = {name}")
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+from engine.special.exception import EngineError
+
+OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "gravity", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor", "spriteHitbox", "liveTime", "minusSpriteSizePerFrame", "alpha"]
+
+
+def getObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        operation = int(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        operation = int(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        raise EngineError(f"not found object with id = {ids}")
+
+    if OBJECT_PARAMETERS[operation] == "spriteHitbox":
+        answer = [*obj.sprite.pos.get()] + [obj.sprite.width, obj.sprite.height]
+
+    else:
+        answer = obj.getParameter(OBJECT_PARAMETERS[operation])
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["value"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def getObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        raise EngineError(f"not found object with id = {ids}")
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.pos.x
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["y"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.pos.y
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def getObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"]
+
+    else:
+        ids = nodes["objects"][str(id)]["inputs"]["id"]["standard"]
+
+    try:
+        variable = variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)]
+
+    except BaseException:
+        raise EngineError(f"not found object with id = {ids}")
+
+    if name not in variable:
+        raise EngineError(f"not found object variable with object id = {ids} and name = {name}")
+
+    answer = variable[name]["value"]
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def getResultingVector(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        raise EngineError(f"not found object with id = {ids}")
+
+    pos = obj.getVectorsPower()
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = pos.x
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["y"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = pos.y
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def jump(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["power"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["power"]["value"]["value"] is not None:
+        power = float(nodes["objects"][str(id)]["inputs"]["power"]["value"]["value"])
+
+    else:
+        power = float(nodes["objects"][str(id)]["inputs"]["power"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    obj.vectors["__fall__"].power = -power
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def moveObject(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["angle"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["angle"]["value"]["value"] is not None:
+        angle = float(nodes["objects"][str(id)]["inputs"]["angle"]["value"]["value"])
+
+    else:
+        angle = float(nodes["objects"][str(id)]["inputs"]["angle"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["power"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["power"]["value"]["value"] is not None:
+        power = float(nodes["objects"][str(id)]["inputs"]["power"]["value"]["value"])
+
+    else:
+        power = float(nodes["objects"][str(id)]["inputs"]["power"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    obj.moveByAngle(angle, power, specifical=id)
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def moveObjectWithBraking(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["angle"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["angle"]["value"]["value"] is not None:
+        angle = float(nodes["objects"][str(id)]["inputs"]["angle"]["value"]["value"])
+
+    else:
+        angle = float(nodes["objects"][str(id)]["inputs"]["angle"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["power"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["power"]["value"]["value"] is not None:
+        power = float(nodes["objects"][str(id)]["inputs"]["power"]["value"]["value"])
+
+    else:
+        power = float(nodes["objects"][str(id)]["inputs"]["power"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["slidingStep"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["slidingStep"]["value"]["value"] is not None:
+        slidingStep = float(nodes["objects"][str(id)]["inputs"]["slidingStep"]["value"]["value"])
+
+    else:
+        slidingStep = float(nodes["objects"][str(id)]["inputs"]["slidingStep"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    obj.moveByAngle(angle, power, slidingStep, specifical=id)
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def removeObject(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if not program.objects.removeById(ids):
+        raise EngineError(f"not found object with id = {ids}")
+
+    return queue
+
+from engine.special.exception import EngineError
+
+from engine.classes.sprite import Sprite
+from engine.vector.int import Vec2i
+
+import typing
+
+OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "gravity", "slidingStep", "message", "fontSize", "alignment", "fontColor", "backgroundColor", "ramaColor", "spriteHitbox", "liveTime", "minusSpriteSizePerFrame", "alpha"]
+OBJECT_PARAMETERS_TYPES = ["list", "text", "int", "int", "logic", "float", "float", "text", "int", "list", "eval", "eval", "eval", "list", "float", "float", "int"]
+
+
+def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    def decode(operation, text: str) -> typing.Any:
+        if OBJECT_PARAMETERS_TYPES[operation] == "eval":
+            try:
+                return eval(text)
+
+            except BaseException:
+                return text
+
+        if OBJECT_PARAMETERS_TYPES[operation] == "list":
+            if type(text) == list:
+                return text
+
+            else:
+                return eval(text)
+
+        if OBJECT_PARAMETERS_TYPES[operation] == "text":
+            return text
+
+        if OBJECT_PARAMETERS_TYPES[operation] == "int":
+            return int(text)
+
+        if OBJECT_PARAMETERS_TYPES[operation] == "float":
+            return float(text)
+
+        if OBJECT_PARAMETERS_TYPES[operation] == "logic":
+            return True if text in ("True", "true", "1", "+") else False
+
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        operation = int(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        operation = int(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["value"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"] is not None:
+        value = decode(operation, nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"])
+
+    else:
+        value = decode(operation, nodes["objects"][str(id)]["inputs"]["value"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    if OBJECT_PARAMETERS[operation] == "alpha":
+        value = min(255, max(0, value))
+
+    if OBJECT_PARAMETERS[operation] == "spriteHitbox":
+        if obj.sprite is not None:
+            obj.sprite = Sprite(program, obj, obj.sprite.path, Vec2i(value[0], value[1]), Vec2i(value[2], value[3]))
+
+        else:
+            raise EngineError("object {obj.id} has not sprite")
+
+    else:
+        obj.setParameter(OBJECT_PARAMETERS[operation], value)
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def setObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["x"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"] is not None:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"])
+
+    else:
+        x = float(nodes["objects"][str(id)]["inputs"]["x"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["y"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["y"]["value"]["value"] is not None:
+        y = float(nodes["objects"][str(id)]["inputs"]["y"]["value"]["value"])
+
+    else:
+        y = float(nodes["objects"][str(id)]["inputs"]["y"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        EngineError(f"not found object with id = {ids}")
+
+    obj.pos.x = x
+    obj.pos.y = y
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def setObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
+
+    else:
+        name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"]
+
+    else:
+        ids = nodes["objects"][str(id)]["inputs"]["id"]["standard"]
+
+    if nodes["objects"][str(id)]["inputs"]["value"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"] is not None:
+        value = nodes["objects"][str(id)]["inputs"]["value"]["value"]["value"]
+
+    else:
+        value = nodes["objects"][str(id)]["inputs"]["value"]["standard"]
+
+    try:
+        type = variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)][name]["type"]
+
+    except BaseException:
+        raise EngineError(f"not found object with id = {ids}")
+
+    if type == "number":
+        value = float(value)
+
+    variable = variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)]
+
+    if name not in variable:
+        raise EngineError(f"not found object variable with object id = {ids} and name = {name}")
+
+    variable[name]["value"] = value
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def addDictElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    try:
+        if nodes["objects"][str(id)]["inputs"]["dict"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"] is not None:
+            dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"])
+
+        else:
+            dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["standard"])
+
+    except BaseException:
+        raise EngineError("type of dict is not currect")
+
+    if nodes["objects"][str(id)]["inputs"]["key"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["key"]["value"]["value"] is not None:
+        key = str(nodes["objects"][str(id)]["inputs"]["key"]["value"]["value"])
+
+    else:
+        key = str(nodes["objects"][str(id)]["inputs"]["key"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["element"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"] is not None:
+        element = eval(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str else nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]
+
+    else:
+        element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"]) if type(nodes["objects"][str(id)]["inputs"]["element"]["standard"]) == str else nodes["objects"][str(id)]["inputs"]["element"]["standard"]
+
+    dict_[key] = element
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["dict"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = dict_
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def addListElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    try:
+        if nodes["objects"][str(id)]["inputs"]["list"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"] is not None:
+            list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"])
+
+        else:
+            list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["standard"])
+
+    except BaseException:
+        raise EngineError("type of list is not currect")
+
+    if nodes["objects"][str(id)]["inputs"]["element"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"] is not None:
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+            element = eval(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+
+        else:
+            element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]))
+
+    else:
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+            element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+
+        else:
+            element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["standard"]))
+
+    list_.append(element)
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["list"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = list_
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def deleteByIndex(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    try:
+        if nodes["objects"][str(id)]["inputs"]["list"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"] is not None:
+            list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"])
+
+        else:
+            list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["standard"])
+
+    except BaseException:
+        raise EngineError("type of list is not currect")
+
+    if nodes["objects"][str(id)]["inputs"]["index"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["index"]["value"]["value"] is not None:
+        index = int(nodes["objects"][str(id)]["inputs"]["index"]["value"]["value"])
+
+    else:
+        index = int(nodes["objects"][str(id)]["inputs"]["index"]["standard"])
+
+    try:
+        list_.pop(index)
+
+    except IndexError:
+        raise EngineError(f"index {index} not in list {list_}")
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["list"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = list_
+
+    return queue
+
+from engine.special.exception import EngineError
+
+def getByIndex(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    try:
+        if nodes["objects"][str(id)]["inputs"]["list"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"] is not None:
+            list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"])
+
+        else:
+            list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["standard"])
+
+    except BaseException:
+        raise EngineError("type of list is not currect")
+
+    if nodes["objects"][str(id)]["inputs"]["index"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["index"]["value"]["value"] is not None:
+        index = int(nodes["objects"][str(id)]["inputs"]["index"]["value"]["value"])
+
+    else:
+        index = int(nodes["objects"][str(id)]["inputs"]["index"]["standard"])
+
+    try:
+        answer = list_[index]
+
+    except IndexError:
+        raise EngineError(f"index {index} not in list {list_}")
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def getByKey(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    try:
+        if nodes["objects"][str(id)]["inputs"]["dict"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"] is not None:
+            dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"])
+
+        else:
+            dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["standard"])
+
+    except BaseException:
+        raise EngineError("type of dict is not currect")
+
+    if nodes["objects"][str(id)]["inputs"]["key"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["key"]["value"]["value"] is not None:
+        key = str(nodes["objects"][str(id)]["inputs"]["key"]["value"]["value"])
+
+    else:
+        key = str(nodes["objects"][str(id)]["inputs"]["key"]["standard"])
+
+    try:
+        answer = dict_[key]
+
+    except KeyError:
+        raise EngineError(f"key {key} not in dict {dict_}")
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def getIndexOfElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["list"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"] is not None:
+        list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"])
+
+    else:
+        list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["element"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"] is not None:
+        element = str(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+
+    else:
+        element = str(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+
+    answer = None
+
+    for index, elem in enumerate(list_):
+        if str(elem) == str(element):
+            answer = index
+
+            break
+
+    if answer is None:
+        raise EngineError(f"not found element = {element} in list = {list_}")
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def getKeyOfElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["dict"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"] is not None:
+        dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"])
+
+    else:
+        dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["element"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"] is not None:
+        element = str(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"])
+
+    else:
+        element = str(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
+
+    answer = None
+
+    for key, value in dict_.items():
+        if str(value) == str(element):
+            answer = key
+
+            break
+
+    if answer is None:
+        raise EngineError(f"not found element = {element} in dict = {dict_}")
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["key"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def removeByKey(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["dict"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"] is not None:
+        dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"])
+
+    else:
+        dict_ = dict(nodes["objects"][str(id)]["inputs"]["dict"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["key"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["key"]["value"]["value"] is not None:
+        key = str(nodes["objects"][str(id)]["inputs"]["key"]["value"]["value"])
+
+    else:
+        key = str(nodes["objects"][str(id)]["inputs"]["key"]["standard"])
+
+    if key in dict_:
+        dict_.pop(key)
+
+    else:
+        raise EngineError(f"not found key = {key} in dict = {dict_}")
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["dict"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = dict_
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def sliceList(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["list"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"] is not None:
+        list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"])
+
+    else:
+        list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["start"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["start"]["value"]["value"] is not None:
+        start = int(nodes["objects"][str(id)]["inputs"]["start"]["value"]["value"])
+
+    else:
+        start = int(nodes["objects"][str(id)]["inputs"]["start"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["end"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["end"]["value"]["value"] is not None:
+        end = int(nodes["objects"][str(id)]["inputs"]["end"]["value"]["value"])
+
+    else:
+        end = int(nodes["objects"][str(id)]["inputs"]["end"]["standard"])
+
+    if start > end:
+        raise EngineError(f"end position {end} must be bigger than start position {start}")
+
+    answer = list_[start:(None if end == -1 else end + 1)]
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["list"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+def connectText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["text1"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["text1"]["value"]["value"] is not None:
+        text1 = str(nodes["objects"][str(id)]["inputs"]["text1"]["value"]["value"])
+
+    else:
+        text1 = str(nodes["objects"][str(id)]["inputs"]["text1"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["text2"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["text2"]["value"]["value"] is not None:
+        text2 = str(nodes["objects"][str(id)]["inputs"]["text2"]["value"]["value"])
+
+    else:
+        text2 = str(nodes["objects"][str(id)]["inputs"]["text2"]["standard"])
+
+    answer = text1 + text2
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["text"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+def displayText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["text"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"] is not None:
+        text = str(nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"])
+
+    else:
+        text = str(nodes["objects"][str(id)]["inputs"]["text"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["x"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"] is not None:
+        x = int(nodes["objects"][str(id)]["inputs"]["x"]["value"]["value"])
+
+    else:
+        x = int(nodes["objects"][str(id)]["inputs"]["x"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["y"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["y"]["value"]["value"] is not None:
+        y = int(nodes["objects"][str(id)]["inputs"]["y"]["value"]["value"])
+
+    else:
+        y = int(nodes["objects"][str(id)]["inputs"]["y"]["standard"])
+
+    program.afterDrawing.append(lambda: program.linkEngine.print_text(program.screen, x, y, text))
+
+    return queue
+
+from engine.special.exception import EngineError
+
+
+def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["text"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"] is not None:
+        text = str(nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"])
+
+    else:
+        text = str(nodes["objects"][str(id)]["inputs"]["text"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["start"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["start"]["value"]["value"] is not None:
+        start = int(nodes["objects"][str(id)]["inputs"]["start"]["value"]["value"])
+
+    else:
+        start = int(nodes["objects"][str(id)]["inputs"]["start"]["standard"])
+
+    if nodes["objects"][str(id)]["inputs"]["end"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["end"]["value"]["value"] is not None:
+        end = int(nodes["objects"][str(id)]["inputs"]["end"]["value"]["value"])
+
+    else:
+        end = int(nodes["objects"][str(id)]["inputs"]["end"]["standard"])
+
+    if start > end:
+        raise EngineError(f"end position {end} must be bigger than start position {start}")
+
+    answer = text[start:(None if end == -1 else end + 1)]
+
+    for ids, connector in nodes["objects"][str(id)]["outputs"]["text"]["value"].items():
+        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+
+    return queue
+
+def writeText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.append(name["id"])
+
+    if nodes["objects"][str(id)]["inputs"]["text"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"] is not None:
+        text = str(nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"])
+
+    else:
+        text = str(nodes["objects"][str(id)]["inputs"]["text"]["standard"])
+
+    line = True
+
+    answer = ">>> " + text.rstrip() + "\n" if line else ">>> " + text.rstrip()
+
+    program.print(answer)
+
+    print(answer)
+
+    return queue
+
