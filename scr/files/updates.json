@@ -24,7 +24,8 @@
         "3.12.0",
         "3.12.1",
         "3.12.2",
-        "3.12.3"
+        "3.12.3",
+        "3.12.4"
     ],
 
     "updates": {
@@ -151,6 +152,11 @@
         "3.12.3": {
             "name": "3.12.3",
             "text": "- fixbug with object nodes"
+        },
+
+        "3.12.4": {
+            "name": "3.12.4",
+            "text": "- fixbug with getSceneName function in Python node"
         }
     }
 }
