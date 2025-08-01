@@ -213,10 +213,10 @@ class ObjectGroup:
 
         self.movedByKinematic = {}
 
-    def init(self):
+    def init(self) -> None:
         self.tree = QuadTree(self.game)
 
-    def empty(self):
+    def empty(self) -> None:
         for obj in self.objects:
             self.remove(obj)
 

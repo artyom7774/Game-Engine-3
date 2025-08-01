@@ -1,8 +1,6 @@
-import typing
-
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
 from PyQt5.QtGui import QKeySequence
-from PyQt5.Qt import QIcon, Qt
+from PyQt5.Qt import QIcon, Qt, QTimer
 
 from scr.modules.widgets import TabFileBar, VersionLogScrollArea, TreeProject, VisiableConsole
 
@@ -16,6 +14,8 @@ import subprocess
 import traceback
 import threading
 import requests
+import hashlib
+import socket
 import typing
 import ctypes
 import sys
@@ -114,7 +114,35 @@ class Main(QMainWindow):
         if not FLAGS["not-view-version-update"]:
             self.versionUpdateMessage()
 
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.updateOnline)
+        self.timer.start(60000)
+
         self.init()
+
+    def updateOnline(self):
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+                s.connect(("8.8.8.8", 80))
+                ip = s.getsockname()[0]
+
+        except Exception as e:
+            print(f"ERROR: can't getting IP: {e}")
+            return
+
+        try:
+            response = requests.post(
+                url="http://127.0.0.1:5000/updateOnline",
+                data={
+                    "ip": hashlib.sha256(ip.encode()).hexdigest()
+                },
+                timeout=2
+            )
+
+            # print(f"LOG: status: {response.status_code}, Response: {response.text}")
+
+        except requests.exceptions.RequestException as e:
+            print(f"ERROR: request failed: {e}")
 
     def versionUpdateMessage(self) -> None:
         def function():

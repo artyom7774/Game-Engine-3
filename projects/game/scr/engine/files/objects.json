@@ -84,6 +84,7 @@
         "slidingStep": 1e6,
         "mass": 1000,
         "invisible": false,
+        "alpha": 255,
         "liveTime": 60,
         "minusSpriteSizePerFrame": 0.01,
         "animation": {
@@ -115,7 +116,8 @@
         "animation": "Animation",
         "mass": "Mass",
         "liveTime": "Live time",
-        "minusSpriteSizePerFrame": "Minus size per frame"
+        "minusSpriteSizePerFrame": "Minus size per frame",
+        "alpha": "Alpha"
     },
     "type": {
         "type": "choose",
@@ -130,7 +132,8 @@
         "animation": "animator",
         "mass": "int",
         "liveTime": "int",
-        "minusSpriteSizePerFrame": "int"
+        "minusSpriteSizePerFrame": "int",
+        "alpha": "int"
     },
     "specials": {
         "choose": {
@@ -159,7 +162,8 @@
             "mass",
             "layer",
             "animation",
-            "invisible"
+            "invisible",
+            "alpha"
         ],
         "DynamicObject": [
             "gravity",

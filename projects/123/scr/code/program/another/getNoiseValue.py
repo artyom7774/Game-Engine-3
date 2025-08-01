@@ -7,8 +7,6 @@ import time
 
 
 class PerlinNoise:
-    octave_noise_values_cache = {}
-    noise_stats = {}
     tables = {}
 
     def __init__(self, seed=0):
@@ -100,8 +98,6 @@ class PerlinNoise:
         return min_val + normalized * (max_val - min_val)
 
     def octave_noise(self, x, y, octaves=4, frequency=1.0, amplitude=1.0, lacunarity=2.0, persistence=0.5, min_val=0.0, max_val=1.0):
-        stats_key = (self.seed, octaves, frequency, amplitude, lacunarity, persistence)
-
         total = 0.0
         current_amplitude = amplitude
         current_frequency = frequency
@@ -112,23 +108,7 @@ class PerlinNoise:
             current_amplitude *= persistence
             current_frequency *= lacunarity
 
-        if stats_key not in self.noise_stats:
-            self.noise_stats[stats_key] = {"min": total, "max": total, "samples": 1}
-
-        else:
-            stats = self.noise_stats[stats_key]
-
-            stats["min"] = min(stats["min"], total)
-            stats["max"] = max(stats["max"], total)
-
-            stats["samples"] += 1
-
-        stats = self.noise_stats[stats_key]
-        if stats["max"] != stats["min"]:
-            normalized = (total - stats["min"]) / (stats["max"] - stats["min"])
-
-        else:
-            normalized = 0.5
+        normalized = (total - min_val) / (max_val - min_val)
 
         return min_val + normalized * (max_val - min_val)
 

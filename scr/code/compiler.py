@@ -165,6 +165,8 @@ class Compiler:
             except Exception as e:
                 self.error = True
 
+                traceback.print_exc()
+
                 self.information = {
                     "inputs": self.nodes["objects"][str(id)]["inputs"],
                     "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],

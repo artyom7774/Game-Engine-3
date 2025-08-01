@@ -112,8 +112,6 @@ class Compiler:
         # print(self.nodesSortedByTypes)
         # print(dumps(self.nodes, indent=4))
 
-        self.init()
-
     def init(self):
         text = ""
 
@@ -166,6 +164,8 @@ class Compiler:
 
             except Exception as e:
                 self.error = True
+
+                traceback.print_exc()
 
                 self.information = {
                     "inputs": self.nodes["objects"][str(id)]["inputs"],

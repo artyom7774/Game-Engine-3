@@ -131,10 +131,13 @@ class Game(engine.Application):
         for key, value in PROGRAMS.items():
             self.programs[key] = Compiler(self, key, value, self.settings, DEBUG)
             
-        self.loadScene(SETTINGS["start_scene"])
+        self.loadScene(SETTINGS["start_scene"], True)
         
         for key, value in PROGRAMS.items():
             self.programs[key].init()
+
+        for name, program in self.programs.items():
+            self.programs[name].event("onLoadScene")
 
         self.counter = threading.Thread(target=lambda: self.tpsStart())
         self.counter.daemon = True
@@ -214,7 +217,7 @@ class Game(engine.Application):
         for key, value in PROGRAMS.items():
             self.programs[key].event("mouseRightClick")
 
-    def loadScene(self, scene):
+    def loadScene(self, scene, start: bool = False):
         self.objects = engine.ObjectGroup(self)
         self.objects.init()
         
@@ -249,9 +252,10 @@ class Game(engine.Application):
 
             if SCENES[scene]["focus"] is not None and key == SCENES[scene]["focus"]:
                 self.setCamera(engine.camera.FocusCamera(self, obj))
-                
-        for name, program in self.programs.items():
-            program.event("onLoadScene")
+
+        if not start:
+            for name, program in self.programs.items():
+                program.event("onLoadScene")
 
 
 if __name__ == "__main__":
@@ -290,28 +294,28 @@ class SocketHandler(QtCore.QObject):
             print(f"ERROR: can't create socket on port {port}")
 
         self.accept_notifier = QSocketNotifier(self.host.fileno(), QSocketNotifier.Read, self)
-        self.accept_notifier.activated.connect(self.accept_connection)
+        self.accept_notifier.activated.connect(self.accept)
 
         self.conn = None
         self.addr = None
 
         self.notifier = None
 
-    def accept_connection(self, fd):
+    def accept(self, fd):
         try:
             self.conn, self.addr = self.host.accept()
 
             self.conn.setblocking(False)
 
             self.notifier = QSocketNotifier(self.conn.fileno(), QSocketNotifier.Read, self)
-            self.notifier.activated.connect(self.read_from_connection)
+            self.notifier.activated.connect(self.read)
 
             self.accept_notifier.setEnabled(False)
 
         except Exception as e:
             print("Accept error:", e)
 
-    def read_from_connection(self, fd):
+    def read(self, fd):
         try:
             data = self.conn.recv(1024)
 

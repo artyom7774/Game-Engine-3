@@ -112,8 +112,6 @@ class Compiler:
         # print(self.nodesSortedByTypes)
         # print(dumps(self.nodes, indent=4))
 
-        self.init()
-
     def init(self):
         text = ""
 

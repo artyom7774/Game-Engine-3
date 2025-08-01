@@ -81,6 +81,10 @@ class Sprite:
     def resize(self, width: int, height: int) -> None:
         self.width, self.height = width, height
 
+        if self.width <= 0 or self.height <= 0:
+            self.width = 0
+            self.height = 0
+
         self.copyImage = pygame.transform.scale(self.image, (self.width, self.height))
 
     def flip(self, horizontal: bool = False, vertical: bool = False) -> None:

@@ -201,7 +201,7 @@ class PythonFunctions:
         program.loadScene(program.sceneNames[scene])
 
     @staticmethod
-    def getSceneName(scene, program, variables, path):
+    def getSceneName(program, variables, path):
         scenes = {}
 
         for key, value in program.sceneNames.items():

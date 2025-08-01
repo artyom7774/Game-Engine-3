@@ -14,8 +14,6 @@ def getObjectIDByName(program, compiler, path: str, nodes: dict, id: int, variab
         name = str(nodes["objects"][str(id)]["inputs"]["name"]["standard"])
 
     answer = program.objectIDByName[program.scene][name] if name in program.objectIDByName[program.scene] else None
-    
-    print(answer)
 
     if answer is None:
         raise EngineError(f"not found object with name = {name}")
