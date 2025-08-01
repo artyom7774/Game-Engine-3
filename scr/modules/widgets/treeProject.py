@@ -11,8 +11,8 @@ class TreeProject(QTreeWidget):
         # self.setDragEnabled(True)
         # self.setAcceptDrops(True)
         self.setSelectionMode(QTreeWidget.SingleSelection)
-        self.setDragDropMode(QTreeWidget.InternalMove)
-        self.setDefaultDropAction(Qt.MoveAction)
+        # self.setDragDropMode(QTreeWidget.InternalMove)
+        # self.setDefaultDropAction(Qt.MoveAction)
 
         # self.setDropIndicatorShown(True)
         self.setHeaderLabel("Project Structure")
@@ -33,9 +33,9 @@ class TreeProject(QTreeWidget):
         mime_data.setData("application/x-treeitem", data)
 
         # Настраиваем и запускаем перетаскивание
-        drag = QDrag(self)
-        drag.setMimeData(mime_data)
-        drag.exec_(Qt.MoveAction)
+        # drag = QDrag(self)
+        # drag.setMimeData(mime_data)
+        # drag.exec_(Qt.MoveAction)
 
     def dragEnterEvent(self, event):
         if event.source() == self:
@@ -95,9 +95,9 @@ class TreeProject(QTreeWidget):
         event.accept()
 
     def _is_ancestor(self, parent, child):
-        """Проверяет, является ли parent предком child"""
         while child is not None:
             child = child.parent()
             if child == parent:
                 return True
+
         return False

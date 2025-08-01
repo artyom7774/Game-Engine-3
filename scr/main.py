@@ -114,6 +114,8 @@ class Main(QMainWindow):
         if not FLAGS["not-view-version-update"]:
             self.versionUpdateMessage()
 
+        self.updateOnline()
+
         self.timer = QTimer()
         self.timer.timeout.connect(self.updateOnline)
         self.timer.start(60000)
@@ -128,11 +130,15 @@ class Main(QMainWindow):
 
         except Exception as e:
             print(f"ERROR: can't getting IP: {e}")
+
             return
 
         try:
+            url = "https://artyom7777.pythonanywhere.com/updateOnline"
+            # url = "http://127.0.0.1:5000/updateOnline"
+
             response = requests.post(
-                url="https://artyom7777.pythonanywhere.com/updateOnline",
+                url=url,
                 data={
                     "ip": hashlib.sha256(ip.encode()).hexdigest()
                 },
