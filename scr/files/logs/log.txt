@@ -1,3 +1,0 @@
-LOG: divelop mode = False
-LOG: program runned on "Windows 10"
-LOG: last version = 3.12.4, now version = 3.12.5
