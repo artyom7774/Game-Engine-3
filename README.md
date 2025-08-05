@@ -30,7 +30,7 @@
 
 1. Visit the [official website](https://artyom7777.pythonanywhere.com/) or [GitHub repository](https://github.com/artyom7774/Game-Engine-3/releases/)
 2. Download the program archive
-3. Extract the archive to a convenient location
+3. Extract the archive to a convenient location (UNPACK THE ARCHIVE ONLY IN A WAY THAT DOES NOT CONTAIN CHARACTERS OTHER THAN ENGLISH)
 4. Launch **Game Engine 3.exe**
 
 ## Quick Start
