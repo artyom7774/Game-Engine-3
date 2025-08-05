@@ -235,6 +235,17 @@
     "Project version is outdated": "Project version is outdated"
     "Update the project to a new version? Otherwise, the project may not work on this version. This may take some time.": "Update the project to a new version? Otherwise, the project may not work on this version. This may take some time."
     "It isn't possible to update the version": "It isn't possible to update the version"
+    "Hitbox": "Hitbox"
+    "Square hitbox": "Square hitbox"
+    "Circle hitbox": "Circle hitbox"
+    "X offset": "X offset"
+    "Y offset": "Y offset"
+    "Width": "Width"
+    "Height": "Height"
+    "Radius": "Radius"
+    "Particle": "Particle"
+    "Live time": "Live time"
+    "Minus size per frame": "Minus size per frame"
 
     // OBJECT NAME
     "object.name.staticObject": "Static object"

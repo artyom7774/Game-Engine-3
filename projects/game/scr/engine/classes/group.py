@@ -11,7 +11,7 @@ from engine.variables import *
 import typing
 import random
 
-MAX_COUNT_NODE_OBJECTS = 20
+MAX_COUNT_NODE_OBJECTS = 10
 OBJECT_POS_PRECISION = 1
 MIN_NODE_SIZE = 100
 
@@ -45,7 +45,7 @@ class QuadTreeNode:
             return
 
         for i, rect in enumerate(self.rects):
-            if Collision.rect(*rect, obj.pos.x + obj.hitbox.x - OBJECT_POS_PRECISION, obj.pos.y + obj.hitbox.y - OBJECT_POS_PRECISION, obj.hitbox.width + 2 * OBJECT_POS_PRECISION, obj.hitbox.height + 2 * OBJECT_POS_PRECISION):
+            if Collision.any(SquareHitbox(rect), obj.hitbox.position(obj.pos.x, obj.pos.y, OBJECT_POS_PRECISION)):
                 self.childrens[i].add(obj)
 
     def remove(self, obj) -> None:
@@ -56,7 +56,7 @@ class QuadTreeNode:
             return
 
         for i, rect in enumerate(self.rects):
-            if Collision.rect(*rect, obj.pos.x + obj.hitbox.x - OBJECT_POS_PRECISION, obj.pos.y + obj.hitbox.y - OBJECT_POS_PRECISION, obj.hitbox.width + 2 * OBJECT_POS_PRECISION, obj.hitbox.height + 2 * OBJECT_POS_PRECISION):
+            if Collision.any(SquareHitbox(rect), obj.hitbox.position(obj.pos.x, obj.pos.y, OBJECT_POS_PRECISION)):
                 self.childrens[i].remove(obj)
 
     def divide(self) -> None:
@@ -74,7 +74,7 @@ class QuadTreeNode:
             ]
 
             for rect in self.rects:
-                self.childrens.append(QuadTreeNode(self.game, list(filter(lambda obj: Collision.rect(*rect, obj.pos.x + obj.hitbox.x - OBJECT_POS_PRECISION, obj.pos.y + obj.hitbox.y - OBJECT_POS_PRECISION, obj.hitbox.width + 2 * OBJECT_POS_PRECISION, obj.hitbox.height + 2 * OBJECT_POS_PRECISION), self.objects)), rect))
+                self.childrens.append(QuadTreeNode(self.game, list(filter(lambda obj: Collision.any(SquareHitbox(rect), obj.hitbox.position(obj.pos.x, obj.pos.y, OBJECT_POS_PRECISION)), self.objects)), rect))
 
             self.objects = []
 
@@ -85,7 +85,7 @@ class QuadTreeNode:
         out = []
 
         for i, rect in enumerate(self.rects):
-            if Collision.rect(*rect, *square):
+            if Collision.any(SquareHitbox(rect), SquareHitbox(square)):
                 out.extend(self.childrens[i].getAnotherNodes(square))
 
         return out
@@ -97,7 +97,7 @@ class QuadTreeNode:
         out = set()
 
         for i, rect in enumerate(self.rects):
-            if Collision.rect(*rect, *square):
+            if Collision.any(SquareHitbox(rect), SquareHitbox(square)):
                 out |= self.childrens[i].getAnotherObjects(square)
 
         return out
@@ -163,9 +163,9 @@ class QuadTree:
             if cobj.id == obj.id:
                 continue
 
-            base = [cobj.pos.x + cobj.hitbox.x - OBJECT_POS_PRECISION, cobj.pos.y + cobj.hitbox.y - OBJECT_POS_PRECISION, cobj.hitbox.width + 2 * OBJECT_POS_PRECISION, cobj.hitbox.height + 2 * OBJECT_POS_PRECISION]
+            base = cobj.hitbox.position(cobj.pos.x, cobj.pos.y, OBJECT_POS_PRECISION)
 
-            if Collision.rect(*rect, *base):
+            if Collision.any(SquareHitbox(rect), base):
                 dynamicsObjects.add(cobj)
 
         return dynamicsObjects
@@ -173,8 +173,10 @@ class QuadTree:
     def getUsingObjects(self, obj) -> typing.List[VObject]:
         resulting = obj.getVectorsPower()
 
-        base = [obj.pos.x + obj.hitbox.x - OBJECT_POS_PRECISION, obj.pos.y + obj.hitbox.y - OBJECT_POS_PRECISION, obj.hitbox.width + 2 * OBJECT_POS_PRECISION, obj.hitbox.height + 2 * OBJECT_POS_PRECISION]
-        rect = [obj.pos.x + obj.hitbox.x + 2 * resulting.x - OBJECT_POS_PRECISION, obj.pos.y + obj.hitbox.y + 2 * resulting.y - OBJECT_POS_PRECISION, obj.hitbox.width + 2 * OBJECT_POS_PRECISION, obj.hitbox.height + 2 * OBJECT_POS_PRECISION]
+        hitbox = obj.hitbox.rect()
+
+        base = obj.hitbox.position(obj.pos.x, obj.pos.y, OBJECT_POS_PRECISION).rect().get()
+        rect = [obj.pos.x + hitbox.x + 2 * resulting.x - OBJECT_POS_PRECISION, obj.pos.y + hitbox.y + 2 * resulting.y - OBJECT_POS_PRECISION, hitbox.width + 2 * OBJECT_POS_PRECISION, hitbox.height + 2 * OBJECT_POS_PRECISION]
 
         full = [
             min(base[0], rect[0]),
@@ -221,7 +223,7 @@ class ObjectGroup:
             self.remove(obj)
 
     def add(self, obj: VObject) -> None:
-        if isinstance(obj, Particle):
+        if isinstance(obj, Particle) and self.game.particleInAnotherGroup:
             self.particles.append(obj)
 
         elif isinstance(obj, DynamicObject):

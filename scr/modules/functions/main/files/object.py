@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QLabel, QCheckBox, QTreeWidget, QTreeWidgetItem, QWi
 from scr.modules.widgets import FocusLineEdit, FocusComboBox
 
 from scr.modules.functions.main.files.code import CodeAdditionsVarsType
-from scr.modules.dialogs import animatorCreateDialog
+from scr.modules.dialogs import animatorCreateDialog, hitboxCreateDialog
 
 from engine.vector.int import Vec4i
 
@@ -65,6 +65,15 @@ class Object:
                 self.value.setFixedHeight(20)
 
                 self.value.clicked.connect(lambda: animatorCreateDialog(self.project))
+
+                self.value.saveAllValues = lambda: Object.function(self.value, project, save, temp, path, init=False)
+
+            elif temp["type"] == "hitbox":
+                self.value = QPushButton(self)
+                self.value.setText(translate("Hitbox"))
+                self.value.setFixedHeight(20)
+
+                self.value.clicked.connect(lambda: hitboxCreateDialog(self.project))
 
                 self.value.saveAllValues = lambda: Object.function(self.value, project, save, temp, path, init=False)
 

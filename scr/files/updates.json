@@ -27,7 +27,8 @@
         "3.12.3",
         "3.12.4",
         "3.12.5",
-        "3.12.6"
+        "3.12.6",
+        "3.13.0"
     ],
 
     "updates": {
@@ -116,7 +117,7 @@
             "text": "- new object physic\n- add mass for object"
         },
 
-	"3.8.1": {
+	    "3.8.1": {
             "name": "3.8.1",
             "text": "- update physic\n- new nodes: get object parameter, set object parameter, get time passed\n- new parameter for node jump: power"
         },
@@ -169,6 +170,11 @@
         "3.12.6": {
             "name": "3.12.6",
             "text": "- fixbug with folder tree"
+        },
+
+        "3.13.0": {
+            "name": "3.13.0",
+            "text": "- new hitbox editor\n- circle hitbox\n- refactor animation menu\n- fixbug with visible TPS\n- fixbug with visible particle sprite\n- fixbug with particle sprite position\n- fixbug with select particle object"
         }
     }
 }

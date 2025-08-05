@@ -179,7 +179,7 @@ class Game(engine.Application):
                 pass
                 
         if self.debug:
-            self.updateCustomCaption(f"FPS = {round(self.clock.get_fps())} TPS = {list(self.programs.values())[0].tpsNow}")
+            self.updateCustomCaption(f"FPS = {round(self.clock.get_fps())} TPS = {list(self.programs.values())[0].tpsNow if len(self.programs) > 0 else '?'}")
 
         for key, value in self.programs.items():
             if self.programs[key].error:
@@ -574,7 +574,15 @@ class Compile:
                 type, variables, _ = functions.main.files.Scene.loadObjectFileFull(project, objectPath[:objectPath.rfind(".")][objectPath.rfind("-") + 1:], load(open(objectPath, "r", encoding="utf-8")))
 
                 if "sprite" in variables:
+                    image = pygame.image.load(variables["sprite"][0])
+
                     variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
+
+                    if type == "Particle" and variables["sprite"][3] == -1:
+                        variables["sprite"][3] = image.get_width()
+
+                    if type == "Particle" and variables["sprite"][4] == -1:
+                        variables["sprite"][4] = image.get_height()
 
                 objects[element] = {
                     "type": type,

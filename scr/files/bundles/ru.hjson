@@ -235,6 +235,17 @@
     "Project version is outdated": "Версия проекта устарела"
     "Update the project to a new version? Otherwise, the project may not work on this version. This may take some time.": "Обновить проект до новой версии? В противном случие программа на этой версии может не работать. Это может занять некоторое время."
     "It isn't possible to update the version": "Обновить версию невозможно"
+    "Hitbox": "Хитбокс"
+    "Square hitbox": "Квадратный хитбокс"
+    "Circle hitbox": "Круглый хитбокс"
+    "X offset": "Смещение по X"
+    "Y offset": "Смещение по Y"
+    "Width": "Ширина"
+    "Height": "Высота"
+    "Radius": "Радиус"
+    "Particle": "Частица"
+    "Live time": "Время жизни"
+    "Minus size per frame": "Минус размер спрайта каждый кадр"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"

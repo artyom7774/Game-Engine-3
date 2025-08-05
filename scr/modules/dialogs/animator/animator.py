@@ -594,11 +594,11 @@ class Animator(QDialog):
 
         self.objects["main_rama"] = QTreeWidget(self)
         self.objects["main_rama"].header().hide()
-        self.objects["main_rama"].setGeometry(10, 10, 1060, 460)
+        self.objects["main_rama"].setGeometry(10, 10, 1000, 460)
         self.objects["main_rama"].show()
 
         if self.selectSprite is not None:
-            x, y, pixmap = Image.getPixmap(self.project, 1060, 460, self.selectSprite)
+            x, y, pixmap = Image.getPixmap(self.project, 1000, 460, self.selectSprite)
 
             self.objects["main_image"] = QLabel(parent=self.objects["main_rama"])
             self.objects["main_image"].setGeometry(x, y, pixmap.width(), pixmap.height())
@@ -609,7 +609,7 @@ class Animator(QDialog):
 
         self.objects["animation_rama"] = QTreeWidget(self)
         self.objects["animation_rama"].header().hide()
-        self.objects["animation_rama"].setGeometry(10, 480, 1060, 230)
+        self.objects["animation_rama"].setGeometry(10, 480, 1000, 230)
         self.objects["animation_rama"].show()
 
         self.objects["animation_scroll"] = QScrollArea(self)
@@ -626,7 +626,7 @@ class Animator(QDialog):
 
             self.objects["animation_scroll_container"].addWidget(tile)
 
-        self.objects["animation_scroll"].setGeometry(10, 480, 1060, 230)
+        self.objects["animation_scroll"].setGeometry(10, 480, 1000, 230)
         self.objects["animation_scroll"].show()
 
         # GROUPS
@@ -634,7 +634,7 @@ class Animator(QDialog):
         if "groups" not in expects:
             self.objects["groups"] = QTreeWidget(self)
             self.objects["groups"].header().hide()
-            self.objects["groups"].setGeometry(1080, 10, 190, 345)
+            self.objects["groups"].setGeometry(1020, 10, 250, 345)
             self.objects["groups"].setRootIsDecorated(False)
             self.objects["groups"].show()
 
@@ -677,7 +677,7 @@ class Animator(QDialog):
 
         self.objects["settings_rama"] = QTreeWidget(self)
         self.objects["settings_rama"].header().hide()
-        self.objects["settings_rama"].setGeometry(1080, 365, 190, 345)
+        self.objects["settings_rama"].setGeometry(1020, 365, 250, 345)
         self.objects["settings_rama"].show()
 
         settings = self.object["StaticObject"]["animation"]["value"]["groups"][self.selectGroup]["settings"]
@@ -690,7 +690,7 @@ class Animator(QDialog):
 
         self.objects["settings_repeat_check_box"] = QCheckBox(self.objects["settings_rama"])
         self.objects["settings_repeat_check_box"].setChecked(settings["repeat"])
-        self.objects["settings_repeat_check_box"].setGeometry(145, 5, 40, 22)
+        self.objects["settings_repeat_check_box"].setGeometry(145, 5, 100, 22)
         self.objects["settings_repeat_check_box"].show()
 
         self.objects["settings_repeat_check_box"].stateChanged.connect(lambda empty=None, pr=self.project, dia=self: AnimatorFunctions.settingsRepeat(pr, dia, self.objects["settings_repeat_check_box"]))
@@ -703,7 +703,7 @@ class Animator(QDialog):
 
         self.objects["settings_base_check_box"] = QCheckBox(self.objects["settings_rama"])
         self.objects["settings_base_check_box"].setChecked(settings["standard"])
-        self.objects["settings_base_check_box"].setGeometry(145, 30, 40, 22)
+        self.objects["settings_base_check_box"].setGeometry(145, 30, 100, 22)
         self.objects["settings_base_check_box"].show()
 
         self.objects["settings_base_check_box"].stateChanged.connect(lambda empty=None, pr=self.project, dia=self: AnimatorFunctions.settingsBase(pr, dia, self.objects["settings_base_check_box"]))
@@ -716,7 +716,7 @@ class Animator(QDialog):
 
         self.objects["settings_frame_line_edit"] = FocusLineEdit(self.objects["settings_rama"])
         self.objects["settings_frame_line_edit"].setText(str(settings["fpsPerFrame"]))
-        self.objects["settings_frame_line_edit"].setGeometry(145, 55, 40, 22)
+        self.objects["settings_frame_line_edit"].setGeometry(145, 55, 100, 22)
         self.objects["settings_frame_line_edit"].show()
 
         self.objects["settings_frame_line_edit"].releasedFocusFunction = lambda empty=None, pr=self.project, dia=self: AnimatorFunctions.settingsFps(pr, dia, self.objects["settings_frame_line_edit"])

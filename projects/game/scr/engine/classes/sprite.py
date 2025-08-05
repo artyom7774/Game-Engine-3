@@ -45,6 +45,8 @@ class Sprite:
                 self.image = path
 
         except FileNotFoundError:
+            print(f"LOG: not found image ({path})")
+
             self.image = None
 
         self.size = size if type(size) == Vec2i else (Vec2i(*size) if size is not None else None)

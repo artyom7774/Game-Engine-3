@@ -1,5 +1,6 @@
 import json
 import ast
+import os
 
 
 def loadAnimationFile(path: str) -> dict:
@@ -97,73 +98,77 @@ def loadSettingFile(game, path: str) -> None:
 def loadCollisionFile(path: str) -> dict:
     out = {}
 
-    with open(path, "r") as file:
-        text = (file.read() + "\n").split("\n")
+    if os.path.exists(path):
+        with open(path, "r") as file:
+            text = (file.read() + "\n").split("\n")
 
-        for line in text:
-            if len(line.split()) == 0:
-                continue
+    else:
+        text = (path + "\n").split("\n")
 
-            if line.startswith("$") and line.endswith("$"):
-                continue
+    for line in text:
+        if len(line.split()) == 0:
+            continue
 
-            first, separator, second, _, *collisions = line.split()
+        if line.startswith("$") and line.endswith("$"):
+            continue
 
-            collisions = " ".join(collisions)
-            collisions = collisions.replace("{", "").replace("}", "")
-            collisions = collisions.split(", ")
+        first, separator, second, _, *collisions = line.split()
 
-            if first not in out:
-                out[first] = {}
+        collisions = " ".join(collisions)
+        collisions = collisions.replace("{", "").replace("}", "")
+        collisions = collisions.split(", ")
 
-            if second not in out:
-                out[second] = {}
+        if first not in out:
+            out[first] = {}
 
-            if first not in out[second] and separator in ["<-", "<->"]:
-                out[second][first] = {"types": [], "functions": []}
+        if second not in out:
+            out[second] = {}
 
-            if second not in out[first] and separator in ["->", "<->"]:
-                out[first][second] = {"types": [], "functions": []}
+        if first not in out[second] and separator in ["<-", "<->"]:
+            out[second][first] = {"types": [], "functions": []}
 
-            if separator == "->":
-                var = []
+        if second not in out[first] and separator in ["->", "<->"]:
+            out[first][second] = {"types": [], "functions": []}
 
-                for element in collisions:
-                    if not element.startswith("function::"):
-                        out[first][second]["types"].append(element)
+        if separator == "->":
+            var = []
 
-                    else:
-                        var.append(element)
+            for element in collisions:
+                if not element.startswith("function::"):
+                    out[first][second]["types"].append(element)
 
-                out[first][second]["functions"] = var
+                else:
+                    var.append(element)
 
-            elif separator == "<-":
-                var = []
+            out[first][second]["functions"] = var
 
-                for element in collisions:
-                    if not element.startswith("function::"):
-                        out[second][first]["types"].append(element)
+        elif separator == "<-":
+            var = []
 
-                    else:
-                        var.append(element)
+            for element in collisions:
+                if not element.startswith("function::"):
+                    out[second][first]["types"].append(element)
 
-                out[second][first]["functions"] = var
+                else:
+                    var.append(element)
 
-            elif separator == "<->":
-                var = []
+            out[second][first]["functions"] = var
 
-                for element in collisions:
-                    if not element.startswith("function::"):
-                        out[second][first]["types"].append(element)
-                        out[first][second]["types"].append(element)
+        elif separator == "<->":
+            var = []
 
-                    else:
-                        var.append(element)
+            for element in collisions:
+                if not element.startswith("function::"):
+                    out[second][first]["types"].append(element)
+                    out[first][second]["types"].append(element)
 
-                out[second][first]["functions"] = var
-                out[first][second]["functions"] = var
+                else:
+                    var.append(element)
 
-            else:
-                raise NameError(f"not found separator {separator}")
+            out[second][first]["functions"] = var
+            out[first][second]["functions"] = var
+
+        else:
+            raise NameError(f"not found separator {separator}")
 
     return out

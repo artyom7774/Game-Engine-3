@@ -2,7 +2,7 @@ from libc.math cimport sqrt, sin, cos
 
 from engine.classes.collision import Collision
 
-from engine.classes.hitbox import SquareHitbox
+from engine.classes.hitbox import SquareHitbox, CircleHitbox
 
 from engine.classes.sprite import Sprite
 
@@ -26,6 +26,24 @@ import math
 def hex_to_rgb(color: str) -> typing.List[int]:
     color = color.lstrip('#')
     return list(int(color[i:i+2], 16) for i in (0, 2, 4))
+
+
+def buildHitbox(hitbox: typing.Any) -> typing.Any:
+    if isinstance(hitbox, (list, tuple)):
+        if len(hitbox) == 4:
+            return SquareHitbox(hitbox)
+
+        if len(hitbox) == 3:
+            return CircleHitbox(hitbox)
+
+    if isinstance(hitbox, dict):
+        if hitbox["type"] == "SquareHitbox":
+            return SquareHitbox([parameter["value"] for parameter in hitbox["hitbox"]["SquareHitbox"].values()])
+
+        if hitbox["type"] == "CircleHitbox":
+            return CircleHitbox([parameter["value"] for parameter in hitbox["hitbox"]["CircleHitbox"].values()])
+
+    raise TypeError()
 
 
 cdef class StaticObject:
@@ -52,9 +70,9 @@ cdef class StaticObject:
     def __init__(
         self, game: object,
         pos: typing.Union[typing.List[float], Vec2f, Vec2i],
-        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f, Vec4i],
+        hitbox: typing.Union[SquareHitbox, CircleHitbox, typing.List[float], Vec4f, Vec4i],
         sprite: VSprite = None,
-        group: str = None,
+        group: str = "",
         mass: int = 1000,
         layer: int = 0,
         id: int = None,
@@ -87,7 +105,7 @@ cdef class StaticObject:
         self.group = group
         self.procesionPos = Vec2f(0, 0)
         self.pos = pos if type(pos) == Vec2f else Vec2f(*pos)
-        self.hitbox = hitbox if type(hitbox) == SquareHitbox else SquareHitbox(hitbox)
+        self.hitbox = hitbox if type(hitbox) in (SquareHitbox, CircleHitbox) else buildHitbox(hitbox)
         self.mass = mass
         self.layer = layer
         self.invisible = invisible
@@ -171,7 +189,7 @@ cdef class StaticObject:
 
                 if not self.invisible or self.game.forcedViewObject:
                     if sprite is not None:
-                        sprite = sprite.copy()
+                        # sprite = sprite.copy()
                         sprite.set_alpha(min(255, max(0, self.alpha)))
 
                         self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x + px, self.pos.y + self.sprite.pos.y + py))
@@ -188,7 +206,7 @@ cdef class StaticObject:
         flag = False
 
         for obj in self.game.cash["collisions"][self.id]:
-            if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height) and (filter is None or filter(obj["object"])):
+            if Collision.any(hitbox.position(self.pos.x, self.pos.y), obj["object"].hitbox.position(obj["object"].pos.x, obj["object"].pos.y)) and (filter is None or filter(obj["object"])):
                 if allowFunctions:
                     if obj["functions"] is not None:
                         for element in obj["functions"]["functions"]:
@@ -211,19 +229,17 @@ cdef class StaticObject:
 
         for obj in self.game.cash["collisions"][self.id]:
             if obj["object"].group == group or group is None:
-                if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+                if Collision.any(hitbox.position(self.pos.x, self.pos.y), obj["object"].hitbox.position(obj["object"].pos.x, obj["object"].pos.y)):
                     return [True, obj["object"]]
 
         return [False, -1]
 
     def getEditHitbox(self, x: float = 0, y: float = 0, append: bool = False) -> SquareHitbox:
-        hitbox = self.hitbox.copy()
-
         if append:
-            hitbox.x -= 1
-            hitbox.width += 2
-            hitbox.y -= 1
-            hitbox.height += 2
+            hitbox = self.hitbox.position(0, 0, 1)
+
+        else:
+            hitbox = self.hitbox.copy()
 
         if x > 0:
             hitbox.x += 1
@@ -264,7 +280,7 @@ cdef class DynamicObject(StaticObject):
     def __init__(
         self, game: object,
         pos: typing.Union[typing.List[float], Vec2f],
-        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f],
+        hitbox: typing.Union[SquareHitbox, CircleHitbox, typing.List[float], Vec4f],
         sprite: VSprite = None,
         group: str = None,
         mass: int = 1000,
@@ -364,7 +380,7 @@ cdef class DynamicObject(StaticObject):
             if isinstance(obj["object"], KinematicObject):
                 continue
 
-            if Collision.rect(now.pos.x + hitbox.x + phitbox[0], now.pos.y + hitbox.y + phitbox[1], hitbox.width + phitbox[2], hitbox.height + phitbox[3], obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+            if Collision.any(SquareHitbox(now.pos.x + hitbox.x + phitbox[0], now.pos.y + hitbox.y + phitbox[1], hitbox.width + phitbox[2], hitbox.height + phitbox[3]), SquareHitbox(obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height)):
                 objects.append(obj["object"])
 
                 objects.extend(self.getObjectStructure(x, y, append, phitbox, obj["object"], visited))
@@ -378,9 +394,11 @@ cdef class DynamicObject(StaticObject):
             moving = self.getVectorsPower() * 6
 
             if abs(moving.x) > FLOAT_PRECISION or abs(moving.y) > FLOAT_PRECISION:
+                hitbox = self.hitbox.rect()
+
                 pygame.draw.line(
                     self.game.screen, (255, 0, 0) if "debug_color" not in self.specials else self.specials["debug_color"],
-                    (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2), (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2 + moving.x, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2 + moving.y), 1
+                    (px + self.pos.x + hitbox.x + hitbox.width / 2, py + self.pos.y + hitbox.y + hitbox.height / 2), (px + self.pos.x + hitbox.x + hitbox.width / 2 + moving.x, py + self.pos.y + hitbox.y + hitbox.height / 2 + moving.y), 1
                 )
 
     def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
@@ -392,7 +410,7 @@ cdef class DynamicObject(StaticObject):
         flag = False
 
         for obj in self.game.cash["collisions"][self.id]:
-            if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height) and (filter is None or filter(obj["object"])):
+            if Collision.any(hitbox.position(self.pos.x, self.pos.y), obj["object"].hitbox.position(obj["object"].pos.x, obj["object"].pos.y)) and (filter is None or filter(obj["object"])):
                 if allowFunctions:
                     if obj["functions"] is not None:
                         for element in obj["functions"]["functions"]:
@@ -536,7 +554,7 @@ cdef class KinematicObject(DynamicObject):
             if obj is None or obj["object"] is None:
                 continue
 
-            if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
+            if Collision.any(hitbox.position(self.pos.x, self.pos.y), obj["object"].hitbox.position(obj["object"].pos.x, obj["object"].pos.y)):
                 affected.append(obj["object"])
 
                 if isinstance(obj["object"], DynamicObject) and not isinstance(obj["object"], KinematicObject):
@@ -561,7 +579,7 @@ cdef class KinematicObject(DynamicObject):
             if collision["object"].id in visited:
                 continue
 
-            if Collision.rect(obj.pos.x + hitbox.x - 1, obj.pos.y + hitbox.y - 1, hitbox.width + 2, hitbox.height + 2, collision["object"].pos.x + collision["object"].hitbox.x, collision["object"].pos.y + collision["object"].hitbox.y, collision["object"].hitbox.width, collision["object"].hitbox.height):
+            if Collision.any(hitbox.position(self.pos.x, self.pos.y, 1), collision["object"].hitbox.position(collision["object"].pos.x, collision["object"].pos.y)):
                 if isinstance(collision["object"], DynamicObject) and not isinstance(collision["object"], KinematicObject):
                     stacked.append(collision["object"])
 
@@ -572,8 +590,8 @@ cdef class KinematicObject(DynamicObject):
 
 cdef class Particle(DynamicObject):
     cdef public int liveTime
-    cdef public float minusSpriteSizePerFrame
     cdef public float spriteSize
+    cdef public float minusSpriteSizePerFrame
 
     def __init__(
         self, game: object,
@@ -616,14 +634,21 @@ cdef class Particle(DynamicObject):
     def update(self, collisions: list = None):
         super().update(collisions)
 
-        self.spriteSize -= self.minusSpriteSizePerFrame
         self.liveTime -= 1
+
+        self.sprite.pos.x -= math.ceil((1 - self.spriteSize) * self.sprite.size.x // 2)
+        self.sprite.pos.y -= math.ceil((1 - self.spriteSize) * self.sprite.size.y // 2)
+
+        self.spriteSize -= self.minusSpriteSizePerFrame
+
+        self.sprite.pos.x += math.ceil((1 - self.spriteSize) * self.sprite.size.x // 2)
+        self.sprite.pos.y += math.ceil((1 - self.spriteSize) * self.sprite.size.y // 2)
 
         if self.liveTime <= 0 or self.spriteSize <= 0:
             self.destroy()
 
-        if self.sprite is not None:
-            self.sprite.resize(round(self.sprite.width * self.spriteSize), round(self.sprite.height * self.spriteSize))
+        if self.sprite is not None and not self.game.noRefactorUpdate:
+            self.sprite.resize(round(self.sprite.size.x * self.spriteSize), round(self.sprite.size.y * self.spriteSize))
 
 
 cdef class Text(StaticObject):

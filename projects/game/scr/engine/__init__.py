@@ -3,7 +3,7 @@ from engine.vector.float import Vec2f, Vec3f, Vec4f
 from engine.vector.angle import AngleVector
 from engine.variables import *
 
-from engine.classes.hitbox import SquareHitbox
+from engine.classes.hitbox import SquareHitbox, CircleHitbox
 
 from engine.classes.collision import Collision
 from engine.classes.group import ObjectGroup

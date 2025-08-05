@@ -6,3 +6,4 @@ from .code import *
 from .scene import *
 
 from .animator import *
+from .hitbox import *

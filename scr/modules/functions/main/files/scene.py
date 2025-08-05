@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QTreeWidget, QPushButton, QWidget, QSpacerItem, QSiz
 from PyQt5.QtGui import QPixmap, QImage, QCursor, QPainter, QPen, QColor
 from PyQt5.Qt import Qt, QTimer, QPoint
 
-from scr.modules.dialogs import CreateSceneObject, CreateInterfaceObject, animatorCreateDialog
+from scr.modules.dialogs import CreateSceneObject, CreateInterfaceObject, animatorCreateDialog, hitboxCreateDialog
 
 from scr.modules.functions.main.files.button import Button
 from scr.modules.functions.main.files.objtext import ObjectText, fontCreateDialog, colorCreateDialog
@@ -309,6 +309,15 @@ class SceneAdditions:
 
                 self.value.saveAllValues = lambda: ObjectText.function(self.value, project, save, temp, path, init=False)
 
+            elif temp["type"] == "hitbox":
+                self.value = QPushButton(self)
+                self.value.setText(translate("Hitbox"))
+                self.value.setFixedHeight(20)
+
+                self.value.clicked.connect(lambda: hitboxCreateDialog(self.project, save))
+
+                self.value.saveAllValues = lambda: ObjectTypingClass.function(self.value, project, save, temp, path, init=False)
+
             elif temp["type"] == "none":
                 pass
 
@@ -426,20 +435,22 @@ class Scene:
         with open(project.cash["file"][project.selectFile].settings, "r", encoding="utf-8") as file:
             project.objects["main"]["scene_settings"] = load(file)
 
+        if project.selectFile not in project.application:
+            project.application[project.selectFile] = project.engine.Application(usingWidth=project.desktop.width(), usingHeight=project.desktop.height(), visiable=False, debug=False, autoUpdateScreen=False, forcedViewObject=True, noRefactorUpdate=True, particleInAnotherGroup=False)
+
+            project.cash["file"][project.selectFile].camera = project.engine.objects.DynamicObject(project.application[project.selectFile], (0, 0), (0, 0, 1, 1), group="__mouse__", gravity=0, layer=int(1e9))
+
+            project.application[project.selectFile].objects.add(project.cash["file"][project.selectFile].camera)
+
+            project.application[project.selectFile].objects.add(project.engine.objects.StaticObject(project.application[project.selectFile], (0, -100000), (0, 0, 1, 200000), group="__debug__", layer=int(1e9)))
+            project.application[project.selectFile].objects.add(project.engine.objects.StaticObject(project.application[project.selectFile], (-100000, 0), (0, 0, 200000, 1), group="__debug__", layer=int(1e9)))
+
+            project.application[project.selectFile].setCamera(project.engine.camera.FocusCamera(project.application[project.selectFile], project.cash["file"][project.selectFile].camera))
+
         try:
-            if project.selectFile not in project.application:
-                project.application[project.selectFile] = project.engine.Application(usingWidth=project.desktop.width(), usingHeight=project.desktop.height(), visiable=False, debug=False, autoUpdateScreen=False, forcedViewObject=True)
+            pass
 
-                project.cash["file"][project.selectFile].camera = project.engine.objects.DynamicObject(project.application[project.selectFile], (0, 0), (0, 0, 1, 1), group="__mouse__", gravity=0, layer=int(1e9))
-
-                project.application[project.selectFile].objects.add(project.cash["file"][project.selectFile].camera)
-
-                project.application[project.selectFile].objects.add(project.engine.objects.StaticObject(project.application[project.selectFile], (0, -100000), (0, 0, 1, 200000), group="__debug__", layer=int(1e9)))
-                project.application[project.selectFile].objects.add(project.engine.objects.StaticObject(project.application[project.selectFile], (-100000, 0), (0, 0, 200000, 1), group="__debug__", layer=int(1e9)))
-
-                project.application[project.selectFile].setCamera(project.engine.camera.FocusCamera(project.application[project.selectFile], project.cash["file"][project.selectFile].camera))
-
-        except TypeError as e:
+        except BaseException as e:
             print(e)
 
         else:
@@ -528,7 +539,9 @@ class Scene:
             if obj.group.startswith("__") and obj.group.endswith("__"):
                 continue
 
-            if obj.pos.x + obj.hitbox.x - 5 < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.hitbox.x + obj.hitbox.width + 5 and obj.pos.y + obj.hitbox.y - 5 < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.hitbox.y + obj.hitbox.height + 5:
+            hitbox = obj.hitbox.rect()
+
+            if obj.pos.x + hitbox.x - 5 < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width + 5 and obj.pos.y + hitbox.y - 5 < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height + 5:
                 select.append(obj)
 
         if len(select) > 0:
@@ -543,7 +556,9 @@ class Scene:
             if obj.group.find("debug") != -1 and obj.group.startswith("__") and obj.group.endswith("__"):
                 continue
 
-            if obj.pos.x + obj.hitbox.x - 5 < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.hitbox.x + obj.hitbox.width + 5 and obj.pos.y + obj.hitbox.y - 5 < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.hitbox.y + obj.hitbox.height + 5:
+            hitbox = obj.hitbox.rect()
+
+            if obj.pos.x + hitbox.x - 5 < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width + 5 and obj.pos.y + hitbox.y - 5 < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height + 5:
                 project.cash["file"][project.selectFile].selectObject = obj
                 project.cash["file"][project.selectFile].selectLink = obj.id
 
@@ -585,7 +600,9 @@ class Scene:
             if obj.group.find("debug") != -1 and obj.group.startswith("__") and obj.group.endswith("__"):
                 continue
 
-            if obj.pos.x + obj.hitbox.x < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.hitbox.x + obj.hitbox.width and obj.pos.y + obj.hitbox.y < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.hitbox.y + obj.hitbox.height:
+            hitbox = obj.hitbox.rect()
+
+            if obj.pos.x + hitbox.x < x + project.cash["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width and obj.pos.y + hitbox.y < y + project.cash["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height:
                 break
 
         else:
@@ -971,7 +988,9 @@ class Scene:
         select.pos = obj.pos
 
         for i in range(2):
-            Scene.select(project, obj.pos.x + obj.hitbox.width // 2, obj.pos.y + obj.hitbox.height // 2)
+            hitbox = obj.hitbox.rect()
+
+            Scene.select(project, obj.pos.x + hitbox.width // 2, obj.pos.y + hitbox.height // 2)
 
             Scene.update(project)
 
