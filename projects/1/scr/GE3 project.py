@@ -1,4 +1,4 @@
-# MADE BY GAME ENGINE 3.12.6
+# MADE BY GAME ENGINE 3.13.0
 
 import tkinter
 import engine
@@ -14,8 +14,8 @@ height = root.winfo_screenheight()
 
 root.destroy()
 
-SOCKET_ID = 19381
-SOCKET_GLOBAL_ID = 19382
+SOCKET_ID = 17991
+SOCKET_GLOBAL_ID = 17992
 
 VARIABLES = {
     "globals": {},
@@ -31,7 +31,7 @@ MUSIC = {}
 
 SCENE_BY_NAME = {'1': 'projects/1/project/scenes/%scene%1'}
 
-DEBUG = True
+DEBUG = False
 
 import importlib.util
 

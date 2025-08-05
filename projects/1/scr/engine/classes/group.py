@@ -11,7 +11,7 @@ from engine.variables import *
 import typing
 import random
 
-MAX_COUNT_NODE_OBJECTS = 20
+MAX_COUNT_NODE_OBJECTS = 10
 OBJECT_POS_PRECISION = 1
 MIN_NODE_SIZE = 100
 

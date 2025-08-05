@@ -680,12 +680,13 @@ class Scene:
 
         projectSettings = project.objects["main"]["project_settings"]
 
-        if sceneSettings["Scene"]["visiable_screen"]["value"]:
-            application.objects.add(project.engine.objects.StaticObject(
-                application, [x - projectSettings["values"]["width"]["value"] // 2, y - projectSettings["values"]["height"]["value"] // 2],
-                [0, 0, projectSettings["values"]["width"]["value"], projectSettings["values"]["height"]["value"]],
-                group="__debug_center_rama__", layer=int(1e9 + 2)
-            ))
+        if [obj.group for obj in application.objects.objects].count("__debug_center_rama__") == 0:
+            if sceneSettings["Scene"]["visiable_screen"]["value"]:
+                application.objects.add(project.engine.objects.StaticObject(
+                    application, [x - projectSettings["values"]["width"]["value"] // 2, y - projectSettings["values"]["height"]["value"] // 2],
+                    [0, 0, projectSettings["values"]["width"]["value"], projectSettings["values"]["height"]["value"]],
+                    group="__debug_center_rama__", layer=int(1e9 + 2)
+                ))
 
         # VISIABLE
 
