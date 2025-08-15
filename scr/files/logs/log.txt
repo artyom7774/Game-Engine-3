@@ -2,3 +2,7 @@
 LOG: divelop mode = True
 LOG: program runned on "Windows 10"
 LOG: last version = 3.13.0, now version = 3.13.1
+-------------------- LOG 2025-08-16 00:17:47.837807 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.0, now version = 3.13.1
