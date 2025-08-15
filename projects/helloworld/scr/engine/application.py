@@ -27,7 +27,8 @@ class Application:
         self, usingWidth: int = 700, usingHeight: int = 700, displayWidth: int = 700, displayHeight: int = 700,
         fps: int = 60, tps: int = 20, name: str = "GE3 project", icon: str = "", flags: typing.Dict[str, typing.Any] = None,
         variables: typing.Dict[str, typing.Any] = None, visiable: bool = True, debug: bool = False,
-        autoUpdateScreen: bool = True, collision: str = "", forcedViewObject: bool = False
+        autoUpdateScreen: bool = True, collision: str = "", forcedViewObject: bool = False, noRefactorUpdate: bool = False,
+        particleInAnotherGroup: bool = True
     ) -> None:
         if flags is None:
             flags = {}
@@ -48,6 +49,8 @@ class Application:
 
         self.autoUpdateScreen = autoUpdateScreen
         self.forcedViewObject = forcedViewObject
+        self.noRefactorUpdate = noRefactorUpdate
+        self.particleInAnotherGroup = particleInAnotherGroup
 
         self.usingWidth = usingWidth
         self.usingHeight = usingHeight

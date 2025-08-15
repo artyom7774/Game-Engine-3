@@ -47,9 +47,11 @@ class FocusCamera(StaticCamera):
     def update(self, *args, **kwargs) -> None:
         # print(self)
 
+        hitbox = self.obj.hitbox.rect()
+
         super().update(
-            self.obj.pos.x + self.obj.hitbox.x + self.obj.hitbox.width // 2 - self.game.usingWidth // 2,
-            -(self.obj.pos.y + self.obj.hitbox.y + self.obj.hitbox.height // 2 - self.game.usingHeight // 2)
+            self.obj.pos.x + hitbox.x + hitbox.width // 2 - self.game.usingWidth // 2,
+            -(self.obj.pos.y + hitbox.y + hitbox.height // 2 - self.game.usingHeight // 2)
         )
 
     def get(self) -> VObject:

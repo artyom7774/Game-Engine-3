@@ -1,6 +1,5 @@
 {
     "main": "Button",
-
     "dependences": {
         "Button": []
     },

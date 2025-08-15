@@ -21,30 +21,6 @@ import ctypes
 import sys
 
 
-def exceptionHandler(func) -> typing.Callable:
-    def wrapper(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-
-        except Exception as e:
-            with open("scr/files/logs/log.txt", "a+", encoding="utf-8", buffering=1) as file:
-                file.write(traceback.format_exc())
-
-            if not DIVELOP:
-                if SYSTEM == "Windows":
-                    subprocess.run(["notepad.exe", "scr/files/logs/log.txt"])
-
-                elif SYSTEM == "Linux":
-                    subprocess.run(["gedit", "scr/files/logs/log.txt"])
-
-                else:
-                    print("LOG: scr/files/logs/log.txt")
-
-            sys.exit()
-
-    return wrapper
-
-
 class FocusTreeWidget(QTreeWidget):
     def __init__(self, parent=None):
         QTreeWidget.__init__(self, parent)
@@ -64,16 +40,6 @@ class Main(QMainWindow):
 
         except AttributeError:
             pass
-
-        for name in dir(self):
-            try:
-                attr = getattr(self, name)
-
-                if callable(attr) and not name.startswith("__"):
-                    setattr(self, name, exceptionHandler(attr))
-
-            except RuntimeError:
-                pass
 
         QMainWindow.__init__(self)
 

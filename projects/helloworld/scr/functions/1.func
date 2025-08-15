@@ -1,11 +1,5 @@
 {
-    "variables": {
-        "var1": {
-            "name": "var1",
-            "type": "text",
-            "value": "Hello World!"
-        }
-    },
+    "variables": {},
     "objects": {
         "134867557": {
             "display": {

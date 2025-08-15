@@ -11,9 +11,4 @@ if platform.system() == "Windows":
     )
 
 else:
-    subprocess.run(
-        [".\python\python.exe", "-OO", "-s", "Game Engine 3.py"],
-        capture_output=True,
-        text=True,
-        start_new_session=True
-    )
+    pass

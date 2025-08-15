@@ -1,4 +1,4 @@
-# MADE BY GAME ENGINE 3.12.4
+# MADE BY GAME ENGINE 3.13.0
 
 import tkinter
 import engine
@@ -14,19 +14,19 @@ height = root.winfo_screenheight()
 
 root.destroy()
 
-SOCKET_ID = 7901
-SOCKET_GLOBAL_ID = 7902
+SOCKET_ID = 35029
+SOCKET_GLOBAL_ID = 35030
 
 VARIABLES = {
-    "globals": {'var2': {'name': 'var2', 'type': 'text', 'value': '10'}},
-    "locals": {'projects/helloworld/project/functions/1.func': {'var1': {'name': 'var1', 'type': 'text', 'value': 'Hello World!'}}},
+    "globals": {},
+    "locals": {'projects/helloworld/project/functions/1.func': {}},
     "objects": {'projects/helloworld/project/scenes/%scene%1': {'0.objc': {'name': {'name': 'name', 'type': 'text', 'value': 'Nick'}}}}
 }
 
 SETTINGS = {'name': 'GE3 project', 'icon': '', 'debug': False, 'fps': 60, 'tps': 20, 'start_scene': 'projects/helloworld/project/scenes/%scene%1', 'width': 500, 'height': 500, 'full_screen_mode': False}
-PROGRAMS = {'projects/helloworld/project/functions/1.func': {'variables': {'var1': {'name': 'var1', 'type': 'text', 'value': 'Hello World!'}}, 'objects': {'134867557': {'display': {'name': 'node.name.onStartGame', 'text': {'__none__': 'node.text.none', '__path__': 'node.text.path'}}, 'height': 3, 'id': 134867557, 'inputs': {}, 'name': 'onStartGame', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 7.0, 'y': 9.0}, '143994821': {'display': {'name': 'node.name.python', 'text': {'__answer__': 'node.text.answer', '__dict__': 'node.text.dict', '__list__': 'node.text.list', '__none__': 'node.text.none', '__path__': 'node.text.path', '__text__': 'node.text.text'}}, 'height': 5, 'id': 143994821, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 134867557, 'name': 'path'}}, 'text': {'code': 'text', 'name': '__text__', 'standard': 'def run(program, args, kwargs):\n\tpass', 'type': 'text', 'value': None}, 'list': {'code': 'list', 'name': '__list__', 'standard': [], 'type': 'list', 'value': None}, 'dict': {'code': 'dict', 'name': '__dict__', 'standard': {}, 'type': 'dict', 'value': None}}, 'name': 'python', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}, 'answer': {'code': 'answer', 'name': '__answer__', 'type': 'list'}}, 'sorting': {'inputs': ['path', 'text', 'list', 'dict'], 'outputs': ['path', 'answer']}, 'special': {'inputs': {'dict': {'invisible': True}, 'list': {'invisible': True}, 'text': {'height': 3, 'type': 'text-box'}}}, 'type': 'another', 'width': 10, 'x': 15.0, 'y': 9.0}}}}
-OBJECTS = {'player.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': [0, 0, 32, 32], 'sprite': ['assets/player.png', 0, 0, -1, -1], 'group': 'object', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False, 'alpha': 255}, 'vars': {}}}
-SCENES = {'projects/helloworld/project/scenes/%scene%1': {'objects': {'0.objc': {'type': 'StaticObject', 'variables': {'pos': [9.0, 8.0], 'hitbox': [0, 0, 32, 32], 'sprite': ['assets/player.png', 0, 0, -1, -1], 'group': 'object', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False, 'alpha': 255}}}, 'focus': '0.objc'}}
+PROGRAMS = {'projects/helloworld/project/functions/1.func': {'variables': {}, 'objects': {'134867557': {'display': {'name': 'node.name.onStartGame', 'text': {'__none__': 'node.text.none', '__path__': 'node.text.path'}}, 'height': 3, 'id': 134867557, 'inputs': {}, 'name': 'onStartGame', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}}, 'type': 'event', 'width': 6, 'x': 7.0, 'y': 9.0}, '143994821': {'display': {'name': 'node.name.python', 'text': {'__answer__': 'node.text.answer', '__dict__': 'node.text.dict', '__list__': 'node.text.list', '__none__': 'node.text.none', '__path__': 'node.text.path', '__text__': 'node.text.text'}}, 'height': 5, 'id': 143994821, 'inputs': {'path': {'code': 'path', 'name': '__path__', 'standard': None, 'type': 'path', 'value': {'id': 134867557, 'name': 'path'}}, 'text': {'code': 'text', 'name': '__text__', 'standard': 'def run(program, args, kwargs):\n\tpass', 'type': 'text', 'value': None}, 'list': {'code': 'list', 'name': '__list__', 'standard': [], 'type': 'list', 'value': None}, 'dict': {'code': 'dict', 'name': '__dict__', 'standard': {}, 'type': 'dict', 'value': None}}, 'name': 'python', 'outputs': {'path': {'code': 'path', 'name': '__path__', 'type': 'path'}, 'answer': {'code': 'answer', 'name': '__answer__', 'type': 'list'}}, 'sorting': {'inputs': ['path', 'text', 'list', 'dict'], 'outputs': ['path', 'answer']}, 'special': {'inputs': {'dict': {'invisible': True}, 'list': {'invisible': True}, 'text': {'height': 3, 'type': 'text-box'}}}, 'type': 'another', 'width': 10, 'x': 15.0, 'y': 9.0}}}}
+OBJECTS = {'player.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'hitbox': {'type': 'SquareHitbox', 'types': ['SquareHitbox', 'CircleHitbox'], 'translates': ['Square hitbox', 'Circle hitbox'], 'hitbox': {'SquareHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 0}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 0}, 'width': {'name': 'Width', 'type': 'int', 'value': 32}, 'height': {'name': 'Height', 'type': 'int', 'value': 32}}, 'CircleHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 0}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 0}, 'radius': {'name': 'Radius', 'type': 'int', 'value': 100}}}}, 'sprite': ['assets/player.png', 0, 0, -1, -1], 'group': 'object', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False, 'alpha': 255}, 'vars': {}}}
+SCENES = {'projects/helloworld/project/scenes/%scene%1': {'objects': {'0.objc': {'type': 'StaticObject', 'variables': {'pos': [9.0, 8.0], 'hitbox': {'type': 'SquareHitbox', 'types': ['SquareHitbox', 'CircleHitbox'], 'translates': ['Square hitbox', 'Circle hitbox'], 'hitbox': {'SquareHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 0}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 0}, 'width': {'name': 'Width', 'type': 'int', 'value': 32}, 'height': {'name': 'Height', 'type': 'int', 'value': 32}}, 'CircleHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 0}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 0}, 'radius': {'name': 'Radius', 'type': 'int', 'value': 100}}}}, 'sprite': ['assets/player.png', 0, 0, -1, -1], 'group': 'object', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False, 'alpha': 255}}}, 'focus': '0.objc'}}
 MUSIC = {}
 
 SCENE_BY_NAME = {'1': 'projects/helloworld/project/scenes/%scene%1'}
@@ -200,6 +200,8 @@ class Compiler:
             except Exception as e:
                 self.error = True
 
+                traceback.print_exc()
+
                 self.information = {
                     "inputs": self.nodes["objects"][str(id)]["inputs"],
                     "pos": [self.nodes["objects"][str(id)]["x"], self.nodes["objects"][str(id)]["y"]],
@@ -366,10 +368,13 @@ class Game(engine.Application):
         for key, value in PROGRAMS.items():
             self.programs[key] = Compiler(self, key, value, self.settings, DEBUG)
             
-        self.loadScene(SETTINGS["start_scene"])
+        self.loadScene(SETTINGS["start_scene"], True)
         
         for key, value in PROGRAMS.items():
             self.programs[key].init()
+
+        for name, program in self.programs.items():
+            self.programs[name].event("onLoadScene")
 
         self.counter = threading.Thread(target=lambda: self.tpsStart())
         self.counter.daemon = True
@@ -411,7 +416,7 @@ class Game(engine.Application):
                 pass
                 
         if self.debug:
-            self.updateCustomCaption(f"FPS = {round(self.clock.get_fps())} TPS = {list(self.programs.values())[0].tpsNow}")
+            self.updateCustomCaption(f"FPS = {round(self.clock.get_fps())} TPS = {list(self.programs.values())[0].tpsNow if len(self.programs) > 0 else '?'}")
 
         for key, value in self.programs.items():
             if self.programs[key].error:
@@ -449,7 +454,7 @@ class Game(engine.Application):
         for key, value in PROGRAMS.items():
             self.programs[key].event("mouseRightClick")
 
-    def loadScene(self, scene):
+    def loadScene(self, scene, start: bool = False):
         self.objects = engine.ObjectGroup(self)
         self.objects.init()
         
@@ -484,9 +489,10 @@ class Game(engine.Application):
 
             if SCENES[scene]["focus"] is not None and key == SCENES[scene]["focus"]:
                 self.setCamera(engine.camera.FocusCamera(self, obj))
-                
-        for name, program in self.programs.items():
-            program.event("onLoadScene")
+
+        if not start:
+            for name, program in self.programs.items():
+                program.event("onLoadScene")
 
 
 if __name__ == "__main__":

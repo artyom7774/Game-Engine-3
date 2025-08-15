@@ -4,31 +4,23 @@ from scr.main import Main
 
 from scr.variables import *
 
-import traceback
+import datetime
 import sys
 
 
 def main() -> None:
-    with open("scr/files/logs/log.txt", "w+", encoding="utf-8", buffering=1) as file:
-        try:
-            if not DIVELOP:
-                sys.stdout = file
-                sys.stderr = file
+    sys.stderr = open("scr/files/logs/error.txt", "w", buffering=1)
+    sys.stdout = open("scr/files/logs/log.txt", "a", buffering=1)
 
-            print(f"LOG: divelop mode = {DIVELOP}")
-            print(f"LOG: program runned on \"{SYSTEM} {RELEASE}\"")
+    print(f"{'-' * 20} LOG {datetime.datetime.now()} {'-' * 20}")
 
-            app = QApplication(sys.argv)
-            ex = Main(app)
+    print(f"LOG: divelop mode = {DIVELOP}")
+    print(f"LOG: program runned on \"{SYSTEM} {RELEASE}\"")
 
-            sys.exit(app.exec_())
+    app = QApplication(sys.argv)
+    ex = Main(app)
 
-        except Exception as e:
-            print(traceback.format_exc())
-
-        finally:
-            sys.stdout = sys.__stdout__
-            sys.stderr = sys.__stderr__
+    sys.exit(app.exec_())
 
 
 if __name__ == "__main__":

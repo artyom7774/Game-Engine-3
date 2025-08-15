@@ -1,6 +1,5 @@
 {
     "main": "StaticObject",
-
     "dependences": {
         "StaticObject": [],
         "DynamicObject": [
@@ -30,25 +29,55 @@
             }
         },
         "hitbox": {
-            "X offset": {
-                "name": "X offset",
-                "type": "int",
-                "value": 0
-            },
-            "Y offset": {
-                "name": "Y offset",
-                "type": "int",
-                "value": 0
-            },
-            "width": {
-                "name": "Width",
-                "type": "int",
-                "value": 32
-            },
-            "height": {
-                "name": "Height",
-                "type": "int",
-                "value": 32
+            "type": "SquareHitbox",
+            "types": [
+                "SquareHitbox",
+                "CircleHitbox"
+            ],
+            "translates": [
+                "Square hitbox",
+                "Circle hitbox"
+            ],
+            "hitbox": {
+                "SquareHitbox": {
+                    "X offset": {
+                        "name": "X offset",
+                        "type": "int",
+                        "value": 0
+                    },
+                    "Y offset": {
+                        "name": "Y offset",
+                        "type": "int",
+                        "value": 0
+                    },
+                    "width": {
+                        "name": "Width",
+                        "type": "int",
+                        "value": 32
+                    },
+                    "height": {
+                        "name": "Height",
+                        "type": "int",
+                        "value": 32
+                    }
+                },
+                "CircleHitbox": {
+                    "X offset": {
+                        "name": "X offset",
+                        "type": "int",
+                        "value": 0
+                    },
+                    "Y offset": {
+                        "name": "Y offset",
+                        "type": "int",
+                        "value": 0
+                    },
+                    "radius": {
+                        "name": "Radius",
+                        "type": "int",
+                        "value": 50
+                    }
+                }
             }
         },
         "sprite": {
@@ -122,7 +151,7 @@
     "type": {
         "type": "choose",
         "pos": "dict",
-        "hitbox": "dict",
+        "hitbox": "hitbox",
         "sprite": "dict",
         "group": "str",
         "layer": "int",
@@ -156,8 +185,8 @@
     "objects": {
         "StaticObject": [
             "pos",
-            "hitbox",
             "sprite",
+            "hitbox",
             "group",
             "mass",
             "layer",

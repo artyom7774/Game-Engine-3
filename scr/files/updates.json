@@ -28,7 +28,8 @@
         "3.12.4",
         "3.12.5",
         "3.12.6",
-        "3.13.0"
+        "3.13.0",
+        "3.13.1"
     ],
 
     "updates": {
@@ -175,6 +176,11 @@
         "3.13.0": {
             "name": "3.13.0",
             "text": "- new hitbox editor\n- circle hitbox\n- refactor animation menu\n- fixbug with visible TPS\n- fixbug with visible particle sprite\n- fixbug with particle sprite position\n- fixbug with select particle object"
+        },
+
+        "3.13.1": {
+            "name": "3.13.1",
+            "text": "- update engine logging"
         }
     }
 }
