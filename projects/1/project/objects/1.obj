@@ -134,12 +134,12 @@
                         "X offset": {
                             "name": "X offset",
                             "type": "int",
-                            "value": 0
+                            "value": 16
                         },
                         "Y offset": {
                             "name": "Y offset",
                             "type": "int",
-                            "value": 0
+                            "value": 16
                         },
                         "radius": {
                             "name": "Radius",

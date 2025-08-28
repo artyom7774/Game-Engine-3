@@ -8,6 +8,8 @@ from scr.modules import functions
 
 from scr.variables import *
 
+from scr.modules.functions.debugger import inspector
+
 import webbrowser
 import qdarktheme
 import subprocess
@@ -323,6 +325,9 @@ class Main(QMainWindow):
         # INITIALIZATION
 
         self.init("initialization")
+
+        if DIVELOP:
+            inspector(self, "Game Engine 3", show_private=False, max_depth=999)
 
     def theme(self) -> None:
         if SETTINGS["theme"] == "light":

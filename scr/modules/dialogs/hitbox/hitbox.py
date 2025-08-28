@@ -68,8 +68,8 @@ class Hitbox(QDialog):
         self.application = self.project.engine.Application(usingWidth=1000 - 4, usingHeight=700 - 4, visiable=False, debug=True, autoUpdateScreen=False, forcedViewObject=True)
         self.main = self.project.engine.objects.StaticObject(self.application, (0, 0), self.project.engine.SquareHitbox([0, 0, 0, 0]))
 
-        self.application.objects.add(project.engine.objects.StaticObject(self.application, (0, -100000), (0, 0, 1, 200000), group="__debug__", layer=int(1e9)))
-        self.application.objects.add(project.engine.objects.StaticObject(self.application, (-100000, 0), (0, 0, 200000, 1), group="__debug__", layer=int(1e9)))
+        # self.application.objects.add(project.engine.objects.StaticObject(self.application, (0, -100000), (0, 0, 1, 200000), group="__debug__", layer=int(1e9)))
+        # self.application.objects.add(project.engine.objects.StaticObject(self.application, (-100000, 0), (0, 0, 200000, 1), group="__debug__", layer=int(1e9)))
 
         self.application.objects.add(self.main)
 
@@ -138,106 +138,106 @@ class Hitbox(QDialog):
 
         self.objects["settings_rama"] = QTreeWidget(self)
         self.objects["settings_rama"].header().hide()
-        self.objects["settings_rama"].setGeometry(1020, 10, 250, 700)
+        self.objects["settings_rama"].setGeometry(1020, 40, 250, 700)
         self.objects["settings_rama"].show()
 
-        self.objects["settings_hitbox_choose"] = QComboBox(self.objects["settings_rama"])
+        self.objects["settings_hitbox_choose"] = QComboBox(self)
         self.objects["settings_hitbox_choose"].addItems([translate(element) for element in settings["translates"]])
         self.objects["settings_hitbox_choose"].setCurrentIndex(settings["types"].index(settings["type"]))
-        self.objects["settings_hitbox_choose"].setGeometry(5, 5, 240, 22)
+        self.objects["settings_hitbox_choose"].setGeometry(1020, 10 + 1, 250, 22)
         self.objects["settings_hitbox_choose"].show()
 
         self.objects["settings_hitbox_choose"].currentIndexChanged.connect(lambda: HitboxFunctions.chooseHitbox(self.project, self))
 
         if settings["type"] == "SquareHitbox":
             self.objects["settings_x_label"] = QLabel(self.objects["settings_rama"])
-            self.objects["settings_x_label"].setGeometry(5, 40, 130, 20)
+            self.objects["settings_x_label"].setGeometry(5, 5, 130, 20)
             self.objects["settings_x_label"].setText(translate("X offset") + ":")
             self.objects["settings_x_label"].setFont(FONT)
             self.objects["settings_x_label"].show()
 
             self.objects["settings_x_edit"] = FocusLineEdit(self.objects["settings_rama"])
             self.objects["settings_x_edit"].setText(str(settings["hitbox"]["SquareHitbox"]["X offset"]["value"]))
-            self.objects["settings_x_edit"].setGeometry(145, 40, 100, 22)
+            self.objects["settings_x_edit"].setGeometry(145, 5, 100, 22)
             self.objects["settings_x_edit"].show()
 
             self.objects["settings_x_edit"].releasedFocusFunction = lambda empty=None, pr=self.project, dia=self: HitboxFunctions.chooseParameter(pr, dia, ["hitbox", "SquareHitbox", "X offset", "value"], self.objects["settings_x_edit"])
 
             self.objects["settings_y_label"] = QLabel(self.objects["settings_rama"])
-            self.objects["settings_y_label"].setGeometry(5, 65, 130, 20)
+            self.objects["settings_y_label"].setGeometry(5, 30, 130, 20)
             self.objects["settings_y_label"].setText(translate("Y offset") + ":")
             self.objects["settings_y_label"].setFont(FONT)
             self.objects["settings_y_label"].show()
 
             self.objects["settings_y_edit"] = FocusLineEdit(self.objects["settings_rama"])
             self.objects["settings_y_edit"].setText(str(settings["hitbox"]["SquareHitbox"]["Y offset"]["value"]))
-            self.objects["settings_y_edit"].setGeometry(145, 65, 100, 22)
+            self.objects["settings_y_edit"].setGeometry(145, 30, 100, 22)
             self.objects["settings_y_edit"].show()
 
             self.objects["settings_y_edit"].releasedFocusFunction = lambda empty=None, pr=self.project, dia=self: HitboxFunctions.chooseParameter(pr, dia, ["hitbox", "SquareHitbox", "Y offset", "value"], self.objects["settings_y_edit"])
 
             self.objects["settings_width_label"] = QLabel(self.objects["settings_rama"])
-            self.objects["settings_width_label"].setGeometry(5, 90, 130, 20)
+            self.objects["settings_width_label"].setGeometry(5, 55, 130, 20)
             self.objects["settings_width_label"].setText(translate("Width") + ":")
             self.objects["settings_width_label"].setFont(FONT)
             self.objects["settings_width_label"].show()
 
             self.objects["settings_width_edit"] = FocusLineEdit(self.objects["settings_rama"])
             self.objects["settings_width_edit"].setText(str(settings["hitbox"]["SquareHitbox"]["width"]["value"]))
-            self.objects["settings_width_edit"].setGeometry(145, 90, 100, 22)
+            self.objects["settings_width_edit"].setGeometry(145, 55, 100, 22)
             self.objects["settings_width_edit"].show()
 
             self.objects["settings_width_edit"].releasedFocusFunction = lambda empty=None, pr=self.project, dia=self: HitboxFunctions.chooseParameter(pr, dia, ["hitbox", "SquareHitbox", "width", "value"], self.objects["settings_width_edit"])
 
             self.objects["settings_height_label"] = QLabel(self.objects["settings_rama"])
-            self.objects["settings_height_label"].setGeometry(5, 115, 130, 20)
+            self.objects["settings_height_label"].setGeometry(5, 80, 130, 20)
             self.objects["settings_height_label"].setText(translate("Height") + ":")
             self.objects["settings_height_label"].setFont(FONT)
             self.objects["settings_height_label"].show()
 
             self.objects["settings_height_edit"] = FocusLineEdit(self.objects["settings_rama"])
             self.objects["settings_height_edit"].setText(str(settings["hitbox"]["SquareHitbox"]["height"]["value"]))
-            self.objects["settings_height_edit"].setGeometry(145, 115, 100, 22)
+            self.objects["settings_height_edit"].setGeometry(145, 80, 100, 22)
             self.objects["settings_height_edit"].show()
 
             self.objects["settings_height_edit"].releasedFocusFunction = lambda empty=None, pr=self.project, dia=self: HitboxFunctions.chooseParameter(pr, dia, ["hitbox", "SquareHitbox", "height", "value"], self.objects["settings_height_edit"])
 
         if settings["type"] == "CircleHitbox":
             self.objects["settings_x_label"] = QLabel(self.objects["settings_rama"])
-            self.objects["settings_x_label"].setGeometry(5, 40, 130, 20)
+            self.objects["settings_x_label"].setGeometry(5, 5, 130, 20)
             self.objects["settings_x_label"].setText(translate("X offset") + ":")
             self.objects["settings_x_label"].setFont(FONT)
             self.objects["settings_x_label"].show()
 
             self.objects["settings_x_edit"] = FocusLineEdit(self.objects["settings_rama"])
             self.objects["settings_x_edit"].setText(str(settings["hitbox"]["CircleHitbox"]["X offset"]["value"]))
-            self.objects["settings_x_edit"].setGeometry(145, 40, 100, 22)
+            self.objects["settings_x_edit"].setGeometry(145, 5, 100, 22)
             self.objects["settings_x_edit"].show()
 
             self.objects["settings_x_edit"].releasedFocusFunction = lambda empty=None, pr=self.project, dia=self: HitboxFunctions.chooseParameter(pr, dia, ["hitbox", "CircleHitbox", "X offset", "value"], self.objects["settings_x_edit"])
 
             self.objects["settings_y_label"] = QLabel(self.objects["settings_rama"])
-            self.objects["settings_y_label"].setGeometry(5, 65, 130, 20)
+            self.objects["settings_y_label"].setGeometry(5, 30, 130, 20)
             self.objects["settings_y_label"].setText(translate("Y offset") + ":")
             self.objects["settings_y_label"].setFont(FONT)
             self.objects["settings_y_label"].show()
 
             self.objects["settings_y_edit"] = FocusLineEdit(self.objects["settings_rama"])
             self.objects["settings_y_edit"].setText(str(settings["hitbox"]["CircleHitbox"]["Y offset"]["value"]))
-            self.objects["settings_y_edit"].setGeometry(145, 65, 100, 22)
+            self.objects["settings_y_edit"].setGeometry(145, 30, 100, 22)
             self.objects["settings_y_edit"].show()
 
             self.objects["settings_y_edit"].releasedFocusFunction = lambda empty=None, pr=self.project, dia=self: HitboxFunctions.chooseParameter(pr, dia, ["hitbox", "CircleHitbox", "Y offset", "value"], self.objects["settings_y_edit"])
 
             self.objects["settings_radius_label"] = QLabel(self.objects["settings_rama"])
-            self.objects["settings_radius_label"].setGeometry(5, 90, 130, 20)
+            self.objects["settings_radius_label"].setGeometry(5, 55, 130, 20)
             self.objects["settings_radius_label"].setText(translate("Radius") + ":")
             self.objects["settings_radius_label"].setFont(FONT)
             self.objects["settings_radius_label"].show()
 
             self.objects["settings_radius_edit"] = FocusLineEdit(self.objects["settings_rama"])
             self.objects["settings_radius_edit"].setText(str(settings["hitbox"]["CircleHitbox"]["radius"]["value"]))
-            self.objects["settings_radius_edit"].setGeometry(145, 90, 100, 22)
+            self.objects["settings_radius_edit"].setGeometry(145, 55, 100, 22)
             self.objects["settings_radius_edit"].show()
 
             self.objects["settings_radius_edit"].releasedFocusFunction = lambda empty=None, pr=self.project, dia=self: HitboxFunctions.chooseParameter(pr, dia, ["hitbox", "CircleHitbox", "radius", "value"], self.objects["settings_radius_edit"])

@@ -1,4 +1,4 @@
-# MADE BY GAME ENGINE 3.13.0
+# MADE BY GAME ENGINE 3.13.1
 
 import tkinter
 import engine
@@ -14,8 +14,8 @@ height = root.winfo_screenheight()
 
 root.destroy()
 
-SOCKET_ID = 57054
-SOCKET_GLOBAL_ID = 57055
+SOCKET_ID = 36202
+SOCKET_GLOBAL_ID = 36203
 
 VARIABLES = {
     "globals": {},
@@ -25,13 +25,13 @@ VARIABLES = {
 
 SETTINGS = {'name': 'GE3 project', 'icon': '', 'debug': True, 'fps': 60, 'tps': 20, 'start_scene': 'projects/1/project/scenes/%scene%1', 'width': 500, 'height': 500, 'full_screen_mode': False}
 PROGRAMS = {}
-OBJECTS = {'1.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'sprite': ['assets/player.png', 0, 0, -1, -1], 'hitbox': {'type': 'CircleHitbox', 'types': ['SquareHitbox', 'CircleHitbox'], 'translates': ['Square hitbox', 'Circle hitbox'], 'hitbox': {'SquareHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 0}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 0}, 'width': {'name': 'Width', 'type': 'int', 'value': 32}, 'height': {'name': 'Height', 'type': 'int', 'value': 32}}, 'CircleHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 0}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 0}, 'radius': {'name': 'Radius', 'type': 'int', 'value': 100}}}}, 'group': 'object', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False, 'alpha': 255}, 'vars': {}}}
+OBJECTS = {'1.obj': {'type': 'StaticObject', 'variables': {'pos': [0, 0], 'sprite': ['assets/player.png', 0, 0, -1, -1], 'hitbox': {'type': 'CircleHitbox', 'types': ['SquareHitbox', 'CircleHitbox'], 'translates': ['Square hitbox', 'Circle hitbox'], 'hitbox': {'SquareHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 0}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 0}, 'width': {'name': 'Width', 'type': 'int', 'value': 32}, 'height': {'name': 'Height', 'type': 'int', 'value': 32}}, 'CircleHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 16}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 16}, 'radius': {'name': 'Radius', 'type': 'int', 'value': 100}}}}, 'group': 'object', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False, 'alpha': 255}, 'vars': {}}}
 SCENES = {'projects/1/project/scenes/%scene%1': {'objects': {'0.objc': {'type': 'StaticObject', 'variables': {'pos': [-3.0, -59.0], 'sprite': ['assets/player.png', 0, 0, -1, -1], 'hitbox': {'type': 'CircleHitbox', 'types': ['SquareHitbox', 'CircleHitbox'], 'translates': ['Square hitbox', 'Circle hitbox'], 'hitbox': {'SquareHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 0}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 0}, 'width': {'name': 'Width', 'type': 'int', 'value': 32}, 'height': {'name': 'Height', 'type': 'int', 'value': 32}}, 'CircleHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 16}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 16}, 'radius': {'name': 'Radius', 'type': 'int', 'value': 100}}}}, 'group': 'object', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False, 'alpha': 255}}, '1.objc': {'type': 'DynamicObject', 'variables': {'pos': [66.0, -308.0], 'sprite': ['assets/player.png', 0, 0, -1, -1], 'hitbox': {'type': 'CircleHitbox', 'types': ['SquareHitbox', 'CircleHitbox'], 'translates': ['Square hitbox', 'Circle hitbox'], 'hitbox': {'SquareHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 0}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 0}, 'width': {'name': 'Width', 'type': 'int', 'value': 32}, 'height': {'name': 'Height', 'type': 'int', 'value': 32}}, 'CircleHitbox': {'X offset': {'name': 'X offset', 'type': 'int', 'value': 16}, 'Y offset': {'name': 'Y offset', 'type': 'int', 'value': 16}, 'radius': {'name': 'Radius', 'type': 'int', 'value': 50}}}}, 'group': '123', 'mass': 1000, 'layer': 0, 'animation': {'groups': {'group': {'name': 'group', 'sprites': [], 'settings': {'repeat': False, 'fpsPerFrame': 10, 'standard': False}}}}, 'invisible': False, 'alpha': 255, 'gravity': 100, 'slidingStep': 1000000.0}}}, 'focus': '0.objc'}}
 MUSIC = {}
 
 SCENE_BY_NAME = {'1': 'projects/1/project/scenes/%scene%1'}
 
-DEBUG = False
+DEBUG = True
 
 import importlib.util
 

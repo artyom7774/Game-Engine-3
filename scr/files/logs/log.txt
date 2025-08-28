@@ -6,3 +6,156 @@ LOG: last version = 3.13.0, now version = 3.13.1
 LOG: divelop mode = True
 LOG: program runned on "Windows 10"
 LOG: last version = 3.13.0, now version = 3.13.1
+-------------------- LOG 2025-08-16 19:05:53.439677 --------------------
+LOG: divelop mode = False
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+ERROR: request failed: HTTPSConnectionPool(host='artyom7777.pythonanywhere.com', port=443): Read timed out. (read timeout=2)
+LOG: python path: E:\divelop\Game-Engine-3/python/python.exe
+-------------------- LOG 2025-08-17 00:12:57.067849 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:18:42.970205 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:21:16.113399 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:21:33.917384 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:21:49.736823 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:27:48.232590 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:31:30.528477 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:31:42.070409 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:32:56.489445 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:33:19.604812 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:34:36.349323 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:37:10.871823 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:40:20.700190 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 00:43:04.233330 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 10:49:36.408349 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+-------------------- LOG 2025-08-17 11:01:09.510540 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 11:01:49.851563 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 11:02:07.716711 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+-------------------- LOG 2025-08-17 11:02:24.983037 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 11:02:59.506754 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 11:07:36.454239 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-17 11:24:42.298280 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-24 19:08:48.223666 --------------------
+LOG: divelop mode = False
+LOG: program runned on "Windows 10"
+-------------------- LOG 2025-08-24 19:08:48.223666 --------------------
+LOG: divelop mode = False
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+LOG: last version = 3.13.1, now version = 3.13.1
+LOG: python path: E:\divelop\Game-Engine-3/python/python.exe
+LOG: python path: E:\divelop\Game-Engine-3/python/python.exe
+-------------------- LOG 2025-08-28 09:41:42.338457 --------------------
+LOG: divelop mode = False
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+ERROR: request failed: HTTPSConnectionPool(host='artyom7777.pythonanywhere.com', port=443): Read timed out. (read timeout=2)
+-------------------- LOG 2025-08-28 09:43:10.627117 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-28 09:44:28.144885 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-28 09:50:08.810597 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-28 09:53:39.071538 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-28 09:56:43.085659 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-28 09:57:45.437477 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-28 09:58:26.909746 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+-------------------- LOG 2025-08-28 09:59:14.403875 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+-------------------- LOG 2025-08-28 10:00:07.910111 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-28 10:00:20.282306 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+-------------------- LOG 2025-08-28 10:03:31.988799 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: last version = 3.13.1, now version = 3.13.1
+-------------------- LOG 2025-08-28 10:07:04.477985 --------------------
+LOG: divelop mode = True
+LOG: program runned on "Windows 10"
+LOG: python path: E:\divelop\Game-Engine-3/python/python.exe
+LOG: last version = 3.13.1, now version = 3.13.1
