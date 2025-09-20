@@ -29,8 +29,7 @@
         "3.12.5",
         "3.12.6",
         "3.13.0",
-        "3.13.1",
-        "3.13.2"
+        "3.13.1"
     ],
 
     "updates": {
@@ -186,7 +185,11 @@
 
         "3.13.2": {
             "name": "3.13.2",
+<<<<<<< HEAD
             "text": "- Updated hitbox editor\n- Fixed bugs with scene moving\n- Removed scene acceleration"
+=======
+            "text": "- update hitbox editor"
+>>>>>>> 656ac4d87be9fd6cbda5572944c6865614ac01a3
         }
     }
 }
