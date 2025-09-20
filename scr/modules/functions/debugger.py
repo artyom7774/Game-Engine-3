@@ -3,9 +3,15 @@ import tkinter as tk
 
 import inspect
 
+CLASS_INSPECTOR_WAS_ACTIVATED = False
+
 
 class InteractiveClassInspector:
     def __init__(self, root, obj, name="ROOT", max_depth=20, show_private=False, show_inherited=True):
+        global CLASS_INSPECTOR_WAS_ACTIVATED
+
+        CLASS_INSPECTOR_WAS_ACTIVATED = True
+
         self.root = root
         self.max_depth = max_depth
         self.show_private = show_private
@@ -495,7 +501,10 @@ class InteractiveClassInspector:
         return False
 
 
-def inspector(obj, name="ROOT", max_depth=20, show_private=False, show_inherited=True):
+def inspector(obj, name="ROOT", max_depth=20, show_private=False, show_inherited=False) -> None:
+    if CLASS_INSPECTOR_WAS_ACTIVATED:
+        return
+
     root = tk.Tk()
     app = InteractiveClassInspector(root, obj, name, max_depth, show_private, show_inherited)
     root.mainloop()

@@ -9,8 +9,9 @@ import sys
 
 
 def main() -> None:
-    sys.stderr = open("scr/files/logs/error.txt", "w", buffering=1)
-    sys.stdout = open("scr/files/logs/log.txt", "a", buffering=1)
+    if not DIVELOP:
+        sys.stderr = open("scr/files/logs/error.txt", "w", buffering=1)
+        sys.stdout = open("scr/files/logs/log.txt", "a", buffering=1)
 
     print(f"{'-' * 20} LOG {datetime.datetime.now()} {'-' * 20}")
 

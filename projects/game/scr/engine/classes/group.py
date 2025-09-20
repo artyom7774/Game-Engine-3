@@ -219,8 +219,10 @@ class ObjectGroup:
         self.tree = QuadTree(self.game)
 
     def empty(self) -> None:
-        for obj in self.objects:
-            self.remove(obj)
+        collisions = self.collisions
+
+        self.game.objects = ObjectGroup(self.game)
+        self.game.objects.collisions = collisions
 
     def add(self, obj: VObject) -> None:
         if isinstance(obj, Particle) and self.game.particleInAnotherGroup:

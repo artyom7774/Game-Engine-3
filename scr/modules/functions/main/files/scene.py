@@ -119,7 +119,7 @@ class SceneLabel(QLabel):
 
         self.position = None
 
-        self.drawing = False
+        self.pressed = False
 
         self.pos = Vec2f()
 
@@ -145,26 +145,26 @@ class SceneLabel(QLabel):
         if self.draggingFunction is None:
             return
 
-        if self.sceneSettings["Scene"]["camera_acceleration"]["value"]:
-            speed = math.sqrt(self.pos.x ** 2 + self.pos.y ** 2) / 15
-
-            pos = Vec2f(*self.pos.get())
-
-            while abs(pos.x) > speed or abs(pos.y) > speed:
-                pos /= 2
-
-            pos.x = int(pos.x)
-            pos.y = int(pos.y)
-
-            self.pos.x -= pos.x
-            self.pos.y -= pos.y
-
-            self.draggingFunction(pos.x, pos.y)
+        if self.sceneSettings["Scene"]["camera_acceleration"]["value"] is True and True:
+            speed = math.sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 
         else:
-            self.draggingFunction(self.pos.x, self.pos.y)
+            print(1)
 
-            self.pos = Vec2f()
+            speed = 1000
+
+        pos = Vec2f(*self.pos.get())
+
+        while abs(pos.x) > speed or abs(pos.y) > speed:
+            pos /= 2
+
+        pos.x = int(pos.x)
+        pos.y = int(pos.y)
+
+        self.pos.x -= pos.x
+        self.pos.y -= pos.y
+
+        self.draggingFunction(pos.x, pos.y)
 
     def mousePressEvent(self, event) -> None:
         if event.button() == Qt.LeftButton:
@@ -172,7 +172,7 @@ class SceneLabel(QLabel):
 
             self.pressFunction(event.pos().x() - self.project.objects["main"]["scene"].width() // 2, event.pos().y() - self.project.objects["main"]["scene"].height() // 2)
 
-            self.drawing = True
+            self.pressed = True
 
         try:
             self.setFocus()
@@ -185,12 +185,10 @@ class SceneLabel(QLabel):
             if self.releasedFunction is not None:
                 self.releasedFunction(event.pos().x() - self.project.objects["main"]["scene"].width() // 2, event.pos().y() - self.project.objects["main"]["scene"].height() // 2)
 
-            self.drawing = False
+            self.pressed = False
 
     def mouseMoveEvent(self, event) -> None:
-        self.updateCameraObject()
-
-        if event.buttons() & Qt.LeftButton and self.drawing:
+        if event.buttons() & Qt.LeftButton and self.pressed:
             x = event.pos().x() - self.lastPoint.x()
             y = event.pos().y() - self.lastPoint.y()
 
@@ -205,6 +203,8 @@ class SceneLabel(QLabel):
 
             except RuntimeError:
                 pass
+
+        self.updateCameraObject()
 
 
 class SceneAdditions:
@@ -422,8 +422,18 @@ class SceneAdditions:
 class Scene:
     updating = False
 
+    objectsLoaded = False
+    objectsToUpdate = []
+    objectsCashed = []
+    objectsByName = {}
+
     @staticmethod
     def init(project, call: str = "") -> None:
+        Scene.objectsLoaded = False
+        Scene.objectsToUpdate = []
+        Scene.objectsCashed = []
+        Scene.objectsByName = {}
+
         project.cash["file"][project.selectFile].settings = f"projects/{project.selectProject}/project/cash/{'-'.join(project.selectFile.split('/')[3:])}-setting.json"
 
         with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
@@ -491,10 +501,49 @@ class Scene:
         # project.objects["main"]["timer"].timeout.connect(lambda: update_())
         # project.objects["main"]["timer"].start(1000 // 30)
 
+        Scene.objects(project)
+
     @staticmethod
     def objects(project) -> None:
         application = project.application[project.selectFile]
 
+        # if project.cash["file"][project.selectFile].selectObject is not None:
+        #     Scene.objectsToUpdate.append(project.cash["file"][project.selectFile].selectObject.variables["name"])
+
+        if not Scene.objectsLoaded:
+            Scene.objectsLoaded = True
+
+            for obj in application.objects.objects:
+                if obj.group.startswith("__") and obj.group.endswith("__"):
+                    continue
+
+                application.objects.removeById(obj.id)
+
+            Scene.objectsToUpdate = os.listdir(project.selectFile)
+
+        for name in Scene.objectsToUpdate:
+            if name in Scene.objectsByName:
+                application.objects.removeById(Scene.objectsByName[name].id)
+
+            if os.path.exists(f"{project.selectFile}/{name}"):
+                with open(f"{project.selectFile}/{name}", "r") as f:
+                    type, variables = Scene.loadObjectFile(project, name[:name.rfind(".")][name.rfind("-") + 1:], load(f))
+
+            else:
+                continue
+
+            obj = getattr(project.engine.objects, type)(application, **variables, variables={"file": f"{project.selectFile}/{name}", "name": name})
+
+            if hasattr(obj, "gravity"):
+                obj.gravity = 0
+
+            Scene.objectsByName[name] = obj
+
+            application.objects.add(obj)
+
+        Scene.objectsToUpdate = []
+
+        """
         for obj in application.objects.objects:
             if not obj.group.startswith("__") or not obj.group.endswith("__"):
                 application.objects.remove(obj)
@@ -506,20 +555,17 @@ class Scene:
 
         var.sort()
 
-        id = 0
-
         for file in var:
             with open(f"{project.selectFile}/{file}", "r") as f:
                 type, variables = Scene.loadObjectFile(project, file[:file.rfind(".")][file.rfind("-") + 1:], load(f))
 
-                obj = getattr(project.engine.objects, type)(application, **variables, id=id, variables={"file": f"{project.selectFile}/{file}"})
+                obj = getattr(project.engine.objects, type)(application, **variables, variables={"file": f"{project.selectFile}/{file}", "name": f"{file}"})
 
                 if hasattr(obj, "gravity"):
                     obj.gravity = 0
 
                 application.objects.add(obj)
-
-            id += 1
+        """
 
         if application.objects.getById(project.cash["file"][project.selectFile].selectLink) is None and project.cash["file"][project.selectFile].selectObject is not None:
             Scene.objectReleased(project)
@@ -719,6 +765,9 @@ class Scene:
 
     @staticmethod
     def move(project, x, y) -> None:
+        if not project.objects["main"]["scene"].pressed:
+            return
+
         if project.selectFile == "":
             return
 
@@ -791,6 +840,9 @@ class Scene:
 
                 except OSError:
                     pass
+
+                Scene.objectsToUpdate.append(obj.variables["name"])
+                Scene.objects(project)
 
                 project.init()
 
@@ -880,16 +932,23 @@ class Scene:
         if project.objects["main"]["scene"].position is None:
             return
 
-        if project.cash["file"][project.selectFile].selectObject is not None:
-            try:
-                os.remove(project.cash["file"][project.selectFile].selectObject.variables["file"])
+        if project.cash["file"][project.selectFile].selectObject is None:
+            return
 
-                Scene.objectReleased(project)
+        try:
+            os.remove(project.cash["file"][project.selectFile].selectObject.variables["file"])
 
-            except FileNotFoundError:
-                pass
+        except FileNotFoundError:
+            Scene.objectsLoaded = False
+            Scene.objects(project)
 
-        project.init()
+            project.init()
+
+        else:
+            Scene.objectsLoaded = False
+            Scene.objects(project)
+
+            project.init()
 
     @staticmethod
     def objectReleased(project) -> None:
@@ -983,17 +1042,17 @@ class Scene:
         select = project.application[project.selectFile].objects.getByGroup("__debug_select__")[0]
 
         obj = project.cash["file"][project.selectFile].selectObject
+        project.application[project.selectFile].objects.remove(obj)
 
-        select.hitbox = obj.hitbox
+        Scene.objectsToUpdate.append(obj.variables["name"])
 
         select.pos = obj.pos
+        select.hitbox = obj.hitbox
 
-        for i in range(2):
-            hitbox = obj.hitbox.rect()
+        # hitbox = obj.hitbox.rect()
+        # Scene.select(project, obj.pos.x + hitbox.width // 2, obj.pos.y + hitbox.height // 2)
 
-            Scene.select(project, obj.pos.x + hitbox.width // 2, obj.pos.y + hitbox.height // 2)
-
-            Scene.update(project)
+        Scene.update(project)
 
     @staticmethod
     def saveAllValues(project) -> None:

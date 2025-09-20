@@ -12,15 +12,11 @@ from scr.modules.functions.debugger import inspector
 
 import webbrowser
 import qdarktheme
-import subprocess
-import traceback
 import threading
 import requests
 import hashlib
 import socket
-import typing
 import ctypes
-import sys
 
 
 class FocusTreeWidget(QTreeWidget):
@@ -80,7 +76,9 @@ class Main(QMainWindow):
         self.initialization()
 
         if not FLAGS["not-view-version-update"]:
-            self.versionUpdateMessage()
+            thr = threading.Thread(target=lambda: self.versionUpdateMessage())
+            thr.daemon = True
+            thr.start()
 
         self.updateOnline()
 
@@ -326,27 +324,24 @@ class Main(QMainWindow):
 
         self.init("initialization")
 
-        if DIVELOP:
-            inspector(self, "Game Engine 3", show_private=False, max_depth=999)
+        if not DIVELOP:
+            return
 
-    def theme(self) -> None:
-        if SETTINGS["theme"] == "light":
-            pass
+        thr = threading.Thread(target=lambda: inspector(self, "Game Engine 3", show_private=False, max_depth=999))
+        thr.daemon = True
+        thr.start()
+
 
     def init(self, type: str = "") -> None:
         self.menu()
 
         if self.selectProject == "":
-            self.theme()
-
             return
 
         functions.project.projectTreeInit(self)
         functions.project.centerMenuInit(self)
 
         self.geometryInit()
-
-        self.theme()
 
     def menu(self) -> None:
         self.statusBar()

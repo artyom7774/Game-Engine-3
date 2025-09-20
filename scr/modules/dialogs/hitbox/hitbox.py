@@ -138,7 +138,7 @@ class Hitbox(QDialog):
 
         self.objects["settings_rama"] = QTreeWidget(self)
         self.objects["settings_rama"].header().hide()
-        self.objects["settings_rama"].setGeometry(1020, 40, 250, 700)
+        self.objects["settings_rama"].setGeometry(1020, 40, 250, 670)
         self.objects["settings_rama"].show()
 
         self.objects["settings_hitbox_choose"] = QComboBox(self)

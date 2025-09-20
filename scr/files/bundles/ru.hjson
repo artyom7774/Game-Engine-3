@@ -246,6 +246,8 @@
     "Particle": "Частица"
     "Live time": "Время жизни"
     "Minus size per frame": "Минус размер спрайта каждый кадр"
+    "Create interface": "Создать интерфейс"
+    "Interface": "Интерфейс"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"

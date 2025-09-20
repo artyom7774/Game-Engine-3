@@ -3,18 +3,25 @@ from PyQt5.QtGui import QFont
 
 from scr.modules.translate import Translate
 
-from tkinter import font
-
 import importlib.util
 import platform
-import tkinter
+import argparse
 import random
-import pygame
 import ujson
 import json
 import os
 
-DIVELOP = os.getenv("PYCHARM_HOSTED") == "1"
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
+
+import pygame
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--windows-standalone-build", default=None)
+parser.add_argument("--debug", type=int, default=0)
+
+args = parser.parse_args()
+
+DIVELOP = bool(args.debug)
 
 pygame.init()
 

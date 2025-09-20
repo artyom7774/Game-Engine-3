@@ -138,7 +138,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets/water/water.png"
+                    "value": "assets\/water\/water.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -185,22 +185,22 @@
                     "group": {
                         "name": "group",
                         "sprites": [
-                            "assets/water/animation/1.png",
-                            "assets/water/animation/2.png",
-                            "assets/water/animation/3.png",
-                            "assets/water/animation/4.png",
-                            "assets/water/animation/5.png",
-                            "assets/water/animation/6.png",
-                            "assets/water/animation/7.png",
-                            "assets/water/animation/8.png",
-                            "assets/water/animation/9.png",
-                            "assets/water/animation/10.png",
-                            "assets/water/animation/11.png",
-                            "assets/water/animation/12.png",
-                            "assets/water/animation/13.png",
-                            "assets/water/animation/14.png",
-                            "assets/water/animation/15.png",
-                            "assets/water/animation/16.png"
+                            "assets\/water\/animation\/1.png",
+                            "assets\/water\/animation\/2.png",
+                            "assets\/water\/animation\/3.png",
+                            "assets\/water\/animation\/4.png",
+                            "assets\/water\/animation\/5.png",
+                            "assets\/water\/animation\/7.png",
+                            "assets\/water\/animation\/8.png",
+                            "assets\/water\/animation\/6.png",
+                            "assets\/water\/animation\/9.png",
+                            "assets\/water\/animation\/10.png",
+                            "assets\/water\/animation\/11.png",
+                            "assets\/water\/animation\/12.png",
+                            "assets\/water\/animation\/13.png",
+                            "assets\/water\/animation\/14.png",
+                            "assets\/water\/animation\/15.png",
+                            "assets\/water\/animation\/16.png"
                         ],
                         "settings": {
                             "repeat": true,

@@ -36,157 +36,157 @@
     "updates": {
         "3.0.1": {
             "name": "3.0.1",
-            "text": "- update moving object by angle\n- message about a program update, if one exists\n- update help menu"
+            "text": "- Updated moving object by angle\n- Added update notification if a new program version exists\n- Updated help menu"
         },
 
         "3.0.2": {
             "name": "3.0.2",
-            "text": "- update help menu"
+            "text": "- Updated help menu"
         },
 
         "3.0.3": {
             "name": "3.0.3",
-            "text": "- optimize code editor\n- fixed bugs in code editor\n- fixed bug with object collision"
+            "text": "- Optimized code editor\n- Fixed bugs in the code editor\n- Fixed a bug with object collision"
         },
 
         "3.1.0": {
             "name": "3.1.0",
-            "text": "- fixed bug with visiable versions\n- optimize engine\n- project site with help menu: https://artyom7777.pythonanywhere.com/\n- fixed bug with save (executable) project\n- create collision editor"
+            "text": "- Fixed a bug with visible versions\n- Optimized engine\n- Added project site link to help menu: https://artyom7777.pythonanywhere.com/\n- Fixed a bug with saving (executable) projects\n- Created collision editor"
         },
 
         "3.2.0": {
             "name": "3.2.0",
-            "text": "- update site and help menu\n- update vector move in dynamic object\n- nodes for mouse and keyboard click and press\n- update node every frame\n- add node every tick\n- can't set input in event nodes\n- fixed console in run project\n- update logger"
+            "text": "- Updated site and help menu\n- Updated vector movement for dynamic objects\n- Added nodes for mouse and keyboard click and press events\n- Added \"Every Frame\" and \"Every Tick\" nodes\n- Input cannot be set in event nodes\n- Fixed the console in project run mode\n- Updated logger"
         },
 
         "3.3.0": {
             "name": "3.3.0",
-            "text": "- fixed bug with save files\n- fixed bug with save code files\n- fixed bug with using more funcions files in project\n- update code editor\n- every object have you'r variables\n- node for save and get object variables"
+            "text": "- Fixed a bug with saving files\n- Fixed a bug with saving code files\n- Fixed a bug with using multiple function files in a project\n- Updated code editor\n- Each object now has its own variables\n- Added nodes to save and get object variables"
         },
 
         "3.4.0": {
             "name": "3.4.0",
-            "text": "- add node dislay text, if collision, create object, random, remove object, for object in group, connect text"
+            "text": "- Added nodes: Display Text, If Collision, Create Object, Random, Remove Object, For Object In Group, Concatenate Text"
         },
 
         "3.4.1": {
             "name": "3.4.1",
-            "text": "- new color for type \"Any\" in code\n- optimize code\n- optimize scene\n- fixbug with move object"
+            "text": "- New color for the \"Any\" type in code\n- Code optimization\n- Scene optimization\n- Fixed a bug with moving objects"
         },
 
         "3.4.2": {
             "name": "3.4.2",
-            "text": "- update help menu\n- fixed bug with write text on console\n- delete help menu\n- new variable types: dict, list\n- add nodes for using lists and dicts\n- another nodes\n- light theme"
+            "text": "- Updated help menu\n- Fixed a bug with writing text to the console\n- Removed help menu (integrated into the site)\n- New variable types: dict, list\n- Added nodes for using lists and dicts\n- Other various nodes\n- Added light theme"
         },
 
         "3.5.0": {
             "name": "3.5.0",
-            "text": "- new node for write code on python\n- using more than one functions in project\n- debugger for run project\n- optimized engine (by 2 times)"
+            "text": "- New node for writing Python code\n- Support for using more than one function in a project\n- Debugger for running projects\n- Engine optimization (2x faster)"
         },
 
         "3.5.1": {
             "name": "3.5.1",
-            "text": "- node for run function and initializate function"
+            "text": "- Added nodes: Run Function and Initialize Function"
         },
 
         "3.6.0": {
             "name": "3.6.0",
-            "text": "- mode for full screen in settings\n- param for invisible object (working in run project)\n- optimized engine\n- changed object physics"
+            "text": "- Added fullscreen mode in settings\n- Parameter for invisible objects (works in run mode)\n- Engine optimization\n- Changed object physics"
         },
 
         "3.7.0": {
             "name": "3.7.0",
-            "text": "- animations\n- node for animations: run animation, stop animation, mirror animation"
+            "text": "- Added animations\n- Added nodes for animations: Run Animation, Stop Animation, Mirror Animation"
         },
 
         "3.7.1": {
             "name": "3.7.1",
-            "text": "- fixed bug with animation\n- new node: get resulting vector"
+            "text": "- Fixed a bug with animations\n- New node: Get Resulting Vector"
         },
 
         "3.7.2": {
             "name": "3.7.2",
-            "text": "- optimize engine"
+            "text": "- Engine optimization"
         },
 
         "3.7.3": {
             "name": "3.7.3",
-            "text": "- new nodes: get mouse pos\n- new functions for python node: run animation, stop animation, mirror animation, get resulting vector, get mouse pos\n- fixbug with compiling project"
+            "text": "- New node: Get Mouse Position\n- New functions for the Python node: run_animation, stop_animation, mirror_animation, get_resulting_vector, get_mouse_pos\n- Fixed a bug with project compilation"
         },
 
         "3.8.0": {
             "name": "3.8.0",
-            "text": "- new object physic\n- add mass for object"
+            "text": "- New object physics\n- Added mass parameter for objects"
         },
 
 	    "3.8.1": {
             "name": "3.8.1",
-            "text": "- update physic\n- new nodes: get object parameter, set object parameter, get time passed\n- new parameter for node jump: power"
+            "text": "- Updated physics\n- New nodes: Get Object Parameter, Set Object Parameter, Get Time Passed\n- New parameter for the Jump node: power"
         },
 
         "3.9.0": {
             "name": "3.9.0",
-            "text": "- new objects: text, field, button, particle, kinematic object\n- update node: set object parameter, get object parameter, move object with braking, on button press\n- new functions for python node: setObjectParameter, getObjectParameter, moveObjectWithBraking, getTimePassed\n- fixed bug with run project\n- run project have menu with all globals variables\n- update checking for new version\n- increase font for nodes\n- open notepad when there is an error\n- remove jump power and speed parameters for dynamic object\n- update run menu\n- update install python menu"
+            "text": "- New objects: Text, Field, Button, Particle, Kinematic Object\n- Updated nodes: Set Object Parameter, Get Object Parameter, Move Object With Braking, On Button Press\n- New functions for the Python node: setObjectParameter, getObjectParameter, moveObjectWithBraking, getTimePassed\n- Fixed a bug with running projects\n- The run menu now displays all global variables\n- Improved update checking for new versions\n- Increased font size for nodes\n- Notepad opens when there is an error\n- Removed jump power and speed parameters for dynamic objects\n- Updated run menu\n- Updated \"Install Python\" menu"
         },
 
         "3.10.0": {
             "name": "3.10.0",
-            "text": "- fixed bug with get and set var for created object\n- update text translate\n- new nodes: get noise value, wait, on load scene, break loop, if key in dict, if element in list, get all object in group\n- new nodes for math operations: absolute of number, sin, cos, tan, ctg, degrees, radians\n- new nodes for music: play music, stop music, play sound\n- new functions for python node: getNoiseValue, sin, cos, tan, ctg, degrees, radians, playMusic, stopMusic, playSound\n- update error messages\n- fixed bug in set numbers in code\n- fixed bug with flip animation update\n- optimize engine for objects with big hitbox\n- fixed bug with more one functions in project when is not job press event node"
+            "text": "- Fixed a bug with getting and setting variables for created objects\n- Improved text translation\n- New nodes: Get Noise Value, Wait, On Load Scene, Break Loop, If Key In Dict, If Element In List, Get All Objects In Group\n- New math operation nodes: Absolute Value, Sin, Cos, Tan, Ctg, Degrees, Radians\n- New music nodes: Play Music, Stop Music, Play Sound\n- New functions for the Python node: getNoiseValue, sin, cos, tan, ctg, degrees, radians, playMusic, stopMusic, playSound\n- Improved error messages\n- Fixed a bug with setting numbers in code\n- Fixed a bug with flip animation update\n- Optimized engine for objects with large hitboxes\n- Fixed a bug with multiple functions in a project when no job press event node is present"
         },
 
         "3.11.0": {
             "name": "3.11.0",
-            "text": "- new method for run project\n- basic group nodes for code"
+            "text": "- New method for running projects\n- Added basic group nodes for code"
         },
 
         "3.12.0": {
             "name": "3.12.0",
-            "text": "- objects have new parameter: alpha\n- auto update project for new version Game Engine 3 (working from 3.11.0)"
+            "text": "- Objects have a new parameter: alpha\n- Added automatic project update for new Game Engine 3 versions (working from 3.11.0)"
         },
 
         "3.12.1": {
             "name": "3.12.1",
-            "text": "- added new engine translations\n- add icon for engine"
+            "text": "- Added new engine translations\n- Added icon for the engine"
         },
 
         "3.12.2": {
             "name": "3.12.2",
-            "text": "- fixbug with node if element in list"
+            "text": "- Fixed a bug with the \"If Element In List\" node"
         },
 
         "3.12.3": {
             "name": "3.12.3",
-            "text": "- fixbug with object nodes"
+            "text": "- Fixed a bug with object nodes"
         },
 
         "3.12.4": {
             "name": "3.12.4",
-            "text": "- fixbug with getSceneName function in Python node"
+            "text": "- Fixed a bug with the getSceneName function in the Python node"
         },
 
         "3.12.5": {
             "name": "3.12.5",
-            "text": "- fixbug with On load scene node"
+            "text": "- Fixed a bug with the \"On Load Scene\" node"
         },
 
         "3.12.6": {
             "name": "3.12.6",
-            "text": "- fixbug with folder tree"
+            "text": "- Fixed a bug with the folder tree"
         },
 
         "3.13.0": {
             "name": "3.13.0",
-            "text": "- new hitbox editor\n- circle hitbox\n- refactor animation menu\n- fixbug with visible TPS\n- fixbug with visible particle sprite\n- fixbug with particle sprite position\n- fixbug with select particle object"
+            "text": "- New hitbox editor\n- Added circle hitbox\n- Refactored animation menu\n- Fixed a bug with TPS visibility\n- Fixed a bug with particle sprite visibility\n- Fixed a bug with particle sprite position\n- Fixed a bug with selecting particle objects"
         },
 
         "3.13.1": {
             "name": "3.13.1",
-            "text": "- update engine logging"
+            "text": "- Updated engine logging"
         },
 
         "3.13.2": {
-            "name": "3.12.2",
-            "text": "- update hitbox editor"
+            "name": "3.13.2",
+            "text": "- Updated hitbox editor\n- Fixed bugs with scene moving\n- Removed scene acceleration"
         }
     }
 }
