@@ -121,6 +121,7 @@ class SceneLabel(QLabel):
 
         self.pressed = False
 
+        self.step = Vec2f()
         self.pos = Vec2f()
 
         self.setMouseTracking(True)
@@ -145,13 +146,11 @@ class SceneLabel(QLabel):
         if self.draggingFunction is None:
             return
 
-        if self.sceneSettings["Scene"]["camera_acceleration"]["value"] is True and True:
+        if self.sceneSettings["Scene"]["camera_acceleration"]["value"] is True and False:
             speed = math.sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 
         else:
-            print(1)
-
-            speed = 1000
+            speed = 1e9
 
         pos = Vec2f(*self.pos.get())
 
@@ -192,17 +191,13 @@ class SceneLabel(QLabel):
             x = event.pos().x() - self.lastPoint.x()
             y = event.pos().y() - self.lastPoint.y()
 
+            self.step = Vec2f(x, y)
+
             self.lastPoint = event.pos()
 
             if self.draggingFunction is not None:
                 self.pos.x += x
                 self.pos.y += y
-
-            try:
-                self.update()
-
-            except RuntimeError:
-                pass
 
         self.updateCameraObject()
 
@@ -714,8 +709,8 @@ class Scene:
             for px in range(-project.objects["main"]["scene"].width() // 2 // gridWidth - 2, project.objects["main"]["scene"].width() // 2 // gridWidth + 2):
                 for py in range(-project.objects["main"]["scene"].height() // 2 // gridHeight - 2, project.objects["main"]["scene"].height() // 2 // gridHeight + 2):
                     lastDrawing.append(["rect", [application.screen, (63, 64, 66) if SETTINGS["theme"] == "dark" else (218, 220, 224), (
-                        (project.desktop.width() // 2 + gridX - (x - gridX) - (gridWidth * (gridX // gridWidth))) + px * gridWidth,
-                        (project.desktop.height() // 2 + gridY - (y - gridY) - (gridHeight * (gridY // gridHeight))) + py * gridHeight,
+                        (project.desktop.width() // 2 + gridX - (x - gridX) - (gridWidth * (gridX // gridWidth))) + px * gridWidth - project.objects["main"]["scene"].step.x,
+                        (project.desktop.height() // 2 + gridY - (y - gridY) - (gridHeight * (gridY // gridHeight))) + py * gridHeight - project.objects["main"]["scene"].step.y,
                         gridWidth,
                         gridHeight
                     ), 1]])
