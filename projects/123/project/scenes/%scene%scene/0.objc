@@ -9,10 +9,12 @@
             "DynamicObject"
         ]
     },
-    "dependence": [],
+    "dependence": [
+        "StaticObject"
+    ],
     "type": {
         "name": "Object type",
-        "value": "StaticObject",
+        "value": "DynamicObject",
         "type": "choose",
         "choose": {
             "input": [
@@ -48,12 +50,12 @@
                 "x": {
                     "name": "X",
                     "type": "int",
-                    "value": -40
+                    "value": 100
                 },
                 "y": {
                     "name": "Y",
                     "type": "int",
-                    "value": -55
+                    "value": -200
                 }
             },
             "type": "dict"
@@ -120,7 +122,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets/player.png"
+                    "value": "assets\/player.png"
                 },
                 "X offset": {
                     "name": "X offset",

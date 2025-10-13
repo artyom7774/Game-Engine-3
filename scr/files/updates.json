@@ -186,7 +186,7 @@
 
         "3.13.2": {
             "name": "3.13.2",
-            "text": "- Updated hitbox editor\n- Fixed bugs with scene moving\n- Removed scene acceleration"
+            "text": "- Updated hitbox editor\n- Discord shows when someone is using the program."
         }
     }
 }

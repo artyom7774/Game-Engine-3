@@ -1,0 +1,176 @@
+{
+    "main": "Text",
+    "dependences": {
+        "Text": [],
+        "Field": [
+            "Text"
+        ]
+    },
+    "standard": {
+        "type": "Text",
+        "pos": {
+            "x": {
+                "name": "X",
+                "type": "int",
+                "value": 0
+            },
+            "y": {
+                "name": "Y",
+                "type": "int",
+                "value": 0
+            }
+        },
+        "hitbox": {
+            "X offset": {
+                "name": "X offset",
+                "type": "int",
+                "value": 0
+            },
+            "Y offset": {
+                "name": "Y offset",
+                "type": "int",
+                "value": 0
+            },
+            "width": {
+                "name": "Width",
+                "type": "int",
+                "value": 32
+            },
+            "height": {
+                "name": "Height",
+                "type": "int",
+                "value": 32
+            }
+        },
+        "group": "object",
+        "layer": 0,
+        "invisible": false,
+        "font": "Arial",
+        "message": "Text",
+        "fontSize": 13,
+        "fontColor": "#000000",
+        "alpha": 255,
+        "alignment": {
+            "vertical": {
+                "name": "Vertical",
+                "type": "choosing",
+                "value": "up",
+                "choose": {
+                    "input": [
+                        "Up",
+                        "Center",
+                        "Down"
+                    ],
+                    "output": [
+                        "up",
+                        "center",
+                        "down"
+                    ]
+                }
+            },
+            "horizontal": {
+                "name": "Horizontal",
+                "type": "choosing",
+                "value": "left",
+                "choose": {
+                    "input": [
+                        "Left",
+                        "Center",
+                        "Right"
+                    ],
+                    "output": [
+                        "left",
+                        "center",
+                        "right"
+                    ]
+                }
+            }
+        }
+    },
+    "name": {
+        "type": "Text type",
+        "pos": "Text position",
+        "hitbox": "Text hitbox",
+        "group": "Name of object group",
+        "layer": "Object layer",
+        "invisible": "Invisible",
+        "font": "Font type",
+        "message": "Message",
+        "fontSize": "Font size",
+        "alpha": "Alpha",
+        "fontColor": "Font color",
+        "alignment": "Alignment text"
+    },
+    "type": {
+        "type": "choose",
+        "pos": "dict",
+        "hitbox": "dict",
+        "group": "str",
+        "layer": "int",
+        "invisible": "bool",
+        "font": "font",
+        "message": "str",
+        "fontSize": "int",
+        "alpha": "int",
+        "fontColor": "color",
+        "alignment": "dict"
+    },
+    "specials": {
+        "choose": {
+            "type": {
+                "input": [
+                    "object.name.text",
+                    "object.name.field"
+                ],
+                "output": [
+                    "Text",
+                    "Field"
+                ]
+            },
+
+            "vertical": {
+                "input": [
+                    "Up",
+                    "Center",
+                    "Down"
+                ],
+                "output": [
+                    "up",
+                    "center",
+                    "down"
+                ]
+            },
+
+            "horizontal": {
+                "input": [
+                    "Left",
+                    "Center",
+                    "Right"
+                ],
+                "output": [
+                    "left",
+                    "center",
+                    "right"
+                ]
+            }
+        }
+    },
+    "objects": {
+        "Text": [
+            "pos",
+            "hitbox",
+            "group",
+            "layer",
+            "font",
+            "message",
+            "fontSize",
+            "invisible",
+            "alpha",
+            "fontColor",
+            "alignment"
+        ],
+        "Field": [
+
+        ]
+    }
+}

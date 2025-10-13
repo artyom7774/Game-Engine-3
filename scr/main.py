@@ -5,6 +5,7 @@ from PyQt5.Qt import QIcon, Qt, QTimer
 from scr.modules.widgets import TabFileBar, VersionLogScrollArea, TreeProject, VisiableConsole
 
 from scr.modules import functions
+from scr.modules import internet
 
 from scr.variables import *
 
@@ -80,41 +81,14 @@ class Main(QMainWindow):
             thr.daemon = True
             thr.start()
 
-        self.updateOnline()
+        internet.updateDiscordStatusRTS(self)
+        internet.updateOnlineOnSite(self)
 
         self.timer = QTimer()
-        self.timer.timeout.connect(self.updateOnline)
+        self.timer.timeout.connect(lambda: internet.updateOnlineOnSite(self))
         self.timer.start(60000)
 
         self.init()
-
-    def updateOnline(self):
-        try:
-            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-                s.connect(("8.8.8.8", 80))
-                ip = s.getsockname()[0]
-
-        except Exception as e:
-            print(f"ERROR: can't getting IP: {e}")
-
-            return
-
-        try:
-            url = "https://artyom7777.pythonanywhere.com/updateOnline"
-            # url = "http://127.0.0.1:5000/updateOnline"
-
-            response = requests.post(
-                url=url,
-                data={
-                    "ip": hashlib.sha256(ip.encode()).hexdigest()
-                },
-                timeout=2
-            )
-
-            # print(f"LOG: status: {response.status_code}, Response: {response.text}")
-
-        except requests.exceptions.RequestException as e:
-            print(f"ERROR: request failed: {e}")
 
     def versionUpdateMessage(self) -> None:
         def function():

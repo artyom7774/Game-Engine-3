@@ -71,6 +71,11 @@ def getAllProjectScenes(project, onlyFileName: bool = False) -> typing.List[str]
             answer.append(path)
 
         else:
+            if os.path.isfile(path):
+                queue.pop(0)
+
+                continue
+
             for element in os.listdir(path):
                 queue.append(queue[0] + "/" + element)
 

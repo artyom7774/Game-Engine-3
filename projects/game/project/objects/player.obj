@@ -116,7 +116,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets/player/idle/1.png"
+                    "value": "assets\/player\/idle\/1.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -172,7 +172,7 @@
                     "idle": {
                         "name": "group",
                         "sprites": [
-                            "assets/player/idle/1.png"
+                            "assets\/player\/idle\/1.png"
                         ],
                         "settings": {
                             "repeat": false,
@@ -183,12 +183,12 @@
                     "walk": {
                         "name": "group",
                         "sprites": [
-                            "assets/player/walk/1.png",
-                            "assets/player/walk/2.png",
-                            "assets/player/walk/3.png",
-                            "assets/player/walk/4.png",
-                            "assets/player/walk/5.png",
-                            "assets/player/walk/6.png"
+                            "assets\/player\/walk\/1.png",
+                            "assets\/player\/walk\/2.png",
+                            "assets\/player\/walk\/3.png",
+                            "assets\/player\/walk\/4.png",
+                            "assets\/player\/walk\/6.png",
+                            "assets\/player\/walk\/5.png"
                         ],
                         "settings": {
                             "repeat": true,
