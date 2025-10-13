@@ -5,26 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/scr/modules/internet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/project/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/project/collision.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/GE3 project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/scr/engine/classes/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/1/scr/engine/classes/group.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/123/project/scenes/%scene%scene/0.objc" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/project/scenes/%scene%scene/0.objc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/123/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/123/version.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/player.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/player.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/helloworld/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/helloworld/version.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/w/project/objects/1.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/w/project/objects/1.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/w/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/w/version.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/cash/image.png" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/cash/image.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/logs/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/logs/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/settings/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/settings/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/files/updates.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/updates.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scr/modules/functions/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/functions/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start.spec" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/scr/modules/updating/v3131to3132.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/files/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/scr/files/version.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scr/modules/updating/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scr/modules/updating/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
