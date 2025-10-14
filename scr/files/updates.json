@@ -187,6 +187,11 @@
         "3.13.2": {
             "name": "3.13.2",
             "text": "- Updated hitbox editor\n- Discord shows when someone is using the program"
+        },
+
+        "3.13.3": {
+            "name": "3.13.3",
+            "text": "- fixed bug with displayed on discord"
         }
     }
 }

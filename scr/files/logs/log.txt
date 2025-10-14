@@ -118,3 +118,9 @@ LOG: last version = 3.13.1, now version = 3.13.2
 LOG: divelop mode = False
 LOG: program runned on "Windows 10"
 LOG: last version = 3.13.1, now version = 3.13.2
+-------------------- LOG 2025-10-14 14:43:22.199855 --------------------
+LOG: divelop mode = False
+LOG: program runned on "Windows 10"
+-------------------- LOG 2025-10-14 14:49:36.324848 --------------------
+LOG: divelop mode = False
+LOG: program runned on "Windows 10"

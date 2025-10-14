@@ -1,4 +1,4 @@
-from pypresence import Presence
+import pypresence
 import requests
 import hashlib
 import socket
@@ -37,14 +37,21 @@ def updateOnlineOnSite(project):
 
 
 def updateDiscordStatusRTS(project):
-    RPC = Presence(DISCORD_BOT_ID)
-    RPC.connect()
+    try:
+        RPC = pypresence.Presence(DISCORD_BOT_ID)
+        RPC.connect()
 
-    RPC.update(
-        details="Develops applications",
-        large_image="logo",
-        start=time.time(),
-        buttons=[
-            {"label": "Download", "url": "https://artyom7777.pythonanywhere.com/"}
-        ]
-    )
+        RPC.update(
+            details="Develops applications",
+            large_image="logo",
+            start=time.time(),
+            buttons=[
+                {"label": "Download", "url": "https://artyom7777.pythonanywhere.com/"}
+            ]
+        )
+
+    except pypresence.exceptions.DiscordNotFound:
+        print(f"LOG: discord is not found")
+
+    except BaseException as e:
+        print(f"ERROR: request failed: {e}")
