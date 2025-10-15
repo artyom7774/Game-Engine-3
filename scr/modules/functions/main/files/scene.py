@@ -934,16 +934,15 @@ class Scene:
             os.remove(project.cash["file"][project.selectFile].selectObject.variables["file"])
 
         except FileNotFoundError:
-            Scene.objectsLoaded = False
-            Scene.objects(project)
+            pass
 
-            project.init()
+        Scene.objectsLoaded = False
+        Scene.objects(project)
 
-        else:
-            Scene.objectsLoaded = False
-            Scene.objects(project)
+        project.init()
 
-            project.init()
+        # project.cash["file"][project.selectFile].selectObject = None
+        # project.cash["file"][project.selectFile].selectLink = -1
 
     @staticmethod
     def objectReleased(project) -> None:
@@ -961,7 +960,7 @@ class Scene:
     def loadObjectFile(project, id: int, obj: dict) -> dict:
         answer = {}
 
-        for element in obj["dependence"] + [obj["type"]["value"]]:
+        for element in obj.get("dependence", []) + [obj["type"]["value"]]:
             if element not in obj:
                 continue
 

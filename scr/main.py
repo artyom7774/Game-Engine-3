@@ -15,8 +15,6 @@ import webbrowser
 import qdarktheme
 import threading
 import requests
-import hashlib
-import socket
 import ctypes
 
 

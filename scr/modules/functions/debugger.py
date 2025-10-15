@@ -155,19 +155,20 @@ class InteractiveClassInspector:
         try:
             if not inspect.isclass(obj):
                 obj_class = type(obj)
+
             else:
                 obj_class = obj
 
-            # Если это собственный атрибут объекта
             if hasattr(obj, '__dict__') and attr_name in obj.__dict__:
                 return False
 
-            # Проверяем MRO
             if inspect.isclass(obj_class):
                 for i, cls in enumerate(obj_class.__mro__):
                     if attr_name in cls.__dict__:
                         return i > 0
+
             return False
+
         except Exception:
             return False
 
