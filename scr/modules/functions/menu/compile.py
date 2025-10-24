@@ -11,6 +11,7 @@ import threading
 import socket
 import shutil
 import typing
+import orjson
 import json
 import sys
 import os
@@ -568,10 +569,11 @@ class Compile:
 
             objects_variables[scene] = {}
 
-            for element in os.listdir(scene):
-                objectPath = f"{scene}/{element}"
+            with open(f"{scene}/objects.scene", "rb") as file:
+                objectsInScene = orjson.loads(file.read())
 
-                type, variables, _ = functions.main.files.Scene.loadObjectFileFull(project, objectPath[:objectPath.rfind(".")][objectPath.rfind("-") + 1:], load(open(objectPath, "r", encoding="utf-8")))
+            for name, obj in objectsInScene.items():
+                type, variables = functions.main.files.Scene.loadObjectFile(project, name, obj)
 
                 if "sprite" in variables:
                     image = pygame.image.load(variables["sprite"][0])
@@ -584,15 +586,15 @@ class Compile:
                     if type == "Particle" and variables["sprite"][4] == -1:
                         variables["sprite"][4] = image.get_height()
 
-                objects[element] = {
+                objects[name] = {
                     "type": type,
                     "variables": variables
                 }
 
-                objects_variables[scene][element] = load(open(objectPath, "r", encoding="utf-8"))["variables"]
+                objects_variables[scene][name] = obj["variables"]
 
             if os.path.exists(scenePath):
-                focus = load(open(scenePath, "r", encoding="utf-8"))["Scene"]["focus"]["value"]
+                focus = load(open(scenePath, "r", encoding="utf-8"))["Scene"]["focus"]["value"].replace(".objc", "")
 
             else:
                 focus = None

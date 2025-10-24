@@ -6,7 +6,64 @@ from scr.modules.functions.project import projectTreeGetPath, projectTreeGetFile
 
 from scr.variables import *
 
+import orjson
 import os
+
+SCENE_SETTINGS_TEMPLATE = {
+    "dependences": {
+        "Scene": []
+    },
+    "dependence": [],
+    "type": {
+        "name": "Scene type",
+        "value": "Scene",
+        "type": "none"
+    },
+    "variables": {},
+    "Scene": {
+        "camera_acceleration": {
+            "name": "Camera acceleration",
+            "value": True,
+            "type": "none"
+        },
+        "visiable_screen": {
+            "name": "Visible screen",
+            "value": True,
+            "type": "bool"
+        },
+        "visiable_grid": {
+            "name": "Grid visiable",
+            "value": True,
+            "type": "bool"
+        },
+        "snap": {
+            "name": "Snap to grid",
+            "value": True,
+            "type": "bool"
+        },
+        "grid": {
+            "name": "Grid",
+            "value": {
+                "x": {
+                    "name": "Width",
+                    "type": "int",
+                    "value": 32
+                },
+                "y": {
+                    "name": "Height",
+                    "type": "int",
+                    "value": 32
+                }
+            },
+            "type": "dict"
+        },
+        "focus": {
+            "name": "Name focus object",
+            "value": "0.objc",
+            "type": "str"
+        }
+    }
+}
 
 
 class CreateSceneFunctions:
@@ -41,6 +98,12 @@ class CreateSceneFunctions:
         # CREATE
 
         os.mkdir(f"{path}/%scene%{name}")
+
+        with open(f"{path}/%scene%{name}/objects.scene", "wb") as file:
+            file.write(orjson.dumps({}))
+
+        with open(f"projects/{project.selectProject}/project/cash/scenes-%scene%{name}-setting.json", "w", encoding="utf-8") as file:
+            json.dump(SCENE_SETTINGS_TEMPLATE, file, indent=4)
 
         project.init()
 

@@ -16,7 +16,7 @@ def main() -> None:
     print(f"{'-' * 20} LOG {datetime.datetime.now()} {'-' * 20}")
 
     print(f"LOG: divelop mode = {DIVELOP}")
-    print(f"LOG: program runned on \"{SYSTEM} {RELEASE}\"")
+    print(f"LOG: program ran on \"{SYSTEM} {RELEASE}\"")
 
     app = QApplication(sys.argv)
     ex = Main(app)

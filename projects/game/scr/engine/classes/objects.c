@@ -26965,11 +26965,11 @@ static int __pyx_pw_6engine_7classes_7objects_4Text_1__init__(PyObject *__pyx_v_
     values[8] = __Pyx_Arg_NewRef_VARARGS(((PyObject*)__pyx_n_s_Arial));
     values[9] = __Pyx_Arg_NewRef_VARARGS(((PyObject*)__pyx_n_s_Text));
     values[10] = __Pyx_Arg_NewRef_VARARGS(__pyx_k__35);
-    values[11] = __Pyx_Arg_NewRef_VARARGS(((PyObject*)__pyx_kp_s_FFFFFF));
+    values[11] = __Pyx_Arg_NewRef_VARARGS(((PyObject *)__pyx_kp_s_FFFFFF));
 
     /* "engine/classes/objects.pyx":680
  *         fontSize: int = 13,
- *         fontColor: str = "#FFFFFF",
+ *         fontColor: object = "#FFFFFF",
  *         alignment: typing.List[bool] = None,             # <<<<<<<<<<<<<<
  *         variables: typing.Dict[str, typing.Any] = None,
  *         specials: typing.Dict[str, typing.Any] = None,
@@ -26977,7 +26977,7 @@ static int __pyx_pw_6engine_7classes_7objects_4Text_1__init__(PyObject *__pyx_v_
     values[12] = __Pyx_Arg_NewRef_VARARGS(((PyObject*)Py_None));
 
     /* "engine/classes/objects.pyx":681
- *         fontColor: str = "#FFFFFF",
+ *         fontColor: object = "#FFFFFF",
  *         alignment: typing.List[bool] = None,
  *         variables: typing.Dict[str, typing.Any] = None,             # <<<<<<<<<<<<<<
  *         specials: typing.Dict[str, typing.Any] = None,
@@ -27196,7 +27196,7 @@ static int __pyx_pw_6engine_7classes_7objects_4Text_1__init__(PyObject *__pyx_v_
     __pyx_v_font = ((PyObject*)values[8]);
     __pyx_v_message = ((PyObject*)values[9]);
     __pyx_v_fontSize = ((PyObject*)values[10]);
-    __pyx_v_fontColor = ((PyObject*)values[11]);
+    __pyx_v_fontColor = values[11];
     __pyx_v_alignment = ((PyObject*)values[12]);
     __pyx_v_variables = ((PyObject*)values[13]);
     __pyx_v_specials = ((PyObject*)values[14]);
@@ -27226,7 +27226,6 @@ static int __pyx_pw_6engine_7classes_7objects_4Text_1__init__(PyObject *__pyx_v_
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_font), (&PyString_Type), 0, "font", 1))) __PYX_ERR(0, 676, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_message), (&PyString_Type), 0, "message", 1))) __PYX_ERR(0, 677, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fontSize), (&PyInt_Type), 0, "fontSize", 1))) __PYX_ERR(0, 678, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fontColor), (&PyString_Type), 0, "fontColor", 1))) __PYX_ERR(0, 679, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_alignment), (&PyList_Type), 1, "alignment", 1))) __PYX_ERR(0, 680, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_variables), (&PyDict_Type), 1, "variables", 1))) __PYX_ERR(0, 681, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_specials), (&PyDict_Type), 1, "specials", 1))) __PYX_ERR(0, 682, __pyx_L1_error)
@@ -28801,7 +28800,7 @@ static int __pyx_pf_6engine_7classes_7objects_4Text_4font_4__del__(struct __pyx_
  *     cdef public str font
  *     cdef public str message             # <<<<<<<<<<<<<<
  *     cdef public int fontSize
- *     cdef public str fontColor
+ *     cdef public object fontColor
  */
 
 /* Python wrapper */
@@ -28914,7 +28913,7 @@ static int __pyx_pf_6engine_7classes_7objects_4Text_7message_4__del__(struct __p
  *     cdef public str font
  *     cdef public str message
  *     cdef public int fontSize             # <<<<<<<<<<<<<<
- *     cdef public str fontColor
+ *     cdef public object fontColor
  *     cdef public object alignment
  */
 
@@ -28996,7 +28995,7 @@ static int __pyx_pf_6engine_7classes_7objects_4Text_8fontSize_2__set__(struct __
 /* "engine/classes/objects.pyx":658
  *     cdef public str message
  *     cdef public int fontSize
- *     cdef public str fontColor             # <<<<<<<<<<<<<<
+ *     cdef public object fontColor             # <<<<<<<<<<<<<<
  *     cdef public object alignment
  *     cdef public str vertical
  */
@@ -29050,28 +29049,15 @@ static int __pyx_pw_6engine_7classes_7objects_4Text_9fontColor_3__set__(PyObject
 static int __pyx_pf_6engine_7classes_7objects_4Text_9fontColor_2__set__(struct __pyx_obj_6engine_7classes_7objects_Text *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 1);
-  if (!(likely(PyString_CheckExact(__pyx_v_value))||((__pyx_v_value) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_v_value))) __PYX_ERR(0, 658, __pyx_L1_error)
-  __pyx_t_1 = __pyx_v_value;
-  __Pyx_INCREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_v_value);
+  __Pyx_GIVEREF(__pyx_v_value);
   __Pyx_GOTREF(__pyx_v_self->fontColor);
   __Pyx_DECREF(__pyx_v_self->fontColor);
-  __pyx_v_self->fontColor = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
+  __pyx_v_self->fontColor = __pyx_v_value;
 
   /* function exit code */
   __pyx_r = 0;
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("engine.classes.objects.Text.fontColor.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = -1;
-  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
@@ -29099,7 +29085,7 @@ static int __pyx_pf_6engine_7classes_7objects_4Text_9fontColor_4__del__(struct _
   __Pyx_GIVEREF(Py_None);
   __Pyx_GOTREF(__pyx_v_self->fontColor);
   __Pyx_DECREF(__pyx_v_self->fontColor);
-  __pyx_v_self->fontColor = ((PyObject*)Py_None);
+  __pyx_v_self->fontColor = Py_None;
 
   /* function exit code */
   __pyx_r = 0;
@@ -29109,7 +29095,7 @@ static int __pyx_pf_6engine_7classes_7objects_4Text_9fontColor_4__del__(struct _
 
 /* "engine/classes/objects.pyx":659
  *     cdef public int fontSize
- *     cdef public str fontColor
+ *     cdef public object fontColor
  *     cdef public object alignment             # <<<<<<<<<<<<<<
  *     cdef public str vertical
  *     cdef public str horizontal
@@ -29209,7 +29195,7 @@ static int __pyx_pf_6engine_7classes_7objects_4Text_9alignment_4__del__(struct _
 }
 
 /* "engine/classes/objects.pyx":660
- *     cdef public str fontColor
+ *     cdef public object fontColor
  *     cdef public object alignment
  *     cdef public str vertical             # <<<<<<<<<<<<<<
  *     cdef public str horizontal
@@ -30079,7 +30065,7 @@ static PyObject *__pyx_pf_6engine_7classes_7objects_4Text_8__reduce_cython__(str
       __pyx_t_14 = __pyx_t_15;
       goto __pyx_L4_bool_binop_done;
     }
-    __pyx_t_15 = (__pyx_v_self->fontColor != ((PyObject*)Py_None));
+    __pyx_t_15 = (__pyx_v_self->fontColor != Py_None);
     if (!__pyx_t_15) {
     } else {
       __pyx_t_14 = __pyx_t_15;
@@ -30500,11 +30486,11 @@ static int __pyx_pw_6engine_7classes_7objects_5Field_1__init__(PyObject *__pyx_v
     values[8] = __Pyx_Arg_NewRef_VARARGS(((PyObject*)__pyx_n_s_Arial));
     values[9] = __Pyx_Arg_NewRef_VARARGS(((PyObject*)__pyx_n_s_Text));
     values[10] = __Pyx_Arg_NewRef_VARARGS(__pyx_k__38);
-    values[11] = __Pyx_Arg_NewRef_VARARGS(((PyObject*)__pyx_kp_s_FFFFFF));
+    values[11] = __Pyx_Arg_NewRef_VARARGS(((PyObject *)__pyx_kp_s_FFFFFF));
 
     /* "engine/classes/objects.pyx":768
  *         fontSize: int = 13,
- *         fontColor: str = "#FFFFFF",
+ *         fontColor: object = "#FFFFFF",
  *         alignment: typing.List[bool] = None,             # <<<<<<<<<<<<<<
  *         variables: typing.Dict[str, typing.Any] = None,
  *         specials: typing.Dict[str, typing.Any] = None,
@@ -30512,7 +30498,7 @@ static int __pyx_pw_6engine_7classes_7objects_5Field_1__init__(PyObject *__pyx_v
     values[12] = __Pyx_Arg_NewRef_VARARGS(((PyObject*)Py_None));
 
     /* "engine/classes/objects.pyx":769
- *         fontColor: str = "#FFFFFF",
+ *         fontColor: object = "#FFFFFF",
  *         alignment: typing.List[bool] = None,
  *         variables: typing.Dict[str, typing.Any] = None,             # <<<<<<<<<<<<<<
  *         specials: typing.Dict[str, typing.Any] = None,
@@ -30731,7 +30717,7 @@ static int __pyx_pw_6engine_7classes_7objects_5Field_1__init__(PyObject *__pyx_v
     __pyx_v_font = ((PyObject*)values[8]);
     __pyx_v_message = ((PyObject*)values[9]);
     __pyx_v_fontSize = ((PyObject*)values[10]);
-    __pyx_v_fontColor = ((PyObject*)values[11]);
+    __pyx_v_fontColor = values[11];
     __pyx_v_alignment = ((PyObject*)values[12]);
     __pyx_v_variables = ((PyObject*)values[13]);
     __pyx_v_specials = ((PyObject*)values[14]);
@@ -30761,7 +30747,6 @@ static int __pyx_pw_6engine_7classes_7objects_5Field_1__init__(PyObject *__pyx_v
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_font), (&PyString_Type), 0, "font", 1))) __PYX_ERR(0, 764, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_message), (&PyString_Type), 0, "message", 1))) __PYX_ERR(0, 765, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fontSize), (&PyInt_Type), 0, "fontSize", 1))) __PYX_ERR(0, 766, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fontColor), (&PyString_Type), 0, "fontColor", 1))) __PYX_ERR(0, 767, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_alignment), (&PyList_Type), 1, "alignment", 1))) __PYX_ERR(0, 768, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_variables), (&PyDict_Type), 1, "variables", 1))) __PYX_ERR(0, 769, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_specials), (&PyDict_Type), 1, "specials", 1))) __PYX_ERR(0, 770, __pyx_L1_error)
@@ -33504,7 +33489,7 @@ static PyObject *__pyx_pf_6engine_7classes_7objects_5Field_10__reduce_cython__(s
       __pyx_t_14 = __pyx_t_15;
       goto __pyx_L4_bool_binop_done;
     }
-    __pyx_t_15 = (__pyx_v_self->__pyx_base.fontColor != ((PyObject*)Py_None));
+    __pyx_t_15 = (__pyx_v_self->__pyx_base.fontColor != Py_None);
     if (!__pyx_t_15) {
     } else {
       __pyx_t_14 = __pyx_t_15;
@@ -41499,11 +41484,10 @@ static PyObject *__pyx_f_6engine_7classes_7objects___pyx_unpickle_Text__set_stat
   }
   __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v___pyx_result->fontColor);
   __Pyx_DECREF(__pyx_v___pyx_result->fontColor);
-  __pyx_v___pyx_result->fontColor = ((PyObject*)__pyx_t_1);
+  __pyx_v___pyx_result->fontColor = __pyx_t_1;
   __pyx_t_1 = 0;
   if (unlikely(__pyx_v___pyx_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -42236,11 +42220,10 @@ static PyObject *__pyx_f_6engine_7classes_7objects___pyx_unpickle_Field__set_sta
   }
   __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyString_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v___pyx_result->__pyx_base.fontColor);
   __Pyx_DECREF(__pyx_v___pyx_result->__pyx_base.fontColor);
-  __pyx_v___pyx_result->__pyx_base.fontColor = ((PyObject*)__pyx_t_1);
+  __pyx_v___pyx_result->__pyx_base.fontColor = __pyx_t_1;
   __pyx_t_1 = 0;
   if (unlikely(__pyx_v___pyx_state == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -44414,7 +44397,7 @@ static PyObject *__pyx_tp_new_6engine_7classes_7objects_Text(PyTypeObject *t, Py
   p = ((struct __pyx_obj_6engine_7classes_7objects_Text *)o);
   p->font = ((PyObject*)Py_None); Py_INCREF(Py_None);
   p->message = ((PyObject*)Py_None); Py_INCREF(Py_None);
-  p->fontColor = ((PyObject*)Py_None); Py_INCREF(Py_None);
+  p->fontColor = Py_None; Py_INCREF(Py_None);
   p->alignment = Py_None; Py_INCREF(Py_None);
   p->vertical = ((PyObject*)Py_None); Py_INCREF(Py_None);
   p->horizontal = ((PyObject*)Py_None); Py_INCREF(Py_None);
@@ -44447,6 +44430,9 @@ static int __pyx_tp_traverse_6engine_7classes_7objects_Text(PyObject *o, visitpr
   int e;
   struct __pyx_obj_6engine_7classes_7objects_Text *p = (struct __pyx_obj_6engine_7classes_7objects_Text *)o;
   e = __pyx_tp_traverse_6engine_7classes_7objects_StaticObject(o, v, a); if (e) return e;
+  if (p->fontColor) {
+    e = (*v)(p->fontColor, a); if (e) return e;
+  }
   if (p->alignment) {
     e = (*v)(p->alignment, a); if (e) return e;
   }
@@ -44460,6 +44446,9 @@ static int __pyx_tp_clear_6engine_7classes_7objects_Text(PyObject *o) {
   PyObject* tmp;
   struct __pyx_obj_6engine_7classes_7objects_Text *p = (struct __pyx_obj_6engine_7classes_7objects_Text *)o;
   __pyx_tp_clear_6engine_7classes_7objects_StaticObject(o);
+  tmp = ((PyObject*)p->fontColor);
+  p->fontColor = Py_None; Py_INCREF(Py_None);
+  Py_XDECREF(tmp);
   tmp = ((PyObject*)p->alignment);
   p->alignment = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
@@ -48507,7 +48496,7 @@ if (!__Pyx_RefNanny) {
  *         font: str = "Arial",
  *         message: str = "Text",
  *         fontSize: int = 13,             # <<<<<<<<<<<<<<
- *         fontColor: str = "#FFFFFF",
+ *         fontColor: object = "#FFFFFF",
  *         alignment: typing.List[bool] = None,
  */
   if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_13)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_13))) __PYX_ERR(0, 678, __pyx_L1_error)
@@ -48585,7 +48574,7 @@ if (!__Pyx_RefNanny) {
  *         font: str = "Arial",
  *         message: str = "Text",
  *         fontSize: int = 13,             # <<<<<<<<<<<<<<
- *         fontColor: str = "#FFFFFF",
+ *         fontColor: object = "#FFFFFF",
  *         alignment: typing.List[bool] = None,
  */
   if (!(likely(__Pyx_Py3Int_CheckExact(__pyx_int_13)) || __Pyx_RaiseUnexpectedTypeError("int", __pyx_int_13))) __PYX_ERR(0, 766, __pyx_L1_error)

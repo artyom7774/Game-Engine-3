@@ -6,6 +6,8 @@ import typing
 
 
 cdef class SquareHitbox:
+    __slots__ = ("x", "y", "width", "height")
+
     cdef public int x
     cdef public int y
     cdef public int width
@@ -43,6 +45,8 @@ cdef class SquareHitbox:
 
 
 cdef class CircleHitbox:
+    __slots__ = ("x", "y", "radius")
+
     cdef public int x
     cdef public int y
     cdef public int radius

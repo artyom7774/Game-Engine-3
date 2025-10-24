@@ -36,7 +36,7 @@ def updateOnlineOnSite(project):
         print(f"ERROR: request failed: {e}")
 
 
-def updateDiscordStatusRTS(project):
+def updateDiscordStatusRPS(project):
     try:
         RPC = pypresence.Presence(DISCORD_BOT_ID)
         RPC.connect()

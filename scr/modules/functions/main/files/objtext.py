@@ -13,8 +13,11 @@ from engine.vector.int import Vec4i
 
 from scr.variables import *
 
+import orjson
 import math
 import os
+
+TEMPLATE = json.load(open("engine/files/text.json", "r", encoding="utf-8"))
 
 SORTING_TEXT_TYPES = {
     "Text": 1,
@@ -129,9 +132,9 @@ class ChooseFontDialog(QDialog):
     def fontVisiable(self):
         self.application.objects.removeByGroup("font")
 
-        self.application.objects.add(self.project.engine.objects.Text(self.application, (0, 0), (0, 0, 560, 280), group="font", font=FONT_LIST[self.objects["choose_combobox"].currentIndex()], message="Example", fontSize=60, fontColor="#000000", alignment=["center", "center"]))
+        self.application.objects.add(self.project.engine.objects.Text(self.application, (0, 0), (0, 0, 560, 280), group="font", font=FONT_LIST[self.objects["choose_combobox"].currentIndex()], message="Example", fontSize=60, fontColor=(32, 33, 36) if SETTINGS["theme"] == "light" else (248, 249, 250), alignment=["center", "center"]))
 
-        self.application.frame(screenFillColor=(248, 249, 250))
+        self.application.frame(screenFillColor=(32, 33, 36) if SETTINGS["theme"] == "dark" else (248, 249, 250))
 
         qpixmap = QPixmap(ObjectText.getVisiableScreen(QImage(self.application.screen.get_buffer(), 560, 280, QImage.Format_RGB32), 560, 280))
 
@@ -149,7 +152,13 @@ class ObjectText:
 
             layout = QHBoxLayout()
 
-            self.label = QLabel(translate(temp["name"]) + ":")
+            if path.split("/")[-1] in TEMPLATE["name"]:
+                name = TEMPLATE["name"][path.split("/")[-1]]
+
+            else:
+                name = ObjectText.get(TEMPLATE["standard"], path if len(path.split("/")) == 1 else path[path.find("/") + 1:])["name"]
+
+            self.label = QLabel(translate(name) + ":")
             self.label.setFont(FONT)
 
             self.label.setFixedWidth(Size.x(20))
@@ -368,12 +377,12 @@ class ObjectText:
         with open(f"engine/files/text.json", "r", encoding="utf-8") as file:
             objects = load(file)
 
-        try:
+        if os.path.exists(save):
             with open(save, "r", encoding="utf-8") as f:
                 file = load(f)
 
-        except BaseException:
-            return
+        else:
+            file = project.cash["allSceneObjects"][save]
 
         if last["type"] == "font":
             text = obj.text()
@@ -489,8 +498,15 @@ class ObjectText:
             obj.setText(str(last["value"]))
 
         if doing and temp["value"] != last["value"]:
-            with open(save, "w", encoding="utf-8") as f:
-                dump(file, f, indent=4)
+            if os.path.exists(save):
+                with open(save, "w", encoding="utf-8") as f:
+                    dump(file, f, indent=4)
+
+            else:
+                project.cash["allSceneObjects"][save] = file
+
+                with open(f"{project.selectFile}/objects.scene", "wb") as file:
+                    file.write(orjson.dumps(project.cash["allSceneObjects"]))
 
             if init:
                 project.init()

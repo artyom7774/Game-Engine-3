@@ -60,8 +60,12 @@ class Hitbox(QDialog):
         desktop = QtWidgets.QApplication.desktop()
         self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
 
-        with open(self.path, "r", encoding="utf-8") as f:
-            self.object = load(f)
+        if os.path.exists(self.path):
+            with open(self.path, "r", encoding="utf-8") as f:
+                self.object = load(f)
+
+        else:
+            self.object = project.cash["allSceneObjects"][self.path]
 
         settings = self.object["StaticObject"]["hitbox"]["value"]
 

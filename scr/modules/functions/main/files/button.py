@@ -13,8 +13,11 @@ from engine.vector.int import Vec4i
 
 from scr.variables import *
 
+import orjson
 import math
 import os
+
+TEMPLATE = json.load(open("engine/files/button.json", "r", encoding="utf-8"))
 
 SORTING_BUTTON_TYPES = {
     "Button": 1
@@ -148,7 +151,13 @@ class Button:
 
             layout = QHBoxLayout()
 
-            self.label = QLabel(translate(temp["name"]) + ":")
+            if path.split("/")[-1] in TEMPLATE["name"]:
+                name = TEMPLATE["name"][path.split("/")[-1]]
+
+            else:
+                name = Button.get(TEMPLATE["standard"], path if len(path.split("/")) == 1 else path[path.find("/") + 1:])["name"]
+
+            self.label = QLabel(translate(name) + ":")
             self.label.setFont(FONT)
 
             self.label.setFixedWidth(Size.x(20))
@@ -367,12 +376,12 @@ class Button:
         with open(f"engine/files/button.json", "r", encoding="utf-8") as file:
             objects = load(file)
 
-        try:
+        if os.path.exists(save):
             with open(save, "r", encoding="utf-8") as f:
                 file = load(f)
 
-        except BaseException:
-            return
+        else:
+            file = project.cash["allSceneObjects"][save]
 
         if last["type"] == "font":
             text = obj.text()
@@ -488,8 +497,15 @@ class Button:
             obj.setText(str(last["value"]))
 
         if doing and temp["value"] != last["value"]:
-            with open(save, "w", encoding="utf-8") as f:
-                dump(file, f, indent=4)
+            if os.path.exists(save):
+                with open(save, "w", encoding="utf-8") as f:
+                    dump(file, f, indent=4)
+
+            else:
+                project.cash["allSceneObjects"][save] = file
+
+                with open(f"{project.selectFile}/objects.scene", "wb") as file:
+                    file.write(orjson.dumps(project.cash["allSceneObjects"]))
 
             if init:
                 project.init()

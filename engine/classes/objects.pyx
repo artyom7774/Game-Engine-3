@@ -655,7 +655,7 @@ cdef class Text(StaticObject):
     cdef public str font
     cdef public str message
     cdef public int fontSize
-    cdef public str fontColor
+    cdef public object fontColor
     cdef public object alignment
     cdef public str vertical
     cdef public str horizontal
@@ -676,7 +676,7 @@ cdef class Text(StaticObject):
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
-        fontColor: str = "#FFFFFF",
+        fontColor: object = "#FFFFFF",
         alignment: typing.List[bool] = None,
         variables: typing.Dict[str, typing.Any] = None,
         specials: typing.Dict[str, typing.Any] = None,
@@ -764,7 +764,7 @@ cdef class Field(Text):
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
-        fontColor: str = "#FFFFFF",
+        fontColor: object = "#FFFFFF",
         alignment: typing.List[bool] = None,
         variables: typing.Dict[str, typing.Any] = None,
         specials: typing.Dict[str, typing.Any] = None,

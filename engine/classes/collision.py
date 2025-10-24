@@ -1,5 +1,3 @@
-import os.path
-
 from engine.classes.hitbox import SquareHitbox, CircleHitbox
 
 from engine.functions.loads import loadCollisionFile
@@ -12,16 +10,16 @@ import math
 class Collision:
     @staticmethod
     def any(hitbox1, hitbox2) -> bool:
-        if type(hitbox2) == SquareHitbox:
+        if isinstance(hitbox2, SquareHitbox):
             hitbox2, hitbox1 = hitbox1, hitbox2
 
-        if type(hitbox1) == SquareHitbox and type(hitbox2) == SquareHitbox:
+        if isinstance(hitbox1, SquareHitbox) and isinstance(hitbox2, SquareHitbox):
             return Collision.rectByRect(*hitbox1.get(), *hitbox2.get())
 
-        if type(hitbox1) == SquareHitbox and type(hitbox2) == CircleHitbox:
+        if isinstance(hitbox1, CircleHitbox) and isinstance(hitbox2, CircleHitbox):
             return Collision.rectByCircle(*hitbox1.get(), *hitbox2.get())
 
-        if type(hitbox1) == CircleHitbox and type(hitbox2) == CircleHitbox:
+        if isinstance(hitbox1, CircleHitbox) and isinstance(hitbox2, CircleHitbox):
             return Collision.circleByCircle(*hitbox1.get(), *hitbox2.get())
 
         raise TypeError()

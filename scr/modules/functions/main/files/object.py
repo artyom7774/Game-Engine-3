@@ -9,14 +9,18 @@ from engine.vector.int import Vec4i
 
 from scr.variables import *
 
+import orjson
 import math
 import json
 import os
 
+TEMPLATE = json.load(open("engine/files/objects.json", "r", encoding="utf-8"))
+
 SORTING_OBJECT_TYPES = {
     "StaticObject": 1,
     "DynamicObject": 2,
-    "Particle": 3
+    "Particle": 3,
+    "KinematicObject": 4
 }
 
 
@@ -31,7 +35,13 @@ class Object:
 
             layout = QHBoxLayout()
 
-            self.label = QLabel(translate(temp["name"]) + ":")
+            if path.split("/")[-1] in TEMPLATE["name"]:
+                name = TEMPLATE["name"][path.split("/")[-1]]
+
+            else:
+                name = Object.get(TEMPLATE["standard"], path if len(path.split("/")) == 1 else path[path.find("/") + 1:])["name"]
+
+            self.label = QLabel(translate(name) + ":")
             self.label.setFont(FONT)
 
             self.label.setFixedWidth(Size.x(20))
@@ -146,22 +156,26 @@ class Object:
             else:
                 project.objects["main"]["object_tree_objects"][path] = QTreeWidgetItem(project.objects["main"]["object_tree_objects"][path[:path.rfind("/")]])
 
-            project.objects["main"]["object_tree"].setItemWidget(
-                project.objects["main"]["object_tree_objects"][path], 0, widget
-            )
+            project.objects["main"]["object_tree"].setItemWidget(project.objects["main"]["object_tree_objects"][path], 0, widget)
 
         if file is None:
             file = project.selectFile
-
-        else:
-            pass
 
         try:
             with open(file, "r", encoding="utf-8") as f:
                 obj = load(f)
 
         except FileNotFoundError:
-            return
+            with open(f"{project.selectFile}/objects.scene", "rb") as f:
+                objects = orjson.loads(f.read())
+
+            if file in objects:
+                obj = objects[file]
+
+            else:
+                print(f"ERROR: object {file} not found on this scene")
+
+                return
 
         if "object_variables" in project.objects["main"]:
             try:
@@ -225,9 +239,6 @@ class Object:
         project.objects["main"]["object_tree_main"].setExpanded(True)
         project.objects["main"]["object_tree_main"].setFont(0, FONT)
 
-        if include(project, obj, "type", class_) == -1:
-            pass
-
         obj = dict(sorted(obj.items(), key=lambda x: -1 if x[0] not in SORTING_OBJECT_TYPES else SORTING_OBJECT_TYPES[x[0]]))
 
         for key, value in obj.items():
@@ -250,12 +261,18 @@ class Object:
         with open(f"engine/files/objects.json", "r", encoding="utf-8") as file:
             objects = load(file)
 
-        try:
+        if os.path.exists(save):
             with open(save, "r", encoding="utf-8") as f:
                 file = load(f)
 
-        except BaseException:
-            return
+        else:
+            try:
+                file = project.cash["allSceneObjects"][save]
+
+            except KeyError:
+                # TODO: почему ключ не найден?
+
+                return
 
         if last["type"] == "bool":
             text = obj.isChecked()
@@ -339,8 +356,15 @@ class Object:
             obj.setText(str(last["value"]))
 
         if doing and temp["value"] != last["value"]:
-            with open(save, "w", encoding="utf-8") as f:
-                dump(file, f, indent=4)
+            if os.path.exists(save):
+                with open(save, "w", encoding="utf-8") as f:
+                    dump(file, f, indent=4)
+
+            else:
+                project.cash["allSceneObjects"][save] = file
+
+                with open(f"{project.selectFile}/objects.scene", "wb") as file:
+                    file.write(orjson.dumps(project.cash["allSceneObjects"]))
 
             if init:
                 project.init()

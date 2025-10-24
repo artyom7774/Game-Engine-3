@@ -12,6 +12,7 @@ from PIL import Image as PImage
 from scr.variables import *
 
 import typing
+import orjson
 import numpy
 import math
 import os
@@ -493,8 +494,15 @@ class AnimatorFunctions:
 
     @staticmethod
     def save(project, dialog):
-        with open(dialog.path, "w", encoding="utf-8") as f:
-            dump(dialog.object, f, indent=4)
+        if os.path.exists(dialog.path):
+            with open(dialog.path, "w", encoding="utf-8") as f:
+                dump(dialog.object, f, indent=4)
+
+        else:
+            project.cash["allSceneObjects"][str(dialog.path)] = dialog.object
+
+            with open(f"{project.selectFile}/objects.scene", "wb") as file:
+                file.write(orjson.dumps(project.cash["allSceneObjects"]))
 
         dialog.init()
 
@@ -552,8 +560,12 @@ class Animator(QDialog):
         desktop = QtWidgets.QApplication.desktop()
         self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
 
-        with open(self.path, "r", encoding="utf-8") as f:
-            self.object = load(f)
+        if os.path.exists(self.path):
+            with open(self.path, "r", encoding="utf-8") as f:
+                self.object = load(f)
+
+        else:
+            self.object = project.cash["allSceneObjects"][self.path]
 
         self.object["StaticObject"]["animation"]["value"]["groups"] = dict(sorted(self.object["StaticObject"]["animation"]["value"]["groups"].items(), key=lambda x: x[0]))
 

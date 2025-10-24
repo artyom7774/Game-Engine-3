@@ -26,4 +26,6 @@ from engine.ui.text import Label, TextField, print_text
 from engine.ui.layout import Layout
 from engine.ui.button import Button
 
+import engine.special.exception
+
 from engine.application import Application

@@ -7,6 +7,7 @@ from scr.modules import functions
 from scr.variables import *
 
 import shutil
+import orjson
 import os
 
 
@@ -21,26 +22,13 @@ class CreateSceneObjectFunctions:
         except IndexError:
             return
 
-        name = path[path.rfind("/") + 1:]
-        name = name[:path.rfind(".")]
-
-        extension = path[path.rfind(".") + 1:]
-
-        name = ""
-
-        files = os.listdir(project.selectFile)
-        files.sort()
-
         index = 0
 
-        for file in files:
-            for element in files:
-                if element.endswith(f"{index}.{extension}c"):
-                    index += 1
+        while f"{index}" in project.cash["allSceneObjects"]:
+            index += 1
 
-        out = f"{project.selectFile}/{index}.{extension}c"
-
-        shutil.copyfile(path, out)
+        with open(path, "r", encoding="utf-8") as file:
+            obj = json.load(file)
 
         position = [
             position.x() - project.objects["main"]["scene"].width() // 2 + project.cash["file"][project.selectFile].camera.pos.x,
@@ -54,14 +42,13 @@ class CreateSceneObjectFunctions:
             position[0] = position[0] // width * width
             position[1] = position[1] // height * height
 
-        with open(out, "r", encoding="utf-8") as f:
-            obj = load(f)
-
         obj["StaticObject"]["pos"]["value"]["x"]["value"] = position[0]
         obj["StaticObject"]["pos"]["value"]["y"]["value"] = position[1]
 
-        with open(out, "w") as f:
-            dump(obj, f, indent=4)
+        project.cash["allSceneObjects"][str(index)] = obj
+
+        with open(f"{project.selectFile}/objects.scene", "wb") as file:
+            file.write(orjson.dumps(project.cash["allSceneObjects"]))
 
         project.init()
 

@@ -1,4 +1,6 @@
 cdef class Vec2f:
+    __slots__ = ("x", "y")
+
     cdef public double x, y
 
     def __init__(self, double x=0, double y=0):
@@ -54,6 +56,8 @@ cdef class Vec2f:
 
 
 cdef class Vec3f:
+    __slots__ = ("x", "y", "z")
+
     cdef public double x, y, z
 
     def __init__(self, double x=0, double y=0, double z=0):
@@ -118,6 +122,8 @@ cdef class Vec3f:
 
 
 cdef class Vec4f:
+    __slots__ = ("x", "y", "z", "w")
+
     cdef public double x, y, z, w
 
     def __init__(self, double x=0, double y=0, double z=0, double w=0):

@@ -1016,8 +1016,12 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.plusButton.setText(name)
         self.plusButton.show()
 
-        with open(self.path, "r", encoding="utf-8") as file:
-            self.variables = load(file)["variables"]
+        if os.path.exists(self.path):
+            with open(self.path, "r", encoding="utf-8") as file:
+                self.variables = load(file)["variables"]
+
+        else:
+            self.variables = self.project.cash["allSceneObjects"][self.path]["variables"]
 
         self.setRootIsDecorated(False)
 

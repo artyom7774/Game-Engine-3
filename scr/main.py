@@ -79,7 +79,7 @@ class Main(QMainWindow):
             thr.daemon = True
             thr.start()
 
-        internet.updateDiscordStatusRTS(self)
+        internet.updateDiscordStatusRPS(self)
         internet.updateOnlineOnSite(self)
 
         self.timer = QTimer()

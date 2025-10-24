@@ -187,6 +187,8 @@ CODE_POINT_PRECISION = 6
 CODE_LINER_PRECISION = 0.25
 CODE_CONNECTOR_NO_HAVE_INPUT_TYPES = ["path"]
 
+OBJECT_TYPES = ["StaticObject", "DynamicObject", "Particle", "KinematicObject", "Text", "Field", "Button"]
+
 OBJECT_CURRECT_TEST = ["type", "type/name", "type/value", "type/type", "StaticObject", "StaticObject/pos", "StaticObject/hitbox", "StaticObject/sprite", "StaticObject/group", "StaticObject/layer"]
 TEXT_CURRECT_TEST = ["type", "type/name", "type/value", "type/type", "Text", "Text/pos", "Text/hitbox", "Text/group", "Text/layer"]
 BUTTON_CURRECT_TEST = ["type", "type/name", "type/value", "type/type", "Button"]

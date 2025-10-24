@@ -93,7 +93,8 @@ class PythonFunctions:
 
     @staticmethod
     def getObjectIDByName(name, program, variables, path):
-        name = name + ".objc" if not name.endswith(".objc") else name
+        if name.endswith(".objc"):
+            name = name[:-5]
 
         answer = program.objectIDByName[program.scene][name] if name in program.objectIDByName[program.scene] else -1
 
