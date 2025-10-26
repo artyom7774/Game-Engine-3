@@ -4,10 +4,13 @@ python -m cProfile -s tottime "Game Engine 3.py"
 
 INSTALL:
 # pyinstaller "Game Engine 3.spec"
-pyinstaller -F -w "start.py" --icon="scr/files/sprites/logo.png"
+pyinstaller -F -w "start.py" --icon="src/files/sprites/logo.png"
 
 COMPILE .pyx:
 python setup.py build_ext --inplace -v
 
 GET INSTALLED MODULES:
 pip freeze > requirements.txt
+
+LINUX PYTHON VENV:
+source ~/game-engine-venv/bin/activate

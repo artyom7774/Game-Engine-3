@@ -1727,31 +1727,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.1.executor": "Run",
-    "Python.Game Engine 3 - Debug.executor": "Debug",
-    "Python.Game Engine 3 - Release.executor": "Run",
-    "Python.Game Engine 3.executor": "Debug",
-    "Python.camera.executor": "Run",
-    "Python.collision.executor": "Run",
-    "Python.game.executor": "Run",
-    "Python.getNoiseValue.executor": "Run",
-    "Python.getTimePassed.executor": "Debug",
-    "Python.program.executor": "Run",
-    "Python.scratch.executor": "Run",
-    "Python.sprite.executor": "Run",
-    "Python.start.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.text.executor": "Run",
-    "Python.variables.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/divelop/Game-Engine-3/projects/game/project/objects",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Python"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Game Engine 3 - Debug.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.Game Engine 3 - Release.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Game Engine 3.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.camera.executor&quot;: &quot;Run&quot;,
+    &quot;Python.collision.executor&quot;: &quot;Run&quot;,
+    &quot;Python.game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.getNoiseValue.executor&quot;: &quot;Run&quot;,
+    &quot;Python.getTimePassed.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.program.executor&quot;: &quot;Run&quot;,
+    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sprite.executor&quot;: &quot;Run&quot;,
+    &quot;Python.start.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.text.executor&quot;: &quot;Run&quot;,
+    &quot;Python.variables.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/divelop/Game-Engine-3/projects/game/project/objects&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Python&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\divelop\Game-Engine-3\projects\game\project\objects" />
@@ -1761,7 +1761,7 @@
       <recent name="E:\divelop\Game-Engine-3\projects\game" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Game Engine 3 - Debug">
+  <component name="RunManager">
     <configuration name="Game Engine 3 - Debug" type="PythonConfigurationType" factoryName="Python">
       <module name="Game-Engine-3" />
       <option name="ENV_FILES" value="" />

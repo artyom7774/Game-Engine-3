@@ -1,5 +1,0 @@
-**/__pycache__/**
-**/.idea/**
-/python/**
-/build/**
-/dist/**

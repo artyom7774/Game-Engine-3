@@ -3,6 +3,10 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
+        "extra_compile_args": [
+            "/O2",
+            "/fp:fast"
+        ],
         "name": "engine.classes.getUsingObjects",
         "sources": [
             "engine\\classes\\getUsingObjects.pyx"
@@ -2261,7 +2265,6 @@ static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_obj[] = "obj";
 static const char __pyx_k_pos[] = "pos";
 static const char __pyx_k_None[] = "None";
-static const char __pyx_k_cash[] = "cash";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_game[] = "game";
 static const char __pyx_k_left[] = "left";
@@ -2271,6 +2274,7 @@ static const char __pyx_k_self[] = "self";
 static const char __pyx_k_spec[] = "__spec__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_tree[] = "tree";
+static const char __pyx_k_cache[] = "cache";
 static const char __pyx_k_float[] = "float";
 static const char __pyx_k_group[] = "group";
 static const char __pyx_k_right[] = "right";
@@ -2419,10 +2423,11 @@ typedef struct {
   PyObject *__pyx_n_s_before;
   PyObject *__pyx_n_s_binaryLeft;
   PyObject *__pyx_n_s_binaryRight;
-  PyObject *__pyx_n_s_cash;
+  PyObject *__pyx_n_s_cache;
   PyObject *__pyx_n_s_class_getitem;
   PyObject *__pyx_n_s_cline_in_traceback;
   PyObject *__pyx_n_s_collisions;
+  PyObject *__pyx_n_u_collisions;
   PyObject *__pyx_n_s_dict;
   PyObject *__pyx_n_s_dict_2;
   PyObject *__pyx_kp_u_disable;
@@ -2439,7 +2444,7 @@ typedef struct {
   PyObject *__pyx_n_s_enumerate;
   PyObject *__pyx_n_s_filter;
   PyObject *__pyx_n_s_float;
-  PyObject *__pyx_n_s_functions;
+  PyObject *__pyx_n_u_functions;
   PyObject *__pyx_n_s_game;
   PyObject *__pyx_kp_u_gc;
   PyObject *__pyx_n_s_get;
@@ -2471,8 +2476,8 @@ typedef struct {
   PyObject *__pyx_n_s_name;
   PyObject *__pyx_n_s_new;
   PyObject *__pyx_n_s_obj;
-  PyObject *__pyx_n_s_object;
-  PyObject *__pyx_n_s_object_sorted_by_distance;
+  PyObject *__pyx_n_u_object;
+  PyObject *__pyx_n_u_object_sorted_by_distance;
   PyObject *__pyx_n_s_objects;
   PyObject *__pyx_n_s_objectsAfter;
   PyObject *__pyx_n_s_objectsBefore;
@@ -2598,10 +2603,11 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_before);
   Py_CLEAR(clear_module_state->__pyx_n_s_binaryLeft);
   Py_CLEAR(clear_module_state->__pyx_n_s_binaryRight);
-  Py_CLEAR(clear_module_state->__pyx_n_s_cash);
+  Py_CLEAR(clear_module_state->__pyx_n_s_cache);
   Py_CLEAR(clear_module_state->__pyx_n_s_class_getitem);
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
   Py_CLEAR(clear_module_state->__pyx_n_s_collisions);
+  Py_CLEAR(clear_module_state->__pyx_n_u_collisions);
   Py_CLEAR(clear_module_state->__pyx_n_s_dict);
   Py_CLEAR(clear_module_state->__pyx_n_s_dict_2);
   Py_CLEAR(clear_module_state->__pyx_kp_u_disable);
@@ -2618,7 +2624,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_enumerate);
   Py_CLEAR(clear_module_state->__pyx_n_s_filter);
   Py_CLEAR(clear_module_state->__pyx_n_s_float);
-  Py_CLEAR(clear_module_state->__pyx_n_s_functions);
+  Py_CLEAR(clear_module_state->__pyx_n_u_functions);
   Py_CLEAR(clear_module_state->__pyx_n_s_game);
   Py_CLEAR(clear_module_state->__pyx_kp_u_gc);
   Py_CLEAR(clear_module_state->__pyx_n_s_get);
@@ -2650,8 +2656,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
   Py_CLEAR(clear_module_state->__pyx_n_s_new);
   Py_CLEAR(clear_module_state->__pyx_n_s_obj);
-  Py_CLEAR(clear_module_state->__pyx_n_s_object);
-  Py_CLEAR(clear_module_state->__pyx_n_s_object_sorted_by_distance);
+  Py_CLEAR(clear_module_state->__pyx_n_u_object);
+  Py_CLEAR(clear_module_state->__pyx_n_u_object_sorted_by_distance);
   Py_CLEAR(clear_module_state->__pyx_n_s_objects);
   Py_CLEAR(clear_module_state->__pyx_n_s_objectsAfter);
   Py_CLEAR(clear_module_state->__pyx_n_s_objectsBefore);
@@ -2755,10 +2761,11 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_before);
   Py_VISIT(traverse_module_state->__pyx_n_s_binaryLeft);
   Py_VISIT(traverse_module_state->__pyx_n_s_binaryRight);
-  Py_VISIT(traverse_module_state->__pyx_n_s_cash);
+  Py_VISIT(traverse_module_state->__pyx_n_s_cache);
   Py_VISIT(traverse_module_state->__pyx_n_s_class_getitem);
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
   Py_VISIT(traverse_module_state->__pyx_n_s_collisions);
+  Py_VISIT(traverse_module_state->__pyx_n_u_collisions);
   Py_VISIT(traverse_module_state->__pyx_n_s_dict);
   Py_VISIT(traverse_module_state->__pyx_n_s_dict_2);
   Py_VISIT(traverse_module_state->__pyx_kp_u_disable);
@@ -2775,7 +2782,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_enumerate);
   Py_VISIT(traverse_module_state->__pyx_n_s_filter);
   Py_VISIT(traverse_module_state->__pyx_n_s_float);
-  Py_VISIT(traverse_module_state->__pyx_n_s_functions);
+  Py_VISIT(traverse_module_state->__pyx_n_u_functions);
   Py_VISIT(traverse_module_state->__pyx_n_s_game);
   Py_VISIT(traverse_module_state->__pyx_kp_u_gc);
   Py_VISIT(traverse_module_state->__pyx_n_s_get);
@@ -2807,8 +2814,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
   Py_VISIT(traverse_module_state->__pyx_n_s_new);
   Py_VISIT(traverse_module_state->__pyx_n_s_obj);
-  Py_VISIT(traverse_module_state->__pyx_n_s_object);
-  Py_VISIT(traverse_module_state->__pyx_n_s_object_sorted_by_distance);
+  Py_VISIT(traverse_module_state->__pyx_n_u_object);
+  Py_VISIT(traverse_module_state->__pyx_n_u_object_sorted_by_distance);
   Py_VISIT(traverse_module_state->__pyx_n_s_objects);
   Py_VISIT(traverse_module_state->__pyx_n_s_objectsAfter);
   Py_VISIT(traverse_module_state->__pyx_n_s_objectsBefore);
@@ -2922,10 +2929,11 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_before __pyx_mstate_global->__pyx_n_s_before
 #define __pyx_n_s_binaryLeft __pyx_mstate_global->__pyx_n_s_binaryLeft
 #define __pyx_n_s_binaryRight __pyx_mstate_global->__pyx_n_s_binaryRight
-#define __pyx_n_s_cash __pyx_mstate_global->__pyx_n_s_cash
+#define __pyx_n_s_cache __pyx_mstate_global->__pyx_n_s_cache
 #define __pyx_n_s_class_getitem __pyx_mstate_global->__pyx_n_s_class_getitem
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
 #define __pyx_n_s_collisions __pyx_mstate_global->__pyx_n_s_collisions
+#define __pyx_n_u_collisions __pyx_mstate_global->__pyx_n_u_collisions
 #define __pyx_n_s_dict __pyx_mstate_global->__pyx_n_s_dict
 #define __pyx_n_s_dict_2 __pyx_mstate_global->__pyx_n_s_dict_2
 #define __pyx_kp_u_disable __pyx_mstate_global->__pyx_kp_u_disable
@@ -2942,7 +2950,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_enumerate __pyx_mstate_global->__pyx_n_s_enumerate
 #define __pyx_n_s_filter __pyx_mstate_global->__pyx_n_s_filter
 #define __pyx_n_s_float __pyx_mstate_global->__pyx_n_s_float
-#define __pyx_n_s_functions __pyx_mstate_global->__pyx_n_s_functions
+#define __pyx_n_u_functions __pyx_mstate_global->__pyx_n_u_functions
 #define __pyx_n_s_game __pyx_mstate_global->__pyx_n_s_game
 #define __pyx_kp_u_gc __pyx_mstate_global->__pyx_kp_u_gc
 #define __pyx_n_s_get __pyx_mstate_global->__pyx_n_s_get
@@ -2974,8 +2982,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
 #define __pyx_n_s_new __pyx_mstate_global->__pyx_n_s_new
 #define __pyx_n_s_obj __pyx_mstate_global->__pyx_n_s_obj
-#define __pyx_n_s_object __pyx_mstate_global->__pyx_n_s_object
-#define __pyx_n_s_object_sorted_by_distance __pyx_mstate_global->__pyx_n_s_object_sorted_by_distance
+#define __pyx_n_u_object __pyx_mstate_global->__pyx_n_u_object
+#define __pyx_n_u_object_sorted_by_distance __pyx_mstate_global->__pyx_n_u_object_sorted_by_distance
 #define __pyx_n_s_objects __pyx_mstate_global->__pyx_n_s_objects
 #define __pyx_n_s_objectsAfter __pyx_mstate_global->__pyx_n_s_objectsAfter
 #define __pyx_n_s_objectsBefore __pyx_mstate_global->__pyx_n_s_objectsBefore
@@ -3725,7 +3733,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
  *                     left = mid + 1
  * 
  */
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_objects, __pyx_v_mid, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_objects, __pyx_v_mid, int, 1, __Pyx_PyInt_From_int, 0, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_pos); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 41, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -3782,7 +3790,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
  *         def binaryRight(objects, x: float) -> int:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_objects, __pyx_v_left, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_objects, __pyx_v_left, int, 1, __Pyx_PyInt_From_int, 0, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_pos); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -4016,7 +4024,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
  *                     right = mid - 1
  * 
  */
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_objects, __pyx_v_mid, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_objects, __pyx_v_mid, int, 1, __Pyx_PyInt_From_int, 0, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_pos); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -4073,7 +4081,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
  *         cdef list dynamicsObjects = []
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_objects, __pyx_v_right, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_objects, __pyx_v_right, int, 1, __Pyx_PyInt_From_int, 0, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_pos); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -4131,8 +4139,8 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
 /* "engine/classes/getUsingObjects.pyx":74
  *                 dynamicsObjects.append(obj)
  * 
- *         game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)             # <<<<<<<<<<<<<<
- *         game.cash["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cash["object_sorted_by_distance"]))
+ *         game.cache["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)             # <<<<<<<<<<<<<<
+ *         game.cache["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cache["object_sorted_by_distance"]))
  * 
  */
 
@@ -4265,8 +4273,8 @@ static PyObject *__pyx_lambda_funcdef_lambda(CYTHON_UNUSED PyObject *__pyx_self,
 
 /* "engine/classes/getUsingObjects.pyx":75
  * 
- *         game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
- *         game.cash["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cash["object_sorted_by_distance"]))             # <<<<<<<<<<<<<<
+ *         game.cache["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
+ *         game.cache["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cache["object_sorted_by_distance"]))             # <<<<<<<<<<<<<<
  * 
  *         for obj in dynamicsObjects:
  */
@@ -4616,7 +4624,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
  *             if isinstance(obj, DynamicObject):
  *                 dynamicsObjects.append(obj)             # <<<<<<<<<<<<<<
  * 
- *         game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
+ *         game.cache["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
  */
       __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_dynamicsObjects, __pyx_v_obj); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 72, __pyx_L1_error)
 
@@ -4642,8 +4650,8 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
   /* "engine/classes/getUsingObjects.pyx":74
  *                 dynamicsObjects.append(obj)
  * 
- *         game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)             # <<<<<<<<<<<<<<
- *         game.cash["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cash["object_sorted_by_distance"]))
+ *         game.cache["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)             # <<<<<<<<<<<<<<
+ *         game.cache["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cache["object_sorted_by_distance"]))
  * 
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_group, __pyx_n_s_objects); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
@@ -4663,24 +4671,24 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cash); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cache); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_n_s_object_sorted_by_distance, __pyx_t_5) < 0))) __PYX_ERR(0, 74, __pyx_L1_error)
+  if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_n_u_object_sorted_by_distance, __pyx_t_5) < 0))) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "engine/classes/getUsingObjects.pyx":75
  * 
- *         game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
- *         game.cash["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cash["object_sorted_by_distance"]))             # <<<<<<<<<<<<<<
+ *         game.cache["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
+ *         game.cache["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cache["object_sorted_by_distance"]))             # <<<<<<<<<<<<<<
  * 
  *         for obj in dynamicsObjects:
  */
   __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_6engine_7classes_15getUsingObjects_15GetUsingObjects_21getUsingObjectsSquare_5lambda1, 0, __pyx_n_s_getUsingObjectsSquare_locals_lam, NULL, __pyx_n_s_engine_classes_getUsingObjects, __pyx_d, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cash); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cache); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_s_object_sorted_by_distance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_object_sorted_by_distance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
@@ -4697,14 +4705,14 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
   __pyx_t_2 = __Pyx_PySequence_ListKeepNew(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cash); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cache); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (unlikely((PyObject_SetItem(__pyx_t_1, __pyx_n_s_object_sorted_by_distance, __pyx_t_2) < 0))) __PYX_ERR(0, 75, __pyx_L1_error)
+  if (unlikely((PyObject_SetItem(__pyx_t_1, __pyx_n_u_object_sorted_by_distance, __pyx_t_2) < 0))) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "engine/classes/getUsingObjects.pyx":77
- *         game.cash["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cash["object_sorted_by_distance"]))
+ *         game.cache["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cache["object_sorted_by_distance"]))
  * 
  *         for obj in dynamicsObjects:             # <<<<<<<<<<<<<<
  *             resulting = obj.getVectorsPower()
@@ -4734,7 +4742,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
  *         for obj in dynamicsObjects:
  *             resulting = obj.getVectorsPower()             # <<<<<<<<<<<<<<
  * 
- *             l = binaryLeft(game.cash["object_sorted_by_distance"], obj.pos.x - obj.hitbox.x - obj.hitbox.width - resulting.x)
+ *             l = binaryLeft(game.cache["object_sorted_by_distance"], obj.pos.x - obj.hitbox.x - obj.hitbox.width - resulting.x)
  */
     __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_getVectorsPower); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 78, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
@@ -4766,13 +4774,13 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
     /* "engine/classes/getUsingObjects.pyx":80
  *             resulting = obj.getVectorsPower()
  * 
- *             l = binaryLeft(game.cash["object_sorted_by_distance"], obj.pos.x - obj.hitbox.x - obj.hitbox.width - resulting.x)             # <<<<<<<<<<<<<<
- *             r = binaryRight(game.cash["object_sorted_by_distance"], obj.pos.x + obj.hitbox.x + obj.hitbox.width + resulting.x) + 1
+ *             l = binaryLeft(game.cache["object_sorted_by_distance"], obj.pos.x - obj.hitbox.x - obj.hitbox.width - resulting.x)             # <<<<<<<<<<<<<<
+ *             r = binaryRight(game.cache["object_sorted_by_distance"], obj.pos.x + obj.hitbox.x + obj.hitbox.width + resulting.x) + 1
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cash); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cache); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_s_object_sorted_by_distance); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_object_sorted_by_distance); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_pos); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
@@ -4814,14 +4822,14 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
 
     /* "engine/classes/getUsingObjects.pyx":81
  * 
- *             l = binaryLeft(game.cash["object_sorted_by_distance"], obj.pos.x - obj.hitbox.x - obj.hitbox.width - resulting.x)
- *             r = binaryRight(game.cash["object_sorted_by_distance"], obj.pos.x + obj.hitbox.x + obj.hitbox.width + resulting.x) + 1             # <<<<<<<<<<<<<<
+ *             l = binaryLeft(game.cache["object_sorted_by_distance"], obj.pos.x - obj.hitbox.x - obj.hitbox.width - resulting.x)
+ *             r = binaryRight(game.cache["object_sorted_by_distance"], obj.pos.x + obj.hitbox.x + obj.hitbox.width + resulting.x) + 1             # <<<<<<<<<<<<<<
  * 
- *             objectsBefore = game.cash["object_sorted_by_distance"][l:r]
+ *             objectsBefore = game.cache["object_sorted_by_distance"][l:r]
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cash); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cache); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_s_object_sorted_by_distance); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 81, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_object_sorted_by_distance); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 81, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_pos); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
@@ -4865,18 +4873,18 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
     __pyx_t_5 = 0;
 
     /* "engine/classes/getUsingObjects.pyx":83
- *             r = binaryRight(game.cash["object_sorted_by_distance"], obj.pos.x + obj.hitbox.x + obj.hitbox.width + resulting.x) + 1
+ *             r = binaryRight(game.cache["object_sorted_by_distance"], obj.pos.x + obj.hitbox.x + obj.hitbox.width + resulting.x) + 1
  * 
- *             objectsBefore = game.cash["object_sorted_by_distance"][l:r]             # <<<<<<<<<<<<<<
+ *             objectsBefore = game.cache["object_sorted_by_distance"][l:r]             # <<<<<<<<<<<<<<
  *             objectsAfter = []
  * 
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cash); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cache); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_5, __pyx_n_s_object_sorted_by_distance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_5, __pyx_n_u_object_sorted_by_distance); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_t_1, 0, 0, &__pyx_v_l, &__pyx_v_r, NULL, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_t_1, 0, 0, &__pyx_v_l, &__pyx_v_r, NULL, 0, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_XDECREF_SET(__pyx_v_objectsBefore, __pyx_t_5);
@@ -4884,7 +4892,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
 
     /* "engine/classes/getUsingObjects.pyx":84
  * 
- *             objectsBefore = game.cash["object_sorted_by_distance"][l:r]
+ *             objectsBefore = game.cache["object_sorted_by_distance"][l:r]
  *             objectsAfter = []             # <<<<<<<<<<<<<<
  * 
  *             for before in objectsBefore:
@@ -5125,7 +5133,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
     /* "engine/classes/getUsingObjects.pyx":77
- *         game.cash["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cash["object_sorted_by_distance"]))
+ *         game.cache["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cache["object_sorted_by_distance"]))
  * 
  *         for obj in dynamicsObjects:             # <<<<<<<<<<<<<<
  *             resulting = obj.getVectorsPower()
@@ -5176,7 +5184,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_2
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def getUsingObjectsIterationSquare(game, objects, obj) -> None:
- *         game.cash["collisions"][obj.id] = []
+ *         game.cache["collisions"][obj.id] = []
  */
 
 /* Python wrapper */
@@ -5331,15 +5339,15 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_4
   /* "engine/classes/getUsingObjects.pyx":94
  *     @staticmethod
  *     def getUsingObjectsIterationSquare(game, objects, obj) -> None:
- *         game.cash["collisions"][obj.id] = []             # <<<<<<<<<<<<<<
+ *         game.cache["collisions"][obj.id] = []             # <<<<<<<<<<<<<<
  * 
  *         for j, second in enumerate(objects):
  */
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cash); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cache); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_s_collisions); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_collisions); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_id); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
@@ -5350,7 +5358,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_4
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "engine/classes/getUsingObjects.pyx":96
- *         game.cash["collisions"][obj.id] = []
+ *         game.cache["collisions"][obj.id] = []
  * 
  *         for j, second in enumerate(objects):             # <<<<<<<<<<<<<<
  *             if obj.id == second.id:
@@ -5443,7 +5451,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_4
  *             if obj.id == second.id:
  *                 continue             # <<<<<<<<<<<<<<
  * 
- *             game.cash["collisions"][obj.id].append({"object": second, "functions": obj.collisions.get(second.group)})
+ *             game.cache["collisions"][obj.id].append({"object": second, "functions": obj.collisions.get(second.group)})
  */
       goto __pyx_L3_continue;
 
@@ -5459,12 +5467,12 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_4
     /* "engine/classes/getUsingObjects.pyx":100
  *                 continue
  * 
- *             game.cash["collisions"][obj.id].append({"object": second, "functions": obj.collisions.get(second.group)})             # <<<<<<<<<<<<<<
+ *             game.cache["collisions"][obj.id].append({"object": second, "functions": obj.collisions.get(second.group)})             # <<<<<<<<<<<<<<
  * 
  */
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cash); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 100, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_game, __pyx_n_s_cache); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_t_7, __pyx_n_s_collisions); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 100, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_t_7, __pyx_n_u_collisions); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_id); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 100, __pyx_L1_error)
@@ -5475,7 +5483,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_4
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_object, __pyx_v_second) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_u_object, __pyx_v_second) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
     __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_collisions); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_get); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 100, __pyx_L1_error)
@@ -5506,14 +5514,14 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_4
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     }
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_functions, __pyx_t_6) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_u_functions, __pyx_t_6) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_13 = __Pyx_PyObject_Append(__pyx_t_3, __pyx_t_7); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
     /* "engine/classes/getUsingObjects.pyx":96
- *         game.cash["collisions"][obj.id] = []
+ *         game.cache["collisions"][obj.id] = []
  * 
  *         for j, second in enumerate(objects):             # <<<<<<<<<<<<<<
  *             if obj.id == second.id:
@@ -5529,7 +5537,7 @@ static PyObject *__pyx_pf_6engine_7classes_15getUsingObjects_15GetUsingObjects_4
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def getUsingObjectsIterationSquare(game, objects, obj) -> None:
- *         game.cash["collisions"][obj.id] = []
+ *         game.cache["collisions"][obj.id] = []
  */
 
   /* function exit code */
@@ -6271,8 +6279,7 @@ static PyObject *__pyx_f_6engine_7classes_15getUsingObjects___pyx_unpickle_GetUs
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
-  PyObject *__pyx_t_7 = NULL;
-  unsigned int __pyx_t_8;
+  unsigned int __pyx_t_7;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -6314,27 +6321,24 @@ static PyObject *__pyx_f_6engine_7classes_15getUsingObjects___pyx_unpickle_GetUs
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
       __PYX_ERR(1, 13, __pyx_L1_error)
     }
-    __pyx_t_5 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 13, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = NULL;
-    __pyx_t_8 = 0;
+    __pyx_t_5 = NULL;
+    __pyx_t_7 = 0;
     #if CYTHON_UNPACK_METHODS
     if (likely(PyMethod_Check(__pyx_t_6))) {
-      __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_6);
-      if (likely(__pyx_t_7)) {
+      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_6);
+      if (likely(__pyx_t_5)) {
         PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-        __Pyx_INCREF(__pyx_t_7);
+        __Pyx_INCREF(__pyx_t_5);
         __Pyx_INCREF(function);
         __Pyx_DECREF_SET(__pyx_t_6, function);
-        __pyx_t_8 = 1;
+        __pyx_t_7 = 1;
       }
     }
     #endif
     {
-      PyObject *__pyx_callargs[2] = {__pyx_t_7, __pyx_t_5};
-      __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      PyObject *__pyx_callargs[2] = {__pyx_t_5, PyTuple_GET_ITEM(__pyx_v___pyx_state, 0)};
+      __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_7, 1+__pyx_t_7);
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -6364,7 +6368,6 @@ static PyObject *__pyx_f_6engine_7classes_15getUsingObjects___pyx_unpickle_GetUs
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_7);
   __Pyx_AddTraceback("engine.classes.getUsingObjects.__pyx_unpickle_GetUsingObjects__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
@@ -6684,10 +6687,11 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_before, __pyx_k_before, sizeof(__pyx_k_before), 0, 0, 1, 1},
     {&__pyx_n_s_binaryLeft, __pyx_k_binaryLeft, sizeof(__pyx_k_binaryLeft), 0, 0, 1, 1},
     {&__pyx_n_s_binaryRight, __pyx_k_binaryRight, sizeof(__pyx_k_binaryRight), 0, 0, 1, 1},
-    {&__pyx_n_s_cash, __pyx_k_cash, sizeof(__pyx_k_cash), 0, 0, 1, 1},
+    {&__pyx_n_s_cache, __pyx_k_cache, sizeof(__pyx_k_cache), 0, 0, 1, 1},
     {&__pyx_n_s_class_getitem, __pyx_k_class_getitem, sizeof(__pyx_k_class_getitem), 0, 0, 1, 1},
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
     {&__pyx_n_s_collisions, __pyx_k_collisions, sizeof(__pyx_k_collisions), 0, 0, 1, 1},
+    {&__pyx_n_u_collisions, __pyx_k_collisions, sizeof(__pyx_k_collisions), 0, 1, 0, 1},
     {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
     {&__pyx_n_s_dict_2, __pyx_k_dict_2, sizeof(__pyx_k_dict_2), 0, 0, 1, 1},
     {&__pyx_kp_u_disable, __pyx_k_disable, sizeof(__pyx_k_disable), 0, 1, 0, 0},
@@ -6704,7 +6708,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
     {&__pyx_n_s_filter, __pyx_k_filter, sizeof(__pyx_k_filter), 0, 0, 1, 1},
     {&__pyx_n_s_float, __pyx_k_float, sizeof(__pyx_k_float), 0, 0, 1, 1},
-    {&__pyx_n_s_functions, __pyx_k_functions, sizeof(__pyx_k_functions), 0, 0, 1, 1},
+    {&__pyx_n_u_functions, __pyx_k_functions, sizeof(__pyx_k_functions), 0, 1, 0, 1},
     {&__pyx_n_s_game, __pyx_k_game, sizeof(__pyx_k_game), 0, 0, 1, 1},
     {&__pyx_kp_u_gc, __pyx_k_gc, sizeof(__pyx_k_gc), 0, 1, 0, 0},
     {&__pyx_n_s_get, __pyx_k_get, sizeof(__pyx_k_get), 0, 0, 1, 1},
@@ -6736,8 +6740,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
     {&__pyx_n_s_new, __pyx_k_new, sizeof(__pyx_k_new), 0, 0, 1, 1},
     {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
-    {&__pyx_n_s_object, __pyx_k_object, sizeof(__pyx_k_object), 0, 0, 1, 1},
-    {&__pyx_n_s_object_sorted_by_distance, __pyx_k_object_sorted_by_distance, sizeof(__pyx_k_object_sorted_by_distance), 0, 0, 1, 1},
+    {&__pyx_n_u_object, __pyx_k_object, sizeof(__pyx_k_object), 0, 1, 0, 1},
+    {&__pyx_n_u_object_sorted_by_distance, __pyx_k_object_sorted_by_distance, sizeof(__pyx_k_object_sorted_by_distance), 0, 1, 0, 1},
     {&__pyx_n_s_objects, __pyx_k_objects, sizeof(__pyx_k_objects), 0, 0, 1, 1},
     {&__pyx_n_s_objectsAfter, __pyx_k_objectsAfter, sizeof(__pyx_k_objectsAfter), 0, 0, 1, 1},
     {&__pyx_n_s_objectsBefore, __pyx_k_objectsBefore, sizeof(__pyx_k_objectsBefore), 0, 0, 1, 1},
@@ -6856,7 +6860,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def getUsingObjectsIterationSquare(game, objects, obj) -> None:
- *         game.cash["collisions"][obj.id] = []
+ *         game.cache["collisions"][obj.id] = []
  */
   __pyx_tuple__11 = PyTuple_Pack(5, __pyx_n_s_game, __pyx_n_s_objects, __pyx_n_s_obj, __pyx_n_s_j, __pyx_n_s_second); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
@@ -7634,7 +7638,7 @@ if (!__Pyx_RefNanny) {
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def getUsingObjectsIterationSquare(game, objects, obj) -> None:
- *         game.cash["collisions"][obj.id] = []
+ *         game.cache["collisions"][obj.id] = []
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);

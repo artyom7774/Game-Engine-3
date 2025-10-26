@@ -1,17 +1,18 @@
 import subprocess
 import platform
 
-
 if platform.system() == "Windows":
-    result = subprocess.run(
-        [".\python\python.exe", "-OO", "-s", "Game Engine 3.py", "--windows-standalone-build", "--debug 0"],
+    subprocess.run(
+        ["./python/python.exe", "-OO", "-s", "Game Engine 3.py"],
         capture_output=True,
         text=True,
         creationflags=subprocess.CREATE_NO_WINDOW
     )
 
-    if result.returncode != 0:
-        print(result.stderr)
-
 else:
-    pass
+    subprocess.run(
+        ["./python/bin/python3", "-OO", "Game Engine 3.py"],
+        capture_output=True,
+        text=True,
+        start_new_session=True
+    )

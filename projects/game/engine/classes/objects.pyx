@@ -128,7 +128,7 @@ cdef class StaticObject:
 
         self.game.doCollisionsUpdate = max(self.game.doCollisionsUpdate, x != 0 or y != 0)
 
-        collisions = self.game.cash["collisions"][self.id] if self.id in self.game.cash["collisions"] else []
+        collisions = self.game.cache["collisions"][self.id] if self.id in self.game.cash["collisions"] else []
 
         step = math.ceil(abs(x) + abs(y))
 
@@ -170,7 +170,7 @@ cdef class StaticObject:
     def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
         hitbox = self.getEditHitbox(x, y, append)
 
-        if self.id not in self.game.cash["collisions"]:
+        if self.id not in self.game.cache["collisions"]:
             return False
 
         flag = False

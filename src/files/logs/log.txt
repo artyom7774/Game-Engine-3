@@ -1,0 +1,45 @@
+-------------------- LOG 2025-10-27 00:12:51.203697 --------------------
+LOG: develop mode = False
+LOG: program ran on "Linux 6.14.0-29-generic"
+LOG: discord is not found
+ERROR: can't download now project version, status = 404
+-------------------- LOG 2025-10-27 00:13:07.940380 --------------------
+LOG: develop mode = False
+LOG: program ran on "Linux 6.14.0-29-generic"
+LOG: discord is not found
+ERROR: can't download now project version, status = 404
+-------------------- LOG 2025-10-27 00:14:18.258782 --------------------
+LOG: develop mode = False
+LOG: program ran on "Linux 6.14.0-29-generic"
+LOG: discord is not found
+ERROR: can't download now project version, status = 404
+-------------------- LOG 2025-10-27 00:16:35.888256 --------------------
+LOG: develop mode = False
+LOG: program ran on "Windows 10"
+LOG: discord is not found
+ERROR: can't download now project version, status = 404
+-------------------- LOG 2025-10-27 00:16:42.969937 --------------------
+LOG: develop mode = False
+LOG: program ran on "Windows 10"
+LOG: discord is not found
+ERROR: can't download now project version, status = 404
+-------------------- LOG 2025-10-27 00:17:14.221217 --------------------
+LOG: develop mode = False
+LOG: program ran on "Windows 10"
+LOG: discord is not found
+ERROR: can't download now project version, status = 404
+-------------------- LOG 2025-10-27 00:20:12.420864 --------------------
+LOG: develop mode = False
+LOG: program ran on "Windows 10"
+LOG: discord is not found
+ERROR: can't download now project version, status = 404
+-------------------- LOG 2025-10-27 00:20:23.110284 --------------------
+LOG: develop mode = False
+LOG: program ran on "Windows 10"
+LOG: discord is not found
+ERROR: can't download now project version, status = 404
+-------------------- LOG 2025-10-27 00:20:55.277231 --------------------
+LOG: develop mode = False
+LOG: program ran on "Windows 10"
+LOG: discord is not found
+ERROR: can't download now project version, status = 404

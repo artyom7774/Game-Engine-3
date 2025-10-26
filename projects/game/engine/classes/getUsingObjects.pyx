@@ -52,16 +52,16 @@ cdef class GetUsingObjects:
             if isinstance(obj, DynamicObject):
                 dynamicsObjects.append(obj)
 
-        game.cash["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
-        game.cash["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cash["object_sorted_by_distance"]))
+        game.cache["object_sorted_by_distance"] = sorted(group.objects, key=lambda obj: obj.pos.x)
+        game.cache["object_sorted_by_distance"] = list(filter(lambda obj: obj.doCollisionUpdate, game.cache["object_sorted_by_distance"]))
 
         for obj in dynamicsObjects:
             resulting = obj.getVectorsPower()
 
-            l = binaryLeft(game.cash["object_sorted_by_distance"], obj.pos.x - resulting.x - group.maxLengthObject)
-            r = binaryRight(game.cash["object_sorted_by_distance"], obj.pos.x + resulting.x + group.maxLengthObject) + 1
+            l = binaryLeft(game.cache["object_sorted_by_distance"], obj.pos.x - resulting.x - group.maxLengthObject)
+            r = binaryRight(game.cache["object_sorted_by_distance"], obj.pos.x + resulting.x + group.maxLengthObject) + 1
 
-            objectsBefore = game.cash["object_sorted_by_distance"][l:r]
+            objectsBefore = game.cache["object_sorted_by_distance"][l:r]
             objectsAfter = []
 
             for before in objectsBefore:
@@ -72,11 +72,11 @@ cdef class GetUsingObjects:
 
     @staticmethod
     def getUsingObjectsIterationSquare(game, objects, obj) -> None:
-        game.cash["collisions"][obj.id] = []
+        game.cache["collisions"][obj.id] = []
 
         for j, second in enumerate(objects):
             if obj.id == second.id:
                 continue
 
-            game.cash["collisions"][obj.id].append({"object": second, "functions": obj.collisions.get(second.group)})
+            game.cache["collisions"][obj.id].append({"object": second, "functions": obj.collisions.get(second.group)})
 

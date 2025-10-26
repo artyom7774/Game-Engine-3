@@ -65,7 +65,7 @@ class Application:
         self.name = name
         self.icon = icon
 
-        self.cash = {
+        self.cache = {
             "collisions": {},
             "object_sorted_by_distance": []
         }
