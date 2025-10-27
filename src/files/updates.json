@@ -198,7 +198,7 @@
 
         "3.14.0": {
             "name": "3.14.0",
-            "text": "- optimize scene\n- fixed bugs with scene"
+            "text": "- version for linux\n- optimize scene\n- fixed bugs with scene"
         }
     }
 }
