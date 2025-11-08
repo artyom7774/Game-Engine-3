@@ -7,6 +7,8 @@ from src.variables import *
 import datetime
 import sys
 
+os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = ""
+
 
 def main() -> None:
     if not DEVELOP:

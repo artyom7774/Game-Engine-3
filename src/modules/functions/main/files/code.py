@@ -1,10 +1,14 @@
-from PyQt5.QtWidgets import QLabel, QMenu, QAction, QVBoxLayout, QTreeWidget, QTreeWidgetItem, QTextEdit, QDialog, QToolTip, QLineEdit, QPushButton, QComboBox
-from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon, QTextCursor
+from PyQt5.QtWidgets import QApplication, QLabel, QMenu, QAction, QVBoxLayout, QTreeWidget, QTreeWidgetItem, QTextEdit, QDialog, QToolTip, QLineEdit, QPushButton, QComboBox
+from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon, QTextCursor, QIcon
 from PyQt5.Qt import Qt, QPoint, QTimer, QSize
 
 from PyQt5.Qsci import QsciScintilla, QsciLexerPython
 
 from src.modules.dialogs import CreateNode
+
+from src.modules.functions.ai.ai import requestAI
+from src.modules.functions.project import getColor
 from src.modules.functions.algorithm import bezierCurveWidth
 
 from src.modules.widgets import FocusLineEdit, FocusComboBox
@@ -159,7 +163,136 @@ class TypeCurrect:
         return True
 
 
-class TextEditor(QDialog):
+class AIDialogTextEdit(QTextEdit):
+    def __init__(self, project):
+        QTextEdit.__init__(self, project)
+
+        self.project = project
+
+        self.setReadOnly(True)
+
+
+class AIWorker(QThread):
+    signal = pyqtSignal(int, str)
+
+    def __init__(self, text):
+        super().__init__()
+        self.text = text
+
+    def run(self):
+        status, answer = requestAI(self.text)
+
+        self.signal.emit(status, answer)
+
+
+class AIDialog(QDialog):
+    def __init__(self, project):
+        super().__init__()
+
+        self.project = project
+        self.setWindowTitle(translate("AI"))
+        self.setGeometry(0, 0, int(size["width"] * 0.55), int(size["height"] * 0.7))
+
+        desktop = QApplication.desktop()
+        self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
+
+        self.objects = {}
+        self.thread = None
+        self.init()
+
+    def request(self):
+        text = self.objects["entry"].text()
+
+        self.objects["entry"].setText("")
+
+        if self.objects["text"].toPlainText() == "":
+            self.objects["text"].setPlainText(f"YOU: {text}")
+
+        else:
+            self.objects["text"].setPlainText(f"{self.objects['text'].toPlainText()}\nYOU: {text}")
+
+        prompt = f"""
+        ANSWER LANGUAGE: {SETTINGS["language"]}
+        HISTORY: {self.project.cache[f"{self.project.selectFile}-ai-responce"]["text"]}
+        PROMPT: {text}
+        """
+
+        self.thread = AIWorker(prompt)
+        self.thread.signal.connect(lambda status, answer: self.function(status, answer))
+        self.thread.start()
+
+    def function(self, status, answer):
+        if status == 1:
+            self.objects["text"].setPlainText(f"{self.objects['text'].toPlainText()}\nAI: something went wrong ({answer})")
+
+            return
+
+        temp = answer = answer.replace("```json", "").replace("```", "").replace("```", "")
+
+        print(f"LOG: AI ANSWER = {answer}")
+
+        try:
+            answer = json.loads(answer)
+
+        except json.JSONDecodeError as e:
+            self.objects["text"].setPlainText(f"{self.objects['text'].toPlainText()}\nAI: something went wrong ({e})")
+
+            return
+
+        self.objects["text"].setPlainText(f"{self.objects['text'].toPlainText()}\nAI: {answer['text']}")
+
+        self.project.cache[f"{self.project.selectFile}-ai-responce"]["text"] = self.objects['text'].toPlainText()
+
+        if "nodes" not in answer:
+            return
+
+        for id in list(answer["nodes"].keys()):
+            ids = random.randint(1, 1000000000)
+
+            while str(id) in temp:
+                temp = temp.replace(str(id), str(ids))
+
+        answer = json.loads(temp)
+
+        for id, node in answer["nodes"].items():
+            node["x"] += self.project.cache["file"][self.project.selectFile].x // CODE_GRID_CELL_SIZE + 5
+            node["y"] += self.project.cache["file"][self.project.selectFile].y // CODE_GRID_CELL_SIZE + 5
+
+        for id, node in answer["nodes"].items():
+            self.project.objects["main"]["function"]["objects"][id] = node
+
+        with open(self.project.selectFile, "w", encoding="utf-8") as file:
+            dump(self.project.objects["main"]["function"], file, indent=4)
+
+        self.project.init()
+
+    def init(self):
+        self.objects["text"] = AIDialogTextEdit(self)
+        self.objects["text"].setGeometry(10, 10, self.width() - 20, self.height() - 55)
+        self.objects["text"].setFont(QFont("Courier", 10))
+        self.objects["text"].show()
+
+        self.objects["text"].setText(self.project.cache[f"{self.project.selectFile}-ai-responce"]["text"])
+
+        self.objects["entry"] = QLineEdit(self)
+        self.objects["entry"].setGeometry(10, self.height() - 37, self.width() - 20, 29)
+        self.objects["entry"].setStyleSheet(f"background-color: #{'1c1d1f' if SETTINGS['theme'] == 'dark' else 'ffffff'};")
+        self.objects["entry"].setPlaceholderText(translate("Write prompt and press enter..."))
+        self.objects["entry"].returnPressed.connect(self.request)
+        self.objects["entry"].setFont(QFont("Courier", 10))
+        self.objects["entry"].show()
+
+    def resizeEvent(self, event):
+        self.objects["text"].setGeometry(10, 10, self.width() - 20, self.height() - 55)
+        self.objects["entry"].setGeometry(10, self.height() - 37, self.width() - 20, 29)
+
+
+def createAIDailog(project):
+    project.dialog = AIDialog(project)
+    project.dialog.exec_()
+
+
+class TextEditorDialog(QDialog):
     def __init__(self, project, input, id):
         super().__init__()
 
@@ -170,7 +303,9 @@ class TextEditor(QDialog):
         self.setWindowTitle(translate("Text Editor"))
 
         self.setGeometry(0, 0, int(size["width"] * 0.55), int(size["height"] * 0.7))
-        self.move((size["width"] - self.width()) // 2, (size["height"] - self.height()) // 2)
+
+        desktop = QApplication.desktop()
+        self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
 
         self.layout = QVBoxLayout()
 
@@ -305,7 +440,8 @@ class CodeNodeConnectorTextBox(QTextEdit):
         type = self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["type"]
 
         if TypeCurrect.currect_(type, text):
-            self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = TypeSet.set_(type, text)
+            self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]][
+                "standard"] = TypeSet.set_(type, text)
 
     def init(self):
         self.button.setGeometry(self.x(), self.y() + 25 * (self.heigth_ - 1), self.width(), 16 + 4)
@@ -313,7 +449,7 @@ class CodeNodeConnectorTextBox(QTextEdit):
         self.button.raise_()
 
     def editor(self):
-        self.project.dialog = TextEditor(self.project, self.input, self.id)
+        self.project.dialog = TextEditorDialog(self.project, self.input, self.id)
         self.project.dialog.exec_()
 
     def setGeometry(self, x, y, w, h):
@@ -413,7 +549,9 @@ class CodeNodeConnector(QLabel):
         self.right = None
 
         self.input = input
+        self.output = output
 
+        self.placeholderLabel = None
         self.inputLeftText = None
         self.inputLeftRama = None
 
@@ -491,6 +629,24 @@ class CodeNodeConnector(QLabel):
                         self.inputLeftText.setFont(MFONT)
                         self.inputLeftText.show()
 
+                        self.inputLeftText.textEdited.connect(lambda event: self.updateObjectGeometry())
+
+                        self.placeholderLabel = QLabel(project.objects["main"]["code"])
+                        self.placeholderLabel.setAttribute(Qt.WA_TranslucentBackground)
+                        self.placeholderLabel.setAttribute(Qt.WA_TransparentForMouseEvents)
+                        self.placeholderLabel.setGeometry(self.inputLeftText.geometry())
+                        self.placeholderLabel.setFixedWidth(self.width() - 40 - 5)
+                        self.placeholderLabel.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                        self.placeholderLabel.setStyleSheet("background-color: transparent; border: 0px; color: #a0a3a6;")
+                        self.placeholderLabel.setFont(MFONT)
+                        self.placeholderLabel.show()
+
+                        if len(self.inputLeftText.text()) < CODE_CONNECTOR_MAX_DISPLAY_DESCRIPTION:
+                            self.placeholderLabel.setText(translate(node["display"]["text"][input["name"]]))
+
+                        else:
+                            self.placeholderLabel.setText("")
+
                     self.inputLeftRama = QLabel(project.objects["main"]["code"])
                     self.inputLeftRama.setAttribute(Qt.WA_TransparentForMouseEvents)
                     self.inputLeftRama.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 6, self.width() - 40, 18)
@@ -523,13 +679,22 @@ class CodeNodeConnector(QLabel):
             self.left.move(0, 9)
 
         if self.right is not None:
-            self.project.objects["main"]["liner"].points["outputs"].append([{"id": self.id, "number": self.number, "keys": self.keys}, Vec2i(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
+            self.project.objects["main"]["liner"].points["outputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "connector": self.output["type"]}, Vec2i(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
 
             self.right.move(self.width() - 12, 9)
 
         if self.inputLeftText is not None:
             self.inputLeftText.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 3)
             self.inputLeftRama.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 6)
+
+            if self.placeholderLabel is not None:
+                self.placeholderLabel.move(self.inputLeftText.pos().x(), self.inputLeftText.pos().y())
+
+                if len(self.inputLeftText.text()) < CODE_CONNECTOR_MAX_DISPLAY_DESCRIPTION:
+                    self.placeholderLabel.setText(translate(self.node["display"]["text"][self.input["name"]]))
+
+                else:
+                    self.placeholderLabel.setText("")
 
 
 class CodeNode(QTreeWidget):
@@ -588,7 +753,8 @@ class CodeNode(QTreeWidget):
         # CONNECTORS
 
         if "sorting" in self.node and "outputs" in self.node["sorting"]:
-            self.node["outputs"] = dict(sorted(self.node["outputs"].items(), key=lambda x: self.node["sorting"]["outputs"].index(x[1]["code"])))
+            self.node["outputs"] = dict(
+                sorted(self.node["outputs"].items(), key=lambda x: self.node["sorting"]["outputs"].index(x[1]["code"])))
 
         else:
             self.node["outputs"] = dict(sorted(self.node["outputs"].items(), key=lambda x: self.project.objects["main"]["config"]["sorting"].index(x[1]["type"])))
@@ -663,6 +829,9 @@ class CodeNode(QTreeWidget):
 
         self.bg.setPixmap(qpixmap)
 
+    def update(self) -> None:
+        self.updateObjectGeometry()
+
     def updateObjectGeometry(self) -> None:
         self.move(
             int((self.node["x"] * CODE_GRID_CELL_SIZE - self.project.cache["file"][self.project.selectFile].x) * CODE_GRID_CELL_SIZE // CODE_GRID_CELL_SIZE),
@@ -674,11 +843,8 @@ class CodeNode(QTreeWidget):
 
 
 class CodeLabel(QLabel):
-    def __init__(self, parent=None, pressFunction: typing.Callable = None, releasedFunction: typing.Callable = None) -> None:
+    def __init__(self, parent) -> None:
         QLabel.__init__(self, parent)
-
-        self.pressFunction = pressFunction
-        self.releasedFunction = releasedFunction
 
         self.project = parent
 
@@ -688,6 +854,28 @@ class CodeLabel(QLabel):
         self.position = None
 
         self.setMouseTracking(True)
+
+        self.project.objects["main"]["ai_open_menu"] = QPushButton(self)
+        self.project.objects["main"]["ai_open_menu"].clicked.connect(lambda: createAIDailog(self.project))
+
+        self.project.objects["main"]["ai_open_menu"].setStyleSheet(f"""
+            QPushButton {{
+                background-color: #{'202124' if SETTINGS['theme'] == 'dark' else 'f8f9fa'};
+            }}
+            
+            QPushButton:hover {{
+                background-color: #{'27282a' if SETTINGS['theme'] == 'dark' else 'f0f2f4'};
+            }}
+            
+            QPushButton:pressed {{
+                background-color: #{'2d2e30' if SETTINGS['theme'] == 'dark' else 'e8eaed'};
+            }}
+        """)
+
+        self.project.objects["main"]["ai_open_menu"].setIcon(QIcon(getColor("ai")))
+        self.project.objects["main"]["ai_open_menu"].setIconSize(QSize(28, 28))
+        self.project.objects["main"]["ai_open_menu"].setGeometry(self.project.objects["center_rama"].width() - 4 - 35, 3, 32, 32)
+        self.project.objects["main"]["ai_open_menu"].show()
 
         self.project.objects["main"]["code_timer"] = QTimer(self)
         self.project.objects["main"]["code_timer"].timeout.connect(lambda: self.timerToolTip())
@@ -712,7 +900,11 @@ class CodeLabel(QLabel):
         if len(self.project.cache["file"][self.project.selectFile].lastToolTipPoses) > 2:
             self.project.cache["file"][self.project.selectFile].lastToolTipPoses.pop(0)
 
-        self.project.objects["main"]["code"].viewToolTip()
+        try:
+            self.project.objects["main"]["code"].viewToolTip()
+
+        except RuntimeError:
+            return
 
     def timerMoveScene(self):
         # MOVE SCENE IF SELECT COLLECTOR
@@ -779,7 +971,8 @@ class CodeLabel(QLabel):
             else:
                 for elem in self.project.objects["main"]["liner"].cache["outputsPointPosses"].values():
                     for element in elem:
-                        if abs(element["pos"]["start"].x - event.pos().x()) < CODE_POINT_PRECISION and abs(element["pos"]["start"].y - event.pos().y()) < CODE_POINT_PRECISION:
+                        if abs(element["pos"]["start"].x - event.pos().x()) < CODE_POINT_PRECISION and abs(
+                                element["pos"]["start"].y - event.pos().y()) < CODE_POINT_PRECISION:
                             var = element["start"]["inputs"][element["key"]]["value"]
 
                             if var is None:
@@ -873,7 +1066,8 @@ class CodeLabel(QLabel):
             elif start is not None:
                 if self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["type"] in [self.project.objects["main"]["function"]["objects"][str(start[0]["id"])]["outputs"][start[0]["keys"][start[0]["number"]]["output"]]["type"]] + self.project.objects["main"]["config"]["infelicity"][self.project.objects["main"]["function"]["objects"][str(start[0]["id"])]["outputs"][start[0]["keys"][start[0]["number"]]["output"]]["type"]]:
                     if start[0]["id"] != finish[0]["id"] and finish[0]["node"]["type"] != "event":
-                        path = self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][finish[0]["keys"][finish[0]["number"]]["input"]]["code"]
+                        path = self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][
+                            finish[0]["keys"][finish[0]["number"]]["input"]]["code"]
 
                         self.project.objects["main"]["function"]["objects"][str(finish[0]["id"])]["inputs"][path]["value"] = {
                             "id": start[0]["id"],
@@ -890,10 +1084,7 @@ class CodeLabel(QLabel):
         self.project.objects["main"]["liner"].node = None
 
         if event.button() == Qt.LeftButton:
-            if self.releasedFunction is not None:
-                self.releasedFunction(event.pos().x() - self.project.objects["main"]["code"].width() // 2, event.pos().y() - self.project.objects["main"]["code"].height() // 2)
-
-        Code.update(self.project, call="move")
+            Code.update(self.project)
 
     def mouseMoveEvent(self, event) -> None:
         # MOVE SCENE
@@ -1038,8 +1229,12 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.menu.popup(self.project.objects["main"]["code"].mapToGlobal(pos))
 
     def removeVariableFunction(self, name):
-        with open(self.path, "r", encoding="utf-8") as file:
-            text = load(file)
+        if os.path.exists(self.path):
+            with open(self.path, "r", encoding="utf-8") as file:
+                text = load(file)
+
+        else:
+            text = self.project.cache["allSceneObjects"][self.path]
 
         self.variables.pop(name)
 
@@ -1081,8 +1276,12 @@ class CodeAdditionsVarsType(QTreeWidget):
             self.setItemWidget(item, 2, self.project.objects["main"][f"additions_element_value_{name}"])
 
     def new(self) -> None:
-        with open(self.path, "r", encoding="utf-8") as file:
-            text = load(file)
+        if os.path.exists(self.path):
+            with open(self.path, "r", encoding="utf-8") as file:
+                text = load(file)
+
+        else:
+            text = self.project.cache["allSceneObjects"][self.path]
 
         name = "undefined"
         plus = 0
@@ -1104,8 +1303,12 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.project.init()
 
     def functionName(self, name: str) -> None:
-        with open(self.path, "r", encoding="utf-8") as file:
-            text = load(file)
+        if os.path.exists(self.path):
+            with open(self.path, "r", encoding="utf-8") as file:
+                text = load(file)
+
+        else:
+            text = self.project.cache["allSceneObjects"][self.path]
 
         try:
             name = text["variables"][name]["name"]
@@ -1131,8 +1334,12 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.project.init()
 
     def functionType(self, name: str) -> None:
-        with open(self.path, "r", encoding="utf-8") as file:
-            text = load(file)
+        if os.path.exists(self.path):
+            with open(self.path, "r", encoding="utf-8") as file:
+                text = load(file)
+
+        else:
+            text = self.project.cache["allSceneObjects"][self.path]
 
         index = self.project.objects["main"][f"additions_element_type_{name}"].currentIndex()
 
@@ -1147,8 +1354,12 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.project.init()
 
     def functionValue(self, name: str) -> None:
-        with open(self.path, "r", encoding="utf-8") as file:
-            text = load(file)
+        if os.path.exists(self.path):
+            with open(self.path, "r", encoding="utf-8") as file:
+                text = load(file)
+
+        else:
+            text = self.project.cache["allSceneObjects"][self.path]
 
         value = self.project.objects["main"][f"additions_element_value_{name}"].text()
 
@@ -1212,11 +1423,13 @@ class CodeAdditions:
 class Code:
     @staticmethod
     def init(project) -> None:
+        if f"{project.selectFile}-ai-responce" not in project.cache:
+            project.cache[f"{project.selectFile}-ai-responce"] = {
+                "text": ""
+            }
+
         try:
-            project.objects["main"]["code"] = CodeLabel(
-                parent=project,
-                releasedFunction=lambda x, y: Code.update(project)
-            )
+            project.objects["main"]["code"] = CodeLabel(project)
 
             project.objects["main"]["code"].setGeometry(project.objects["center_rama"].x() + 2, project.objects["center_rama"].y() + 2, project.objects["center_rama"].width() - 4, project.objects["center_rama"].height() - 4)
             project.objects["main"]["code"].show()
@@ -1274,7 +1487,7 @@ class Code:
         qpixmap.fill(QColor(32, 33, 36) if SETTINGS["theme"] == "dark" else QColor(248, 249, 250))
 
         painter = QPainter(qpixmap)
-        painter.setPen(QPen(QColor(63, 64, 66)if SETTINGS["theme"] == "dark" else QColor(218, 220, 224), 1))
+        painter.setPen(QPen(QColor(63, 64, 66) if SETTINGS["theme"] == "dark" else QColor(218, 220, 224), 1))
 
         painter.setFont(SFONT)
 
@@ -1294,9 +1507,7 @@ class Code:
 
         painter.setPen(QPen(QColor(255, 255, 255) if SETTINGS["theme"] == "dark" else QColor(70, 70, 70), 1))
 
-        painter.drawText(
-            5, project.objects["center_rama"].height() - 8, f"X, Y: {pos.x}  {pos.y}"
-        )
+        painter.drawText(5, project.objects["center_rama"].height() - 8, f"X, Y: {pos.x}  {pos.y}")
 
         painter.setPen(QPen(QColor("#cecac9"), 2))
 
@@ -1431,7 +1642,7 @@ class Code:
         project.objects["main"]["replacer_pos"].show()
 
     @staticmethod
-    def nodes(project, create: bool = True) -> None:
+    def nodes(project, create: bool = True, update: bool = False) -> None:
         if create:
             for node in project.objects["main"]["nodes"].values():
                 for connector in node.connectors.values():
@@ -1441,6 +1652,8 @@ class Code:
 
                             connector.inputLeftText.deleteLater()
                             connector.inputLeftRama.deleteLater()
+
+                            connector.placeholderLabel.deleteLater()
 
                         except RuntimeError:
                             pass

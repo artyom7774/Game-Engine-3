@@ -215,3 +215,13 @@ def paste(project) -> None:
             MessageBox.imposiable(e)
 
     project.init()
+
+
+def openDirectory(project) -> None:
+    path = projectTreeGetFilePath(projectTreeGetPath(project.objects["tree_project"].selectedItems()[0]))
+
+    if SYSTEM == "Windows":
+        os.system(f"explorer \"{os.path.normpath(os.getcwd() + '/' + path)}\"")
+
+    else:
+        os.system(f"xdg-open \"{os.path.normpath(os.getcwd() + '/' + path)}\"")

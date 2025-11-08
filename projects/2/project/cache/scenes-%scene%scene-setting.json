@@ -1,0 +1,55 @@
+{
+    "dependences": {
+        "Scene": []
+    },
+    "dependence": [],
+    "type": {
+        "name": "Scene type",
+        "value": "Scene",
+        "type": "none"
+    },
+    "variables": {},
+    "Scene": {
+        "camera_acceleration": {
+            "name": "Camera acceleration",
+            "value": true,
+            "type": "none"
+        },
+        "visiable_screen": {
+            "name": "Visible screen",
+            "value": true,
+            "type": "bool"
+        },
+        "visiable_grid": {
+            "name": "Grid visiable",
+            "value": true,
+            "type": "bool"
+        },
+        "snap": {
+            "name": "Snap to grid",
+            "value": true,
+            "type": "bool"
+        },
+        "grid": {
+            "name": "Grid",
+            "value": {
+                "x": {
+                    "name": "Width",
+                    "type": "int",
+                    "value": 32
+                },
+                "y": {
+                    "name": "Height",
+                    "type": "int",
+                    "value": 32
+                }
+            },
+            "type": "dict"
+        },
+        "focus": {
+            "name": "Name focus object",
+            "value": "player",
+            "type": "str"
+        }
+    }
+}

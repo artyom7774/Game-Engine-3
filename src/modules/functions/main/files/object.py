@@ -239,6 +239,9 @@ class Object:
         project.objects["main"]["object_tree_main"].setExpanded(True)
         project.objects["main"]["object_tree_main"].setFont(0, FONT)
 
+        if include(project, obj, "type", class_) == -1:
+            pass
+
         obj = dict(sorted(obj.items(), key=lambda x: -1 if x[0] not in SORTING_OBJECT_TYPES else SORTING_OBJECT_TYPES[x[0]]))
 
         for key, value in obj.items():
@@ -304,8 +307,8 @@ class Object:
 
                 doing = True
 
-            else:
-                MessageBox.error("The path does not exist or this isn't a image")
+            # else:
+            #     MessageBox.error("The path does not exist or this isn't a image")
 
         if last["type"] == "int":
             try:
@@ -352,11 +355,15 @@ class Object:
                             "type": objects["type"][value]
                         }
 
-        if not doing:
-            obj.setText(str(last["value"]))
+        try:
+            if not doing:
+                obj.setText(str(last["value"]))
+
+        except RuntimeError:
+            pass
 
         if doing and temp["value"] != last["value"]:
-            if os.path.exists(save):
+            if os.path.exists(save) and save.startswith("projects/"):
                 with open(save, "w", encoding="utf-8") as f:
                     dump(file, f, indent=4)
 

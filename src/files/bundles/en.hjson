@@ -307,6 +307,7 @@
     "node.name.removeByKey": "Remove by key"
     "node.name.getKeyOfElement": "Get element key"
     "node.name.addListElement": "Add list element"
+    "node.name.insertListElement": "Insert list element"
     "node.name.addDictElement": "Add dict element"
     "node.name.len_": "Length"
     "node.name.python": "Python"
@@ -335,6 +336,9 @@
     "node.name.getAllObjectInGroup": "Get all object in group"
     "node.name.distance": "Distance"
     "node.name.absolute": "Absolute of number"
+    "node.name.pow": "Power"
+    "node.name.sqrt": "Square root"
+    "node.name.modulo": "Remainder"
 
     // NODE TEXT
     "node.text.none": ""
@@ -342,7 +346,7 @@
     "node.text.text": "text"
     "node.text.angle": "angle"
     "node.text.power": "power"
-    "node.text.id": "ID"
+    "node.text.id": "object ID"
     "node.text.key": "key"
     "node.text.a": "A"
     "node.text.b": "B"
@@ -385,6 +389,11 @@
     "node.text.pathFalse": "path if false"
     "node.text.listObjectID": "list with object ID"
     "node.text.objectID": "object ID"
+    "node.text.n": "N"
+    "node.text.delay": "delay"
+    "node.text.append": "append"
+    "node.text.number": "number"
+    "node.text.degree": "degree"
 
     // OBJECT PARAMETERS
     "object.parameter.number.hitbox": "0. Hitbox"

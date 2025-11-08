@@ -33,7 +33,7 @@ PLUS = 64 + 8 - 1
 # MINI FONT
 
 MFONT = QFont("src/files/fonts/mini.ttf")
-MFONT.setPointSize(9)
+MFONT.setPointSize(8)
 
 # BASE FONT
 
@@ -183,9 +183,11 @@ DONT_OPEN_FORMATES = ()
 CODE_GRID_CELL_SIZE = 25
 CODE_GRID_CELL_SIZE_TWO = 26
 
-CODE_POINT_PRECISION = 6
+CODE_POINT_PRECISION = 10
 CODE_LINER_PRECISION = 0.25
+
 CODE_CONNECTOR_NO_HAVE_INPUT_TYPES = ["path"]
+CODE_CONNECTOR_MAX_DISPLAY_DESCRIPTION = 10
 
 OBJECT_TYPES = ["StaticObject", "DynamicObject", "Particle", "KinematicObject", "Text", "Field", "Button"]
 
@@ -215,7 +217,9 @@ SPRITES = {
     "text": "src/files/sprites/text.png",
     "textc": "src/files/sprites/text.png",
     "btn": "src/files/sprites/text.png",
-    "btnc": "src/files/sprites/text.png"
+    "btnc": "src/files/sprites/text.png",
+    "ai": "src/files/sprites/ai.png",
+    "ai-light": "src/files/sprites/ai-light.png"
 }
 
 for element in IMAGE_FORMATES:

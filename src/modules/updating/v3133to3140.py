@@ -42,5 +42,9 @@ def updating(name):
 
                 os.remove(f"{dirpath}/{filename}")
 
-        with open(f"{dirpath}/objects.scene", "wb") as file:
-            file.write(orjson.dumps(objects))
+        if not os.path.exists(f"{dirpath}/objects.scene"):
+            with open(f"{dirpath}/objects.scene", "wb") as file:
+                file.write(orjson.dumps(objects))
+
+    if os.path.exists(f"projects/{name}/project/cash"):
+        os.rename(f"projects/{name}/project/cash", f"projects/{name}/project/cache")

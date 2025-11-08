@@ -1,5 +1,3 @@
-import time
-
 from PyQt5.QtWidgets import QTreeWidget, QPushButton, QWidget, QSpacerItem, QSizePolicy, QHBoxLayout, QLabel, QTreeWidgetItem, QCheckBox, QMenu, QAction
 from PyQt5.QtGui import QPixmap, QImage, QCursor, QPainter, QPen, QColor
 from PyQt5.Qt import Qt, QTimer, QPoint
@@ -26,14 +24,11 @@ from PIL import Image
 
 import dataclasses
 import pyperclip
-import threading
-import shutil
 import typing
 import orjson
 import json
-import math
 import copy
-import re
+import os
 
 TEMPLATES = {
     "StaticObject": json.load(open("engine/files/objects.json", "r", encoding="utf-8")),
@@ -186,6 +181,8 @@ class SceneLabel(QLabel):
 
             self.drawing = False
 
+        # Scene.update(self.project)
+
     def mouseMoveEvent(self, event) -> None:
         if event.buttons() & Qt.LeftButton and self.drawing:
             x = event.pos().x() - self.lastPoint.x()
@@ -198,7 +195,7 @@ class SceneLabel(QLabel):
                 self.pos.y += y
 
             try:
-                self.update()
+                Scene.update(self.project)
 
             except RuntimeError:
                 pass
@@ -539,10 +536,10 @@ class Scene:
             if obj.pos.x + hitbox.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width + 5 and obj.pos.y + hitbox.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height + 5:
                 select.append(obj)
 
-        if len(select) > 0:
+        try:
             application.objects.removeByGroup("__debug_select__")
 
-        else:
+        except BaseException:
             return
 
         # print(select)
@@ -977,29 +974,40 @@ class Scene:
         with open(f"{project.selectFile}/objects.scene", "wb") as file:
             file.write(orjson.dumps(project.cache["allSceneObjects"]))
 
-        select = project.application[project.selectFile].objects.getByGroup("__debug_select__")[0]
-
         obj = project.cache["file"][project.selectFile].selectObject
+
+        if len(project.application[project.selectFile].objects.getByGroup("__debug_select__")) == 0:
+            application.objects.add(project.engine.objects.StaticObject(
+                application, obj.pos, obj.hitbox, group="__debug_select__", layer=int(1e9) + 1
+            ))
+
+        select = project.application[project.selectFile].objects.getByGroup("__debug_select__")[0]
 
         select.hitbox = obj.hitbox
 
         select.pos = obj.pos
 
-        for i in range(2):
-            hitbox = obj.hitbox.rect()
+        hitbox = obj.hitbox.rect()
 
-            Scene.select(project, obj.pos.x + hitbox.width // 2, obj.pos.y + hitbox.height // 2)
+        Scene.select(project, obj.pos.x + hitbox.width // 2, obj.pos.y + hitbox.height // 2)
 
-            Scene.update(project)
+        Scene.update(project)
 
     @staticmethod
     def save(project) -> None:
-        with open(f"{project.selectFile}/objects.scene", "wb") as file:
-            file.write(orjson.dumps(project.cache["allSceneObjects"]))
+        if not os.path.exists(f"{project.selectFile}/objects.scene"):
+            return
+
+        try:
+            with open(f"{project.selectFile}/objects.scene", "wb") as file:
+                file.write(orjson.dumps(project.cache["allSceneObjects"]))
+
+        except KeyError:
+            return
 
     @staticmethod
     def saveAllValues(project) -> None:
-        pass
+        Scene.save(project)
 
     @staticmethod
     def getVisiableScreen(image, width, height) -> Image.Image:

@@ -1,0 +1,25 @@
+<changelist name="Uncommitted_changes_before_Update_at_08_11_2025_10_19_[Changes]" date="1762586398564" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_11_2025_10_19_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 08.11.2025 10:19 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="projects/game/src/build/game/base_library.zip" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="projects/game/src/build/game/EXE-00.toc" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="projects/game/src/build/game/PKG-00.toc" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="projects/game/src/build/game/Analysis-00.toc" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="projects/game/src/build/game/PYZ-00.pyz" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="projects/game/src/build/game/PYZ-00.toc" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="projects/game/src/build/game/game.pkg" />
+  </binary>
+</changelist>

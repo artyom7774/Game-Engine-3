@@ -1,0 +1,670 @@
+{
+    "variables": {},
+    "objects": {
+        "507597573": {
+            "type": "event",
+            "name": "onStartGame",
+            "x": 13,
+            "y": 5,
+            "width": 6,
+            "height": 3,
+            "id": 507597573,
+            "inputs": {},
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.onStartGame",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            }
+        },
+        "991325182": {
+            "type": "objects",
+            "name": "getObjectIDByName",
+            "x": 31,
+            "y": 5,
+            "width": 6,
+            "height": 3,
+            "id": 991325182,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": {
+                        "id": 833705937,
+                        "name": "iterator"
+                    },
+                    "standard": null
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": "1"
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.getObjectIDByName",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__id__": "node.text.id"
+                }
+            }
+        },
+        "416539036": {
+            "type": "objects",
+            "name": "getObjectIDByName",
+            "x": 41,
+            "y": 12,
+            "width": 6,
+            "height": 3,
+            "id": 416539036,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": {
+                        "id": 870392826,
+                        "name": "iterator"
+                    },
+                    "standard": null
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "type": "text",
+                    "value": null,
+                    "standard": "2"
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.getObjectIDByName",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__id__": "node.text.id"
+                }
+            }
+        },
+        "833705937": {
+            "type": "loop",
+            "name": "for_",
+            "x": 21,
+            "y": 5,
+            "width": 8,
+            "height": 4,
+            "id": 833705937,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "n",
+                    "x"
+                ],
+                "outputs": [
+                    "iterator",
+                    "index",
+                    "after"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": {
+                        "id": 507597573,
+                        "name": "path"
+                    },
+                    "standard": null
+                },
+                "n": {
+                    "code": "n",
+                    "name": "__n__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 100
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__delay__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                }
+            },
+            "outputs": {
+                "iterator": {
+                    "code": "iterator",
+                    "name": "__iterator__",
+                    "type": "iterator"
+                },
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "type": "number"
+                },
+                "after": {
+                    "code": "after",
+                    "name": "__after__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.for",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__iterator__": "node.text.iterator",
+                    "__after__": "node.text.after",
+                    "__name__": "node.text.name",
+                    "__n__": "node.text.n",
+                    "__x__": "node.text.x",
+                    "__index__": "node.text.index",
+                    "__delay__": "node.text.delay"
+                }
+            }
+        },
+        "870392826": {
+            "type": "loop",
+            "name": "for_",
+            "x": 31,
+            "y": 12,
+            "width": 8,
+            "height": 4,
+            "id": 870392826,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "n",
+                    "x"
+                ],
+                "outputs": [
+                    "iterator",
+                    "index",
+                    "after"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": {
+                        "id": 833705937,
+                        "name": "after"
+                    },
+                    "standard": null
+                },
+                "n": {
+                    "code": "n",
+                    "name": "__n__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 100
+                },
+                "x": {
+                    "code": "x",
+                    "name": "__delay__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 1
+                }
+            },
+            "outputs": {
+                "iterator": {
+                    "code": "iterator",
+                    "name": "__iterator__",
+                    "type": "iterator"
+                },
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "type": "number"
+                },
+                "after": {
+                    "code": "after",
+                    "name": "__after__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.for",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__iterator__": "node.text.iterator",
+                    "__after__": "node.text.after",
+                    "__name__": "node.text.name",
+                    "__n__": "node.text.n",
+                    "__x__": "node.text.x",
+                    "__index__": "node.text.index",
+                    "__delay__": "node.text.delay"
+                }
+            }
+        },
+        "183136715": {
+            "display": {
+                "name": "node.name.moveObject",
+                "text": {
+                    "__angle__": "node.text.angle",
+                    "__id__": "node.text.id",
+                    "__name__": "node.text.name",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__power__": "node.text.power"
+                }
+            },
+            "height": 5,
+            "id": 183136715,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 991325182,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 991325182,
+                        "name": "id"
+                    }
+                },
+                "angle": {
+                    "code": "angle",
+                    "name": "__angle__",
+                    "standard": 0,
+                    "type": "number",
+                    "value": null
+                },
+                "power": {
+                    "code": "power",
+                    "name": "__power__",
+                    "standard": 2,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "moveObject",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "angle",
+                    "power"
+                ]
+            },
+            "type": "objects",
+            "width": 10,
+            "x": 39,
+            "y": 5
+        },
+        "352799398": {
+            "display": {
+                "name": "node.name.moveObject",
+                "text": {
+                    "__angle__": "node.text.angle",
+                    "__id__": "node.text.id",
+                    "__name__": "node.text.name",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__power__": "node.text.power"
+                }
+            },
+            "height": 5,
+            "id": 352799398,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 416539036,
+                        "name": "path"
+                    }
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "standard": -1,
+                    "type": "number",
+                    "value": {
+                        "id": 416539036,
+                        "name": "id"
+                    }
+                },
+                "angle": {
+                    "code": "angle",
+                    "name": "__angle__",
+                    "standard": 0,
+                    "type": "number",
+                    "value": null
+                },
+                "power": {
+                    "code": "power",
+                    "name": "__power__",
+                    "standard": 2,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "moveObject",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "angle",
+                    "power"
+                ]
+            },
+            "type": "objects",
+            "width": 10,
+            "x": 49,
+            "y": 12
+        },
+        "447396108": {
+            "display": {
+                "name": "node.name.callFunction",
+                "text": {
+                    "__name__": "node.text.name",
+                    "__none__": "node.text.none",
+                    "__params__": "node.text.params",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 4,
+            "id": 447396108,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 507597573,
+                        "name": "path"
+                    }
+                },
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "function",
+                    "type": "text",
+                    "value": null
+                },
+                "params": {
+                    "code": "params",
+                    "name": "__params__",
+                    "standard": [
+                        "Hello World!"
+                    ],
+                    "type": "list",
+                    "value": null
+                }
+            },
+            "name": "callFunction",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "params"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "type": "another",
+            "width": 8,
+            "x": 21,
+            "y": 19
+        },
+        "925618691": {
+            "display": {
+                "name": "node.name.functionEvent",
+                "text": {
+                    "__name__": "node.text.name",
+                    "__none__": "node.text.none",
+                    "__params__": "node.text.params",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 925618691,
+            "inputs": {
+                "name": {
+                    "code": "name",
+                    "name": "__name__",
+                    "standard": "function",
+                    "type": "text",
+                    "value": null
+                },
+                "params": {
+                    "code": "params",
+                    "name": "__params__",
+                    "standard": [],
+                    "type": "list",
+                    "value": null
+                }
+            },
+            "name": "functionEvent",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "params": {
+                    "code": "params",
+                    "name": "__params__",
+                    "type": "list"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "name",
+                    "params"
+                ],
+                "outputs": [
+                    "path",
+                    "params"
+                ]
+            },
+            "special": {
+                "inputs": {
+                    "params": {
+                        "invisible": true,
+                        "invisible-input": true
+                    }
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 31.0,
+            "y": 19.0
+        },
+        "205870422": {
+            "display": {
+                "name": "node.name.getByIndex",
+                "text": {
+                    "__element__": "node.text.element",
+                    "__index__": "node.text.index",
+                    "__list__": "node.text.list",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 4,
+            "id": 205870422,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 925618691,
+                        "name": "path"
+                    }
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "standard": [],
+                    "type": "list",
+                    "value": {
+                        "id": 925618691,
+                        "name": "params"
+                    }
+                },
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "standard": 0,
+                    "type": "number",
+                    "value": null
+                }
+            },
+            "name": "getByIndex",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "index"
+                ],
+                "outputs": [
+                    "path",
+                    "element"
+                ]
+            },
+            "type": "set",
+            "width": 8,
+            "x": 39.0,
+            "y": 19.0
+        },
+        "547236636": {
+            "display": {
+                "name": "node.name.writeText",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 3,
+            "id": 547236636,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 205870422,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "",
+                    "type": "text",
+                    "value": {
+                        "id": 205870422,
+                        "name": "element"
+                    }
+                }
+            },
+            "name": "writeText",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "text",
+            "width": 6,
+            "x": 49.0,
+            "y": 19.0
+        }
+    }
+}

@@ -1,14 +1,15 @@
 # Game Engine 3
 
-![Game Engine 3 Logo](https://habrastorage.org/getpro/habr/upload_files/271/741/7fc/2717417fc68548727302672b1df80771.png)
-
-## Description
-
 **Game Engine 3** is a powerful software framework for creating 2D games and applications with intuitive visual programming. The engine provides a user-friendly node-based editor that allows game creation without writing textual code.
 
-## Another translate versions
+<div style="display: grid; grid-template-columns: auto auto; gap: 5px 5px;">
+  <img src="descriptions/images/1.png">
+  <img src="descriptions/images/2.png">
+  <img src="descriptions/images/3.png">
+  <img src="descriptions/images/4.png">
+</div>
 
-- [Русский](descriptions/ru.md)
+[ [EN](README.md) | [RU](descriptions/ru.md) ]
 
 ## Key Features
 
@@ -19,19 +20,19 @@
 - **Cross-Platform Support** - Windows (stable) and Linux (beta)
 - **Open Source** - Fully open-source project
 
-## System Requirements
-
-- **Windows 10-11**
-- **4GB RAM**
-- **Intel Core i3-12100 / AMD Ryzen 5 4500**
-- **GTX 1650 / AMD Radeon RX 6500 XT**
-
 ## Installation
 
 1. Visit the [official website](https://artyom7777.pythonanywhere.com/) or [GitHub repository](https://github.com/artyom7774/Game-Engine-3/releases/)
 2. Download the program archive
 3. Extract the archive to a convenient location (UNPACK THE ARCHIVE ONLY IN A WAY THAT DOES NOT CONTAIN CHARACTERS OTHER THAN ENGLISH)
 4. Launch **Game Engine 3.exe**
+
+## System Requirements
+
+- **Windows 10-11**
+- **4GB RAM**
+- **Intel Core i3-12100 / AMD Ryzen 5 4500**
+- **GTX 1650 / AMD Radeon RX 6500 XT**
 
 ## Quick Start
 

@@ -183,7 +183,7 @@
     "Animation": "Анимация"
     "Create group": "Создать группу"
     "Repeat:": "Повторение:"
-    "Base animation:": "Базавая анимация:"
+    "Base animation:": "Базовая анимация:"
     "FPS per frame:": "FPS на кадр:"
     "Create frame": "Создать кадр"
     "Run animation": "Запустить анимацию"
@@ -249,6 +249,11 @@
     "Create interface": "Создать интерфейс"
     "Interface": "Интерфейс"
     "Create text": "Создать текст"
+    "Button type": "Тип кнопки"
+    "Main": "Основное"
+    "Write prompt and press enter...": "Напишите запрос и нажмите enter..."
+    "AI": "ИИ"
+    "Open directory": "Открыть папку"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"
@@ -310,6 +315,7 @@
     "node.name.removeByKey": "Удалить по ключу"
     "node.name.getKeyOfElement": "Получить ключ элемента"
     "node.name.addListElement": "Добавить элемент в список"
+    "node.name.insertListElement": "Вставить элемент в список"
     "node.name.addDictElement": "Добавить элемент в словарь"
     "node.name.len_": "Длинна"
     "node.name.python": "Python"
@@ -338,6 +344,9 @@
     "node.name.getAllObjectInGroup": "Получить все объекты в группе"
     "node.name.distance": "Расстояние"
     "node.name.absolute": "Модуль числа"
+    "node.name.pow": "Степень"
+    "node.name.sqrt": "Квадратный корень"
+    "node.name.modulo": "Остаток от деления"
 
     // NODE TEXT
     "node.text.none": ""
@@ -388,6 +397,11 @@
     "node.text.pathFalse": "путь если ложь"
     "node.text.listObjectID": "список с ID объектов"
     "node.text.objectID": "ID объекта"
+    "node.text.n": "N"
+    "node.text.delay": "задержка"
+    "node.text.append": "соприкосновение"
+    "node.text.number": "число"
+    "node.text.degree": "степень"
 
     // OBJECT PARAMETERS
     "object.parameter.number.hitbox": "0. Хитбокс"

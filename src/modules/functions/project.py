@@ -259,7 +259,7 @@ def projectTreeProjectMenuInit(project) -> typing.Dict[str, bool]:
 
 
 def getColor(name: str) -> str:
-    return SPRITES[name] if ((SETTINGS["theme"] == "dark") or (f"{name}-light" not in SPRITES)) else SPRITES[f"{name}-light"]
+    return SPRITES[name] if (SETTINGS["theme"] == "dark" or (f"{name}-light" not in SPRITES)) else SPRITES[f"{name}-light"]
 
 
 def projectTreeProjectMenuOpen(project, position) -> None:
@@ -324,18 +324,22 @@ def projectTreeProjectMenuOpen(project, position) -> None:
         project.objects["tree_project_menu_paste_action"] = QAction(translate("Paste"), project)
         project.objects["tree_project_menu_rename_action"] = QAction(translate("Rename"), project)
         project.objects["tree_project_menu_remove_action"] = QAction(translate("Delete"), project)
+        project.objects["tree_project_menu_open_directory_action"] = QAction(translate("Open directory"), project)
 
         project.objects["tree_project_menu_open_action"].triggered.connect(lambda: functions.tree.open(project))
         project.objects["tree_project_menu_copy_action"].triggered.connect(lambda: functions.tree.copy(project))
         project.objects["tree_project_menu_paste_action"].triggered.connect(lambda: functions.tree.paste(project))
         project.objects["tree_project_menu_rename_action"].triggered.connect(lambda: functions.tree.rename(project))
         project.objects["tree_project_menu_remove_action"].triggered.connect(lambda: functions.tree.remove(project))
+        project.objects["tree_project_menu_open_directory_action"].triggered.connect(lambda: functions.tree.openDirectory(project))
 
         project.objects["tree_project_menu"].addAction(project.objects["tree_project_menu_open_action"])
         project.objects["tree_project_menu"].addAction(project.objects["tree_project_menu_copy_action"])
         project.objects["tree_project_menu"].addAction(project.objects["tree_project_menu_paste_action"])
         project.objects["tree_project_menu"].addSeparator()
         project.objects["tree_project_menu"].addMenu(project.objects["tree_project_menu_new_menu"])
+        project.objects["tree_project_menu"].addSeparator()
+        project.objects["tree_project_menu"].addAction(project.objects["tree_project_menu_open_directory_action"])
         project.objects["tree_project_menu"].addSeparator()
         project.objects["tree_project_menu"].addAction(project.objects["tree_project_menu_rename_action"])
         project.objects["tree_project_menu"].addAction(project.objects["tree_project_menu_remove_action"])
@@ -357,6 +361,9 @@ def projectTreeProjectMenuOpen(project, position) -> None:
 
             project.objects["tree_project_menu_rename_action"].setDisabled(True)
             project.objects["tree_project_menu_remove_action"].setDisabled(True)
+
+        if os.path.isfile(projectTreeGetFilePath(path)):
+            project.objects["tree_project_menu_open_directory_action"].setDisabled(True)
 
         project.cache["tree_menu_focus"] = project.objects["tree_project"].selectedItems()[0]
         project.objects["tree_project_menu"].popup(project.objects["tree_project"].mapToGlobal(position)) if project.objects["tree_project"].selectedItems() else None
@@ -527,6 +534,11 @@ def projectTreeInit(project) -> None:
             project.objects["tree_project"].addTopLevelItem(project.objects["project_tree_file_objects"][path])
 
         else:
+            if queue[0][0].endswith(".scene") and queue[0][0].find("%scene%") != -1:
+                queue.pop(0)
+
+                continue
+
             queue.pop(0)
 
             if path[path.rfind("/") + 1:] in ("NULL.txt", "NOTHING.txt", "EMPTY.txt"):

@@ -1,4 +1,4 @@
-from ..functions import project
+from ..functions import project, ai
 from .project import *
 
 from .tree import *

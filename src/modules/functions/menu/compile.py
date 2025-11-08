@@ -271,8 +271,7 @@ class LoggerTextEdit(QTextEdit):
 
         self.project = project
 
-    def focusInEvent(self, event):
-        self.project.objects["text"].clearFocus()
+        self.setReadOnly(True)
 
 
 class SocketHandler(QtCore.QObject):
@@ -318,7 +317,7 @@ class SocketHandler(QtCore.QObject):
 
     def read(self, fd):
         try:
-            data = self.conn.recv(1024)
+            data = self.conn.recv(1024**2)
 
             if data:
                 self.dataReceived.emit(data.decode().rstrip())

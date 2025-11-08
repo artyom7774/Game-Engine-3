@@ -1,8 +1,10 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
+from PyQt5.QtCore import QEvent
 from PyQt5.QtGui import QKeySequence
 from PyQt5.Qt import QIcon, Qt, QTimer
 
 from src.modules.widgets import TabFileBar, VersionLogScrollArea, TreeProject, VisiableConsole
+from src.modules.functions.project import projectTreeInit
 
 from src.modules import functions
 from src.modules import internet
@@ -42,8 +44,11 @@ class Main(QMainWindow):
 
         QMainWindow.__init__(self)
 
+        self.programWasStarted = False
         self.app = app
-        self.app.setFont(QFont("Segoe UI", 9))
+
+        if SYSTEM == "Linux":
+            self.app.setFont(QFont("Segoe UI", 9))
 
         try:
             qdarktheme.setup_theme(theme=SETTINGS["theme"])
@@ -287,12 +292,14 @@ class Main(QMainWindow):
 
         self.init("initialization")
 
+        self.programWasStarted = True
+
         if not DEVELOP:
             return
 
-        thr = threading.Thread(target=lambda: inspector(self, "Game Engine 3", show_private=False, max_depth=999))
-        thr.daemon = True
-        thr.start()
+        # thr = threading.Thread(target=lambda: inspector(self, "Game Engine 3", show_private=False, max_depth=999))
+        # thr.daemon = True
+        # thr.start()
 
     def init(self, type: str = "") -> None:
         self.menu()
@@ -401,7 +408,8 @@ class Main(QMainWindow):
 
         def q(project):
             if project.selectFile[project.selectFile.find(".") + 1:].find("%scene%") != -1:
-                functions.files.Scene.objectReleased(self)
+                for _ in range(2):
+                    functions.files.Scene.objectReleased(self)
 
         def ctrlC(project):
             if functions.project.projectTreeProjectMenuInit(self)["copy"]:

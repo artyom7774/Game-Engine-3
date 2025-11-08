@@ -235,8 +235,8 @@ class Config:
                         answer = project.objects["main"][obj].text()
 
                     else:
-                        if project.objects["main"][obj].text() != "":
-                            MessageBox.error("The path does not exist or this isn't a image")
+                        # if project.objects["main"][obj].text() != "":
+                        #     MessageBox.error("The path does not exist or this isn't a image")
 
                         project.objects["main"][obj].setText(str(value["value"]))
 

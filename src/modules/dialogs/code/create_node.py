@@ -80,6 +80,7 @@ class CreateNode(QDialog):
         self.objects["nodes"].show()
 
         self.objects["nodes"].itemClicked.connect(self.choose)
+        self.objects["nodes"].itemDoubleClicked.connect(lambda event: CreateNodeFunctions.create(self.project, self, self.position, event))
 
         self.objects["select"] = None
         self.objects["widgets"] = {}

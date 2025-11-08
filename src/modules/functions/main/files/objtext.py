@@ -48,11 +48,11 @@ class ChooseFontFunction:
     def choose(project, dialog, event, widget):
         name = FONT_LIST[dialog.objects["choose_combobox"].currentIndex()]
 
-        widget.setText(name)
-
-        widget.saveAllValues()
+        widget.out = name
 
         dialog.close()
+
+        widget.saveAllValues()
 
         project.init()
 
@@ -385,9 +385,13 @@ class ObjectText:
             file = project.cache["allSceneObjects"][save]
 
         if last["type"] == "font":
-            text = obj.text()
+            if hasattr(obj, "out"):
+                text = obj.out
 
-        if last["type"] == "scroll":
+            else:
+                text = obj.text()
+
+        elif last["type"] == "scroll":
             text = obj.value()
 
         elif last["type"] == "color":
@@ -436,8 +440,8 @@ class ObjectText:
 
                 doing = True
 
-            else:
-                MessageBox.error("The path does not exist or this isn't a image")
+            # else:
+            #     MessageBox.error("The path does not exist or this isn't a image")
 
         if last["type"] == "int":
             try:
@@ -498,7 +502,7 @@ class ObjectText:
             obj.setText(str(last["value"]))
 
         if doing and temp["value"] != last["value"]:
-            if os.path.exists(save):
+            if os.path.exists(save) and save.startswith("projects/"):
                 with open(save, "w", encoding="utf-8") as f:
                     dump(file, f, indent=4)
 
