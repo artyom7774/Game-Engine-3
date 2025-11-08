@@ -2,20 +2,16 @@
 
 **Game Engine 3** is a powerful software framework for creating 2D games and applications with intuitive visual programming. The engine provides a user-friendly node-based editor that allows game creation without writing textual code.
 
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-  <div style="flex: 0 0 48%; margin: 1%;">
-    <img src="descriptions/images/1.png" style="width: 100%;">
-  </div>
-  <div style="flex: 0 0 48%; margin: 1%;">
-    <img src="descriptions/images/2.png" style="width: 100%;">
-  </div>
-  <div style="flex: 0 0 48%; margin: 1%;">
-    <img src="descriptions/images/3.png" style="width: 100%;">
-  </div>
-  <div style="flex: 0 0 48%; margin: 1%;">
-    <img src="descriptions/images/4.png" style="width: 100%;">
-  </div>
-</div>
+<table>
+  <tr>
+    <td><img src="descriptions/images/1.png" width="100%"></td>
+    <td><img src="descriptions/images/2.png" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="descriptions/images/3.png" width="100%"></td>
+    <td><img src="descriptions/images/4.png" width="100%"></td>
+  </tr>
+</table>
 
 [ [EN](README.md) | [RU](descriptions/ru.md) ]
 
