@@ -218,8 +218,8 @@ SPRITES = {
     "textc": "src/files/sprites/text.png",
     "btn": "src/files/sprites/text.png",
     "btnc": "src/files/sprites/text.png",
-    "ai": "src/files/sprites/ai.png",
-    "ai-light": "src/files/sprites/ai-light.png"
+    "ai": "src/files/sprites/ai-light.png",
+    "ai-light": "src/files/sprites/ai.png"
 }
 
 for element in IMAGE_FORMATES:

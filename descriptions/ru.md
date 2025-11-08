@@ -1,10 +1,17 @@
 # Game Engine 3
 
-![Game Engine 3 Logo](https://habrastorage.org/getpro/habr/upload_files/271/741/7fc/2717417fc68548727302672b1df80771.png)
-
-## Описание
-
 **Game Engine 3** - это мощная программная оболочка для создания двумерных игр и приложений с интуитивным визуальным программированием. Движок предоставляет удобный редактор на основе нодов, который позволяет создавать игры без написания текстового кода.
+
+<table>
+  <tr>
+    <td><img src="descriptions/images/1.png" width="100%"></td>
+    <td><img src="descriptions/images/2.png" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="descriptions/images/3.png" width="100%"></td>
+    <td><img src="descriptions/images/4.png" width="100%"></td>
+  </tr>
+</table>
 
 ## Ключевые особенности
 
