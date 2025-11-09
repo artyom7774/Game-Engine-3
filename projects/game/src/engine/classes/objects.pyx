@@ -184,7 +184,7 @@ cdef class StaticObject:
         self.lastFrameUpdateNumber = self.game.fpsc
 
         if self.sprite is not None:
-            if self.game.usingWidth + self.sprite.pos.x + self.sprite.size.x + 500 > self.pos.x + px > - 500 - self.sprite.pos.x - self.sprite.size.x and 500 + self.game.usingHeight + self.sprite.pos.y + self.sprite.size.y > self.pos.y + py > - 500 - self.sprite.pos.y - self.sprite.size.y:
+            if self.game.usingWidth + self.sprite.pos.x + self.sprite.size.x > self.pos.x + px > -self.sprite.pos.x - self.sprite.size.x and self.game.usingHeight + self.sprite.pos.y + self.sprite.size.y > self.pos.y + py > -self.sprite.pos.y - self.sprite.size.y:
                 sprite = self.sprite.get()
 
                 if not self.invisible or self.game.forcedViewObject:

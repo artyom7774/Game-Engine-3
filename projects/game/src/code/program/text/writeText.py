@@ -10,9 +10,11 @@ def writeText(program, compiler, path: str, nodes: dict, id: int, variables: dic
     else:
         text = str(nodes["objects"][str(id)]["inputs"]["text"]["standard"])
 
-    answer = ">>> " + text.rstrip()
+    line = True
 
-    program.print(answer + "\n")
+    answer = ">>> " + text.rstrip() + "\n" if line else ">>> " + text.rstrip()
+
+    program.print(answer)
 
     print(answer)
 

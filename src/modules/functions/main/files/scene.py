@@ -430,9 +430,12 @@ class SceneAdditions:
 
 class Scene:
     updating = False
+    open = ""
 
     @staticmethod
     def init(project, call: str = "") -> None:
+        Scene.open = project.selectFile
+
         project.cache["file"][project.selectFile].settings = f"projects/{project.selectProject}/project/cache/{'-'.join(project.selectFile.split('/')[3:])}-setting.json"
 
         if project.selectFile not in project.application:
@@ -1002,6 +1005,9 @@ class Scene:
     @staticmethod
     def save(project) -> None:
         if not os.path.exists(f"{project.selectFile}/objects.scene"):
+            return
+
+        if Scene.open != project.selectFile:
             return
 
         try:

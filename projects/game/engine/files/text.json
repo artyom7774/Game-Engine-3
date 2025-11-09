@@ -1,5 +1,6 @@
 {
     "main": "Text",
+
     "dependences": {
         "Text": [],
         "Field": [
@@ -161,10 +162,10 @@
             "hitbox",
             "group",
             "layer",
+            "invisible",
             "font",
             "message",
             "fontSize",
-            "invisible",
             "alpha",
             "fontColor",
             "alignment"

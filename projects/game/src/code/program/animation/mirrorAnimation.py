@@ -28,7 +28,7 @@ def mirrorAnimation(program, compiler, path: str, nodes: dict, id: int, variable
     obj = program.objects.getById(ids)
 
     if obj is None:
-        raise EngineError(f"not found object with id = {ids}")
+        EngineError(f"not found object with id = {ids}")
 
     obj.animator.flipAnimation(horizontal, vertical)
 

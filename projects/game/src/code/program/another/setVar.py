@@ -1,6 +1,3 @@
-from engine.special.exception import EngineError
-
-
 def setVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
@@ -44,13 +41,13 @@ def setVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, 
 
     if gl:
         if name not in variables["globals"]:
-            raise EngineError(f"not found global variable with name = {name}")
+            EngineError(f"not found global variable with name = {name}")
 
         variables["globals"][name]["value"] = value
 
     else:
         if name not in variables["locals"][path]:
-            raise EngineError(f"not found local variable with name = {name}")
+            EngineError(f"not found local variable with name = {name}")
 
         variables["locals"][path][name]["value"] = value
 

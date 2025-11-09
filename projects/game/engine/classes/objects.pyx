@@ -2,7 +2,7 @@ from libc.math cimport sqrt, sin, cos
 
 from engine.classes.collision import Collision
 
-from engine.classes.hitbox import SquareHitbox, CircleHitbox
+from engine.classes.hitbox import SquareHitbox
 
 from engine.classes.sprite import Sprite
 
@@ -28,24 +28,6 @@ def hex_to_rgb(color: str) -> typing.List[int]:
     return list(int(color[i:i+2], 16) for i in (0, 2, 4))
 
 
-def buildHitbox(hitbox: typing.Any) -> typing.Any:
-    if isinstance(hitbox, (list, tuple)):
-        if len(hitbox) == 4:
-            return SquareHitbox(hitbox)
-
-        if len(hitbox) == 3:
-            return CircleHitbox(hitbox)
-
-    if isinstance(hitbox, dict):
-        if hitbox["type"] == "SquareHitbox":
-            return SquareHitbox([parameter["value"] for parameter in hitbox["hitbox"]["SquareHitbox"].values()])
-
-        if hitbox["type"] == "CircleHitbox":
-            return CircleHitbox([parameter["value"] for parameter in hitbox["hitbox"]["CircleHitbox"].values()])
-
-    raise TypeError()
-
-
 cdef class StaticObject:
     cdef public object game
     cdef public object procesionPos
@@ -61,23 +43,19 @@ cdef class StaticObject:
     cdef public dict specials
     cdef public object collisions
     cdef public bint invisible
-    cdef public int alpha
     cdef public object animator
     cdef public bint doCollisionUpdate
-
-    cdef public int lastFrameUpdateNumber
 
     def __init__(
         self, game: object,
         pos: typing.Union[typing.List[float], Vec2f, Vec2i],
-        hitbox: typing.Union[SquareHitbox, CircleHitbox, typing.List[float], Vec4f, Vec4i],
+        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f, Vec4i],
         sprite: VSprite = None,
-        group: str = "",
+        group: str = None,
         mass: int = 1000,
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
-        alpha: int = 255,
         animator: typing.Any = None,
         variables: typing.Dict[str, typing.Any] = None,
         specials: typing.Dict[str, typing.Any] = None,
@@ -100,21 +78,22 @@ cdef class StaticObject:
         self.game = game
         self.collisions = self.game.objects.collisions.get(group)
 
-        self.id = random.randint(1, 1000000000) if id is None else id
+        if id is None:
+            self.id = random.randint(1, 1000000000)
+
+        else:
+            self.id = id
 
         self.group = group
         self.procesionPos = Vec2f(0, 0)
         self.pos = pos if type(pos) == Vec2f else Vec2f(*pos)
-        self.hitbox = hitbox if type(hitbox) in (SquareHitbox, CircleHitbox) else buildHitbox(hitbox)
+        self.hitbox = hitbox if type(hitbox) == SquareHitbox else SquareHitbox(hitbox)
         self.mass = mass
         self.layer = layer
         self.invisible = invisible
-        self.alpha = alpha
         self.sprite = sprite if type(sprite) != list else Sprite(self.game, self, *sprite)
         self.distance = sqrt(self.pos.x ** 2 + self.pos.y ** 2)
         self.animator = animator
-
-        self.lastFrameUpdateNumber = -1
 
     def __str__(self):
         return f"StaticObject(id = {self.id} pos = {self.pos})"
@@ -145,11 +124,11 @@ cdef class StaticObject:
         self.procesionPos.y -= y
 
         if x == 0 and y == 0:
-            return
+            return 0
 
         self.game.doCollisionsUpdate = max(self.game.doCollisionsUpdate, x != 0 or y != 0)
 
-        collisions = self.game.cache["collisions"][self.id] if self.id in self.game.cache["collisions"] else []
+        collisions = self.game.cache["collisions"][self.id] if self.id in self.game.cash["collisions"] else []
 
         step = math.ceil(abs(x) + abs(y))
 
@@ -175,24 +154,15 @@ cdef class StaticObject:
 
         self.distance = sqrt(self.pos.x ** 2 + self.pos.y ** 2)
 
-        self.game.objects.tree.update(self)
-
     def draw(self, px: float, py: float):
-        if self.lastFrameUpdateNumber == self.game.fpsc:
-            return
-
-        self.lastFrameUpdateNumber = self.game.fpsc
-
         if self.sprite is not None:
-            if self.game.usingWidth + self.sprite.pos.x + self.sprite.size.x + 500 > self.pos.x + px > - 500 - self.sprite.pos.x - self.sprite.size.x and 500 + self.game.usingHeight + self.sprite.pos.y + self.sprite.size.y > self.pos.y + py > - 500 - self.sprite.pos.y - self.sprite.size.y:
+            if self.game.usingWidth + self.sprite.pos.x + self.sprite.size.x > self.pos.x + px > -self.sprite.pos.x - self.sprite.size.x and self.game.usingHeight + self.sprite.pos.y + self.sprite.size.y > self.pos.y + py > -self.sprite.pos.y - self.sprite.size.y:
                 sprite = self.sprite.get()
 
                 if not self.invisible or self.game.forcedViewObject:
                     if sprite is not None:
-                        # sprite = sprite.copy()
-                        sprite.set_alpha(min(255, max(0, self.alpha)))
-
-                        self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x + px, self.pos.y + self.sprite.pos.y + py))
+                        if self.game.usingWidth + 200 > self.pos.x + self.sprite.pos.x + px > -200 and self.game.usingHeight + 200 > self.pos.y + self.sprite.pos.y + py > -200:
+                            self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x + px, self.pos.y + self.sprite.pos.y + py))
 
         if self.game.debug or (self.group.startswith("__") and self.group.endswith("__") and not self.group == "__debug_unvisiable__"):
             self.hitbox.draw(self.game.screen, self.pos.x, self.pos.y, px, py)
@@ -205,8 +175,8 @@ cdef class StaticObject:
 
         flag = False
 
-        for obj in self.game.cache["collisions"][self.id]:
-            if Collision.any(hitbox.position(self.pos.x, self.pos.y), obj["object"].hitbox.position(obj["object"].pos.x, obj["object"].pos.y)) and (filter is None or filter(obj["object"])):
+        for obj in self.game.cash["collisions"][self.id]:
+            if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height) and (filter is None or filter(obj["object"])):
                 if allowFunctions:
                     if obj["functions"] is not None:
                         for element in obj["functions"]["functions"]:
@@ -224,22 +194,24 @@ cdef class StaticObject:
     def collisionGetID(self, x: float = 0, y: float = 0, append: bool = False, group: str = None) -> typing.Any:
         hitbox = self.getEditHitbox(x, y, append)
 
-        if self.id not in self.game.cache["collisions"]:
+        if self.id not in self.game.cash["collisions"]:
             return [False, -1]
 
-        for obj in self.game.cache["collisions"][self.id]:
+        for obj in self.game.cash["collisions"][self.id]:
             if obj["object"].group == group or group is None:
-                if Collision.any(hitbox.position(self.pos.x, self.pos.y), obj["object"].hitbox.position(obj["object"].pos.x, obj["object"].pos.y)):
+                if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
                     return [True, obj["object"]]
 
         return [False, -1]
 
     def getEditHitbox(self, x: float = 0, y: float = 0, append: bool = False) -> SquareHitbox:
-        if append:
-            hitbox = self.hitbox.position(0, 0, 1)
+        hitbox = self.hitbox.copy()
 
-        else:
-            hitbox = self.hitbox.copy()
+        if append:
+            hitbox.x -= 1
+            hitbox.width += 2
+            hitbox.y -= 1
+            hitbox.height += 2
 
         if x > 0:
             hitbox.x += 1
@@ -280,14 +252,13 @@ cdef class DynamicObject(StaticObject):
     def __init__(
         self, game: object,
         pos: typing.Union[typing.List[float], Vec2f],
-        hitbox: typing.Union[SquareHitbox, CircleHitbox, typing.List[float], Vec4f],
+        hitbox: typing.Union[SquareHitbox, typing.List[float], Vec4f],
         sprite: VSprite = None,
         group: str = None,
         mass: int = 1000,
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
-        alpha: int = 255,
         animator: typing.Any = None,
         gravity: float = 300,
         slidingStep: float = INF,
@@ -295,7 +266,7 @@ cdef class DynamicObject(StaticObject):
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        StaticObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, alpha, animator, variables, specials)
+        StaticObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, variables, specials)
 
         self.doCollisionUpdate = True
 
@@ -361,7 +332,7 @@ cdef class DynamicObject(StaticObject):
         if now.id in visited:
             return []
 
-        if now.id not in self.game.cache["collisions"]:
+        if now.id not in self.game.cash["collisions"]:
             return []
 
         visited.add(now.id)
@@ -370,7 +341,7 @@ cdef class DynamicObject(StaticObject):
 
         objects = []
 
-        for obj in self.game.cache["collisions"][now.id]:
+        for obj in self.game.cash["collisions"][now.id]:
             if obj is None or obj["functions"] is None:
                 continue
 
@@ -380,10 +351,15 @@ cdef class DynamicObject(StaticObject):
             if isinstance(obj["object"], KinematicObject):
                 continue
 
-            if Collision.any(SquareHitbox(now.pos.x + hitbox.x + phitbox[0], now.pos.y + hitbox.y + phitbox[1], hitbox.width + phitbox[2], hitbox.height + phitbox[3]), SquareHitbox(obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height)):
+            if Collision.rect(now.pos.x + hitbox.x + phitbox[0], now.pos.y + hitbox.y + phitbox[1], hitbox.width + phitbox[2], hitbox.height + phitbox[3], obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
                 objects.append(obj["object"])
 
-                objects.extend(self.getObjectStructure(x, y, append, phitbox, obj["object"], visited))
+                objects.extend(
+                    self.getObjectStructure(
+                        x, y, append, phitbox,
+                        obj["object"], visited
+                    )
+                )
 
         return objects
 
@@ -394,23 +370,21 @@ cdef class DynamicObject(StaticObject):
             moving = self.getVectorsPower() * 6
 
             if abs(moving.x) > FLOAT_PRECISION or abs(moving.y) > FLOAT_PRECISION:
-                hitbox = self.hitbox.rect()
-
                 pygame.draw.line(
                     self.game.screen, (255, 0, 0) if "debug_color" not in self.specials else self.specials["debug_color"],
-                    (px + self.pos.x + hitbox.x + hitbox.width / 2, py + self.pos.y + hitbox.y + hitbox.height / 2), (px + self.pos.x + hitbox.x + hitbox.width / 2 + moving.x, py + self.pos.y + hitbox.y + hitbox.height / 2 + moving.y), 1
+                    (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2), (px + self.pos.x + self.hitbox.x + self.hitbox.width / 2 + moving.x, py + self.pos.y + self.hitbox.y + self.hitbox.height / 2 + moving.y), 1
                 )
 
     def collision(self, x: float = 0, y: float = 0, allowFunctions: bool = False, append: bool = False, filter: typing.Callable = None) -> bool:
         hitbox = self.getEditHitbox(x, y, append)
 
-        if self.id not in self.game.cache["collisions"]:
+        if self.id not in self.game.cash["collisions"]:
             return False
 
         flag = False
 
-        for obj in self.game.cache["collisions"][self.id]:
-            if Collision.any(hitbox.position(self.pos.x, self.pos.y), obj["object"].hitbox.position(obj["object"].pos.x, obj["object"].pos.y)) and (filter is None or filter(obj["object"])):
+        for obj in self.game.cash["collisions"][self.id]:
+            if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height) and (filter is None or filter(obj["object"])):
                 if allowFunctions:
                     if obj["functions"] is not None:
                         for element in obj["functions"]["functions"]:
@@ -499,7 +473,6 @@ cdef class KinematicObject(DynamicObject):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
-        alpha: int = 255,
         animator: typing.Any = None,
         gravity: float = 300,
         slidingStep: float = INF,
@@ -507,7 +480,7 @@ cdef class KinematicObject(DynamicObject):
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, alpha, animator, gravity, slidingStep, variables, specials)
+        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, gravity, slidingStep, variables, specials)
 
         self.doCollisionUpdate = True
 
@@ -545,16 +518,16 @@ cdef class KinematicObject(DynamicObject):
     def getAffectedObjects(self) -> typing.List["VObject"]:
         affected = []
 
-        if self.id not in self.game.cache["collisions"]:
+        if self.id not in self.game.cash["collisions"]:
             return affected
 
         hitbox = self.getEditHitbox(0, 0, True)
 
-        for obj in self.game.cache["collisions"][self.id]:
+        for obj in self.game.cash["collisions"][self.id]:
             if obj is None or obj["object"] is None:
                 continue
 
-            if Collision.any(hitbox.position(self.pos.x, self.pos.y), obj["object"].hitbox.position(obj["object"].pos.x, obj["object"].pos.y)):
+            if Collision.rect(self.pos.x + hitbox.x, self.pos.y + hitbox.y, hitbox.width, hitbox.height, obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height):
                 affected.append(obj["object"])
 
                 if isinstance(obj["object"], DynamicObject) and not isinstance(obj["object"], KinematicObject):
@@ -567,19 +540,19 @@ cdef class KinematicObject(DynamicObject):
 
         visited.add(obj.id)
 
-        if obj.id not in self.game.cache["collisions"]:
+        if obj.id not in self.game.cash["collisions"]:
             return stacked
 
         hitbox = obj.getEditHitbox(0, 0, True)
 
-        for collision in self.game.cache["collisions"][obj.id]:
+        for collision in self.game.cash["collisions"][obj.id]:
             if collision is None or collision["object"] is None:
                 continue
 
             if collision["object"].id in visited:
                 continue
 
-            if Collision.any(hitbox.position(self.pos.x, self.pos.y, 1), collision["object"].hitbox.position(collision["object"].pos.x, collision["object"].pos.y)):
+            if Collision.rect(obj.pos.x + hitbox.x - 1, obj.pos.y + hitbox.y - 1, hitbox.width + 2, hitbox.height + 2, collision["object"].pos.x + collision["object"].hitbox.x, collision["object"].pos.y + collision["object"].hitbox.y, collision["object"].hitbox.width, collision["object"].hitbox.height):
                 if isinstance(collision["object"], DynamicObject) and not isinstance(collision["object"], KinematicObject):
                     stacked.append(collision["object"])
 
@@ -590,8 +563,8 @@ cdef class KinematicObject(DynamicObject):
 
 cdef class Particle(DynamicObject):
     cdef public int liveTime
-    cdef public float spriteSize
     cdef public float minusSpriteSizePerFrame
+    cdef public float spriteSize
 
     def __init__(
         self, game: object,
@@ -603,7 +576,6 @@ cdef class Particle(DynamicObject):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
-        alpha: int = 255,
         animator: typing.Any = None,
         gravity: float = 300,
         slidingStep: float = INF,
@@ -613,7 +585,7 @@ cdef class Particle(DynamicObject):
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, alpha, animator, gravity, slidingStep, variables, specials)
+        DynamicObject.__init__(self, game, pos, hitbox, sprite, group, mass, layer, id, invisible, animator, gravity, slidingStep, variables, specials)
 
         self.doCollisionUpdate = False
 
@@ -634,28 +606,22 @@ cdef class Particle(DynamicObject):
     def update(self, collisions: list = None):
         super().update(collisions)
 
-        self.liveTime -= 1
-
-        self.sprite.pos.x -= math.ceil((1 - self.spriteSize) * self.sprite.size.x // 2)
-        self.sprite.pos.y -= math.ceil((1 - self.spriteSize) * self.sprite.size.y // 2)
-
         self.spriteSize -= self.minusSpriteSizePerFrame
-
-        self.sprite.pos.x += math.ceil((1 - self.spriteSize) * self.sprite.size.x // 2)
-        self.sprite.pos.y += math.ceil((1 - self.spriteSize) * self.sprite.size.y // 2)
+        self.liveTime -= 1
 
         if self.liveTime <= 0 or self.spriteSize <= 0:
             self.destroy()
 
-        if self.sprite is not None and not self.game.noRefactorUpdate:
-            self.sprite.resize(round(self.sprite.size.x * self.spriteSize), round(self.sprite.size.y * self.spriteSize))
+        if self.sprite is not None:
+            self.sprite.resize(round(self.sprite.width * self.spriteSize), round(self.sprite.height * self.spriteSize))
 
 
 cdef class Text(StaticObject):
     cdef public str font
     cdef public str message
     cdef public int fontSize
-    cdef public object fontColor
+    cdef public int alpha
+    cdef public str fontColor
     cdef public object alignment
     cdef public str vertical
     cdef public str horizontal
@@ -672,17 +638,17 @@ cdef class Text(StaticObject):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
-        alpha: int = 255,
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
-        fontColor: object = "#FFFFFF",
+        alpha: int = 255,
+        fontColor: str = "#FFFFFF",
         alignment: typing.List[bool] = None,
         variables: typing.Dict[str, typing.Any] = None,
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, alpha, None, variables, specials)
+        StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, None, variables, specials)
 
         self.doCollisionUpdate = False
 
@@ -760,17 +726,16 @@ cdef class Field(Text):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
-        alpha: int = 255,
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
-        fontColor: object = "#FFFFFF",
+        fontColor: str = "#FFFFFF",
         alignment: typing.List[bool] = None,
         variables: typing.Dict[str, typing.Any] = None,
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        Text.__init__(self, game, pos, hitbox, group, layer, id, invisible, alpha, font, message, fontSize, fontColor, alignment, variables, specials)
+        Text.__init__(self, game, pos, hitbox, group, layer, id, invisible, font, message, fontSize, fontColor, alignment, variables, specials)
 
         self.doCollisionUpdate = False
 
@@ -877,6 +842,7 @@ cdef class Button(StaticObject):
     cdef public str font
     cdef public str message
     cdef public int fontSize
+    cdef public int alpha
     cdef public object fontColor
     cdef public object ramaColor
     cdef public object backgroundColor
@@ -898,10 +864,10 @@ cdef class Button(StaticObject):
         layer: int = 0,
         id: int = None,
         invisible: bool = False,
-        alpha: int = 255,
         font: str = "Arial",
         message: str = "Text",
         fontSize: int = 13,
+        alpha: int = 255,
         ramaColor: typing.List[str] = ["#000000", "#000000", "#000000"],
         fontColor: typing.List[str] = ["#FFFFFF", "#FFFFFF", "#FFFFFF"],
         backgroundColor: typing.List[str] = ["#AAAAAA", "#888888", "#444444"],
@@ -910,7 +876,7 @@ cdef class Button(StaticObject):
         specials: typing.Dict[str, typing.Any] = None,
         *args, **kwargs
     ) -> None:
-        StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, alpha, None, variables, specials)
+        StaticObject.__init__(self, game, pos, hitbox, None, group, 0, layer, id, invisible, None, variables, specials)
 
         self.doCollisionUpdate = False
 

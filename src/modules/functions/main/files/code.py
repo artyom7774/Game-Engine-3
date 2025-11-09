@@ -1695,8 +1695,6 @@ class Code:
                             pass
 
                 except Exception as e:
-                    print(f"ERROR: can't delete connector: {e}")
-
                     continue
 
             try:
@@ -1704,7 +1702,6 @@ class Code:
                 node.deleteLater()
 
             except (AttributeError, RuntimeError) as e:
-                print(f"ERROR: can't delete node: {e}")
                 continue
 
         project.objects["main"]["nodes"] = {}

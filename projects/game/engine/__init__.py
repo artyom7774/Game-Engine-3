@@ -3,7 +3,7 @@ from engine.vector.float import Vec2f, Vec3f, Vec4f
 from engine.vector.angle import AngleVector
 from engine.variables import *
 
-from engine.classes.hitbox import SquareHitbox, CircleHitbox
+from engine.classes.hitbox import SquareHitbox
 
 from engine.classes.collision import Collision
 from engine.classes.group import ObjectGroup
@@ -25,7 +25,5 @@ from engine.ui.surface import Surface
 from engine.ui.text import Label, TextField, print_text
 from engine.ui.layout import Layout
 from engine.ui.button import Button
-
-import engine.special.exception
 
 from engine.application import Application

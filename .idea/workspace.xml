@@ -6,31 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMMANDS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/COMMANDS.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game Engine 3.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Game Engine 3.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game Engine 3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game Engine 3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/getUsingObjects.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/hitbox.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/classes/objects.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/vector/float.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib.win-amd64-cpython-311/engine/vector/int.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.exp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/getUsingObjects.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.exp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/hitbox.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.exp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/classes/objects.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.exp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/float.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.exp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/temp.win-amd64-cpython-311/Release/engine/vector/int.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/descriptions/ru.md" beforeDir="false" afterPath="$PROJECT_DIR$/descriptions/ru.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/application.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/animator.py" beforeDir="false" />
@@ -39,16 +15,16 @@
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/getUsingObjects.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/getUsingObjects.pyd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/getUsingObjects.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/getUsingObjects.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/getUsingObjects.so" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/classes/getUsingObjects.so" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/group.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/hitbox.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/hitbox.pyd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/hitbox.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/hitbox.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/hitbox.so" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/classes/hitbox.so" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/objects.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/objects.pyd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/objects.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/objects.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/objects.so" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.so" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/sprite.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/classes/texture.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/files/button.json" beforeDir="false" />
@@ -71,16 +47,17 @@
       <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/float.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/float.pyd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/float.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/float.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/float.so" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/vector/float.so" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/int.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/int.pyd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/int.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/int.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/engine/vector/int.so" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/vector/int.so" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/project/assets/EMPTY.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/project/assets/player.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/project/cache/EMPTY.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/project/cache/scenes-%scene%scene-setting.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/project/collision.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/project/files/1.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/project/files/EMPTY.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/project/functions/1.func" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/project/functions/EMPTY.txt" beforeDir="false" />
@@ -239,6 +216,7 @@
       <change beforePath="$PROJECT_DIR$/projects/1/src/engine/vector/int.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/src/engine/vector/int.pyd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/src/engine/vector/int.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/1/src/files/1.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/src/files/EMPTY.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/src/functions/1.func" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/src/functions/EMPTY.txt" beforeDir="false" />
@@ -246,6 +224,113 @@
       <change beforePath="$PROJECT_DIR$/projects/1/src/music/EMPTY.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/src/project.cfg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/1/version.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/application.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/animator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/camera.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/collision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/getUsingObjects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/getUsingObjects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/getUsingObjects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/group.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/hitbox.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/hitbox.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/hitbox.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/objects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/objects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/objects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/sprite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/classes/texture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/files/button.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/files/objects.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/files/scene.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/files/text.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/fonts/arial.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/functions/alpha.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/functions/cache.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/functions/loads.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/profiler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/special/exception.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/ui/button.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/ui/layout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/ui/lbutton.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/ui/surface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/ui/text.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/variables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/vector/angle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/vector/float.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/vector/float.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/vector/float.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/vector/int.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/vector/int.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/engine/vector/int.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/project/assets/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/project/cache/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/project/collision.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/project/files/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/project/functions/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/project/music/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/project/objects/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/project/project.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/project/scenes/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/project/ui/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/10/version.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/application.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/animator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/camera.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/collision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/getUsingObjects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/getUsingObjects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/getUsingObjects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/group.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/hitbox.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/hitbox.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/hitbox.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/objects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/objects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/objects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/sprite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/classes/texture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/files/button.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/files/objects.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/files/scene.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/files/text.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/fonts/arial.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/functions/alpha.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/functions/cache.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/functions/loads.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/profiler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/special/exception.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/ui/button.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/ui/layout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/ui/lbutton.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/ui/surface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/ui/text.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/variables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/vector/angle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/vector/float.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/vector/float.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/vector/float.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/vector/int.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/vector/int.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/engine/vector/int.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/assets/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/assets/player.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/cache/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/cache/scenes-%scene%scene-setting.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/collision.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/files/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/functions/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/functions/function.func" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/music/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/objects/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/objects/player.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/project.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/scenes/%scene%scene/objects.scene" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/scenes/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/project/ui/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/11/version.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/2/engine/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/2/engine/application.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/2/engine/classes/animator.py" beforeDir="false" />
@@ -299,7 +384,7 @@
       <change beforePath="$PROJECT_DIR$/projects/2/project/objects/EMPTY.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/2/project/objects/player.obj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/2/project/project.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/2/project/scenes/%scene%scene/objects.scene" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/2/project/scenes/%scene%scene/objects.scene" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/scenes/%scene%1/objects.scene" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/2/project/scenes/EMPTY.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/2/project/ui/EMPTY.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/2/src/GE3 project.py" beforeDir="false" />
@@ -454,505 +539,492 @@
       <change beforePath="$PROJECT_DIR$/projects/2/src/music/EMPTY.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/2/src/project.cfg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/2/version.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/application.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/animator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/camera.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/collision.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/getUsingObjects.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/getUsingObjects.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/getUsingObjects.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/group.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/hitbox.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/hitbox.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/hitbox.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/objects.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/objects.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/objects.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/sprite.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/texture.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/files/button.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/files/objects.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/files/scene.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/files/text.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/fonts/arial.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/functions/alpha.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/functions/cache.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/functions/loads.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/profiler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/special/exception.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/ui/button.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/ui/layout.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/ui/lbutton.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/ui/surface.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/ui/text.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/variables.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/angle.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/float.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/float.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/float.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/int.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/int.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/int.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/bridge/base.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/bridge/bridge.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/bridge/leftCenter.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/bridge/leftDown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/bridge/leftRight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/bridge/rightCenter.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/bridge/rightDown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/bridge/rightLeft.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/decor/house.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/decor/wood.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/dirt/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/dirt/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/dirt/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/dirt/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/dirt/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/dirt/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/dirt/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/grass/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/grass/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/grass/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/grass/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/grass/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/house/floor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/house/floorDown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/player/asset-2.aseprite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/player/asset.aseprite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/player/idle/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/player/walk/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/player/walk/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/player/walk/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/player/walk/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/player/walk/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/player/walk/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/teleport.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/wall.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/animation/9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/water.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/assets/water/waterDown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/cache/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/cache/scenes-%scene%0-setting.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/cache/scenes-%scene%1-setting.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/cache/scenes-%scene%2-setting.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/cache/scenes-%scene%3-setting.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/cache/scenes-%scene%start-setting.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/collision.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/files/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/functions/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/functions/bg.func" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/functions/player.func" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/functions/teleport.func" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/music/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/bg.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/bridge/base.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/bridge/bridge.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/bridge/leftCenter.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/bridge/leftDown.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/bridge/leftRight.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/bridge/rightCenter.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/bridge/rightDown.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/bridge/rightLeft.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/decor/house.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/decor/wood.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/dirt/1.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/dirt/2.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/dirt/3.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/dirt/4.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/dirt/5.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/dirt/6.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/dirt/7.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/grass/1.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/grass/2.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/grass/3.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/grass/4.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/grass/5.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/house/floor.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/house/floorDown.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/player.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/teleport.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/wall.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/water/water.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/water/waterDown.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/project.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/scenes/%scene%0/objects.scene" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/scenes/%scene%1/objects.scene" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/scenes/%scene%2/objects.scene" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/scenes/%scene%3/objects.scene" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/scenes/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/ui/2.btn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/project/ui/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/bridge/base.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/bridge/bridge.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/bridge/leftCenter.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/bridge/leftDown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/bridge/leftRight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/bridge/rightCenter.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/bridge/rightDown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/bridge/rightLeft.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/decor/house.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/decor/wood.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/dirt/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/dirt/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/dirt/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/dirt/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/dirt/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/dirt/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/dirt/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/grass/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/grass/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/grass/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/grass/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/grass/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/house/floor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/house/floorDown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/player/asset-2.aseprite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/player/asset.aseprite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/player/idle/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/player/walk/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/player/walk/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/player/walk/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/player/walk/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/player/walk/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/player/walk/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/teleport.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/wall.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/animation/9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/water.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/water/waterDown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/compiler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/animation/mirrorAnimation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/animation/runAnimation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/animation/stopAnimation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/break_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/callFunction.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/decodeHolder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/exit_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/functionEvent.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/getMousePos.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/getNoiseValue.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/getSceneName.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/getTimePassed.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/getVar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/goToScene.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/len.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/python.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/random_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/setVar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/wait.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/event/everyFrame.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/event/everyTick.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/event/keyboardClick.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/event/keyboardPress.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/event/mouseLeftClick.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/event/mouseRightClick.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/event/onButtonPress.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/event/onLoadScene.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/event/onStartGame.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/logic/ifCollision.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/logic/ifElementInList.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/logic/ifKeyInDict.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/logic/if_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/loop/forDictElements.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/loop/forListElements.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/loop/forObjectsGroup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/loop/for_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/music/playMusic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/music/playSound.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/music/stopMusic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/absolute.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/cos.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/ctg.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/degrees.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/divide.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/minus.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/multiply.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/plus.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/radians.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/sin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/tan.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/createObject.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/getAllObjectInGroup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/getObjectIDByName.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/getObjectParameter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/getObjectPos.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/getObjectVar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/getResultingVector.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/jump.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/moveObject.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/moveObjectWithBraking.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/removeObject.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/setObjectParameter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/setObjectPos.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/setObjectVar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/set/addDictElement.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/set/addListElement.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/set/deleteByIndex.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/set/getByIndex.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/set/getByKey.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/set/getIndexOfElement.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/set/getKeyOfElement.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/set/removeByKey.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/set/sliceList.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/text/connectText.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/text/displayText.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/text/sliceText.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/text/writeText.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/connectors/any.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/connectors/choose.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/connectors/dict.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/connectors/iterator.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/connectors/list.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/connectors/logic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/connectors/number.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/connectors/path.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/connectors/text.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/types/event.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/types/logic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/types/loop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/types/music.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/types/number.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/types/objects.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/types/set.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/code/sprites/types/text.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/collision.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/compiling.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/dist/game" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/application.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/animator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/camera.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/collision.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/getUsingObjects.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/getUsingObjects.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/getUsingObjects.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/getUsingObjects.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/group.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/hitbox.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/hitbox.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/hitbox.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/hitbox.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/sprite.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/texture.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/files/button.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/files/objects.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/files/scene.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/files/text.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/fonts/arial.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/functions/alpha.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/functions/cache.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/functions/loads.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/profiler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/special/exception.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/ui/button.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/ui/layout.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/ui/lbutton.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/ui/surface.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/ui/text.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/variables.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/angle.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/float.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/float.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/float.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/float.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/int.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/int.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/int.pyx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/int.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/files/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/functions/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/functions/bg.func" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/functions/player.func" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/functions/teleport.func" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/game" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/game.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/game.spec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/music/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/src/project.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/game/version.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/logs/error.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/logs/log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/10" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/123" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/123.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/1234" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/12345" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/2-0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/3-0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/4-0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/44" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/Base" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/EMPTY.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/Snake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/___" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/abc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/animation" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/apple" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/base template" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/bg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/black" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/block" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/block.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/body" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/brick" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/brickDust" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/brick_dust" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/bricks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/bridge" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/bv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/calculate" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/camera" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/cash" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/coin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/deathZone" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/decor" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/diirt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/dirt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/enemy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/error" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/floor" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/floorDown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/floorDown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/func" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/function" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/functions" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/funtion" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/game" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/generation" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/grass" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/grfes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/head" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/hello" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/helloworld" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/hhh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/houaw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/house" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/idle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/iiiiii" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/kj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/kkkk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/leftCenter" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/leftDown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/leftRight" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/platform" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/platformer" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/player" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/player-0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/player-jump-collision" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/player-jump-collision-0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/playerJumpCollision" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/python" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/re" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/redsa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/rightCenter" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/rightDown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/rightLeft" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/rpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/run" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/scene" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/start" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/stone" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/teleport" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/test" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/test 2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/test1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/test2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/text" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/w" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/walk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/wall" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/wall.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/water" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/waterDown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/wood" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/xxx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/е" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/киыкпыу" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/уки.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/using/ф" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/file/create_from_template_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/file/create_from_template_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/file/create_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/file/create_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/file/open_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/file/open_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/file/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/file/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/tree/create_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/tree/create_button.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/tree/create_dir.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/tree/create_dir.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/tree/create_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/tree/create_file.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/tree/create_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/tree/create_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/tree/create_object.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/tree/create_object.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/tree/create_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/tree/create_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/tree/create_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/tree/create_text.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/tree/rename_object.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/tree/rename_object.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/functions/main/files/button.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/main/files/button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/application.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/animator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/camera.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/collision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/getUsingObjects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/getUsingObjects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/getUsingObjects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/group.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/hitbox.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/hitbox.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/hitbox.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/objects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/objects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/objects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/sprite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/classes/texture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/files/button.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/files/objects.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/files/scene.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/files/text.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/fonts/arial.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/functions/alpha.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/functions/cache.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/functions/loads.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/profiler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/special/exception.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/ui/button.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/ui/layout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/ui/lbutton.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/ui/surface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/ui/text.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/variables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/vector/angle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/vector/float.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/vector/float.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/vector/float.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/vector/int.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/vector/int.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/engine/vector/int.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/project/assets/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/project/cache/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/project/collision.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/project/files/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/project/functions/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/project/music/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/project/objects/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/project/project.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/project/scenes/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/project/ui/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/3/version.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/animator.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/animator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/camera.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/collision.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/collision.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/getUsingObjects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/getUsingObjects.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/getUsingObjects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/getUsingObjects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/getUsingObjects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/group.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/hitbox.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/hitbox.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/hitbox.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/hitbox.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/hitbox.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/objects.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/objects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/objects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/classes/sprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/classes/sprite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/files/button.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/files/button.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/files/objects.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/files/objects.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/files/text.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/files/text.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/functions/loads.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/functions/loads.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/profiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/profiler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/float.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/vector/float.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/vector/float.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/float.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/vector/float.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/int.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/vector/int.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/vector/int.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/engine/vector/int.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/engine/vector/int.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/project/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/collision.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/project/functions/1.func" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/project/functions/function.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/functions/function.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/project/objects/player.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/player.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/project/project.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/project.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/project/scenes/%scene%scene/objects.scene" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/scenes/%scene%scene/objects.scene" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/GE3 project.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/assets/player.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/animation/mirrorAnimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/animation/mirrorAnimation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/animation/runAnimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/animation/runAnimation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/callFunction.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/another/callFunction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/getVar.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/another/getVar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/python.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/another/python.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/another/setVar.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/another/setVar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/loop/forObjectsGroup.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/loop/forObjectsGroup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/modulo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/pow.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/numbers/sqrt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/createObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/objects/createObject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/jump.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/objects/jump.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/moveObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/objects/moveObject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/moveObjectWithBraking.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/objects/moveObjectWithBraking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/setObjectParameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/objects/setObjectParameter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/objects/setObjectPos.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/objects/setObjectPos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/set/insertListElement.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/code/program/text/writeText.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/code/program/text/writeText.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/collision.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/collision.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/compiling.txt" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/compiling.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/getUsingObjects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/classes/getUsingObjects.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/getUsingObjects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/classes/getUsingObjects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/hitbox.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/classes/hitbox.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/hitbox.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/classes/hitbox.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/classes/objects.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/files/button.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/files/button.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/float.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/vector/float.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/float.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/vector/float.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/int.c" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/vector/int.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/engine/vector/int.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/engine/vector/int.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/functions/1.func" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/functions/function.func" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/game/src/project.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/project.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/application.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/animator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/camera.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/collision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/getUsingObjects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/getUsingObjects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/getUsingObjects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/group.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/hitbox.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/hitbox.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/hitbox.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/objects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/objects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/objects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/sprite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/classes/texture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/files/button.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/files/objects.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/files/scene.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/files/text.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/fonts/arial.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/functions/alpha.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/functions/cache.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/functions/loads.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/profiler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/special/exception.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/ui/button.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/ui/layout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/ui/lbutton.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/ui/surface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/ui/text.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/variables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/vector/angle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/vector/float.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/vector/float.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/vector/float.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/vector/int.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/vector/int.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/engine/vector/int.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/bg.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/bg.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/bridge/base.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/bridge/base.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/bridge/bridge.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/bridge/bridge.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/bridge/leftCenter.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/bridge/leftCenter.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/bridge/leftDown.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/bridge/leftDown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/bridge/leftRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/bridge/leftRight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/bridge/rightCenter.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/bridge/rightCenter.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/bridge/rightDown.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/bridge/rightDown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/bridge/rightLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/bridge/rightLeft.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/decor/house.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/decor/house.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/decor/wood.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/decor/wood.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/dirt/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/dirt/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/dirt/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/dirt/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/dirt/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/dirt/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/dirt/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/dirt/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/dirt/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/dirt/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/dirt/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/dirt/6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/dirt/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/dirt/7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/grass/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/grass/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/grass/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/grass/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/grass/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/grass/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/grass/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/grass/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/grass/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/grass/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/house/floor.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/house/floor.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/house/floorDown.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/house/floorDown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/player.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/player/asset-2.aseprite" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/player/asset-2.aseprite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/player/asset.aseprite" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/player/asset.aseprite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/player/idle/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/player/idle/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/player/walk/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/player/walk/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/player/walk/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/player/walk/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/player/walk/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/player/walk/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/player/walk/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/player/walk/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/player/walk/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/player/walk/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/player/walk/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/player/walk/6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/teleport.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/teleport.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/wall.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/wall.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/10.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/11.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/12.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/13.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/13.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/14.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/14.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/15.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/15.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/16.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/animation/9.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/animation/9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/water.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/water.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/assets/water/waterDown.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/assets/water/waterDown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/cache/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/cache/scenes-%scene%0-setting.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/cache/scenes-%scene%0-setting.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/cache/scenes-%scene%1-setting.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/cache/scenes-%scene%1-setting.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/cache/scenes-%scene%2-setting.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/cache/scenes-%scene%2-setting.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/cache/scenes-%scene%3-setting.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/cache/scenes-%scene%3-setting.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/cache/scenes-%scene%scene-setting.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/cache/scenes-%scene%start-setting.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/cache/scenes-%scene%start-setting.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/collision.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/files/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/functions/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/functions/bg.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/functions/bg.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/functions/function.func" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/functions/player.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/functions/player.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/functions/teleport.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/functions/teleport.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/music/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/bg.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/bg.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/bridge/base.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/bridge/base.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/bridge/bridge.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/bridge/bridge.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/bridge/leftCenter.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/bridge/leftCenter.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/bridge/leftDown.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/bridge/leftDown.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/bridge/leftRight.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/bridge/leftRight.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/bridge/rightCenter.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/bridge/rightCenter.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/bridge/rightDown.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/bridge/rightDown.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/bridge/rightLeft.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/bridge/rightLeft.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/decor/house.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/decor/house.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/decor/wood.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/decor/wood.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/dirt/1.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/dirt/1.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/dirt/2.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/dirt/2.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/dirt/3.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/dirt/3.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/dirt/4.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/dirt/4.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/dirt/5.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/dirt/5.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/dirt/6.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/dirt/6.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/dirt/7.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/dirt/7.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/grass/1.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/grass/1.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/grass/2.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/grass/2.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/grass/3.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/grass/3.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/grass/4.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/grass/4.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/grass/5.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/grass/5.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/house/floor.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/house/floor.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/house/floorDown.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/house/floorDown.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/player.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/teleport.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/teleport.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/wall.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/wall.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/water/water.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/water/water.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/objects/water/waterDown.obj" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/objects/water/waterDown.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/project.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/scenes/%scene%0/objects.scene" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/scenes/%scene%0/objects.scene" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/scenes/%scene%1/objects.scene" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/scenes/%scene%2/objects.scene" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/scenes/%scene%2/objects.scene" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/scenes/%scene%3/objects.scene" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/scenes/%scene%3/objects.scene" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/scenes/%scene%scene/objects.scene" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/scenes/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/ui/2.btn" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/project/ui/2.btn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/project/ui/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/bg.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/bg.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/bridge/base.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/bridge/base.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/bridge/bridge.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/bridge/bridge.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/bridge/leftCenter.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/bridge/leftCenter.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/bridge/leftDown.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/bridge/leftDown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/bridge/leftRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/bridge/leftRight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/bridge/rightCenter.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/bridge/rightCenter.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/bridge/rightDown.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/bridge/rightDown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/bridge/rightLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/bridge/rightLeft.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/decor/house.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/decor/house.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/decor/wood.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/decor/wood.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/dirt/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/dirt/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/dirt/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/dirt/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/dirt/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/dirt/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/dirt/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/dirt/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/dirt/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/dirt/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/dirt/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/dirt/6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/dirt/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/dirt/7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/grass/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/grass/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/grass/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/grass/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/grass/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/grass/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/grass/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/grass/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/grass/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/grass/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/house/floor.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/house/floor.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/house/floorDown.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/house/floorDown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/player/asset-2.aseprite" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/player/asset-2.aseprite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/player/asset.aseprite" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/player/asset.aseprite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/player/idle/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/player/idle/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/player/walk/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/player/walk/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/player/walk/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/player/walk/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/player/walk/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/player/walk/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/player/walk/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/player/walk/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/player/walk/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/player/walk/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/player/walk/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/player/walk/6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/teleport.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/teleport.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/wall.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/wall.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/10.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/11.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/12.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/13.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/13.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/14.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/14.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/15.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/15.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/16.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/animation/9.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/animation/9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/water.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/water.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/assets/water/waterDown.png" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/assets/water/waterDown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/compiler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/animation/mirrorAnimation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/animation/runAnimation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/animation/stopAnimation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/break_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/callFunction.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/decodeHolder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/exit_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/functionEvent.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/getMousePos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/getNoiseValue.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/getSceneName.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/getTimePassed.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/getVar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/goToScene.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/len.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/python.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/random_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/setVar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/another/wait.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/event/everyFrame.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/event/everyTick.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/event/keyboardClick.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/event/keyboardPress.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/event/mouseLeftClick.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/event/mouseRightClick.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/event/onButtonPress.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/event/onLoadScene.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/event/onStartGame.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/logic/ifCollision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/logic/ifElementInList.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/logic/ifKeyInDict.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/logic/if_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/loop/forDictElements.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/loop/forListElements.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/loop/forObjectsGroup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/loop/for_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/music/playMusic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/music/playSound.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/music/stopMusic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/absolute.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/cos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/ctg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/degrees.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/divide.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/minus.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/multiply.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/plus.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/radians.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/sin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/numbers/tan.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/createObject.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/getAllObjectInGroup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/getObjectIDByName.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/getObjectParameter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/getObjectPos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/getObjectVar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/getResultingVector.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/jump.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/moveObject.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/moveObjectWithBraking.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/removeObject.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/setObjectParameter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/setObjectPos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/objects/setObjectVar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/set/addDictElement.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/set/addListElement.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/set/deleteByIndex.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/set/getByIndex.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/set/getByKey.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/set/getIndexOfElement.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/set/getKeyOfElement.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/set/removeByKey.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/set/sliceList.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/text/connectText.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/text/displayText.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/text/sliceText.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/program/text/writeText.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/connectors/any.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/connectors/choose.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/connectors/dict.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/connectors/iterator.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/connectors/list.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/connectors/logic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/connectors/number.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/connectors/path.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/connectors/text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/types/event.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/types/logic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/types/loop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/types/music.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/types/number.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/types/objects.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/types/set.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/code/sprites/types/text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/collision.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/compiling.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/dist/game" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/dist/game" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/application.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/animator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/camera.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/collision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/getUsingObjects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/getUsingObjects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/getUsingObjects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/getUsingObjects.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/group.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/hitbox.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/hitbox.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/hitbox.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/hitbox.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/objects.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/objects.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/objects.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/objects.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/sprite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/classes/texture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/files/button.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/files/objects.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/files/scene.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/files/text.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/fonts/arial.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/functions/alpha.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/functions/cache.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/functions/loads.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/profiler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/special/exception.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/ui/button.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/ui/layout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/ui/lbutton.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/ui/surface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/ui/text.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/variables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/vector/angle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/vector/float.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/vector/float.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/vector/float.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/vector/float.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/vector/int.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/vector/int.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/vector/int.pyx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/engine/vector/int.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/files/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/functions/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/functions/bg.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/functions/bg.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/functions/player.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/functions/player.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/functions/teleport.func" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/functions/teleport.func" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/game" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/game" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/game.spec" beforeDir="false" afterPath="$PROJECT_DIR$/projects/game/src/game.spec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/music/EMPTY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/src/project.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/v/version.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/functions/main/files/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/main/files/code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/functions/main/files/object.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/main/files/object.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/functions/main/files/objtext.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/main/files/objtext.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/functions/main/files/scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/main/files/scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/functions/menu/compile.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/menu/compile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/functions/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/functions/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/updating/v3110to3120.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/updating/v3110to3120.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/updating/v3126to3130.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/updating/v3126to3130.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/updating/v3133to3140.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/updating/v3133to3140.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/widgets/treeProject.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/widgets/treeProject.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/variables.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start.spec" beforeDir="false" afterPath="$PROJECT_DIR$/start.spec" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

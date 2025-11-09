@@ -45,8 +45,6 @@ class Sprite:
                 self.image = path
 
         except FileNotFoundError:
-            print(f"LOG: not found image ({path})")
-
             self.image = None
 
         self.size = size if type(size) == Vec2i else (Vec2i(*size) if size is not None else None)
@@ -68,24 +66,14 @@ class Sprite:
                 self.height if self.height > 0 else self.image.get_height()
             ))
 
-        else:
-            self.image = None
-
         if self.image is not None:
             self.copyImage = self.image.copy()
-
-        else:
-            self.copyImage = None
 
     def copy(self) -> "Sprite":
         return Sprite(self.game, self.obj, self.path, self.pos, Vec2i(self.width, self.height))
 
     def resize(self, width: int, height: int) -> None:
         self.width, self.height = width, height
-
-        if self.width <= 0 or self.height <= 0:
-            self.width = 0
-            self.height = 0
 
         self.copyImage = pygame.transform.scale(self.image, (self.width, self.height))
 

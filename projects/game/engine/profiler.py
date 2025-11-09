@@ -31,29 +31,13 @@ def profile():
             if str(second) not in PROFILER[func.__name__]["calls"]:
                 PROFILER[func.__name__]["calls"][str(second)] = []
 
-            PROFILER[func.__name__]["calls"][str(second)].append(float(f"{end - start:.7f}"))
+            PROFILER[func.__name__]["calls"][str(second)].append(f"{end - start:.6f}")
 
             return result
 
         return wrapper
 
     return decorator
-
-
-def averange():
-    for key, value in PROFILER.items():
-        PROFILER[key]["avr"] = {}
-
-        counts = []
-
-        for second, times in value["calls"].items():
-            PROFILER[key]["avr"][second] = float(f"{sum(times) / len(times):.7f}")
-
-            counts.append(PROFILER[key]["avr"][second])
-
-        PROFILER[key]["averange"] = float(f"{sum(counts) / len(counts):.7f}")
-
-    return PROFILER
 
 
 @profile()
@@ -70,6 +54,3 @@ def a(a):
 # print(a(3e7))
 # print(a(1e6))
 # print(PROFILER)
-
-# 0.000110
-# 0.000074

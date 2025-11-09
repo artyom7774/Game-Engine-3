@@ -1,8 +1,6 @@
 from engine.classes.collision import Collision
 from engine.classes.objects import DynamicObject
 
-from engine import profiler
-
 from engine.variables import *
 
 import typing
@@ -17,19 +15,6 @@ else:
 
 cdef class GetUsingObjects:
     @staticmethod
-    @profiler.profile()
-    def getUsingObjectsQuadTree(game, group) -> None:
-        cdef list dynamicsObjects = []
-
-        for obj in group.objects:
-            if isinstance(obj, DynamicObject):
-                dynamicsObjects.append(obj)
-
-        for obj in dynamicsObjects:
-            GetUsingObjects.getUsingObjectsIterationSquare(game, game.objects.tree.getUsingObjects(obj), obj)
-
-    @staticmethod
-    @profiler.profile()
     def getUsingObjectsSquare(game, group) -> None:
         def binaryLeft(objects, x: float) -> int:
             cdef int left = 0
@@ -63,11 +48,7 @@ cdef class GetUsingObjects:
 
         cdef list dynamicsObjects = []
 
-        maxLengthObject = -1
-
         for obj in group.objects:
-            maxLengthObject = max(maxLengthObject, obj.hitbox.width + obj.hitbox.height)
-
             if isinstance(obj, DynamicObject):
                 dynamicsObjects.append(obj)
 
@@ -77,14 +58,14 @@ cdef class GetUsingObjects:
         for obj in dynamicsObjects:
             resulting = obj.getVectorsPower()
 
-            l = binaryLeft(game.cache["object_sorted_by_distance"], obj.pos.x - obj.hitbox.x - obj.hitbox.width - resulting.x)
-            r = binaryRight(game.cache["object_sorted_by_distance"], obj.pos.x + obj.hitbox.x + obj.hitbox.width + resulting.x) + 1
+            l = binaryLeft(game.cache["object_sorted_by_distance"], obj.pos.x - resulting.x - group.maxLengthObject)
+            r = binaryRight(game.cache["object_sorted_by_distance"], obj.pos.x + resulting.x + group.maxLengthObject) + 1
 
             objectsBefore = game.cache["object_sorted_by_distance"][l:r]
             objectsAfter = []
 
             for before in objectsBefore:
-                if not (obj.pos.y + obj.hitbox.y + obj.hitbox.height + 10 < before.pos.y + before.hitbox.y or before.pos.y + before.hitbox.y + before.hitbox.height + 10 < obj.pos.y + obj.hitbox.y):
+                if not (obj.pos.y + obj.hitbox.y + obj.hitbox.height + group.maxLengthObject < before.pos.y + before.hitbox.y or before.pos.y + before.hitbox.y + before.hitbox.height + group.maxLengthObject < obj.pos.y + obj.hitbox.y):
                     objectsAfter.append(before)
 
             GetUsingObjects.getUsingObjectsIterationSquare(game, objectsAfter, obj)

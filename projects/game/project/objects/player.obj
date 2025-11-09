@@ -4,43 +4,39 @@
         "DynamicObject": [
             "StaticObject"
         ],
+        "KinematicObject": [
+            "StaticObject",
+            "DynamicObject"
+        ],
         "Particle": [
             "StaticObject",
             "DynamicObject"
         ]
     },
-    "dependence": [],
+    "dependence": [
+        "StaticObject"
+    ],
     "type": {
         "name": "Object type",
-        "value": "StaticObject",
+        "value": "DynamicObject",
         "type": "choose",
         "choose": {
             "input": [
                 "object.name.staticObject",
                 "object.name.dynamicObject",
-                "Particle"
+                "object.name.kinematicObject",
+                "object.name.particle"
             ],
             "output": [
                 "StaticObject",
                 "DynamicObject",
+                "KinematicObject",
                 "Particle"
             ]
         }
     },
     "variables": {},
     "main": "StaticObject",
-    "Particle": {
-        "liveTime": {
-            "name": "Live time",
-            "value": 60,
-            "type": "int"
-        },
-        "minusSpriteSizePerFrame": {
-            "name": "Minus size per frame",
-            "value": 0.01,
-            "type": "int"
-        }
-    },
     "StaticObject": {
         "pos": {
             "name": "Object position",
@@ -85,12 +81,12 @@
                         "width": {
                             "name": "Width",
                             "type": "int",
-                            "value": 80
+                            "value": 100
                         },
                         "height": {
                             "name": "Height",
                             "type": "int",
-                            "value": 110
+                            "value": 150
                         }
                     },
                     "CircleHitbox": {
@@ -120,7 +116,7 @@
                 "path": {
                     "name": "Path to image",
                     "type": "path",
-                    "value": "assets/player.png"
+                    "value": "assets\/player\/idle\/1.png"
                 },
                 "X offset": {
                     "name": "X offset",
@@ -135,12 +131,12 @@
                 "width": {
                     "name": "Width",
                     "type": "int",
-                    "value": -1
+                    "value": 100
                 },
                 "height": {
                     "name": "Height",
                     "type": "int",
-                    "value": -1
+                    "value": 150
                 }
             },
             "type": "dict"
@@ -164,12 +160,39 @@
             "name": "Animation",
             "value": {
                 "groups": {
-                    "group": {
+                    "": {
                         "name": "group",
                         "sprites": [],
                         "settings": {
+                            "repeat": true,
+                            "fpsPerFrame": 10,
+                            "standard": false
+                        }
+                    },
+                    "idle": {
+                        "name": "group",
+                        "sprites": [
+                            "assets\/player\/idle\/1.png"
+                        ],
+                        "settings": {
                             "repeat": false,
                             "fpsPerFrame": 10,
+                            "standard": true
+                        }
+                    },
+                    "walk": {
+                        "name": "group",
+                        "sprites": [
+                            "assets\/player\/walk\/1.png",
+                            "assets\/player\/walk\/2.png",
+                            "assets\/player\/walk\/3.png",
+                            "assets\/player\/walk\/4.png",
+                            "assets\/player\/walk\/6.png",
+                            "assets\/player\/walk\/5.png"
+                        ],
+                        "settings": {
+                            "repeat": true,
+                            "fpsPerFrame": 6,
                             "standard": false
                         }
                     }
@@ -188,15 +211,27 @@
             "type": "int"
         }
     },
+    "Particle": {
+        "liveTime": {
+            "name": "Live time",
+            "value": 60,
+            "type": "int"
+        },
+        "minusSpriteSizePerFrame": {
+            "name": "Minus size per frame",
+            "value": 0.01,
+            "type": "int"
+        }
+    },
     "DynamicObject": {
         "gravity": {
             "name": "Object gravity",
-            "value": 1000,
+            "value": 300,
             "type": "int"
         },
         "slidingStep": {
             "name": "Braking power",
-            "value": 1000000.0,
+            "value": 10000000000,
             "type": "int"
         }
     }

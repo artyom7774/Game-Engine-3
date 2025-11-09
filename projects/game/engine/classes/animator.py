@@ -53,8 +53,8 @@ class Animator:
 
         self.obj.sprite.flip(self.horizontal, self.vertical)
 
-    def setAnimation(self, value, forcibly: bool = False):
-        if self.animation == value and not forcibly:
+    def setAnimation(self, value):
+        if self.animation == value:
             return
 
         self.animation = value
@@ -75,13 +75,8 @@ class Animator:
         self.setAnimation(animation)
 
     def flipAnimation(self, horizontal, vertical):
-        if self.horizontal == horizontal and self.vertical == vertical:
-            return
-
         self.horizontal = horizontal
         self.vertical = vertical
-
-        self.setAnimation(self.animation, forcibly=True)
 
     def stopAnimation(self):
         self.setAnimation(self.standardGroup)

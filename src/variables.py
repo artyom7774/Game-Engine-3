@@ -24,27 +24,6 @@ args = parser.parse_args()
 
 DEVELOP = bool(args.debug)
 
-import os
-import sys
-import traceback
-
-def exception_hook(exc_type, exc_value, exc_traceback):
-    """Обработчик исключений для PyQt"""
-    print("".join(traceback.format_exception(exc_type, exc_value, exc_traceback)))
-    sys.exit(1)
-
-sys.excepthook = exception_hook
-
-# Декоратор для отлова исключений в слотах
-def catch_exceptions(func):
-    def wrapper(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except Exception as e:
-            print(f"Исключение в слоте {func.__name__}: {e}")
-            traceback.print_exc()
-    return wrapper
-
 
 def getAppDataDir():
     if os.name == "nt":

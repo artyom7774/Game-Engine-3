@@ -28,11 +28,8 @@ def moveObject(program, compiler, path: str, nodes: dict, id: int, variables: di
     obj = program.objects.getById(ids)
 
     if obj is None:
-        raise EngineError(f"not found object with id = {ids}")
+        EngineError(f"not found object with id = {ids}")
 
-    if not hasattr(obj, "moveByAngle"):
-        raise EngineError(f"type of object must be not static")
-
-    obj.moveByAngle(360 - (angle + 90) + 180, power, specifical=id)
+    obj.moveByAngle(angle, power, specifical=id)
 
     return queue

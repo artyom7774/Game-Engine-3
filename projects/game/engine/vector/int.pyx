@@ -1,6 +1,4 @@
 cdef class Vec2i:
-    __slots__ = ("x", "y")
-
     cdef public int x, y
 
     def __init__(self, int x=0, int y=0):
@@ -66,8 +64,6 @@ cdef class Vec2i:
 
 
 cdef class Vec3i:
-    __slots__ = ("x", "y", "z")
-
     cdef public int x, y, z
 
     def __init__(self, int x=0, int y=0, int z=0):
@@ -145,8 +141,6 @@ cdef class Vec3i:
 
 
 cdef class Vec4i:
-    __slots__ = ("x", "y", "z", "w")
-
     cdef public int x, y, z, w
 
     def __init__(self, int x=0, int y=0, int z=0, int w=0):

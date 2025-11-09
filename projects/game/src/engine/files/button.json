@@ -135,7 +135,7 @@
         }
     },
     "name": {
-        "type": "Button type",
+        "type": "Text type",
         "pos": "Text position",
         "hitbox": "Text hitbox",
         "group": "Name of object group",

@@ -1,5 +1,6 @@
 {
     "main": "StaticObject",
+
     "dependences": {
         "StaticObject": [],
         "DynamicObject": [
@@ -29,55 +30,25 @@
             }
         },
         "hitbox": {
-            "type": "SquareHitbox",
-            "types": [
-                "SquareHitbox",
-                "CircleHitbox"
-            ],
-            "translates": [
-                "Square hitbox",
-                "Circle hitbox"
-            ],
-            "hitbox": {
-                "SquareHitbox": {
-                    "X offset": {
-                        "name": "X offset",
-                        "type": "int",
-                        "value": 0
-                    },
-                    "Y offset": {
-                        "name": "Y offset",
-                        "type": "int",
-                        "value": 0
-                    },
-                    "width": {
-                        "name": "Width",
-                        "type": "int",
-                        "value": 32
-                    },
-                    "height": {
-                        "name": "Height",
-                        "type": "int",
-                        "value": 32
-                    }
-                },
-                "CircleHitbox": {
-                    "X offset": {
-                        "name": "X offset",
-                        "type": "int",
-                        "value": 0
-                    },
-                    "Y offset": {
-                        "name": "Y offset",
-                        "type": "int",
-                        "value": 0
-                    },
-                    "radius": {
-                        "name": "Radius",
-                        "type": "int",
-                        "value": 50
-                    }
-                }
+            "X offset": {
+                "name": "X offset",
+                "type": "int",
+                "value": 0
+            },
+            "Y offset": {
+                "name": "Y offset",
+                "type": "int",
+                "value": 0
+            },
+            "width": {
+                "name": "Width",
+                "type": "int",
+                "value": 32
+            },
+            "height": {
+                "name": "Height",
+                "type": "int",
+                "value": 32
             }
         },
         "sprite": {
@@ -113,7 +84,6 @@
         "slidingStep": 1e6,
         "mass": 1000,
         "invisible": false,
-        "alpha": 255,
         "liveTime": 60,
         "minusSpriteSizePerFrame": 0.01,
         "animation": {
@@ -145,13 +115,12 @@
         "animation": "Animation",
         "mass": "Mass",
         "liveTime": "Live time",
-        "minusSpriteSizePerFrame": "Minus size per frame",
-        "alpha": "Alpha"
+        "minusSpriteSizePerFrame": "Minus size per frame"
     },
     "type": {
         "type": "choose",
         "pos": "dict",
-        "hitbox": "hitbox",
+        "hitbox": "dict",
         "sprite": "dict",
         "group": "str",
         "layer": "int",
@@ -161,8 +130,7 @@
         "animation": "animator",
         "mass": "int",
         "liveTime": "int",
-        "minusSpriteSizePerFrame": "int",
-        "alpha": "int"
+        "minusSpriteSizePerFrame": "int"
     },
     "specials": {
         "choose": {
@@ -185,14 +153,13 @@
     "objects": {
         "StaticObject": [
             "pos",
-            "sprite",
             "hitbox",
+            "sprite",
             "group",
             "mass",
             "layer",
             "animation",
-            "invisible",
-            "alpha"
+            "invisible"
         ],
         "DynamicObject": [
             "gravity",

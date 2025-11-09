@@ -27,8 +27,7 @@ class Application:
         self, usingWidth: int = 700, usingHeight: int = 700, displayWidth: int = 700, displayHeight: int = 700,
         fps: int = 60, tps: int = 20, name: str = "GE3 project", icon: str = "", flags: typing.Dict[str, typing.Any] = None,
         variables: typing.Dict[str, typing.Any] = None, visiable: bool = True, debug: bool = False,
-        autoUpdateScreen: bool = True, collision: str = "", forcedViewObject: bool = False, noRefactorUpdate: bool = False,
-        particleInAnotherGroup: bool = True
+        autoUpdateScreen: bool = True, collision: str = "", forcedViewObject: bool = False
     ) -> None:
         if flags is None:
             flags = {}
@@ -37,7 +36,6 @@ class Application:
             variables = {}
 
         self.objects = engine.ObjectGroup(self)
-        self.objects.init()
 
         self.objects.collisions = engine.Collision(collision)
 
@@ -49,8 +47,6 @@ class Application:
 
         self.autoUpdateScreen = autoUpdateScreen
         self.forcedViewObject = forcedViewObject
-        self.noRefactorUpdate = noRefactorUpdate
-        self.particleInAnotherGroup = particleInAnotherGroup
 
         self.usingWidth = usingWidth
         self.usingHeight = usingHeight
@@ -207,12 +203,12 @@ class Application:
         #     pygame.display.set_caption(str(round(self.clock.get_fps())))
 
         if self.doCollisionsUpdate:
-            engine.classes.getUsingObjects.GetUsingObjects.getUsingObjectsQuadTree(self, self.objects)
+            engine.classes.getUsingObjects.GetUsingObjects.getUsingObjectsSquare(self, self.objects)
 
     def logic(self) -> None:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.exit()
+                self.play = False
 
             if event.type in self.events:
                 if event.key in self.events[event.type]:
@@ -302,7 +298,4 @@ class Application:
         sys.exit()
 
     def exit(self) -> None:
-        for key, value in engine.profiler.averange().items():
-            print(key, ":", value)
-
         self.play = False
