@@ -26,7 +26,7 @@ class CreateFunctionFunctions:
             return
 
         try:
-            with open(f"src/files/using/{name}", "w", encoding="utf-8") as file:
+            with open(f"{SAVE_APPDATA_DIR}/Game-Engine-3/using/{name}", "w", encoding="utf-8") as file:
                 pass
 
         except BaseException:

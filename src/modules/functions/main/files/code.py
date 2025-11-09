@@ -363,6 +363,21 @@ class TextEditorDialog(QDialog):
 
         self.project.init()
 
+    def save(self):
+        text = self.editor.text()
+
+        try:
+            type = self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["type"]
+
+        except KeyError:
+            return
+
+        if TypeCurrect.currect_(type, text):
+            self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = TypeSet.set_(type, text)
+
+        with open(self.project.selectFile, "w", encoding="utf-8") as file:
+            dump(self.project.objects["main"]["function"], file, indent=4)
+
 
 class CodeNodeStroke(QLabel):
     def __init__(self, parent):
@@ -440,8 +455,10 @@ class CodeNodeConnectorTextBox(QTextEdit):
         type = self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["type"]
 
         if TypeCurrect.currect_(type, text):
-            self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]][
-                "standard"] = TypeSet.set_(type, text)
+            self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = TypeSet.set_(type, text)
+
+        if isinstance(self.project.dialog, TextEditorDialog):
+            self.project.dialog.save()
 
     def init(self):
         self.button.setGeometry(self.x(), self.y() + 25 * (self.heigth_ - 1), self.width(), 16 + 4)
@@ -592,9 +609,9 @@ class CodeNodeConnector(QLabel):
 
             if input["type"] not in CODE_CONNECTOR_NO_HAVE_INPUT_TYPES and not invisible:
                 if type is not None:
-                    if type == "text-box":
-                        height = self.node["special"]["inputs"][input["code"]]["height"]
+                    height = self.node["special"]["inputs"][input["code"]]["height"]
 
+                    if type == "text-box":
                         self.inputLeftText = CodeNodeConnectorTextBox(project.objects["main"]["code"], self.project, id, input, height)
                         self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
                         self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 4, self.width() - 40, 14 + 25 * (height - 2))
@@ -1643,44 +1660,58 @@ class Code:
 
     @staticmethod
     def nodes(project, create: bool = True, update: bool = False) -> None:
-        if create:
-            for node in project.objects["main"]["nodes"].values():
-                for connector in node.connectors.values():
-                    if connector.inputLeftText is not None:
+        if not create:
+            for id, node in list(project.objects["main"]["nodes"].items()):
+                node.updateObjectGeometry()
+
+            return
+
+        for node in list(project.objects["main"]["nodes"].values()):
+            for connector in list(node.connectors.values()):
+                if not connector or not hasattr(connector, "inputLeftText") or connector.inputLeftText is None:
+                    continue
+
+                try:
+                    if hasattr(connector.inputLeftText, "save"):
+                        connector.inputLeftText.save()
+
+                    if connector.inputLeftText:
                         try:
-                            # connector.inputLeftText.save()
-
                             connector.inputLeftText.deleteLater()
-                            connector.inputLeftRama.deleteLater()
+                        except RuntimeError:
+                            pass
 
+                    if connector.inputLeftRama:
+                        try:
+                            connector.inputLeftRama.deleteLater()
+                        except RuntimeError:
+                            pass
+
+                    if hasattr(connector, 'placeholderLabel') and connector.placeholderLabel:
+                        try:
                             connector.placeholderLabel.deleteLater()
 
                         except RuntimeError:
                             pass
 
-                try:
-                    node.hide()
+                except Exception as e:
+                    print(f"ERROR: can't delete connector: {e}")
 
-                except AttributeError:
-                    pass
-
-                except RuntimeError:
                     continue
 
-                try:
-                    node.deleteLater()
+            try:
+                node.hide()
+                node.deleteLater()
 
-                except AttributeError:
-                    pass
+            except (AttributeError, RuntimeError) as e:
+                print(f"ERROR: can't delete node: {e}")
+                continue
 
-            project.objects["main"]["nodes"] = {}
+        project.objects["main"]["nodes"] = {}
 
-            for id, node in project.objects["main"]["function"]["objects"].items():
-                project.objects["main"]["nodes"][node["id"]] = CodeNode(project, node)
+        for id, node in project.objects["main"]["function"]["objects"].items():
+            project.objects["main"]["nodes"][node["id"]] = CodeNode(project, node)
 
-        else:
-            for id, node in project.objects["main"]["function"]["objects"].items():
-                project.objects["main"]["nodes"][node["id"]].updateObjectGeometry()
 
     @staticmethod
     def menu(project, position) -> None:

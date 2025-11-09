@@ -1,3 +1,5 @@
+from src.variables import *
+
 import orjson
 import json
 import os

@@ -592,7 +592,7 @@ class Compile:
                 type, variables = functions.main.files.Scene.loadObjectFile(project, name, obj)
 
                 if "sprite" in variables:
-                    image = pygame.image.load(variables["sprite"][0])
+                    image = pygame.image.load(f"" + variables["sprite"][0])
 
                     variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
 

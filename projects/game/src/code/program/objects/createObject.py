@@ -28,7 +28,7 @@ def createObject(program, compiler, path: str, nodes: dict, id: int, variables: 
         y = float(nodes["objects"][str(id)]["inputs"]["y"]["standard"])
 
     if name not in program.allObjects:
-        EngineError(f"not found object with name = {name}")
+        raise EngineError(f"not found object with name = {name}")
 
     type = program.allObjects[name]["type"]
     variables = program.allObjects[name]["variables"]

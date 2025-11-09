@@ -22,7 +22,7 @@ def jump(program, compiler, path: str, nodes: dict, id: int, variables: dict, **
     obj = program.objects.getById(ids)
 
     if obj is None:
-        EngineError(f"not found object with id = {ids}")
+        raise EngineError(f"not found object with id = {ids}")
 
     obj.vectors["__fall__"].power = -power
 

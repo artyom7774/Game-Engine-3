@@ -19,7 +19,7 @@ else:
 
 
 class PythonFunctions:
-    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos", "setObjectParameter", "getObjectParameter", "getTimePassed", "moveObjectWithBraking", "getNoiseValue", "sin", "cos", "tan", "ctg", "degrees", "radians", "goToScene", "getSceneName", "playMusic", "stopMusic", "playSound"]
+    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos", "setObjectParameter", "getObjectParameter", "getTimePassed", "moveObjectWithBraking", "getNoiseValue", "sin", "cos", "tan", "ctg", "degrees", "radians", "goToScene", "getSceneName", "playMusic", "stopMusic", "playSound", "sqrt", "pow"]
 
     @staticmethod
     def decodeHolder(text, program, variables, path):
@@ -55,9 +55,9 @@ class PythonFunctions:
 
     @staticmethod
     def writeText(text, program, variables, path):
-        answer = ">>> " + str(text).rstrip() + "\n"
+        answer = ">>> " + str(text).rstrip()
 
-        program.print(answer)
+        program.print(answer + "\n")
 
         print(answer)
 
@@ -116,7 +116,7 @@ class PythonFunctions:
 
     @staticmethod
     def moveObject(ids, angle, power, program, variables, path):
-        program.objects.getById(int(ids)).moveByAngle(angle, power)
+        program.objects.getById(int(ids)).moveByAngle(360 - (angle + 90) + 180, power)
 
     @staticmethod
     def removeObject(ids, program, variables, path):
@@ -167,7 +167,7 @@ class PythonFunctions:
 
     @staticmethod
     def moveObjectWithBraking(ids, angle, power, brakingPower, program, variables, path):
-        program.objects.getById(int(ids)).moveByAngle(angle, power, brakingPower)
+        program.objects.getById(int(ids)).moveByAngle(360 - (angle + 90) + 180, power, brakingPower)
 
     @staticmethod
     def getNoiseValue(seed, x, y, octaves, frequency, amplitude, lacunarity, persistence, mn, mx, program, variables, path):
@@ -196,6 +196,14 @@ class PythonFunctions:
     @staticmethod
     def radians(degrees, program, variables, path):
         return math.radians(degrees)
+
+    @staticmethod
+    def sqrt(number, program, variables, path):
+        return math.sqrt(number)
+
+    @staticmethod
+    def pow(number, power, program, variables, path):
+        return number ** power
 
     @staticmethod
     def goToScene(scene, program, variables, path):

@@ -1,0 +1,120 @@
+{
+    "variables": {},
+    "objects": {
+        "81376843": {
+            "display": {
+                "name": "node.name.onStartGame",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path"
+                }
+            },
+            "height": 3,
+            "id": 81376843,
+            "inputs": {},
+            "name": "onStartGame",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "type": "event",
+            "width": 6,
+            "x": 8,
+            "y": 10
+        },
+        "530642674": {
+            "display": {
+                "name": "node.name.python",
+                "text": {
+                    "__answer__": "node.text.answer",
+                    "__dict__": "node.text.dict",
+                    "__list__": "node.text.list",
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__text__": "node.text.text"
+                }
+            },
+            "height": 5,
+            "id": 530642674,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "standard": null,
+                    "type": "path",
+                    "value": {
+                        "id": 81376843,
+                        "name": "path"
+                    }
+                },
+                "text": {
+                    "code": "text",
+                    "name": "__text__",
+                    "standard": "def run(program, args, kwargs):\n\twriteText(\"hi, Python node! this working!\")",
+                    "type": "text",
+                    "value": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "standard": [],
+                    "type": "list",
+                    "value": null
+                },
+                "dict": {
+                    "code": "dict",
+                    "name": "__dict__",
+                    "standard": {},
+                    "type": "dict",
+                    "value": null
+                }
+            },
+            "name": "python",
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "list"
+                }
+            },
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "text",
+                    "list",
+                    "dict"
+                ],
+                "outputs": [
+                    "path",
+                    "answer"
+                ]
+            },
+            "special": {
+                "inputs": {
+                    "dict": {
+                        "invisible": true
+                    },
+                    "list": {
+                        "invisible": true
+                    },
+                    "text": {
+                        "height": 3,
+                        "type": "text-box"
+                    }
+                }
+            },
+            "type": "another",
+            "width": 10,
+            "x": 20,
+            "y": 8
+        }
+    }
+}

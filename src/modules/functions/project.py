@@ -207,7 +207,7 @@ def projectTreeGetPath(obj, path: list = None, deep: int = 0) -> list:
 
 
 def projectTreeGetFilePath(path: list) -> str:
-    return "projects/" + path[0] + "/project/" + "/".join(path[1:])
+    return f"projects/" + path[0] + "/project/" + "/".join(path[1:])
 
 
 def projectTreeOpenDir(project, obj) -> None:
@@ -496,7 +496,7 @@ def projectTreeInit(project) -> None:
 
     project.objects["project_tree_file_objects"] = {}
 
-    directory = "projects/" + project.selectProject + "/project/"
+    directory = f"projects/" + project.selectProject + "/project/"
 
     queue = [[file, "file" if os.path.isfile(directory + file) else "dir"] for file in os.listdir(directory)]
     queue.sort(key=lambda x: x[1] == "dir", reverse=True)

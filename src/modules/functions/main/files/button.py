@@ -501,7 +501,7 @@ class Button:
             obj.setText(str(last["value"]))
 
         if doing and temp["value"] != last["value"]:
-            if os.path.exists(save) and save.startswith("projects/"):
+            if os.path.exists(save) and save.startswith(f"projects/"):
                 with open(save, "w", encoding="utf-8") as f:
                     dump(file, f, indent=4)
 

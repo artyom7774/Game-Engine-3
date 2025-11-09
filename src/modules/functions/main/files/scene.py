@@ -506,6 +506,9 @@ class Scene:
             if onlyToUpdate is None or name in onlyToUpdate:
                 type, variables = Scene.loadObjectFile(project, name, obj)
 
+                if variables["sprite"][0] != "":
+                    variables["sprite"][0] = f"" + variables["sprite"][0] # TODO
+
                 obj = getattr(project.engine.objects, type)(application, **variables, variables={"code": name})
 
                 if hasattr(obj, "gravity"):
@@ -551,6 +554,9 @@ class Scene:
             hitbox = obj.hitbox.rect()
 
             if obj.pos.x + hitbox.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width + 5 and obj.pos.y + hitbox.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height + 5:
+                if obj.variables == {}:
+                    continue
+
                 project.cache["file"][project.selectFile].selectObject = obj
                 project.cache["file"][project.selectFile].selectLink = obj.id
 

@@ -1,0 +1,2 @@
+class EngineError(Exception):
+    pass

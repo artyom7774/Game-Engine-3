@@ -7,6 +7,7 @@ import importlib.util
 import platform
 import argparse
 import random
+import shutil
 import ujson
 import json
 import os
@@ -23,9 +24,86 @@ args = parser.parse_args()
 
 DEVELOP = bool(args.debug)
 
+import os
+import sys
+import traceback
+
+def exception_hook(exc_type, exc_value, exc_traceback):
+    """Обработчик исключений для PyQt"""
+    print("".join(traceback.format_exception(exc_type, exc_value, exc_traceback)))
+    sys.exit(1)
+
+sys.excepthook = exception_hook
+
+# Декоратор для отлова исключений в слотах
+def catch_exceptions(func):
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            print(f"Исключение в слоте {func.__name__}: {e}")
+            traceback.print_exc()
+    return wrapper
+
+
+def getAppDataDir():
+    if os.name == "nt":
+        base = os.getenv("APPDATA")
+
+    elif os.name == "posix":
+        if os.uname().sysname == "Darwin":
+            base = os.path.join(os.path.expanduser("~"), "Library", "Preferences")
+
+        else:
+            base = os.path.join(os.path.expanduser("~"), ".config")
+
+    else:
+        base = os.getcwd()
+
+    return base
+
+
+def setupDirLink(path, link):
+    if os.path.exists(link):
+        os.remove(link)
+
+    try:
+        if os.name == "nt":
+            import _winapi as winapi
+
+            winapi.CreateJunction(path, link)
+
+        else:
+            os.symlink(path, link)
+
+        print(f"LOG: create link {link} -> {path}")
+
+    except Exception as e:
+        print(f"ERROR: {e}")
+
+
+SAVE_APPDATA_DIR = getAppDataDir()
+
+if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3"):
+    os.mkdir(f"{SAVE_APPDATA_DIR}/Game-Engine-3")
+
+if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects"):
+    os.mkdir(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects")
+
+if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3/using"):
+    os.mkdir(f"{SAVE_APPDATA_DIR}/Game-Engine-3/using")
+
+if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3/logs"):
+    os.mkdir(f"{SAVE_APPDATA_DIR}/Game-Engine-3/logs")
+
+# setupDirLink(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects", "projects")
+
 pygame.init()
 
-with open("src/files/settings/settings.json", "r", encoding="utf-8") as file:
+if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3/settings.json"):
+    shutil.copyfile("src/files/settings/settings.json", f"{SAVE_APPDATA_DIR}/Game-Engine-3/settings.json")
+
+with open(f"{SAVE_APPDATA_DIR}/Game-Engine-3/settings.json", "r", encoding="utf-8") as file:
     SETTINGS = json.load(file)
 
 PLUS = 64 + 8 - 1

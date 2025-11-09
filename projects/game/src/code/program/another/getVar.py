@@ -21,13 +21,13 @@ def getVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, 
 
     if gl:
         if name not in variables["globals"]:
-            EngineError(f"not found global variable with name = {name}")
+            raise EngineError(f"not found global variable with name = {name}")
 
         answer = variables["globals"][name]["value"]
 
     else:
         if name not in variables["locals"][path]:
-            EngineError(f"not found local variable with name = {name}")
+            raise EngineError(f"not found local variable with name = {name}")
 
         answer = variables["locals"][path][name]["value"]
 

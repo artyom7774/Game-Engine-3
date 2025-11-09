@@ -18,7 +18,7 @@ def forObjectsGroup(program, compiler, path: str, nodes: dict, id: int, variable
     objects = program.objects.getByGroup(group)
 
     if objects is None:
-        EngineError(f"group of objects {group} newer existed")
+        raise EngineError(f"group of objects {group} newer existed")
 
     n = len(objects)
 

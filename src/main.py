@@ -1,3 +1,5 @@
+import os.path
+
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
 from PyQt5.QtCore import QEvent
 from PyQt5.QtGui import QKeySequence

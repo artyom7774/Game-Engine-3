@@ -45,7 +45,7 @@ class SettingsFunctions:
 
         qdarktheme.setup_theme(theme=SETTINGS["theme"])
 
-        with open("src/files/settings/settings.json", "w", encoding="utf-8") as file:
+        with open(f"{SAVE_APPDATA_DIR}/Game-Engine-3/settings.json", "w", encoding="utf-8") as file:
             dump(SETTINGS, file, indent=4)
 
         thr = threading.Thread(target=lambda: SettingsFunctions.newRunProgram())

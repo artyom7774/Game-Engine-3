@@ -19,7 +19,7 @@ def callFunction(program, compiler, path: str, nodes: dict, id: int, variables: 
     functions = compiler.functionsByName(name)
 
     if functions is None:
-        EngineError(f"not found function with name = {name}")
+        raise EngineError(f"not found function with name = {name}")
 
     for ids in functions:
         nodes["objects"][str(ids)]["inputs"]["params"]["standard"] = params

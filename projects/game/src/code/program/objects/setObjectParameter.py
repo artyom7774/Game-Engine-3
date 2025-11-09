@@ -63,7 +63,7 @@ def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, varia
     obj = program.objects.getById(ids)
 
     if obj is None:
-        EngineError(f"not found object with id = {ids}")
+        raise EngineError(f"not found object with id = {ids}")
 
     if OBJECT_PARAMETERS[operation] == "alpha":
         value = min(255, max(0, value))

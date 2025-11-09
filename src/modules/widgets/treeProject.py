@@ -174,7 +174,7 @@ class TreeProject(QTreeWidget):
             return path
 
     def getItemFilePath(self, path):
-        return "projects/" + path[0] + "/project/" + "/".join(path[1:])
+        return f"projects/" + path[0] + "/project/" + "/".join(path[1:])
 
     def onItemExpanded(self, item):
         path = self.getItemPath(item)

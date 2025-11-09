@@ -12,8 +12,8 @@ os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = ""
 
 def main() -> None:
     if not DEVELOP:
-        sys.stderr = open("src/files/logs/error.txt", "w", buffering=1)
-        sys.stdout = open("src/files/logs/log.txt", "a", buffering=1)
+        sys.stderr = open(f"{SAVE_APPDATA_DIR}/Game-Engine-3/logs/error.txt", "w", buffering=1)
+        sys.stdout = open(f"{SAVE_APPDATA_DIR}/Game-Engine-3/logs/log.txt", "a", buffering=1)
 
     print(f"{'-' * 20} LOG {datetime.datetime.now()} {'-' * 20}")
 

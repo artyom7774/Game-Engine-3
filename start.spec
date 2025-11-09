@@ -1,12 +1,11 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-
 a = Analysis(
     ['start.py'],
     pathex=[],
     binaries=[],
     datas=[],
-    hiddenimports=['PIL.Image', 'PIL.ImageFont', 'PIL._imaging', 'pygame', 'PyQt5', 'PyQt5.QtCore', 'PyQt5.QtGui', 'PyQt5.QtWidgets'],
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -14,6 +13,7 @@ a = Analysis(
     noarchive=False,
     optimize=0,
 )
+
 pyz = PYZ(a.pure)
 
 exe = EXE(
@@ -23,6 +23,7 @@ exe = EXE(
     a.datas,
     [],
     name='start',
+    uac_admin=False,
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -36,4 +37,5 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
     icon=['src\\files\\sprites\\logo.png'],
+    manifest='manifest.xml',
 )
