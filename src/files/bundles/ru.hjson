@@ -253,7 +253,8 @@
     "Main": "Основное"
     "Write prompt and press enter...": "Напишите запрос и нажмите enter..."
     "AI": "ИИ"
-    "Open directory": "Открыть папку"
+    "Open directory": "Открыть папку",
+    "AI model": "ИИ модель"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"

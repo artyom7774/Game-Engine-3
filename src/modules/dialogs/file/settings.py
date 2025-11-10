@@ -15,7 +15,11 @@ class SettingsFunctions:
     def newRunProgram() -> None:
         if SYSTEM == "Windows":
             if DEVELOP:
-                subprocess.run(["venv/Scripts/python.exe", "Game Engine 3.py"])
+                if os.path.exists("venv"):
+                    subprocess.run(["venv/Scripts/python.exe", "Game Engine 3.py"])
+
+                else:
+                    subprocess.run([".venv/Scripts/python.exe", "Game Engine 3.py"])
 
             else:
                 subprocess.run(["Game Engine 3.exe"])
@@ -32,10 +36,13 @@ class SettingsFunctions:
 
         languages = dict(zip(LANGUAGES.values(), LANGUAGES.keys()))
         themes = list(THEMES.keys())
+        models = list(AI_MODELS.keys())
 
         settings = {
             "language": languages[dialog.objects["language_combobox"].currentText()],
-            "theme": themes[dialog.objects["theme_combobox"].currentIndex()]
+
+            "theme": themes[dialog.objects["theme_combobox"].currentIndex()],
+            "model": models[dialog.objects["model_combobox"].currentIndex()]
         }
 
         for key, value in settings.items():
@@ -128,6 +135,20 @@ class Settings(QDialog):
         self.objects["theme_combobox"].setGeometry(210, 45, 300, 25)
         self.objects["theme_combobox"].setFont(FONT)
         self.objects["theme_combobox"].show()
+
+        # AI MODEL
+
+        self.objects["model_label"] = QLabel(parent=self, text=translate("AI model") + ":")
+        self.objects["model_label"].setGeometry(10, 80, 200, 25)
+        self.objects["model_label"].setFont(FONT)
+        self.objects["model_label"].show()
+
+        self.objects["model_combobox"] = QComboBox(parent=self)
+        self.objects["model_combobox"].addItems([translate(obj) for obj in AI_MODELS.values()])
+        self.objects["model_combobox"].setCurrentIndex([translate(obj).lower() == translate(AI_MODELS[SETTINGS["model"]]).lower() for obj in AI_MODELS.values()].index(True))
+        self.objects["model_combobox"].setGeometry(210, 80, 300, 25)
+        self.objects["model_combobox"].setFont(FONT)
+        self.objects["model_combobox"].show()
 
         # COMFIRM
 

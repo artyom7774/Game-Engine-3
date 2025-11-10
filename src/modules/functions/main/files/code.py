@@ -203,6 +203,9 @@ class AIDialog(QDialog):
     def request(self):
         text = self.objects["entry"].text()
 
+        if text == "":
+            return
+
         self.objects["entry"].setText("")
 
         if self.objects["text"].toPlainText() == "":
@@ -223,7 +226,7 @@ class AIDialog(QDialog):
 
     def function(self, status, answer):
         if status == 1:
-            self.objects["text"].setPlainText(f"{self.objects['text'].toPlainText()}\nAI: something went wrong ({answer})")
+            self.objects["text"].setPlainText(f"{self.objects['text'].toPlainText()}\nERROR: {answer}")
 
             return
 

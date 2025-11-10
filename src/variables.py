@@ -75,7 +75,8 @@ if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3/using"):
 if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3/logs"):
     os.mkdir(f"{SAVE_APPDATA_DIR}/Game-Engine-3/logs")
 
-# setupDirLink(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects", "projects")
+if DEVELOP:
+    setupDirLink(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects", "projects")
 
 pygame.init()
 
@@ -287,7 +288,8 @@ for element in IMAGE_FORMATES:
 
 BASE_SETTINGS = {
     "language": "EN",
-    "theme": "Dark"
+    "theme": "Dark",
+    "model": "gemini-2.5-flash"
 }
 
 LANGUAGES = {
@@ -320,6 +322,11 @@ LANGUAGES_ICONS = {
 THEMES = {
     "light": "Light",
     "dark": "Dark"
+}
+
+AI_MODELS = {
+    "gemini-2.5-flash": "gemini-2.5-flash",
+    "gemini-2.5-pro": "gemini-2.5-pro"
 }
 
 if SETTINGS["theme"] == "dark":

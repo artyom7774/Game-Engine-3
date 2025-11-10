@@ -1,0 +1,224 @@
+{
+    "main": "Button",
+    "dependences": {
+        "Button": []
+    },
+    "standard": {
+        "type": "Button",
+        "pos": {
+            "x": {
+                "name": "X",
+                "type": "int",
+                "value": 0
+            },
+            "y": {
+                "name": "Y",
+                "type": "int",
+                "value": 0
+            }
+        },
+        "hitbox": {
+            "X offset": {
+                "name": "X offset",
+                "type": "int",
+                "value": 0
+            },
+            "Y offset": {
+                "name": "Y offset",
+                "type": "int",
+                "value": 0
+            },
+            "width": {
+                "name": "Width",
+                "type": "int",
+                "value": 32
+            },
+            "height": {
+                "name": "Height",
+                "type": "int",
+                "value": 32
+            }
+        },
+        "group": "object",
+        "layer": 0,
+        "invisible": false,
+        "font": "Arial",
+        "message": "Button",
+        "fontSize": 13,
+        "ramaColor": {
+            "main": {
+                "name": "Main",
+                "type": "color",
+                "value": "#000000"
+            },
+            "mouse": {
+                "name": "Mouse",
+                "type": "color",
+                "value": "#000000"
+            },
+            "click": {
+                "name": "Click",
+                "type": "color",
+                "value": "#000000"
+            }
+        },
+        "fontColor": {
+            "main": {
+                "name": "Main",
+                "type": "color",
+                "value": "#FFFFFF"
+            },
+            "mouse": {
+                "name": "Mouse",
+                "type": "color",
+                "value": "#FFFFFF"
+            },
+            "click": {
+                "name": "Click",
+                "type": "color",
+                "value": "#FFFFFF"
+            }
+        },
+        "backgroundColor": {
+            "main": {
+                "name": "Main",
+                "type": "color",
+                "value": "#AAAAAA"
+            },
+            "mouse": {
+                "name": "Mouse",
+                "type": "color",
+                "value": "#888888"
+            },
+            "click": {
+                "name": "Click",
+                "type": "color",
+                "value": "#444444"
+            }
+        },
+        "alpha": 255,
+        "alignment": {
+            "vertical": {
+                "name": "Vertical",
+                "type": "choosing",
+                "value": "up",
+                "choose": {
+                    "input": [
+                        "Up",
+                        "Center",
+                        "Down"
+                    ],
+                    "output": [
+                        "up",
+                        "center",
+                        "down"
+                    ]
+                }
+            },
+            "horizontal": {
+                "name": "Horizontal",
+                "type": "choosing",
+                "value": "left",
+                "choose": {
+                    "input": [
+                        "Left",
+                        "Center",
+                        "Right"
+                    ],
+                    "output": [
+                        "left",
+                        "center",
+                        "right"
+                    ]
+                }
+            }
+        }
+    },
+    "name": {
+        "type": "Button type",
+        "pos": "Text position",
+        "hitbox": "Text hitbox",
+        "group": "Name of object group",
+        "layer": "Object layer",
+        "invisible": "Invisible",
+        "font": "Font type",
+        "message": "Message",
+        "fontSize": "Font size",
+        "alpha": "Alpha",
+        "fontColor": "Font color",
+        "alignment": "Alignment text",
+        "ramaColor": "Rama color",
+        "backgroundColor": "Background color"
+    },
+    "type": {
+        "type": "choose",
+        "pos": "dict",
+        "hitbox": "dict",
+        "group": "str",
+        "layer": "int",
+        "invisible": "bool",
+        "font": "font",
+        "message": "str",
+        "fontSize": "int",
+        "alpha": "int",
+        "fontColor": "dict",
+        "ramaColor": "dict",
+        "backgroundColor": "dict",
+        "alignment": "dict"
+    },
+    "specials": {
+        "choose": {
+            "type": {
+                "input": [
+                    "object.name.button"
+                ],
+                "output": [
+                    "Button"
+                ]
+            },
+
+            "vertical": {
+                "input": [
+                    "Up",
+                    "Center",
+                    "Down"
+                ],
+                "output": [
+                    "up",
+                    "center",
+                    "down"
+                ]
+            },
+
+            "horizontal": {
+                "input": [
+                    "Left",
+                    "Center",
+                    "Right"
+                ],
+                "output": [
+                    "left",
+                    "center",
+                    "right"
+                ]
+            }
+        }
+    },
+    "objects": {
+        "Button": [
+            "pos",
+            "hitbox",
+            "group",
+            "layer",
+            "font",
+            "message",
+            "fontSize",
+            "invisible",
+            "alpha",
+            "backgroundColor",
+            "ramaColor",
+            "fontColor",
+            "alignment"
+        ]
+    }
+}
