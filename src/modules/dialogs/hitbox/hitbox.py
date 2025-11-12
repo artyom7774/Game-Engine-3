@@ -20,8 +20,12 @@ import os
 class HitboxFunctions:
     @staticmethod
     def save(project, dialog):
-        with open(dialog.path, "w", encoding="utf-8") as f:
-            dump(dialog.object, f, indent=4)
+        if os.path.exists(dialog.path):
+            with open(dialog.path, "w", encoding="utf-8") as f:
+                dump(dialog.object, f)
+
+        else:
+            project.cache["allSceneObjects"][dialog.project.selectFile][dialog.path] = dialog.object
 
         dialog.init()
 
@@ -65,7 +69,7 @@ class Hitbox(QDialog):
                 self.object = load(f)
 
         else:
-            self.object = project.cache["allSceneObjects"][self.path]
+            self.object = project.cache["allSceneObjects"][self.project.selectFile][self.path]
 
         settings = self.object["StaticObject"]["hitbox"]["value"]
 
@@ -124,7 +128,7 @@ class Hitbox(QDialog):
             sprite = None
 
         else:
-            sprite = self.project.engine.Sprite(self.application, self.main, f"projects/{self.project.selectProject}/project/" + self.object["StaticObject"]["sprite"]["value"]["path"]["value"], self.object["StaticObject"]["sprite"]["value"]["X offset"]["value"], self.object["StaticObject"]["sprite"]["value"]["Y offset"]["value"], self.object["StaticObject"]["sprite"]["value"]["width"]["value"], self.object["StaticObject"]["sprite"]["value"]["height"]["value"])
+            sprite = self.project.engine.Sprite(self.application, self.main, f"{PATH_TO_PROJECTS}/{self.project.selectProject}/project/" + self.object["StaticObject"]["sprite"]["value"]["path"]["value"], self.object["StaticObject"]["sprite"]["value"]["X offset"]["value"], self.object["StaticObject"]["sprite"]["value"]["Y offset"]["value"], self.object["StaticObject"]["sprite"]["value"]["width"]["value"], self.object["StaticObject"]["sprite"]["value"]["height"]["value"])
 
         self.main.hitbox = hitbox
         self.main.sprite = sprite
@@ -245,6 +249,12 @@ class Hitbox(QDialog):
             self.objects["settings_radius_edit"].show()
 
             self.objects["settings_radius_edit"].releasedFocusFunction = lambda empty=None, pr=self.project, dia=self: HitboxFunctions.chooseParameter(pr, dia, ["hitbox", "CircleHitbox", "radius", "value"], self.objects["settings_radius_edit"])
+
+    def closeEvent(self, event):
+        HitboxFunctions.save(self.project, self)
+
+        self.project.init()
+        event.accept()
 
 
 def hitboxCreateDialog(project, path: str = None):

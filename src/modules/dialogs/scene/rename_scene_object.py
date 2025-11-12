@@ -15,7 +15,7 @@ class RenameSceneObjectFunctions:
         if name == "":
             return
 
-        if name in project.cache["allSceneObjects"]:
+        if name in project.cache["allSceneObjects"][project.selectFile]:
             return
 
         if project.objects["main"]["scene"].position is None:
@@ -24,11 +24,11 @@ class RenameSceneObjectFunctions:
         if project.cache["file"][project.selectFile].selectObject is None:
             return
 
-        project.cache["allSceneObjects"][name] = project.cache["allSceneObjects"][project.cache["file"][project.selectFile].selectObject.variables["code"]]
-        project.cache["allSceneObjects"].pop(project.cache["file"][project.selectFile].selectObject.variables["code"])
+        project.cache["allSceneObjects"][project.selectFile][name] = project.cache["allSceneObjects"][project.selectFile][project.cache["file"][project.selectFile].selectObject.variables["code"]]
+        project.cache["allSceneObjects"][project.selectFile].pop(project.cache["file"][project.selectFile].selectObject.variables["code"])
 
         with open(f"{project.selectFile}/objects.scene", "wb") as file:
-            file.write(orjson.dumps(project.cache["allSceneObjects"]))
+            file.write(orjson.dumps(project.cache["allSceneObjects"][project.selectFile]))
 
         project.init()
 

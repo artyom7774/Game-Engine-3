@@ -7,7 +7,6 @@ import importlib.util
 import platform
 import argparse
 import random
-import shutil
 import ujson
 import json
 import os
@@ -42,26 +41,8 @@ def getAppDataDir():
     return base
 
 
-def setupDirLink(path, link):
-    if os.path.exists(link):
-        os.remove(link)
-
-    try:
-        if os.name == "nt":
-            import _winapi as winapi
-
-            winapi.CreateJunction(path, link)
-
-        else:
-            os.symlink(path, link)
-
-        print(f"LOG: create link {link} -> {path}")
-
-    except Exception as e:
-        print(f"ERROR: {e}")
-
-
 SAVE_APPDATA_DIR = getAppDataDir()
+PATH_TO_PROJECTS = f"{getAppDataDir()}/Game-Engine-3/projects"
 
 if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3"):
     os.mkdir(f"{SAVE_APPDATA_DIR}/Game-Engine-3")
@@ -75,16 +56,29 @@ if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3/using"):
 if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3/logs"):
     os.mkdir(f"{SAVE_APPDATA_DIR}/Game-Engine-3/logs")
 
-if DEVELOP:
-    setupDirLink(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects", "projects")
-
 pygame.init()
 
-if not os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3/settings.json"):
-    shutil.copyfile("src/files/settings/settings.json", f"{SAVE_APPDATA_DIR}/Game-Engine-3/settings.json")
+BASE_SETTINGS = {
+    "language": "EN",
+    "theme": "dark",
+    "model": "gemini-2.5-flash"
+}
 
-with open(f"{SAVE_APPDATA_DIR}/Game-Engine-3/settings.json", "r", encoding="utf-8") as file:
-    SETTINGS = json.load(file)
+SETTINGS = BASE_SETTINGS
+
+if os.path.exists(f"{SAVE_APPDATA_DIR}/Game-Engine-3/settings.json"):
+    with open(f"{SAVE_APPDATA_DIR}/Game-Engine-3/settings.json", "r", encoding="utf-8") as file:
+        SETTINGS = json.load(file)
+
+for key, value in BASE_SETTINGS.items():
+    if key not in SETTINGS:
+        SETTINGS[key] = BASE_SETTINGS[key]
+
+with open(f"{SAVE_APPDATA_DIR}/Game-Engine-3/settings.json", "w", encoding="utf-8") as file:
+    json.dump(SETTINGS, file, indent=4)
+
+with open("src/files/version.json", "r", encoding="utf-8") as file:
+    VERSION = json.load(file)
 
 PLUS = 64 + 8 - 1
 
@@ -285,12 +279,6 @@ for element in IMAGE_FORMATES:
 
 for element in IMAGE_FORMATES:
     SPRITES[f"{element}-light"] = "src/files/sprites/image-light.png"
-
-BASE_SETTINGS = {
-    "language": "EN",
-    "theme": "Dark",
-    "model": "gemini-2.5-flash"
-}
 
 LANGUAGES = {
     "RU": "Русский",

@@ -229,7 +229,7 @@
     "Installing libraries": "Установка библиотек"
     "Successfully": "Успешно"
     "Music": "Музыка"
-    "Basic nodes": "Основные ноды"
+    "Basic nodes": "Базовые ноды"
     "Experimental nodes": "Экспериментальные ноды"
     "Experimental": "Экспериментальные"
     "Project version is outdated": "Версия проекта устарела"
@@ -403,6 +403,7 @@
     "node.text.append": "соприкосновение"
     "node.text.number": "число"
     "node.text.degree": "степень"
+    "node.text.slidingStep": "сила торможение"
 
     // OBJECT PARAMETERS
     "object.parameter.number.hitbox": "0. Хитбокс"

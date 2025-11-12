@@ -112,6 +112,9 @@ def loadCollisionFile(path: str) -> dict:
         if line.startswith("$") and line.endswith("$"):
             continue
 
+        if len(line.split()) <= 4:
+            continue
+
         first, separator, second, _, *collisions = line.split()
 
         collisions = " ".join(collisions)

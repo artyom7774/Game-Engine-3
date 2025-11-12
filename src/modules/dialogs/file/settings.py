@@ -6,6 +6,7 @@ from src.variables import *
 
 import subprocess
 import threading
+import os
 
 from libs import qdarktheme
 
@@ -16,16 +17,16 @@ class SettingsFunctions:
         if SYSTEM == "Windows":
             if DEVELOP:
                 if os.path.exists("venv"):
-                    subprocess.run(["venv/Scripts/python.exe", "Game Engine 3.py"])
+                    subprocess.run(["venv/Scripts/python.exe", "Game Engine 3.py", "--debug 1"])
 
-                else:
-                    subprocess.run([".venv/Scripts/python.exe", "Game Engine 3.py"])
+                if os.path.exists(".venv"):
+                    subprocess.run([".venv/Scripts/python.exe", "Game Engine 3.py", "--debug 1"])
 
             else:
                 subprocess.run(["Game Engine 3.exe"])
 
         elif SYSTEM == "Linux":
-            pass
+            subprocess.run(["./Game Engine 3"])
 
         else:
             print("ERROR: system (Unknown) not supported this opperation")

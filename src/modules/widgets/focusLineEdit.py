@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QLineEdit
+from PyQt5.Qt import Qt
 
 import typing
 
@@ -23,3 +24,10 @@ class FocusLineEdit(QLineEdit):
 
         if self.connectFocusFunction is not None:
             self.connectFocusFunction()
+
+    def keyPressEvent(self, event):
+        if event.key() in (Qt.Key_Return, Qt.Key_Enter):
+            if self.releasedFocusFunction is not None:
+                self.releasedFocusFunction()
+
+        super().keyPressEvent(event)

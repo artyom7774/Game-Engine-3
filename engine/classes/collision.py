@@ -16,13 +16,13 @@ class Collision:
         if isinstance(hitbox1, SquareHitbox) and isinstance(hitbox2, SquareHitbox):
             return Collision.rectByRect(*hitbox1.get(), *hitbox2.get())
 
-        if isinstance(hitbox1, CircleHitbox) and isinstance(hitbox2, CircleHitbox):
+        if isinstance(hitbox1, SquareHitbox) and isinstance(hitbox2, CircleHitbox):
             return Collision.rectByCircle(*hitbox1.get(), *hitbox2.get())
 
         if isinstance(hitbox1, CircleHitbox) and isinstance(hitbox2, CircleHitbox):
             return Collision.circleByCircle(*hitbox1.get(), *hitbox2.get())
 
-        raise TypeError()
+        raise TypeError(f"ERROR: {hitbox1=} {hitbox2=}")
 
     @staticmethod
     def rectByRect(x1: float, y1: float, w1: float, h1: float, x2: float, y2: float, w2: float, h2: float) -> bool:

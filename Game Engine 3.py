@@ -1,10 +1,12 @@
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QIcon
 
 from src.main import Main
 
 from src.variables import *
 
 import datetime
+import ctypes
 import sys
 
 os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = ""
@@ -20,8 +22,16 @@ def main() -> None:
     print(f"LOG: develop mode = {DEVELOP}")
     print(f"LOG: program ran on \"{SYSTEM} {RELEASE}\"")
 
+    try:
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(f"Game-Engine-{VERSION}")
+
+    except Exception as e:
+        pass
+
     app = QApplication(sys.argv)
-    ex = Main(app)
+
+    window = Main(app)
+    app.setWindowIcon(window.windowIcon())
 
     sys.exit(app.exec_())
 

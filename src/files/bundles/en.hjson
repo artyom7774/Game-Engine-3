@@ -394,6 +394,7 @@
     "node.text.append": "append"
     "node.text.number": "number"
     "node.text.degree": "degree"
+    "node.text.slidingStep": "sliding step"
 
     // OBJECT PARAMETERS
     "object.parameter.number.hitbox": "0. Hitbox"

@@ -184,7 +184,7 @@ class AnimatorCreateFrame(QDialog):
     def createFrame(self, event):
         path = self.objects["sprite_entry"].text()
 
-        if not os.path.exists(f"projects/{self.project.selectProject}/project/{path}"):
+        if not os.path.exists(f"{PATH_TO_PROJECTS}/{self.project.selectProject}/project/{path}"):
             self.objects["log_label"].setText("File is not found")
 
             return
@@ -499,10 +499,10 @@ class AnimatorFunctions:
                 dump(dialog.object, f, indent=4)
 
         else:
-            project.cache["allSceneObjects"][str(dialog.path)] = dialog.object
+            project.cache["allSceneObjects"][project.selectFile][str(dialog.path)] = dialog.object
 
             with open(f"{project.selectFile}/objects.scene", "wb") as file:
-                file.write(orjson.dumps(project.cache["allSceneObjects"]))
+                file.write(orjson.dumps(project.cache["allSceneObjects"][project.selectFile]))
 
         dialog.init()
 
@@ -565,7 +565,7 @@ class Animator(QDialog):
                 self.object = load(f)
 
         else:
-            self.object = project.cache["allSceneObjects"][self.path]
+            self.object = project.cache["allSceneObjects"][self.project.selectFile][self.path]
 
         self.object["StaticObject"]["animation"]["value"]["groups"] = dict(sorted(self.object["StaticObject"]["animation"]["value"]["groups"].items(), key=lambda x: x[0]))
 
@@ -632,7 +632,7 @@ class Animator(QDialog):
         self.objects["animation_scroll"].setWidget(self.objects["animation_scroll_container"])
 
         for i, sprite in enumerate(self.object["StaticObject"]["animation"]["value"]["groups"][self.selectGroup]["sprites"]):
-            tile = AnimationContainerTile(self.project, self, f"projects/{self.project.selectProject}/project/{sprite}", f"{i + 1}")
+            tile = AnimationContainerTile(self.project, self, f"{PATH_TO_PROJECTS}/{self.project.selectProject}/project/{sprite}", f"{i + 1}")
 
             tile.temp = sprite
 

@@ -36,6 +36,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['src\\files\\sprites\\logo.png'],
-    manifest='manifest.xml',
+    icon=['src\\files\\sprites\\logo.ico']
 )

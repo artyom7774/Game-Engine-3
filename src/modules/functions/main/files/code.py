@@ -24,6 +24,7 @@ import typing
 import random
 import math
 import copy
+import gc
 
 
 def isCurrectNode(obj: dict):
@@ -250,10 +251,12 @@ class AIDialog(QDialog):
             return
 
         for id in list(answer["nodes"].keys()):
-            ids = random.randint(1, 1000000000)
+            ids = random.randint(10000, 1000000000)
 
             while str(id) in temp:
                 temp = temp.replace(str(id), str(ids))
+
+            gc.collect()
 
         answer = json.loads(temp)
 
@@ -1172,7 +1175,7 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.style = f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}"
 
         with open("src/code/config.json", "r", encoding="utf-8") as file:
-            self.config = load(file)
+            self.config = json.load(file)
 
         self.project = parent
 
@@ -1204,7 +1207,7 @@ class CodeAdditionsVarsType(QTreeWidget):
                 self.variables = load(file)["variables"]
 
         else:
-            self.variables = self.project.cache["allSceneObjects"][self.path]["variables"]
+            self.variables = self.project.cache["allSceneObjects"][self.project.selectFile][self.path]["variables"]
 
         self.setRootIsDecorated(False)
 
@@ -1254,7 +1257,7 @@ class CodeAdditionsVarsType(QTreeWidget):
                 text = load(file)
 
         else:
-            text = self.project.cache["allSceneObjects"][self.path]
+            text = self.project.cache["allSceneObjects"][self.project.selectFile][self.path]
 
         self.variables.pop(name)
 
@@ -1301,7 +1304,7 @@ class CodeAdditionsVarsType(QTreeWidget):
                 text = load(file)
 
         else:
-            text = self.project.cache["allSceneObjects"][self.path]
+            text = self.project.cache["allSceneObjects"][self.project.selectFile][self.path]
 
         name = "undefined"
         plus = 0
@@ -1328,7 +1331,7 @@ class CodeAdditionsVarsType(QTreeWidget):
                 text = load(file)
 
         else:
-            text = self.project.cache["allSceneObjects"][self.path]
+            text = self.project.cache["allSceneObjects"][self.project.selectFile][self.path]
 
         try:
             name = text["variables"][name]["name"]
@@ -1359,7 +1362,7 @@ class CodeAdditionsVarsType(QTreeWidget):
                 text = load(file)
 
         else:
-            text = self.project.cache["allSceneObjects"][self.path]
+            text = self.project.cache["allSceneObjects"][self.project.selectFile][self.path]
 
         index = self.project.objects["main"][f"additions_element_type_{name}"].currentIndex()
 
@@ -1379,7 +1382,7 @@ class CodeAdditionsVarsType(QTreeWidget):
                 text = load(file)
 
         else:
-            text = self.project.cache["allSceneObjects"][self.path]
+            text = self.project.cache["allSceneObjects"][self.project.selectFile][self.path]
 
         value = self.project.objects["main"][f"additions_element_value_{name}"].text()
 
@@ -1418,7 +1421,7 @@ class CodeAdditions:
                 (project.height() - 80) // 2
             ),
             translate("Create global variable"),
-            f"projects/{project.selectProject}/project/project.cfg"
+            f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg"
         )
 
     @staticmethod
@@ -1477,7 +1480,7 @@ class Code:
                 project.objects["main"]["nodes"] = {}
 
             with open("src/code/config.json", "r", encoding="utf-8") as file:
-                project.objects["main"]["config"] = load(file)
+                project.objects["main"]["config"] = json.load(file)
 
             CodeAdditions.init(project)
 

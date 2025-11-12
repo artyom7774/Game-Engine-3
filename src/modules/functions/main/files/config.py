@@ -28,14 +28,14 @@ class ConfigButtonStartSceneFunctions:
 
             return
 
-        scene = scenes[dialog.objects["choose_combobox"].currentIndex()].replace(f"projects/{project.selectProject}/project/", "")
+        scene = scenes[dialog.objects["choose_combobox"].currentIndex()].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/", "")
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             config = load(file)
 
         config["values"]["start_scene"]["value"] = scene
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "w", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "w", encoding="utf-8") as file:
             dump(config, file, indent=4)
 
         project.init()
@@ -104,16 +104,16 @@ class ConfigButtonStartScene(QDialog):
 class Config:
     @staticmethod
     def test(project) -> None:
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             config = load(file)
 
-        if os.path.exists(f"projects/{project.selectProject}/project/" + config["values"]["start_scene"]["value"]):
+        if os.path.exists(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/" + config["values"]["start_scene"]["value"]):
             pass
 
         else:
             config["values"]["start_scene"]["value"] = ""
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "w", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "w", encoding="utf-8") as file:
             dump(config, file, indent=4)
 
     @staticmethod
@@ -139,7 +139,7 @@ class Config:
                 project.height() - 70
             ),
             translate("Create global variable"),
-            f"projects/{project.selectProject}/project/project.cfg"
+            f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg"
         )
 
         x = (10 + 10 + Size.x(16) + 10) + 15
@@ -193,7 +193,7 @@ class Config:
                     project.objects["main"][f"{k}_button"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
                     project.objects["main"][f"{k}_button"].show()
 
-                    project.objects["main"][f"{k}_button"].setText(re.sub("%.*?%", "", v["value"].replace(f"projects/{project.selectProject}/project/scenes/", "")) if v["value"] != "" else translate("Choose"))
+                    project.objects["main"][f"{k}_button"].setText(re.sub("%.*?%", "", v["value"].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/scenes/", "")) if v["value"] != "" else translate("Choose"))
 
                     project.objects["main"][f"{k}_button"].clicked.connect(lambda empty=None, key=k, value=v: ConfigButtonStartScene.start(project, key, value))
 
@@ -231,7 +231,7 @@ class Config:
                     answer = str(project.objects['main'][obj].text())
 
                 elif value["type"] == "path":
-                    if os.path.exists(f"projects/{project.selectProject}/project/{project.objects['main'][obj].text()}") and any([project.objects['main'][obj].text().endswith(element) for element in IMAGE_FORMATES]):
+                    if os.path.exists(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/{project.objects['main'][obj].text()}") and any([project.objects['main'][obj].text().endswith(element) for element in IMAGE_FORMATES]):
                         answer = project.objects["main"][obj].text()
 
                     else:

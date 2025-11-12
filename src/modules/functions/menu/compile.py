@@ -76,7 +76,7 @@ class Game(engine.Application):
     def __init__(self):
         global width, height
 
-        engine.Application.__init__(self)
+        engine.Application.__init__(self, initOnCreated=False)
 
         self.objects.collisions = engine.Collision("collision.cfg")
 
@@ -455,7 +455,7 @@ class Compile:
     def run(project) -> None:
         project.compiling = False
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettings = load(file)
 
         if Compile.compile(project, executable=False):
@@ -463,38 +463,24 @@ class Compile:
 
             return
 
-        with open(f"projects/{project.selectProject}/src/{projectSettings['values']['name']['value']}.py", "r", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/src/{projectSettings['values']['name']['value']}.py", "r", encoding="utf-8") as file:
             text = file.read()
 
-        """
-        name = "game"
-        spec = importlib.util.spec_from_loader(name, loader=None)
-
-        program = importlib.util.module_from_spec(spec)
-
-        exec(text, program.__dict__)
-
-        os.chdir(f"projects/{project.selectProject}/src")
-
-        game = program.Game()
-        game.start()
-        """
-
         if SYSTEM == "Windows":
-            pathProject = f"projects/{project.selectProject}/src"
+            pathProject = f"{PATH_TO_PROJECTS}/{project.selectProject}/src"
 
             pathPython = os.path.abspath(os.path.abspath(sys.argv[0]))
             pathPython = pathPython[:pathPython.rfind('\\')]
             pathPython = f"{pathPython}/python/python.exe"
 
-            print(f"LOG: python path: {pathPython}")
+            command = f"cd {pathProject} & \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""
 
-            thr = threading.Thread(target=lambda: os.system(f"cd \"{pathProject}\" && \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""))
-            thr.daemon = True
-            thr.start()
+            print(f"LOG: command for run: {command}")
+
+            subprocess.run([pathPython, f"{projectSettings['values']['name']['value']}.py"], cwd=pathProject)
 
         else:
-            pathProject = f"projects/{project.selectProject}/src"
+            pathProject = f"{PATH_TO_PROJECTS}/{project.selectProject}/src"
 
             pathPython = os.path.abspath(sys.argv[0])
             pathPython = os.path.dirname(pathPython)
@@ -508,27 +494,27 @@ class Compile:
 
     @staticmethod
     def compile(project, executable: bool = True) -> bool:
-        engine = f"projects/{project.selectProject}/src/engine"
+        engine = f"{PATH_TO_PROJECTS}/{project.selectProject}/src/engine"
 
-        if os.path.exists(f"projects/{project.selectProject}/src"):
-            shutil.rmtree(f"projects/{project.selectProject}/src")
+        if os.path.exists(f"{PATH_TO_PROJECTS}/{project.selectProject}/src"):
+            shutil.rmtree(f"{PATH_TO_PROJECTS}/{project.selectProject}/src")
 
-        os.mkdir(f"projects/{project.selectProject}/src")
+        os.mkdir(f"{PATH_TO_PROJECTS}/{project.selectProject}/src")
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettings = load(file)
 
         names = {
-            "project": f"projects/{project.selectProject}/src/project.cfg",
-            "function": f"projects/{project.selectProject}/src/functions",
-            "assets": f"projects/{project.selectProject}/src/assets",
-            "files": f"projects/{project.selectProject}/src/files",
-            "code": f"projects/{project.selectProject}/src/code",
-            "music": f"projects/{project.selectProject}/src/music",
-            "build": f"projects/{project.selectProject}/src/build",
-            "dist": f"projects/{project.selectProject}/src/dict",
-            "collision": f"projects/{project.selectProject}/src/collision.cfg",
-            "spec": f"projects/{project.selectProject}/src/{projectSettings['values']['name']['value']}.spec"
+            "project": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/project.cfg",
+            "function": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/functions",
+            "assets": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/assets",
+            "files": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/files",
+            "code": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/code",
+            "music": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/music",
+            "build": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/build",
+            "dist": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/dict",
+            "collision": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/collision.cfg",
+            "spec": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/{projectSettings['values']['name']['value']}.spec"
         }
 
         for name, path in names.items():
@@ -541,26 +527,26 @@ class Compile:
 
         shutil.copytree("engine", engine)
 
-        shutil.copytree(f"projects/{project.selectProject}/project/music", names["music"])
-        shutil.copytree(f"projects/{project.selectProject}/project/functions", names["function"])
-        shutil.copytree(f"projects/{project.selectProject}/project/assets", names["assets"])
-        shutil.copytree(f"projects/{project.selectProject}/project/files", names["files"])
+        shutil.copytree(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/music", names["music"])
+        shutil.copytree(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/functions", names["function"])
+        shutil.copytree(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/assets", names["assets"])
+        shutil.copytree(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/files", names["files"])
         shutil.copytree(f"src/code", names["code"])
 
-        shutil.copyfile(f"projects/{project.selectProject}/project/collision.cfg", names["collision"])
-        shutil.copyfile(f"projects/{project.selectProject}/project/project.cfg", names["project"])
+        shutil.copyfile(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/collision.cfg", names["collision"])
+        shutil.copyfile(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", names["project"])
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettingsCfg = load(file)
 
-        if f"projects/{project.selectProject}/project/" + projectSettingsCfg["values"]["start_scene"]["value"] == "":
+        if f"{PATH_TO_PROJECTS}/{project.selectProject}/project/" + projectSettingsCfg["values"]["start_scene"]["value"] == "":
             MessageBox.error("Project start scene is empty")
 
             project.compiling = False
 
             return 1
 
-        output = f"projects/{project.selectProject}/src/{projectSettingsCfg['values']['name']['value']}.py"
+        output = f"{PATH_TO_PROJECTS}/{project.selectProject}/src/{projectSettingsCfg['values']['name']['value']}.py"
 
         # LOAD PROGRAMS AND LOCAL VARIABLES
 
@@ -579,7 +565,7 @@ class Compile:
         objects_variables = {}
 
         for scene in functions.project.getAllProjectScenes(project, False):
-            scenePath = f"projects/{project.selectProject}/project/cache/{'-'.join(scene.split('/')[3:])}-setting.json"
+            scenePath = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/cache/{'-'.join(scene.split('/')[3:][scene.split('/')[3:].index('scenes'):])}-setting.json"
 
             objects = {}
 
@@ -592,15 +578,19 @@ class Compile:
                 type, variables = functions.main.files.Scene.loadObjectFile(project, name, obj)
 
                 if "sprite" in variables:
-                    image = pygame.image.load(f"" + variables["sprite"][0])
+                    try:
+                        image = pygame.image.load(f"" + variables["sprite"][0])
 
-                    variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
+                        variables["sprite"][0] = variables["sprite"][0].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/", "")
 
-                    if type == "Particle" and variables["sprite"][3] == -1:
-                        variables["sprite"][3] = image.get_width()
+                        if type == "Particle" and variables["sprite"][3] == -1:
+                            variables["sprite"][3] = image.get_width()
 
-                    if type == "Particle" and variables["sprite"][4] == -1:
-                        variables["sprite"][4] = image.get_height()
+                        if type == "Particle" and variables["sprite"][4] == -1:
+                            variables["sprite"][4] = image.get_height()
+
+                    except FileNotFoundError:
+                        pass
 
                 objects[name] = {
                     "type": type,
@@ -637,11 +627,11 @@ class Compile:
             type, variables, vars = functions.main.files.Scene.loadObjectFileFull(project, -1, load(open(obj, "r", encoding="utf-8")))
 
             if "sprite" in variables:
-                variables["sprite"][0] = variables["sprite"][0].replace(f"projects/{project.selectProject}/project/", "")
+                variables["sprite"][0] = variables["sprite"][0].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/", "")
 
             name = obj
-            name = name.replace(f"projects/{project.selectProject}/project/objects/", "")
-            name = name.replace(f"projects/{project.selectProject}/project/ui/", "")
+            name = name.replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/objects/", "")
+            name = name.replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/ui/", "")
 
             allObjects[name] = {
                 "type": type,
@@ -663,24 +653,24 @@ class Compile:
 
         allMusic = {}
 
-        queue = os.listdir(f"projects/{project.selectProject}/project/music/")
+        queue = os.listdir(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/music/")
 
         while queue:
             path = queue.pop(0)
 
-            if os.path.isdir(f"projects/{project.selectProject}/project/music/{path}"):
-                for element in os.listdir(f"projects/{project.selectProject}/project/music/{path}"):
+            if os.path.isdir(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/music/{path}"):
+                for element in os.listdir(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/music/{path}"):
                     queue.append(element)
 
-            if os.path.isfile(f"projects/{project.selectProject}/project/music/{path}") and path[path.rfind(".") + 1:] in ("wav", "ogg", "mp3"):
-                allMusic[f"projects/{project.selectProject}/project/music/{path}".replace(f"projects/{project.selectProject}/project/", "")] = f"projects/{project.selectProject}/project/music/{path}".replace(f"projects/{project.selectProject}/project/", "")
+            if os.path.isfile(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/music/{path}") and path[path.rfind(".") + 1:] in ("wav", "ogg", "mp3"):
+                allMusic[f"{PATH_TO_PROJECTS}/{project.selectProject}/project/music/{path}".replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/", "")] = f"projects/{project.selectProject}/project/music/{path}".replace(f"projects/{project.selectProject}/project/", "")
 
         # CAN RUN PROJECT
 
         projectSettingsStandard = projectSettings
         projectSettings = functions.main.files.Config.get(projectSettings)
 
-        if not any([scene == f"projects/{project.selectProject}/project/" + projectSettings["start_scene"] for scene in scenes.keys()]):
+        if not any([scene == f"{PATH_TO_PROJECTS}/{project.selectProject}/project/" + projectSettings["start_scene"] for scene in scenes.keys()]):
             project.dialog.logSignal.emit(
                 translate("ERROR") + ": " + translate("project start scene is not found") + "\n"
             )
@@ -696,7 +686,7 @@ class Compile:
         # MAKE PROJECT
 
         useProjectSettings = dict(projectSettings)
-        useProjectSettings["start_scene"] = f"projects/{project.selectProject}/project/" + useProjectSettings["start_scene"]
+        useProjectSettings["start_scene"] = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/" + useProjectSettings["start_scene"]
 
         program = PROGRAM
 
@@ -741,7 +731,7 @@ class Compile:
             except AttributeError:
                 pass
 
-            pathProject = f"projects/{project.selectProject}/src"
+            pathProject = f"{PATH_TO_PROJECTS}/{project.selectProject}/src"
 
             if SYSTEM == "Windows":
                 pathPython = os.path.abspath(os.path.abspath(sys.argv[0]))
@@ -765,7 +755,7 @@ class Compile:
             diskName = pathProgram[:pathProgram.find(":")]
 
             if SYSTEM == "Windows":
-                command = f"{diskName}: && cd \"{pathProgram}\" && cd \"{pathProject}\" && \"{pathPythonExecutable}\" \"{pathPyInstaller}\" -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\""
+                command = f"cd \"{pathProject}\" && \"{pathPythonExecutable}\" \"{pathPyInstaller}\" -F -w -y --distpath \"{os.path.join(pathProject, 'dist')}\" --workpath \"{os.path.join(pathProject, 'build')}\" --specpath \"{pathProject}\" \"{pathProject}\\{projectSettingsCfg['values']['name']['value']}.py\""
 
             else:
                 command = f"bash -c 'source {pathProgram}/python/bin/activate && cd \"{pathProgram}\" && cd \"{pathProject}\" && pyinstaller -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\"'"
@@ -801,13 +791,13 @@ class Compile:
     def compileAndRun(project) -> None:
         Compile.compile(project)
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettings = load(file)
 
-        path = f"projects/{project.selectProject}/src"
+        path = f"{PATH_TO_PROJECTS}/{project.selectProject}/src"
 
         if SYSTEM == "Windows":
-            os.system(f"cd {path} && \"{projectSettings['values']['name']['value']}.exe\"")
+            os.system(f"cd /d \"{path}\" && start \"\" \"{projectSettings['values']['name']['value']}.exe\"")
 
         else:
             os.system(f"cd {path} && ./\"{projectSettings['values']['name']['value']}\"")
@@ -818,10 +808,10 @@ class Compile:
     def saveProject(project) -> None:
         Compile.compile(project, executable=False)
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettings = load(file)
 
-        path = f"projects/{project.selectProject}"
+        path = f"{PATH_TO_PROJECTS}/{project.selectProject}"
 
         if SYSTEM == "Windows":
             folder = QFileDialog.getExistingDirectory(project, translate("Choose path"), "/home")
@@ -855,14 +845,12 @@ class Compile:
     def saveExecutableProject(project, folder: str = None) -> None:
         Compile.compile(project)
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             projectSettings = json.load(file)
 
-        path = f"projects/{project.selectProject}/src"
+        path = f"{PATH_TO_PROJECTS}/{project.selectProject}/src"
 
-        loads = ["functions", "assets", "engine", "files", "code", "music", f"{projectSettings['values']['name']['value']}.py", f"{projectSettings['values']['name']['value']}.exe", f"{projectSettings['values']['name']['value']}", "collision.cfg"]
-
-        folder = folder if folder is not None else QFileDialog.getExistingDirectory(project, translate("Choose path"), "/home")
+        loads = ["functions", "assets", "engine", "files", "code", "music", "cache", f"{projectSettings['values']['name']['value']}.py", f"{projectSettings['values']['name']['value']}.exe", f"{projectSettings['values']['name']['value']}", "collision.cfg"]
 
         name = projectSettings["values"]["name"]["value"]
         index = None
@@ -961,7 +949,7 @@ def saveExecutableProject(project) -> None:
 
     logger(project, "Compiling")
 
-    folder = None if SYSTEM == "Windows" else QFileDialog.getExistingDirectory(None, translate("Choose path"), "/")
+    folder = QFileDialog.getExistingDirectory(None, translate("Choose path"), f"{os.getenv('USERPROFILE')}/Desktop") if SYSTEM == "Windows" else QFileDialog.getExistingDirectory(None, translate("Choose path"), "/")
 
     thr = threading.Thread(target=lambda: Compile.saveExecutableProject(project, folder))
     thr.start()

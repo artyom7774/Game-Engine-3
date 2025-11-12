@@ -4,7 +4,7 @@ import json
 import os
 
 def updating(name):
-    for dirpath, _, filenames in os.walk(f"projects/{name}/project/objects"):
+    for dirpath, _, filenames in os.walk(f"{PATH_TO_PROJECTS}/{name}/project/objects"):
         for filename in filenames:
             if filename.endswith(".obj"):
                 with open(f"{dirpath}/{filename}", "r", encoding="utf-8") as file:
@@ -46,7 +46,7 @@ def updating(name):
                 with open(f"{dirpath}/{filename}", "w", encoding="utf-8") as file:
                     json.dump(obj, file, indent=4)
 
-    for dirpath, _, filenames in os.walk(f"projects/{name}/project/scenes"):
+    for dirpath, _, filenames in os.walk(f"{PATH_TO_PROJECTS}/{name}/project/scenes"):
         for filename in filenames:
             if filename.endswith(".objc"):
                 with open(f"{dirpath}/{filename}", "r", encoding="utf-8") as file:

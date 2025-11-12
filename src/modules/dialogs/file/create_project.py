@@ -28,7 +28,7 @@ class CreateProjectFunctions:
 
             return
 
-        for element in os.listdir(f"projects/"):
+        for element in os.listdir(f"{PATH_TO_PROJECTS}/"):
             if element == name:
                 dialog.objects["log_label"].setText(translate("Project name already exist"))
 

@@ -1,8 +1,6 @@
-import os.path
-
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
 from PyQt5.QtCore import QEvent
-from PyQt5.QtGui import QKeySequence
+from PyQt5.QtGui import QKeySequence, QPixmap
 from PyQt5.Qt import QIcon, Qt, QTimer
 
 from src.modules.widgets import TabFileBar, VersionLogScrollArea, TreeProject, VisiableConsole
@@ -95,6 +93,9 @@ class Main(QMainWindow):
 
         internet.updateDiscordStatusRPS(self)
         internet.updateOnlineOnSite(self)
+
+        self.setWindowTitle("Game Engine 3")
+        self.setWindowIcon(QIcon("src/files/sprites/logo.ico"))
 
         # INFORMATION
 
@@ -213,6 +214,7 @@ class Main(QMainWindow):
                 return
 
             self.selectFile = self.objects["tab_file_bar"].objects[index]["name"]
+
             functions.tree.open(self, self.selectFile)
 
         def tabFileBarTabCloseRequested(index: int) -> None:
@@ -227,9 +229,6 @@ class Main(QMainWindow):
 
             except AttributeError:
                 pass
-
-        self.setWindowTitle("Game Engine 3")
-        self.setWindowIcon(QIcon("src/files/sprites/logo.png"))
 
         self.selectProject = ""
         self.selectFile = ""

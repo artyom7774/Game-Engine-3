@@ -15,10 +15,10 @@ import re
 def getAllProjectInterface(project, onlyFileName: bool = False) -> typing.List[str]:
     answer = []
 
-    queue = os.listdir(f"projects/{project.selectProject}/project/ui/")
+    queue = os.listdir(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/ui/")
 
     while len(queue) > 0:
-        path = f"projects/{project.selectProject}/project/ui/{queue[0]}"
+        path = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/ui/{queue[0]}"
 
         if os.path.isfile(path):
             if not path.endswith("EMPTY.txt"):
@@ -36,10 +36,10 @@ def getAllProjectInterface(project, onlyFileName: bool = False) -> typing.List[s
 def getAllProjectObjects(project, onlyFileName: bool = False) -> typing.List[str]:
     answer = []
 
-    queue = os.listdir(f"projects/{project.selectProject}/project/objects/")
+    queue = os.listdir(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/objects/")
 
     while len(queue) > 0:
-        path = f"projects/{project.selectProject}/project/objects/{queue[0]}"
+        path = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/objects/{queue[0]}"
 
         if os.path.isfile(path):
             if not path.endswith("EMPTY.txt"):
@@ -57,10 +57,10 @@ def getAllProjectObjects(project, onlyFileName: bool = False) -> typing.List[str
 def getAllProjectScenes(project, onlyFileName: bool = False) -> typing.List[str]:
     answer = []
 
-    queue = os.listdir(f"projects/{project.selectProject}/project/scenes/")
+    queue = os.listdir(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/scenes/")
 
     while len(queue) > 0:
-        path = f"projects/{project.selectProject}/project/scenes/{queue[0]}"
+        path = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/scenes/{queue[0]}"
 
         if queue[0].endswith("EMPTY.txt"):
             queue.pop(0)
@@ -87,10 +87,10 @@ def getAllProjectScenes(project, onlyFileName: bool = False) -> typing.List[str]
 def getAllProjectPrograms(project, onlyFileName: bool = False) -> typing.List[str]:
     answer = []
 
-    queue = os.listdir(f"projects/{project.selectProject}/project/functions/")
+    queue = os.listdir(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/functions/")
 
     while len(queue) > 0:
-        path = f"projects/{project.selectProject}/project/functions/{queue[0]}"
+        path = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/functions/{queue[0]}"
 
         if os.path.isfile(path):
             if not path.endswith("EMPTY.txt"):
@@ -113,14 +113,14 @@ def getAllProjectPrograms(project, onlyFileName: bool = False) -> typing.List[st
 
 
 def createProjectDirecroryByTemplate(project, name: str, template: str) -> None:
-    shutil.copytree(f"src/files/templates/{template}", f"projects/{name}/")
+    shutil.copytree(f"src/files/templates/{template}", f"{PATH_TO_PROJECTS}/{name}/")
 
-    shutil.copytree("engine/", f"projects/{name}/engine/")
+    shutil.copytree("engine/", f"{PATH_TO_PROJECTS}/{name}/engine/")
 
-    queue = os.listdir(f"projects/{name}/")
+    queue = os.listdir(f"{PATH_TO_PROJECTS}/{name}/")
 
     while len(queue) > 0:
-        path = f"projects/{name}/{queue[0]}"
+        path = f"{PATH_TO_PROJECTS}/{name}/{queue[0]}"
 
         if os.path.isfile(path):
             if path.endswith("EMPTY.txt"):
@@ -138,14 +138,14 @@ def createProjectDirecroryByTemplate(project, name: str, template: str) -> None:
 
 
 def createProjectDirectory(project, name: str) -> None:
-    shutil.copytree("src/base/", f"projects/{name}/")
+    shutil.copytree("src/base/", f"{PATH_TO_PROJECTS}/{name}/")
 
-    shutil.copytree("engine/", f"projects/{name}/engine/")
+    shutil.copytree("engine/", f"{PATH_TO_PROJECTS}/{name}/engine/")
 
-    queue = os.listdir(f"projects/{name}/")
+    queue = os.listdir(f"{PATH_TO_PROJECTS}/{name}/")
 
     while len(queue) > 0:
-        path = f"projects/{name}/{queue[0]}"
+        path = f"{PATH_TO_PROJECTS}/{name}/{queue[0]}"
 
         if os.path.isfile(path):
             if path.endswith("EMPTY.txt"):
@@ -160,7 +160,7 @@ def createProjectDirectory(project, name: str) -> None:
     with open("src/files/version.json", "r", encoding="utf-8") as file:
         config = load(file)
 
-    with open(f"projects/{name}/version.json", "w", encoding="utf-8") as file:
+    with open(f"{PATH_TO_PROJECTS}/{name}/version.json", "w", encoding="utf-8") as file:
         json.dump({"version": config["version"]}, file, indent=4)
 
     project.selectProject = name
@@ -207,7 +207,7 @@ def projectTreeGetPath(obj, path: list = None, deep: int = 0) -> list:
 
 
 def projectTreeGetFilePath(path: list) -> str:
-    return f"projects/" + path[0] + "/project/" + "/".join(path[1:])
+    return f"{PATH_TO_PROJECTS}/" + path[0] + "/project/" + "/".join(path[1:])
 
 
 def projectTreeOpenDir(project, obj) -> None:
@@ -496,7 +496,7 @@ def projectTreeInit(project) -> None:
 
     project.objects["project_tree_file_objects"] = {}
 
-    directory = f"projects/" + project.selectProject + "/project/"
+    directory = f"{PATH_TO_PROJECTS}/" + project.selectProject + "/project/"
 
     queue = [[file, "file" if os.path.isfile(directory + file) else "dir"] for file in os.listdir(directory)]
     queue.sort(key=lambda x: x[1] == "dir", reverse=True)
@@ -571,8 +571,8 @@ def projectCheckVersion(project) -> None:
     with open("src/files/version.json", "r", encoding="utf-8") as file:
         config = json.load(file)
 
-    if os.path.exists(f"projects/{project.selectProject}/version.json"):
-        with open(f"projects/{project.selectProject}/version.json", "r", encoding="utf-8") as file:
+    if os.path.exists(f"{PATH_TO_PROJECTS}/{project.selectProject}/version.json"):
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/version.json", "r", encoding="utf-8") as file:
             projectConfig = json.load(file)
 
     else:
@@ -634,7 +634,7 @@ def projectUpdateVersion(project, projectConfig) -> None:
 
     projectConfig["version"] = value[-1]
 
-    with open(f"projects/{project.selectProject}/version.json", "w", encoding="utf-8") as file:
+    with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/version.json", "w", encoding="utf-8") as file:
         json.dump(projectConfig, file, indent=4)
 
 

@@ -1,4 +1,8 @@
 {
+    "group": [
+        "groups",
+        "basic"
+    ],
     "basic": {
         "events": {
             "name": "Events",

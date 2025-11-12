@@ -28,7 +28,7 @@ class Application:
         fps: int = 60, tps: int = 20, name: str = "GE3 project", icon: str = "", flags: typing.Dict[str, typing.Any] = None,
         variables: typing.Dict[str, typing.Any] = None, visiable: bool = True, debug: bool = False,
         autoUpdateScreen: bool = True, collision: str = "", forcedViewObject: bool = False, noRefactorUpdate: bool = False,
-        particleInAnotherGroup: bool = True
+        particleInAnotherGroup: bool = True, initOnCreated: bool = True
     ) -> None:
         if flags is None:
             flags = {}
@@ -99,10 +99,14 @@ class Application:
         self.lastDrawing = []
         self.afterDrawing = []
 
-        self.init()
+        if initOnCreated:
+            self.init()
 
     def init(self) -> None:
-        if self.visiable:
+        if self.surface is not None and self.surface.get_width() == self.displayWidth and self.surface.get_height() == self.displayHeight:
+            pass
+
+        elif self.visiable:
             self.surface = pygame.display.set_mode((self.displayWidth, self.displayHeight))
 
         else:
@@ -133,18 +137,27 @@ class Application:
         self.tps = tps
 
     def setSize(self, width: int = None, height: int = None) -> None:
+        if ((self.displayWidth == width and self.usingWidth == width) or width is None) and ((self.displayHeight == height and self.usingHeight == height) or height is None):
+            return
+
         self.setDisplaySize(width, height)
         self.setUsingSize(width, height)
 
         self.init()
 
     def setUsingSize(self, width: int = None, height: int = None) -> None:
+        if (self.usingWidth == width or width is None) and (self.usingHeight == height or height is None):
+            return
+
         self.usingWidth = width if width is not None else self.usingWidth
         self.usingHeight = height if height is not None else self.usingHeight
 
         self.init()
 
     def setDisplaySize(self, width: int = None, height: int = None) -> None:
+        if (self.displayWidth == width or width is None) and (self.displayHeight == height or height is None):
+            return
+
         self.displayWidth = width if width is not None else self.displayWidth
         self.displayHeight = height if height is not None else self.displayHeight
 

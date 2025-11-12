@@ -24,7 +24,7 @@ class CreateSceneObjectFunctions:
 
         index = 0
 
-        while f"{index}" in project.cache["allSceneObjects"]:
+        while f"{index}" in project.cache["allSceneObjects"][project.selectFile]:
             index += 1
 
         with open(path, "r", encoding="utf-8") as file:
@@ -45,10 +45,10 @@ class CreateSceneObjectFunctions:
         obj["StaticObject"]["pos"]["value"]["x"]["value"] = position[0]
         obj["StaticObject"]["pos"]["value"]["y"]["value"] = position[1]
 
-        project.cache["allSceneObjects"][str(index)] = obj
+        project.cache["allSceneObjects"][project.selectFile][str(index)] = obj
 
         with open(f"{project.selectFile}/objects.scene", "wb") as file:
-            file.write(orjson.dumps(project.cache["allSceneObjects"]))
+            file.write(orjson.dumps(project.cache["allSceneObjects"][project.selectFile]))
 
         project.init()
 
@@ -89,7 +89,7 @@ class CreateSceneObject(QDialog):
         self.objects["project_combobox"].setFont(FONT)
         self.objects["project_combobox"].show()
 
-        self.objects["project_combobox"].addItems([element.replace(f"projects/{self.project.selectProject}/project/objects/", "") for element in functions.project.getAllProjectObjects(self.project, False)])
+        self.objects["project_combobox"].addItems([element.replace(f"{PATH_TO_PROJECTS}/{self.project.selectProject}/project/objects/", "") for element in functions.project.getAllProjectObjects(self.project, False)])
 
         # CREATE
 

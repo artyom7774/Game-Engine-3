@@ -436,17 +436,26 @@ class Scene:
     def init(project, call: str = "") -> None:
         Scene.open = project.selectFile
 
-        project.cache["file"][project.selectFile].settings = f"projects/{project.selectProject}/project/cache/{'-'.join(project.selectFile.split('/')[3:])}-setting.json"
+        project.cache["file"][project.selectFile].settings = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/cache/{'-'.join(project.selectFile.split('/')[3:][project.selectFile.split('/')[3:].index('scenes'):])}-setting.json"
+
+        if "allSceneObjects" not in project.cache:
+            project.cache["allSceneObjects"] = {}
 
         if project.selectFile not in project.application:
-            with open(f"{project.selectFile}/objects.scene", "rb") as file:
-                project.cache["allSceneObjects"] = orjson.loads(file.read())
+            project.cache["allSceneObjects"][project.selectFile] = {}
 
-        with open(f"projects/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
+            with open(f"{project.selectFile}/objects.scene", "rb") as file:
+                project.cache["allSceneObjects"][project.selectFile] = orjson.loads(file.read())
+
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             project.objects["main"]["project_settings"] = load(file)
 
-        with open(project.cache["file"][project.selectFile].settings, "r", encoding="utf-8") as file:
-            project.objects["main"]["scene_settings"] = load(file)
+        try:
+            with open(project.cache["file"][project.selectFile].settings, "r", encoding="utf-8") as file:
+                project.objects["main"]["scene_settings"] = load(file)
+
+        except FileNotFoundError:
+            return
 
         if not os.path.exists(project.cache["file"][project.selectFile].settings):
             CreateObjectFunctions.create(project, None, None, "", False, "engine/files/scene.json", project.cache["file"][project.selectFile].settings)
@@ -496,7 +505,7 @@ class Scene:
 
         if onlyToUpdate is None:
             with open(f"{project.selectFile}/objects.scene", "rb") as file:
-                project.cache["allSceneObjects"] = orjson.loads(file.read())
+                project.cache["allSceneObjects"][project.selectFile] = orjson.loads(file.read())
 
         for obj in application.objects.objects:
             if obj.group.startswith("__") and obj.group.endswith("__"):
@@ -505,7 +514,7 @@ class Scene:
             if onlyToUpdate is None or obj.variables["code"] in onlyToUpdate:
                 application.objects.remove(obj)
 
-        for name, obj in project.cache["allSceneObjects"].items():
+        for name, obj in project.cache["allSceneObjects"][project.selectFile].items():
             if onlyToUpdate is None or name in onlyToUpdate:
                 type, variables = Scene.loadObjectFile(project, name, obj)
 
@@ -745,7 +754,7 @@ class Scene:
     @staticmethod
     def test(project) -> None:
         for scene in functions.project.getAllProjectScenes(project, False):
-            path = f"projects/{project.selectProject}/project/cache/{'-'.join(scene.split('/')[3:])}-setting.json"
+            path = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/cache/{'-'.join(scene.split('/')[3:])}-setting.json"
 
             if not os.path.exists(path):
                 continue
@@ -800,7 +809,7 @@ class Scene:
                 continue
 
             if obj.pos.x + obj.hitbox.x < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.hitbox.x + obj.hitbox.width and obj.pos.y + obj.hitbox.y < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.hitbox.y + obj.hitbox.height:
-                del project.cache["allSceneObjects"][obj.variables["code"]]
+                del project.cache["allSceneObjects"][project.selectFile][obj.variables["code"]]
 
                 Scene.objects(project, [obj.variables["code"]])
 
@@ -831,7 +840,7 @@ class Scene:
 
         code = pyperclip.paste()
 
-        if code not in project.cache["allSceneObjects"]:
+        if code not in project.cache["allSceneObjects"][project.selectFile]:
             MessageBox.error(translate("Object is not difined (object must was copyed on scene)"))
 
             return
@@ -853,12 +862,12 @@ class Scene:
             new += "-"
             number = 1
 
-        while f"{new}{number}" in project.cache["allSceneObjects"]:
+        while f"{new}{number}" in project.cache["allSceneObjects"][project.selectFile]:
             number += 1
 
         new = f"{new}{number}"
 
-        obj = copy.deepcopy(project.cache["allSceneObjects"][code])
+        obj = copy.deepcopy(project.cache["allSceneObjects"][project.selectFile][code])
 
         width = project.objects["main"]["scene_settings"]["Scene"]["grid"]["value"]["x"]["value"]
         height = project.objects["main"]["scene_settings"]["Scene"]["grid"]["value"]["y"]["value"]
@@ -871,7 +880,7 @@ class Scene:
             obj[obj["main"]]["pos"]["value"]["x"]["value"] = pos.x - project.objects["main"]["scene"].width() // 2
             obj[obj["main"]]["pos"]["value"]["y"]["value"] = pos.y - project.objects["main"]["scene"].height() // 2
 
-        project.cache["allSceneObjects"][new] = obj
+        project.cache["allSceneObjects"][project.selectFile][new] = obj
 
         Scene.objects(project, [new])
 
@@ -884,7 +893,7 @@ class Scene:
             return
 
         if project.cache["file"][project.selectFile].selectObject is not None:
-            del project.cache["allSceneObjects"][project.cache["file"][project.selectFile].selectObject.variables["code"]]
+            del project.cache["allSceneObjects"][project.selectFile][project.cache["file"][project.selectFile].selectObject.variables["code"]]
 
             Scene.objects(project, [project.cache["file"][project.selectFile].selectObject.variables["code"]])
 
@@ -923,7 +932,7 @@ class Scene:
                     answer[key] = value["value"]
 
         if "sprite" in answer and answer["sprite"] != "":
-            answer["sprite"][0] = f"projects/{project.selectProject}/project/{answer['sprite'][0]}"
+            answer["sprite"][0] = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/{answer['sprite'][0]}"
 
         # print(answer["sprite"])
 
@@ -945,7 +954,7 @@ class Scene:
                     answer[key] = value["value"]
 
         if "sprite" in answer and answer["sprite"] != "":
-            answer["sprite"][0] = f"projects/{project.selectProject}/project/{answer['sprite'][0]}"
+            answer["sprite"][0] = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/{answer['sprite'][0]}"
 
         # print(answer["sprite"])
 
@@ -971,7 +980,7 @@ class Scene:
         if project.cache["file"][project.selectFile].selectObject is None:
             return
 
-        obj = project.cache["allSceneObjects"][project.cache["file"][project.selectFile].selectObject.variables["code"]]
+        obj = project.cache["allSceneObjects"][project.selectFile][project.cache["file"][project.selectFile].selectObject.variables["code"]]
 
         try:
             obj[obj["main"]]["pos"]["value"]["x"]["value"] += directions[direction][0]
@@ -981,7 +990,7 @@ class Scene:
             return
 
         with open(f"{project.selectFile}/objects.scene", "wb") as file:
-            file.write(orjson.dumps(project.cache["allSceneObjects"]))
+            file.write(orjson.dumps(project.cache["allSceneObjects"][project.selectFile]))
 
         obj = project.cache["file"][project.selectFile].selectObject
 
@@ -1012,7 +1021,7 @@ class Scene:
 
         try:
             with open(f"{project.selectFile}/objects.scene", "wb") as file:
-                file.write(orjson.dumps(project.cache["allSceneObjects"]))
+                file.write(orjson.dumps(project.cache["allSceneObjects"][project.selectFile]))
 
         except KeyError:
             return

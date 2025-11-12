@@ -19,7 +19,7 @@ def findAllNameKey(obj, path=""):
 
 
 def updating(name):
-    for dirpath, _, filenames in os.walk(f"projects/{name}/project/scenes/"):
+    for dirpath, _, filenames in os.walk(f"{PATH_TO_PROJECTS}/{name}/project/scenes/"):
         if dirpath.find("%scene%") == -1:
             continue
 
@@ -48,5 +48,5 @@ def updating(name):
             with open(f"{dirpath}/objects.scene", "wb") as file:
                 file.write(orjson.dumps(objects))
 
-    if os.path.exists(f"projects/{name}/project/cash"):
-        os.rename(f"projects/{name}/project/cash", f"projects/{name}/project/cache")
+    if os.path.exists(f"{PATH_TO_PROJECTS}/{name}/project/cash"):
+        os.rename(f"{PATH_TO_PROJECTS}/{name}/project/cash", f"{PATH_TO_PROJECTS}/{name}/project/cache")

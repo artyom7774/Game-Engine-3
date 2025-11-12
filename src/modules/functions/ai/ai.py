@@ -1,7 +1,6 @@
 from src.variables import *
 
 import traceback
-
 import requests
 import time
 
@@ -20,7 +19,10 @@ def requestAI(message):
         except requests.exceptions.RequestException as e:
             return 1, traceback.format_exc()
 
-        except BaseException as e:
+        except requests.exceptions.ConnectTimeout as e:
+            return 1, traceback.format_exc()
+
+        except Exception as e:
             return 1, traceback.format_exc()
 
         if status["status"] == "completed":

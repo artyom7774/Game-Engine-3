@@ -1,13 +1,16 @@
 import subprocess
 import platform
+import threading
 
 if platform.system() == "Windows":
-    subprocess.run(
+    thr = threading.Thread(target=lambda: subprocess.run(
         ["./python/python.exe", "-OO", "-s", "Game Engine 3.py"],
         capture_output=True,
         text=True,
         creationflags=subprocess.CREATE_NO_WINDOW
-    )
+    ))
+
+    thr.start()
 
 else:
     subprocess.run(

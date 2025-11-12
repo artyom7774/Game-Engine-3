@@ -102,7 +102,7 @@ class CreateSceneFunctions:
         with open(f"{path}/%scene%{name}/objects.scene", "wb") as file:
             file.write(orjson.dumps({}))
 
-        with open(f"projects/{project.selectProject}/project/cache/scenes-%scene%{name}-setting.json", "w", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/cache/scenes-%scene%{name}-setting.json", "w", encoding="utf-8") as file:
             json.dump(SCENE_SETTINGS_TEMPLATE, file, indent=4)
 
         project.init()

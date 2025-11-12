@@ -174,7 +174,7 @@ class TreeProject(QTreeWidget):
             return path
 
     def getItemFilePath(self, path):
-        return f"projects/" + path[0] + "/project/" + "/".join(path[1:])
+        return f"{PATH_TO_PROJECTS}/" + path[0] + "/project/" + "/".join(path[1:])
 
     def onItemExpanded(self, item):
         path = self.getItemPath(item)
@@ -236,7 +236,7 @@ class TreeProject(QTreeWidget):
 
         self.project.objects["project_tree_file_objects"] = {}
 
-        directory = f"projects/{self.project.selectProject}/project/"
+        directory = f"{PATH_TO_PROJECTS}/{self.project.selectProject}/project/"
 
         if not os.path.exists(directory):
             return

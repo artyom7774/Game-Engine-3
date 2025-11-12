@@ -382,7 +382,7 @@ class ObjectText:
                 file = load(f)
 
         else:
-            file = project.cache["allSceneObjects"][save]
+            file = project.cache["allSceneObjects"][project.selectFile][save]
 
         if last["type"] == "font":
             if hasattr(obj, "out"):
@@ -435,7 +435,7 @@ class ObjectText:
             doing = True
 
         if last["type"] == "path":
-            if text == "" or (os.path.exists(f"projects/{project.selectProject}/project/{text}") and any([text.endswith(element) for element in IMAGE_FORMATES])):
+            if text == "" or (os.path.exists(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/{text}") and any([text.endswith(element) for element in IMAGE_FORMATES])):
                 temp["value"] = text
 
                 doing = True
@@ -502,15 +502,15 @@ class ObjectText:
             obj.setText(str(last["value"]))
 
         if doing and temp["value"] != last["value"]:
-            if os.path.exists(save) and save.startswith(f"projects/"):
+            if os.path.exists(save) and save.startswith(f"{PATH_TO_PROJECTS}/"):
                 with open(save, "w", encoding="utf-8") as f:
                     dump(file, f, indent=4)
 
             else:
-                project.cache["allSceneObjects"][save] = file
+                project.cache["allSceneObjects"][project.selectFile][save] = file
 
                 with open(f"{project.selectFile}/objects.scene", "wb") as file:
-                    file.write(orjson.dumps(project.cache["allSceneObjects"]))
+                    file.write(orjson.dumps(project.cache["allSceneObjects"][project.selectFile]))
 
             if init:
                 project.init()

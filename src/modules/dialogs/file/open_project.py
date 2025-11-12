@@ -58,7 +58,7 @@ class OpenProject(QDialog):
         self.objects["project_combobox"].setFont(FONT)
         self.objects["project_combobox"].show()
 
-        self.objects["project_combobox"].addItems([file for file in os.listdir(f"projects/")])
+        self.objects["project_combobox"].addItems([file for file in os.listdir(f"{PATH_TO_PROJECTS}/")])
 
         # OPEN
 

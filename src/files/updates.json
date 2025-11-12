@@ -204,7 +204,7 @@
 
         "3.15.0": {
             "name": "3.15.0",
-            "text": "- generating code through AI\n- can moving files in project dir\n- in node display description of connector\n- new nodes: square root, power, insert list element, remainder\n- new functions for the python node: sqrt, pow\n- can open directory in project tree\n- added renaming object in scene\n- can choose node by double click\n- fixed bug with button in scene\n- fixed bug with write more text in console\n- fixed bug with drawing objects in application\n- fixed bug with choosing font"
+            "text": "- generating code through AI\n- can moving files in project dir\n- in node display description of connector\n- new nodes: square root, power, insert list element, remainder\n- new functions for the python node: sqrt, pow\n- can open directory in project tree\n- added renaming object in scene\n- can choose node by double click\n- fixed bug with button in scene\n- fixed bug with write more text in console\n- fixed bug with drawing objects in application\n- fixed bug with choosing font\n- fixed bug with run project in linux\n- fixed bug with saving objects in scene"
         }
     }
 }
