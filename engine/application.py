@@ -169,7 +169,7 @@ class Application:
     def setFunctionClass(self, functionClass) -> None:
         self.functions = functionClass
 
-    def setKeyEvent(self, event: typing.List[str], func: typing.Callable) -> None:
+    def setKeyEvent(self, event: typing.List[str], func: typing.Callable) -> int:
         # setKeyEvent(["KEYDOWN", "r"], function)
 
         try:
@@ -183,7 +183,11 @@ class Application:
                 event[1] = getattr(pygame, "K_" + event[1])
 
             except AttributeError:
-                event[1] = getattr(pygame, "K_" + event[1].upper())
+                try:
+                    event[1] = getattr(pygame, "K_" + event[1].upper())
+
+                except AttributeError:
+                    return 1
 
         if event[0] not in self.events:
             self.events[event[0]] = {}
@@ -192,6 +196,8 @@ class Application:
             self.events[event[0]][event[1]] = []
 
         self.events[event[0]][event[1]].append(func)
+
+        return 0
 
     def setMouseEvent(self, mouse: int, func: typing.Callable) -> None:
         if f"MOUSE_{mouse}" not in self.events:

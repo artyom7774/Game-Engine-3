@@ -33,7 +33,9 @@ def main() -> None:
     window = Main(app)
     app.setWindowIcon(window.windowIcon())
 
-    sys.exit(app.exec_())
+    app.exec_()
+
+    QApplication.quit()
 
 
 if __name__ == "__main__":

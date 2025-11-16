@@ -73,10 +73,10 @@ class Tps:
 
 
 class Game(engine.Application):
-    def __init__(self):
+    def __init__(self, visiable: bool = True):
         global width, height
 
-        engine.Application.__init__(self, initOnCreated=False)
+        engine.Application.__init__(self, initOnCreated=False, visiable=visiable)
 
         self.objects.collisions = engine.Collision("collision.cfg")
 
@@ -152,14 +152,16 @@ class Game(engine.Application):
         for name, program in PROGRAMS.items():
             for id in self.programs[name].get("keyboardClick"):
                 node = PROGRAMS[name]["objects"][id]
-
-                self.setKeyEvent(["KEYDOWN", node["inputs"]["key"]["standard"]], lambda command=self.programs[name], temp=id: command.start(temp))
+                
+                if self.setKeyEvent(["KEYDOWN", node["inputs"]["key"]["standard"]], lambda command=self.programs[name], temp=id: command.start(temp)):
+                    self.print(f"WARNING: not found key: {node['inputs']['key']['standard']}\\n")
 
         for name, program in PROGRAMS.items():
             for id in self.programs[name].get("keyboardPress"):
                 node = PROGRAMS[name]["objects"][id]
 
-                self.setKeyEvent(["PRESS", node["inputs"]["key"]["standard"]], lambda command=self.programs[name], temp=id: command.start(temp))
+                if self.setKeyEvent(["PRESS", node["inputs"]["key"]["standard"]], lambda command=self.programs[name], temp=id: command.start(temp)):
+                    self.print(f"WARNING: not found key: {node['inputs']['key']['standard']}\\n")
 
     def print(self, text: str) -> None:
         if self.socket is not None:
@@ -265,6 +267,20 @@ if __name__ == "__main__":
 """
 
 
+def getTruePath(path):
+    path = os.path.normpath(path).replace(os.path.join(SAVE_APPDATA_DIR, "Game-Engine-3"), "")
+
+    if path.startswith("/"):
+        path = path.replace("/", "", 1)
+
+    if path.startswith("\\"):
+        path = path.replace("\\", "", 1)
+
+    path = path.replace("\\", "/", int(1e18))
+
+    return path
+
+
 class LoggerTextEdit(QTextEdit):
     def __init__(self, project):
         QTextEdit.__init__(self, project)
@@ -357,11 +373,14 @@ class SocketHandler(QtCore.QObject):
 class GlobalsTable(QTableWidget):
     def __init__(self, parent=None):
         QTableWidget.__init__(self, parent)
+
         self.setColumnCount(2)
+
         self.setHorizontalHeaderLabels([translate("Name") + " ", translate("Value")])
 
         self.verticalHeader().setVisible(False)
         self.verticalHeader().setDefaultSectionSize(20)
+
         self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
     def set(self, data):
@@ -437,6 +456,8 @@ class Logger(QDialog):
 
     def send(self, text: typing.Union[typing.List, str]) -> None:
         text = text.replace("FATAL ERROR", translate("FATAL ERROR"))
+        text = text.replace("WARNING", translate("WARNING"))
+
         self.objects["text"].append(text)
 
     def closeEvent(self, event):
@@ -463,7 +484,7 @@ class Compile:
 
             return
 
-        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/src/{projectSettings['values']['name']['value']}.py", "r", encoding="utf-8") as file:
+        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/src/game.py", "r", encoding="utf-8") as file:
             text = file.read()
 
         if SYSTEM == "Windows":
@@ -473,11 +494,11 @@ class Compile:
             pathPython = pathPython[:pathPython.rfind('\\')]
             pathPython = f"{pathPython}/python/python.exe"
 
-            command = f"cd {pathProject} & \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""
+            command = f"cd {pathProject} & \"{pathPython}\" \"game.py\""
 
             print(f"LOG: command for run: {command}")
 
-            subprocess.run([pathPython, f"{projectSettings['values']['name']['value']}.py"], cwd=pathProject)
+            subprocess.run([pathPython, f"game.py"], cwd=pathProject)
 
         else:
             pathProject = f"{PATH_TO_PROJECTS}/{project.selectProject}/src"
@@ -488,7 +509,7 @@ class Compile:
 
             print(f"LOG: python path: {pathPython}")
 
-            thr = threading.Thread(target=lambda: os.system(f"cd \"{pathProject}\" && \"{pathPython}\" \"{projectSettings['values']['name']['value']}.py\""))
+            thr = threading.Thread(target=lambda: os.system(f"cd \"{pathProject}\" && \"{pathPython}\" \"game.py\""))
             thr.daemon = True
             thr.start()
 
@@ -514,7 +535,7 @@ class Compile:
             "build": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/build",
             "dist": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/dict",
             "collision": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/collision.cfg",
-            "spec": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/{projectSettings['values']['name']['value']}.spec"
+            "spec": f"{PATH_TO_PROJECTS}/{project.selectProject}/src/game.spec"
         }
 
         for name, path in names.items():
@@ -546,7 +567,7 @@ class Compile:
 
             return 1
 
-        output = f"{PATH_TO_PROJECTS}/{project.selectProject}/src/{projectSettingsCfg['values']['name']['value']}.py"
+        output = f"{PATH_TO_PROJECTS}/{project.selectProject}/src/game.py"
 
         # LOAD PROGRAMS AND LOCAL VARIABLES
 
@@ -555,9 +576,13 @@ class Compile:
 
         for program in functions.project.getAllProjectPrograms(project, False):
             with open(program, "r", encoding="utf-8") as file:
-                programs[program] = load(file)
+                programs[getTruePath(program)] = load(file)
 
-                locals_variables[program] = programs[program]["variables"]
+                name = getTruePath(program)
+
+                print(program, name)
+
+                locals_variables[name] = programs[getTruePath(program)]["variables"]
 
         # LOAD SCENES
 
@@ -569,7 +594,7 @@ class Compile:
 
             objects = {}
 
-            objects_variables[scene] = {}
+            objects_variables[getTruePath(scene)] = {}
 
             with open(f"{scene}/objects.scene", "rb") as file:
                 objectsInScene = orjson.loads(file.read())
@@ -597,7 +622,7 @@ class Compile:
                     "variables": variables
                 }
 
-                objects_variables[scene][name] = obj["variables"]
+                objects_variables[getTruePath(scene)][name] = obj["variables"]
 
             if os.path.exists(scenePath):
                 focus = load(open(scenePath, "r", encoding="utf-8"))["Scene"]["focus"]["value"].replace(".objc", "")
@@ -611,7 +636,7 @@ class Compile:
                 )
 
             else:
-                scenes[scene] = {
+                scenes[getTruePath(scene)] = {
                     "objects": objects,
                     "focus": focus
                 }
@@ -647,7 +672,7 @@ class Compile:
         projectSceneNames = {}
 
         for i in range(len(sceneNames)):
-            projectSceneNames[sceneNames[i]] = sceneFullNames[i]
+            projectSceneNames[sceneNames[i]] = getTruePath(sceneFullNames[i])
 
         # LOAD MUSIC PATHS
 
@@ -662,7 +687,7 @@ class Compile:
                 for element in os.listdir(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/music/{path}"):
                     queue.append(element)
 
-            if os.path.isfile(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/music/{path}") and path[path.rfind(".") + 1:] in ("wav", "ogg", "mp3"):
+            if os.path.isfile(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/music/{path}") and path[path.rfind(".") + 1:] in MUSIC_FORMATES:
                 allMusic[f"{PATH_TO_PROJECTS}/{project.selectProject}/project/music/{path}".replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/", "")] = f"projects/{project.selectProject}/project/music/{path}".replace(f"projects/{project.selectProject}/project/", "")
 
         # CAN RUN PROJECT
@@ -670,7 +695,7 @@ class Compile:
         projectSettingsStandard = projectSettings
         projectSettings = functions.main.files.Config.get(projectSettings)
 
-        if not any([scene == f"{PATH_TO_PROJECTS}/{project.selectProject}/project/" + projectSettings["start_scene"] for scene in scenes.keys()]):
+        if not any([scene == getTruePath(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/" + projectSettings["start_scene"]) for scene in scenes.keys()]):
             project.dialog.logSignal.emit(
                 translate("ERROR") + ": " + translate("project start scene is not found") + "\n"
             )
@@ -686,7 +711,7 @@ class Compile:
         # MAKE PROJECT
 
         useProjectSettings = dict(projectSettings)
-        useProjectSettings["start_scene"] = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/" + useProjectSettings["start_scene"]
+        useProjectSettings["start_scene"] = getTruePath(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/" + useProjectSettings["start_scene"])
 
         program = PROGRAM
 
@@ -755,10 +780,10 @@ class Compile:
             diskName = pathProgram[:pathProgram.find(":")]
 
             if SYSTEM == "Windows":
-                command = f"cd \"{pathProject}\" && \"{pathPythonExecutable}\" \"{pathPyInstaller}\" -F -w -y --distpath \"{os.path.join(pathProject, 'dist')}\" --workpath \"{os.path.join(pathProject, 'build')}\" --specpath \"{pathProject}\" \"{pathProject}\\{projectSettingsCfg['values']['name']['value']}.py\""
+                command = f"cd \"{pathProject}\" && \"{pathPythonExecutable}\" \"{pathPyInstaller}\" -F -w -y --distpath \"{os.path.join(pathProject, 'dist')}\" --workpath \"{os.path.join(pathProject, 'build')}\" --specpath \"{pathProject}\" \"{pathProject}\\game.py\""
 
             else:
-                command = f"bash -c 'source {pathProgram}/python/bin/activate && cd \"{pathProgram}\" && cd \"{pathProject}\" && pyinstaller -F -w -y \"{projectSettingsCfg['values']['name']['value']}.py\"'"
+                command = f"bash -c 'source {pathProgram}/python/bin/activate && cd \"{pathProgram}\" && cd \"{pathProject}\" && pyinstaller -F -w -y \"game.py\"'"
 
             print(f"LOG: command for compiling: {command}")
 
@@ -767,14 +792,14 @@ class Compile:
             project.dialog.logSignal.emit(result.stdout)
             project.dialog.logSignal.emit(result.stderr)
 
-            if os.path.exists(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe"):
-                os.remove(f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")
+            if os.path.exists(f"{pathProject}/game.exe"):
+                os.remove(f"{pathProject}/game.exe")
 
             if SYSTEM == "Windows":
-                shutil.copy2(f"{pathProject}/dist/{projectSettingsCfg['values']['name']['value']}.exe", f"{pathProject}/{projectSettingsCfg['values']['name']['value']}.exe")
+                shutil.copy2(f"{pathProject}/dist/game.exe", f"{pathProject}/game.exe")
 
             else:
-                shutil.copy2(f"{pathProject}/dist/{projectSettingsCfg['values']['name']['value']}", f"{pathProject}/{projectSettingsCfg['values']['name']['value']}")
+                shutil.copy2(f"{pathProject}/dist/game", f"{pathProject}/game")
             try:
                 project.dialog.logSignal.emit(
                     translate("LOG") + ": " + translate("the project has been successfully compile")
@@ -797,10 +822,10 @@ class Compile:
         path = f"{PATH_TO_PROJECTS}/{project.selectProject}/src"
 
         if SYSTEM == "Windows":
-            os.system(f"cd /d \"{path}\" && start \"\" \"{projectSettings['values']['name']['value']}.exe\"")
+            os.system(f"cd /d \"{path}\" && start \"\" \"game.exe\"")
 
         else:
-            os.system(f"cd {path} && ./\"{projectSettings['values']['name']['value']}\"")
+            os.system(f"cd {path} && ./\"game\"")
 
         project.compiling = False
 
@@ -850,7 +875,7 @@ class Compile:
 
         path = f"{PATH_TO_PROJECTS}/{project.selectProject}/src"
 
-        loads = ["functions", "assets", "engine", "files", "code", "music", "cache", f"{projectSettings['values']['name']['value']}.py", f"{projectSettings['values']['name']['value']}.exe", f"{projectSettings['values']['name']['value']}", "collision.cfg"]
+        loads = ["functions", "assets", "engine", "files", "code", "music", "cache", f"game.py", f"game.exe", f"game", "collision.cfg"]
 
         name = projectSettings["values"]["name"]["value"]
         index = None
@@ -882,8 +907,8 @@ class Compile:
                 else:
                     shutil.copytree(var, f"{name}/{load}")
 
-        if os.path.exists(f"{name}/{projectSettings['values']['name']['value']}"):
-            os.chmod(f"{name}/{projectSettings['values']['name']['value']}", 0o755)
+        if os.path.exists(f"{name}/game"):
+            os.chmod(f"{name}/game", 0o755)
 
         project.dialog.logSignal.emit(
             translate("LOG") + ": " + translate("project save")

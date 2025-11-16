@@ -1,11 +1,16 @@
 from PyQt5.QtWidgets import QMessageBox
 
-from src.modules.dialogs import About
+from src.modules.dialogs import About, Updates
 
 from src.variables import *
 
 import webbrowser
 import threading
+
+
+def updates(project) -> None:
+    project.dialog = Updates(project, parent=project)
+    project.dialog.exec_()
 
 
 def help_(project) -> None:

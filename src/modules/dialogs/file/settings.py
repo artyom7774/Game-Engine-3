@@ -17,10 +17,10 @@ class SettingsFunctions:
         if SYSTEM == "Windows":
             if DEVELOP:
                 if os.path.exists("venv"):
-                    subprocess.run(["venv/Scripts/python.exe", "Game Engine 3.py", "--debug 1"])
+                    subprocess.run(["venv/Scripts/python.exe", "Game Engine 3.py"])
 
                 if os.path.exists(".venv"):
-                    subprocess.run([".venv/Scripts/python.exe", "Game Engine 3.py", "--debug 1"])
+                    subprocess.run([".venv/Scripts/python.exe", "Game Engine 3.py"])
 
             else:
                 subprocess.run(["Game Engine 3.exe"])

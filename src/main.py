@@ -380,12 +380,16 @@ class Main(QMainWindow):
 
         self.menues["help_menu"] = self.menubar.addMenu(translate("Help"))
 
-        help_program_action = QAction(translate("Program"), self)
+        updates_program_action = QAction(translate("Updates"), self)
+        updates_program_action.triggered.connect(lambda: functions.menu.help.updates(self))
+
+        help_program_action = QAction(translate("Go to site"), self)
         help_program_action.triggered.connect(lambda: functions.menu.help.help_(self))
 
         author_program_action = QAction(translate("About"), self)
         author_program_action.triggered.connect(lambda: functions.menu.help.about(self))
 
+        self.menues["help_menu"].addAction(updates_program_action)
         self.menues["help_menu"].addAction(help_program_action)
         self.menues["help_menu"].addSeparator()
         self.menues["help_menu"].addAction(author_program_action)

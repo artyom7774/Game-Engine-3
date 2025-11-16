@@ -1,16 +1,21 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QScrollArea, QVBoxLayout, QFrame
+from PyQt5.Qt import Qt
 
 from src.variables import *
 
 
 class VersionLogScrollArea(QWidget):
-    def __init__(self, parent, information: dict):
+    def __init__(self, parent, information: dict, updateAreaSize: bool = True):
         QWidget.__init__(self, parent)
 
         self.information = information
 
+        self.updateAreaSize = updateAreaSize
+
         self.area = QScrollArea(parent)
-        self.area.setGeometry(10, 40, Size.x(100) - 20, Size.y(100) - 70)
+
+        if self.updateAreaSize:
+            self.area.setGeometry(10, 40, Size.x(100) - 20, Size.y(100) - 70)
 
         container = QFrame()
         layout = QVBoxLayout(container)
@@ -43,12 +48,13 @@ class VersionLogScrollArea(QWidget):
 
         self.area.setWidget(container)
         self.area.setStyleSheet("border: 0px")
-        # self.area.setWidgetResizable(True)
+        self.area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
 
         self.area.show()
 
     def show(self):
-        self.area.setGeometry(10, 40, Size.x(100) - 20, Size.y(100) - 70)
+        if self.updateAreaSize:
+            self.area.setGeometry(10, 40, Size.x(100) - 20, Size.y(100) - 70)
 
         self.area.show()
 

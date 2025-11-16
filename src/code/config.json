@@ -774,6 +774,15 @@
                     "__x__": "node.text.x",
                     "__y__": "node.text.y"
                 }
+            },
+            "special": {
+                "inputs": {
+                    "name": {
+                        "type": "open-filedir",
+                        "open-filedir-path": "objects",
+                        "open-filedir-formates": [".obj"]
+                    }
+                }
             }
         },
 
@@ -4608,6 +4617,15 @@
                     "__name__": "node.text.name",
                     "__volume__": "node.text.volume"
                 }
+            },
+            "special": {
+                "inputs": {
+                    "name": {
+                        "type": "open-filedir",
+                        "open-filedir-path": "music",
+                        "open-filedir-formates": [".wav", ".mp3", ".mp4", ".aac", ".m4a", ".ogg"]
+                    }
+                }
             }
         },
         "stopMusic": {
@@ -4695,6 +4713,15 @@
                     "__path__": "node.text.path",
                     "__name__": "node.text.name",
                     "__volume__": "node.text.volume"
+                }
+            },
+            "special": {
+                "inputs": {
+                    "name": {
+                        "type": "open-filedir",
+                        "open-filedir-path": "music",
+                        "open-filedir-formates": [".wav", ".mp3", ".mp4", ".aac", ".m4a", ".ogg"]
+                    }
                 }
             }
         },

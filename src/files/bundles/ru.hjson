@@ -253,8 +253,13 @@
     "Main": "Основное"
     "Write prompt and press enter...": "Напишите запрос и нажмите enter..."
     "AI": "ИИ"
-    "Open directory": "Открыть папку",
+    "Open directory": "Открыть папку"
     "AI model": "ИИ модель"
+    "Updates": "Обновления"
+    "Go to site": "Перейти на сайт"
+    "WARNING": "ПРЕДУПРЕЖДЕНИЕ"
+    "Choose path": "Выберите путь"
+    "File must be in dir": "Файл должен быть в папке"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"
@@ -318,7 +323,7 @@
     "node.name.addListElement": "Добавить элемент в список"
     "node.name.insertListElement": "Вставить элемент в список"
     "node.name.addDictElement": "Добавить элемент в словарь"
-    "node.name.len_": "Длинна"
+    "node.name.len_": "Длина"
     "node.name.python": "Python"
     "node.name.functionEvent": "Функция"
     "node.name.callFunction": "Вызвать функцию"

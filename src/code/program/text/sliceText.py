@@ -25,7 +25,7 @@ def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dic
     else:
         end = int(nodes["objects"][str(id)]["inputs"]["end"]["standard"])
 
-    if start > end:
+    if start > end > 0:
         raise EngineError(f"end position {end} must be bigger than start position {start}")
 
     answer = text[start:(None if end == -1 else end + 1)]

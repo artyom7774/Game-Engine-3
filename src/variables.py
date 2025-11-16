@@ -4,6 +4,7 @@ from PyQt5.QtGui import QFont
 from src.modules.translate import Translate
 
 import importlib.util
+import faulthandler
 import platform
 import argparse
 import random
@@ -14,6 +15,8 @@ import os
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 import pygame
+
+faulthandler.enable()
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--windows-standalone-build", default=None)
@@ -228,9 +231,11 @@ SYSTEM = platform.system()
 RELEASE = platform.release()
 
 IMAGE_FORMATES = "jpeg jpg jpe jfif png ico tiff tif eps svgb bmp".split()
+MUSIC_FORMATES = "wav mp3 mp4 flac aac m4a wma ogg opus".split()
+
 BLOCKED_FORMATES = "cfg obj objc func".split()
 
-DONT_OPEN_FORMATES = ()
+DONT_OPEN_FORMATES = MUSIC_FORMATES
 
 CODE_GRID_CELL_SIZE = 25
 CODE_GRID_CELL_SIZE_TWO = 26
@@ -279,6 +284,9 @@ for element in IMAGE_FORMATES:
 
 for element in IMAGE_FORMATES:
     SPRITES[f"{element}-light"] = "src/files/sprites/image-light.png"
+
+# for element in MUSIC_FORMATES:
+#     SPRITES[f"{element}"] = "src/files/sprites/music.png"
 
 LANGUAGES = {
     "RU": "Русский",

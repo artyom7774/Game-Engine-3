@@ -69,6 +69,8 @@ def open(project, path: str = None) -> None:
     if any([path.endswith(element) for element in DONT_OPEN_FORMATES]):
         MessageBox.imposiable("Can't open this file")
 
+        project.objects["tab_file_bar"].updateSelectFile()
+
         return
 
     icon = (getColor("scene") if path.find("%scene%") != -1 else getColor("dir")) if os.path.isdir(path) else (getColor(path[path.rfind(".") + 1:]) if path[path.rfind(".") + 1:] in SPRITES else getColor("file"))
@@ -110,13 +112,11 @@ def copy(project) -> None:
     path = projectTreeGetFilePath(projectTreeGetPath(project.objects["tree_project"].selectedItems()[0]))
 
     if SYSTEM == "Windows":
-        os.system(f"powershell -command \"Get-Item \"{os.getcwd()}/{path}\" | Set-Clipboard\"")
+        subprocess.run(["powershell", "-command", f"Set-Clipboard -Path '{os.path.normpath(os.path.join(os.getcwd(), path))}'"], check=True, capture_output=True)
 
     elif SYSTEM == "Linux":
-        full = os.path.join(os.getcwd(), path)
-
         try:
-            subprocess.run(["xclip", "-selection", "clipboard"], input=full.encode(), check=True)
+            subprocess.run(["xclip", "-selection", "clipboard"], input=os.path.join(os.getcwd(), path).encode(), check=True)
 
         except Exception as e:
             print(f"ERROR: can't set clipboard: {e}")

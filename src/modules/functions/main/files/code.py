@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QLabel, QMenu, QAction, QVBoxLayout, QTreeWidget, QTreeWidgetItem, QTextEdit, QDialog, QToolTip, QLineEdit, QPushButton, QComboBox
+from PyQt5.QtWidgets import QApplication, QLabel, QFileDialog, QMenu, QAction, QVBoxLayout, QTreeWidget, QTreeWidgetItem, QTextEdit, QDialog, QToolTip, QLineEdit, QPushButton, QComboBox
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap, QImage, QPolygon, QTextCursor, QIcon
 from PyQt5.Qt import Qt, QPoint, QTimer, QSize
@@ -235,6 +235,8 @@ class AIDialog(QDialog):
 
         print(f"LOG: AI ANSWER = {answer}")
 
+        # sorting, display
+
         try:
             answer = json.loads(answer)
 
@@ -251,7 +253,7 @@ class AIDialog(QDialog):
             return
 
         for id in list(answer["nodes"].keys()):
-            ids = random.randint(10000, 1000000000)
+            ids = random.randint(1, 1000000000)
 
             while str(id) in temp:
                 temp = temp.replace(str(id), str(ids))
@@ -260,9 +262,20 @@ class AIDialog(QDialog):
 
         answer = json.loads(temp)
 
+        with open("src/code/config.json", "r", encoding="utf-8") as file:
+            config = json.load(file)
+
         for id, node in answer["nodes"].items():
             node["x"] += self.project.cache["file"][self.project.selectFile].x // CODE_GRID_CELL_SIZE + 5
             node["y"] += self.project.cache["file"][self.project.selectFile].y // CODE_GRID_CELL_SIZE + 5
+
+            if "sorting" in config["nodes"][node["name"]]:
+                node["sorting"] = config["nodes"][node["name"]]["sorting"]
+
+            if "special" in config["nodes"][node["name"]]:
+                node["special"] = config["nodes"][node["name"]]["special"]
+
+            node["display"] = config["nodes"][node["name"]]["display"]
 
         for id, node in answer["nodes"].items():
             self.project.objects["main"]["function"]["objects"][id] = node
@@ -467,7 +480,7 @@ class CodeNodeConnectorTextBox(QTextEdit):
             self.project.dialog.save()
 
     def init(self):
-        self.button.setGeometry(self.x(), self.y() + 25 * (self.heigth_ - 1), self.width(), 16 + 4)
+        self.button.setGeometry(self.x(), self.y() + 25 * (self.heigth_ - 1) + 1, self.width(), 16 + 4)
 
         self.button.raise_()
 
@@ -478,12 +491,12 @@ class CodeNodeConnectorTextBox(QTextEdit):
     def setGeometry(self, x, y, w, h):
         super().setGeometry(x, y - 1, w, h)
 
-        self.button.setGeometry(self.x(), self.y() + 25 * (self.heigth_ - 1), self.width(), 16 + 4)
+        self.button.setGeometry(self.x(), self.y() + 25 * (self.heigth_ - 1) + 1, self.width(), 16 + 4)
 
     def move(self, x, y):
         super().move(x, y)
 
-        self.button.move(self.x(), self.y() + 25 * (self.heigth_ - 1))
+        self.button.move(self.x(), self.y() + 25 * (self.heigth_ - 1) + 1)
 
     def deleteLater(self):
         self.button.deleteLater()
@@ -551,6 +564,71 @@ class CodeNodeConnectorComboBox(QComboBox):
         self.save(True)
 
 
+class CodeNodeConnectorSelectFile(QPushButton):
+    def __init__(self, parent, project, id, input, path, formates) -> None:
+        QPushButton.__init__(self, parent)
+
+        self.project = project
+
+        self.id = id
+        self.input = input
+
+        self.path = path
+        self.formates = formates
+
+        self.use = False
+
+        self.file = str(input["standard"])
+
+        self.setText(self.file if self.file else translate("Select file"))
+
+        self.clicked.connect(lambda: self.function())
+
+    def save(self) -> None:
+        self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = self.file
+
+        with open(self.project.selectFile, "w", encoding="utf-8") as file:
+            dump(self.project.objects["main"]["function"], file, indent=4)
+
+    def function(self) -> None:
+        if SYSTEM == "Windows":
+            file = QFileDialog.getOpenFileName(None, translate("Choose path"), f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{self.project.selectProject}/project/{self.path}")
+
+        else:
+            file = QFileDialog.getOpenFileName(None, translate("Choose path"), f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{self.project.selectProject}/project/{self.path}")
+
+        file = os.path.normpath(file[0])
+
+        if not file or file == ".":
+            return
+
+        if not file.startswith(os.path.normpath(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{self.project.selectProject}/project/{self.path}")):
+            MessageBox.error(f"{translate('File must be in dir')}: {self.path}")
+
+            return
+
+        file = file.replace(os.path.normpath(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{self.project.selectProject}/project/"), "")
+
+        file = file.replace("\\", "/", 1000)
+
+        if file.startswith("/"):
+            file = file[1:]
+
+        if not any([file.endswith(format) for format in self.formates]) and len(self.formates) > 0:
+            MessageBox.error(f"{translate('Currect file formates')}: {' '.join(self.formates)}")
+
+            return
+
+        self.file = file
+
+        self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = self.file
+
+        with open(self.project.selectFile, "w", encoding="utf-8") as file:
+            dump(self.project.objects["main"]["function"], file, indent=4)
+
+        self.project.init()
+
+
 class CodeNodeConnector(QLabel):
     def __init__(self, parent, project, node: dict, id: int, keys: dict, number: int, input: dict = None, output: dict = None) -> None:
         QLabel.__init__(self, parent)
@@ -578,9 +656,14 @@ class CodeNodeConnector(QLabel):
         self.inputLeftText = None
         self.inputLeftRama = None
 
+        self.type = None
+
         invisibleInput = False
         invisible = False
         type = None
+
+        openFileDirPath = ""
+        openFileDirForamtes = []
 
         if "special" in self.node:
             if input["code"] in self.node["special"]["inputs"]:
@@ -593,7 +676,13 @@ class CodeNodeConnector(QLabel):
                     invisible = special["invisible"]
 
                 if "type" in special:
-                    type = special["type"]
+                    self.type = type = special["type"]
+
+                if "open-filedir-path" in special:
+                    openFileDirPath = special["open-filedir-path"]
+
+                if "open-filedir-formates" in special:
+                    openFileDirForamtes = special["open-filedir-formates"]
 
         if input is not None:
             self.left = QLabel(self)
@@ -615,9 +704,9 @@ class CodeNodeConnector(QLabel):
 
             if input["type"] not in CODE_CONNECTOR_NO_HAVE_INPUT_TYPES and not invisible:
                 if type is not None:
-                    height = self.node["special"]["inputs"][input["code"]]["height"]
-
                     if type == "text-box":
+                        height = self.node["special"]["inputs"][input["code"]]["height"]
+
                         self.inputLeftText = CodeNodeConnectorTextBox(project.objects["main"]["code"], self.project, id, input, height)
                         self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
                         self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 4, self.width() - 40, 14 + 25 * (height - 2))
@@ -628,11 +717,22 @@ class CodeNodeConnector(QLabel):
 
                         self.inputLeftText.init()
 
-                    self.inputLeftRama = QLabel(project.objects["main"]["code"])
-                    self.inputLeftRama.setAttribute(Qt.WA_TransparentForMouseEvents)
-                    self.inputLeftRama.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 6, self.width() - 40, 18 + 25 * (height - 2))
-                    self.inputLeftRama.setStyleSheet("border: 1px solid #cecac9;")
-                    self.inputLeftRama.show()
+                        self.inputLeftRama = QLabel(project.objects["main"]["code"])
+                        self.inputLeftRama.setAttribute(Qt.WA_TransparentForMouseEvents)
+                        self.inputLeftRama.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 6, self.width() - 40, 18 + 25 * (height - 2))
+                        self.inputLeftRama.setStyleSheet("border: 1px solid #cecac9;")
+                        self.inputLeftRama.show()
+
+                    elif type == "open-filedir":
+                        self.inputLeftText = CodeNodeConnectorSelectFile(project.objects["main"]["code"], self.project, id, input, openFileDirPath, openFileDirForamtes)
+                        self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
+                        self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 5, self.width() - 40, 20)
+                        self.inputLeftText.setStyleSheet(f"border: 1px solid #cecac9; color: #{'cecac9' if SETTINGS['theme'] == 'dark' else '686b71'};")
+                        self.inputLeftText.setFont(MFONT)
+                        self.inputLeftText.show()
+
+                    else:
+                        print(f"ERROR: not found special type {type}")
 
                 else:
                     if input["type"] == "choose":
@@ -707,10 +807,16 @@ class CodeNodeConnector(QLabel):
             self.right.move(self.width() - 12, 9)
 
         if self.inputLeftText is not None:
-            self.inputLeftText.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 3)
-            self.inputLeftRama.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 6)
+            if self.type == "open-filedir":
+                self.inputLeftText.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 5)
 
-            if self.placeholderLabel is not None:
+            else:
+                self.inputLeftText.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 3)
+
+            if self.inputLeftRama is not None:
+                self.inputLeftRama.move(self.x() + self.parent().x() + 20, self.y() + self.parent().y() + 6)
+
+            if self.placeholderLabel is not None and self.type is None:
                 self.placeholderLabel.move(self.inputLeftText.pos().x(), self.inputLeftText.pos().y())
 
                 if len(self.inputLeftText.text()) < CODE_CONNECTOR_MAX_DISPLAY_DESCRIPTION:
@@ -1451,43 +1557,40 @@ class Code:
                 "text": ""
             }
 
-        try:
-            project.objects["main"]["code"] = CodeLabel(project)
+        project.objects["main"]["code"] = CodeLabel(project)
 
-            project.objects["main"]["code"].setGeometry(project.objects["center_rama"].x() + 2, project.objects["center_rama"].y() + 2, project.objects["center_rama"].width() - 4, project.objects["center_rama"].height() - 4)
-            project.objects["main"]["code"].show()
+        project.objects["main"]["code"].setGeometry(project.objects["center_rama"].x() + 2, project.objects["center_rama"].y() + 2, project.objects["center_rama"].width() - 4, project.objects["center_rama"].height() - 4)
+        project.objects["main"]["code"].show()
 
-            project.objects["main"]["code"].setContextMenuPolicy(Qt.CustomContextMenu)
+        project.objects["main"]["code"].setContextMenuPolicy(Qt.CustomContextMenu)
 
-            project.objects["main"]["code"].customContextMenuRequested.connect(
-                lambda pos: Code.menu(project, pos)
-            )
+        project.objects["main"]["code"].customContextMenuRequested.connect(
+            lambda pos: Code.menu(project, pos)
+        )
 
-            if project.cache["file"][project.selectFile].lastToolTipPoses is None:
-                project.cache["file"][project.selectFile].lastToolTipPoses = []
+        if project.cache["file"][project.selectFile].lastToolTipPoses is None:
+            project.cache["file"][project.selectFile].lastToolTipPoses = []
 
-            if "replacer" not in project.objects["main"]:
-                project.objects["main"]["replacer"] = CodeReplacer()
+        if "replacer" not in project.objects["main"]:
+            project.objects["main"]["replacer"] = CodeReplacer()
 
-            project.objects["main"]["liner"] = CodeLiner()
+        project.objects["main"]["liner"] = CodeLiner()
 
-            if project.objects["main"]["liner"].points is None:
-                project.objects["main"]["liner"].points = {"inputs": [], "outputs": []}
+        if project.objects["main"]["liner"].points is None:
+            project.objects["main"]["liner"].points = {"inputs": [], "outputs": []}
 
-            project.objects["main"]["liner"].cache = {"outputsPointPosses": {}}
+        project.objects["main"]["liner"].cache = {"outputsPointPosses": {}}
 
-            if "nodes" not in project.objects["main"]:
-                project.objects["main"]["nodes"] = {}
+        if "nodes" not in project.objects["main"]:
+            project.objects["main"]["nodes"] = {}
 
-            with open("src/code/config.json", "r", encoding="utf-8") as file:
-                project.objects["main"]["config"] = json.load(file)
+        with open("src/code/config.json", "r", encoding="utf-8") as file:
+            project.objects["main"]["config"] = json.load(file)
 
-            CodeAdditions.init(project)
+        CodeAdditions.init(project)
 
-            Code.update(project)
+        Code.update(project)
 
-        except BaseException:
-            return
 
     @staticmethod
     def update(project, call: str = "") -> None:
@@ -1742,13 +1845,17 @@ class Code:
         project.objects["main"]["code_menu"].addSeparator()
         project.objects["main"]["code_menu"].addAction(project.objects["main"]["code_menu_delete_node"])
 
-        for id, node in project.objects["main"]["function"]["objects"].items():
-            if node["x"] * CODE_GRID_CELL_SIZE < x + project.cache["file"][project.selectFile].x < (node["x"] + node["width"]) * CODE_GRID_CELL_SIZE and node["y"] * CODE_GRID_CELL_SIZE < y + project.cache["file"][project.selectFile].y < (node["y"] + node["height"]) * CODE_GRID_CELL_SIZE:
-                break
+        try:
+            for id, node in project.objects["main"]["function"]["objects"].items():
+                if node["x"] * CODE_GRID_CELL_SIZE < x + project.cache["file"][project.selectFile].x < (node["x"] + node["width"]) * CODE_GRID_CELL_SIZE and node["y"] * CODE_GRID_CELL_SIZE < y + project.cache["file"][project.selectFile].y < (node["y"] + node["height"]) * CODE_GRID_CELL_SIZE:
+                    break
 
-        else:
-            project.objects["main"]["code_menu_copy_node"].setDisabled(True)
-            project.objects["main"]["code_menu_delete_node"].setDisabled(True)
+            else:
+                project.objects["main"]["code_menu_copy_node"].setDisabled(True)
+                project.objects["main"]["code_menu_delete_node"].setDisabled(True)
+
+        except Exception as e:
+            print(f"ERROR: {e}")
 
         project.objects["main"]["code_menu"].popup(project.objects["main"]["code"].mapToGlobal(position))
 
