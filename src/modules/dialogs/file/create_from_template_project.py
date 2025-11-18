@@ -49,14 +49,14 @@ class CreateFromTemplateProject(QDialog):
 
         self.project = project
 
-        self.setWindowTitle(translate("Copy template"))
+        self.setWindowTitle(translate("Create"))
         self.setFixedSize(600, 400)
 
         desktop = QtWidgets.QApplication.desktop()
         self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
 
         self.template = "src/files/templates"
-        self.templates = list(sorted([name for name in os.listdir(self.template)], key=lambda x: 0 if x == translate("Base") else 1))
+        self.templates = ["Empty project"] + list(sorted([name for name in os.listdir(self.template)], key=lambda x: 0 if x == translate("Base") else 1))
 
         self.objects = {}
 
@@ -116,9 +116,13 @@ class CreateFromTemplateProject(QDialog):
         self.objects["create_button"].clicked.connect(lambda event: CreateProjectFunctions.create(self.project, self, event))
 
     def createProject(self, name, template) -> None:
-        functions.project.createProjectDirecroryByTemplate(self.project, name, template)
+        if template == "Empty project":
+            functions.project.createProjectDirectory(self.project, name)
 
-        functions.project.projectOpen(self.project)
+        else:
+            functions.project.createProjectDirecroryByTemplate(self.project, name, template)
+
+        functions.project.projectOpen(self.project, True)
 
     def keyPressEvent(self, event) -> None:
         if event.key() in (Qt.Key_Enter, Qt.Key_Return):

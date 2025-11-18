@@ -324,7 +324,7 @@ def projectTreeProjectMenuOpen(project, position) -> None:
         project.objects["tree_project_menu_paste_action"] = QAction(translate("Paste"), project)
         project.objects["tree_project_menu_rename_action"] = QAction(translate("Rename"), project)
         project.objects["tree_project_menu_remove_action"] = QAction(translate("Delete"), project)
-        project.objects["tree_project_menu_open_directory_action"] = QAction(translate("Open directory"), project)
+        project.objects["tree_project_menu_open_directory_action"] = QAction(translate("Open file explorer"), project)
 
         project.objects["tree_project_menu_open_action"].triggered.connect(lambda: functions.tree.open(project))
         project.objects["tree_project_menu_copy_action"].triggered.connect(lambda: functions.tree.copy(project))
@@ -567,7 +567,7 @@ def projectTreeInit(project) -> None:
             project.objects["tree_project"].addTopLevelItem(project.objects["project_tree_file_objects"][path])
 
 
-def projectCheckVersion(project) -> None:
+def projectCheckVersion(project, viewConfirmButton: bool = False) -> None:
     with open("src/files/version.json", "r", encoding="utf-8") as file:
         config = json.load(file)
 
@@ -581,6 +581,11 @@ def projectCheckVersion(project) -> None:
         }
 
     if projectConfig["version"] == config["version"]:
+        return
+
+    if not viewConfirmButton:
+        projectUpdateVersion(project, projectConfig)
+
         return
 
     msg = QMessageBox()
@@ -638,7 +643,7 @@ def projectUpdateVersion(project, projectConfig) -> None:
         json.dump(projectConfig, file, indent=4)
 
 
-def projectOpen(project) -> None:
+def projectOpen(project, firstOpening: bool = False) -> None:
     project.menues["project_menu"].setDisabled(False)
 
     project.variables = {}
@@ -650,7 +655,7 @@ def projectOpen(project) -> None:
 
     project.engine = loader(f"engine/__init__.py")
 
-    projectCheckVersion(project)
+    projectCheckVersion(project, 1 - firstOpening)
 
 
 def projectClose(project) -> None:

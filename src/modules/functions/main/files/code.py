@@ -1355,7 +1355,11 @@ class CodeAdditionsVarsType(QTreeWidget):
 
         self.menu.addAction(delete_variable)
 
-        self.menu.popup(self.project.objects["main"]["code"].mapToGlobal(pos))
+        try:
+            self.menu.popup(self.project.objects["center_rama"].mapToGlobal(pos))
+
+        except Exception as e:
+            pass
 
     def removeVariableFunction(self, name):
         if os.path.exists(self.path):

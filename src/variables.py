@@ -126,6 +126,11 @@ SFONT.setPointSize(13)
 BIG_HELP_FONT = QFont("Consolas")
 BIG_HELP_FONT.setPointSize(14)
 
+# MAIN BIG FONT
+
+MAIN_BIG_FONT = QFont("Courier")
+MAIN_BIG_FONT.setPointSize(24)
+
 # HELP FONT
 
 HELP_FONT = QFont("Courier")

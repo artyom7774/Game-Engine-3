@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QLabel, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
 from PyQt5.QtCore import QEvent
 from PyQt5.QtGui import QKeySequence, QPixmap
 from PyQt5.Qt import QIcon, Qt, QTimer
@@ -178,6 +178,8 @@ class Main(QMainWindow):
 
         self.objects["version_log"].hide()
 
+        self.objects["main_name"].hide()
+
         if self.selectProject != "":
             self.objects["tree_project"].show()
             self.objects["tree_project"].setGeometry(10, 40, Size.x(16), Size.y(100) - 70)
@@ -200,8 +202,11 @@ class Main(QMainWindow):
             functions.project.centerMenuInit(self)
 
         else:
-            self.objects["version_log"].show()
-            self.objects["version_log"].setGeometry(10, 10, Size.x(200) - 20, Size.y(100) - 20)
+            self.objects["main_name"].show()
+            self.objects["main_name"].setGeometry(50, 10, 1000, 100)
+
+            # self.objects["version_log"].show()
+            # self.objects["version_log"].setGeometry(10, 10, Size.x(200) - 20, Size.y(100) - 20)
 
         if self.selectFile == "" and self.objects["tab_file_bar"].count() != 0:
             self.selectFile = self.objects["tab_file_bar"].objects[self.objects["tab_file_bar"].currentIndex()]["name"]
@@ -249,9 +254,14 @@ class Main(QMainWindow):
         # self.objects["center_rama"].mousePressEvent.connect(lambda: self.objects["center_rama"].setFocus())
         self.objects["center_rama"].setHeaderHidden(True)
 
-        # VERSION LOG
+        # MAIN DISPLAY
+
+        self.objects["main_name"] = QLabel(self)
+        self.objects["main_name"].setFont(MAIN_BIG_FONT)
+        self.objects["main_name"].setText("Game Engine 3")
 
         self.objects["version_log"] = VersionLogScrollArea(self, load(open("src/files/updates.json", "r", encoding="utf-8")))
+        self.objects["version_log"].hide()
 
         # PROJECT TREE
 
@@ -306,6 +316,8 @@ class Main(QMainWindow):
         self.menu()
 
         if self.selectProject == "":
+            self.geometryInit()
+
             return
 
         functions.project.projectTreeInit(self)
@@ -322,10 +334,7 @@ class Main(QMainWindow):
         # FILE MENU
 
         file_create_action = QAction(translate("Create"), self)
-        file_create_action.triggered.connect(lambda: functions.menu.file.create(self))
-
-        file_create_from_template = QAction(translate("Copy template"), self)
-        file_create_from_template.triggered.connect(lambda: functions.menu.file.createFromTemplate(self))
+        file_create_action.triggered.connect(lambda: functions.menu.file.createFromTemplate(self))
 
         file_open_action = QAction(translate("Open"), self)
         file_open_action.triggered.connect(lambda: functions.menu.file.open(self))
@@ -339,7 +348,6 @@ class Main(QMainWindow):
         self.menues["file_menu"] = self.menubar.addMenu(translate("File"))
 
         self.menues["file_menu"].addAction(file_create_action)
-        self.menues["file_menu"].addAction(file_create_from_template)
         self.menues["file_menu"].addSeparator()
         self.menues["file_menu"].addAction(file_open_action)
         self.menues["file_menu"].addAction(file_close_action)

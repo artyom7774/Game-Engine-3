@@ -260,6 +260,8 @@
     "WARNING": "ПРЕДУПРЕЖДЕНИЕ"
     "Choose path": "Выберите путь"
     "File must be in dir": "Файл должен быть в папке"
+    "Open file explorer": "Открыть проводник"
+    "Empty project": "Пустой проект"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"

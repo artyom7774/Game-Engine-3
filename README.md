@@ -21,15 +21,14 @@
 - **Built-in Physics** - Full-fledged physics engine with collisions and object interactions
 - **Animation System** - Flexible animation setup with sprite grouping
 - **Graphical Rendering** - Work with sprites and textures
-- **Cross-Platform Support** - Windows (stable) and Linux (beta)
+- **Cross-Platform Support** - Windows and Linux
 - **Open Source** - Fully open-source project
 
 ## Installation
 
 1. Visit the [official website](https://artyom7777.pythonanywhere.com/) or [GitHub repository](https://github.com/artyom7774/Game-Engine-3/releases/)
-2. Download the program archive
-3. Extract the archive to a convenient location (UNPACK THE ARCHIVE ONLY IN A WAY THAT DOES NOT CONTAIN CHARACTERS OTHER THAN ENGLISH)
-4. Launch **Game Engine 3.exe**
+2. Download the program installer
+3. Launch **Game Engine 3.exe**
 
 ## System Requirements
 
@@ -65,13 +64,14 @@
 #### Customizable Parameters
 
 - Position
-- Hitbox
-- Object layer
 - Sprite
-- Mass
+- Hitbox
 - Group
+- Mass
+- Layer
 - Animation
-- Gravity
+- Invsible
+- Opacity
 
 #### Scenes
 
@@ -87,12 +87,12 @@ Over 80 available nodes divided into 10 categories:
 - Events
 - Loops
 - Text
-- Number operations
+- Number
 - Logic
 - Objects
 - Animation
-- Miscellaneous
-- Sets
+- Another
+- Set
 - Music
 
 #### Collision Configuration
@@ -119,19 +119,23 @@ In the **collision.cfg** file, configure interactions between different object g
 ```
 Game Engine 3
 ├─ Engine
-│   ├─ Sprite Rendering (Pygame)
-│   ├─ Sprite and Texture Handling (Pillow)
-│   ├─ Physics Engine
-│   ├─ Collision System
-│   └─ Animation System
-├─ Editor Interface
-│   ├─ Object Editor
-│   ├─ Scene Editor
-│   ├─ Node Editor
-│   └─ Project Execution and Compilation
+│   ├─ Sprite rendering (Pygame)
+│   ├─ Sprite and texture handling (Pillow)
+│   ├─ Physics engine
+│   ├─ Collision system
+│   └─ Animation system
+│
+├─ Editor interface
+│   ├─ AI assistant
+│   ├─ Object editor
+│   ├─ Scene editor
+│   ├─ Node editor
+│   └─ Project execution and compilation
+│
 ├─ Website
-│   ├─ First Project Documentation
-│   └─ Complete Node List with Usage Examples
+│   ├─ Project documentation
+│   └─ Node list with examples
+│
 └─ GELauncher
     └─ Launcher for using Game Engine 3
 ```
@@ -162,7 +166,7 @@ Examples available in a [dedicated repository](https://github.com/artyom7774/Gam
 ## Community and Support
 
 - 🌐 [Official Website](https://artyom7777.pythonanywhere.com/)
-- 📚 [Documentation & Guides](https://artyom7777.pythonanywhere.com/)
+- 📚 [Documentation & Guides](https://artyom7777.pythonanywhere.com/documentation/)
 - 💬 [Discord Community](https://discord.gg/AgYqzHYUVf)
 - 📝 [GitHub Repository](https://github.com/artyom7774/Game-Engine-3)
 

@@ -5,24 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/dialogs/help/updates.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game Engine 3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game Engine 3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/program/objects/createObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/program/objects/createObject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/program/text/sliceText.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/program/text/sliceText.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/descriptions/ru.md" beforeDir="false" afterPath="$PROJECT_DIR$/descriptions/ru.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/program/another/getNoiseValue.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/program/another/getNoiseValue.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/files/bundles/ru.hjson" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/bundles/ru.hjson" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/files/updates.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/updates.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/file/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/file/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/help/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/help/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/file/create_from_template_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/file/create_from_template_project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/functions/main/files/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/main/files/code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/functions/menu/compile.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/menu/compile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/functions/menu/help.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/menu/help.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/functions/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/widgets/versionLogScrollArea.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/widgets/versionLogScrollArea.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/functions/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/variables.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +65,7 @@
   "keyToString": {
     "Docker.Dockerfile.executor": "Run",
     "Python.1.executor": "Run",
-    "Python.Game Engine 3 - Debug.executor": "Debug",
+    "Python.Game Engine 3 - Debug.executor": "Run",
     "Python.Game Engine 3 - Release.executor": "Run",
     "Python.Game Engine 3.executor": "Debug",
     "Python.camera.executor": "Run",
@@ -82,6 +76,7 @@
     "Python.getTimePassed.executor": "Debug",
     "Python.program.executor": "Run",
     "Python.scratch.executor": "Run",
+    "Python.scratch_1.executor": "Run",
     "Python.sprite.executor": "Run",
     "Python.start.executor": "Run",
     "Python.test.executor": "Run",
