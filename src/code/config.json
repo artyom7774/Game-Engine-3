@@ -76,6 +76,7 @@
                 "mouseRightClick",
                 "mouseLeftClick",
                 "keyboardClick",
+                "keyboardRelease",
                 "keyboardPress",
                 "onButtonPress"
             ]
@@ -123,7 +124,8 @@
                 "if_",
                 "ifCollision",
                 "ifKeyInDict",
-                "ifElementInList"
+                "ifElementInList",
+                "ifKeyPressed"
             ]
         },
         "objects": {
@@ -142,6 +144,7 @@
                 "getObjectParameter",
                 "setObjectParameter",
                 "getAllObjectInGroup",
+                "setObjectRotation",
                 "jump"
             ]
         },
@@ -177,6 +180,7 @@
             "name": "Set",
             "nodes": [
                 "addListElement",
+                "setListElement",
                 "insertListElement",
                 "getByIndex",
                 "deleteByIndex",
@@ -433,14 +437,6 @@
             "height": 3,
             "id": null,
             "inputs": {
-                "path": {
-                    "code": "path",
-                    "name": "__path__",
-                    "type": "path",
-                    "value": null,
-                    "standard": null
-                },
-
                 "key": {
                     "code": "key",
                     "name": "__key__",
@@ -502,6 +498,41 @@
             },
             "display": {
                 "name": "node.name.keyboardPress",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__key__": "node.text.key",
+                    "__path__": "node.text.path"
+                }
+            }
+        },
+
+        "keyboardRelease": {
+            "type": "event",
+            "name": "keyboardRelease",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": "",
+                    "visible": false
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.keyboardRelease",
                 "text": {
                     "__none__": "node.text.none",
                     "__key__": "node.text.key",
@@ -937,6 +968,65 @@
                     "__a__": "node.text.a",
                     "__b__": "node.text.b",
                     "__operation__": "node.text.operation",
+                    "__path_true__": "node.text.pathTrue",
+                    "__path_false__": "node.text.pathFalse"
+                }
+            }
+        },
+        "ifKeyPressed": {
+            "type": "logic",
+            "name": "ifKeyPressed",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "key"
+                ],
+                "outputs": [
+                    "path_true",
+                    "path_false"
+                ]
+            },
+
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "key": {
+                    "code": "key",
+                    "name": "__key__",
+                    "type": "text",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path_true": {
+                    "code": "path_true",
+                    "name": "__path_true__",
+                    "type": "path"
+                },
+                "path_false": {
+                    "code": "path_false",
+                    "name": "__path_false__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.ifKeyPressed",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__key__": "node.text.key",
                     "__path_true__": "node.text.pathTrue",
                     "__path_false__": "node.text.pathFalse"
                 }
@@ -1755,6 +1845,65 @@
                 }
             }
         },
+        "setObjectRotation": {
+            "type": "objects",
+            "name": "setObjectRotation",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id",
+                    "angle"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                },
+                "angle": {
+                    "code": "angle",
+                    "name": "__angle__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.setObjectRotation",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__name__": "node.text.name",
+                    "__id__": "node.text.id",
+                    "__angle__": "node.text.angle"
+                }
+            }
+        },
         "getObjectIDByName": {
             "type": "objects",
             "name": "getObjectIDByName",
@@ -1834,13 +1983,6 @@
             "height": 3,
             "id": null,
             "inputs": {
-                "path": {
-                    "code": "path",
-                    "name": "__path__",
-                    "type": "path",
-                    "value": null,
-                    "standard": null
-                },
                 "N": {
                     "code": "N",
                     "name": "__n__",
@@ -1875,13 +2017,6 @@
             "height": 3,
             "id": null,
             "inputs": {
-                "path": {
-                    "code": "path",
-                    "name": "__path__",
-                    "type": "path",
-                    "value": null,
-                    "standard": null
-                },
                 "N": {
                     "code": "N",
                     "name": "__n__",
@@ -3151,6 +3286,80 @@
                 }
             }
         },
+        "setListElement": {
+            "type": "set",
+            "name": "setListElement",
+            "x": null,
+            "y": null,
+            "width": 10,
+            "height": 5,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "list",
+                    "index",
+                    "element"
+                ],
+                "outputs": [
+                    "path",
+                    "list"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list",
+                    "value": null,
+                    "standard": []
+                },
+                "index": {
+                    "code": "index",
+                    "name": "__index__",
+                    "type": "number",
+                    "value": null,
+                    "standard": 0
+                },
+                "element": {
+                    "code": "element",
+                    "name": "__element__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "list": {
+                    "code": "list",
+                    "name": "__list__",
+                    "type": "list"
+                }
+            },
+            "display": {
+                "name": "node.name.setListElement",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__list__": "node.text.list",
+                    "__key__": "node.text.key",
+                    "__element__": "node.text.element",
+                    "__index__": "node.text.index"
+                }
+            }
+        },
         "insertListElement": {
             "type": "set",
             "name": "insertListElement",
@@ -4044,13 +4253,7 @@
             "height": 3,
             "id": null,
             "inputs": {
-                "path": {
-                    "code": "path",
-                    "name": "__path__",
-                    "type": "path",
-                    "value": null,
-                    "standard": null
-                }
+
             },
             "outputs": {
                 "path": {

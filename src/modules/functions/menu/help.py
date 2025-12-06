@@ -23,7 +23,7 @@ def help_(project) -> None:
     result = msg.exec_()
 
     if result == QMessageBox.Yes:
-        thr = threading.Thread(target=lambda: webbrowser.open("https://artyom7777.pythonanywhere.com/"))
+        thr = threading.Thread(target=lambda: webbrowser.open("https://ge3.pythonanywhere.com/"))
         thr.daemon = True
         thr.start()
 

@@ -6,3 +6,4 @@ from .rename_object import RenameObject
 from .create_object import CreateObject
 from .create_text import CreateText
 from .create_button import CreateButton
+from .select_file_dir import selectFileDir

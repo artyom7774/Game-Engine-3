@@ -24,7 +24,7 @@ class CreateInterfaceObjectFunctions:
 
         index = 0
 
-        while f"{index}" in project.cache["allSceneObjects"][self.project.selectFile]:
+        while f"{index}" in project.cache["allSceneObjects"][project.selectFile]:
             index += 1
 
         with open(path, "r", encoding="utf-8") as file:

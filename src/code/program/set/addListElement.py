@@ -25,7 +25,7 @@ def addListElement(program, compiler, path: str, nodes: dict, id: int, variables
             element = eval(str(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]))
 
     else:
-        if type(nodes["objects"][str(id)]["inputs"]["element"]["value"]["value"]) == str:
+        if type(nodes["objects"][str(id)]["inputs"]["element"]["standard"]) == str:
             element = eval(nodes["objects"][str(id)]["inputs"]["element"]["standard"])
 
         else:

@@ -1,22 +1,22 @@
 from PyQt5.QtWidgets import QTreeWidget, QPushButton, QWidget, QSpacerItem, QSizePolicy, QHBoxLayout, QLabel, QTreeWidgetItem, QCheckBox, QMenu, QAction
 from PyQt5.QtGui import QPixmap, QImage, QCursor, QPainter, QPen, QColor
-from PyQt5.Qt import Qt, QTimer, QPoint
+from PyQt5.Qt import Qt, QPoint
 
-from src.modules.dialogs import CreateSceneObject, RenameSceneObject, CreateInterfaceObject, animatorCreateDialog, hitboxCreateDialog
+from src.modules.dialogs import CreateSceneObject, RenameSceneObject, CreateInterfaceObject, animatorCreateDialog, hitboxCreateDialog, selectFileDir
 
-from src.modules.functions.main.files.button import Button
-from src.modules.functions.main.files.objtext import ObjectText, fontCreateDialog, colorCreateDialog
+from src.modules.functions.main.files.objects.button import Button
+from src.modules.functions.main.files.objects.objtext import ObjectText
+from src.modules.functions.main.files.objects.abstract import fontCreateDialog, colorCreateDialog
 
 from src.modules.dialogs.tree.create_object import CreateObjectFunctions
 
-from src.modules.functions.main.files.object import Object as ObjectTypingClass
+from src.modules.functions.main.files.objects.object import Object as ObjectTypingClass
 
 from src.modules.widgets import FocusLineEdit, FocusComboBox
 
 from src.modules import functions
 
 from engine.vector.float import Vec2f
-from engine.variables import *
 
 from src.variables import *
 
@@ -31,7 +31,7 @@ import copy
 import os
 
 TEMPLATES = {
-    "StaticObject": json.load(open("engine/files/objects.json", "r", encoding="utf-8")),
+    "StaticObject": json.load(open("engine/files/object.json", "r", encoding="utf-8")),
     "Text": json.load(open("engine/files/text.json", "r", encoding="utf-8")),
     "Button": json.load(open("engine/files/button.json", "r", encoding="utf-8"))
 }
@@ -205,7 +205,7 @@ class SceneLabel(QLabel):
 
 class SceneAdditions:
     class SceneAdditionWidgetItem(QWidget):
-        def __init__(self, project, obj: dict, temp: dict, path: str, file: str, type: str = "object", parent=None) -> None:
+        def __init__(self, project, objectTemplateType, obj: dict, temp: dict, path: str, file: str, type: str = "object", parent=None) -> None:
             QWidget.__init__(self, parent)
 
             self.project = project
@@ -324,6 +324,15 @@ class SceneAdditions:
                 self.value.setFixedHeight(20)
 
                 self.value.clicked.connect(lambda: hitboxCreateDialog(self.project, save))
+
+                self.value.saveAllValues = lambda: ObjectTypingClass.function(self.value, project, save, temp, path, init=False)
+
+            elif temp["type"] == "selector":
+                self.value = QPushButton(self)
+                self.value.setText(translate("Select file") if temp["value"] == "" else temp["value"])
+                self.value.setFixedHeight(20)
+
+                self.value.clicked.connect(lambda: selectFileDir(self.project, self.value, temp["selector"]["path"], temp["selector"]["formates"], lambda value: ObjectTypingClass.function(self.value, project, save, temp, path)))
 
                 self.value.saveAllValues = lambda: ObjectTypingClass.function(self.value, project, save, temp, path, init=False)
 
@@ -518,7 +527,7 @@ class Scene:
             if onlyToUpdate is None or name in onlyToUpdate:
                 type, variables = Scene.loadObjectFile(project, name, obj)
 
-                if variables["sprite"][0] != "":
+                if "sprite" in variables and variables["sprite"][0] != "":
                     variables["sprite"][0] = f"" + variables["sprite"][0] # TODO
 
                 obj = getattr(project.engine.objects, type)(application, **variables, variables={"code": name})

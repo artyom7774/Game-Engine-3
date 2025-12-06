@@ -7,20 +7,33 @@ from src.modules.widgets import FocusLineEdit, FocusComboBox
 
 from src.modules.functions.main.files.code import CodeAdditionsVarsType
 
+from src.modules.dialogs import animatorCreateDialog, hitboxCreateDialog, selectFileDir
+
 from PIL import Image
 
 from engine.vector.int import Vec4i
 
 from src.variables import *
 
+import typing
 import orjson
 import math
 import os
 
-TEMPLATE = json.load(open("engine/files/button.json", "r", encoding="utf-8"))
-
-SORTING_BUTTON_TYPES = {
+SORTING_TYPES = {
+    "StaticObject": 1,
+    "DynamicObject": 2,
+    "Particle": 3,
+    "KinematicObject": 4,
+    "Text": 1,
+    "Field": 2,
     "Button": 1
+}
+
+TEMPLATE = {
+    "object": json.load(open("engine/files/object.json", "r", encoding="utf-8")),
+    "button": json.load(open("engine/files/button.json", "r", encoding="utf-8")),
+    "text": json.load(open("engine/files/text.json", "r", encoding="utf-8"))
 }
 
 
@@ -131,135 +144,156 @@ class ChooseFontDialog(QDialog):
     def fontVisiable(self):
         self.application.objects.removeByGroup("font")
 
-        self.application.objects.add(self.project.engine.objects.Text(self.application, (0, 0), (0, 0, 560, 280), group="font", font=FONT_LIST[self.objects["choose_combobox"].currentIndex()], message="Example", fontSize=60, fontColor="#000000", alignment=["center", "center"]))
+        self.application.objects.add(self.project.engine.objects.Text(self.application, (0, 0), (0, 0, 560, 280), group="font", font=FONT_LIST[self.objects["choose_combobox"].currentIndex()], message="Example", fontSize=60, fontColor=(32, 33, 36) if SETTINGS["theme"] == "light" else (248, 249, 250), alignment=["center", "center"]))
 
-        self.application.frame(screenFillColor=(248, 249, 250))
+        self.application.frame(screenFillColor=(32, 33, 36) if SETTINGS["theme"] == "dark" else (248, 249, 250))
 
-        qpixmap = QPixmap(Button.getVisiableScreen(QImage(self.application.screen.get_buffer(), 560, 280, QImage.Format_RGB32), 560, 280))
+        qpixmap = QPixmap(AbstractObject.getVisiableScreen(QImage(self.application.screen.get_buffer(), 560, 280, QImage.Format_RGB32), 560, 280))
 
         self.objects["font"].setPixmap(qpixmap)
 
 
-class Button:
-    class TextTreeWidgetItem(QWidget):
-        def __init__(self, project, obj: dict, temp: dict, path: str, parent=None) -> None:
-            QWidget.__init__(self, parent)
 
-            self.project = project
+class AbstractWidgetItem(QWidget):
+    def __init__(self, project, objectTemplateType, obj: dict, temp: dict, path: str, parent=None) -> None:
+        QWidget.__init__(self, parent)
 
+        self.project = project
+
+        self.complited = 0
+
+        layout = QHBoxLayout()
+
+        if path.split("/")[-1] in TEMPLATE[objectTemplateType]["name"]:
+            name = TEMPLATE[objectTemplateType]["name"][path.split("/")[-1]]
+
+        else:
+            name = AbstractObject.get(TEMPLATE[objectTemplateType]["standard"], path if len(path.split("/")) == 1 else path[path.find("/") + 1:])["name"]
+
+        self.label = QLabel(translate(name) + ":")
+        self.label.setFont(FONT)
+
+        self.label.setFixedWidth(Size.x(20))
+
+        save = project.selectFile
+
+        if temp["type"] == "none":
             self.complited = 0
 
-            layout = QHBoxLayout()
+            return
 
-            if path.split("/")[-1] in TEMPLATE["name"]:
-                name = TEMPLATE["name"][path.split("/")[-1]]
+        elif temp["type"] == "str" or temp["type"] == "path" or temp["type"] == "int":
+            self.value = FocusLineEdit(project, releasedFocusFunction=lambda: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path))
+            self.value.setText(str(temp["value"]))
 
-            else:
-                name = Button.get(TEMPLATE["standard"], path if len(path.split("/")) == 1 else path[path.find("/") + 1:])["name"]
+            self.value.saveAllValues = lambda: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path, init=False)
 
-            self.label = QLabel(translate(name) + ":")
-            self.label.setFont(FONT)
+        elif temp["type"] == "bool":
+            self.value = QCheckBox(project)
+            self.value.setFixedHeight(20)
+            self.value.setChecked(bool(temp["value"]))
 
-            self.label.setFixedWidth(Size.x(20))
+            self.value.clicked.connect(lambda: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path, init=False))
 
-            save = project.selectFile
+        elif temp["type"] == "animator":
+            self.value = QPushButton(self)
+            self.value.setText(translate("Animation"))
+            self.value.setFixedHeight(20)
 
-            if temp["type"] == "str" or temp["type"] == "path" or temp["type"] == "int":
-                self.value = FocusLineEdit(project, releasedFocusFunction=lambda: Button.function(self.value, project, save, temp, path))
-                self.value.setText(str(temp["value"]))
+            self.value.clicked.connect(lambda: animatorCreateDialog(self.project))
 
-                self.value.saveAllValues = lambda: Button.function(self.value, project, save, temp, path, init=False)
+            self.value.saveAllValues = lambda: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path, init=False)
 
-            elif temp["type"] == "bool":
-                self.value = QCheckBox(project)
-                self.value.setFixedHeight(20)
-                self.value.setChecked(bool(temp["value"]))
+        elif temp["type"] == "hitbox":
+            self.value = QPushButton(self)
+            self.value.setText(translate("Hitbox"))
+            self.value.setFixedHeight(20)
 
-                self.value.clicked.connect(lambda: Button.function(self.value, project, save, temp, path, init=False))
+            self.value.clicked.connect(lambda: hitboxCreateDialog(self.project))
 
-            elif temp["type"] in ("choose", "choosing"):
-                self.value = FocusComboBox(releasedFocusFunction=lambda: Button.function(self.value, project, save, temp, path))
-                self.value.currentIndexChanged.connect(lambda: self.value.clearFocus())
-                self.value.addItems([translate(element) for element in temp["choose"]["input"]])
-                self.value.setCurrentIndex([temp["value"] == element for i, element in enumerate(temp["choose"]["output"])].index(True))
+            self.value.saveAllValues = lambda: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path, init=False)
 
-                self.value.saveAllValues = lambda: Button.function(self.value, project, save, temp, path, init=False)
+        elif temp["type"] in ("choose", "choosing"):
+            self.value = FocusComboBox(releasedFocusFunction=lambda: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path))
+            self.value.currentIndexChanged.connect(lambda: self.value.clearFocus())
+            self.value.addItems([translate(element) for element in temp["choose"]["input"]])
+            self.value.setCurrentIndex([temp["value"] == element for i, element in enumerate(temp["choose"]["output"])].index(True))
 
-            elif temp["type"] == "font":
-                self.value = QPushButton(self)
-                self.value.setText(temp["value"])
-                self.value.setFixedHeight(20)
+            self.value.saveAllValues = lambda: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path, init=False)
 
-                self.value.clicked.connect(lambda: fontCreateDialog(self.project, self.value, path, temp["value"]))
+        elif temp["type"] == "font":
+            self.value = QPushButton(self)
+            self.value.setText(temp["value"])
+            self.value.setFixedHeight(20)
 
-                self.value.saveAllValues = lambda: Button.function(self.value, project, save, temp, path, init=False)
+            self.value.clicked.connect(lambda: fontCreateDialog(self.project, self.value, path, temp["value"]))
 
-            elif temp["type"] == "color":
-                self.value = QPushButton(self)
-                self.value.setFixedHeight(20)
-                self.value.setStyleSheet(f"background-color: {temp['value']};")
+            self.value.saveAllValues = lambda: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path, init=False)
 
-                self.value.clicked.connect(lambda: colorCreateDialog(self.project, self.value, path, temp["value"]))
+        elif temp["type"] == "color":
+            self.value = QPushButton(self)
+            self.value.setFixedHeight(20)
+            self.value.setStyleSheet(f"background-color: {temp['value']};")
 
-                self.value.saveAllValues = lambda: Button.function(self.value, project, save, temp, path, init=False)
+            self.value.clicked.connect(lambda: colorCreateDialog(self.project, self.value, path, temp["value"]))
 
-            elif temp["type"] == "dict":
-                project.objects["main"]["object_tree_objects"][path] = QTreeWidgetItem(project.objects["main"]["object_tree_objects"][path[:path.rfind("/")]])
-                project.objects["main"]["object_tree_objects"][path].setText(0, translate(temp["name"]))
-                project.objects["main"]["object_tree_objects"][path].setExpanded(True)
-                project.objects["main"]["object_tree_objects"][path].setFont(0, FONT)
+            self.value.saveAllValues = lambda: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path, init=False)
 
-                self.complited = 2
+        elif temp["type"] == "dict":
+            project.objects["main"]["object_tree_objects"][path] = QTreeWidgetItem(project.objects["main"]["object_tree_objects"][path[:path.rfind("/")]])
+            project.objects["main"]["object_tree_objects"][path].setText(0, translate(temp["name"]))
+            project.objects["main"]["object_tree_objects"][path].setExpanded(True)
+            project.objects["main"]["object_tree_objects"][path].setFont(0, FONT)
 
-                return
+            self.complited = 2
 
-            else:
-                raise TypeError(f"type {temp['type']} is not defined")
+            return
 
-            self.value.setFont(FONT)
-            self.value.setFixedWidth(Size.x(25))
+        elif temp["type"] == "selector":
+            self.value = QPushButton(self)
+            self.value.setText(translate("Select file") if temp["value"] == "" else temp["value"])
+            self.value.setFixedHeight(20)
 
-            layout.addWidget(self.label)
-            layout.addSpacerItem(QSpacerItem(20, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
+            self.value.clicked.connect(lambda: selectFileDir(self.project, self.value, temp["selector"]["path"], temp["selector"]["formates"], lambda value: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path, value=value, init=True)))
 
-            layout.addWidget(self.value)
+            self.value.saveAllValues = lambda: AbstractObject.function(objectTemplateType, self.value, project, save, temp, path, init=False)
 
-            layout.setContentsMargins(0, 0, 10, 0)
+        else:
+            raise TypeError(f"type {temp['type']} is not defined")
 
-            self.setLayout(layout)
+        self.value.setFont(FONT)
+        self.value.setFixedWidth(Size.x(25))
 
-            self.complited = 1
+        layout.addWidget(self.label)
+        layout.addSpacerItem(QSpacerItem(20, 0, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
+        layout.addWidget(self.value)
+
+        layout.setContentsMargins(0, 0, 10, 0)
+
+        self.setLayout(layout)
+
+        self.complited = 1
+
+
+class AbstractObject:
     @staticmethod
-    def get(obj, path) -> dict:
-        temp = obj
-
-        for element in path.split("/"):
-            try:
-                temp = temp[element]
-
-            except KeyError:
-                temp = temp["value"][element]
-
-        return temp
-
-    @staticmethod
-    def init(project, class_=TextTreeWidgetItem, file=None, pos=None, type: str = "object", variables: bool = True, bottom: bool = False) -> None:
-        def include(project, obj: dict, path: str, class_) -> None:
-            temp = Button.get(obj, path)
+    def init(project, objectTemplateType, file=None, pos=None, type: str = "object", variables: bool = True, bottom: bool = False, class_=AbstractWidgetItem) -> None:
+        def include(project, objectTemplateType, obj: dict, path: str, class_) -> None:
+            temp = AbstractObject.get(obj, path)
 
             try:
-                widget = class_(project, obj, temp, path, project, type=type)
+                widget = class_(project, objectTemplateType, obj, temp, path, project, type=type)
 
             except:
-                widget = class_(project, obj, temp, path, project)
+                widget = class_(project, objectTemplateType, obj, temp, path, project)
 
             if widget.complited == -1:
                 return -1
 
             if widget.complited == 2:
                 for key, value in temp["value"].items():
-                    include(project, obj, f"{path}/{key}", class_)
+                    include(project, objectTemplateType, obj, f"{path}/{key}", class_)
 
                 return
 
@@ -272,22 +306,26 @@ class Button:
             else:
                 project.objects["main"]["object_tree_objects"][path] = QTreeWidgetItem(project.objects["main"]["object_tree_objects"][path[:path.rfind("/")]])
 
-            project.objects["main"]["object_tree"].setItemWidget(
-                project.objects["main"]["object_tree_objects"][path], 0, widget
-            )
+            project.objects["main"]["object_tree"].setItemWidget(project.objects["main"]["object_tree_objects"][path], 0, widget)
 
         if file is None:
             file = project.selectFile
-
-        else:
-            pass
 
         try:
             with open(file, "r", encoding="utf-8") as f:
                 obj = load(f)
 
         except FileNotFoundError:
-            return
+            with open(f"{project.selectFile}/objects.scene", "rb") as f:
+                objects = orjson.loads(f.read())
+
+            if file in objects:
+                obj = objects[file]
+
+            else:
+                print(f"ERROR: object {file} not found on this scene")
+
+                return
 
         if "object_variables" in project.objects["main"]:
             try:
@@ -323,8 +361,7 @@ class Button:
                 project.objects["main"]["object_variables"] = CodeAdditionsVarsType(
                     project,
                     Vec4i(
-                        project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
-                        40,
+                        project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10, 40,
                         project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
                         project.height() - 70
                     ),
@@ -344,17 +381,17 @@ class Button:
         project.objects["main"]["object_tree"].setFont(LFONT)
         project.objects["main"]["object_tree"].show()
 
-        project.objects["main"]["object_tree"].saveAllValues = lambda self, project: Button.saveAllValues(project)
+        project.objects["main"]["object_tree"].saveAllValues = lambda self, project: AbstractObject.saveAllValues(project)
 
         project.objects["main"]["object_tree_main"] = QTreeWidgetItem(project.objects["main"]["object_tree"])
         project.objects["main"]["object_tree_main"].setText(0, file[file.rfind("/") + 1:])
         project.objects["main"]["object_tree_main"].setExpanded(True)
         project.objects["main"]["object_tree_main"].setFont(0, FONT)
 
-        if include(project, obj, "type", class_) == -1:
+        if include(project, objectTemplateType, obj, "type", class_) == -1:
             pass
 
-        obj = dict(sorted(obj.items(), key=lambda x: -1 if x[0] not in SORTING_BUTTON_TYPES else SORTING_BUTTON_TYPES[x[0]]))
+        obj = dict(sorted(obj.items(), key=lambda x: -1 if x[0] not in SORTING_TYPES else SORTING_TYPES[x[0]]))
 
         for key, value in obj.items():
             if key == "type":
@@ -369,19 +406,23 @@ class Button:
             project.objects["main"]["object_tree_objects"][key].setFont(0, FONT)
 
             for k1, v1 in value.items():
-                include(project, obj, f"{key}/{k1}", class_)
+                include(project, objectTemplateType, obj, f"{key}/{k1}", class_)
 
     @staticmethod
-    def function(obj, project, save: str, last: dict, path: str, init: bool = True) -> None:
-        with open(f"engine/files/button.json", "r", encoding="utf-8") as file:
+    def function(type, obj, project, save: str, last: dict, path: str, init: bool = True, value: typing.Any = None):
+        with open(f"engine/files/{type}.json", "r", encoding="utf-8") as file:
             objects = load(file)
 
-        if os.path.exists(save):
-            with open(save, "r", encoding="utf-8") as f:
-                file = load(f)
+        try:
+            if os.path.exists(save):
+                with open(save, "r", encoding="utf-8") as f:
+                    file = load(f)
 
-        else:
-            file = project.cache["allSceneObjects"][project.selectFile][save]
+            else:
+                file = project.cache["allSceneObjects"][project.selectFile][save]
+
+        except KeyError as e:
+            pass
 
         if last["type"] == "font":
             if hasattr(obj, "out"):
@@ -411,9 +452,9 @@ class Button:
 
         doing = False
 
-        temp = Button.get(file, path)
+        temp = AbstractObject.get(file, path)
 
-        if last["type"] == "str":
+        if last["type"] in ("str", "selector"):
             temp["value"] = text
 
             doing = True
@@ -515,10 +556,17 @@ class Button:
                 project.init()
 
     @staticmethod
-    def saveAllValues(project):
-        for widget in project.objects["main"]["widgets"]:
-            if hasattr(widget, "value") and hasattr(widget.value, "saveAllValues"):
-                widget.value.saveAllValues()
+    def get(obj, path) -> dict:
+        temp = obj
+
+        for element in path.split("/"):
+            if "value" not in temp:
+                temp = temp[element]
+
+            else:
+                temp = temp["value"][element]
+
+        return temp
 
     @staticmethod
     def getVisiableScreen(image, width, height) -> Image.Image:
@@ -534,3 +582,9 @@ class Button:
             return image.copy(left, top, newWidth, newHeight)
 
         return center(image, width, height)
+
+    @staticmethod
+    def saveAllValues(project):
+        for widget in project.objects["main"]["widgets"]:
+            if hasattr(widget, "value") and hasattr(widget.value, "saveAllValues"):
+                widget.value.saveAllValues()

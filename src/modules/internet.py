@@ -19,7 +19,7 @@ def updateOnlineOnSite(project):
         return
 
     try:
-        url = "https://artyom7777.pythonanywhere.com/updateOnline"
+        url = "https://ge3.pythonanywhere.com/updateOnline"
         # url = "http://127.0.0.1:5000/updateOnline"
 
         response = requests.post(
@@ -46,7 +46,7 @@ def updateDiscordStatusRPS(project):
             large_image="logo",
             start=time.time(),
             buttons=[
-                {"label": "Download", "url": "https://artyom7777.pythonanywhere.com/"}
+                {"label": "Download", "url": "https://ge3.pythonanywhere.com/"}
             ]
         )
 

@@ -24,7 +24,7 @@ class Help(QMessageBox):
 
         self.init()
 
-        thr = threading.Thread(target=lambda: webbrowser.open("https://artyom7777.pythonanywhere.com/"))
+        thr = threading.Thread(target=lambda: webbrowser.open("https://ge3.pythonanywhere.com/"))
         thr.daemon = True
         thr.start()
 

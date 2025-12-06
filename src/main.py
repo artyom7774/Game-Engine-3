@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QLabel, QStatusBar, QAction, QTreeWidgetItem, QShortcut, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeWidget, QLabel, QStatusBar, QAction, QFrame, QTreeWidgetItem, QShortcut, QPushButton
 from PyQt5.QtCore import QEvent
 from PyQt5.QtGui import QKeySequence, QPixmap
 from PyQt5.Qt import QIcon, Qt, QTimer
@@ -91,8 +91,13 @@ class Main(QMainWindow):
             thr.daemon = True
             thr.start()
 
-        internet.updateDiscordStatusRPS(self)
-        internet.updateOnlineOnSite(self)
+        thr = threading.Thread(target=lambda: internet.updateOnlineOnSite(self))
+        thr.daemon = True
+        thr.start()
+
+        thr = threading.Thread(target=lambda: internet.updateDiscordStatusRPS(self))
+        thr.daemon = True
+        thr.start()
 
         self.setWindowTitle("Game Engine 3")
         self.setWindowIcon(QIcon("src/files/sprites/logo.ico"))
@@ -110,7 +115,7 @@ class Main(QMainWindow):
 
     def versionUpdateMessage(self) -> None:
         def function():
-            thr = threading.Thread(target=lambda: webbrowser.open("https://artyom7777.pythonanywhere.com/"))
+            thr = threading.Thread(target=lambda: webbrowser.open("https://ge3.pythonanywhere.com/"))
             thr.daemon = True
             thr.start()
 
@@ -179,6 +184,9 @@ class Main(QMainWindow):
         self.objects["version_log"].hide()
 
         self.objects["main_name"].hide()
+        self.objects["main_line"].hide()
+        self.objects["main_create_text"].hide()
+        self.objects["main_open_text"].hide()
 
         if self.selectProject != "":
             self.objects["tree_project"].show()
@@ -203,7 +211,16 @@ class Main(QMainWindow):
 
         else:
             self.objects["main_name"].show()
-            self.objects["main_name"].setGeometry(50, 10, 1000, 100)
+            self.objects["main_name"].setGeometry(130, 80, 500, 60)
+
+            self.objects["main_line"].show()
+            self.objects["main_line"].setGeometry(125, 140, 500, 1)
+
+            self.objects["main_create_text"].show()
+            self.objects["main_create_text"].setGeometry(130, 160, 200, 30)
+
+            self.objects["main_open_text"].show()
+            self.objects["main_open_text"].setGeometry(130, 185, 200, 30)
 
             # self.objects["version_log"].show()
             # self.objects["version_log"].setGeometry(10, 10, Size.x(200) - 20, Size.y(100) - 20)
@@ -257,11 +274,29 @@ class Main(QMainWindow):
         # MAIN DISPLAY
 
         self.objects["main_name"] = QLabel(self)
-        self.objects["main_name"].setFont(MAIN_BIG_FONT)
         self.objects["main_name"].setText("Game Engine 3")
+        self.objects["main_name"].setFont(QFont("courier new", 30))
+
+        self.objects["main_line"] = QFrame(self)
+        self.objects["main_line"].setStyleSheet(f"background-color: rgb{(32, 33, 36) if SETTINGS['theme'] == 'light' else (248, 249, 250)};")
+        self.objects["main_line"].setFrameShape(QFrame.HLine)
+        self.objects["main_line"].setFrameShadow(QFrame.Sunken)
+
+        self.objects["main_create_text"] = QLabel(self)
+        self.objects["main_create_text"].setFont(HELP_FONT_TWO)
+        self.objects["main_create_text"].setText(translate("Create project"))
+        self.objects["main_create_text"].setCursor(Qt.PointingHandCursor)
+        self.objects["main_create_text"].mousePressEvent = lambda none: functions.menu.file.createFromTemplate(self)
+        self.objects["main_create_text"].setStyleSheet("QLabel:hover {color: rgba(95, 154, 244, 1);}")
+
+        self.objects["main_open_text"] = QLabel(self)
+        self.objects["main_open_text"].setFont(HELP_FONT_TWO)
+        self.objects["main_open_text"].setText(translate("Open project"))
+        self.objects["main_open_text"].setCursor(Qt.PointingHandCursor)
+        self.objects["main_open_text"].mousePressEvent = lambda none: functions.menu.file.open(self)
+        self.objects["main_open_text"].setStyleSheet("QLabel:hover {color: rgba(95, 154, 244, 1);}")
 
         self.objects["version_log"] = VersionLogScrollArea(self, load(open("src/files/updates.json", "r", encoding="utf-8")))
-        self.objects["version_log"].hide()
 
         # PROJECT TREE
 

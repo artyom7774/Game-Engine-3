@@ -83,8 +83,12 @@
         "sprite": {
             "path": {
                 "name": "Path to image",
-                "type": "path",
-                "value": ""
+                "type": "selector",
+                "value": "",
+                "selector": {
+                    "path": "assets",
+                    "formates": [".jpeg", ".jpg", ".jpe", ".jfif", ".png", ".ico", ".tiff", ".tif", ".eps", ".svgb", ".bmp"]
+                }
             },
             "X offset": {
                 "name": "X offset",

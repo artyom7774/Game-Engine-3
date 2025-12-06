@@ -339,6 +339,10 @@
     "node.name.pow": "Power"
     "node.name.sqrt": "Square root"
     "node.name.modulo": "Remainder"
+    "node.name.ifKeyPressed": "If key pressed"
+    "node.name.keyboardRelease": "Keyboard release"
+    "node.name.setObjectRotation": "Set object rotation"
+    "node.name.setListElement": "Set list element"
 
     // NODE TEXT
     "node.text.none": ""

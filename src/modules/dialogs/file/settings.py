@@ -115,6 +115,7 @@ class Settings(QDialog):
         self.objects["language_combobox"] = QComboBox(parent=self)
 
         self.objects["language_combobox"].addItems([obj for obj in LANGUAGES.values()])
+
         for i, name in enumerate(LANGUAGES):
             self.objects["language_combobox"].setItemIcon(i, QIcon(LANGUAGES_ICONS[name]))
 

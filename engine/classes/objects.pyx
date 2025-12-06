@@ -184,7 +184,7 @@ cdef class StaticObject:
         self.lastFrameUpdateNumber = self.game.fpsc
 
         if self.sprite is not None:
-            if self.game.usingWidth + self.sprite.pos.x + self.sprite.size.x + 500 > self.pos.x + px > - 500 - self.sprite.pos.x - self.sprite.size.x and 500 + self.game.usingHeight + self.sprite.pos.y + self.sprite.size.y > self.pos.y + py > - 500 - self.sprite.pos.y - self.sprite.size.y:
+            if self.game.usingWidth + self.sprite.pos.x + self.sprite.width + 100 > self.pos.x + px > - 100 - self.sprite.pos.x - self.sprite.width and 100 + self.game.usingHeight + self.sprite.pos.y + self.sprite.height > self.pos.y + py > - 100 - self.sprite.pos.y - self.sprite.height:
                 sprite = self.sprite.get()
 
                 if not self.invisible or self.game.forcedViewObject:
@@ -192,7 +192,7 @@ cdef class StaticObject:
                         # sprite = sprite.copy()
                         sprite.set_alpha(min(255, max(0, self.alpha)))
 
-                        self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x + px, self.pos.y + self.sprite.pos.y + py))
+                        self.game.screen.blit(sprite, (self.pos.x + self.sprite.pos.x - self.sprite.cx + px, self.pos.y + self.sprite.pos.y - self.sprite.cy + py))
 
         if self.game.debug or (self.group.startswith("__") and self.group.endswith("__") and not self.group == "__debug_unvisiable__"):
             self.hitbox.draw(self.game.screen, self.pos.x, self.pos.y, px, py)
@@ -321,7 +321,10 @@ cdef class DynamicObject(StaticObject):
         if self.collision(0, -1):
             pass
 
-        if self.collision(0, 1):
+        if self.gravity == 0:
+            self.vectors["__fall__"].power = 0
+
+        elif self.collision(0, 1):
             if self.vectors["__fall__"].power > 0:
                 self.vectors["__fall__"].power = 0
 
@@ -380,7 +383,7 @@ cdef class DynamicObject(StaticObject):
             if isinstance(obj["object"], KinematicObject):
                 continue
 
-            if Collision.any(SquareHitbox(now.pos.x + hitbox.x + phitbox[0], now.pos.y + hitbox.y + phitbox[1], hitbox.width + phitbox[2], hitbox.height + phitbox[3]), SquareHitbox(obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height)):
+            if Collision.any(SquareHitbox([now.pos.x + hitbox.x + phitbox[0], now.pos.y + hitbox.y + phitbox[1], hitbox.width + phitbox[2], hitbox.height + phitbox[3]]), SquareHitbox([obj["object"].pos.x + obj["object"].hitbox.x, obj["object"].pos.y + obj["object"].hitbox.y, obj["object"].hitbox.width, obj["object"].hitbox.height])):
                 objects.append(obj["object"])
 
                 objects.extend(self.getObjectStructure(x, y, append, phitbox, obj["object"], visited))

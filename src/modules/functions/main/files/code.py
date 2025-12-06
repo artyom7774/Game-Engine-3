@@ -178,6 +178,7 @@ class AIWorker(QThread):
 
     def __init__(self, text):
         super().__init__()
+
         self.text = text
 
     def run(self):
@@ -873,20 +874,26 @@ class CodeNode(QTreeWidget):
 
         painter.drawImage(2, 2, QImage(self.project.objects["main"]["config"]["icons"][self.node["type"]]))
 
-        painter.drawText(
-            24, self.bg.height() - 8, translate(f"{self.node['display']['name']}")
-        )
+        painter.drawText(24, self.bg.height() - 8, translate(f"{self.node['display']['name']}"))
 
         painter.end()
 
         # CONNECTORS
 
         if "sorting" in self.node and "outputs" in self.node["sorting"]:
-            self.node["outputs"] = dict(
-                sorted(self.node["outputs"].items(), key=lambda x: self.node["sorting"]["outputs"].index(x[1]["code"])))
+            self.node["outputs"] = dict(sorted(self.node["outputs"].items(), key=lambda x: self.node["sorting"]["outputs"].index(x[1]["code"])))
 
         else:
             self.node["outputs"] = dict(sorted(self.node["outputs"].items(), key=lambda x: self.project.objects["main"]["config"]["sorting"].index(x[1]["type"])))
+
+        if "path" not in self.node["inputs"]:
+            self.node["inputs"]["path"] = {
+                "code": "path",
+                "name": "__path__",
+                "type": "path",
+                "value": None,
+                "standard": None
+            }
 
         if "sorting" in self.node and "inputs" in self.node["sorting"]:
             self.node["inputs"] = dict(sorted(self.node["inputs"].items(), key=lambda x: self.node["sorting"]["inputs"].index(x[1]["code"])))
@@ -1746,8 +1753,12 @@ class Code:
 
         # SELECTED
 
-        nodeObj = project.objects["main"]["nodes"][int(project.objects["main"]["replacer"].node)]
-        nodeType = project.objects["main"]["function"]["objects"][str(project.objects["main"]["replacer"].node)]
+        try:
+            nodeObj = project.objects["main"]["nodes"][int(project.objects["main"]["replacer"].node)]
+            nodeType = project.objects["main"]["function"]["objects"][str(project.objects["main"]["replacer"].node)]
+
+        except KeyError:
+            return
 
         project.objects["main"]["replacer_select"] = CodeNodeStroke(project.objects["main"]["code"])
         project.objects["main"]["replacer_select"].setGeometry(nodeObj.x(), nodeObj.y(), nodeObj.width(), nodeObj.height())

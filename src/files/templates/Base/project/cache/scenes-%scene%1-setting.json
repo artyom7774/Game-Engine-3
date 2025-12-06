@@ -48,7 +48,7 @@
         },
         "focus": {
             "name": "Name focus object",
-            "value": "0",
+            "value": "player",
             "type": "str"
         }
     }

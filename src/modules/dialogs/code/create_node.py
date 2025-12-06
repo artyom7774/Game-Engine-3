@@ -14,7 +14,13 @@ import random
 class CreateNodeFunctions:
     @staticmethod
     def create(project, dialog, position, event):
-        node = dialog.objects["select"]
+        if dialog.objects["select"] is None:
+            return
+
+        node, level = dialog.objects["select"]
+
+        if level != 2:
+            return
 
         pos = Vec2f(
             (position.x() + project.cache["file"][project.selectFile].x) // CODE_GRID_CELL_SIZE,
@@ -63,7 +69,7 @@ class CreateNode(QDialog):
         if data["level"] != 2:
             return
 
-        self.objects["select"] = data["node"]
+        self.objects["select"] = (data["node"], data["level"])
 
         self.objects["open_button"].setDisabled(False)
 

@@ -5,6 +5,7 @@ from src.main import Main
 from src.variables import *
 
 import datetime
+import asyncio
 import ctypes
 import sys
 
@@ -23,8 +24,9 @@ def main() -> None:
 
     try:
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(f"Game-Engine-{VERSION}")
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-    except Exception as e:
+    except AttributeError as e:
         pass
 
     app = QApplication(sys.argv)

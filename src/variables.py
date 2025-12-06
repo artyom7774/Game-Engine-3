@@ -129,12 +129,18 @@ BIG_HELP_FONT.setPointSize(14)
 # MAIN BIG FONT
 
 MAIN_BIG_FONT = QFont("Courier")
-MAIN_BIG_FONT.setPointSize(24)
+MAIN_BIG_FONT.setBold(True)
+MAIN_BIG_FONT.setPointSize(52)
 
 # HELP FONT
 
 HELP_FONT = QFont("Courier")
 HELP_FONT.setPointSize(10)
+
+# HELP FONT TWO
+
+HELP_FONT_TWO = QFont("Courier")
+HELP_FONT_TWO.setPointSize(11)
 
 # TRANSLATE
 
@@ -327,7 +333,8 @@ THEMES = {
 
 AI_MODELS = {
     "gemini-2.5-flash": "gemini-2.5-flash",
-    "gemini-2.5-pro": "gemini-2.5-pro"
+    "gemini-2.5-pro": "gemini-2.5-pro",
+    # "gemini-3-pro-preview": "gemini-3-pro-preview"
 }
 
 if SETTINGS["theme"] == "dark":

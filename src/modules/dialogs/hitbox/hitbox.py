@@ -39,9 +39,14 @@ class HitboxFunctions:
 
     @staticmethod
     def chooseParameter(project, dialog, path, obj):
-        dialog.object["StaticObject"]["hitbox"]["value"][path[0]][path[1]][path[2]][path[3]] = int(obj.text())
+        try:
+            dialog.object["StaticObject"]["hitbox"]["value"][path[0]][path[1]][path[2]][path[3]] = int(obj.text())
 
-        HitboxFunctions.save(project, dialog)
+        except ValueError:
+            pass
+
+        else:
+            HitboxFunctions.save(project, dialog)
 
         dialog.init()
 

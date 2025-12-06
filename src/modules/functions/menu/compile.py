@@ -155,14 +155,19 @@ class Game(engine.Application):
                 
                 if self.setKeyEvent(["KEYDOWN", node["inputs"]["key"]["standard"]], lambda command=self.programs[name], temp=id: command.start(temp)):
                     self.print(f"WARNING: not found key: {node['inputs']['key']['standard']}\\n")
+            
+            for id in self.programs[name].get("keyboardRelease"):
+                node = PROGRAMS[name]["objects"][id]
 
-        for name, program in PROGRAMS.items():
+                if self.setKeyEvent(["KEYUP", node["inputs"]["key"]["standard"]], lambda command=self.programs[name], temp=id: command.start(temp)):
+                    self.print(f"WARNING: not found key: {node['inputs']['key']['standard']}\\n")
+            
             for id in self.programs[name].get("keyboardPress"):
                 node = PROGRAMS[name]["objects"][id]
 
                 if self.setKeyEvent(["PRESS", node["inputs"]["key"]["standard"]], lambda command=self.programs[name], temp=id: command.start(temp)):
                     self.print(f"WARNING: not found key: {node['inputs']['key']['standard']}\\n")
-
+            
     def print(self, text: str) -> None:
         if self.socket is not None:
             self.socket.sendall(text.encode())
@@ -457,6 +462,7 @@ class Logger(QDialog):
     def send(self, text: typing.Union[typing.List, str]) -> None:
         text = text.replace("FATAL ERROR", translate("FATAL ERROR"))
         text = text.replace("WARNING", translate("WARNING"))
+        text = text.replace("not found key", translate("not found key"))
 
         self.objects["text"].append(text)
 

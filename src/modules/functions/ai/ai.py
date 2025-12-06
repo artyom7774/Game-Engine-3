@@ -4,7 +4,7 @@ import traceback
 import requests
 import time
 
-url = "https://artyom7777.pythonanywhere.com/ai"
+url = "https://ge3.pythonanywhere.com/ai"
 
 def requestAI(message):
     data = {"message": message, "model": SETTINGS["model"]}

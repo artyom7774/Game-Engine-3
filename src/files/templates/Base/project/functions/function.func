@@ -1,7 +1,7 @@
 {
     "variables": {},
     "objects": {
-        "81376843": {
+        "571630123": {
             "display": {
                 "name": "node.name.onStartGame",
                 "text": {
@@ -10,7 +10,7 @@
                 }
             },
             "height": 3,
-            "id": 81376843,
+            "id": 571630123,
             "inputs": {},
             "name": "onStartGame",
             "outputs": {
@@ -22,10 +22,10 @@
             },
             "type": "event",
             "width": 6,
-            "x": 8,
-            "y": 10
+            "x": 15.0,
+            "y": 11.0
         },
-        "933700812": {
+        "567933737": {
             "display": {
                 "name": "node.name.writeText",
                 "text": {
@@ -35,7 +35,7 @@
                 }
             },
             "height": 3,
-            "id": 933700812,
+            "id": 567933737,
             "inputs": {
                 "path": {
                     "code": "path",
@@ -43,7 +43,7 @@
                     "standard": null,
                     "type": "path",
                     "value": {
-                        "id": 81376843,
+                        "id": 571630123,
                         "name": "path"
                     }
                 },
@@ -65,8 +65,8 @@
             },
             "type": "text",
             "width": 6,
-            "x": 16.0,
-            "y": 10.0
+            "x": 23.0,
+            "y": 11.0
         }
     }
 }

@@ -19,7 +19,7 @@ else:
 
 
 class PythonFunctions:
-    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos", "setObjectParameter", "getObjectParameter", "getTimePassed", "moveObjectWithBraking", "getNoiseValue", "sin", "cos", "tan", "ctg", "degrees", "radians", "goToScene", "getSceneName", "playMusic", "stopMusic", "playSound", "sqrt", "pow"]
+    functions = ["decodeHolder", "exit", "getVar", "setVar", "objectsGroup", "random", "writeText", "displayText", "collision", "createObject", "getObjectIDByName", "getObjectPos", "getObjectVar", "jump", "moveObject", "removeObject", "setObjectPos", "setObjectVar", "getResultingVector", "runAnimation", "stopAnimation", "mirrorAnimation", "getMousePos", "setObjectParameter", "getObjectParameter", "getTimePassed", "moveObjectWithBraking", "getNoiseValue", "sin", "cos", "tan", "ctg", "degrees", "radians", "goToScene", "getSceneName", "playMusic", "stopMusic", "playSound", "sqrt", "pow", "setObjectRotation"]
 
     @staticmethod
     def decodeHolder(text, program, variables, path):
@@ -105,6 +105,10 @@ class PythonFunctions:
         return program.objects.getById(ids).pos.get()
 
     @staticmethod
+    def setObjectRotation(ids, angle, program, variables, path):
+        program.objects.getById(ids).sprite.rotate(angle)
+
+    @staticmethod
     def getObjectVar(ids, name, program, variables, path):
         return variables["objects"][program.scene][program.objectNameByID[program.scene][str(ids)] if str(ids) in program.objectNameByID[program.scene] else str(ids)][name]["value"]
 
@@ -171,6 +175,8 @@ class PythonFunctions:
 
     @staticmethod
     def getNoiseValue(seed, x, y, octaves, frequency, amplitude, lacunarity, persistence, mn, mx, program, variables, path):
+        # TODO
+
         return PerlinNoise(seed).octave_noise(x + random.uniform(-0.1, 0.1), y + random.uniform(-0.1, 0.1), octaves, frequency, amplitude, lacunarity, persistence, mn, mx)
 
     @staticmethod

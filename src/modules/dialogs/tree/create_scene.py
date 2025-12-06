@@ -59,7 +59,7 @@ SCENE_SETTINGS_TEMPLATE = {
         },
         "focus": {
             "name": "Name focus object",
-            "value": "0.objc",
+            "value": "",
             "type": "str"
         }
     }

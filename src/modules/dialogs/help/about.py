@@ -37,7 +37,7 @@ class About(QDialog):
         self.objects["site"].setFont(HELP_FONT)
         self.objects["site"].setGeometry(10, 45, 600, 40)
         self.objects["site"].setTextFormat(Qt.RichText)
-        self.objects["site"].setText("Site: <a href='https://artyom7777.pythonanywhere.com/'>https://artyom7777.pythonanywhere.com/</a>")
+        self.objects["site"].setText("Site: <a href='https://ge3.pythonanywhere.com/'>https://ge3.pythonanywhere.com/</a>")
         self.objects["site"].setOpenExternalLinks(True)
         self.objects["site"].show()
 

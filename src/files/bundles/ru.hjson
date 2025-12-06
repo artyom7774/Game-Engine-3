@@ -262,6 +262,9 @@
     "File must be in dir": "Файл должен быть в папке"
     "Open file explorer": "Открыть проводник"
     "Empty project": "Пустой проект"
+    "not found key": "не найден ключ"
+    "Select file": "Выбрать файл"
+    "Currect file formates": "Доступные форматы файла"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"
@@ -355,6 +358,10 @@
     "node.name.pow": "Степень"
     "node.name.sqrt": "Квадратный корень"
     "node.name.modulo": "Остаток от деления"
+    "node.name.ifKeyPressed": "Если клавиша нажата"
+    "node.name.keyboardRelease": "При отжатии клавиши"
+    "node.name.setObjectRotation": "Установить поворот объекта"
+    "node.name.setListElement": "Установить элемент списка"
 
     // NODE TEXT
     "node.text.none": ""
@@ -417,7 +424,7 @@
     "object.parameter.number.group": "1. Группа"
     "object.parameter.number.mass": "2. Масса"
     "object.parameter.number.layer": "3. Слой"
-    "object.parameter.number.invisible": "4. Невидемость"
+    "object.parameter.number.invisible": "4. Нивидемость"
     "object.parameter.number.gravity": "5. Гравитация"
     "object.parameter.number.brakingPower": "6. Сила торможения"
     "object.parameter.number.message": "7. Сообщение"

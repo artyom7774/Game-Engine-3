@@ -412,7 +412,11 @@ def centerMenuInit(project, update: bool = False) -> None:
     #     project.objects["main"]["code"].deleteLater()
 
     if project.selectFile != "" or update:
-        SaveAllObjectsValues(project)
+        try:
+            SaveAllObjectsValues(project)
+
+        except BaseException:
+            pass
 
         for key, value in project.objects["main"].items():
             if key.find("timer") != -1:

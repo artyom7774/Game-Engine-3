@@ -11,7 +11,7 @@ import os
 
 class CreateObjectFunctions:
     @staticmethod
-    def create(project, dialog, event, name: str = None, logger: bool = True, loadFile: str = "engine/files/objects.json", save: str = None) -> None:
+    def create(project, dialog, event, name: str = None, logger: bool = True, loadFile: str = "engine/files/object.json", save: str = None) -> None:
         if save is None:
             path = projectTreeGetFilePath(projectTreeGetPath(project.objects["tree_project"].selectedItems()[0]))
 

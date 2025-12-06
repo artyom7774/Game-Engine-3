@@ -81,6 +81,8 @@ class Application:
 
         self.fpsc = 0
 
+        self.allPressedKeys = pygame.key.get_pressed()
+
         self.events = {
             "PRESS": {}
         }
@@ -169,9 +171,7 @@ class Application:
     def setFunctionClass(self, functionClass) -> None:
         self.functions = functionClass
 
-    def setKeyEvent(self, event: typing.List[str], func: typing.Callable) -> int:
-        # setKeyEvent(["KEYDOWN", "r"], function)
-
+    def getCurrectKey(self, event: typing.List[str]):
         try:
             event[0] = getattr(pygame, event[0])
             event[1] = getattr(pygame, "K_" + event[1])
@@ -187,7 +187,17 @@ class Application:
                     event[1] = getattr(pygame, "K_" + event[1].upper())
 
                 except AttributeError:
-                    return 1
+                    return None
+
+        return event
+
+    def setKeyEvent(self, event: typing.List[str], func: typing.Callable) -> int:
+        # setKeyEvent(["KEYDOWN", "r"], function)
+
+        event = self.getCurrectKey(event)
+
+        if event is None:
+            return 1
 
         if event[0] not in self.events:
             self.events[event[0]] = {}
@@ -244,10 +254,10 @@ class Application:
             if event.type == pygame.MOUSEBUTTONUP:
                 self.click[event.button - 1] = True
 
-        keys = pygame.key.get_pressed()
+        self.allPressedKeys = pygame.key.get_pressed()
 
         for key, value in self.events.get("PRESS").items():
-            if keys[key]:
+            if self.allPressedKeys[key]:
                 for element in value:
                     element()
 
