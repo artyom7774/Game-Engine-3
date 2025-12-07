@@ -1194,8 +1194,14 @@ class CodeNode(QTreeWidget):
             if self.node["inputs"][key]["value"] is not None:
                 finish = self.project.objects["main"]["function"]["objects"][str(self.node["inputs"][key]["value"]["id"])]
 
-                indexStart = list(self.node["inputs"].keys()).index(key) + 1
-                indexFinish = list(finish["outputs"].keys()).index(self.node["inputs"][key]["value"]["name"]) + 1
+                try:
+                    indexStart = list(self.node["inputs"].keys()).index(key) + 1
+                    indexFinish = list(finish["outputs"].keys()).index(self.node["inputs"][key]["value"]["name"]) + 1
+
+                except ValueError as e:
+                    print(f"ERROR: {self.node['id']=}")
+
+                    raise ValueError(e)
 
                 usingOtputsPointPossesKeys.append(self.node["id"])
 
