@@ -6,6 +6,7 @@ import time
 
 url = "https://ge3.pythonanywhere.com/ai"
 
+
 def requestAI(message):
     data = {"message": message, "model": SETTINGS["model"]}
 
