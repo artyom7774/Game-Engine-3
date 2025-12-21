@@ -39,6 +39,6 @@ def moveObjectWithBraking(program, compiler, path: str, nodes: dict, id: int, va
     if not hasattr(obj, "moveByAngle"):
         raise EngineError(f"type of object must be not static")
 
-    obj.moveByAngle(360 - (angle + 90) + 180, power, slidingStep, specifical=id)
+    obj.moveByAngle(angle - 270, power, slidingStep, specifical=id)
 
     return queue

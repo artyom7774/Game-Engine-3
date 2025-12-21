@@ -3,6 +3,7 @@ from src.variables import *
 import json
 import os
 
+
 def updating(name):
     for dirpath, _, filenames in os.walk(f"{PATH_TO_PROJECTS}/{name}/project/objects"):
         for filename in filenames:

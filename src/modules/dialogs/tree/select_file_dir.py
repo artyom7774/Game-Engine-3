@@ -49,6 +49,6 @@ def selectFileDir(project, object, path: str = None, formates: list = None, func
     object.setText(file)
 
     if not function:
-        return
+        return file
 
     function(file)

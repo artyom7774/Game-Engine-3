@@ -20,7 +20,7 @@ class RenameObjectFunctions:
         # LOGGER
 
         if name == "":
-            dialog.objects["log_label"].setText("Imposiable object name")
+            dialog.objects["log_label"].setText("Imposiable file name")
 
             return
 
@@ -29,13 +29,13 @@ class RenameObjectFunctions:
                 pass
 
         except BaseException:
-            dialog.objects["log_label"].setText("Imposiable object name")
+            dialog.objects["log_label"].setText("Imposiable file name")
 
             return
 
         for element in os.listdir(path if os.path.isdir(path) else path[:path.rfind("/")]):
             if element == name:
-                dialog.objects["log_label"].setText("Object name already exist")
+                dialog.objects["log_label"].setText("File name already exist")
 
                 return
 
@@ -54,15 +54,25 @@ class RenameObjectFunctions:
 
         # RENAME
 
-        try:
-            if os.path.isfile(path):
-                os.rename(path, path[:path.rfind("/")] + "/" + specials + name + "." + extension)
+        new = path[:path.rfind("/")] + "/" + specials + name + "." + extension if os.path.isfile(path) else path[:path.rfind("/")] + "/" + specials + name
 
-            else:
-                os.rename(path, path[:path.rfind("/")] + "/" + specials + name)
+        try:
+            os.rename(path, new)
 
         except FileExistsError:
             MessageBox.error("file exists in this directory")
+
+        if path.find("%scene%") != -1:
+            try:
+                os.rename(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/cache/scenes-{last}-setting.json", f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/cache/scenes-%scene%{name}-setting.json")
+
+            except FileNotFoundError:
+                pass
+
+        project.objects["tab_file_bar"].rename(path, new)
+
+        if project.selectFile == path:
+            project.selectFile = new
 
         project.init()
 
@@ -75,7 +85,7 @@ class RenameObject(QDialog):
 
         self.project = project
 
-        self.setWindowTitle(translate("Rename object"))
+        self.setWindowTitle(translate("Rename file"))
         self.setFixedSize(600, 400)
 
         desktop = QtWidgets.QApplication.desktop()

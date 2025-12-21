@@ -270,6 +270,11 @@ class ObjectGroup:
         return self.objectById.get(id)
 
     def removeByGroup(self, group: str) -> None:
+        for obj in self.objects:
+            if obj.group == group:
+                self.remove(obj)
+
+        """
         if group not in self.objectByGroup:
             return
 
@@ -277,6 +282,7 @@ class ObjectGroup:
 
         for obj in objects:
             self.remove(obj)
+        """
 
     def removeById(self, id: int) -> None:
         if id not in self.objectById:

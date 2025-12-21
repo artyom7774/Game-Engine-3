@@ -61,6 +61,8 @@ class Main(QMainWindow):
 
         self.dialog = None
 
+        self.start_background = None
+
         self.menubar = None
 
         self.selectProject = ""
@@ -245,6 +247,8 @@ class Main(QMainWindow):
 
                 self.init()
 
+            functions.tree.open(self, self.selectFile)
+
         for key, value in self.objects.items():
             try:
                 value.hide()
@@ -394,6 +398,9 @@ class Main(QMainWindow):
         project_run_action = QAction(translate("Run"), self)
         project_run_action.triggered.connect(lambda: functions.compile.run(self))
 
+        project_publish_action = QAction(translate("Publish"), self)
+        project_publish_action.triggered.connect(lambda: functions.compile.publish(self))
+
         project_compile_action = QAction(translate("Compile"), self)
         project_compile_action.triggered.connect(lambda: functions.compile.compile(self))
 
@@ -412,6 +419,8 @@ class Main(QMainWindow):
             self.menues["project_menu"].setDisabled(True)
 
         self.menues["project_menu"].addAction(project_run_action)
+        self.menues["project_menu"].addSeparator()
+        self.menues["project_menu"].addAction(project_publish_action)
         self.menues["project_menu"].addSeparator()
         self.menues["project_menu"].addAction(project_compile_action)
         self.menues["project_menu"].addAction(project_compile_and_run_action)
@@ -456,7 +465,7 @@ class Main(QMainWindow):
 
         def q(project):
             if project.selectFile[project.selectFile.find(".") + 1:].find("%scene%") != -1:
-                for _ in range(2):
+                for _ in range(3):
                     functions.files.Scene.objectReleased(self)
 
         def ctrlC(project):

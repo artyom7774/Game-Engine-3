@@ -8,6 +8,7 @@ from src.variables import *
 
 import subprocess
 import threading
+import zipfile
 import socket
 import shutil
 import typing
@@ -520,6 +521,56 @@ class Compile:
             thr.start()
 
     @staticmethod
+    def publish(project) -> bool:
+        with zipfile.ZipFile(f"{PATH_TO_PROJECTS}/{project.selectProject}/temp.zip", "w") as zip:
+            for root, dirs, files in os.walk(f"{PATH_TO_PROJECTS}/{project.selectProject}/project"):
+                for file in files:
+                    file_path = os.path.join(root, file)
+
+                    arcname = "project/" + os.path.relpath(file_path, f"{PATH_TO_PROJECTS}/{project.selectProject}/project")
+
+                    zip.write(file_path, arcname)
+
+            zip.write(f"{PATH_TO_PROJECTS}/{project.selectProject}/version.json", "version.json")
+
+        import requests
+        import hashlib
+        import socket
+
+        def get_local_ips():
+            ips = set()
+
+            hostname = socket.gethostname()
+
+            for info in socket.getaddrinfo(hostname, None):
+                ip = info[4][0]
+
+                if ":" in ip:
+                    ips.add(ip)
+
+            return list(ips)
+
+        url = "https://ge3.pythonanywhere.com/upload"
+        zip_path = f"{PATH_TO_PROJECTS}/{project.selectProject}/temp.zip"
+
+        headers = {
+            "ip": hashlib.sha256(get_local_ips()[0].encode()).hexdigest(),
+            "name": project.selectProject
+        }
+
+        with open(zip_path, "rb") as f:
+            files = {
+                "file": ("test.zip", f, "application/zip")
+            }
+
+            response = requests.post(url, files=files, headers=headers)
+
+        print("Status:", response.status_code)
+        print("Response:", response.text)
+
+        os.remove(f"{PATH_TO_PROJECTS}/{project.selectProject}/temp.zip")
+
+    @staticmethod
     def compile(project, executable: bool = True) -> bool:
         engine = f"{PATH_TO_PROJECTS}/{project.selectProject}/src/engine"
 
@@ -938,6 +989,11 @@ def run(project) -> None:
     logger(project, "Run")
 
     thr = threading.Thread(target=lambda: Compile.run(project))
+    thr.start()
+
+
+def publish(project) -> None:
+    thr = threading.Thread(target=lambda: Compile.publish(project))
     thr.start()
 
 

@@ -260,11 +260,17 @@
     "WARNING": "ПРЕДУПРЕЖДЕНИЕ"
     "Choose path": "Выберите путь"
     "File must be in dir": "Файл должен быть в папке"
-    "Open file explorer": "Открыть проводник"
+    "Open dir explorer": "Открыть проводник"
     "Empty project": "Пустой проект"
     "not found key": "не найден ключ"
     "Select file": "Выбрать файл"
     "Currect file formates": "Доступные форматы файла"
+    "Imposiable file name": "Невозможное имя файла"
+    "Rename file": "Переименовать файл"
+    "File name already exist": "Имя файла уже существует"
+    "Choose file": "Выбрать файл"
+    "Project description": "Описание проекта"
+    "Publish": "Опубликовать"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"
@@ -437,4 +443,8 @@
     "object.parameter.number.liveTime": "14. Время жизни"
     "object.parameter.number.minusSpriteSizePerFrame": "15. Минус размер спрайта каждый кадр"
     "object.parameter.number.alpha": "16. Прозрачность"
+
+    // TEMPLATES
+    "template.base": "Основной шаблон"
+    "template.player-controller": "Контроллер персонажа"
 }

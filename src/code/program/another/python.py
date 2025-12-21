@@ -120,7 +120,7 @@ class PythonFunctions:
 
     @staticmethod
     def moveObject(ids, angle, power, program, variables, path):
-        program.objects.getById(int(ids)).moveByAngle(360 - (angle + 90) + 180, power)
+        program.objects.getById(int(ids)).moveByAngle(angle - 270, power)
 
     @staticmethod
     def removeObject(ids, program, variables, path):
@@ -171,13 +171,13 @@ class PythonFunctions:
 
     @staticmethod
     def moveObjectWithBraking(ids, angle, power, brakingPower, program, variables, path):
-        program.objects.getById(int(ids)).moveByAngle(360 - (angle + 90) + 180, power, brakingPower)
+        program.objects.getById(int(ids)).moveByAngle(angle - 270, power, brakingPower)
 
     @staticmethod
     def getNoiseValue(seed, x, y, octaves, frequency, amplitude, lacunarity, persistence, mn, mx, program, variables, path):
         # TODO
 
-        return PerlinNoise(seed).octave_noise(x + random.uniform(-0.1, 0.1), y + random.uniform(-0.1, 0.1), octaves, frequency, amplitude, lacunarity, persistence, mn, mx)
+        return random.randint(mn, mx)
 
     @staticmethod
     def sin(x, program, variables, path):

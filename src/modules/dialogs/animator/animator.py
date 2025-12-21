@@ -1,9 +1,8 @@
-from PyQt5.QtWidgets import QDialog, QApplication, QMenu, QLabel, QWidget, QScrollArea, QFrame, QGridLayout, QSizePolicy, QVBoxLayout, QLineEdit, QTreeWidgetItem, QComboBox, QCheckBox, QPushButton, QTreeWidget
+from PyQt5.QtWidgets import QDialog, QApplication, QFileDialog, QMenu, QLabel, QWidget, QScrollArea, QFrame, QGridLayout, QSizePolicy, QVBoxLayout, QLineEdit, QTreeWidgetItem, QComboBox, QCheckBox, QPushButton, QTreeWidget
 from PyQt5.QtCore import Qt, QMimeData, pyqtSignal
 from PyQt5.QtGui import QPixmap, QImage, QDrag
-from PyQt5 import QtCore
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 
 from src.modules.widgets import FocusLineEdit
 
@@ -16,6 +15,44 @@ import orjson
 import numpy
 import math
 import os
+
+
+def selectFileDir(project, object, path: str = None, formates: list = None, function: typing.Callable = None):
+    if SYSTEM == "Windows":
+        file = QFileDialog.getOpenFileName(None, translate("Choose path"), f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/{path}")
+
+    else:
+        file = QFileDialog.getOpenFileName(None, translate("Choose path"), f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/{path}")
+
+    file = os.path.normpath(file[0])
+
+    if not file or file == ".":
+        return None
+
+    if not file.startswith(os.path.normpath(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/{path}")):
+        MessageBox.error(f"{translate('File must be in dir')}: {path}")
+
+        return None
+
+    file = file.replace(os.path.normpath(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/"), "")
+
+    file = file.replace("\\", "/", 1000)
+
+    if file.startswith("/"):
+        file = file[1:]
+
+    if not any([file.endswith(format) for format in formates]) and (formates is None or len(formates) > 0):
+        MessageBox.error(f"{translate('Currect file formates')}: {' '.join(formates)}")
+
+        return None
+
+    if object:
+        object.setText(file)
+
+    if function:
+        function(file)
+
+    return file
 
 
 class Image:
@@ -123,88 +160,6 @@ class Image:
         project.objects["main"]["image"].setGeometry(project.objects["center_rama"].x() + x, project.objects["center_rama"].y() + y, image.width, image.height)
         project.objects["main"]["image"].setPixmap(pixmap)
         project.objects["main"]["image"].show()
-
-
-class AnimatorCreateFrame(QDialog):
-    def __init__(self, project, dialog, parent=None) -> None:
-        QDialog.__init__(self, parent)
-
-        self.project = project
-        self.dialog = dialog
-
-        self.setWindowTitle(translate("Create frame"))
-        self.setFixedSize(600, 400)
-
-        desktop = QtWidgets.QApplication.desktop()
-        self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
-
-        self.objects = {}
-
-        self.init()
-
-    def init(self) -> None:
-        self.objects["empty"] = QPushButton(parent=self)
-        self.objects["empty"].setGeometry(0, 0, 0, 0)
-
-        # SPRITE
-
-        self.objects["sprite_label"] = QLabel(parent=self, text=translate("Path to sprite") + ":")
-        self.objects["sprite_label"].setGeometry(10, 10, 200, 25)
-        self.objects["sprite_label"].setFont(FONT)
-        self.objects["sprite_label"].show()
-
-        self.objects["sprite_entry"] = QLineEdit(parent=self)
-        self.objects["sprite_entry"].setGeometry(210, 10, 300, 25)
-        self.objects["sprite_entry"].setFont(FONT)
-        self.objects["sprite_entry"].show()
-
-        # LOG TEXT
-
-        self.objects["log_label"] = QLabel(parent=self, text="")
-        self.objects["log_label"].setGeometry(0, 310, 600, 20)
-        self.objects["log_label"].setFont(FONT)
-        self.objects["log_label"].show()
-
-        self.objects["log_label"].setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.objects["log_label"].setStyleSheet("color: red;")
-
-        # CREATE
-
-        self.objects["create_button"] = QPushButton(parent=self, text=translate("Create"))
-        self.objects["create_button"].setStyleSheet(BUTTON_BLUE_STYLE)
-
-        self.objects["create_button"].released.connect(lambda: self.objects["empty"].setFocus())
-
-        self.objects["create_button"].setGeometry(150, 340, 300, 40)
-        self.objects["create_button"].setFont(FONT)
-        self.objects["create_button"].show()
-
-        self.objects["create_button"].clicked.connect(lambda event: self.createFrame(event))
-
-    def createFrame(self, event):
-        path = self.objects["sprite_entry"].text()
-
-        if not os.path.exists(f"{PATH_TO_PROJECTS}/{self.project.selectProject}/project/{path}"):
-            self.objects["log_label"].setText("File is not found")
-
-            return
-
-        if path[path.rfind(".") + 1:] not in IMAGE_FORMATES:
-            self.objects["log_label"].setText("Image formate is not possible")
-
-            return
-
-        self.dialog.object["StaticObject"]["animation"]["value"]["groups"][self.dialog.selectGroup]["sprites"].append(path)
-
-        AnimatorFunctions.save(self.project, self.dialog)
-
-        self.close()
-
-    def keyPressEvent(self, event) -> None:
-        if event.key() in (Qt.Key_Enter, Qt.Key_Return):
-            self.objects["create_button"].click()
-
-        event.accept()
 
 
 class AnimationContainerTile(QWidget):
@@ -455,8 +410,14 @@ class AnimatorFunctions:
     def createNewFrame(project, dialog):
         dialog.init()
 
-        dialog.dialog = AnimatorCreateFrame(project, dialog)
-        dialog.dialog.exec_()
+        name = selectFileDir(dialog.project, None, "assets/", IMAGE_FORMATES)
+
+        if not name:
+            return
+
+        dialog.object["StaticObject"]["animation"]["value"]["groups"][dialog.selectGroup]["sprites"].append(name)
+
+        AnimatorFunctions.save(project, dialog)
 
     @staticmethod
     def renameGroup(project, dialog, name, widget):
@@ -609,7 +570,7 @@ class Animator(QDialog):
         self.objects["main_rama"].setGeometry(10, 10, 1000, 460)
         self.objects["main_rama"].show()
 
-        if self.selectSprite is not None:
+        if self.selectSprite is not None and self.selectSprite is not None:
             x, y, pixmap = Image.getPixmap(self.project, 1000, 460, self.selectSprite)
 
             self.objects["main_image"] = QLabel(parent=self.objects["main_rama"])

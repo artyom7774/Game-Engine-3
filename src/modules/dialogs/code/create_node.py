@@ -14,10 +14,8 @@ import random
 class CreateNodeFunctions:
     @staticmethod
     def create(project, dialog, position, event):
-        if dialog.objects["select"] is None:
-            return
-
-        node, level = dialog.objects["select"]
+        node = dialog.objects["nodes"].selectedItems()[0].data(0, 1000)["node"]
+        level = dialog.objects["nodes"].selectedItems()[0].data(0, 1000)["level"]
 
         if level != 2:
             return
@@ -27,7 +25,7 @@ class CreateNodeFunctions:
             (position.y() + project.cache["file"][project.selectFile].y) // CODE_GRID_CELL_SIZE
         )
 
-        node["id"] = random.randint(1, 1000000000)
+        node["id"] = random.randint(1, 1e18)
 
         node["x"] = pos.x
         node["y"] = pos.y
@@ -63,16 +61,6 @@ class CreateNode(QDialog):
 
         self.init()
 
-    def choose(self, item, column) -> None:
-        data = item.data(column, 1000)
-
-        if data["level"] != 2:
-            return
-
-        self.objects["select"] = (data["node"], data["level"])
-
-        self.objects["open_button"].setDisabled(False)
-
     def init(self) -> None:
         self.objects["empty"] = QPushButton(parent=self)
         self.objects["empty"].setGeometry(0, 0, 0, 0)
@@ -85,7 +73,6 @@ class CreateNode(QDialog):
         self.objects["nodes"].setHeaderHidden(True)
         self.objects["nodes"].show()
 
-        self.objects["nodes"].itemClicked.connect(self.choose)
         self.objects["nodes"].itemDoubleClicked.connect(lambda event: CreateNodeFunctions.create(self.project, self, self.position, event))
 
         self.objects["select"] = None
@@ -171,8 +158,6 @@ class CreateNode(QDialog):
         self.objects["open_button"].setGeometry(300, 540, 300, 40)
         self.objects["open_button"].setFont(FONT)
         self.objects["open_button"].show()
-
-        self.objects["open_button"].setDisabled(True)
 
         self.objects["open_button"].clicked.connect(lambda event: CreateNodeFunctions.create(self.project, self, self.position, event))
 

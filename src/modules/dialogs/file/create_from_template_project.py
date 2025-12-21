@@ -34,7 +34,7 @@ class CreateProjectFunctions:
 
                 return
 
-        template = dialog.templates[dialog.objects["template_combobox"].currentIndex()]
+        template = dialog.names[dialog.objects["template_combobox"].currentIndex()]
 
         project.selectProject = name
 
@@ -56,7 +56,20 @@ class CreateFromTemplateProject(QDialog):
         self.move((desktop.width() - self.width()) // 2, (desktop.height() - self.height() - PLUS) // 2)
 
         self.template = "src/files/templates"
-        self.templates = ["Empty project"] + list(sorted([name for name in os.listdir(self.template)], key=lambda x: 0 if x == translate("Base") else 1))
+
+        self.config = {}
+
+        for code in os.listdir(self.template):
+            with open(f"{self.template}/{code}/version.json", "r", encoding="utf-8") as file:
+                version = json.load(file)
+
+            self.config[code] = {
+                "code": code,
+                "name": version["template"]
+            }
+
+        self.names = ["Empty project"] + list(sorted([element["code"] for element in self.config.values()], key=lambda x: 0 if x == translate("Base") else 1))
+        self.templates = ["Empty project"] + list(sorted([element["name"] for element in self.config.values()], key=lambda x: 0 if x == translate("Base") else 1))
 
         self.objects = {}
 

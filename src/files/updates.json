@@ -34,7 +34,8 @@
         "3.13.3",
         "3.14.0",
         "3.15.0",
-        "3.15.1"
+        "3.15.1",
+        "3.15.2"
     ],
 
     "updates": {
@@ -210,7 +211,12 @@
 
         "3.15.1": {
             "name": "3.15.1",
-            "text": "- can select a file from the directory in the nodes instead of entering the path manually\n- fixed bug with copy file in windows\n- new nodes: if key pressed, keyboard release, rotate object\n- new functions for the python node: rotateObject\n- fixed bug with render big objects in game"
+            "text": "- can select a file from the directory in the nodes instead of entering the path manually\n- new nodes: if key pressed, keyboard release, rotate object\n- new functions for the python node: rotateObject\n- new choosing frame in animation\n- fixed bug with render big objects in game\n- fixed bug with displaing connectors in code\n- fixed bug with copy file in windows"
+        },
+
+        "3.15.2": {
+            "name": "3.15.2",
+            "text": "- new templates: base template, player controller\n- fixed bug with node get resulting vector\n- fixed bug with closing tabs\n- fixed bug with rename file"
         }
     }
 }

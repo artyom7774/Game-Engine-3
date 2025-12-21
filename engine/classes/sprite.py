@@ -45,7 +45,7 @@ class Sprite:
                 self.image = path
 
         except FileNotFoundError:
-            print(f"LOG: not found image ({path})")
+            # print(f"LOG: not found image ({path})")
 
             self.image = None
 

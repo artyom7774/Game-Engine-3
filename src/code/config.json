@@ -144,7 +144,6 @@
                 "getObjectParameter",
                 "setObjectParameter",
                 "getAllObjectInGroup",
-                "setObjectRotation",
                 "jump"
             ]
         },
@@ -153,7 +152,8 @@
             "nodes": [
                 "runAnimation",
                 "stopAnimation",
-                "mirrorAnimation"
+                "mirrorAnimation",
+                "setObjectRotation"
             ]
         },
         "another": {

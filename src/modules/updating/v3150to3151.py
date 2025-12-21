@@ -60,3 +60,27 @@ def updating(name):
 
                 with open(f"{dirpath}/{filename}", "w", encoding="utf-8") as file:
                     json.dump(objects, file, indent=4)
+
+    with open(f"{PATH_TO_PROJECTS}/{name}/project/project.cfg", "r") as file:
+        config = json.load(file)
+
+    config["type"] = "selector"
+    config["selector"] = {
+        "path": "assets",
+        "formates": [
+            ".jpeg",
+            ".jpg",
+            ".jpe",
+            ".jfif",
+            ".png",
+            ".ico",
+            ".tiff",
+            ".tif",
+            ".eps",
+            ".svgb",
+            ".bmp"
+        ]
+    }
+
+    with open(f"{PATH_TO_PROJECTS}/{name}/project/project.cfg", "w") as file:
+        json.dump(config, file, indent=4)

@@ -67,7 +67,7 @@ class Application:
         self.click = [0, 0, 0, 0, 0]
 
         self.name = name
-        self.icon = icon
+        self.icon = icon if icon is not None else ""
 
         self.cache = {
             "collisions": {},

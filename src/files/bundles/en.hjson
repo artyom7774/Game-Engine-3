@@ -418,4 +418,8 @@
     "object.parameter.number.liveTime": "14. Live time"
     "object.parameter.number.minusSpriteSizePerFrame": "15. Minus sprite size per frame"
     "object.parameter.number.alpha": "16. Transparency"
+
+    // TEMPLATES
+    "template.base": "Base template"
+    "template.player-controller": "Player controller"
 }

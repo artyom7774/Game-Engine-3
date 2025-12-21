@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel, QCheckBox, QPushButton, QDialog, QComboBox, QTreeWidget
+from PyQt5.QtWidgets import QLabel, QCheckBox, QFileDialog, QPushButton, QDialog, QComboBox, QTreeWidget
 from PyQt5 import QtWidgets, QtCore
 
 from src.modules.functions.main.files.code import CodeAdditionsVarsType as ConfigAdditionsVarsType
@@ -11,9 +11,66 @@ from engine.vector.int import Vec4i
 
 from src.variables import *
 
-import json
+import typing
 import os
 import re
+
+
+def selectFileDir(project, object, path: str = None, formates: list = None, function: typing.Callable = None):
+    if SYSTEM == "Windows":
+        file = QFileDialog.getOpenFileName(None, translate("Choose path"), f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/{path}")
+
+    else:
+        file = QFileDialog.getOpenFileName(None, translate("Choose path"), f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/{path}")
+
+    file = os.path.normpath(file[0])
+
+    if not file or file == ".":
+        return
+
+    if not file.startswith(os.path.normpath(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/{path}")):
+        MessageBox.error(f"{translate('File must be in dir')}: {path}")
+
+        return
+
+    file = file.replace(os.path.normpath(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/"), "")
+
+    file = file.replace("\\", "/", 1000)
+
+    if file.startswith("/"):
+        file = file[1:]
+
+    if not any([file.endswith(format) for format in formates]) and (formates is None or len(formates) > 0):
+        MessageBox.error(f"{translate('Currect file formates')}: {' '.join(formates)}")
+
+        return
+
+    object.setText(file)
+
+    if function:
+        function(file)
+
+    return file
+
+
+class SelectorButton(QPushButton):
+    def __init__(self, parent, key, value, path, formates):
+        QPushButton.__init__(self, parent)
+
+        self.key = key
+        self.value = value
+
+        self.path = path
+        self.formates = formates
+
+        self.clicked.connect(lambda: self.function())
+
+    def function(self):
+        name = selectFileDir(self.parent(), self, self.path, self.formates)
+
+        self.value["value"] = name
+
+        Config.save(self.parent(), self.key, self.value)
 
 
 class ConfigButtonStartSceneFunctions:
@@ -193,9 +250,20 @@ class Config:
                     project.objects["main"][f"{k}_button"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
                     project.objects["main"][f"{k}_button"].show()
 
-                    project.objects["main"][f"{k}_button"].setText(re.sub("%.*?%", "", v["value"].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/scenes/", "")) if v["value"] != "" else translate("Choose"))
+                    project.objects["main"][f"{k}_button"].setText(re.sub("%.*?%", "", v["value"].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/scenes/", "")) if v["value"] != "" else translate("Choose scene"))
 
                     project.objects["main"][f"{k}_button"].clicked.connect(lambda empty=None, key=k, value=v: ConfigButtonStartScene.start(project, key, value))
+
+                elif v["type"] == "selector":
+                    if v["value"] is None:
+                        v["value"] = ""
+
+                    project.objects["main"][f"{k}_button"] = SelectorButton(project, k, v, v["selector"]["path"], v["selector"]["formates"])
+                    project.objects["main"][f"{k}_button"].setText(translate("Select file") if v["value"] == "" else v["value"])
+                    project.objects["main"][f"{k}_button"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
+                    project.objects["main"][f"{k}_button"].show()
+
+                    project.objects["main"][f"{k}_button"].setText(re.sub("%.*?%", "", v["value"].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/scenes/", "")) if v["value"] != "" else translate("Choose file"))
 
                 else:
                     raise NameError(f"type {v['type']} is not defined")
@@ -228,7 +296,7 @@ class Config:
 
             try:
                 if value["type"] == "str":
-                    answer = str(project.objects['main'][obj].text())
+                    answer = str(project.objects["main"][obj].text())
 
                 elif value["type"] == "path":
                     if os.path.exists(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/{project.objects['main'][obj].text()}") and any([project.objects['main'][obj].text().endswith(element) for element in IMAGE_FORMATES]):

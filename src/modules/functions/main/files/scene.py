@@ -9,6 +9,7 @@ from src.modules.functions.main.files.objects.objtext import ObjectText
 from src.modules.functions.main.files.objects.abstract import fontCreateDialog, colorCreateDialog
 
 from src.modules.dialogs.tree.create_object import CreateObjectFunctions
+from src.modules.dialogs.tree.create_scene import SCENE_SETTINGS_TEMPLATE
 
 from src.modules.functions.main.files.objects.object import Object as ObjectTypingClass
 
@@ -375,7 +376,7 @@ class SceneAdditions:
             try:
                 select = project.application[project.selectFile].objects.getByGroup("__debug_select__")[0]
 
-            except BaseException:
+            except BaseException as e:
                 return
 
             except IndexError:
@@ -459,12 +460,12 @@ class Scene:
         with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             project.objects["main"]["project_settings"] = load(file)
 
-        try:
-            with open(project.cache["file"][project.selectFile].settings, "r", encoding="utf-8") as file:
-                project.objects["main"]["scene_settings"] = load(file)
+        if not os.path.exists(project.cache["file"][project.selectFile].settings):
+            with open(project.cache["file"][project.selectFile].settings, "w", encoding="utf-8") as file:
+                json.dump(SCENE_SETTINGS_TEMPLATE, file, indent=4)
 
-        except FileNotFoundError:
-            return
+        with open(project.cache["file"][project.selectFile].settings, "r", encoding="utf-8") as file:
+            project.objects["main"]["scene_settings"] = load(file)
 
         if not os.path.exists(project.cache["file"][project.selectFile].settings):
             CreateObjectFunctions.create(project, None, None, "", False, "engine/files/scene.json", project.cache["file"][project.selectFile].settings)

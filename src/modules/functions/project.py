@@ -324,7 +324,7 @@ def projectTreeProjectMenuOpen(project, position) -> None:
         project.objects["tree_project_menu_paste_action"] = QAction(translate("Paste"), project)
         project.objects["tree_project_menu_rename_action"] = QAction(translate("Rename"), project)
         project.objects["tree_project_menu_remove_action"] = QAction(translate("Delete"), project)
-        project.objects["tree_project_menu_open_directory_action"] = QAction(translate("Open file explorer"), project)
+        project.objects["tree_project_menu_open_directory_action"] = QAction(translate("Open dir explorer"), project)
 
         project.objects["tree_project_menu_open_action"].triggered.connect(lambda: functions.tree.open(project))
         project.objects["tree_project_menu_copy_action"].triggered.connect(lambda: functions.tree.copy(project))
@@ -440,7 +440,6 @@ def centerMenuInit(project, update: bool = False) -> None:
                 continue
 
             else:
-
                 rem.append(key)
 
         for element in rem:

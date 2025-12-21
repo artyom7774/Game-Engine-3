@@ -1,6 +1,6 @@
 import subprocess
-import platform
 import threading
+import platform
 
 if platform.system() == "Windows":
     thr = threading.Thread(target=lambda: subprocess.run(

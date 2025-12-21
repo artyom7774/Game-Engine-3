@@ -321,6 +321,12 @@ cdef class DynamicObject(StaticObject):
         if self.collision(0, -1):
             pass
 
+        if self.collision(0, 0) and not self.collision(0, -1):
+            self.pos.y -= 1
+
+        if self.collision(0, 0) and not self.collision(0, 1):
+            self.pos.y += 1
+
         if self.gravity == 0:
             self.vectors["__fall__"].power = 0
 
@@ -335,6 +341,11 @@ cdef class DynamicObject(StaticObject):
         rem = []
 
         for name, vector in self.vectors.items():
+            if vector.power <= FLOAT_PRECISION and name != "__fall__":
+                rem.append(name)
+
+                continue
+
             x = vector.power * sin(math.radians(vector.angle))
             y = vector.power * cos(math.radians(vector.angle))
 
@@ -348,9 +359,6 @@ cdef class DynamicObject(StaticObject):
 
             # vector.power = sqrt(x ** 2 + y ** 2)
             # vector.angle = math.atan2(y, x)
-
-            if vector.power <= FLOAT_PRECISION and name != "__fall__":
-                rem.append(name)
 
         for name in rem:
             self.vectors.pop(name)
@@ -459,7 +467,7 @@ cdef class DynamicObject(StaticObject):
     def moveByAngle(self, angle: float, speed: float = None, slidingStep: float = None, name: str = "vector", specifical: int = None):
         id = random.randint(1, 1000000000) if specifical is None else int(specifical)
 
-        self.vectors[f"{name} ({id})"] = AngleVector(180 - angle, self.speed if speed is None else speed, self.slidingStep if slidingStep is None else slidingStep)
+        self.vectors[f"{name} ({id})"] = AngleVector(angle, self.speed if speed is None else speed, self.slidingStep if slidingStep is None else slidingStep)
 
     def moveByType(self, move: str, power: float = None) -> None:
         if move == "jump":
@@ -475,8 +483,8 @@ cdef class DynamicObject(StaticObject):
             if name.startswith("__") and name.endswith("__"):
                 continue
 
-            pos.x += vector.power * sin(math.radians(vector.angle))
-            pos.y += vector.power * cos(math.radians(vector.angle))
+            pos.x += (vector.power + (0 if vector.power >= 0 else vector.decreaseSpeed)) * sin(math.radians(vector.angle))
+            pos.y += (vector.power + (0 if vector.power >= 0 else vector.decreaseSpeed)) * cos(math.radians(vector.angle))
 
         if pos.y <= FLOAT_PRECISION:
             pos.x += self.vectors["__fall__"].power * sin(math.radians(self.vectors["__fall__"].angle))

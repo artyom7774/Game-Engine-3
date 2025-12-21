@@ -6,6 +6,7 @@ from src.modules import functions
 from src.variables import *
 
 import typing
+import re
 
 
 class TabFileBar(QTabBar):
@@ -82,6 +83,16 @@ class TabFileBar(QTabBar):
 
         else:
             self.project.selectFile = self.objects[0]["name"] if self.objects else ""
+
+    def rename(self, last, new) -> None:
+        for i, obj in enumerate(self.objects):
+            if obj["name"] == last:
+                visible = re.sub("%.*?%", "", new[new.rfind("/") + 1:])
+
+                self.setTabText(i, visible)
+
+                obj["visible"] = visible
+                obj["name"] = new
 
     def pop(self, index: int) -> None:
         if not 0 <= index < len(self.objects):
