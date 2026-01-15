@@ -7,42 +7,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download and setup Python embeddable
+      - name: Download and setup Python full version
         run: |
-          Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.11.9/python-3.11.9-embed-amd64.zip" -OutFile "python.zip"
-          Expand-Archive -Path "python.zip" -DestinationPath "python"
-          Remove-Item "python.zip"
-
-      - name: Enable pip in embeddable Python
-        run: |
-          (Get-Content "python/python311._pth") -replace '#import site', 'import site' | Set-Content "python/python311._pth"
-          Invoke-WebRequest -Uri "https://bootstrap.pypa.io/get-pip.py" -OutFile "get-pip.py"
-          ./python/python.exe get-pip.py
-          Remove-Item "get-pip.py"
+          Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe" -OutFile "python-installer.exe"
+          Start-Process -FilePath "python-installer.exe" -ArgumentList "/quiet", "InstallAllUsers=0", "PrependPath=0", "Include_test=0", "TargetDir=$PWD\python" -Wait
+          Remove-Item "python-installer.exe"
 
       - name: Install requirements
         run: |
-          ./python/python.exe -m pip install -r src/extra/requirements.txt
-
-      - name: Clean up Python to reduce size
-        run: |
-          # Удаляем ненужные файлы для ускорения компиляции
-          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "python/Lib/site-packages/pip"
-          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "python/Lib/site-packages/setuptools"
-          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "python/Lib/site-packages/wheel"
-          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "python/Scripts"
-          # Удаляем тесты
-          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -Directory -Filter "tests" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -Directory -Filter "test" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-          # Удаляем документацию
-          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -File -Filter "*.md" | Remove-Item -Force -ErrorAction SilentlyContinue
-          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -File -Filter "*.txt" | Where-Object { $_.Name -ne "top_level.txt" } | Remove-Item -Force -ErrorAction SilentlyContinue
-          # Удаляем .dist-info (метаданные пакетов)
-          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -Directory -Filter "*.dist-info" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-          
-          Write-Host "Python folder size after cleanup:"
-          $size = (Get-ChildItem "python" -Recurse | Measure-Object -Property Length -Sum).Sum / 1MB
-          Write-Host "$size MB"
+          .\python\python.exe -m pip install -r src/extra/requirements.txt
 
       - name: Compile .ISS to .EXE Installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2

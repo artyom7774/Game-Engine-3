@@ -12,7 +12,9 @@ pyperclip
 requests
 six
 urllib3
+pyinstaller
 orjson
 cython
 setuptools
 pypresence
+tkinter
