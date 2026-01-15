@@ -17,4 +17,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Game-Engine-3-Installer
-          path: Output/Game-Engine-3-installer.exe
+          path: src/extra/Game-Engine-3-installer.exe
