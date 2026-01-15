@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.github/workflows/compile.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/compile.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/extra/compile.iss" beforeDir="false" afterPath="$PROJECT_DIR$/src/extra/compile.iss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,6 +92,7 @@
       <recent name="E:\divelop\Game-Engine-3\src\code\program\numbers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\divelop\Game-Engine-3\src\extra" />
       <recent name="E:\divelop\Game-Engine-3\src\modules\functions\ai" />
     </key>
   </component>
