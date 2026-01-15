@@ -22,13 +22,26 @@ jobs:
 
       - name: Install requirements
         run: |
-          ./python/python.exe -m pip install -r requirements.txt
+          ./python/python.exe -m pip install -r src/extra/requirements.txt
 
       - name: Compile .ISS to .EXE Installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
         with:
           path: src/extra/compile.iss
           options: /O+
+
+      - name: Check if installer was created
+        run: |
+          Write-Host "Checking for installer file..."
+          if (Test-Path "src/extra/Game-Engine-3-installer.exe") {
+            Write-Host "✓ Installer found!"
+            $size = (Get-Item "src/extra/Game-Engine-3-installer.exe").Length / 1MB
+            Write-Host "File size: $size MB"
+          } else {
+            Write-Host "✗ Installer NOT found!"
+            Write-Host "Contents of src/extra/:"
+            Get-ChildItem "src/extra/" -Recurse
+          }
 
       - name: Upload Installer as Artifact
         uses: actions/upload-artifact@v4
