@@ -5,7 +5,7 @@
 #define MyAppVersion "3.15.2"
 #define MyAppPublisher "Game Engine 3"
 #define MyAppURL "https://artyom7777.pythonanywhere.com/"
-#define MyAppExeName "Game-Engine-3-installer.exe"
+#define MyAppExeName "Game Engine 3.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -32,6 +32,7 @@ DisableProgramGroupPage=yes
 LicenseFile=..\..\LICENSE.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 ;PrivilegesRequired=lowest
+OutputDir=.
 OutputBaseFilename=Game-Engine-3-installer
 SetupIconFile=..\..\src\files\sprites\logo.ico
 SolidCompression=yes
