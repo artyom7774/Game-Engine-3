@@ -32,7 +32,7 @@ DisableProgramGroupPage=yes
 LicenseFile=..\..\LICENSE.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 ;PrivilegesRequired=lowest
-OutputBaseFilename=Game Engine 3
+OutputBaseFilename=Game-Engine-3-installer
 SetupIconFile=..\..\src\files\sprites\logo.ico
 SolidCompression=yes
 WizardStyle=modern
