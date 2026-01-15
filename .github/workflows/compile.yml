@@ -15,7 +15,9 @@ jobs:
 
       - name: Install requirements
         run: |
-          .\python\python.exe -m pip install -r src/extra/requirements.txt
+          .\python\python.exe -m pip install --no-deps certifi charset-normalizer clipboard darkdetect hjson idna pillow pygame pyperclip requests six urllib3 orjson pypresence
+          # Numba требует llvmlite и numpy
+          .\python\python.exe -m pip install numpy numba
 
       - name: Compile .ISS to .EXE Installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
