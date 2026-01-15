@@ -4,10 +4,6 @@ jobs:
   build:
     name: Build the Inno Setup Installer
     runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: .
-
     steps:
       - uses: actions/checkout@v4
       - name: Compile .ISS to .EXE Installer
@@ -15,4 +11,3 @@ jobs:
         with:
           path: src/extra/compile.iss
           options: /O+
-

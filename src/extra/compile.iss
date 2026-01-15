@@ -29,11 +29,11 @@ ArchitecturesAllowed=x64compatible
 ; the 64-bit view of the registry.
 ArchitecturesInstallIn64BitMode=x64compatible
 DisableProgramGroupPage=yes
-LicenseFile=LICENSE.txt
+LicenseFile=..\..\LICENSE.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 ;PrivilegesRequired=lowest
 OutputBaseFilename=Game Engine 3
-SetupIconFile=src\files\sprites\logo.ico
+SetupIconFile=..\..\src\files\sprites\logo.ico
 SolidCompression=yes
 WizardStyle=modern
 DisableDirPage=no
@@ -46,26 +46,26 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "Game Engine 3.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "COMMANDS.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "counter.py"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Game Engine 3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Game Engine 3.py"; DestDir: "{app}"; Flags: ignoreversion
-Source: "icon.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "README.md"; DestDir: "{app}"; Flags: ignoreversion
-Source: "requirements.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "setup.py"; DestDir: "{app}"; Flags: ignoreversion
-Source: "start.py"; DestDir: "{app}"; Flags: ignoreversion
-Source: "start.spec"; DestDir: "{app}"; Flags: ignoreversion
-Source: "test.py"; DestDir: "{app}"; Flags: ignoreversion
-Source: "TODO.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\Game Engine 3.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\COMMANDS.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\counter.py"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\Game Engine 3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\Game Engine 3.py"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\icon.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\README.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\requirements.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\setup.py"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\start.py"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\start.spec"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\test.py"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\TODO.txt"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "descriptions\*"; DestDir: "{app}\descriptions"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "engine\*"; DestDir: "{app}\engine"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "libs\*"; DestDir: "{app}\libs"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "python\*"; DestDir: "{app}\python"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "src\*"; DestDir: "{app}\src"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\descriptions\*"; DestDir: "{app}\descriptions"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\engine\*"; DestDir: "{app}\engine"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\libs\*"; DestDir: "{app}\libs"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\python\*"; DestDir: "{app}\python"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\src\*"; DestDir: "{app}\src"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
