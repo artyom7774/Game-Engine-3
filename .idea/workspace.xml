@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/compile.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/compile.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/extra/compile.iss" beforeDir="false" afterPath="$PROJECT_DIR$/src/extra/compile.iss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +73,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/divelop/Game-Engine-3",
+    "last_opened_file_path": "E:/divelop/Game-Engine-3/src/extra",
     "settings.editor.selected.configurable": "com.dsoftware.ghmanager"
   },
   "keyToStringList": {
@@ -85,11 +84,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\divelop\Game-Engine-3\src\extra" />
       <recent name="E:\divelop\Game-Engine-3" />
       <recent name="E:\divelop\Game-Engine-3\src\files\templates" />
       <recent name="C:\Users\Артём\AppData\Roaming\JetBrains\PyCharmCE2024.3\scratches" />
       <recent name="E:\divelop\Game-Engine-3\src\code\program\event" />
-      <recent name="E:\divelop\Game-Engine-3\src\code\program\numbers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\divelop\Game-Engine-3\src\extra" />
