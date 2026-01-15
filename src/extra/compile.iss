@@ -5,7 +5,7 @@
 #define MyAppVersion "3.15.2"
 #define MyAppPublisher "Game Engine 3"
 #define MyAppURL "https://artyom7777.pythonanywhere.com/"
-#define MyAppExeName "Game Engine 3.exe"
+#define MyAppExeName "Game-Engine-3-installer.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
