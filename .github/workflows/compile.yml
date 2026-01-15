@@ -6,8 +6,15 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Compile .ISS to .EXE Installer
-        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.7
         with:
           path: src/extra/compile.iss
           options: /O+
+
+      - name: Upload Installer as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Game-Engine-3-Installer
+          path: Output/Game-Engine-3-installer.exe
