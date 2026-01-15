@@ -24,6 +24,22 @@ jobs:
         run: |
           ./python/python.exe -m pip install -r src/extra/requirements.txt
 
+      - name: Clean up Python to reduce size
+        run: |
+
+          # Удаляем тесты
+          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -Directory -Filter "tests" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -Directory -Filter "test" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+          # Удаляем документацию
+          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -File -Filter "*.md" | Remove-Item -Force -ErrorAction SilentlyContinue
+          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -File -Filter "*.txt" | Where-Object { $_.Name -ne "top_level.txt" } | Remove-Item -Force -ErrorAction SilentlyContinue
+          # Удаляем .dist-info (метаданные пакетов)
+          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -Directory -Filter "*.dist-info" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+          
+          Write-Host "Python folder size after cleanup:"
+          $size = (Get-ChildItem "python" -Recurse | Measure-Object -Property Length -Sum).Sum / 1MB
+          Write-Host "$size MB"
+
       - name: Compile .ISS to .EXE Installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
         with:
