@@ -26,6 +26,10 @@ jobs:
 
       - name: Clean up Python to reduce size
         run: |
+          # Удаляем ненужные файлы для ускорения компиляции
+          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "python/Lib/site-packages/pip"
+          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "python/Lib/site-packages/setuptools"
+          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "python/Lib/site-packages/wheel"
 
           # Удаляем тесты
           Get-ChildItem -Path "python/Lib/site-packages" -Recurse -Directory -Filter "tests" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
