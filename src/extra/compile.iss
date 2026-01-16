@@ -24,8 +24,8 @@ LicenseFile=..\..\LICENSE.txt
 OutputDir=.
 OutputBaseFilename=Game-Engine-3-installer
 SetupIconFile=..\..\src\files\sprites\logo.ico
-Compression=none
-SolidCompression=no
+Compression=lzma2/fast
+SolidCompression=yes
 WizardStyle=modern
 DisableDirPage=no
 
@@ -55,8 +55,8 @@ Source: "..\..\TODO.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\descriptions\*"; DestDir: "{app}\descriptions"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\engine\*"; DestDir: "{app}\engine"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\libs\*"; DestDir: "{app}\libs"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\..\python\*"; DestDir: "{app}\python"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\..\src\*"; DestDir: "{app}\src"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\src\extra\python\windows\"; DestDir: "{app}\python"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\src\*"; Excludes: "extra\python"; DestDir: "{app}\src"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
