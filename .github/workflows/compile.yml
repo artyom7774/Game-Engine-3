@@ -11,7 +11,8 @@ jobs:
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.7
         with:
           path: src/extra/compile.iss
-          options: /O+
+          options: /Q /O+
+
       - name: Upload Installer as Artifact
         uses: actions/upload-artifact@v4
         with:
