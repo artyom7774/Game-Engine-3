@@ -24,8 +24,8 @@ LicenseFile=..\..\LICENSE.txt
 OutputDir=.
 OutputBaseFilename=Game-Engine-3-installer
 SetupIconFile=..\..\src\files\sprites\logo.ico
-Compression=lzma2/fast
-SolidCompression=yes
+Compression=none
+SolidCompression=no
 WizardStyle=modern
 DisableDirPage=no
 
