@@ -4,65 +4,14 @@ jobs:
   build:
     name: Build the Inno Setup Installer
     runs-on: windows-latest
-    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download and setup Python embeddable
-        run: |
-          Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.11.9/python-3.11.9-embed-amd64.zip" -OutFile "python.zip"
-          Expand-Archive -Path "python.zip" -DestinationPath "python"
-          Remove-Item "python.zip"
-
-      - name: Enable pip in embeddable Python
-        run: |
-          (Get-Content "python/python311._pth") -replace '#import site', 'import site' | Set-Content "python/python311._pth"
-          Invoke-WebRequest -Uri "https://bootstrap.pypa.io/get-pip.py" -OutFile "get-pip.py"
-          ./python/python.exe get-pip.py
-          Remove-Item "get-pip.py"
-
-      - name: Install requirements
-        run: |
-          ./python/python.exe -m pip install -r src/extra/requirements.txt
-
-      - name: Clean up Python to reduce size
-        run: |
-          # Удаляем ненужные файлы для ускорения компиляции
-          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "python/Lib/site-packages/pip"
-          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "python/Lib/site-packages/setuptools"
-          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "python/Lib/site-packages/wheel"
-
-          # Удаляем тесты
-          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -Directory -Filter "tests" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -Directory -Filter "test" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-          # Удаляем документацию
-          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -File -Filter "*.md" | Remove-Item -Force -ErrorAction SilentlyContinue
-          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -File -Filter "*.txt" | Where-Object { $_.Name -ne "top_level.txt" } | Remove-Item -Force -ErrorAction SilentlyContinue
-          # Удаляем .dist-info (метаданные пакетов)
-          Get-ChildItem -Path "python/Lib/site-packages" -Recurse -Directory -Filter "*.dist-info" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-          
-          Write-Host "Python folder size after cleanup:"
-          $size = (Get-ChildItem "python" -Recurse | Measure-Object -Property Length -Sum).Sum / 1MB
-          Write-Host "$size MB"
-
       - name: Compile .ISS to .EXE Installer
-        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.7
         with:
           path: src/extra/compile.iss
           options: /O+
-
-      - name: Check if installer was created
-        run: |
-          Write-Host "Checking for installer file..."
-          if (Test-Path "src/extra/Game-Engine-3-installer.exe") {
-            Write-Host "✓ Installer found!"
-            $size = (Get-Item "src/extra/Game-Engine-3-installer.exe").Length / 1MB
-            Write-Host "File size: $size MB"
-          } else {
-            Write-Host "✗ Installer NOT found!"
-            Write-Host "Contents of src/extra/:"
-            Get-ChildItem "src/extra/" -File
-          }
 
       - name: Upload Installer as Artifact
         uses: actions/upload-artifact@v4
