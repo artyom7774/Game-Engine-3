@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="" />
+    <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Game-Engine-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Game-Engine-3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game Engine 3.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Game Engine 3.exe" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,7 +56,7 @@
   "keyToString": {
     "Docker.Dockerfile.executor": "Run",
     "Python.1.executor": "Run",
-    "Python.Game Engine 3 - Debug.executor": "Debug",
+    "Python.Game Engine 3 - Debug.executor": "Run",
     "Python.Game Engine 3 - Release.executor": "Run",
     "Python.Game Engine 3.executor": "Debug",
     "Python.camera.executor": "Run",
@@ -69,6 +74,7 @@
     "Python.text.executor": "Run",
     "Python.variables.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "E:/divelop/Game-Engine-3/src/extra",
@@ -93,7 +99,7 @@
       <recent name="E:\divelop\Game-Engine-3\src\modules\functions\ai" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Game Engine 3 - Debug">
+  <component name="RunManager">
     <configuration name="Game Engine 3 - Debug" type="PythonConfigurationType" factoryName="Python">
       <module name="Game-Engine-3" />
       <option name="ENV_FILES" value="" />
@@ -103,7 +109,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (Game-Engine-3) (2)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -126,7 +131,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (Game-Engine-3) (2)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -182,7 +186,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-fc1d50d2d915-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.24978.54" />
+        <option value="bundled-python-sdk-1bde30d8e611-7b97d883f26b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.25557.130" />
       </set>
     </attachedChunks>
   </component>
