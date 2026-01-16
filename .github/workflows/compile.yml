@@ -12,7 +12,6 @@ jobs:
         with:
           path: src/extra/compile.iss
           options: /O+
-
       - name: Upload Installer as Artifact
         uses: actions/upload-artifact@v4
         with:
