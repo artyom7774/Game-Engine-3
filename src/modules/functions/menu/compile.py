@@ -21,6 +21,7 @@ import re
 PROGRAM = \
 """# MADE BY GAME ENGINE %ENGINE_VERSION%
 
+import screeninfo
 import tkinter
 import engine
 import socket
@@ -28,12 +29,10 @@ import json
 import sys
 import os
 
-root = tkinter.Tk()
+monitor = screeninfo.get_monitors()[0]
 
-width = root.winfo_screenwidth()
-height = root.winfo_screenheight()
-
-root.destroy()
+width = monitor.width
+height = monitor.height
 
 SOCKET_ID = %SOCKET_ID%
 SOCKET_GLOBAL_ID = %SOCKET_GLOBAL_ID%

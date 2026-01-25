@@ -11,7 +11,11 @@ from src.modules import internet
 
 from src.variables import *
 
-from src.modules.functions.debugger import inspector
+try:
+    from src.modules.functions.debugger import inspector
+
+except ModuleNotFoundError:
+    inspector = None
 
 import webbrowser
 import threading
