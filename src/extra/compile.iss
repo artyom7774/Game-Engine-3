@@ -56,7 +56,14 @@ Source: "..\..\descriptions\*"; DestDir: "{app}\descriptions"; Flags: ignorevers
 Source: "..\..\engine\*"; DestDir: "{app}\engine"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\libs\*"; DestDir: "{app}\libs"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\src\extra\python\windows\*"; DestDir: "{app}\python"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\..\src\*"; DestDir: "{app}\src"; Excludes: "*\extra\python\windows\*"; Flags: ignoreversion recursesubdirs createallsubdirs
+
+Source: "..\..\src\files\*"; DestDir: "{app}\src\files"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\src\base\*"; DestDir: "{app}\src\base"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\src\code\*"; DestDir: "{app}\src\code"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\src\modules\*"; DestDir: "{app}\src\modules"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\src\__init__.py"; DestDir: "{app}\src\__init__.py"; Flags: ignoreversion
+Source: "..\..\src\main.py"; DestDir: "{app}\src\main.py"; Flags: ignoreversion
+Source: "..\..\src\variables.py"; DestDir: "{app}\src\variables.py"; Flags: ignoreversion
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
