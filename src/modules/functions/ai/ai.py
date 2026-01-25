@@ -13,7 +13,7 @@ url = "https://ge3.pythonanywhere.com/ai"
 
 
 def requestAI(message):
-    data = {"message": message, "model": SETTINGS["model"]}
+    data = {"message": message, "model": "gemma-3-27b-it"}
 
     response = requests.post(url, json=data)
     ids = response.json()["ids"]

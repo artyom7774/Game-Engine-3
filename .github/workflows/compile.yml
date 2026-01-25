@@ -1,20 +1,83 @@
-name: Build Installer
+name: Compile
 on: push
 jobs:
-  build:
-    name: Build the Inno Setup Installer
+  build-windows:
+    name: Compile Windows
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compile .ISS to .EXE Installer
+      - name: Checkout Python dependencies
+        uses: actions/checkout@v4
+        with:
+          repository: artyom7774/Game-Engine-3-python
+          path: python-deps
+
+      - name: Copy Windows Python
+        run: |
+          Copy-Item -Path "python-deps/windows" -Destination "src/extra/python/windows" -Recurse -Force
+        shell: pwsh
+
+      - name: Compile windows
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.7
         with:
           path: src/extra/compile.iss
           options: /Q /O+
 
-      - name: Upload Installer as Artifact
+      - name: Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Game-Engine-3-Installer
           path: src/extra/Game-Engine-3-installer.exe
+
+  build-linux:
+    name: Build Linux Archive
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout Python dependencies
+        uses: actions/checkout@v4
+        with:
+          repository: artyom7774/Game-Engine-3-python
+          path: python-deps
+
+      - name: Create Linux distribution
+        run: |
+          mkdir -p dist/Game-Engine-3
+          
+          # Copy main files
+          cp "Game Engine 3.exe" dist/Game-Engine-3/ 2>/dev/null || true
+          cp COMMANDS.txt dist/Game-Engine-3/
+          cp counter.py dist/Game-Engine-3/
+          cp "Game Engine 3" dist/Game-Engine-3/ 2>/dev/null || true
+          cp "Game Engine 3.py" dist/Game-Engine-3/
+          cp icon.png dist/Game-Engine-3/
+          cp LICENSE.txt dist/Game-Engine-3/
+          cp README.md dist/Game-Engine-3/
+          cp requirements.txt dist/Game-Engine-3/
+          cp setup.py dist/Game-Engine-3/
+          cp start.py dist/Game-Engine-3/
+          cp start.spec dist/Game-Engine-3/
+          cp test.py dist/Game-Engine-3/
+          cp TODO.txt dist/Game-Engine-3/
+          
+          # Copy directories
+          cp -r descriptions dist/Game-Engine-3/
+          cp -r engine dist/Game-Engine-3/
+          cp -r libs dist/Game-Engine-3/
+          
+          # Copy Linux Python from external repo
+          cp -r python-deps/linux
+          
+          cp -r src dist/Game-Engine-3/
+          
+          # Create tar.gz
+          cd dist
+          tar -czf Game-Engine-3-linux.tar.gz Game-Engine-3/
+
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Game-Engine-3-Linux
+          path: dist/Game-Engine-3-linux.tar.gz
