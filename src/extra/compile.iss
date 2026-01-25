@@ -56,7 +56,7 @@ Source: "..\..\descriptions\*"; DestDir: "{app}\descriptions"; Flags: ignorevers
 Source: "..\..\engine\*"; DestDir: "{app}\engine"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\libs\*"; DestDir: "{app}\libs"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\src\extra\python\windows\*"; DestDir: "{app}\python"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\..\src\*"; DestDir: "{app}\src"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "\extra\python\windows\"
+Source: "..\..\src\*"; DestDir: "{app}\src"; Excludes: "*\extra\python\windows\*"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
