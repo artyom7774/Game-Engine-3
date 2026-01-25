@@ -45,7 +45,7 @@ jobs:
       - name: Create Linux distribution
         run: |
           mkdir -p dist/Game-Engine-3
-          
+    
           # Copy main files
           cp "Game Engine 3.exe" dist/Game-Engine-3/ 2>/dev/null || true
           cp COMMANDS.txt dist/Game-Engine-3/
@@ -68,7 +68,8 @@ jobs:
           cp -r libs dist/Game-Engine-3/
           
           # Copy Linux Python from external repo
-          cp -r python-deps/linux
+          mkdir -p dist/Game-Engine-3/src/extra/python
+          cp -r python-deps/linux dist/Game-Engine-3/src/extra/python/linux
           
           cp -r src dist/Game-Engine-3/
           
