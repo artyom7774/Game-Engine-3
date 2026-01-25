@@ -61,9 +61,9 @@ Source: "..\..\src\files\*"; DestDir: "{app}\src\files"; Flags: ignoreversion re
 Source: "..\..\src\base\*"; DestDir: "{app}\src\base"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\src\code\*"; DestDir: "{app}\src\code"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\src\modules\*"; DestDir: "{app}\src\modules"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\..\src\__init__.py"; DestDir: "{app}\src\__init__.py"; Flags: ignoreversion
-Source: "..\..\src\main.py"; DestDir: "{app}\src\main.py"; Flags: ignoreversion
-Source: "..\..\src\variables.py"; DestDir: "{app}\src\variables.py"; Flags: ignoreversion
+Source: "..\..\src\__init__.py"; DestDir: "{app}\src\"; Flags: ignoreversion
+Source: "..\..\src\main.py"; DestDir: "{app}\src\"; Flags: ignoreversion
+Source: "..\..\src\variables.py"; DestDir: "{app}\src\"; Flags: ignoreversion
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
