@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Include python dependencies
+      - name: Include python
         uses: actions/checkout@v4
         with:
           repository: artyom7774/Game-Engine-3-python
@@ -36,13 +36,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Include python dependencies
+      - name: Include python
         uses: actions/checkout@v4
         with:
           repository: artyom7774/Game-Engine-3-python
           path: python
 
-      - name: Create Linux distribution
+      - name: Create linux archive
         run: |
           mkdir -p dist/Game-Engine-3
     
