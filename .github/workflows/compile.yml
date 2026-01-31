@@ -31,7 +31,7 @@ jobs:
           path: src/extra/Game-Engine-3-installer.exe
 
   build-linux:
-    name: Build Linux Archive
+    name: Linux
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
