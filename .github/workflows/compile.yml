@@ -2,20 +2,20 @@ name: Compile
 on: push
 jobs:
   build-windows:
-    name: Compile Windows
+    name: Windows
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Checkout Python dependencies
+      - name: Include python dependencies
         uses: actions/checkout@v4
         with:
           repository: artyom7774/Game-Engine-3-python
-          path: python-deps
+          path: python
 
-      - name: Copy Windows Python
+      - name: Copy python to project
         run: |
-          Copy-Item -Path "python-deps/windows" -Destination "src/extra/python/windows" -Recurse -Force
+          Copy-Item -Path "python/windows" -Destination "src/extra/python/windows" -Recurse -Force
         shell: pwsh
 
       - name: Compile windows
@@ -36,17 +36,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Checkout Python dependencies
+      - name: Include python dependencies
         uses: actions/checkout@v4
         with:
           repository: artyom7774/Game-Engine-3-python
-          path: python-deps
+          path: python
 
       - name: Create Linux distribution
         run: |
           mkdir -p dist/Game-Engine-3
     
-          # Copy main files
           cp "Game Engine 3.exe" dist/Game-Engine-3/ 2>/dev/null || true
           cp COMMANDS.txt dist/Game-Engine-3/
           cp counter.py dist/Game-Engine-3/
@@ -62,22 +61,20 @@ jobs:
           cp test.py dist/Game-Engine-3/
           cp TODO.txt dist/Game-Engine-3/
           
-          # Copy directories
           cp -r descriptions dist/Game-Engine-3/
           cp -r engine dist/Game-Engine-3/
           cp -r libs dist/Game-Engine-3/
-          
-          # Copy Linux Python from external repo
+
           mkdir -p dist/Game-Engine-3/src/extra/python
-          cp -r python-deps/linux dist/Game-Engine-3/src/extra/python/linux
+          cp -r python/linux dist/Game-Engine-3/src/extra/python/linux
           
           cp -r src dist/Game-Engine-3/
-          
-          # Create tar.gz
+
           cd dist
+          
           tar -czf Game-Engine-3-linux.tar.gz Game-Engine-3/
 
-      - name: Upload Linux artifact
+      - name: Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Game-Engine-3-Linux
