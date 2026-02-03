@@ -336,6 +336,28 @@ AI_MODELS = {
     # "gemini-2.5-pro": "gemini-2.5-pro"
 }
 
+STYLE = {
+"dark": """
+QToolTip {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    border: 1px solid #555555;
+    padding-right: -3px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+""",
+
+"light": """
+QToolTip {
+    border: 1px solid #dee0e3;
+    padding-right: -3px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+"""
+}
+
 if SETTINGS["theme"] == "dark":
     BUTTON_RED_STYLE = """
     QPushButton {

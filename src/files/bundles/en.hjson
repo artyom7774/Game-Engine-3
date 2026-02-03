@@ -399,6 +399,7 @@
     "node.text.number": "number"
     "node.text.degree": "degree"
     "node.text.slidingStep": "sliding step"
+    "node.text.operation": "operation"
 
     // OBJECT PARAMETERS
     "object.parameter.number.hitbox": "0. Hitbox"

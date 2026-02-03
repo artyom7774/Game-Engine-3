@@ -424,6 +424,7 @@
     "node.text.number": "число"
     "node.text.degree": "степень"
     "node.text.slidingStep": "сила торможение"
+    "node.text.operation": "операция"
 
     // OBJECT PARAMETERS
     "object.parameter.number.hitbox": "0. Хитбокс"

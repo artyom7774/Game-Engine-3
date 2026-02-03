@@ -55,7 +55,7 @@ class Main(QMainWindow):
             self.app.setFont(QFont("Segoe UI", 9))
 
         try:
-            qdarktheme.setup_theme(theme=SETTINGS["theme"])
+            QApplication.instance().setStyleSheet(qdarktheme.load_stylesheet(SETTINGS["theme"]) + STYLE[SETTINGS["theme"]])
 
         except AttributeError:
             print("ERROR: can't setup theme")
