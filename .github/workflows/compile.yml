@@ -65,8 +65,7 @@ jobs:
           cp -r engine dist/Game-Engine-3/
           cp -r libs dist/Game-Engine-3/
 
-          mkdir -p dist/Game-Engine-3/src/extra/python
-          cp -r python/linux dist/Game-Engine-3/src/extra/python/linux
+          cp -r python/linux dist/Game-Engine-3/python
           
           cp -r src dist/Game-Engine-3/
 
