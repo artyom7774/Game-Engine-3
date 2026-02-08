@@ -15,6 +15,7 @@ from engine.vector.int import Vec4i
 
 from src.variables import *
 
+import logging
 import typing
 import orjson
 import math
@@ -323,7 +324,7 @@ class AbstractObject:
                 obj = objects[file]
 
             else:
-                print(f"ERROR: object {file} not found on this scene")
+                logging.error(f"object {file} not found on this scene")
 
                 return
 

@@ -4,7 +4,6 @@ from PyQt5.QtGui import QFont
 from src.modules.translate import Translate
 
 import importlib.util
-import faulthandler
 import platform
 import argparse
 import random
@@ -12,11 +11,10 @@ import ujson
 import json
 import os
 
+os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = ""
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 import pygame
-
-faulthandler.enable()
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--windows-standalone-build", default=None)

@@ -8,6 +8,7 @@ from src.variables import *
 
 import subprocess
 import threading
+import logging
 import zipfile
 import socket
 import shutil
@@ -312,7 +313,7 @@ class SocketHandler(QtCore.QObject):
             self.host.setblocking(False)
 
         except OSError:
-            print(f"ERROR: can't create socket on port {port}")
+            logging.error(f"can't create socket on port {port}")
 
         self.accept_notifier = QSocketNotifier(self.host.fileno(), QSocketNotifier.Read, self)
         self.accept_notifier.activated.connect(self.accept)
@@ -361,7 +362,7 @@ class SocketHandler(QtCore.QObject):
                 self.connectionClosed.emit()
 
             else:
-                print("LOG: error reading connection:", e)
+                logging.info("error reading connection:", e)
 
     def close(self):
         try:
@@ -486,7 +487,7 @@ class Compile:
             projectSettings = load(file)
 
         if Compile.compile(project, executable=False):
-            print("ERROR: compile error")
+            logging.error("compile error")
 
             return
 
@@ -502,7 +503,7 @@ class Compile:
 
             command = f"cd {pathProject} & \"{pathPython}\" \"game.py\""
 
-            print(f"LOG: command for run: {command}")
+            logging.info(f"command for run project: {command}")
 
             subprocess.run([pathPython, f"game.py"], cwd=pathProject)
 
@@ -513,7 +514,7 @@ class Compile:
             pathPython = os.path.dirname(pathPython)
             pathPython = f"{pathPython}/python/bin/python3"
 
-            print(f"LOG: python path: {pathPython}")
+            logging.info(f"python path for compile: {pathPython}")
 
             thr = threading.Thread(target=lambda: os.system(f"cd \"{pathProject}\" && \"{pathPython}\" \"game.py\""))
             thr.daemon = True
@@ -564,8 +565,7 @@ class Compile:
 
             response = requests.post(url, files=files, headers=headers)
 
-        print("Status:", response.status_code)
-        print("Response:", response.text)
+        logging.info(f"status: {response.status_code}, responce: {response.text}")
 
         os.remove(f"{PATH_TO_PROJECTS}/{project.selectProject}/temp.zip")
 
@@ -635,8 +635,6 @@ class Compile:
                 programs[getTruePath(program)] = load(file)
 
                 name = getTruePath(program)
-
-                print(program, name)
 
                 locals_variables[name] = programs[getTruePath(program)]["variables"]
 
@@ -841,7 +839,7 @@ class Compile:
             else:
                 command = f"bash -c 'source {pathProgram}/python/bin/activate && cd \"{pathProgram}\" && cd \"{pathProject}\" && pyinstaller -F -w -y \"game.py\"'"
 
-            print(f"LOG: command for compiling: {command}")
+            logging.info(f"command for compiling: {command}")
 
             result = subprocess.run(command, shell=True, capture_output=True, check=True, text=True)
 

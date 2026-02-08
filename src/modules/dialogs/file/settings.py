@@ -6,6 +6,7 @@ from src.variables import *
 
 import subprocess
 import threading
+import logging
 import os
 
 from libs import qdarktheme
@@ -29,7 +30,7 @@ class SettingsFunctions:
             subprocess.run(["./Game Engine 3"])
 
         else:
-            print("ERROR: system (Unknown) not supported this opperation")
+            logging.error("system (Unknown) not supported this opperation")
 
     @staticmethod
     def confirm(project, dialog, event) -> None:

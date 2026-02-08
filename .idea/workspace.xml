@@ -5,13 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a878b9a-3695-4a4e-bf96-06b74362e80b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Game-Engine-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Game-Engine-3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_11_2025_10_19_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_11_2025_10_19_[Changes]/shelved.patch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_11_2025_10_19__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_11_2025_10_19__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game Engine 3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game Engine 3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/classes/sprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/classes/sprite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/ui/text.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/ui/text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/dialogs/file/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/dialogs/file/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/functions/main/files/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/main/files/code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/functions/main/files/objects/abstract.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/main/files/objects/abstract.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/functions/main/files/scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/main/files/scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/functions/menu/compile.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/menu/compile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/functions/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/functions/tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/internet.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/internet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/widgets/treeProject.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/widgets/treeProject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/variables.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/variables.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +69,7 @@
     "Python.1.executor": "Run",
     "Python.Game Engine 3 - Debug.executor": "Run",
     "Python.Game Engine 3 - Release.executor": "Run",
-    "Python.Game Engine 3.executor": "Debug",
+    "Python.Game Engine 3.executor": "Run",
     "Python.camera.executor": "Run",
     "Python.collision.executor": "Run",
     "Python.counter.executor": "Run",

@@ -25,6 +25,7 @@ from PIL import Image
 
 import dataclasses
 import pyperclip
+import logging
 import typing
 import orjson
 import json
@@ -724,7 +725,7 @@ class Scene:
             return
 
         except AttributeError as e:
-            print(f"ERROR: {e}")
+            logging.error(f"{e}")
 
             return
 

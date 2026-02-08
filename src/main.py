@@ -20,6 +20,7 @@ except ModuleNotFoundError:
 import webbrowser
 import threading
 import requests
+import logging
 import shutil
 import ctypes
 
@@ -58,7 +59,7 @@ class Main(QMainWindow):
             QApplication.instance().setStyleSheet(qdarktheme.load_stylesheet(SETTINGS["theme"]) + STYLE[SETTINGS["theme"]])
 
         except AttributeError:
-            print("ERROR: can't setup theme")
+            logging.error("can't setup theme")
 
         self.application = {}
         self.engine = None
@@ -134,7 +135,7 @@ class Main(QMainWindow):
                 lastVersion = loads(response.text)["version"]
                 nowVersion = load(open("src/files/version.json", "r", encoding="utf-8"))["version"]
 
-                print(f"LOG: last version = {lastVersion}, now version = {nowVersion}")
+                logging.info(f"last version = {lastVersion}, now version = {nowVersion}")
 
                 if lastVersion[0] <= nowVersion[0] and lastVersion[2] <= nowVersion[2] and lastVersion[4] < nowVersion[4]:
                     msg = QMessageBox()
@@ -152,10 +153,10 @@ class Main(QMainWindow):
                     msg.exec_()
 
             else:
-                print(f"ERROR: can't download now project version, status = {response.status_code}")
+                logging.error(f"ERROR: can't download now project version, status = {response.status_code}")
 
         else:
-            print("ERROR: can't download now project version, bad internet connection")
+            logging.error("can't download now project version, bad internet connection")
 
     def geometryInit(self) -> None:
         if "main" in self.objects and "object_variables" in self.objects["main"]:

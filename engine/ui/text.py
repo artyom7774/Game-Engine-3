@@ -6,6 +6,7 @@ from engine.functions.cache import cache
 from PIL.ImageFont import FreeTypeFont
 from PIL import ImageFont
 
+import logging
 import typing
 import pygame
 import os
@@ -35,7 +36,7 @@ def get_ttf(font_type: str, font_size: int) -> FreeTypeFont:
     if find_system_font(font_type.lower()) is not None:
         ImageFont.truetype(find_system_font(font_type.lower()), font_size)
 
-    print(f"WARNING: {font_type} is not found")
+    logging.warning(f"{font_type} is not found")
 
     return ImageFont.load_default()
 

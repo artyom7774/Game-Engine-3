@@ -21,6 +21,7 @@ from src.variables import *
 
 import dataclasses
 import pyperclip
+import logging
 import typing
 import random
 import math
@@ -235,7 +236,7 @@ class AIDialog(QDialog):
 
         temp = answer = answer.replace("```python", "").replace("```", "").replace("```", "")
 
-        print(f"LOG: AI answer = {answer}")
+        logging.info(f"AI answer = {answer}")
 
         try:
             pass
@@ -252,7 +253,8 @@ class AIDialog(QDialog):
 
         answer, errors = compileProgramCode(answer)
 
-        print(f"LOG: AI errors = {errors}")
+        if errors:
+            logging.info(f"AI errors = {errors}")
 
         for id, node in answer.items():
             node["x"] += self.project.cache["file"][self.project.selectFile].x // CODE_GRID_CELL_SIZE + 5
@@ -721,7 +723,7 @@ class CodeNodeConnector(QLabel):
                         self.inputLeftText.show()
 
                     else:
-                        print(f"ERROR: not found special type {type}")
+                        logging.error(f"not found special type {type}")
 
                 else:
                     if input["type"] == "choose":
@@ -906,7 +908,7 @@ class CodeNode(QTreeWidget):
                     indexFinish = list(finish["outputs"].keys()).index(self.node["inputs"][key]["value"]["name"]) + 1
 
                 except ValueError as e:
-                    print(f"ERROR: {self.node['id']=}")
+                    logging.error(f"{self.node['id']=}")
 
                     raise ValueError(e)
 
@@ -1875,7 +1877,7 @@ class Code:
                 project.objects["main"]["code_menu_delete_node"].setDisabled(True)
 
         except Exception as e:
-            print(f"ERROR: {e}")
+            logging.error(f"{e}")
 
         project.objects["main"]["code_menu"].popup(project.objects["main"]["code"].mapToGlobal(position))
 

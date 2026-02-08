@@ -13,6 +13,7 @@ except BaseException:
     win32clipboard = None
 
 import subprocess
+import logging
 import shutil
 import typing
 import os
@@ -119,10 +120,10 @@ def copy(project) -> None:
             subprocess.run(["xclip", "-selection", "clipboard"], input=os.path.join(os.getcwd(), path).encode(), check=True)
 
         except Exception as e:
-            print(f"ERROR: can't set clipboard: {e}")
+            logging.error(f"can't set clipboard: {e}")
 
     else:
-        print("ERROR: system (Unknown) not supported this operation")
+        logging.error("system (Unknown) not supported this operation")
 
 
 def paste(project) -> None:
@@ -146,7 +147,7 @@ def paste(project) -> None:
             return result if os.path.exists(result) else None
 
         except Exception as e:
-            print(f"ERROR: can't get clipboard data: {e}")
+            logging.error(f"can't get clipboard data: {e}")
 
             return None
 
@@ -169,7 +170,7 @@ def paste(project) -> None:
         src = LinuxGetPath()
 
     else:
-        print("ERROR: system (Unknown) not supported this operation")
+        logging.error("system (Unknown) not supported this operation")
 
         return
 

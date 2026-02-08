@@ -1,6 +1,7 @@
 from engine.vector.float import Vec2f
 from engine.vector.int import Vec2i
 
+import logging
 import pygame
 
 
@@ -45,7 +46,7 @@ class Sprite:
                 self.image = path
 
         except FileNotFoundError:
-            # print(f"LOG: not found image ({path})")
+            # logging.info(f"not found image ({path})")
 
             self.image = None
 

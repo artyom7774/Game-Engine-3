@@ -1,5 +1,6 @@
 import pypresence
 import requests
+import logging
 import hashlib
 import socket
 import time
@@ -14,7 +15,7 @@ def updateOnlineOnSite(project):
             ip = s.getsockname()[0]
 
     except Exception as e:
-        print(f"ERROR: can't getting IP: {e}")
+        logging.error(f"can't getting IP: {e}")
 
         return
 
@@ -30,10 +31,10 @@ def updateOnlineOnSite(project):
             timeout=2
         )
 
-        # print(f"LOG: status: {response.status_code}, Response: {response.text}")
+        # logging.info(f"status: {response.status_code}, response: {response.text}")
 
     except requests.exceptions.RequestException as e:
-        print(f"ERROR: request failed: {e}")
+        logging.error(f"request failed: {e}")
 
 
 def updateDiscordStatusRPS(project):
@@ -51,7 +52,7 @@ def updateDiscordStatusRPS(project):
         )
 
     except pypresence.exceptions.DiscordNotFound:
-        print(f"LOG: discord is not found")
+        logging.info(f"discord is not found")
 
     except BaseException as e:
-        print(f"ERROR: request failed: {e}")
+        logging.error(f"request failed: {e}")

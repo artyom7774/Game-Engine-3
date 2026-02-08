@@ -1,9 +1,11 @@
 from PyQt5.QtWidgets import QTreeWidget, QTreeWidgetItem, QAbstractItemView, QMenu, QAction
 from PyQt5.QtCore import Qt, QPoint
 from PyQt5.QtGui import QIcon, QDropEvent
-import os
+
+import logging
 import shutil
 import re
+import os
 
 from src.variables import *
 
@@ -138,7 +140,8 @@ class TreeProject(QTreeWidget):
             event.accept()
 
         except Exception as e:
-            print(f"ERROR: moving error: {e}")
+            logging.error(f"moving error: {e}")
+
             event.ignore()
 
     def getItemPath(self, item, path=None, deep=0):
