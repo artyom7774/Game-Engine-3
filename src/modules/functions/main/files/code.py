@@ -254,7 +254,7 @@ class AIDialog(QDialog):
         answer, errors = compileProgramCode(answer)
 
         if errors:
-            logging.info(f"AI errors = {errors}")
+            logging.info(f"AI compile errors = {errors}")
 
         for id, node in answer.items():
             node["x"] += self.project.cache["file"][self.project.selectFile].x // CODE_GRID_CELL_SIZE + 5
@@ -723,7 +723,7 @@ class CodeNodeConnector(QLabel):
                         self.inputLeftText.show()
 
                     else:
-                        logging.error(f"not found special type {type}")
+                        logging.error(f"not found special type of node element {type}")
 
                 else:
                     if input["type"] == "choose":
@@ -908,7 +908,7 @@ class CodeNode(QTreeWidget):
                     indexFinish = list(finish["outputs"].keys()).index(self.node["inputs"][key]["value"]["name"]) + 1
 
                 except ValueError as e:
-                    logging.error(f"{self.node['id']=}")
+                    logging.critical(f"error in starts & finish points in node {self.node['id']} {e}")
 
                     raise ValueError(e)
 
@@ -1867,17 +1867,13 @@ class Code:
         project.objects["main"]["code_menu"].addSeparator()
         project.objects["main"]["code_menu"].addAction(project.objects["main"]["code_menu_delete_node"])
 
-        try:
-            for id, node in project.objects["main"]["function"]["objects"].items():
-                if node["x"] * CODE_GRID_CELL_SIZE < x + project.cache["file"][project.selectFile].x < (node["x"] + node["width"]) * CODE_GRID_CELL_SIZE and node["y"] * CODE_GRID_CELL_SIZE < y + project.cache["file"][project.selectFile].y < (node["y"] + node["height"]) * CODE_GRID_CELL_SIZE:
-                    break
+        for id, node in project.objects["main"]["function"]["objects"].items():
+            if node["x"] * CODE_GRID_CELL_SIZE < x + project.cache["file"][project.selectFile].x < (node["x"] + node["width"]) * CODE_GRID_CELL_SIZE and node["y"] * CODE_GRID_CELL_SIZE < y + project.cache["file"][project.selectFile].y < (node["y"] + node["height"]) * CODE_GRID_CELL_SIZE:
+                break
 
-            else:
-                project.objects["main"]["code_menu_copy_node"].setDisabled(True)
-                project.objects["main"]["code_menu_delete_node"].setDisabled(True)
-
-        except Exception as e:
-            logging.error(f"{e}")
+        else:
+            project.objects["main"]["code_menu_copy_node"].setDisabled(True)
+            project.objects["main"]["code_menu_delete_node"].setDisabled(True)
 
         project.objects["main"]["code_menu"].popup(project.objects["main"]["code"].mapToGlobal(position))
 

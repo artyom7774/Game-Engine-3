@@ -30,7 +30,7 @@ class SettingsFunctions:
             subprocess.run(["./Game Engine 3"])
 
         else:
-            logging.error("system (Unknown) not supported this opperation")
+            logging.error(f"system ({SYSTEM}) not supported running projects")
 
     @staticmethod
     def confirm(project, dialog, event) -> None:

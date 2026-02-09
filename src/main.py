@@ -58,8 +58,8 @@ class Main(QMainWindow):
         try:
             QApplication.instance().setStyleSheet(qdarktheme.load_stylesheet(SETTINGS["theme"]) + STYLE[SETTINGS["theme"]])
 
-        except AttributeError:
-            logging.error("can't setup theme")
+        except AttributeError as e:
+            logging.error(f"can't setup theme {e}")
 
         self.application = {}
         self.engine = None
@@ -153,7 +153,7 @@ class Main(QMainWindow):
                     msg.exec_()
 
             else:
-                logging.error(f"ERROR: can't download now project version, status = {response.status_code}")
+                logging.error(f"can't download now project version, status = {response.status_code}")
 
         else:
             logging.error("can't download now project version, bad internet connection")
