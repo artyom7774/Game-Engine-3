@@ -29,7 +29,6 @@
 1. Visit the [official website](https://ge3.pythonanywhere.com/) or [GitHub repository](https://github.com/artyom7774/Game-Engine-3/releases/)
 2. Download the program installer
 3. Launch **Game Engine 3.exe**
-4. 
 
 ## System Requirements
 

@@ -24,7 +24,7 @@
 
 ## Установка
 
-1. Посетите [официальный сайт](https://ge3.pythonanywhere.com/) или [репозиторий GitHub](https://github.com/artyom7774/Game-Engine-3/releases/)
+1. Откройте [официальный сайт](https://ge3.pythonanywhere.com/) или [репозиторий GitHub](https://github.com/artyom7774/Game-Engine-3/releases/)
 2. Скачайте установщик программы
 3. Запустите **Game Engine 3.exe**
 
