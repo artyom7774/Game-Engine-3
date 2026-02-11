@@ -35,7 +35,8 @@
         "3.14.0",
         "3.15.0",
         "3.15.1",
-        "3.15.2"
+        "3.15.2",
+        "3.15.3"
     ],
 
     "updates": {
@@ -217,6 +218,11 @@
         "3.15.2": {
             "name": "3.15.2",
             "text": "- new templates: base template, player controller\n- fixed bug with node get resulting vector\n- fixed bug with closing tabs\n- fixed bug with rename file"
+        },
+
+        "3.15.3": {
+            "name": "3.15.3",
+            "text": "- optimized code editor"
         }
     }
 }

@@ -24,7 +24,7 @@
 
 ## Установка
 
-1. Посетите [официальный сайт](https://artyom7777.pythonanywhere.com/) или [репозиторий GitHub](https://github.com/artyom7774/Game-Engine-3/releases/)
+1. Посетите [официальный сайт](https://ge3.pythonanywhere.com/) или [репозиторий GitHub](https://github.com/artyom7774/Game-Engine-3/releases/)
 2. Скачайте установщик программы
 3. Запустите **Game Engine 3.exe**
 
@@ -164,8 +164,8 @@ Game Engine 3
 
 ## Сообщество и поддержка
 
-- 🌐 [Официальный сайт](https://artyom7777.pythonanywhere.com/)
-- 📚 [Документация и руководства](https://artyom7777.pythonanywhere.com/documentation/)
+- 🌐 [Официальный сайт](https://ge3.pythonanywhere.com/)
+- 📚 [Документация и руководства](https://ge3.pythonanywhere.com/documentation/)
 - 💬 [Сообщество Discord](https://discord.gg/AgYqzHYUVf)
 - 📝 [Репозиторий GitHub](https://github.com/artyom7774/Game-Engine-3)
 

@@ -788,13 +788,9 @@ class CodeNodeConnector(QLabel):
         self.move(0, (self.number + 1) * CODE_GRID_CELL_SIZE)
 
         if self.left is not None:
-            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "node": self.node}, Vec2i(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
-
             self.left.move(0, 9)
 
         if self.right is not None:
-            self.project.objects["main"]["liner"].points["outputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "connector": self.output["type"]}, Vec2i(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
-
             self.right.move(self.width() - 12, 9)
 
         if self.inputLeftText is not None:
@@ -815,6 +811,15 @@ class CodeNodeConnector(QLabel):
 
                 else:
                     self.placeholderLabel.setText("")
+
+        self.updateConnectorPoints()
+
+    def updateConnectorPoints(self):
+        if self.left is not None:
+            self.project.objects["main"]["liner"].points["inputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "node": self.node}, Vec2i(self.parent().x() + self.x() + 5, self.parent().y() + self.y() + self.height() // 2)])
+
+        if self.right is not None:
+            self.project.objects["main"]["liner"].points["outputs"].append([{"id": self.id, "number": self.number, "keys": self.keys, "connector": self.output["type"]}, Vec2i(self.parent().x() + self.x() + self.width() - 5, self.parent().y() + self.y() + self.height() // 2)])
 
 
 class CodeNode(QTreeWidget):
@@ -973,6 +978,10 @@ class CodeNode(QTreeWidget):
         for key, connector in self.connectors.items():
             connector.updateObjectGeometry()
 
+    def updateConnectorPoints(self) -> None:
+        for key, connector in self.connectors.items():
+            connector.updateConnectorPoints()
+
 
 class CodeLabel(QLabel):
     def __init__(self, parent) -> None:
@@ -1067,7 +1076,9 @@ class CodeLabel(QLabel):
                 Code.update(self.project, call="move")
 
     def mousePressEvent(self, event) -> None:
-        # Code.update(self.project)
+        Code.update(self.project)
+
+        # Code.update(self.project, "move")
 
         flag = False
 
@@ -1183,9 +1194,14 @@ class CodeLabel(QLabel):
 
         self.stop = False
 
+        nodeUpdateCallType = "move"
+
         for element in self.project.objects["main"]["liner"].points["inputs"]:
             if abs(element[1].x - event.pos().x()) < CODE_POINT_PRECISION and abs(element[1].y - event.pos().y()) < CODE_POINT_PRECISION:
                 finish = element
+
+                nodeUpdateCallType = ""
+
                 break
 
         else:
@@ -1218,7 +1234,10 @@ class CodeLabel(QLabel):
         self.project.objects["main"]["liner"].node = None
 
         if event.button() == Qt.LeftButton:
-            Code.update(self.project)
+            # if nodeUpdateCallType == "":
+            #     Code.init(self.project)
+
+            Code.update(self.project, nodeUpdateCallType)
 
     def mouseMoveEvent(self, event) -> None:
         # MOVE SCENE
@@ -1839,7 +1858,6 @@ class Code:
 
         for id, node in project.objects["main"]["function"]["objects"].items():
             project.objects["main"]["nodes"][node["id"]] = CodeNode(project, node)
-
 
     @staticmethod
     def menu(project, position) -> None:

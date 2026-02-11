@@ -47,7 +47,7 @@ def updateDiscordStatusRPS(project):
             large_image="logo",
             start=time.time(),
             buttons=[
-                {"label": "Download", "url": "https://ge3.pythonanywhere.com/"}
+                {"label": "Site", "url": "https://ge3.pythonanywhere.com/"}
             ]
         )
 
