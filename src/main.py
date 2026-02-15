@@ -235,7 +235,7 @@ class Main(QMainWindow):
         if self.selectFile == "" and self.objects["tab_file_bar"].count() != 0:
             self.selectFile = self.objects["tab_file_bar"].objects[self.objects["tab_file_bar"].currentIndex()]["name"]
 
-        self.objects["status_bar"].showMessage(self.selectFile)
+        self.objects["status_bar"].showMessage(os.path.normpath(self.selectFile))
 
     def initialization(self) -> None:
         def tabFileBarCurrentChanged(index: int) -> None:
