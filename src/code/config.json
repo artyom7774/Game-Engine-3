@@ -161,6 +161,7 @@
             "nodes": [
                 "setVar",
                 "getVar",
+                "setVariableType",
                 "random_",
                 "decodeHolder",
                 "len_",
@@ -921,14 +922,14 @@
                     "name": "__a__",
                     "type": "Any",
                     "value": null,
-                    "standard": null
+                    "standard": ""
                 },
                 "b": {
                     "code": "b",
                     "name": "__b__",
                     "type": "Any",
                     "value": null,
-                    "standard": null
+                    "standard": ""
                 },
                 "operation": {
                     "code": "operation",
@@ -4051,6 +4052,74 @@
                     "__path__": "node.text.path",
                     "__x__": "node.text.x",
                     "__y__": "node.text.y"
+                }
+            }
+        },
+        "setVariableType": {
+            "type": "another",
+            "name": "setVariableType",
+            "x": null,
+            "y": null,
+            "width": 8,
+            "height": 4,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "variable",
+                    "type"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "variable": {
+                    "code": "variable",
+                    "name": "__variable__",
+                    "type": "Any",
+                    "value": null,
+                    "standard": ""
+                },
+                "type": {
+                    "code": "type",
+                    "name": "__type__",
+                    "type": "choose",
+                    "value": null,
+                    "standard": 0,
+                    "choose": {
+                        "options": [
+                            "variable.type.number",
+                            "variable.type.text",
+                            "variable.type.logic",
+                            "variable.type.list"
+                        ]
+                    }
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "variable": {
+                    "code": "variable",
+                    "name": "__variable__",
+                    "type": "Any"
+                }
+            },
+            "display": {
+                "name": "node.name.setVariableType",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__variable__": "node.text.variable",
+                    "__type__": "node.text.type"
                 }
             }
         },

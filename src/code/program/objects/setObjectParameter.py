@@ -73,7 +73,7 @@ def setObjectParameter(program, compiler, path: str, nodes: dict, id: int, varia
             obj.sprite = Sprite(program, obj, obj.sprite.path, Vec2i(value[0], value[1]), Vec2i(value[2], value[3]))
 
         else:
-            raise EngineError("object {obj.id} has not sprite")
+            raise EngineError(f"object {obj.id} has not sprite")
 
     else:
         obj.setParameter(OBJECT_PARAMETERS[operation], value)

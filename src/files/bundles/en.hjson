@@ -343,6 +343,7 @@
     "node.name.keyboardRelease": "Keyboard release"
     "node.name.setObjectRotation": "Set object rotation"
     "node.name.setListElement": "Set list element"
+    "node.name.setVariableType": "Set variable type" // TODO
 
     // NODE TEXT
     "node.text.none": ""
@@ -400,6 +401,7 @@
     "node.text.degree": "degree"
     "node.text.slidingStep": "sliding step"
     "node.text.operation": "operation"
+    "node.text.variable": "variable" // TODO
 
     // OBJECT PARAMETERS
     "object.parameter.number.hitbox": "0. Hitbox"
@@ -419,6 +421,13 @@
     "object.parameter.number.liveTime": "14. Live time"
     "object.parameter.number.minusSpriteSizePerFrame": "15. Minus sprite size per frame"
     "object.parameter.number.alpha": "16. Transparency"
+
+    // VARIABLES TYPES
+    "variable.type.number": "0. Number" // TODO
+    "variable.type.text": "1. Text" // TODO
+    "variable.type.logic": "2. Logic" // TODO
+    "variable.type.list": "3. List" // TODO
+    "variable.type.dict": "4. Dict" // TODO
 
     // TEMPLATES
     "template.base": "Base template"
