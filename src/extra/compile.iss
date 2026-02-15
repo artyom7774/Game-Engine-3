@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Game Engine 3"
-#define MyAppVersion "3.15.2"
+#define MyAppVersion "3.15.3"
 #define MyAppPublisher "Game Engine 3"
 #define MyAppURL "https://artyom7777.pythonanywhere.com/"
 #define MyAppExeName "Game Engine 3.exe"
