@@ -49,7 +49,6 @@ Source: "..\..\requirements.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\setup.py"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\start.py"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\start.spec"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\test.py"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\TODO.txt"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "..\..\descriptions\*"; DestDir: "{app}\descriptions"; Flags: ignoreversion recursesubdirs createallsubdirs

@@ -58,7 +58,6 @@ jobs:
           cp setup.py dist/Game-Engine-3/
           cp start.py dist/Game-Engine-3/
           cp start.spec dist/Game-Engine-3/
-          cp test.py dist/Game-Engine-3/
           cp TODO.txt dist/Game-Engine-3/
           
           cp -r descriptions dist/Game-Engine-3/
