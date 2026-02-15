@@ -819,7 +819,6 @@ class Scene:
 
                 Scene.objects(project, [obj.variables["code"]])
 
-                # TODO
                 Scene.save(project)
 
                 Scene.objectReleased(project)
