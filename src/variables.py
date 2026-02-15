@@ -62,7 +62,8 @@ pygame.init()
 BASE_SETTINGS = {
     "language": "EN",
     "theme": "dark",
-    "model": "gemini-2.5-flash"
+    "model": "gemini-2.5-flash",
+    "check-updates": True
 }
 
 SETTINGS = BASE_SETTINGS
@@ -331,6 +332,7 @@ THEMES = {
 
 AI_MODELS = {
     "gemini-2.5-flash": "gemini-2.5-flash"
+    # "gemini-2.5-pro": "gemini-2.5-pro"
 }
 
 STYLE = {
@@ -341,8 +343,9 @@ QToolTip {
     border: 1px solid #555555;
     padding-right: -3px;
     border-radius: 3px;
-    font-size: 11px;
+    font-size: 13px;
 }
+
 """,
 
 "light": """
@@ -350,7 +353,7 @@ QToolTip {
     border: 1px solid #dee0e3;
     padding-right: -3px;
     border-radius: 3px;
-    font-size: 11px;
+    font-size: 13px;
 }
 """
 }

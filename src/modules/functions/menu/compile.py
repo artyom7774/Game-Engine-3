@@ -8,6 +8,8 @@ from src.variables import *
 
 import subprocess
 import threading
+import requests
+import hashlib
 import logging
 import zipfile
 import socket
@@ -533,11 +535,7 @@ class Compile:
 
             zip.write(f"{PATH_TO_PROJECTS}/{project.selectProject}/version.json", "version.json")
 
-        import requests
-        import hashlib
-        import socket
-
-        def get_local_ips():
+        def getLocalIP():
             ips = set()
 
             hostname = socket.gethostname()
@@ -551,19 +549,15 @@ class Compile:
             return list(ips)
 
         url = "https://ge3.pythonanywhere.com/upload"
-        zip_path = f"{PATH_TO_PROJECTS}/{project.selectProject}/temp.zip"
+        zip = f"{PATH_TO_PROJECTS}/{project.selectProject}/temp.zip"
 
         headers = {
-            "ip": hashlib.sha256(get_local_ips()[0].encode()).hexdigest(),
+            "ip": hashlib.sha256(getLocalIP()[0].encode()).hexdigest(),
             "name": project.selectProject
         }
 
-        with open(zip_path, "rb") as f:
-            files = {
-                "file": ("test.zip", f, "application/zip")
-            }
-
-            response = requests.post(url, files=files, headers=headers)
+        with open(zip, "rb") as f:
+            response = requests.post(url, files={"file": ("test.zip", f, "application/zip")}, headers=headers)
 
         logging.info(f"status: {response.status_code}, responce: {response.text}")
 

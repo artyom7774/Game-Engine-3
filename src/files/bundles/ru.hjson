@@ -271,6 +271,7 @@
     "Choose file": "Выбрать файл"
     "Project description": "Описание проекта"
     "Publish": "Опубликовать"
+    "Check updates": "Проверка обновлений"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"

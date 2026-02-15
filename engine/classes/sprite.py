@@ -1,7 +1,6 @@
 from engine.vector.float import Vec2f
 from engine.vector.int import Vec2i
 
-import logging
 import pygame
 
 
@@ -20,7 +19,7 @@ class Sprite:
         self.game = game
         self.obj = obj
 
-        if 0 < len(args) <= 3:
+        if len(args) == 3:
             path = args[0]
             pos  = args[1] if len(args) > 1 else Vec2i(0, 0)
             size = args[2] if len(args) > 2 else None

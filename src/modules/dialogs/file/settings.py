@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QDialog, QLabel, QComboBox, QPushButton
+from PyQt5.QtWidgets import QDialog, QLabel, QComboBox, QPushButton, QCheckBox
 from PyQt5.QtGui import QIcon
 from PyQt5 import QtWidgets
 
@@ -44,7 +44,9 @@ class SettingsFunctions:
             "language": languages[dialog.objects["language_combobox"].currentText()],
 
             "theme": themes[dialog.objects["theme_combobox"].currentIndex()],
-            "model": models[dialog.objects["model_combobox"].currentIndex()]
+            "model": models[dialog.objects["model_combobox"].currentIndex()],
+
+            "check-updates": dialog.objects["updates_checkbox"].isChecked()
         }
 
         for key, value in settings.items():
@@ -75,15 +77,10 @@ class SettingsFunctions:
         for key, value in BASE_SETTINGS.items():
             settings[key] = value
 
-        var = [dialog.objects["language_combobox"].itemText(i) for i in range(dialog.objects["language_combobox"].count())]
-        dialog.objects["language_combobox"].setCurrentIndex([element == LANGUAGES[settings["language"]] for element in var].index(True))
-
-    @staticmethod
-    def install(project, dialog, event):
-        os.system("setup.bat")
-
-        dialog.objects["reset_button"].setDisabled(False)
-        dialog.objects["reset_button"].setText(translate("Reinstall python"))
+        dialog.objects["language_combobox"].setCurrentIndex([element == LANGUAGES[settings["language"]] for element in [dialog.objects["language_combobox"].itemText(i) for i in range(dialog.objects["language_combobox"].count())]].index(True))
+        dialog.objects["theme_combobox"].setCurrentIndex(0)
+        dialog.objects["model_combobox"].setCurrentIndex(0)
+        dialog.objects["updates_checkbox"].setChecked(True)
 
 
 class Settings(QDialog):
@@ -152,6 +149,19 @@ class Settings(QDialog):
         self.objects["model_combobox"].setGeometry(210, 80, 300, 25)
         self.objects["model_combobox"].setFont(FONT)
         self.objects["model_combobox"].show()
+
+        # CHECK UPDATES
+
+        self.objects["updates_label"] = QLabel(parent=self, text=translate("Check updates") + ":")
+        self.objects["updates_label"].setGeometry(10, 115, 200, 25)
+        self.objects["updates_label"].setFont(FONT)
+        self.objects["updates_label"].show()
+
+        self.objects["updates_checkbox"] = QCheckBox(parent=self)
+        self.objects["updates_checkbox"].setChecked(SETTINGS["check-updates"])
+        self.objects["updates_checkbox"].setGeometry(210, 115, 300, 25)
+        self.objects["updates_checkbox"].setFont(FONT)
+        self.objects["updates_checkbox"].show()
 
         # COMFIRM
 

@@ -29,10 +29,9 @@ def main() -> None:
     def handle(exc_type, exc_value, exc_traceback):
         if issubclass(exc_type, KeyboardInterrupt):
             sys.__excepthook__(exc_type, exc_value, exc_traceback)
-
             return
 
-        logger.critical("", exc_info=(exc_type, exc_value, exc_traceback))
+        logger.critical("fatal exception", exc_info=(exc_type, exc_value, exc_traceback))
 
     sys.excepthook = handle
 
@@ -47,7 +46,6 @@ def main() -> None:
         pass
 
     app = QApplication(sys.argv)
-    app.setStyle("windowsvista")
 
     window = Main(app)
     app.setWindowIcon(window.windowIcon())

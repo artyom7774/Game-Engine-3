@@ -93,7 +93,7 @@ class Main(QMainWindow):
 
         self.initialization()
 
-        if not FLAGS["not-view-version-update"]:
+        if not FLAGS["not-view-version-update"] and SETTINGS["check-updates"]:
             thr = threading.Thread(target=lambda: self.versionUpdateMessage())
             thr.daemon = True
             thr.start()
