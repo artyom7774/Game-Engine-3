@@ -702,22 +702,17 @@ class Scene:
 
         # CENTER RAMA
 
-        application.objects.removeByGroup("__debug_center_rama__")
-
         projectSettings = project.objects["main"]["project_settings"]
 
-        if [obj.group for obj in application.objects.objects].count("__debug_center_rama__") == 0:
-            if sceneSettings["Scene"]["visiable_screen"]["value"]:
-                application.objects.add(project.engine.objects.StaticObject(
-                    application, [x - projectSettings["values"]["width"]["value"] // 2, y - projectSettings["values"]["height"]["value"] // 2],
-                    [0, 0, projectSettings["values"]["width"]["value"], projectSettings["values"]["height"]["value"]],
-                    group="__debug_center_rama__", layer=int(1e9 + 2)
-                ))
+        afterDrawing = []
+
+        if sceneSettings["Scene"]["visiable_screen"]["value"]:
+            afterDrawing.append(["rect", [application.screen, (255, 0, 0), (application.usingWidth // 2 - projectSettings["values"]["width"]["value"] // 2, application.usingHeight // 2 - projectSettings["values"]["height"]["value"] // 2, projectSettings["values"]["width"]["value"], projectSettings["values"]["height"]["value"]), 1]])
 
         # VISIABLE
 
         try:
-            project.cache["file"][project.selectFile].screen = application.frame(image=True, screenFillColor=(32, 33, 36), lastDrawing=lastDrawing)
+            project.cache["file"][project.selectFile].screen = application.frame(image=True, screenFillColor=(32, 33, 36), lastDrawing=lastDrawing, afterDrawing=afterDrawing)
 
         except KeyError:
             project.objects["tab_file_bar"].updateSelectFile()
