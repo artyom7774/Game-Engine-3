@@ -212,7 +212,7 @@
 
 ==================== ОБНОВИТЬ САЙТ ====================
 
-ноды: power, squareRoot, insertListElement, modulo, ifKeyPressed, keyboardRelease, setObjectRotation
+ноды: power, squareRoot, insertListElement, modulo, ifKeyPressed, keyboardRelease, setObjectRotation, setVariableType, getFrameNumber
 функции: sqrt, pow, setObjectRotation
 
 =======================================================
