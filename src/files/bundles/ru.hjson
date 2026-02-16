@@ -369,6 +369,8 @@
     "node.name.keyboardRelease": "При отжатии клавиши"
     "node.name.setObjectRotation": "Установить поворот объекта"
     "node.name.setListElement": "Установить элемент списка"
+    "node.name.setVariableType": "Установить тип переменной"
+    "node.name.getFrameNumber": "Получить номер кадра"
 
     // NODE TEXT
     "node.text.none": ""
@@ -426,6 +428,8 @@
     "node.text.degree": "степень"
     "node.text.slidingStep": "сила торможение"
     "node.text.operation": "операция"
+    "node.text.variable": "переменная"
+    "node.text.type": "тип"
 
     // OBJECT PARAMETERS
     "object.parameter.number.hitbox": "0. Хитбокс"
@@ -445,6 +449,13 @@
     "object.parameter.number.liveTime": "14. Время жизни"
     "object.parameter.number.minusSpriteSizePerFrame": "15. Минус размер спрайта каждый кадр"
     "object.parameter.number.alpha": "16. Прозрачность"
+
+    // VARIABLES TYPES
+    "variable.type.number": "0. Число"
+    "variable.type.text": "1. Текст"
+    "variable.type.logic": "2. Логика"
+    "variable.type.list": "3. Список"
+    "variable.type.dict": "4. Словарь"
 
     // TEMPLATES
     "template.base": "Основной шаблон"

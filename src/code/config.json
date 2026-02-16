@@ -162,6 +162,7 @@
                 "setVar",
                 "getVar",
                 "setVariableType",
+                "getFrameNumber",
                 "random_",
                 "decodeHolder",
                 "len_",
@@ -5086,6 +5087,44 @@
                 "text": {
                     "__none__": "node.text.none",
                     "__path__": "node.text.path"
+                }
+            }
+        },
+        "getFrameNumber": {
+            "type": "another",
+            "name": "getFrameNumber",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                },
+                "answer": {
+                    "code": "answer",
+                    "name": "__answer__",
+                    "type": "number"
+                }
+            },
+            "display": {
+                "name": "node.name.getFrameNumber",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__answer__": "node.text.answer"
                 }
             }
         },
