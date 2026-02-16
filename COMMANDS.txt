@@ -13,5 +13,6 @@ python setup.py build_ext --inplace -v
 GET INSTALLED MODULES:
 pip freeze > requirements.txt
 
-LINUX PYTHON VENV:
-source ~/game-engine-venv/bin/activate
+GIT:
+git reset --hard HEAD
+git pull origin main
