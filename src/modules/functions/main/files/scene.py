@@ -107,7 +107,7 @@ class SceneHash:
     camera: typing.Any = None
 
     selectObject: str = None
-    selectLink: id = -1
+    selectLink: int = -1
 
     settings: str = ""
 
@@ -969,12 +969,7 @@ class Scene:
     def toObjectMove(project, direction) -> None:
         application = project.application[project.selectFile]
 
-        directions = {
-            "right": (1, 0),
-            "left": (-1, 0),
-            "up": (0, -1),
-            "down": (0, 1)
-        }
+        directions = {"right": (1, 0), "left": (-1, 0), "up": (0, -1), "down": (0, 1)}
 
         if project.selectFile not in project.cache["file"]:
             return
@@ -987,9 +982,11 @@ class Scene:
 
         obj = project.cache["allSceneObjects"][project.selectFile][project.cache["file"][project.selectFile].selectObject.variables["code"]]
 
+        sceneSettings = project.objects["main"]["scene_settings"]
+
         try:
-            obj[obj["main"]]["pos"]["value"]["x"]["value"] += directions[direction][0]
-            obj[obj["main"]]["pos"]["value"]["y"]["value"] += directions[direction][1]
+            obj[obj["main"]]["pos"]["value"]["x"]["value"] += directions[direction][0] * (sceneSettings["Scene"]["grid"]["value"]["x"]["value"] if project.objects["main"]["scene_settings"]["Scene"]["snap"]["value"] else 1)
+            obj[obj["main"]]["pos"]["value"]["y"]["value"] += directions[direction][1] * (sceneSettings["Scene"]["grid"]["value"]["y"]["value"] if project.objects["main"]["scene_settings"]["Scene"]["snap"]["value"] else 1)
 
         except KeyError:
             return
