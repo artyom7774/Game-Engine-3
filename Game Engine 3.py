@@ -5,8 +5,8 @@ from src.main import Main
 from src.variables import *
 
 import faulthandler
-import logging
 import asyncio
+import logging
 import ctypes
 import sys
 
@@ -35,15 +35,15 @@ def main() -> None:
 
     sys.excepthook = handle
 
-    logging.info(f"develop mode = {DEVELOP}")
-    logging.info(f"program ran on \"{SYSTEM} {RELEASE}\"")
-
     try:
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(f"Game-Engine-{VERSION}")
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(f"Game-Engine-3")
 
     except AttributeError as e:
         pass
+
+    logging.info(f"develop mode = {DEVELOP}")
+    logging.info(f"program ran on \"{SYSTEM} {RELEASE}\"")
 
     app = QApplication(sys.argv)
 

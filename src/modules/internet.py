@@ -1,4 +1,5 @@
 import pypresence
+import traceback
 import requests
 import logging
 import hashlib
@@ -38,8 +39,11 @@ def updateOnlineOnSite(project):
 
 
 def updateDiscordStatusRPS(project):
+    RPC = None
+
     try:
         RPC = pypresence.Presence(DISCORD_BOT_ID)
+
         RPC.connect()
 
         RPC.update(
@@ -47,12 +51,15 @@ def updateDiscordStatusRPS(project):
             large_image="logo",
             start=time.time(),
             buttons=[
-                {"label": "Download", "url": "https://ge3.pythonanywhere.com/"}
+                {"label": "Site", "url": "https://ge3.pythonanywhere.com/"}
             ]
         )
 
     except pypresence.exceptions.DiscordNotFound:
-        logging.info(f"discord is not found")
+        logging.info("discord is not found")
 
     except BaseException as e:
-        logging.error(f"request failed: {e}")
+        logging.error(f"request failed: {traceback.format_exc()}")
+
+    finally:
+        RPC.close()

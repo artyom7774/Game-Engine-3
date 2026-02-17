@@ -228,7 +228,7 @@
 
         "3.15.4": {
             "name": "3.15.4",
-            "text": "- optimized scene editor\n- fixed bug with display status bar\n- new nodes: set variable type, get frame number\n- add button in scene to clear focus"
+            "text": "- optimized scene editor\n- new nodes: set variable type, get frame number\n- add button in scene to clear focus\n- fixed bug with display status bar\n- fixed bug with discord RPC"
         }
     }
 }
