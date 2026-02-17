@@ -272,6 +272,7 @@
     "Project description": "Описание проекта"
     "Publish": "Опубликовать"
     "Check updates": "Проверка обновлений"
+    "Open scene settings": "Открыть настройки сцены"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"

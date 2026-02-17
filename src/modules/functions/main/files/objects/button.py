@@ -5,7 +5,7 @@ import typing
 
 class Button:
     @staticmethod
-    def init(project, file=None, pos=None, type: str = "object", variables: bool = True, bottom: bool = False) -> None:
+    def init(project, file=None, pos=None, type: str = "object", variables: bool = True, bottom: typing.Any = None) -> None:
         AbstractObject.init(project, "button", file, pos, type, variables, bottom)
 
     @staticmethod

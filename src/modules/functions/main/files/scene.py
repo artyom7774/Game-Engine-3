@@ -18,6 +18,7 @@ from src.modules.widgets import FocusLineEdit, FocusComboBox
 from src.modules import functions
 
 from engine.vector.float import Vec2f
+from engine.vector.int import Vec4i
 
 from src.variables import *
 
@@ -144,6 +145,23 @@ class SceneLabel(QLabel):
 
         with open(self.project.cache["file"][self.project.selectFile].settings, "r", encoding="utf-8") as file:
             self.sceneSettings = load(file)
+
+    def event(self, event):
+        if event.type() == event.MouseMove:
+            self.mouseMoveEvent(event)
+
+            return True
+
+        elif event.type() == event.MouseButtonRelease:
+            from PyQt5.QtWidgets import QApplication
+
+            QApplication.processEvents()
+
+            self.mouseReleaseEvent(event)
+
+            return True
+
+        return super().event(event)
 
     def updateCameraObject(self) -> None:
         if self.x() < QCursor.pos().x() - self.project.x() < self.x() + self.width() and self.y() < QCursor.pos().y() - self.project.y() - 40 < self.y() + self.height():
@@ -400,13 +418,23 @@ class SceneAdditions:
             project.objects["main"]["object_tree"].hide()
             project.objects["main"]["object_tree"].deleteLater()
 
+            project.objects["main"]["to_scene_settings_button"].hide()
+            project.objects["main"]["to_scene_settings_button"].deleteLater()
+
         except BaseException:
             pass
 
-        project.objects["main"]["settings"] = QTreeWidget(parent=project)
+        project.objects["main"]["settings"] = QTreeWidget(project)
         project.objects["main"]["settings"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 40, Size.x(16), Size.y(100) - 70)
         project.objects["main"]["settings"].setHeaderHidden(True)
         project.objects["main"]["settings"].header().setFont(FONT)
+        project.objects["main"]["settings"].hide()
+
+        project.objects["main"]["to_scene_settings_button"] = QPushButton(project)
+        project.objects["main"]["to_scene_settings_button"].clicked.connect(lambda: Scene.objectReleased(project))
+        project.objects["main"]["to_scene_settings_button"].setText(translate("Open scene settings"))
+        project.objects["main"]["to_scene_settings_button"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 60 + project.height() - 115, Size.x(16), 23)
+        project.objects["main"]["to_scene_settings_button"].hide()
 
         if project.cache["file"][project.selectFile].selectObject is not None and project.cache["file"][project.selectFile].selectObject.variables.get("code", None) is not None:
             code = project.cache["file"][project.selectFile].selectObject.variables["code"]
@@ -417,11 +445,16 @@ class SceneAdditions:
                     project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
                     40,
                     project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
-                    (project.height() - 80) // 2
-                ), type="object", bottom=True
+                    (project.height() - 110) // 2
+                ), type="object", bottom=Vec4i(
+                    project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
+                    40 + 10 + (project.height() - 110) // 2,
+                    project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
+                    (project.height() - 110) // 2
+                )
             )
 
-            project.objects["main"]["settings"].hide()
+            project.objects["main"]["to_scene_settings_button"].show()
 
         else:
             file = project.cache["file"][project.selectFile].settings

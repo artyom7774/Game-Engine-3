@@ -11,6 +11,7 @@ from src.modules.functions.main.files.objects.abstract import AbstractObject, Ab
 
 from src.variables import *
 
+import typing
 import orjson
 import math
 import json
@@ -117,7 +118,7 @@ class Object:
             self.complited = 1
 
     @staticmethod
-    def init(project, class_=AbstractWidgetItem, file=None, pos=None, type: str = "object", variables: bool = True, bottom: bool = False) -> None:
+    def init(project, class_=AbstractWidgetItem, file=None, pos=None, type: str = "object", variables: bool = True, bottom: typing.Any = None) -> None:
         AbstractObject.init(project, "object", file, pos, type, variables, bottom, class_)
 
     @staticmethod

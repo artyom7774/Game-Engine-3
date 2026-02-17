@@ -279,7 +279,7 @@ class AbstractWidgetItem(QWidget):
 
 class AbstractObject:
     @staticmethod
-    def init(project, objectTemplateType, file=None, pos=None, type: str = "object", variables: bool = True, bottom: bool = False, class_=AbstractWidgetItem) -> None:
+    def init(project, objectTemplateType, file=None, pos=None, type: str = "object", variables: bool = True, bottom: Vec4i = None, class_=AbstractWidgetItem) -> None:
         def include(project, objectTemplateType, obj: dict, path: str, class_) -> None:
             temp = AbstractObject.get(obj, path)
 
@@ -345,15 +345,10 @@ class AbstractObject:
             project.objects["main"]["variables"] = {}
 
         if variables:
-            if bottom:
+            if bottom is not None:
                 project.objects["main"]["object_variables"] = CodeAdditionsVarsType(
                     project,
-                    Vec4i(
-                        project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
-                        40 + 10 + (project.height() - 80) // 2,
-                        project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
-                        (project.height() - 80) // 2
-                    ),
+                    bottom,
                     translate("Create object variable"),
                     file
                 )

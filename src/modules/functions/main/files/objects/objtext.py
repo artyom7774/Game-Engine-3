@@ -5,7 +5,7 @@ import typing
 
 class ObjectText:
     @staticmethod
-    def init(project, file=None, pos=None, type: str = "object", variables: bool = True, bottom: bool = False) -> None:
+    def init(project, file=None, pos=None, type: str = "object", variables: bool = True, bottom: typing.Any = None) -> None:
         AbstractObject.init(project, "text", file, pos, type, variables, bottom)
 
     @staticmethod
