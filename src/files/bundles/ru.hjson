@@ -273,6 +273,7 @@
     "Publish": "Опубликовать"
     "Check updates": "Проверка обновлений"
     "Open scene settings": "Открыть настройки сцены"
+    "Create object variable": "Создать переменную объекта"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"
