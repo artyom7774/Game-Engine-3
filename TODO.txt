@@ -215,8 +215,9 @@
 
 ==================== ОБНОВИТЬ САЙТ ====================
 
+группа нодов numbers переименовать на math
 ноды: power, squareRoot, insertListElement, modulo, ifKeyPressed, keyboardRelease, setObjectRotation, setVariableType, getFrameNumber
-функции: sqrt, pow, setObjectRotation
+функции: sqrt, pow, setObjectRotation, getFrameNumber
 
 =======================================================
 
