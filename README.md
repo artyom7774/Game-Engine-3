@@ -87,7 +87,7 @@ Over 80 available nodes divided into 10 categories:
 - Events
 - Loops
 - Text
-- Number
+- Math
 - Logic
 - Objects
 - Animation
