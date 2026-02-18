@@ -14,11 +14,11 @@ def ifKeyInDict(program, compiler, path: str, nodes: dict, id: int, variables: d
         key = str(nodes["objects"][str(id)]["inputs"]["key"]["standard"])
 
     if key in dict_:
-        for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
-            queue.append(name["id"])
+        for element in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+            queue.extend([item["id"] for item in element])
 
     else:
-        for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
-            queue.append(name["id"])
+        for element in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+            queue.extend([item["id"] for item in element])
 
     return queue

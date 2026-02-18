@@ -25,17 +25,20 @@ def forObjectsGroup(program, compiler, path: str, nodes: dict, id: int, variable
     compiler.loopBreaking[str(id)] = False
 
     for i, obj in enumerate(objects):
-        for ids, connector in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():
-            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.id
+        for ids, connectors in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():
+            for connector in connectors:
+                nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.id
 
-        for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
-            compiler.queue(name["id"])
+        for elements in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
+            for name in elements:
+                compiler.queue(name["id"])
 
         if compiler.loopBreaking.get(str(id), False):
             break
 
     else:
-        for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
-            queue.append(name["id"])
+        for elements in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+            for name in elements:
+                queue.append(name["id"])
 
     return queue

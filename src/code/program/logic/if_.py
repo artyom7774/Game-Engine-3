@@ -24,20 +24,20 @@ def if_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **k
 
     try:
         if eval(f"{a} {OPERATIONS[operation][3:]} {b}"):
-            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
-                queue.append(name["id"])
+            for element in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.extend([item["id"] for item in element])
 
         else:
-            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
-                queue.append(name["id"])
+            for element in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.extend([item["id"] for item in element])
 
     except BaseException:
         if eval(f"'{a}' {OPERATIONS[operation][3:]} '{b}'"):
-            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
-                queue.append(name["id"])
+            for element in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.extend([item["id"] for item in element])
 
         else:
-            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
-                queue.append(name["id"])
+            for element in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.extend([item["id"] for item in element])
 
     return queue

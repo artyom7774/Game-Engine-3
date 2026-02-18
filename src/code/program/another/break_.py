@@ -12,7 +12,8 @@ def break_(program, compiler, path: str, nodes: dict, id: int, variables: dict, 
 
     compiler.loopBreaking[str(compiler.loopForBreak[str(id)])] = True
 
-    for name in nodes["objects"][str(compiler.loopForBreak[str(id)])]["outputs"]["after"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(compiler.loopForBreak[str(id)])]["outputs"]["after"]["value"].values():
+        queue.extend([item["id"] for item in element])
+
 
     return queue

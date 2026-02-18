@@ -1,8 +1,8 @@
 def connectText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     if nodes["objects"][str(id)]["inputs"]["text1"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["text1"]["value"]["value"] is not None:
         text1 = str(nodes["objects"][str(id)]["inputs"]["text1"]["value"]["value"])
@@ -18,7 +18,8 @@ def connectText(program, compiler, path: str, nodes: dict, id: int, variables: d
 
     answer = text1 + text2
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["text"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["text"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
 
     return queue

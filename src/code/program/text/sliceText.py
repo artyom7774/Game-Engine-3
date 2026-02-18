@@ -4,8 +4,8 @@ from engine.special.exception import EngineError
 def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     if nodes["objects"][str(id)]["inputs"]["text"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"] is not None:
         text = str(nodes["objects"][str(id)]["inputs"]["text"]["value"]["value"])
@@ -30,7 +30,8 @@ def sliceText(program, compiler, path: str, nodes: dict, id: int, variables: dic
 
     answer = text[start:(None if end == -1 else end + 1)]
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["text"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["text"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
 
     return queue

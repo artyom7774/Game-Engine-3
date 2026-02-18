@@ -15,11 +15,11 @@ def ifKeyPressed(program, compiler, path: str, nodes: dict, id: int, variables: 
         raise EngineError(f"key {key} is not currect")
 
     if program.allPressedKeys[key]:
-        for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
-            queue.append(name["id"])
+        for element in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+            queue.extend([item["id"] for item in element])
 
     else:
-        for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
-            queue.append(name["id"])
+        for element in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+            queue.extend([item["id"] for item in element])
 
     return queue

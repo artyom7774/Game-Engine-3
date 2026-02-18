@@ -24,14 +24,14 @@ def forDictElements(program, compiler, path: str, nodes: dict, id: int, variable
         for ids, connector in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
             nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = value
 
-        for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
-            compiler.queue(name["id"])
+        for element in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
+            queue.extend([item["id"] for item in element])
 
         if compiler.loopBreaking.get(str(id), False):
             break
 
     else:
-        for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
-            queue.append(name["id"])
+        for element in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+            queue.extend([item["id"] for item in element])
 
     return {"queue": queue, "timer": timer}

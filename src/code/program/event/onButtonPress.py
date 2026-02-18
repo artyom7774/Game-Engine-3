@@ -1,10 +1,11 @@
 def onButtonPress(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = kwargs["onButtonPressObjectID"]
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["id"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = kwargs["onButtonPressObjectID"]
 
     return queue

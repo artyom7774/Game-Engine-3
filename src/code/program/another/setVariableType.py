@@ -11,8 +11,8 @@ VARIABLE_TYPES = ["number", "text", "logic", "list", "dict"]
 def setVariableType(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     if nodes["objects"][str(id)]["inputs"]["variable"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["variable"]["value"]["value"] is not None:
         variable = str(nodes["objects"][str(id)]["inputs"]["variable"]["value"]["value"])
@@ -45,7 +45,8 @@ def setVariableType(program, compiler, path: str, nodes: dict, id: int, variable
     except BaseException:
         raise EngineError(f"can't set variable {variable} to type {type}")
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["variable"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["variable"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
 
     return queue

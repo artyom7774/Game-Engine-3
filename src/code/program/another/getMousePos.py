@@ -4,15 +4,17 @@ import pygame
 def getMousePos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     x, y = pygame.mouse.get_pos()
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = x
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = x
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["y"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = y
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["y"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = y
 
     return queue

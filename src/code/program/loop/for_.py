@@ -29,22 +29,24 @@ def for_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **
             for ids, connector in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
                 nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = i
 
-            for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
-                compiler.queue(name["id"])
+            for element in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
+                for name in element:
+                    compiler.queue(name["id"])
 
             if compiler.loopBreaking.get(str(id), False):
                 break
 
         else:
-            for name in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
-                queue.append(name["id"])
+            for element in nodes["objects"][str(id)]["outputs"]["after"]["value"].values():
+                queue.extend([item["id"] for item in element])
 
     else:
-        for name in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
-            queue.append(name["id"])
+        for element in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
+            queue.extend([item["id"] for item in element])
 
-        for ids, connector in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
-            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = 0
+        for ids, connectors in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
+            for connector in connectors:
+                nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = 0
 
         timer.append({"id": id, "count": n - 1, "timer": x, "tmax": x, "connector": "iterator", "iter": 0})
 

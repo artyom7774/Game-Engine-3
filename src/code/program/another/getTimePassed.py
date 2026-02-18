@@ -1,12 +1,13 @@
 def getTimePassed(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     time_passed = program.dt
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["time_passed"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = time_passed
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["time_passed"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = time_passed
 
     return queue

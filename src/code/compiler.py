@@ -69,8 +69,11 @@ class Compiler:
                         if "value" not in node["outputs"][path]:
                             node["outputs"][path]["value"] = {}
 
+                        if connector["value"]["id"] == int(id) and ids not in node["outputs"][path]["value"]:
+                            node["outputs"][path]["value"][ids] = []
+
                         if connector["value"]["id"] == int(id):
-                            node["outputs"][path]["value"][ids] = {"id": int(ids), "name": name}
+                            node["outputs"][path]["value"][ids].append({"id": int(ids), "name": name})
 
         for id, node in self.nodes["objects"].items():
             for key, value in node["inputs"].items():
@@ -221,18 +224,30 @@ class Compiler:
                 if "index" in self.nodes["objects"][str(element["id"])]["outputs"]:
                     element["iter"] += 1
 
-                    for ids, connector in self.nodes["objects"][str(element["id"])]["outputs"]["index"]["value"].items():
-                        self.nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = element["iter"]
+                    for ids, connectors in self.nodes["objects"][str(element["id"])]["outputs"]["index"]["value"].items():
+                        for connector in connectors:
+                            self.nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = element["iter"]
 
                 if element["connector"] in self.nodes["objects"][str(element["id"])]["outputs"]:
-                    self.queue(queue=[element["id"] for element in self.nodes["objects"][str(element["id"])]["outputs"][element["connector"]]["value"].values()])
+                    queue = []
+
+                    for elem in self.nodes["objects"][str(element["id"])]["outputs"][element["connector"]]["value"].values():
+                        queue.extend([item["id"] for item in elem])
+
+                    self.queue(queue=queue)
 
             if element["count"] == 0:
+                queue = []
+
                 if "after" in self.nodes["objects"][str(element["id"])]["outputs"]:
-                    self.queue(queue=[element["id"] for element in self.nodes["objects"][str(element["id"])]["outputs"]["after"]["value"].values()])
+                    for elem in self.nodes["objects"][str(element["id"])]["outputs"]["after"]["value"].values():
+                        queue.extend([item["id"] for item in elem])
 
                 else:
-                    self.queue(queue=[element["id"] for element in self.nodes["objects"][str(element["id"])]["outputs"]["path"]["value"].values()])
+                    for elem in self.nodes["objects"][str(element["id"])]["outputs"]["path"]["value"].values():
+                        queue.extend([item["id"] for item in elem])
+
+                self.queue(queue=queue)
 
                 remove.append(element)
 

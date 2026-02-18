@@ -28,11 +28,11 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
         EngineError(f"not found object with id = {ids}")
 
     for group in groupList.split(", "):
-        answer = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]
+        answer: list = obj.collisionGetID(0, 0, append, group) if obj is not None else [False, -1]
 
         if answer[0]:
-            for name in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
-                queue.append(name["id"])
+            for element in nodes["objects"][str(id)]["outputs"]["path_true"]["value"].values():
+                queue.extend([item["id"] for item in element])
 
             for ids, connector in nodes["objects"][str(id)]["outputs"]["id_in_group"]["value"].items():
                 nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer[1].id
@@ -40,8 +40,8 @@ def ifCollision(program, compiler, path: str, nodes: dict, id: int, variables: d
             break
 
         else:
-            for name in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
-                queue.append(name["id"])
+            for element in nodes["objects"][str(id)]["outputs"]["path_false"]["value"].values():
+                queue.extend([item["id"] for item in element])
 
             for ids, connector in nodes["objects"][str(id)]["outputs"]["id_in_group"]["value"].items():
                 nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = -1

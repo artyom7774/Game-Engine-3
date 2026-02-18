@@ -10,7 +10,7 @@ def functionEvent(program, compiler, path: str, nodes: dict, id: int, variables:
     for ids, connector in nodes["objects"][str(id)]["outputs"]["params"]["value"].items():
         nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = params
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     return queue
