@@ -592,12 +592,13 @@ class Scene:
 
             hitbox = obj.hitbox.rect()
 
-            if obj.pos.x + hitbox.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width + 5 and obj.pos.y + hitbox.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height + 5:
+            hitboxBySprite = obj.sprite and obj.pos.x + obj.sprite.pos.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.sprite.pos.x + obj.sprite.width + 5 and obj.pos.y + obj.sprite.pos.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.sprite.pos.y + obj.sprite.height + 5
+            hitboxByHitbox = obj.pos.x + hitbox.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width + 5 and obj.pos.y + hitbox.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height + 5
+
+            if hitboxBySprite or (hitboxByHitbox and not obj.sprite):
                 select.append(obj)
 
         if project.cache["file"][project.selectFile].selectObject in select:
-            print(1)
-
             return
 
         try:
@@ -620,7 +621,7 @@ class Scene:
             hitboxBySprite = obj.sprite and obj.pos.x + obj.sprite.pos.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.sprite.pos.x + obj.sprite.width + 5 and obj.pos.y + obj.sprite.pos.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.sprite.pos.y + obj.sprite.height + 5
             hitboxByHitbox = obj.pos.x + hitbox.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width + 5 and obj.pos.y + hitbox.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height + 5
 
-            if hitboxBySprite:
+            if hitboxBySprite or (hitboxByHitbox and not obj.sprite):
                 project.cache["file"][project.selectFile].selectObject = obj
                 project.cache["file"][project.selectFile].selectLink = obj.id
 
