@@ -310,7 +310,7 @@ class TextEditorDialog(QDialog):
         self.input = input
         self.id = id
 
-        self.setWindowTitle(translate("Text Editor"))
+        self.setWindowTitle(translate("Python editor"))
 
         self.setGeometry(0, 0, int(size["width"] * 0.55), int(size["height"] * 0.7))
 
@@ -321,6 +321,11 @@ class TextEditorDialog(QDialog):
 
         self.editor = QsciScintilla(self)
         self.editor.setFont(QFont("Courier", 10))
+
+        lexer = QsciLexerPython()
+        lexer.setFont(QFont("Courier", 10))
+
+        self.editor.setLexer(lexer)
 
         palette = self.project.palette()
 
@@ -335,16 +340,43 @@ class TextEditorDialog(QDialog):
         self.editor.setColor(palette.text().color())
         self.editor.setFont(QFont("Courier", 10))
 
-        lexer = QsciLexerPython()
-        lexer.setFont(QFont("Courier", 10))
+        if SETTINGS["theme"] == "dark":
+            lexer.setColor(QColor("#ffffff"), QsciLexerPython.Default)
+            lexer.setColor(QColor("#ff6b6b"), QsciLexerPython.Comment)
+            lexer.setColor(QColor("#ff6b6b"), QsciLexerPython.CommentBlock)
+            lexer.setColor(QColor("#ffd93d"), QsciLexerPython.Keyword)
+            lexer.setColor(QColor("#6bcb77"), QsciLexerPython.TripleSingleQuotedString)
+            lexer.setColor(QColor("#6bcb77"), QsciLexerPython.TripleDoubleQuotedString)
+            lexer.setColor(QColor("#6bcb77"), QsciLexerPython.SingleQuotedString)
+            lexer.setColor(QColor("#6bcb77"), QsciLexerPython.DoubleQuotedString)
+            lexer.setColor(QColor("#4ecdc4"), QsciLexerPython.FunctionMethodName)
+            lexer.setColor(QColor("#4ecdc4"), QsciLexerPython.ClassName)
+            lexer.setColor(QColor("#c7b3ff"), QsciLexerPython.Number)
+            lexer.setColor(QColor("#ff9f43"), QsciLexerPython.Decorator)
+            lexer.setColor(QColor("#ffffff"), QsciLexerPython.Operator)
+            lexer.setColor(QColor("#ffffff"), QsciLexerPython.Identifier)
+
+        if SETTINGS["theme"] == "light":
+            lexer.setColor(QColor("#000000"), QsciLexerPython.Default)
+            lexer.setColor(QColor("#9e9e9e"), QsciLexerPython.Comment)
+            lexer.setColor(QColor("#9e9e9e"), QsciLexerPython.CommentBlock)
+            lexer.setColor(QColor("#7c4dff"), QsciLexerPython.Keyword)
+            lexer.setColor(QColor("#388e3c"), QsciLexerPython.TripleSingleQuotedString)
+            lexer.setColor(QColor("#388e3c"), QsciLexerPython.TripleDoubleQuotedString)
+            lexer.setColor(QColor("#388e3c"), QsciLexerPython.SingleQuotedString)
+            lexer.setColor(QColor("#388e3c"), QsciLexerPython.DoubleQuotedString)
+            lexer.setColor(QColor("#0277bd"), QsciLexerPython.FunctionMethodName)
+            lexer.setColor(QColor("#0277bd"), QsciLexerPython.ClassName)
+            lexer.setColor(QColor("#e65100"), QsciLexerPython.Number)
+            lexer.setColor(QColor("#f57c00"), QsciLexerPython.Decorator)
+            lexer.setColor(QColor("#000000"), QsciLexerPython.Operator)
+            lexer.setColor(QColor("#000000"), QsciLexerPython.Identifier)
 
         lexer.setDefaultPaper(palette.base().color())
         lexer.setPaper(palette.base().color())
 
         self.editor.setMarginWidth(0, "0000")
         self.editor.setMarginType(0, QsciScintilla.MarginType.NumberMargin)
-
-        self.editor.setLexer(lexer)
 
         self.editor.setText(str(self.input["standard"]))
 

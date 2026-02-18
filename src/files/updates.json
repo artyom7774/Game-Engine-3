@@ -228,7 +228,7 @@
 
         "3.15.4": {
             "name": "3.15.4",
-            "text": "- optimized scene editor\n- new nodes: set variable type, get frame number\n- new functions for the python node: getFrameNumber\n- add button in scene to clear focus\n- fixed bug with display status bar\n- fixed bug with discord RPC\n- fixed bug with moving objects in scene\n- fixed bug with display sprites\n- fixed bug with compiling code"
+            "text": "- optimized scene editor\n- new nodes: set variable type, get frame number\n- new palette for python editor in python node\n- new functions for the python node: getFrameNumber\n- renamed group of nodes \"numbers\" on \"math\"\n- add button in scene to clear focus\n- fixed bug with display status bar\n- fixed bug with discord RPC\n- fixed bug with moving objects in scene\n- fixed bug with display sprites\n- fixed bug with compiling code"
         }
     }
 }
