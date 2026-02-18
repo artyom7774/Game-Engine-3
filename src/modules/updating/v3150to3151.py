@@ -38,7 +38,7 @@ def updating(name):
                 with open(f"{dirpath}/{filename}", "r", encoding="utf-8") as file:
                     objects = json.load(file)
 
-                for name, obj in objects.items():
+                for _, obj in objects.items():
                     if "StaticObject" in obj:
                         obj["StaticObject"]["sprite"]["value"]["path"]["type"] = "selector"
                         obj["StaticObject"]["sprite"]["value"]["path"]["selector"] = {
