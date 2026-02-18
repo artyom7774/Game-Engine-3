@@ -4,8 +4,8 @@ from engine.special.exception import EngineError
 def jump(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
         ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])

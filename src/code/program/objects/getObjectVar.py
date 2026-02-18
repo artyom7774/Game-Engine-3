@@ -4,8 +4,8 @@ from engine.special.exception import EngineError
 def getObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     if nodes["objects"][str(id)]["inputs"]["name"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"] is not None:
         name = str(nodes["objects"][str(id)]["inputs"]["name"]["value"]["value"])
@@ -30,7 +30,8 @@ def getObjectVar(program, compiler, path: str, nodes: dict, id: int, variables: 
 
     answer = variable[name]["value"]
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
 
     return queue

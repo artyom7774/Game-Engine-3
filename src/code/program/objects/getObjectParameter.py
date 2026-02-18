@@ -6,8 +6,8 @@ OBJECT_PARAMETERS = ["hitbox", "group", "mass", "layer", "invisible", "gravity",
 def getObjectParameter(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
         ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
@@ -32,7 +32,8 @@ def getObjectParameter(program, compiler, path: str, nodes: dict, id: int, varia
     else:
         answer = obj.getParameter(OBJECT_PARAMETERS[operation])
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["value"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["value"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
 
     return queue

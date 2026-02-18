@@ -4,8 +4,8 @@ from engine.special.exception import EngineError
 def getObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
         ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
@@ -18,10 +18,12 @@ def getObjectPos(program, compiler, path: str, nodes: dict, id: int, variables: 
     if obj is None:
         raise EngineError(f"not found object with id = {ids}")
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.pos.x
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["x"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.pos.x
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["y"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.pos.y
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["y"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = obj.pos.y
 
     return queue

@@ -213,8 +213,6 @@
 151. [x] кнопка вместо нажатия Q на сцене
 152. [ ] переименовать группу нодов numbers на math
 
-set, objects, numbers, music
-
 ==================== ОБНОВИТЬ САЙТ ====================
 
 ноды: power, squareRoot, insertListElement, modulo, ifKeyPressed, keyboardRelease, setObjectRotation, setVariableType, getFrameNumber

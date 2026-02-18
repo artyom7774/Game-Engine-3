@@ -4,8 +4,8 @@ from engine.special.exception import EngineError
 def getByKey(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     try:
         if nodes["objects"][str(id)]["inputs"]["dict"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["dict"]["value"]["value"] is not None:
@@ -29,7 +29,8 @@ def getByKey(program, compiler, path: str, nodes: dict, id: int, variables: dict
     except KeyError:
         raise EngineError(f"key {key} not in dict {dict_}")
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
 
     return queue

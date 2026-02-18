@@ -3,8 +3,8 @@ from engine.special.exception import EngineError
 def getByIndex(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     try:
         if nodes["objects"][str(id)]["inputs"]["list"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"] is not None:
@@ -28,7 +28,8 @@ def getByIndex(program, compiler, path: str, nodes: dict, id: int, variables: di
     except IndexError:
         raise EngineError(f"index {index} not in list {list_}")
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
 
     return queue

@@ -4,8 +4,8 @@ from engine.special.exception import EngineError
 def getIndexOfElement(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
     queue = []
 
-    for name in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
-        queue.append(name["id"])
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
 
     if nodes["objects"][str(id)]["inputs"]["list"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"] is not None:
         list_ = list(nodes["objects"][str(id)]["inputs"]["list"]["value"]["value"])
@@ -30,7 +30,8 @@ def getIndexOfElement(program, compiler, path: str, nodes: dict, id: int, variab
     if answer is None:
         raise EngineError(f"not found element = {element} in list = {list_}")
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = answer
 
     return queue

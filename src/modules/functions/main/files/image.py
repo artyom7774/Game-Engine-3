@@ -60,10 +60,10 @@ class Image:
         y = (maxHeight - image.height) // 2
 
         image = Image.replaceTransparentColor(image, (32, 33, 36) if SETTINGS["theme"] == 'dark' else (248, 249, 250))
-        image.save(f"{SAVE_APPDATA_DIR}/using/image.png")
+        image.save(f"{SAVE_APPDATA_DIR}/Game-Engine-3/using/image.png")
 
         pixmap = QPixmap()
-        pixmap.load(f"{SAVE_APPDATA_DIR}/using/image.png")
+        pixmap.load(f"{SAVE_APPDATA_DIR}/Game-Engine-3/using/image.png")
 
         return x, y, pixmap
 
@@ -106,10 +106,10 @@ class Image:
         y = (maxHeight - image.height) // 2
 
         image = Image.replaceTransparentColor(image, (32, 33, 36) if SETTINGS["theme"] == 'dark' else (248, 249, 250))
-        image.save(f"{SAVE_APPDATA_DIR}/using/image.png")
+        image.save(f"{SAVE_APPDATA_DIR}/Game-Engine-3/using/image.png")
 
         pixmap = QPixmap()
-        pixmap.load(f"{SAVE_APPDATA_DIR}/using/image.png")
+        pixmap.load(f"{SAVE_APPDATA_DIR}/Game-Engine-3/using/image.png")
 
         project.objects["main"]["image"] = QLabel(parent=project)
         project.objects["main"]["image"].setGeometry(project.objects["center_rama"].x() + x, project.objects["center_rama"].y() + y, image.width, image.height)
