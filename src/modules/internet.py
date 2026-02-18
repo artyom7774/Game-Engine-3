@@ -62,4 +62,8 @@ def updateDiscordStatusRPS(project):
         logging.error(f"request failed: {traceback.format_exc()}")
 
     finally:
-        RPC.close()
+        try:
+            RPC.close()
+
+        except AssertionError:
+            pass
