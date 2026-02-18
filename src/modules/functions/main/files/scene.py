@@ -609,10 +609,13 @@ class Scene:
 
             hitbox = obj.hitbox.rect()
 
-            if obj.pos.x + hitbox.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width + 5 and obj.pos.y + hitbox.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height + 5:
-                if obj.variables == {}:
-                    continue
+            if len(obj.variables) == 0:
+                continue
 
+            hitboxBySprite = obj.sprite and obj.pos.x + obj.sprite.pos.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + obj.sprite.pos.x + obj.sprite.width + 5 and obj.pos.y + obj.sprite.pos.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + obj.sprite.pos.y + obj.sprite.height + 5
+            hitboxByHitbox = obj.pos.x + hitbox.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width + 5 and obj.pos.y + hitbox.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height + 5
+
+            if hitboxBySprite:
                 project.cache["file"][project.selectFile].selectObject = obj
                 project.cache["file"][project.selectFile].selectLink = obj.id
 
@@ -922,7 +925,6 @@ class Scene:
 
         Scene.objects(project, [new])
 
-        # TODO
         Scene.save(project)
 
     @staticmethod
@@ -937,7 +939,6 @@ class Scene:
 
             Scene.objectReleased(project)
 
-            # TODO
             Scene.save(project)
 
         project.init()
