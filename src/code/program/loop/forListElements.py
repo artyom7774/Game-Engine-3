@@ -18,11 +18,13 @@ def forListElements(program, compiler, path: str, nodes: dict, id: int, variable
     compiler.loopBreaking[str(id)] = False
 
     for i, element in enumerate(list_):
-        for ids, connector in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
-            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = i
+        for ids, connectors in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
+            for connector in connectors:
+                nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = i
 
-        for ids, connector in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
-            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = element
+        for ids, connectors in nodes["objects"][str(id)]["outputs"]["element"]["value"].items():
+            for connector in connectors:
+                nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = element
 
         for elem in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
             queue.extend([item["id"] for item in elem])

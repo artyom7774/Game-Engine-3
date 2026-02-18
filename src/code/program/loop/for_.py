@@ -26,8 +26,9 @@ def for_(program, compiler, path: str, nodes: dict, id: int, variables: dict, **
 
     if x == 0:
         for i in range(n):
-            for ids, connector in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
-                nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = i
+            for ids, connectors in nodes["objects"][str(id)]["outputs"]["index"]["value"].items():
+                for connector in connectors:
+                    nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = i
 
             for element in nodes["objects"][str(id)]["outputs"]["iterator"]["value"].values():
                 for name in element:
