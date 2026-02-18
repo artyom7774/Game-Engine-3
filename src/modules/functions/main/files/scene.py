@@ -595,6 +595,11 @@ class Scene:
             if obj.pos.x + hitbox.x - 5 < x + project.cache["file"][project.selectFile].camera.pos.x < obj.pos.x + hitbox.x + hitbox.width + 5 and obj.pos.y + hitbox.y - 5 < y + project.cache["file"][project.selectFile].camera.pos.y < obj.pos.y + hitbox.y + hitbox.height + 5:
                 select.append(obj)
 
+        if project.cache["file"][project.selectFile].selectObject in select:
+            print(1)
+
+            return
+
         try:
             application.objects.removeByGroup("__debug_select__")
 
