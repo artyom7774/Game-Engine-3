@@ -27,8 +27,8 @@
                 "displayText"
             ]
         },
-        "numbers": {
-            "name": "Numbers",
+        "math": {
+            "name": "Math",
             "nodes": [
                 "plus",
                 "minus",
@@ -99,8 +99,8 @@
                 "displayText"
             ]
         },
-        "numbers": {
-            "name": "Numbers",
+        "math": {
+            "name": "Math",
             "nodes": [
                 "plus",
                 "minus",
