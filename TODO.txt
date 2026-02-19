@@ -215,6 +215,7 @@
 
 ==================== ОБНОВИТЬ САЙТ ====================
 
+©2024-2026
 группа нодов numbers переименовать на math
 ноды: power, squareRoot, insertListElement, modulo, ifKeyPressed, keyboardRelease, setObjectRotation, setVariableType, getFrameNumber
 функции: sqrt, pow, setObjectRotation, getFrameNumber
@@ -223,4 +224,4 @@
 
 mading: 90
 
-now: 115 / 152
+now: 116 / 152
