@@ -27,9 +27,6 @@ def createObject(program, compiler, path: str, nodes: dict, id: int, variables: 
     else:
         y = float(nodes["objects"][str(id)]["inputs"]["y"]["standard"])
 
-    if name.startswith("objects/") and name not in program.allObjects:
-        name = name.replace("objects/", "", 1)
-
     if name not in program.allObjects:
         raise EngineError(f"not found object with name = {name}")
 

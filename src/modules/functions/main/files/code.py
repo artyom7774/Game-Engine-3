@@ -588,7 +588,7 @@ class CodeNodeConnectorComboBox(QComboBox):
 
 
 class CodeNodeConnectorSelectFile(QPushButton):
-    def __init__(self, parent, project, id, input, path, formates) -> None:
+    def __init__(self, parent, project, id, input, path, formates, remove: str = None) -> None:
         QPushButton.__init__(self, parent)
 
         self.project = project
@@ -599,6 +599,8 @@ class CodeNodeConnectorSelectFile(QPushButton):
         self.path = path
         self.formates = formates
 
+        self.remove = remove
+
         self.use = False
 
         self.file = str(input["standard"])
@@ -608,7 +610,7 @@ class CodeNodeConnectorSelectFile(QPushButton):
         self.clicked.connect(lambda: self.function())
 
     def save(self) -> None:
-        self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = self.file
+        self.project.objects["main"]["function"]["objects"][str(self.id)]["inputs"][self.input["code"]]["standard"] = self.file if self.remove is None else self.file.replace(self.remove, "", 1)
 
         with open(self.project.selectFile, "w", encoding="utf-8") as file:
             dump(self.project.objects["main"]["function"], file, indent=4)
@@ -707,6 +709,12 @@ class CodeNodeConnector(QLabel):
                 if "open-filedir-formates" in special:
                     openFileDirForamtes = special["open-filedir-formates"]
 
+                if "open-filedir-remove-from-path" in special:
+                    openFileDirRemoveFromPath = special["open-filedir-remove-from-path"]
+
+                else:
+                    openFileDirRemoveFromPath = None
+
         if input is not None:
             self.left = QLabel(self)
             self.left.setGeometry(0, 9, 10, 10)
@@ -747,7 +755,7 @@ class CodeNodeConnector(QLabel):
                         self.inputLeftRama.show()
 
                     elif type == "open-filedir":
-                        self.inputLeftText = CodeNodeConnectorSelectFile(project.objects["main"]["code"], self.project, id, input, openFileDirPath, openFileDirForamtes)
+                        self.inputLeftText = CodeNodeConnectorSelectFile(project.objects["main"]["code"], self.project, id, input, openFileDirPath, openFileDirForamtes, openFileDirRemoveFromPath)
                         self.inputLeftText.setAttribute(Qt.WA_TranslucentBackground)
                         self.inputLeftText.setGeometry(self.x() + parent.x() + 20, self.y() + parent.y() + 5, self.width() - 40, 20)
                         self.inputLeftText.setStyleSheet(f"border: 1px solid #cecac9; color: #{'cecac9' if SETTINGS['theme'] == 'dark' else '686b71'};")

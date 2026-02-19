@@ -813,7 +813,8 @@
                     "name": {
                         "type": "open-filedir",
                         "open-filedir-path": "objects",
-                        "open-filedir-formates": [".obj"]
+                        "open-filedir-formates": [".obj"],
+                        "open-filedir-remove-from-path": "objects/"
                     }
                 }
             }
