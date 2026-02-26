@@ -68,6 +68,9 @@ class SelectorButton(QPushButton):
     def function(self):
         name = selectFileDir(self.parent(), self, self.path, self.formates)
 
+        if not name:
+            return
+
         self.value["value"] = name
 
         Config.save(self.parent(), self.key, self.value)
