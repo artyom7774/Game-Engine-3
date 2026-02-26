@@ -984,8 +984,17 @@ def run(project) -> None:
 
 
 def publish(project) -> None:
-    thr = threading.Thread(target=lambda: Compile.publish(project))
-    thr.start()
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Information)
+    msg.setText(translate("Publish project on the site?"))
+    msg.setWindowTitle(translate("Publish"))
+    msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+
+    result = msg.exec_()
+
+    if result == QMessageBox.Yes:
+        thr = threading.Thread(target=lambda: Compile.publish(project))
+        thr.start()
 
 
 def compile(project) -> None:

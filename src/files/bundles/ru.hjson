@@ -276,6 +276,7 @@
     "Create object variable": "Создать переменную объекта"
     "Math": "Математика"
     "Python editor": "Редактор python"
+    "Publish project on the site?": "Опубликовать проект на сайте?"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"
