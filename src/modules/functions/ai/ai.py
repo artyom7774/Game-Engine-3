@@ -1,5 +1,3 @@
-import os.path
-
 from src.variables import *
 
 import traceback
