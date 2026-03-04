@@ -3624,7 +3624,7 @@
                 "answer": {
                     "code": "answer",
                     "name": "__answer__",
-                    "type": "list"
+                    "type": "Any"
                 }
             },
             "display": {

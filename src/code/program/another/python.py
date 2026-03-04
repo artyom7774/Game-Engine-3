@@ -309,23 +309,10 @@ def python(program, compiler, path: str, nodes: dict, id: int, variables: dict, 
 
     PythonCodeExecutor.add(text)
 
-    if pythonCheckHaveFunction(text):
-        listOutput = PythonCodeExecutor.run(program, list_, dict_)
-
-    else:
-        listOutput = []
-
-    if listOutput is None:
-        listOutput = []
-
-    elif not isinstance(listOutput, list):
-        listOutput = [listOutput]
-
-    else:
-        pass
+    output = PythonCodeExecutor.run(program, list_, dict_)
 
     for ids, connectors in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
         for connector in connectors:
-            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = listOutput
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = output
 
     return queue
