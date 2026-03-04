@@ -19,10 +19,12 @@ except ModuleNotFoundError:
 
 import webbrowser
 import threading
+import datetime
 import requests
 import logging
 import shutil
 import ctypes
+import time
 
 from libs import qdarktheme
 
@@ -106,6 +108,10 @@ class Main(QMainWindow):
         thr.daemon = True
         thr.start()
 
+        thr = threading.Thread(target=lambda: self.backups())
+        thr.daemon = True
+        thr.start()
+
         self.setWindowTitle("Game Engine 3")
         self.setWindowIcon(QIcon("src/files/sprites/logo.ico"))
 
@@ -119,6 +125,23 @@ class Main(QMainWindow):
         self.timer.start(60000)
 
         self.init()
+
+    def backups(self) -> None:
+        while True:
+            time.sleep(SETTINGS["backup-time"])
+
+            if not SETTINGS["backups"] or not self.selectProject:
+                continue
+
+            path = f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{self.selectProject}"
+
+            if not os.path.exists(f"{path}/backups"):
+                os.mkdir(f"{path}/backups")
+
+            date = str(datetime.datetime.now()).replace(':', '-')
+            date = date[:date.rfind(".")]
+
+            shutil.copytree(f"{path}/project", f"{path}/backups/{date}/project")
 
     def versionUpdateMessage(self) -> None:
         def function():

@@ -277,6 +277,7 @@
     "Math": "Математика"
     "Python editor": "Редактор python"
     "Publish project on the site?": "Опубликовать проект на сайте?"
+    "Backups": "Бэкапы"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"
