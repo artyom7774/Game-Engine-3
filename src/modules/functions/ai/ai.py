@@ -9,18 +9,18 @@ import copy
 import json
 import time
 
-url = "https://ge3.pythonanywhere.com/ai"
+URL = "https://ge3.pythonanywhere.com/ai"
 
 
 def requestAI(message):
     data = {"message": message, "model": "gemma-3-27b-it"}
 
-    response = requests.post(url, json=data)
+    response = requests.post(URL, json=data)
     ids = response.json()["ids"]
 
     while True:
         try:
-            status = requests.get(f"{url}/status/{ids}").json()
+            status = requests.get(f"{URL}/status/{ids}").json()
 
         except requests.exceptions.RequestException as e:
             return 1, traceback.format_exc()
