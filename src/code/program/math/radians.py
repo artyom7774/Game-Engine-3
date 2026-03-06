@@ -13,7 +13,7 @@ def radians(program, compiler, path: str, nodes: dict, id: int, variables: dict,
     else:
         degrees = float(nodes["objects"][str(id)]["inputs"]["degrees"]["standard"])
 
-    for ids, connectors in nodes["objects"][str(id)]["outputs"]["answer"]["value"].items():
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["radians"]["value"].items():
         for connector in connectors:
             nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = math.radians(degrees)
 
