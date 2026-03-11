@@ -35,7 +35,15 @@ def createObject(program, compiler, path: str, nodes: dict, id: int, variables: 
 
     variables["pos"] = [x, y]
 
+    if "animation" in variables:
+        variables["animator"] = program.linkEngine.Animator(program, None, variables["animation"])
+
     obj = getattr(program.linkEngine.objects, type)(program, **variables)
+
+    if "animation" in variables:
+        obj.animator.obj = obj
+
+        obj.animator.init()
 
     # print(obj.pos, obj.hitbox, len(program.objects.objects), variables)
 
