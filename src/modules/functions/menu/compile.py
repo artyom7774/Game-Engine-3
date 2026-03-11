@@ -22,7 +22,7 @@ import os
 import re
 
 PROGRAM = \
-"""# MADE BY GAME ENGINE %ENGINE_VERSION%
+"""# MADE ON GAME ENGINE %ENGINE_VERSION%
 
 import screeninfo
 import tkinter
