@@ -128,8 +128,6 @@ class Main(QMainWindow):
 
     def backups(self) -> None:
         while True:
-            time.sleep(SETTINGS["backup-time"])
-
             if not SETTINGS["backups"] or not self.selectProject:
                 continue
 
@@ -142,6 +140,8 @@ class Main(QMainWindow):
             date = date[:date.rfind(".")]
 
             shutil.copytree(f"{path}/project", f"{path}/backups/{date}/project")
+
+            time.sleep(SETTINGS["backup-time"])
 
     def versionUpdateMessage(self) -> None:
         def function():

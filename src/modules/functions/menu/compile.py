@@ -229,6 +229,8 @@ class Game(engine.Application):
             self.programs[key].event("mouseRightClick")
 
     def loadScene(self, scene, start: bool = False):
+        global width, height
+    
         self.objects = engine.ObjectGroup(self)
         self.objects.init()
         
@@ -263,6 +265,9 @@ class Game(engine.Application):
 
             if SCENES[scene]["focus"] is not None and key == SCENES[scene]["focus"]:
                 self.setCamera(engine.camera.FocusCamera(self, obj))
+                
+            else:
+                self.setCamera(engine.camera.StaticCamera(self, 0, 0))
 
         if not start:
             for name, program in self.programs.items():
@@ -680,14 +685,13 @@ class Compile:
 
             if focus is None or focus == "":
                 project.dialog.send(
-                    translate("WARNING") + ": " + translate("Scene") + f" ({scene}) " + translate("can not download:") + " " + translate("name focus object is not defined")
+                    translate("WARNING") + ": " + translate("Scene") + f" ({scene.replace(SAVE_APPDATA_DIR + '/', '')}) " + translate("name focus object is not defined")
                 )
 
-            else:
-                scenes[getTruePath(scene)] = {
-                    "objects": objects,
-                    "focus": focus
-                }
+            scenes[getTruePath(scene)] = {
+                "objects": objects,
+                "focus": focus
+            }
 
         # LOAD OBJECTS AND INTERFACE
 

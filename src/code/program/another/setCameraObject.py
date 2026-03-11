@@ -1,0 +1,23 @@
+from engine.special.exception import EngineError
+
+
+def setCameraObject(program, compiler, path: str, nodes: dict, id: int, variables: dict, **kwargs) -> dict:
+    queue = []
+
+    for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
+        queue.extend([item["id"] for item in element])
+
+    if nodes["objects"][str(id)]["inputs"]["id"]["value"] is not None and nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"] is not None:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["value"]["value"])
+
+    else:
+        ids = int(nodes["objects"][str(id)]["inputs"]["id"]["standard"])
+
+    obj = program.objects.getById(ids)
+
+    if obj is None:
+        raise EngineError(f"not found object with id = {ids}")
+
+    program.setCamera(program.linkEngine.camera.FocusCamera(program, obj))
+
+    return queue

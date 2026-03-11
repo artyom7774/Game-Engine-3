@@ -345,6 +345,7 @@
     "node.name.setListElement": "Set list element"
     "node.name.setVariableType": "Set variable type"
     "node.name.getFrameNumber": "Get frame number"
+    "node.name.setCameraFocus": "Set camera focus"
 
     // NODE TEXT
     "node.text.none": ""
