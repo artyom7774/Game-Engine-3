@@ -37,7 +37,7 @@ def main() -> None:
 
     try:
         asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(f"Game-Engine-3")
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(f"Game-Engine-3 {VERSION}")
 
     except AttributeError as e:
         pass
