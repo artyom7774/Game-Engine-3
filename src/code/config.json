@@ -330,6 +330,7 @@
         "number": [
             "text",
             "choose",
+            "logic",
             "Any"
         ],
         "text": [
