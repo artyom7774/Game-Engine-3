@@ -7,8 +7,9 @@ def functionEvent(program, compiler, path: str, nodes: dict, id: int, variables:
     else:
         params = list(nodes["objects"][str(id)]["inputs"]["params"]["standard"])
 
-    for ids, connector in nodes["objects"][str(id)]["outputs"]["params"]["value"].items():
-        nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = params
+    for ids, connectors in nodes["objects"][str(id)]["outputs"]["params"]["value"].items():
+        for connector in connectors:
+            nodes["objects"][str(ids)]["inputs"][connector["name"]]["value"]["value"] = params
 
     for element in nodes["objects"][str(id)]["outputs"]["path"]["value"].values():
         queue.extend([item["id"] for item in element])
