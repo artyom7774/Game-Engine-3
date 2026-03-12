@@ -240,7 +240,7 @@
 
         "3.16.2": {
             "name": "3.16.2",
-            "text": "- replaced list output on Any output in python node\n- new nodes: set scene object\n- project can run without set focus object\n- fixed bug with create animator class in create object node\n- fixed bug with function event node\n- fixed bug with using moving ndoe with negative number"
+            "text": "- replaced list output on Any output in python node\n- new nodes: set scene object\n- project can run without set focus object\n- fixed bug with create animator class in create object node\n- fixed bug with function event node\n- fixed bug with using moving ndoe with negative number\n- int connector can using in logic connector"
         }
     }
 }
