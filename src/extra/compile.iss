@@ -4,7 +4,7 @@
 #define MyAppName "Game Engine 3"
 #define MyAppVersion "3.15.3"
 #define MyAppPublisher "Game Engine 3"
-#define MyAppURL "https://artyom7777.pythonanywhere.com/"
+#define MyAppURL "https://ge3.pythonanywhere.com/"
 #define MyAppExeName "Game Engine 3.exe"
 
 [Setup]
@@ -22,7 +22,7 @@ ArchitecturesInstallIn64BitMode=x64compatible
 DisableProgramGroupPage=yes
 LicenseFile=..\..\LICENSE.txt
 OutputDir=.
-OutputBaseFilename=Game-Engine-3-installer
+OutputBaseFilename=Game-Engine-3-windows-installer
 SetupIconFile=..\..\src\files\sprites\logo.ico
 Compression=lzma2/fast
 SolidCompression=yes

@@ -63,7 +63,9 @@ BASE_SETTINGS = {
     "language": "EN",
     "theme": "dark",
     "model": "gemini-2.5-flash",
-    "check-updates": True
+    "check-updates": True,
+    "backups": True,
+    "backup-time": 300
 }
 
 SETTINGS = BASE_SETTINGS

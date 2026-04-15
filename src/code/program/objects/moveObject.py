@@ -25,6 +25,10 @@ def moveObject(program, compiler, path: str, nodes: dict, id: int, variables: di
     else:
         power = float(nodes["objects"][str(id)]["inputs"]["power"]["standard"])
 
+    if power < 0:
+        power = abs(power)
+        angle += 180
+
     obj = program.objects.getById(ids)
 
     if obj is None:

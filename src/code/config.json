@@ -159,6 +159,7 @@
         "another": {
             "name": "Another",
             "nodes": [
+                "setCameraFocus",
                 "setVar",
                 "getVar",
                 "setVariableType",
@@ -329,6 +330,7 @@
         "number": [
             "text",
             "choose",
+            "logic",
             "Any"
         ],
         "text": [
@@ -3159,6 +3161,55 @@
                 }
             }
         },
+        "setCameraFocus": {
+            "type": "another",
+            "name": "setCameraObject",
+            "x": null,
+            "y": null,
+            "width": 6,
+            "height": 3,
+            "id": null,
+            "sorting": {
+                "inputs": [
+                    "path",
+                    "id"
+                ],
+                "outputs": [
+                    "path"
+                ]
+            },
+            "inputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path",
+                    "value": null,
+                    "standard": null
+                },
+                "id": {
+                    "code": "id",
+                    "name": "__id__",
+                    "type": "number",
+                    "value": null,
+                    "standard": -1
+                }
+            },
+            "outputs": {
+                "path": {
+                    "code": "path",
+                    "name": "__path__",
+                    "type": "path"
+                }
+            },
+            "display": {
+                "name": "node.name.setCameraFocus",
+                "text": {
+                    "__none__": "node.text.none",
+                    "__path__": "node.text.path",
+                    "__id__": "node.text.id"
+                }
+            }
+        },
         "getKeyOfElement": {
             "type": "set",
             "name": "getKeyOfElement",
@@ -3624,7 +3675,7 @@
                 "answer": {
                     "code": "answer",
                     "name": "__answer__",
-                    "type": "list"
+                    "type": "Any"
                 }
             },
             "display": {

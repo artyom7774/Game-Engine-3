@@ -99,7 +99,7 @@
     "WARNING": "ПРЕДУПРЕЖДЕНИЕ"
     "ERROR": "ОШИБКА"
     "LOG": "ОПОВЕЩЕНИЕ"
-    "name focus object is not defined": "имя объекта фокуса не установлена"
+    "name focus object is not defined": "имя объекта фокуса не установлено"
     "project start scene is not found": "Начальная сцена проекта не найдена"
     "can not run project": "невозможно запустить проект"
     "the project has been successfully compile": "проект успешно скомпилирован"
@@ -277,6 +277,7 @@
     "Math": "Математика"
     "Python editor": "Редактор python"
     "Publish project on the site?": "Опубликовать проект на сайте?"
+    "Backups": "Бэкапы"
 
     // OBJECT NAME
     "object.name.staticObject": "Статический объект"
@@ -376,6 +377,7 @@
     "node.name.setListElement": "Установить элемент списка"
     "node.name.setVariableType": "Установить тип переменной"
     "node.name.getFrameNumber": "Получить номер кадра"
+    "node.name.setCameraFocus": "Установить фокус камеры"
 
     // NODE TEXT
     "node.text.none": ""

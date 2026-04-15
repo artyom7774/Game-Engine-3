@@ -17,11 +17,11 @@ class SettingsFunctions:
     def newRunProgram() -> None:
         if SYSTEM == "Windows":
             if DEVELOP:
-                if os.path.exists("venv"):
-                    subprocess.run(["venv/Scripts/python.exe", "Game Engine 3.py"])
+                if os.path.exists("python"):
+                    subprocess.run(["python/python.exe", "Game Engine 3.py"])
 
-                if os.path.exists(".venv"):
-                    subprocess.run([".venv/Scripts/python.exe", "Game Engine 3.py"])
+                else:
+                    pass
 
             else:
                 subprocess.run(["Game Engine 3.exe"])
@@ -37,6 +37,7 @@ class SettingsFunctions:
         global BUTTON_RED_STYLE, BUTTON_BLUE_STYLE
 
         languages = dict(zip(LANGUAGES.values(), LANGUAGES.keys()))
+
         themes = list(THEMES.keys())
         models = list(AI_MODELS.keys())
 
@@ -46,7 +47,8 @@ class SettingsFunctions:
             "theme": themes[dialog.objects["theme_combobox"].currentIndex()],
             "model": models[dialog.objects["model_combobox"].currentIndex()],
 
-            "check-updates": dialog.objects["updates_checkbox"].isChecked()
+            "check-updates": dialog.objects["updates_checkbox"].isChecked(),
+            "backups": dialog.objects["backups_checkbox"].isChecked()
         }
 
         for key, value in settings.items():
@@ -81,6 +83,7 @@ class SettingsFunctions:
         dialog.objects["theme_combobox"].setCurrentIndex(0)
         dialog.objects["model_combobox"].setCurrentIndex(0)
         dialog.objects["updates_checkbox"].setChecked(True)
+        dialog.objects["backups"].setChecked(True)
 
 
 class Settings(QDialog):
@@ -162,6 +165,19 @@ class Settings(QDialog):
         self.objects["updates_checkbox"].setGeometry(210, 115, 300, 25)
         self.objects["updates_checkbox"].setFont(FONT)
         self.objects["updates_checkbox"].show()
+
+        # BACKUPS
+
+        self.objects["backups_label"] = QLabel(parent=self, text=translate("Backups") + ":")
+        self.objects["backups_label"].setGeometry(10, 150, 200, 25)
+        self.objects["backups_label"].setFont(FONT)
+        self.objects["backups_label"].show()
+
+        self.objects["backups_checkbox"] = QCheckBox(parent=self)
+        self.objects["backups_checkbox"].setChecked(SETTINGS["backups"])
+        self.objects["backups_checkbox"].setGeometry(210, 150, 300, 25)
+        self.objects["backups_checkbox"].setFont(FONT)
+        self.objects["backups_checkbox"].show()
 
         # COMFIRM
 

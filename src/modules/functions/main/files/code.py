@@ -1741,6 +1741,8 @@ class Code:
                         CODE_LINER_PRECISION
                     )
 
+                    # poses = [poses[0], poses[-1]]
+
                     points = [QPoint(math.ceil(pos[0]), math.ceil(pos[1])) for pos in poses]
 
                     painter.drawPolyline(QPolygon(points))
@@ -1765,6 +1767,8 @@ class Code:
                 project.objects["main"]["code"].point.y() + 3,
                 CODE_LINER_PRECISION
             )
+
+            # poses = [poses[0], poses[-1]]
 
             points = [QPoint(math.ceil(pos[0]), math.ceil(pos[1])) for pos in poses]
 

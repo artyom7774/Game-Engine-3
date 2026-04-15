@@ -31,7 +31,7 @@ def setVariableType(program, compiler, path: str, nodes: dict, id: int, variable
             answer = int(variable) if math.trunc(float(variable)) == math.ceil(float(variable)) else float(variable)
 
         elif type == "text":
-            answer = variable
+            answer = str(variable)
 
         elif type == "logic":
             answer = bool(variable)
