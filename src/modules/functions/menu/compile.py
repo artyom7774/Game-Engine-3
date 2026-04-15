@@ -235,6 +235,8 @@ class Game(engine.Application):
         self.objects.init()
         
         self.objects.collisions = engine.Collision("collision.cfg")
+        
+        cameraFocusObjectFind = False
 
         self.scene = scene
 
@@ -266,9 +268,11 @@ class Game(engine.Application):
             if SCENES[scene]["focus"] is not None and key == SCENES[scene]["focus"]:
                 self.setCamera(engine.camera.FocusCamera(self, obj))
                 
-            else:
-                self.setCamera(engine.camera.StaticCamera(self, 0, 0))
+                cameraFocusObjectFind = True
 
+        if not cameraFocusObjectFind:
+            self.setCamera(engine.camera.StaticCamera(self, 0, 0))
+        
         if not start:
             for name, program in self.programs.items():
                 program.event("onLoadScene")
@@ -852,6 +856,7 @@ class Compile:
 
             else:
                 shutil.copy2(f"{pathProject}/dist/game", f"{pathProject}/game")
+
             try:
                 project.dialog.logSignal.emit(
                     translate("LOG") + ": " + translate("the project has been successfully compile")
