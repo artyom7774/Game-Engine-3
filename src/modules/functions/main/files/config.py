@@ -35,7 +35,7 @@ def selectFileDir(project, object, path: str = None, formates: list = None, func
 
     file = file.replace(os.path.normpath(f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{project.selectProject}/project/"), "")
 
-    file = file.replace("\\", "/", 1000)
+    file = file.replace("\\", "/")
 
     if file.startswith("/"):
         file = file[1:]

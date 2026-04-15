@@ -6,10 +6,17 @@ import hashlib
 import socket
 import time
 
+SITE_TIMEOUT_CAPACITY = [0, 1]
+
 DISCORD_BOT_ID = "1427340617800880330"
 
 
 def updateOnlineOnSite(project):
+    if SITE_TIMEOUT_CAPACITY[0] > 0:
+        SITE_TIMEOUT_CAPACITY[0] -= 1
+
+        return
+
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
             s.connect(("8.8.8.8", 80))
@@ -35,7 +42,10 @@ def updateOnlineOnSite(project):
         # logging.info(f"status: {response.status_code}, response: {response.text}")
 
     except requests.exceptions.RequestException as e:
-        logging.error(f"request failed: {e}")
+        SITE_TIMEOUT_CAPACITY[0] = 2 * SITE_TIMEOUT_CAPACITY[1]
+        SITE_TIMEOUT_CAPACITY[1] *= 2
+
+        logging.error(f"request failed: {e}, timeout: {SITE_TIMEOUT_CAPACITY[0]}")
 
 
 def updateDiscordStatusRPS(project):
