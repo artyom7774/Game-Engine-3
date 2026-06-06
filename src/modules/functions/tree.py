@@ -2,7 +2,7 @@ from PyQt5.Qt import QIcon
 
 from src.modules.dialogs import CreateDir, CreateScene, CreateFunction, CreateFile, RenameObject, CreateObject, CreateText, CreateButton
 
-from src.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath, getColor
+from src.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath, getColor, projectTreeInit
 
 from src.variables import *
 
@@ -215,7 +215,7 @@ def paste(project) -> None:
         except BaseException as e:
             MessageBox.imposiable(e)
 
-    project.init()
+    projectTreeInit()
 
 
 def openDirectory(project) -> None:
@@ -224,5 +224,8 @@ def openDirectory(project) -> None:
     if SYSTEM == "Windows":
         os.system(f"explorer \"{os.path.normpath(path)}\"")
 
-    else:
+    elif SYSTEM == "Linux":
         os.system(f"xdg-open \"{os.path.normpath(path)}\"")
+
+    else:
+        logging.error("system (Unknown) not supported this operation")

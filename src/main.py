@@ -284,6 +284,8 @@ class Main(QMainWindow):
             except AttributeError:
                 pass
 
+        print("initialization")
+
         self.selectProject = ""
         self.selectFile = ""
 

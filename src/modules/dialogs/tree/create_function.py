@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QDialog, QLabel, QPushButton, QLineEdit
 from PyQt5.QtCore import Qt
 from PyQt5 import QtWidgets, QtCore
 
-from src.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath
+from src.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath, projectTreeInit
 
 from src.variables import *
 
@@ -45,7 +45,7 @@ class CreateFunctionFunctions:
         with open(f"{path}/{name}.func", "w", encoding="utf-8") as file:
             file.write(CODE_BASE_FILE)
 
-        project.init()
+        projectTreeInit(project)
 
         dialog.close()
 

@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QDialog, QLabel, QPushButton, QLineEdit
 from PyQt5.QtCore import Qt
 from PyQt5 import QtWidgets, QtCore
 
-from src.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath
+from src.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath, projectTreeInit
 
 from src.variables import *
 
@@ -100,7 +100,7 @@ class CreateTextFunctions:
             with open(f"{path}/{name}.text", "w", encoding="utf-8") as file:
                 dump(out, file, indent=4)
 
-        project.init()
+        projectTreeInit()
 
         if dialog is not None:
             dialog.close()

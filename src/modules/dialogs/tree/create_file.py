@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QDialog, QLabel, QPushButton, QLineEdit
 from PyQt5.QtCore import Qt
 from PyQt5 import QtWidgets, QtCore
 
-from src.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath
+from src.modules.functions.project import projectTreeGetPath, projectTreeGetFilePath, projectTreeInit
 
 from src.variables import *
 
@@ -53,7 +53,7 @@ class CreateFileFunctions:
         with open(f"{path}/{name}", "w", encoding="utf-8") as file:
             pass
 
-        project.init()
+        projectTreeInit(project)
 
         dialog.close()
 
@@ -98,6 +98,7 @@ class CreateFile(QDialog):
         self.objects["extension_label"].show()
 
         self.objects["extension_entry"] = QLineEdit(parent=self)
+        self.objects["extension_entry"].setText("txt")
         self.objects["extension_entry"].setGeometry(210, 45, 300, 25)
         self.objects["extension_entry"].setFont(FONT)
         self.objects["extension_entry"].show()
