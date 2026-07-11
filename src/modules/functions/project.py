@@ -384,23 +384,27 @@ def centerMenuInit(project, update: bool = False) -> None:
         project.objects["main"] = {}
 
     try:
-        if "main" in project.objects and "object_variables" in project.objects["main"]:
-            try:
-                project.objects["main"]["object_variables"].hide()
+        for group in project.objects["main"]:
+            if "main" in project.objects and "object_variables" in project.objects["main"]:
+                try:
+                    project.objects["main"][group]["object_variables"].hide()
 
-                project.objects["main"]["object_variables"].deleteLater()
+                except RuntimeError:
+                    pass
 
-            except RuntimeError:
-                pass
+            if "main" in project.objects and "variables" in project.objects["main"]:
+                for element in project.objects["main"][group]["variables"].values():
+                    try:
+                        element.hide()
 
-        if "main" in project.objects and "variables" in project.objects["main"]:
-            for element in project.objects["main"]["variables"].values():
+                    except RuntimeError:
+                        pass
+
+            for element in list(project.objects["main"][group].values()):
                 try:
                     element.hide()
 
-                    element.deleteLater()
-
-                except RuntimeError:
+                except BaseException:
                     pass
 
     except BaseException:
@@ -418,6 +422,7 @@ def centerMenuInit(project, update: bool = False) -> None:
         except BaseException:
             pass
 
+        """
         for key, value in project.objects["main"].items():
             if key.find("timer") != -1:
                 try:
@@ -431,19 +436,6 @@ def centerMenuInit(project, update: bool = False) -> None:
 
             except BaseException:
                 pass
-
-        """
-        rem = []
-
-        for key, value in project.cache["file"].items():
-            if key == project.selectFile:
-                continue
-
-            else:
-                rem.append(key)
-
-        for element in rem:
-            project.cache["file"].pop(element)
         """
 
         if os.path.isdir(project.selectFile) and project.selectFile.find("%scene%") != -1:

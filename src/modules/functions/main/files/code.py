@@ -1345,11 +1345,11 @@ class CodeAdditionsVarsType(QTreeWidget):
 
         self.project = parent
 
-        self.pos = pos
+        self._pos = pos
 
         self.path = path
 
-        self.setGeometry(self.pos.x, self.pos.y, self.pos.z, self.pos.w)
+        self.setGeometry(self._pos.x, self._pos.y, self._pos.z, self._pos.w)
 
         self.setContextMenuPolicy(Qt.CustomContextMenu)
 
@@ -1384,6 +1384,16 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.init()
 
         self.show()
+
+    @property
+    def pos(self):
+        return self._pos
+
+    @pos.setter
+    def pos(self, pos):
+        self._pos = pos
+
+        self.setGeometry(self._pos.x, self._pos.y, self._pos.z, self._pos.w)
 
     def eventFilter(self, obj, event):
         if event.type() == event.ContextMenu:

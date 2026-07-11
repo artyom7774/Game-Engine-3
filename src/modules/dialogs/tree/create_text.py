@@ -100,7 +100,7 @@ class CreateTextFunctions:
             with open(f"{path}/{name}.text", "w", encoding="utf-8") as file:
                 dump(out, file, indent=4)
 
-        projectTreeInit()
+        projectTreeInit(project)
 
         if dialog is not None:
             dialog.close()

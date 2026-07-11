@@ -84,6 +84,8 @@ class TabFileBar(QTabBar):
         else:
             self.project.selectFile = self.objects[0]["name"] if self.objects else ""
 
+        # functions.centerMenuInit(self.project)
+
     def rename(self, last, new) -> None:
         for i, obj in enumerate(self.objects):
             if obj["name"] == last:

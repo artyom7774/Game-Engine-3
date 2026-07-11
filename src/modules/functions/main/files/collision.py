@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QTreeWidget, QPushButton, QHeaderView, QAbstractItemView
+from PyQt5.QtWidgets import QTreeWidget, QPushButton, QHeaderView, QAbstractItemView, QWidget
 from PyQt5.Qt import QPixmap, Qt
 
 from src.modules.widgets.collisionTable import CollisionTable
@@ -8,114 +8,119 @@ from src.modules.functions.project import *
 
 from src.variables import *
 
-import json
 
+# TODO переделать это в виджет
 
 class CollisionAdditions:
     style = f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'};"
 
-    @staticmethod
-    def init(project) -> None:
-        project.objects["main"]["create"] = QTreeWidget(project)
-        project.objects["main"]["create"].header().setMaximumHeight(25)
-        project.objects["main"]["create"].setHeaderLabels([translate("Name"), ""])
+    def __init__(self, project, parent) -> None:
+        self.project = project
 
-        project.objects["main"]["create"].setGeometry(
-            project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
-            40,
-            project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
-            project.height() - 70
-        )
+        self.create = QTreeWidget(self.project)
+        self.create.header().setMaximumHeight(25)
+        self.create.setHeaderLabels([translate("Name"), ""])
 
-        project.objects["main"]["create"].setColumnCount(2)
+        self.create.setColumnCount(2)
 
-        header = project.objects["main"]["create"].header()
+        header = self.create.header()
         header.setSectionResizeMode(1, QHeaderView.Fixed)
         header.setMinimumSectionSize(24)
 
         # header.setDefaultAlignment(Qt.AlignCenter)
 
-        project.objects["main"]["create"].setSelectionMode(QAbstractItemView.NoSelection)
+        self.create.setSelectionMode(QAbstractItemView.NoSelection)
 
-        project.objects["main"]["create"].setColumnWidth(0, project.objects["main"]["create"].width() - 24 - 4)
-        project.objects["main"]["create"].setColumnWidth(1, 24)
+        self.create.setRootIsDecorated(False)
 
-        project.objects["main"]["create"].setRootIsDecorated(False)
+        self.objects = {}
 
-        project.objects["main"]["create"].show()
-
-        for name in project.objects["main"]["adds"]:
+        for name in self.project.link["adds"]:
             item = QTreeWidgetItem()
 
-            project.objects["main"]["create"].addTopLevelItem(item)
+            self.create.addTopLevelItem(item)
 
-            project.objects["main"][f"additions_element_name_{name}"] = FocusLineEdit(releasedFocusFunction=lambda empty=None, n=name: CollisionAdditions.rename(project, n))
-            project.objects["main"][f"additions_element_name_{name}"].setText(name)
-            project.objects["main"][f"additions_element_name_{name}"].setStyleSheet(f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}")
+            self.objects[f"element_{name}"] = FocusLineEdit(releasedFocusFunction=lambda empty=None, n=name: self.rename(n))
+            self.objects[f"element_{name}"].setText(name)
+            self.objects[f"element_{name}"].setStyleSheet(f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}")
 
-            project.objects["main"]["create"].setItemWidget(item, 0, project.objects["main"][f"additions_element_name_{name}"])
+            self.create.setItemWidget(item, 0, self.objects[f"element_{name}"])
 
-            project.objects["main"][f"additions_element_remove_{name}"] = QPushButton()
+            self.objects[f"remove_{name}"] = QPushButton()
 
             if SETTINGS["theme"] == "dark":
-                project.objects["main"][f"additions_element_remove_{name}"].setIcon(QIcon(QPixmap("src/files/sprites/remove.png")))
+                self.objects[f"remove_{name}"].setIcon(QIcon(QPixmap("src/files/sprites/remove.png")))
 
             else:
-                project.objects["main"][f"additions_element_remove_{name}"].setIcon(QIcon(QPixmap("src/files/sprites/remove-light.png")))
+                self.objects[f"remove_{name}"].setIcon(QIcon(QPixmap("src/files/sprites/remove-light.png")))
 
-            # project.objects["main"][f"additions_element_remove_{name}"].setIconSize(QSize(16, 16))
+            # self.objects[f"remove_{name}"].setIconSize(QSize(16, 16))
 
-            project.objects["main"][f"additions_element_remove_{name}"].released.connect(lambda empty=None, n=name: CollisionAdditions.remove(project, n))
-            project.objects["main"][f"additions_element_remove_{name}"].setStyleSheet(f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}")
+            self.objects[f"remove_{name}"].released.connect(lambda empty=None, n=name: self.remove(n))
+            self.objects[f"remove_{name}"].setStyleSheet(f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}")
 
-            project.objects["main"]["create"].setItemWidget(item, 1, project.objects["main"][f"additions_element_remove_{name}"])
+            self.create.setItemWidget(item, 1, self.objects[f"remove_{name}"])
 
-        project.objects["main"]["plus"] = QPushButton(project.objects["main"]["create"])
-        project.objects["main"]["plus"].setGeometry(6, project.objects["main"]["create"].height() - 30, project.objects["main"]["create"].width() - 12, 25)
-        project.objects["main"]["plus"].setText(translate("Create object group"))
-        project.objects["main"]["plus"].show()
+        self.objects["plus"] = QPushButton(self.create)
+        self.objects["plus"].setText(translate("Create object group"))
+        self.objects["plus"].clicked.connect(lambda: self.plus())
 
-        project.objects["main"]["plus"].clicked.connect(lambda: CollisionAdditions.plus(project))
+    def setGeometry(self) -> None:
+        self.create.setGeometry(
+            self.project.objects["center_rama"].x() + self.project.objects["center_rama"].width() + 10,
+            40,
+            self.project.width() - (self.project.objects["center_rama"].x() + self.project.objects["center_rama"].width() + 10) - 10,
+            self.project.height() - 70
+        )
 
-    @staticmethod
-    def rename(project, name: str) -> None:
-        if len(project.objects["main"][f"additions_element_name_{name}"].text().split()) > 1:
+        self.create.setColumnWidth(0, self.create.width() - 24 - 4)
+        self.create.setColumnWidth(1, 24)
+
+        self.objects["plus"].setGeometry(6, self.create.height() - 30, self.create.width() - 12, 25)
+
+    def show(self):
+        self.create.show()
+
+        for obj in self.objects:
+            if hasattr(obj, "show"):
+                obj.show()
+
+    def hide(self):
+        self.create.hide()
+
+        for obj in self.objects:
+            if hasattr(obj, "hide"):
+                obj.hide()
+
+    def rename(self, name: str) -> None:
+        if len(self.objects[f"element_{name}"].text().split()) > 1:
             return
 
-        if project.objects["main"][f"additions_element_name_{name}"].text() in project.objects["main"]["adds"]:
+        if self.objects[f"element_{name}"].text() in self.project.link["adds"]:
             return
 
-        project.objects["main"]["adds"].insert(project.objects["main"]["adds"].index(name), project.objects["main"][f"additions_element_name_{name}"].text())
+        self.project.link["adds"].insert(self.project.link["adds"].index(name), self.objects[f"element_{name}"].text())
 
-        CollisionAdditions.remove(project, name)
+        self.remove(name)
 
-        project.init()
+    def remove(self, name: str) -> None:
+        if name in self.project.link["adds"]:
+            self.project.link["adds"].remove(name)
 
-    @staticmethod
-    def remove(project, name: str) -> None:
-        if name in project.objects["main"]["adds"]:
-            project.objects["main"]["adds"].remove(name)
+        self.save()
 
-        CollisionAdditions.save(project)
-
-        project.init()
-
-    @staticmethod
-    def plus(project) -> None:
+    def plus(self) -> None:
         number = 1
 
-        while str(number) in project.objects["main"]["adds"]:
+        while str(number) in self.project.link["adds"]:
             number += 1
 
-        project.objects["main"]["adds"].append(str(number))
+        self.project.link["adds"].append(str(number))
 
-        CollisionAdditions.save(project)
+        self.save()
 
-        project.init()
-
-    @staticmethod
-    def save(project) -> None:
-        with open(project.selectFile, "r", encoding="utf-8") as file:
+    def save(self) -> None:
+        with open(self.project.selectFile, "r", encoding="utf-8") as file:
             config = file.read()
 
         config = config.split("\n")
@@ -123,25 +128,29 @@ class CollisionAdditions:
 
         symbol = "\""
 
-        config = f"$[{', '.join([symbol + element + symbol for element in project.objects['main']['adds']])}]$" + "\n" + "\n".join(config)
+        config = f"$[{', '.join([symbol + element + symbol for element in self.project.link['adds']])}]$" + "\n" + "\n".join(config)
 
         # print(config)
 
-        with open(project.selectFile, "w", encoding="utf-8") as file:
+        with open(self.project.selectFile, "w", encoding="utf-8") as file:
             file.write(config)
 
-        project.init()
+        self.project.init()
 
 
 class Collision:
     @staticmethod
-    def init(project) -> None:
+    def initialization(project) -> None:
+        project.objects["main"][project.selectFile] = {}
+
+        project.link = project.objects["main"][project.selectFile]
+
         with open(project.selectFile, "r", encoding="utf-8") as file:
             text = file.read().split("\n")[0].replace("$", "").replace("$", "")
 
-        project.objects["main"]["adds"] = eval(text)
+        project.link["adds"] = eval(text)
 
-        project.objects["main"]["groups"] = project.objects["main"]["adds"]
+        project.link["groups"] = project.link["adds"]
 
         for path in getAllProjectObjects(project, onlyFileName=False) + getAllProjectInterface(project, onlyFileName=False):
             with open(path, "r", encoding="utf-8") as file:
@@ -162,22 +171,33 @@ class Collision:
                 for value in obj["dependences"][element]:
                     queue.append(value)
 
-            if group is not None and obj[group]["group"]["value"] not in project.objects["main"]["groups"]:
-                project.objects["main"]["groups"].append(obj[group]["group"]["value"])
+            if group is not None and obj[group]["group"]["value"] not in project.link["groups"]:
+                project.link["groups"].append(obj[group]["group"]["value"])
 
-        project.objects["main"]["table"] = CollisionTable(project, project.objects["main"]["groups"], Collision.function)
-        project.objects["main"]["table"].setGeometry(project.objects["center_rama"].x(), project.objects["center_rama"].y(), project.objects["center_rama"].width(), project.objects["center_rama"].height())
-        project.objects["main"]["table"].show()
+        project.link["table"] = CollisionTable(project, project.link["groups"], Collision.function)
 
-        CollisionAdditions.init(project)
+        project.link["collision"] = CollisionAdditions(project, project)
+
+    @staticmethod
+    def init(project) -> None:
+        if project.selectFile not in project.objects["main"]:
+            Collision.initialization(project)
+
+        project.link = project.objects["main"][project.selectFile]
+
+        project.link["table"].setGeometry(project.objects["center_rama"].x(), project.objects["center_rama"].y(), project.objects["center_rama"].width(), project.objects["center_rama"].height())
+        project.link["table"].show()
+
+        project.link["collision"].setGeometry()
+        project.link["collision"].show()
 
     @staticmethod
     def function(project, x: int, y: int, state: bool) -> None:
         with open(project.selectFile, "r", encoding="utf-8") as file:
             config = file.read()
 
-        first = project.objects["main"]["groups"][x]
-        second = project.objects["main"]["groups"][y]
+        first = project.link["groups"][x]
+        second = project.link["groups"][y]
 
         if state:
             if len(config) != 0:

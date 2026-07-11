@@ -186,90 +186,125 @@ class Config:
         return answer
 
     @staticmethod
-    def init(project) -> None:
+    def initialization(project) -> None:
+        project.objects["main"][project.selectFile] = {}
+
+        project.link = project.objects["main"][project.selectFile]
+
+        project.link["globals"] = ConfigAdditionsVarsType(project, Vec4i(), translate("Create global variable"), f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg")
+
         with open(project.selectFile, "r", encoding="utf-8") as file:
             config = load(file)
 
-        project.objects["main"]["globals"] = ConfigAdditionsVarsType(
-            project,
-            Vec4i(
-                project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
-                40,
-                project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
-                project.height() - 70
-            ),
-            translate("Create global variable"),
-            f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg"
-        )
-
-        x = (10 + 10 + Size.x(16) + 10) + 15
-        y = (40 + 30 + 10)
+        x = Size.x(16) + 45
+        y = 80
 
         for group in config["groups"]:
-            startY = y - 80
-            finishY = startY + (35 * len(group)) + 5
+            y += 10
+
+            project.link[f"{group}_rama"] = QTreeWidget(parent=project)
+            project.link[f"{group}_rama"].setHeaderHidden(True)
+
+            for element in group:
+                value = config["values"][element]
+
+                if value["type"] == "none":
+                    continue
+
+                project.link[f"{element}_label"] = QLabel(parent=project, text=translate(value["name"]) + ":")
+                project.link[f"{element}_label"].setFont(FONT)
+
+                if value["type"] == "str" or value["type"] == "int" or value["type"] == "path":
+                    project.link[f"{element}_entry"] = FocusLineEdit(parent=project, releasedFocusFunction=lambda empty=None, key=element, value=value: Config.function(project, f"{key}_entry", key, value))
+                    project.link[f"{element}_entry"].setText(str(value["value"]))
+                    project.link[f"{element}_entry"].setFont(FONT)
+
+                    project.link[f"{element}_entry"].saveAllValues = lambda self, proj, key=element, value=value, name=project.selectFile: Config.function(project, f"{key}_entry", key, value, name)
+
+                elif value["type"] == "bool":
+                    project.link[f"{element}_checkbox"] = QCheckBox(parent=project)
+                    project.link[f"{element}_checkbox"].setChecked(value["value"])
+                    project.link[f"{element}_checkbox"].setFont(FONT)
+
+                    project.link[f"{element}_checkbox"].clicked.connect(lambda empty=None, key=element, value=value: Config.function(project, f"{key}_checkbox", key, value))
+
+                elif value["type"] == "button-start-scene":
+                    project.link[f"{element}_button"] = QPushButton(parent=project)
+                    project.link[f"{element}_button"].setText(re.sub("%.*?%", "", value["value"].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/scenes/", "")) if value["value"] != "" else translate("Choose scene"))
+
+                    project.link[f"{element}_button"].clicked.connect(lambda empty=None, key=element, value=value: ConfigButtonStartScene.start(project, key, value))
+
+                elif value["type"] == "selector":
+                    if value["value"] is None:
+                        value["value"] = ""
+
+                    project.link[f"{element}_button"] = SelectorButton(project, element, value, value["selector"]["path"], value["selector"]["formates"])
+                    project.link[f"{element}_button"].setText(re.sub("%.*?%", "", value["value"].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/scenes/", "")) if value["value"] != "" else translate("Choose file"))
+
+                else:
+                    raise NameError(f"type {value['type']} is not defined")
+
+                y += 35
 
             y += 10
 
-            project.objects["main"][f"{group}_rama"] = QTreeWidget(parent=project)
-            project.objects["main"][f"{group}_rama"].setGeometry(project.objects["center_rama"].x() + 10, project.objects["center_rama"].y() + startY + 10, project.objects["center_rama"].width() - 20, finishY - startY + 5)
-            project.objects["main"][f"{group}_rama"].setHeaderHidden(True)
-            project.objects["main"][f"{group}_rama"].show()
+    @staticmethod
+    def init(project) -> None:
+        if project.selectFile not in project.objects["main"]:
+            Config.initialization(project)
+
+        project.link = project.objects["main"][project.selectFile]
+
+        with open(project.selectFile, "r", encoding="utf-8") as file:
+            config = load(file)
+
+        project.link["globals"].pos = Vec4i(
+            project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
+            40,
+            project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
+            project.height() - 70
+        )
+        project.link["globals"].show()
+
+        x = Size.x(16) + 45
+        y = 80
+
+        for group in config["groups"]:
+            y += 10
+
+            project.link[f"{group}_rama"].setGeometry(project.objects["center_rama"].x() + 10, project.objects["center_rama"].y() + y - 80, project.objects["center_rama"].width() - 20, 35 * len(group) + 10)
+            project.link[f"{group}_rama"].show()
 
             for element in group:
-                k = element
-                v = config["values"][element]
+                value = config["values"][element]
 
-                if v["type"] == "none":
+                if value["type"] == "none":
                     continue
 
-                project.objects["main"][f"{k}_label"] = QLabel(parent=project, text=translate(v["name"]) + ":")
-                project.objects["main"][f"{k}_label"].setGeometry(x, y, 200, 25)
-                project.objects["main"][f"{k}_label"].setFont(FONT)
-                project.objects["main"][f"{k}_label"].show()
+                project.link[f"{element}_label"].setGeometry(x, y, 200, 25)
+                project.link[f"{element}_label"].show()
 
-                if v["type"] == "str" or v["type"] == "int" or v["type"] == "path":
-                    project.objects["main"][f"{k}_entry"] = FocusLineEdit(parent=project, releasedFocusFunction=lambda empty=None, key=k, value=v: Config.function(project, f"{key}_entry", key, value))
-                    project.objects["main"][f"{k}_entry"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
-                    project.objects["main"][f"{k}_entry"].setFont(FONT)
-                    project.objects["main"][f"{k}_entry"].show()
+                if value["type"] == "str" or value["type"] == "int" or value["type"] == "path":
+                    project.link[f"{element}_entry"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
+                    project.link[f"{element}_entry"].show()
 
-                    project.objects["main"][f"{k}_entry"].setText(str(v["value"]))
+                elif value["type"] == "bool":
+                    project.link[f"{element}_checkbox"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
+                    project.link[f"{element}_checkbox"].show()
 
-                    project.objects["main"][f"{k}_entry"].saveAllValues = lambda self, proj, key=k, value=v, name=project.selectFile: Config.function(project, f"{key}_entry", key, value, name)
+                elif value["type"] == "button-start-scene":
+                    project.link[f"{element}_button"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
+                    project.link[f"{element}_button"].show()
 
-                elif v["type"] == "bool":
-                    project.objects["main"][f"{k}_checkbox"] = QCheckBox(parent=project)
-                    project.objects["main"][f"{k}_checkbox"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
-                    project.objects["main"][f"{k}_checkbox"].setFont(FONT)
-                    project.objects["main"][f"{k}_checkbox"].show()
+                elif value["type"] == "selector":
+                    if value["value"] is None:
+                        value["value"] = ""
 
-                    project.objects["main"][f"{k}_checkbox"].setChecked(v["value"])
-
-                    project.objects["main"][f"{k}_checkbox"].clicked.connect(lambda empty=None, key=k, value=v: Config.function(project, f"{key}_checkbox", key, value))
-
-                elif v["type"] == "button-start-scene":
-                    project.objects["main"][f"{k}_button"] = QPushButton(parent=project)
-                    project.objects["main"][f"{k}_button"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
-                    project.objects["main"][f"{k}_button"].show()
-
-                    project.objects["main"][f"{k}_button"].setText(re.sub("%.*?%", "", v["value"].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/scenes/", "")) if v["value"] != "" else translate("Choose scene"))
-
-                    project.objects["main"][f"{k}_button"].clicked.connect(lambda empty=None, key=k, value=v: ConfigButtonStartScene.start(project, key, value))
-
-                elif v["type"] == "selector":
-                    if v["value"] is None:
-                        v["value"] = ""
-
-                    project.objects["main"][f"{k}_button"] = SelectorButton(project, k, v, v["selector"]["path"], v["selector"]["formates"])
-                    project.objects["main"][f"{k}_button"].setText(translate("Select file") if v["value"] == "" else v["value"])
-                    project.objects["main"][f"{k}_button"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
-                    project.objects["main"][f"{k}_button"].show()
-
-                    project.objects["main"][f"{k}_button"].setText(re.sub("%.*?%", "", v["value"].replace(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/scenes/", "")) if v["value"] != "" else translate("Choose file"))
+                    project.link[f"{element}_button"].setGeometry(x + 200, y, project.objects["center_rama"].width() - (x + 400 + 20), 25)
+                    project.link[f"{element}_button"].show()
 
                 else:
-                    raise NameError(f"type {v['type']} is not defined")
+                    raise NameError(f"type {value['type']} is not defined")
 
                 y += 35
 
@@ -299,17 +334,17 @@ class Config:
 
             try:
                 if value["type"] == "str":
-                    answer = str(project.objects["main"][obj].text())
+                    answer = str(project.link[obj].text())
 
                 elif value["type"] == "path":
                     if os.path.exists(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/{project.objects['main'][obj].text()}") and any([project.objects['main'][obj].text().endswith(element) for element in IMAGE_FORMATES]):
-                        answer = project.objects["main"][obj].text()
+                        answer = project.link[obj].text()
 
                     else:
-                        # if project.objects["main"][obj].text() != "":
+                        # if project.link[obj].text() != "":
                         #     MessageBox.error("The path does not exist or this isn't a image")
 
-                        project.objects["main"][obj].setText(str(value["value"]))
+                        project.link[obj].setText(str(value["value"]))
 
                 elif value["type"] == "int":
                     answer = int(project.objects['main'][obj].text())
@@ -318,7 +353,7 @@ class Config:
                     answer = ""
 
             except BaseException:
-                project.objects["main"][obj].setText(str(value["value"]))
+                project.link[obj].setText(str(value["value"]))
 
             else:
                 value["value"] = answer
@@ -326,7 +361,7 @@ class Config:
                 Config.save(project, key, value, name)
 
         elif obj == f"{key}_checkbox":
-            value["value"] = project.objects["main"][obj].isChecked()
+            value["value"] = project.link[obj].isChecked()
 
             Config.save(project, key, value, name)
 

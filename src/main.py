@@ -68,7 +68,7 @@ class Main(QMainWindow):
 
         self.dialog = None
 
-        self.start_background = None
+        self.link = None
 
         self.menubar = None
 
@@ -132,6 +132,9 @@ class Main(QMainWindow):
                 continue
 
             path = f"{SAVE_APPDATA_DIR}/Game-Engine-3/projects/{self.selectProject}"
+
+            if not os.path.exists(path):
+                continue
 
             if not os.path.exists(f"{path}/backups"):
                 os.mkdir(f"{path}/backups")
@@ -283,8 +286,6 @@ class Main(QMainWindow):
 
             except AttributeError:
                 pass
-
-        print("initialization")
 
         self.selectProject = ""
         self.selectFile = ""
