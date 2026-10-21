@@ -1978,7 +1978,7 @@ class Code:
             return
 
         node["id"] = random.randint(1, 1000000000)
-        
+
         node["x"] = (position.x() + project.cache["file"][project.selectFile].x) // CODE_GRID_CELL_SIZE
         node["y"] = (position.y() + project.cache["file"][project.selectFile].y) // CODE_GRID_CELL_SIZE
 
