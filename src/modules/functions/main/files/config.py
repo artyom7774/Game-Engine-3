@@ -284,8 +284,6 @@ class Config:
 
     @staticmethod
     def init(project) -> None:
-        # прячем виджеты всех остальных открытых файлов, чтобы они
-        # не оставались видимыми при переключении на этот файл
         hideOtherLinks(project, project.selectFile)
 
         if project.selectFile not in project.objects["main"]:
@@ -388,17 +386,16 @@ class Config:
                     answer = str(project.link[obj].text())
 
                 elif value["type"] == "path":
-                    if os.path.exists(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/{project.objects['main'][obj].text()}") and any([project.objects['main'][obj].text().endswith(element) for element in IMAGE_FORMATES]):
-                        answer = project.link[obj].text()
+                    text = project.link[obj].text()
+
+                    if os.path.exists(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/{text}") and any([text.endswith(element) for element in IMAGE_FORMATES]):
+                        answer = text
 
                     else:
-                        # if project.link[obj].text() != "":
-                        #     MessageBox.error("The path does not exist or this isn't a image")
-
                         project.link[obj].setText(str(value["value"]))
 
                 elif value["type"] == "int":
-                    answer = int(project.objects['main'][obj].text())
+                    answer = int(project.link[obj].text())
 
                 else:
                     answer = ""
