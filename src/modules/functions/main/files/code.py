@@ -1148,7 +1148,7 @@ class CodeLabel(QLabel):
 
         find = None
 
-        if event.button() != Qt.MidButton:
+        if event.button() == Qt.LeftButton:
             for element in self.project.objects["main"]["liner"].points["outputs"]:
                 if abs(element[1].x - event.pos().x()) < CODE_POINT_PRECISION and abs(element[1].y - event.pos().y()) < CODE_POINT_PRECISION:
                     find = element
@@ -1484,9 +1484,6 @@ class CodeAdditionsVarsType(QTreeWidget):
 
             self.setItemWidget(item, 2, valueEdit)
 
-            # сохраняем ссылки на виджеты строки локально, а не в
-            # общем project.objects["main"], чтобы при пересоздании
-            # они не оставались висеть там вечно
             self.rows[name] = {"name": nameEdit, "type": typeBox, "value": valueEdit}
 
     def new(self) -> None:
@@ -1635,11 +1632,6 @@ class CodeAdditions:
 class Code:
     @staticmethod
     def clearNodes(project) -> None:
-        """
-        Сохраняет введённые значения в полях ввода узлов и полностью
-        уничтожает все QTreeWidget-узлы вместе с их коннекторами.
-        """
-
         nodes = project.objects["main"].get("nodes", {})
 
         for node in list(nodes.values()):
@@ -1664,14 +1656,6 @@ class Code:
 
     @staticmethod
     def destroy(project) -> None:
-        """
-        Полностью уничтожает все виджеты, созданные Code
-        (канва узлов, таймеры, панель AI, переменные и т.д.).
-
-        Вызывается в начале Code.init(), чтобы при повторной
-        инициализации (project.init()) не оставались старые виджеты.
-        """
-
         for timerKey in ("code_timer", "code_timer_second"):
             timer = project.objects["main"].pop(timerKey, None)
 
@@ -1926,12 +1910,6 @@ class Code:
         x = position.x()
         y = position.y()
 
-        # меню и экшены создаются локально, с родителем "code" (который
-        # реально уничтожается в Code.destroy), и с WA_DeleteOnClose,
-        # чтобы они не копились навсегда в project.objects["main"]
-        # (раньше QAction создавались с parent=project, который живёт
-        # всё время работы программы, и никогда не удалялись)
-
         menu = QMenu(project.objects["main"]["code"])
         menu.setAttribute(Qt.WA_DeleteOnClose)
 
@@ -2000,6 +1978,7 @@ class Code:
             return
 
         node["id"] = random.randint(1, 1000000000)
+        
         node["x"] = (position.x() + project.cache["file"][project.selectFile].x) // CODE_GRID_CELL_SIZE
         node["y"] = (position.y() + project.cache["file"][project.selectFile].y) // CODE_GRID_CELL_SIZE
 
