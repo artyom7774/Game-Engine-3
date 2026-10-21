@@ -13,6 +13,8 @@ from src.modules.dialogs.tree.create_scene import SCENE_SETTINGS_TEMPLATE
 
 from src.modules.functions.main.files.objects.object import Object as ObjectTypingClass
 
+from src.modules.functions.main.files.utils import hideOtherLinks, destroyLink
+
 from src.modules.widgets import FocusLineEdit, FocusComboBox
 
 from src.modules import functions
@@ -112,6 +114,9 @@ class SceneHash:
 
     settings: str = ""
 
+    sceneSettings: dict = None
+    projectSettings: dict = None
+
     size: int = 1
 
 
@@ -184,7 +189,7 @@ class SceneLabel(QLabel):
         if event.button() == Qt.LeftButton:
             self.lastPoint = event.pos()
 
-            self.pressFunction(event.pos().x() - self.project.objects["main"]["scene"].width() // 2, event.pos().y() - self.project.objects["main"]["scene"].height() // 2)
+            self.pressFunction(event.pos().x() - self.width() // 2, event.pos().y() - self.height() // 2)
 
             self.drawing = True
 
@@ -197,11 +202,9 @@ class SceneLabel(QLabel):
     def mouseReleaseEvent(self, event) -> None:
         if event.button() == Qt.LeftButton:
             if self.releasedFunction is not None:
-                self.releasedFunction(event.pos().x() - self.project.objects["main"]["scene"].width() // 2, event.pos().y() - self.project.objects["main"]["scene"].height() // 2)
+                self.releasedFunction(event.pos().x() - self.width() // 2, event.pos().y() - self.height() // 2)
 
             self.drawing = False
-
-        # Scene.update(self.project)
 
     def mouseMoveEvent(self, event) -> None:
         if event.buttons() & Qt.LeftButton and self.drawing:
@@ -410,31 +413,34 @@ class SceneAdditions:
                 Scene.select(project, obj.pos.x + 1, obj.pos.y + 1)
 
     @staticmethod
-    def init(project) -> None:
-        try:
-            project.objects["main"]["settings"].hide()
-            project.objects["main"]["settings"].deleteLater()
+    def initialization(project) -> None:
+        link = project.objects["main"][project.selectFile]
 
+        link["settings"] = QTreeWidget(project)
+        link["settings"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 40, Size.x(16), Size.y(100) - 70)
+        link["settings"].setHeaderHidden(True)
+        link["settings"].header().setFont(FONT)
+        link["settings"].hide()
+
+        link["to_scene_settings_button"] = QPushButton(project)
+        link["to_scene_settings_button"].clicked.connect(lambda: Scene.objectReleased(project))
+        link["to_scene_settings_button"].setText(translate("Open scene settings"))
+        link["to_scene_settings_button"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 60 + project.height() - 115, Size.x(16), 23)
+        link["to_scene_settings_button"].hide()
+
+    @staticmethod
+    def init(project) -> None:
+        link = project.objects["main"][project.selectFile]
+
+        if "settings" not in link:
+            SceneAdditions.initialization(project)
+
+        try:
             project.objects["main"]["object_tree"].hide()
             project.objects["main"]["object_tree"].deleteLater()
 
-            project.objects["main"]["to_scene_settings_button"].hide()
-            project.objects["main"]["to_scene_settings_button"].deleteLater()
-
         except BaseException:
             pass
-
-        project.objects["main"]["settings"] = QTreeWidget(project)
-        project.objects["main"]["settings"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 40, Size.x(16), Size.y(100) - 70)
-        project.objects["main"]["settings"].setHeaderHidden(True)
-        project.objects["main"]["settings"].header().setFont(FONT)
-        project.objects["main"]["settings"].hide()
-
-        project.objects["main"]["to_scene_settings_button"] = QPushButton(project)
-        project.objects["main"]["to_scene_settings_button"].clicked.connect(lambda: Scene.objectReleased(project))
-        project.objects["main"]["to_scene_settings_button"].setText(translate("Open scene settings"))
-        project.objects["main"]["to_scene_settings_button"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 60 + project.height() - 115, Size.x(16), 23)
-        project.objects["main"]["to_scene_settings_button"].hide()
 
         if project.cache["file"][project.selectFile].selectObject is not None and project.cache["file"][project.selectFile].selectObject.variables.get("code", None) is not None:
             code = project.cache["file"][project.selectFile].selectObject.variables["code"]
@@ -454,7 +460,8 @@ class SceneAdditions:
                 )
             )
 
-            project.objects["main"]["to_scene_settings_button"].show()
+            link["settings"].hide()
+            link["to_scene_settings_button"].show()
 
         else:
             file = project.cache["file"][project.selectFile].settings
@@ -462,14 +469,15 @@ class SceneAdditions:
             ObjectTypingClass.init(
                 project, SceneAdditions.SceneAdditionWidgetItem, file,
                 (
-                    project.objects["main"]["settings"].x(),
-                    project.objects["main"]["settings"].y(),
-                    project.objects["main"]["settings"].width(),
-                    project.objects["main"]["settings"].height()
+                    link["settings"].x(),
+                    link["settings"].y(),
+                    link["settings"].width(),
+                    link["settings"].height()
                 ), type="scene", variables=False
             )
 
-            project.objects["main"]["settings"].show()
+            link["settings"].show()
+            link["to_scene_settings_button"].hide()
 
 
 class Scene:
@@ -477,8 +485,39 @@ class Scene:
     open = ""
 
     @staticmethod
+    def destroy(project, file: str = None) -> None:
+        file = file or project.selectFile
+
+        link = project.objects["main"].pop(file, None)
+
+        if link is not None:
+            destroyLink(link)
+
+    @staticmethod
+    def initialization(project) -> None:
+        project.objects["main"][project.selectFile] = {}
+
+        project.link = project.objects["main"][project.selectFile]
+
+        project.link["scene"] = SceneLabel(
+            parent=project, draggingFunction=lambda x, y: Scene.move(project, x, y), pressFunction=lambda x, y: Scene.select(project, x, y), releasedFunction=lambda x, y: Scene.update(project)
+        )
+
+        project.link["scene"].setContextMenuPolicy(Qt.CustomContextMenu)
+
+        project.link["scene"].customContextMenuRequested.connect(
+            lambda pos: Scene.menu(project, pos)
+        )
+
+        project.link["scene"].saveAllValues = lambda self, project: Scene.saveAllValues(project)
+
+        SceneAdditions.initialization(project)
+
+    @staticmethod
     def init(project, call: str = "") -> None:
         Scene.open = project.selectFile
+
+        hideOtherLinks(project, project.selectFile)
 
         project.cache["file"][project.selectFile].settings = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/cache/{'-'.join(project.selectFile.split('/')[3:][project.selectFile.split('/')[3:].index('scenes'):])}-setting.json"
 
@@ -492,14 +531,14 @@ class Scene:
                 project.cache["allSceneObjects"][project.selectFile] = orjson.loads(file.read())
 
         with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
-            project.objects["main"]["project_settings"] = load(file)
+            project.cache["file"][project.selectFile].projectSettings = load(file)
 
         if not os.path.exists(project.cache["file"][project.selectFile].settings):
             with open(project.cache["file"][project.selectFile].settings, "w", encoding="utf-8") as file:
                 json.dump(SCENE_SETTINGS_TEMPLATE, file, indent=4)
 
         with open(project.cache["file"][project.selectFile].settings, "r", encoding="utf-8") as file:
-            project.objects["main"]["scene_settings"] = load(file)
+            project.cache["file"][project.selectFile].sceneSettings = load(file)
 
         if not os.path.exists(project.cache["file"][project.selectFile].settings):
             CreateObjectFunctions.create(project, None, None, "", False, "engine/files/scene.json", project.cache["file"][project.selectFile].settings)
@@ -516,27 +555,13 @@ class Scene:
 
             project.application[project.selectFile].setCamera(project.engine.camera.FocusCamera(project.application[project.selectFile], project.cache["file"][project.selectFile].camera))
 
-        try:
-            if "scene" in project.objects["main"]:
-                project.objects["main"]["scene"].deleteLater()
+        if project.selectFile not in project.objects["main"]:
+            Scene.initialization(project)
 
-        except RuntimeError:
-            pass
+        project.link = project.objects["main"][project.selectFile]
 
-        project.objects["main"]["scene"] = SceneLabel(
-            parent=project, draggingFunction=lambda x, y: Scene.move(project, x, y), pressFunction=lambda x, y: Scene.select(project, x, y), releasedFunction=lambda x, y: Scene.update(project)
-        )
-
-        project.objects["main"]["scene"].setGeometry(project.objects["center_rama"].x() + 2, project.objects["center_rama"].y() + 2, project.objects["center_rama"].width() - 4, project.objects["center_rama"].height() - 4)
-        project.objects["main"]["scene"].show()
-
-        project.objects["main"]["scene"].setContextMenuPolicy(Qt.CustomContextMenu)
-
-        project.objects["main"]["scene"].customContextMenuRequested.connect(
-            lambda pos: Scene.menu(project, pos)
-        )
-
-        project.objects["main"]["scene"].saveAllValues = lambda self, project: Scene.saveAllValues(project)
+        project.link["scene"].setGeometry(project.objects["center_rama"].x() + 2, project.objects["center_rama"].y() + 2, project.objects["center_rama"].width() - 4, project.objects["center_rama"].height() - 4)
+        project.link["scene"].show()
 
         Scene.objects(project)
         Scene.update(project)
@@ -563,7 +588,7 @@ class Scene:
                 type, variables = Scene.loadObjectFile(project, name, obj)
 
                 if "sprite" in variables and variables["sprite"][0] != "":
-                    variables["sprite"][0] = f"" + variables["sprite"][0] # TODO
+                    variables["sprite"][0] = f"" + variables["sprite"][0]
 
                 obj = getattr(project.engine.objects, type)(application, **variables, variables={"code": name})
 
@@ -572,14 +597,13 @@ class Scene:
 
                 application.objects.add(obj)
 
-        # if application.objects.getById(project.cache["file"][project.selectFile].selectLink) is None and project.cache["file"][project.selectFile].selectObject is not None:
-        #     Scene.objectReleased(project)
-
     @staticmethod
     def select(project, x, y) -> None:
         application = project.application[project.selectFile]
 
-        project.objects["main"]["scene"].setFocus()
+        link = project.objects["main"][project.selectFile]
+
+        link["scene"].setFocus()
 
         select = []
 
@@ -607,8 +631,6 @@ class Scene:
         except BaseException:
             return
 
-        # print(select)
-
         for obj in application.objects.objects:
             if obj.group.find("debug") != -1 and obj.group.startswith("__") and obj.group.endswith("__"):
                 continue
@@ -629,8 +651,6 @@ class Scene:
                     application, obj.pos, obj.hitbox, group="__debug_select__", layer=int(1e9) + 1
                 ))
 
-                # print("create")
-
                 Scene.update(project)
 
                 break
@@ -639,8 +659,10 @@ class Scene:
     def menu(project, position) -> None:
         application = project.application[project.selectFile]
 
-        x = position.x() - project.objects["main"]["scene"].width() // 2
-        y = position.y() - project.objects["main"]["scene"].height() // 2
+        link = project.objects["main"][project.selectFile]
+
+        x = position.x() - link["scene"].width() // 2
+        y = position.y() - link["scene"].height() // 2
 
         project.objects["main"]["scene_menu"] = QMenu()
 
@@ -675,7 +697,7 @@ class Scene:
             project.objects["main"]["scene_menu_copy_action"].setDisabled(True)
             project.objects["main"]["scene_menu_delete_action"].setDisabled(True)
 
-        if project.objects["main"]["scene"].position is None or project.cache["file"][project.selectFile].selectObject is None:
+        if link["scene"].position is None or project.cache["file"][project.selectFile].selectObject is None:
             project.objects["main"]["scene_menu_rename_action"].setDisabled(True)
 
         project.objects["main"]["scene_menu"].addAction(project.objects["main"]["scene_menu_new_action"])
@@ -688,7 +710,7 @@ class Scene:
         project.objects["main"]["scene_menu"].addSeparator()
         project.objects["main"]["scene_menu"].addAction(project.objects["main"]["scene_menu_delete_action"])
 
-        project.objects["main"]["scene_menu"].popup(project.objects["main"]["scene"].mapToGlobal(position))
+        project.objects["main"]["scene_menu"].popup(link["scene"].mapToGlobal(position))
 
     @staticmethod
     def update(project, call: str = "") -> None:
@@ -703,6 +725,8 @@ class Scene:
 
         Scene.updating = True
 
+        link = project.objects["main"][project.selectFile]
+
         if project.cache["file"][project.selectFile].selectObject is not None:
             Scene.objects(project, [project.cache["file"][project.selectFile].selectObject.variables["code"]])
 
@@ -712,14 +736,10 @@ class Scene:
         x = project.cache["file"][project.selectFile].camera.pos.x
         y = project.cache["file"][project.selectFile].camera.pos.y
 
-        # STATUS BAR
-
         if call not in ("auto", ):
             project.objects["status_bar"].showMessage(project.selectFile)
 
-        # GRID
-
-        sceneSettings = project.objects["main"]["scene_settings"]
+        sceneSettings = project.cache["file"][project.selectFile].sceneSettings
 
         gridWidth = sceneSettings["Scene"]["grid"]["value"]["x"]["value"]
         gridHeight = sceneSettings["Scene"]["grid"]["value"]["y"]["value"]
@@ -733,8 +753,8 @@ class Scene:
             lastDrawing.append(["rect", [application.screen, (248, 249, 250), (0, 0, project.desktop.width(), project.desktop.height())]])
 
         if sceneSettings["Scene"]["visiable_grid"]["value"]:
-            for px in range(-project.objects["main"]["scene"].width() // 2 // gridWidth - 2, project.objects["main"]["scene"].width() // 2 // gridWidth + 2):
-                for py in range(-project.objects["main"]["scene"].height() // 2 // gridHeight - 2, project.objects["main"]["scene"].height() // 2 // gridHeight + 2):
+            for px in range(-link["scene"].width() // 2 // gridWidth - 2, link["scene"].width() // 2 // gridWidth + 2):
+                for py in range(-link["scene"].height() // 2 // gridHeight - 2, link["scene"].height() // 2 // gridHeight + 2):
                     lastDrawing.append(["rect", [application.screen, (63, 64, 66) if SETTINGS["theme"] == "dark" else (218, 220, 224), (
                         (project.desktop.width() // 2 + gridX - (x - gridX) - (gridWidth * (gridX // gridWidth))) + px * gridWidth,
                         (project.desktop.height() // 2 + gridY - (y - gridY) - (gridHeight * (gridY // gridHeight))) + py * gridHeight,
@@ -742,16 +762,12 @@ class Scene:
                         gridHeight
                     ), 1]])
 
-        # CENTER RAMA
-
-        projectSettings = project.objects["main"]["project_settings"]
+        projectSettings = project.cache["file"][project.selectFile].projectSettings
 
         afterDrawing = []
 
         if sceneSettings["Scene"]["visiable_screen"]["value"]:
             afterDrawing.append(["rect", [application.screen, (255, 0, 0), (application.usingWidth // 2 - projectSettings["values"]["width"]["value"] // 2, application.usingHeight // 2 - projectSettings["values"]["height"]["value"] // 2, projectSettings["values"]["width"]["value"], projectSettings["values"]["height"]["value"]), 1]])
-
-        # VISIABLE
 
         try:
             project.cache["file"][project.selectFile].screen = application.frame(image=True, screenFillColor=(32, 33, 36), lastDrawing=lastDrawing, afterDrawing=afterDrawing)
@@ -768,8 +784,6 @@ class Scene:
 
         qpixmap = QPixmap(Scene.getVisiableScreen(QImage(project.application[project.selectFile].screen.get_buffer(), project.desktop.width(), project.desktop.height(), QImage.Format_RGB32), project.objects["center_rama"].width(), project.objects["center_rama"].height()))
 
-        # UI
-
         painter = QPainter(qpixmap)
         painter.setFont(SFONT)
 
@@ -781,7 +795,7 @@ class Scene:
 
         painter.end()
 
-        project.objects["main"]["scene"].setPixmap(qpixmap)
+        link["scene"].setPixmap(qpixmap)
 
         Scene.updating = False
 
@@ -849,8 +863,10 @@ class Scene:
     def deleteSceneObject(project, position) -> None:
         application = project.application[project.selectFile]
 
-        x = position.x() - project.objects["main"]["scene"].width() // 2
-        y = position.y() - project.objects["main"]["scene"].height() // 2
+        link = project.objects["main"][project.selectFile]
+
+        x = position.x() - link["scene"].width() // 2
+        y = position.y() - link["scene"].height() // 2
 
         for obj in application.objects.objects:
             if obj.group.find("debug") != -1 and obj.group.startswith("__") and obj.group.endswith("__"):
@@ -869,7 +885,9 @@ class Scene:
 
     @staticmethod
     def copyObject(project) -> None:
-        if project.objects["main"]["scene"].position is None:
+        link = project.objects["main"][project.selectFile]
+
+        if link["scene"].position is None:
             return
 
         if project.cache["file"][project.selectFile].selectObject is not None:
@@ -877,12 +895,14 @@ class Scene:
 
     @staticmethod
     def pasteObject(project) -> None:
-        if project.objects["main"]["scene"].position is None:
+        link = project.objects["main"][project.selectFile]
+
+        if link["scene"].position is None:
             return
 
         pos = Vec2f(
-            project.objects["main"]["scene"].position.x + project.cache["file"][project.selectFile].camera.pos.x,
-            project.objects["main"]["scene"].position.y + project.cache["file"][project.selectFile].camera.pos.y
+            link["scene"].position.x + project.cache["file"][project.selectFile].camera.pos.x,
+            link["scene"].position.y + project.cache["file"][project.selectFile].camera.pos.y
         )
 
         code = pyperclip.paste()
@@ -916,16 +936,16 @@ class Scene:
 
         obj = copy.deepcopy(project.cache["allSceneObjects"][project.selectFile][code])
 
-        width = project.objects["main"]["scene_settings"]["Scene"]["grid"]["value"]["x"]["value"]
-        height = project.objects["main"]["scene_settings"]["Scene"]["grid"]["value"]["y"]["value"]
+        width = project.cache["file"][project.selectFile].sceneSettings["Scene"]["grid"]["value"]["x"]["value"]
+        height = project.cache["file"][project.selectFile].sceneSettings["Scene"]["grid"]["value"]["y"]["value"]
 
-        if project.objects["main"]["scene_settings"]["Scene"]["snap"]["value"]:
-            obj[obj["main"]]["pos"]["value"]["x"]["value"] = (pos.x - project.objects["main"]["scene"].width() // 2) // width * width
-            obj[obj["main"]]["pos"]["value"]["y"]["value"] = (pos.y - project.objects["main"]["scene"].height() // 2) // height * height
+        if project.cache["file"][project.selectFile].sceneSettings["Scene"]["snap"]["value"]:
+            obj[obj["main"]]["pos"]["value"]["x"]["value"] = (pos.x - link["scene"].width() // 2) // width * width
+            obj[obj["main"]]["pos"]["value"]["y"]["value"] = (pos.y - link["scene"].height() // 2) // height * height
 
         else:
-            obj[obj["main"]]["pos"]["value"]["x"]["value"] = pos.x - project.objects["main"]["scene"].width() // 2
-            obj[obj["main"]]["pos"]["value"]["y"]["value"] = pos.y - project.objects["main"]["scene"].height() // 2
+            obj[obj["main"]]["pos"]["value"]["x"]["value"] = pos.x - link["scene"].width() // 2
+            obj[obj["main"]]["pos"]["value"]["y"]["value"] = pos.y - link["scene"].height() // 2
 
         project.cache["allSceneObjects"][project.selectFile][new] = obj
 
@@ -935,7 +955,9 @@ class Scene:
 
     @staticmethod
     def deleteObject(project) -> None:
-        if project.objects["main"]["scene"].position is None:
+        link = project.objects["main"][project.selectFile]
+
+        if link["scene"].position is None:
             return
 
         if project.cache["file"][project.selectFile].selectObject is not None:
@@ -979,8 +1001,6 @@ class Scene:
         if "sprite" in answer and answer["sprite"] != "":
             answer["sprite"][0] = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/{answer['sprite'][0]}"
 
-        # print(answer["sprite"])
-
         return obj["type"]["value"], answer
 
     @staticmethod
@@ -1001,8 +1021,6 @@ class Scene:
         if "sprite" in answer and answer["sprite"] != "":
             answer["sprite"][0] = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/{answer['sprite'][0]}"
 
-        # print(answer["sprite"])
-
         return obj["type"]["value"], answer, obj["variables"]
 
     @staticmethod
@@ -1022,11 +1040,11 @@ class Scene:
 
         obj = project.cache["allSceneObjects"][project.selectFile][project.cache["file"][project.selectFile].selectObject.variables["code"]]
 
-        sceneSettings = project.objects["main"]["scene_settings"]
+        sceneSettings = project.cache["file"][project.selectFile].sceneSettings
 
         try:
-            obj[obj["main"]]["pos"]["value"]["x"]["value"] += directions[direction][0] * (sceneSettings["Scene"]["grid"]["value"]["x"]["value"] if project.objects["main"]["scene_settings"]["Scene"]["snap"]["value"] else 1)
-            obj[obj["main"]]["pos"]["value"]["y"]["value"] += directions[direction][1] * (sceneSettings["Scene"]["grid"]["value"]["y"]["value"] if project.objects["main"]["scene_settings"]["Scene"]["snap"]["value"] else 1)
+            obj[obj["main"]]["pos"]["value"]["x"]["value"] += directions[direction][0] * (sceneSettings["Scene"]["grid"]["value"]["x"]["value"] if sceneSettings["Scene"]["snap"]["value"] else 1)
+            obj[obj["main"]]["pos"]["value"]["y"]["value"] += directions[direction][1] * (sceneSettings["Scene"]["grid"]["value"]["y"]["value"] if sceneSettings["Scene"]["snap"]["value"] else 1)
 
         except KeyError:
             return

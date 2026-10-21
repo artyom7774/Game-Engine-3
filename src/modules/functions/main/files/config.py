@@ -12,6 +12,8 @@ from engine.vector.int import Vec4i
 
 from src.variables import *
 
+import tempfile
+import logging
 import typing
 import os
 import re
@@ -96,8 +98,7 @@ class ConfigButtonStartSceneFunctions:
 
         config["values"]["start_scene"]["value"] = scene
 
-        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "w", encoding="utf-8") as file:
-            dump(config, file, indent=4)
+        Config._atomicDump(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", config)
 
         project.init()
 
@@ -164,6 +165,30 @@ class ConfigButtonStartScene(QDialog):
 
 class Config:
     @staticmethod
+    def _atomicDump(path: str, data: dict) -> None:
+        directory = os.path.dirname(path) or "."
+
+        fd, tmp_path = tempfile.mkstemp(dir=directory, suffix=".tmp")
+
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as tmp_file:
+                dump(data, tmp_file, indent=4)
+                tmp_file.flush()
+                os.fsync(tmp_file.fileno())
+
+            os.replace(tmp_path, path)
+
+        except BaseException:
+            if os.path.exists(tmp_path):
+                try:
+                    os.remove(tmp_path)
+
+                except OSError:
+                    pass
+
+            raise
+
+    @staticmethod
     def test(project) -> None:
         with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "r", encoding="utf-8") as file:
             config = load(file)
@@ -174,8 +199,7 @@ class Config:
         else:
             config["values"]["start_scene"]["value"] = ""
 
-        with open(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", "w", encoding="utf-8") as file:
-            dump(config, file, indent=4)
+        Config._atomicDump(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", config)
 
     @staticmethod
     def get(file: dict) -> dict:
@@ -188,9 +212,6 @@ class Config:
 
     @staticmethod
     def destroy(project, file: str = None) -> None:
-        """Полностью скрывает и удаляет виджеты, относящиеся к указанному файлу
-        (по умолчанию - к текущему project.selectFile), и убирает запись из кэша."""
-
         file = file or project.selectFile
 
         link = project.objects["main"].pop(file, None)
@@ -336,10 +357,23 @@ class Config:
             with open(name, "r", encoding="utf-8") as file:
                 config = load(file)
 
-            config["values"][key] = value
+        except (PermissionError, OSError):
+            return
 
-            with open(name, "w", encoding="utf-8") as file:
-                dump(config, file, indent=4)
+        except Exception as error:
+            logging.info(f"Config.save: failed to parse config file {name}: {error}")
+
+            return
+
+        if "values" not in config:
+            logging.info(f"Config.save: config file {name} has no 'values' key, skip saving")
+
+            return
+
+        config["values"][key] = value
+
+        try:
+            Config._atomicDump(name, config)
 
         except PermissionError:
             pass
