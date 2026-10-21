@@ -12,6 +12,8 @@ from src.modules.functions.ai.ai import requestAI, compileProgramCode
 from src.modules.functions.project import getColor
 from src.modules.functions.algorithm import bezierCurveWidth
 
+from src.modules.functions.main.files.utils import hideWidgetLike, destroyWidgetLike, hideOtherLinks
+
 from src.modules.widgets import FocusLineEdit, FocusComboBox
 
 from engine.vector.float import Vec2f
@@ -1034,11 +1036,11 @@ class CodeLabel(QLabel):
             QPushButton {{
                 background-color: #{'202124' if SETTINGS['theme'] == 'dark' else 'f8f9fa'};
             }}
-            
+
             QPushButton:hover {{
                 background-color: #{'27282a' if SETTINGS['theme'] == 'dark' else 'f0f2f4'};
             }}
-            
+
             QPushButton:pressed {{
                 background-color: #{'2d2e30' if SETTINGS['theme'] == 'dark' else 'e8eaed'};
             }}
@@ -1349,6 +1351,8 @@ class CodeAdditionsVarsType(QTreeWidget):
 
         self.path = path
 
+        self.rows = {}
+
         self.setGeometry(self._pos.x, self._pos.y, self._pos.z, self._pos.w)
 
         self.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -1449,6 +1453,8 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.project.init()
 
     def init(self) -> None:
+        self.rows = {}
+
         for i, name in enumerate(self.variables):
             value = self.variables[name]
 
@@ -1458,25 +1464,30 @@ class CodeAdditionsVarsType(QTreeWidget):
 
             self.addTopLevelItem(item)
 
-            self.project.objects["main"][f"additions_element_name_{name}"] = FocusLineEdit(releasedFocusFunction=lambda empty=None, n=name: self.functionName(n))
-            self.project.objects["main"][f"additions_element_name_{name}"].setText(value["name"])
-            self.project.objects["main"][f"additions_element_name_{name}"].setStyleSheet(self.style)
+            nameEdit = FocusLineEdit(releasedFocusFunction=lambda empty=None, n=name: self.functionName(n))
+            nameEdit.setText(value["name"])
+            nameEdit.setStyleSheet(self.style)
 
-            self.setItemWidget(item, 0, self.project.objects["main"][f"additions_element_name_{name}"])
+            self.setItemWidget(item, 0, nameEdit)
 
-            self.project.objects["main"][f"additions_element_type_{name}"] = FocusComboBox()
-            self.project.objects["main"][f"additions_element_type_{name}"].addItems(self.config["variablesTypes"])
-            self.project.objects["main"][f"additions_element_type_{name}"].setCurrentIndex(self.config["variablesTypes"].index(value["type"]))
-            self.project.objects["main"][f"additions_element_type_{name}"].currentIndexChanged.connect(lambda empty, n=name: self.functionType(n))
-            self.project.objects["main"][f"additions_element_type_{name}"].setStyleSheet(self.style)
+            typeBox = FocusComboBox()
+            typeBox.addItems(self.config["variablesTypes"])
+            typeBox.setCurrentIndex(self.config["variablesTypes"].index(value["type"]))
+            typeBox.currentIndexChanged.connect(lambda empty, n=name: self.functionType(n))
+            typeBox.setStyleSheet(self.style)
 
-            self.setItemWidget(item, 1, self.project.objects["main"][f"additions_element_type_{name}"])
+            self.setItemWidget(item, 1, typeBox)
 
-            self.project.objects["main"][f"additions_element_value_{name}"] = FocusLineEdit(releasedFocusFunction=lambda empty=None, n=name: self.functionValue(n))
-            self.project.objects["main"][f"additions_element_value_{name}"].setText(str(value["value"]))
-            self.project.objects["main"][f"additions_element_value_{name}"].setStyleSheet(self.style)
+            valueEdit = FocusLineEdit(releasedFocusFunction=lambda empty=None, n=name: self.functionValue(n))
+            valueEdit.setText(str(value["value"]))
+            valueEdit.setStyleSheet(self.style)
 
-            self.setItemWidget(item, 2, self.project.objects["main"][f"additions_element_value_{name}"])
+            self.setItemWidget(item, 2, valueEdit)
+
+            # сохраняем ссылки на виджеты строки локально, а не в
+            # общем project.objects["main"], чтобы при пересоздании
+            # они не оставались висеть там вечно
+            self.rows[name] = {"name": nameEdit, "type": typeBox, "value": valueEdit}
 
     def new(self) -> None:
         if os.path.exists(self.path):
@@ -1506,6 +1517,8 @@ class CodeAdditionsVarsType(QTreeWidget):
         self.project.init()
 
     def functionName(self, name: str) -> None:
+        key = name
+
         if os.path.exists(self.path):
             with open(self.path, "r", encoding="utf-8") as file:
                 text = load(file)
@@ -1519,10 +1532,10 @@ class CodeAdditionsVarsType(QTreeWidget):
         except KeyError:
             return
 
-        new = self.project.objects["main"][f"additions_element_name_{name}"].text()
+        new = self.rows[key]["name"].text()
 
         if new == name or len(new) < 1 or new in list(text["variables"].keys()):
-            self.project.objects["main"][f"additions_element_name_{name}"].setText(name)
+            self.rows[key]["name"].setText(name)
 
             return
 
@@ -1544,7 +1557,7 @@ class CodeAdditionsVarsType(QTreeWidget):
         else:
             text = self.project.cache["allSceneObjects"][self.project.selectFile][self.path]
 
-        index = self.project.objects["main"][f"additions_element_type_{name}"].currentIndex()
+        index = self.rows[name]["type"].currentIndex()
 
         new = self.config["variablesTypes"][index]
 
@@ -1564,7 +1577,7 @@ class CodeAdditionsVarsType(QTreeWidget):
         else:
             text = self.project.cache["allSceneObjects"][self.project.selectFile][self.path]
 
-        value = self.project.objects["main"][f"additions_element_value_{name}"].text()
+        value = self.rows[name]["value"].text()
 
         if TypeCurrect.currect_(text["variables"][name]["type"], value):
             text["variables"][name]["value"] = TypeSet.set_(text["variables"][name]["type"], value)
@@ -1614,18 +1627,78 @@ class CodeAdditions:
     def remove(project):
         if "variables" in project.objects["main"]:
             for element in project.objects["main"]["variables"].values():
-                try:
-                    element.hide()
+                destroyWidgetLike(element)
 
-                    element.deleteLater()
-
-                except RuntimeError:
-                    pass
+            project.objects["main"].pop("variables", None)
 
 
 class Code:
     @staticmethod
+    def clearNodes(project) -> None:
+        """
+        Сохраняет введённые значения в полях ввода узлов и полностью
+        уничтожает все QTreeWidget-узлы вместе с их коннекторами.
+        """
+
+        nodes = project.objects["main"].get("nodes", {})
+
+        for node in list(nodes.values()):
+            for connector in list(getattr(node, "connectors", {}).values()):
+                if connector is None:
+                    continue
+
+                if getattr(connector, "inputLeftText", None) is not None:
+                    try:
+                        connector.inputLeftText.save()
+
+                    except Exception:
+                        pass
+
+                destroyWidgetLike(getattr(connector, "inputLeftText", None))
+                destroyWidgetLike(getattr(connector, "inputLeftRama", None))
+                destroyWidgetLike(getattr(connector, "placeholderLabel", None))
+
+            destroyWidgetLike(node)
+
+        project.objects["main"]["nodes"] = {}
+
+    @staticmethod
+    def destroy(project) -> None:
+        """
+        Полностью уничтожает все виджеты, созданные Code
+        (канва узлов, таймеры, панель AI, переменные и т.д.).
+
+        Вызывается в начале Code.init(), чтобы при повторной
+        инициализации (project.init()) не оставались старые виджеты.
+        """
+
+        for timerKey in ("code_timer", "code_timer_second"):
+            timer = project.objects["main"].pop(timerKey, None)
+
+            if timer is not None:
+                try:
+                    timer.stop()
+
+                except Exception:
+                    pass
+
+                destroyWidgetLike(timer)
+
+        Code.clearNodes(project)
+
+        CodeAdditions.remove(project)
+
+        for key in ("replacer_select", "replacer_pos", "ai_open_menu", "code"):
+            destroyWidgetLike(project.objects["main"].pop(key, None))
+
+        for key in ("config", "function"):
+            project.objects["main"].pop(key, None)
+
+    @staticmethod
     def init(project) -> None:
+        Code.destroy(project)
+        hideOtherLinks(project, project.selectFile)
+
         if f"{project.selectFile}-ai-responce" not in project.cache:
             project.cache[f"{project.selectFile}-ai-responce"] = {
                 "text": ""
@@ -1798,29 +1871,8 @@ class Code:
 
     @staticmethod
     def selected(project) -> None:
-        try:
-            project.objects["main"]["replacer_select"].deleteLater()
-
-        except AttributeError:
-            pass
-
-        except RuntimeError:
-            pass
-
-        except KeyError:
-            pass
-
-        try:
-            project.objects["main"]["replacer_pos"].deleteLater()
-
-        except AttributeError:
-            pass
-
-        except RuntimeError:
-            pass
-
-        except KeyError:
-            pass
+        for key in ("replacer_select", "replacer_pos"):
+            destroyWidgetLike(project.objects["main"].pop(key, None))
 
         if project.objects["main"]["replacer"].node is None:
             return
@@ -1864,89 +1916,55 @@ class Code:
 
             return
 
-        for node in list(project.objects["main"]["nodes"].values()):
-            for connector in list(node.connectors.values()):
-                if not connector or not hasattr(connector, "inputLeftText") or connector.inputLeftText is None:
-                    continue
-
-                try:
-                    if hasattr(connector.inputLeftText, "save"):
-                        connector.inputLeftText.save()
-
-                    if connector.inputLeftText:
-                        try:
-                            connector.inputLeftText.deleteLater()
-
-                        except RuntimeError:
-                            pass
-
-                    if connector.inputLeftRama:
-                        try:
-                            connector.inputLeftRama.deleteLater()
-
-                        except RuntimeError:
-                            pass
-
-                    if hasattr(connector, 'placeholderLabel') and connector.placeholderLabel:
-                        try:
-                            connector.placeholderLabel.deleteLater()
-
-                        except RuntimeError:
-                            pass
-
-                except Exception as e:
-                    continue
-
-            try:
-                node.hide()
-                node.deleteLater()
-
-            except (AttributeError, RuntimeError) as e:
-                continue
-
-        project.objects["main"]["nodes"] = {}
+        Code.clearNodes(project)
 
         for id, node in project.objects["main"]["function"]["objects"].items():
             project.objects["main"]["nodes"][node["id"]] = CodeNode(project, node)
-
 
     @staticmethod
     def menu(project, position) -> None:
         x = position.x()
         y = position.y()
 
-        project.objects["main"]["code_menu"] = QMenu()
+        # меню и экшены создаются локально, с родителем "code" (который
+        # реально уничтожается в Code.destroy), и с WA_DeleteOnClose,
+        # чтобы они не копились навсегда в project.objects["main"]
+        # (раньше QAction создавались с parent=project, который живёт
+        # всё время работы программы, и никогда не удалялись)
 
-        project.objects["main"]["code_menu_new_node"] = QAction(translate("Create"), project)
-        project.objects["main"]["code_menu_new_node"].triggered.connect(lambda: Code.createNode(project, position))
+        menu = QMenu(project.objects["main"]["code"])
+        menu.setAttribute(Qt.WA_DeleteOnClose)
 
-        project.objects["main"]["code_menu_copy_node"] = QAction(translate("Copy"), project)
-        project.objects["main"]["code_menu_copy_node"].triggered.connect(lambda: Code.copyNode(project, position))
+        newNodeAction = QAction(translate("Create"), menu)
+        newNodeAction.triggered.connect(lambda: Code.createNode(project, position))
 
-        project.objects["main"]["code_menu_paste_node"] = QAction(translate("Paste"), project)
-        project.objects["main"]["code_menu_paste_node"].triggered.connect(lambda: Code.pasteNode(project, position))
+        copyNodeAction = QAction(translate("Copy"), menu)
+        copyNodeAction.triggered.connect(lambda: Code.copyNode(project, position))
 
-        project.objects["main"]["code_menu_delete_node"] = QAction(translate("Delete"), project)
-        project.objects["main"]["code_menu_delete_node"].triggered.connect(lambda: Code.deleteNode(project, position))
+        pasteNodeAction = QAction(translate("Paste"), menu)
+        pasteNodeAction.triggered.connect(lambda: Code.pasteNode(project, position))
 
-        project.objects["main"]["code_menu"].addAction(project.objects["main"]["code_menu_new_node"])
-        project.objects["main"]["code_menu"].addSeparator()
-        project.objects["main"]["code_menu"].addAction(project.objects["main"]["code_menu_copy_node"])
-        project.objects["main"]["code_menu"].addAction(project.objects["main"]["code_menu_paste_node"])
-        project.objects["main"]["code_menu"].addSeparator()
-        project.objects["main"]["code_menu"].addAction(project.objects["main"]["code_menu_delete_node"])
+        deleteNodeAction = QAction(translate("Delete"), menu)
+        deleteNodeAction.triggered.connect(lambda: Code.deleteNode(project, position))
+
+        menu.addAction(newNodeAction)
+        menu.addSeparator()
+        menu.addAction(copyNodeAction)
+        menu.addAction(pasteNodeAction)
+        menu.addSeparator()
+        menu.addAction(deleteNodeAction)
 
         for id, node in project.objects["main"]["function"]["objects"].items():
             if node["x"] * CODE_GRID_CELL_SIZE < x + project.cache["file"][project.selectFile].x < (node["x"] + node["width"]) * CODE_GRID_CELL_SIZE and node["y"] * CODE_GRID_CELL_SIZE < y + project.cache["file"][project.selectFile].y < (node["y"] + node["height"]) * CODE_GRID_CELL_SIZE:
                 break
 
         else:
-            project.objects["main"]["code_menu_copy_node"].setDisabled(True)
-            project.objects["main"]["code_menu_delete_node"].setDisabled(True)
-
-        project.objects["main"]["code_menu"].popup(project.objects["main"]["code"].mapToGlobal(position))
+            copyNodeAction.setDisabled(True)
+            deleteNodeAction.setDisabled(True)
 
         project.objects["main"]["liner"].start = None
+
+        menu.popup(project.objects["main"]["code"].mapToGlobal(position))
 
     @staticmethod
     def createNode(project, position) -> None:
