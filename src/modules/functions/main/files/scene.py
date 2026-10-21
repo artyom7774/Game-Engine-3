@@ -178,6 +178,9 @@ class SceneLabel(QLabel):
         if self.draggingFunction is None:
             return
 
+        if self.pos.x == 0 and self.pos.y == 0:
+            return
+
         pos = Vec2f(*self.pos.get())
 
         self.pos.x = 0
@@ -216,12 +219,6 @@ class SceneLabel(QLabel):
             if self.draggingFunction is not None:
                 self.pos.x += x
                 self.pos.y += y
-
-            try:
-                Scene.update(self.project)
-
-            except RuntimeError:
-                pass
 
         self.updateCameraObject()
 
