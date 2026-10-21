@@ -31,13 +31,13 @@ class CreateSceneObjectFunctions:
             obj = json.load(file)
 
         position = [
-            position.x() - project.objects["main"]["scene"].width() // 2 + project.cache["file"][project.selectFile].camera.pos.x,
-            position.y() - project.objects["main"]["scene"].height() // 2 + project.cache["file"][project.selectFile].camera.pos.y
+            position.x() - project.objects["main"][project.selectFile]["scene"].width() // 2 + project.cache["file"][project.selectFile].camera.pos.x,
+            position.y() - project.objects["main"][project.selectFile]["scene"].height() // 2 + project.cache["file"][project.selectFile].camera.pos.y
         ]
 
-        if project.objects["main"]["scene_settings"]["Scene"]["snap"]["value"]:
-            width = project.objects["main"]["scene_settings"]["Scene"]["grid"]["value"]["x"]["value"]
-            height = project.objects["main"]["scene_settings"]["Scene"]["grid"]["value"]["y"]["value"]
+        if project.cache["file"][project.selectFile].sceneSettings["Scene"]["snap"]["value"]:
+            width = project.cache["file"][project.selectFile].sceneSettings["Scene"]["grid"]["value"]["x"]["value"]
+            height = project.cache["file"][project.selectFile].sceneSettings["Scene"]["grid"]["value"]["y"]["value"]
 
             position[0] = position[0] // width * width
             position[1] = position[1] // height * height

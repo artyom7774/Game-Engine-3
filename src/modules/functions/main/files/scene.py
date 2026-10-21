@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QTreeWidget, QPushButton, QWidget, QSpacerItem, QSizePolicy, QHBoxLayout, QLabel, QTreeWidgetItem, QCheckBox, QMenu, QAction
+from PyQt5.QtWidgets import QTreeWidget, QPushButton, QWidget, QSpacerItem, QSizePolicy, QHBoxLayout, QLabel, QTreeWidgetItem, QCheckBox, QMenu, QAction, QApplication
 from PyQt5.QtGui import QPixmap, QImage, QCursor, QPainter, QPen, QColor
 from PyQt5.Qt import Qt, QPoint
 
@@ -13,7 +13,7 @@ from src.modules.dialogs.tree.create_scene import SCENE_SETTINGS_TEMPLATE
 
 from src.modules.functions.main.files.objects.object import Object as ObjectTypingClass
 
-from src.modules.functions.main.files.utils import hideOtherLinks, destroyLink
+from src.modules.functions.main.files.utils import hideOtherLinks, destroyLink, destroyWidgetLike
 
 from src.modules.widgets import FocusLineEdit, FocusComboBox
 
@@ -296,6 +296,8 @@ class SceneAdditions:
                 self.value.saveAllValues = lambda: ObjectText.function(self.value, project, save, temp, path, init=False)
 
             elif temp["type"] == "dict":
+                project.objects["main"].setdefault("object_tree_objects", {})
+
                 project.objects["main"]["object_tree_objects"][path] = QTreeWidgetItem(project.objects["main"]["object_tree_objects"][path[:path.rfind("/")]])
                 project.objects["main"]["object_tree_objects"][path].setText(0, translate(name))
                 project.objects["main"]["object_tree_objects"][path].setExpanded(True)
@@ -414,7 +416,6 @@ class SceneAdditions:
         link = project.objects["main"][project.selectFile]
 
         link["settings"] = QTreeWidget(project)
-        link["settings"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 40, Size.x(16), Size.y(100) - 70)
         link["settings"].setHeaderHidden(True)
         link["settings"].header().setFont(FONT)
         link["settings"].hide()
@@ -422,8 +423,44 @@ class SceneAdditions:
         link["to_scene_settings_button"] = QPushButton(project)
         link["to_scene_settings_button"].clicked.connect(lambda: Scene.objectReleased(project))
         link["to_scene_settings_button"].setText(translate("Open scene settings"))
-        link["to_scene_settings_button"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 60 + project.height() - 115, Size.x(16), 23)
         link["to_scene_settings_button"].hide()
+
+        SceneAdditions.updateGeometry(project)
+
+    @staticmethod
+    def updateGeometry(project) -> None:
+        link = project.objects["main"][project.selectFile]
+
+        link["settings"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 40, Size.x(16), Size.y(100) - 70)
+        link["to_scene_settings_button"].setGeometry(10 + 10 + Size.x(16) + Size.x(68) - 40 + 10, 60 + project.height() - 115, Size.x(16), 23)
+
+    @staticmethod
+    def destroy(project) -> None:
+        objectTree = project.objects["main"].pop("object_tree", None)
+
+        destroyWidgetLike(objectTree)
+
+        objectTreeObjects = project.objects["main"].pop("object_tree_objects", {})
+
+        for item in objectTreeObjects.values():
+            try:
+                parent = item.parent()
+
+                if parent is not None:
+                    parent.removeChild(item)
+
+            except BaseException:
+                pass
+
+        project.objects["main"]["object_tree_objects"] = {}
+
+        objectElements = project.objects["main"].pop("object_elements", None)
+
+        if objectElements is not None:
+            for element in objectElements:
+                destroyWidgetLike(element)
+
+        QApplication.processEvents()
 
     @staticmethod
     def init(project) -> None:
@@ -432,12 +469,10 @@ class SceneAdditions:
         if "settings" not in link:
             SceneAdditions.initialization(project)
 
-        try:
-            project.objects["main"]["object_tree"].hide()
-            project.objects["main"]["object_tree"].deleteLater()
+        else:
+            SceneAdditions.updateGeometry(project)
 
-        except BaseException:
-            pass
+        SceneAdditions.destroy(project)
 
         if project.cache["file"][project.selectFile].selectObject is not None and project.cache["file"][project.selectFile].selectObject.variables.get("code", None) is not None:
             code = project.cache["file"][project.selectFile].selectObject.variables["code"]
@@ -475,6 +510,98 @@ class SceneAdditions:
 
             link["settings"].show()
             link["to_scene_settings_button"].hide()
+
+    @staticmethod
+    def collectWidgets(project) -> list:
+        link = project.objects["main"][project.selectFile]
+
+        widgets = []
+
+        elements = project.objects["main"].get("object_elements", None)
+
+        if elements:
+            for element in elements:
+                if element is not None:
+                    widgets.append(element)
+
+        if "settings" in link and link["settings"] is not None:
+            widgets.append(link["settings"])
+
+        if "to_scene_settings_button" in link and link["to_scene_settings_button"] is not None:
+            widgets.append(link["to_scene_settings_button"])
+
+        objectTreeObjects = project.objects["main"].get("object_tree_objects", {})
+
+        objectTree = project.objects["main"].get("object_tree", None)
+
+        if objectTree is not None:
+            widgets.append(objectTree)
+
+        return widgets
+
+    @staticmethod
+    def move(project) -> None:
+        link = project.objects["main"][project.selectFile]
+
+        widgets = SceneAdditions.collectWidgets(project)
+
+        project.setUpdatesEnabled(False)
+
+        for widget in widgets:
+            try:
+                widget.setUpdatesEnabled(False)
+
+            except RuntimeError:
+                pass
+
+        try:
+            SceneAdditions.updateGeometry(project)
+
+            if project.cache["file"][project.selectFile].selectObject is not None and project.cache["file"][project.selectFile].selectObject.variables.get("code", None) is not None:
+                ObjectTypingClass.move(
+                    project,
+                    (
+                        project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
+                        40,
+                        project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
+                        (project.height() - 110) // 2
+                    ), bottom=Vec4i(
+                        project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10,
+                        40 + 10 + (project.height() - 110) // 2,
+                        project.width() - (project.objects["center_rama"].x() + project.objects["center_rama"].width() + 10) - 10,
+                        (project.height() - 110) // 2
+                    )
+                )
+
+            else:
+                ObjectTypingClass.move(
+                    project,
+                    (
+                        link["settings"].x(),
+                        link["settings"].y(),
+                        link["settings"].width(),
+                        link["settings"].height()
+                    )
+                )
+
+        finally:
+            for widget in widgets:
+                try:
+                    widget.setUpdatesEnabled(True)
+
+                except RuntimeError:
+                    pass
+
+            project.setUpdatesEnabled(True)
+
+            for widget in widgets:
+                try:
+                    widget.update()
+
+                except RuntimeError:
+                    pass
+
+            project.update()
 
 
 class Scene:
@@ -515,6 +642,8 @@ class Scene:
         Scene.open = project.selectFile
 
         hideOtherLinks(project, project.selectFile)
+
+        SceneAdditions.destroy(project)
 
         project.cache["file"][project.selectFile].settings = f"{PATH_TO_PROJECTS}/{project.selectProject}/project/cache/{'-'.join(project.selectFile.split('/')[3:][project.selectFile.split('/')[3:].index('scenes'):])}-setting.json"
 
@@ -564,6 +693,49 @@ class Scene:
         Scene.update(project)
 
         SceneAdditions.init(project)
+
+    @staticmethod
+    def resize(project) -> None:
+        if project.selectFile not in project.objects["main"]:
+            return
+
+        if project.selectFile not in project.application:
+            return
+
+        link = project.objects["main"][project.selectFile]
+
+        widgets = SceneAdditions.collectWidgets(project)
+
+        project.setUpdatesEnabled(False)
+
+        for widget in widgets:
+            try:
+                widget.setUpdatesEnabled(False)
+
+            except RuntimeError:
+                pass
+
+        try:
+            link["scene"].setGeometry(
+                project.objects["center_rama"].x() + 2,
+                project.objects["center_rama"].y() + 2,
+                project.objects["center_rama"].width() - 4,
+                project.objects["center_rama"].height() - 4
+            )
+
+            SceneAdditions.move(project)
+
+        finally:
+            for widget in widgets:
+                try:
+                    widget.setUpdatesEnabled(True)
+
+                except RuntimeError:
+                    pass
+
+            project.setUpdatesEnabled(True)
+
+        Scene.update(project, "auto")
 
     @staticmethod
     def objects(project, onlyToUpdate: typing.List[str] = None) -> None:
