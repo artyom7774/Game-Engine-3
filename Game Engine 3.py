@@ -12,6 +12,9 @@ import sys
 
 
 def main() -> None:
+    with open(f"{SAVE_APPDATA_DIR}/Game-Engine-3/logs/log.txt", "w", encoding="utf-8"):
+        pass
+
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s.%(msecs)03d [%(levelname)s] [%(module)s.%(funcName)s:%(lineno)d] %(message)s",

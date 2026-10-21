@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QVBoxLayout, QHeaderView, QLabel
+from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QVBoxLayout, QHeaderView, QAbstractItemView
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFontMetrics, QPixmap, QPainter, QPen, QColor
+from PyQt5.QtGui import QFontMetrics
 
 from engine.functions.loads import loadCollisionFile
 
@@ -9,86 +9,99 @@ from src.variables import *
 import typing
 
 
+CELL_SIZE = 40
+CHECKBOX_SIZE = 24
+
+
 class CollisionTable(QTableWidget):
     def __init__(self, parent, groups: typing.List[str], function: typing.Callable) -> None:
         QTableWidget.__init__(self, len(groups), len(groups), parent)
 
         self.project = parent
+        self.function = function
+        self.groups = groups
 
-        var = loadCollisionFile(self.project.selectFile)
-
-        collisions = {}
-
-        for key, value in var.items():
-            collisions[key] = list(value.keys())
+        self.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.setSelectionMode(QAbstractItemView.NoSelection)
 
         self.setHorizontalHeaderLabels(groups)
         self.setVerticalHeaderLabels(groups)
 
-        header = self.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.Fixed)
+        horizontal_header = self.horizontalHeader()
+        horizontal_header.setSectionResizeMode(QHeaderView.Fixed)
 
-        self.widths = {}
+        vertical_header = self.verticalHeader()
+        vertical_header.setSectionResizeMode(QHeaderView.Fixed)
+        vertical_header.setDefaultSectionSize(CELL_SIZE)
 
         metrics = QFontMetrics(self.font())
 
-        width = 0
+        width = max((metrics.width(group) for group in groups), default=0) + 40
 
-        for col, group in enumerate(groups):
-            width = max(width, metrics.width(group) + 40)
-
-        for col, group in enumerate(groups):
+        for col in range(len(groups)):
             self.setColumnWidth(col, width)
 
-            self.widths[str(col)] = width
+        self.checkboxes = {}
 
-        for row in range(len(groups)):
-            for col in range(len(groups)):
-                check = QCheckBox()
+        collisions = CollisionTable._loadCollisions(self.project.selectFile)
 
-                check.setChecked(groups[row] in collisions and groups[col] in collisions[groups[row]])
-
-                check.stateChanged.connect(lambda state="", empty=None, x=row, y=col: function(self.project, x, y, 0 if state == 0 else 1))
-
-                check.setMinimumSize(24, 24)
-                check.setMaximumSize(24, 24)
-
-                widget = QWidget()
-
-                layout = QVBoxLayout()
-
-                if row == col and False:
-                    cross = QLabel()
-                    cross.setPixmap(CollisionTable.createСrossPixMap(self.widths[str(col)] - 1, 40 - 1))
-
-                    layout.addWidget(cross)
-
-                else:
-                    layout.addWidget(check)
-
-                layout.setAlignment(Qt.AlignCenter)
-                layout.setContentsMargins(0, 0, 0, 0)
-
-                widget.setLayout(layout)
-
-                self.setCellWidget(row, col, widget)
-
-                self.setItem(row, col, QTableWidgetItem())
+        for row, row_group in enumerate(groups):
+            for col, col_group in enumerate(groups):
+                self._createCell(row, col, row_group, col_group, collisions)
 
         self.setStyleSheet(f"background-color: #{'202124' if SETTINGS['theme'] == 'dark' else 'f8f9fa'};")
 
     @staticmethod
-    def createСrossPixMap(width: int, height: int) -> QPixmap:
-        pixmap = QPixmap(width, height)
-        pixmap.fill(QColor(f"#{'202124' if SETTINGS['theme'] == 'dark' else 'f8f9fa'}"))
+    def _loadCollisions(path: str) -> dict:
+        var = loadCollisionFile(path)
 
-        # painter = QPainter(pixmap)
-        # pen = QPen(QColor("#3f4042"), 1)
-        # painter.setPen(pen)
+        collisions = {}
 
-        # painter.drawLine(-2, 0, width + 3, height)
-        # painter.drawLine(width, 0, -5, height)
+        for key, value in var.items():
+            collisions[key] = set(value.keys())
 
-        # painter.end()
+        return collisions
 
-        return pixmap
+    @staticmethod
+    def _isColliding(first: str, second: str, collisions: dict) -> bool:
+        return (first in collisions and second in collisions[first]) or (second in collisions and first in collisions[second])
+
+    def _createCell(self, row: int, col: int, row_group: str, col_group: str, collisions: dict) -> None:
+        check = QCheckBox()
+
+        check.setChecked(self._isColliding(row_group, col_group, collisions))
+
+        check.setMinimumSize(CHECKBOX_SIZE, CHECKBOX_SIZE)
+        check.setMaximumSize(CHECKBOX_SIZE, CHECKBOX_SIZE)
+
+        check.clicked.connect(lambda checked, x=row, y=col: self._onToggle(x, y, checked))
+
+        self.checkboxes[(row, col)] = check
+
+        widget = QWidget()
+
+        layout = QVBoxLayout()
+        layout.addWidget(check)
+        layout.setAlignment(Qt.AlignCenter)
+        layout.setContentsMargins(0, 0, 0, 0)
+
+        widget.setLayout(layout)
+
+        self.setCellWidget(row, col, widget)
+
+        item = QTableWidgetItem()
+        item.setFlags(Qt.NoItemFlags)
+
+        self.setItem(row, col, item)
+
+    def _onToggle(self, row: int, col: int, checked: bool) -> None:
+        self.function(self.project, row, col, checked)
+
+        mirror = self.checkboxes.get((col, row))
+
+        if mirror is not None and mirror is not self.checkboxes[(row, col)]:
+            mirror.blockSignals(True)
+
+            mirror.setChecked(checked)
+
+            mirror.blockSignals(False)

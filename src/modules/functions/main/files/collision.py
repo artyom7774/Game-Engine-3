@@ -1,15 +1,15 @@
-from PyQt5.QtWidgets import QTreeWidget, QPushButton, QHeaderView, QAbstractItemView, QWidget
-from PyQt5.Qt import QPixmap, Qt
+from PyQt5.QtWidgets import QTreeWidget, QPushButton, QHeaderView, QAbstractItemView
+from PyQt5.Qt import QPixmap
 
 from src.modules.widgets.collisionTable import CollisionTable
 from src.modules.widgets import FocusLineEdit
+
+from src.modules.functions.main.files.utils import hideOtherLinks, destroyLink
 
 from src.modules.functions.project import *
 
 from src.variables import *
 
-
-# TODO переделать это в виджет
 
 class CollisionAdditions:
     style = f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'};"
@@ -27,43 +27,38 @@ class CollisionAdditions:
         header.setSectionResizeMode(1, QHeaderView.Fixed)
         header.setMinimumSectionSize(24)
 
-        # header.setDefaultAlignment(Qt.AlignCenter)
-
         self.create.setSelectionMode(QAbstractItemView.NoSelection)
-
         self.create.setRootIsDecorated(False)
 
         self.objects = {}
 
         for name in self.project.link["adds"]:
-            item = QTreeWidgetItem()
-
-            self.create.addTopLevelItem(item)
-
-            self.objects[f"element_{name}"] = FocusLineEdit(releasedFocusFunction=lambda empty=None, n=name: self.rename(n))
-            self.objects[f"element_{name}"].setText(name)
-            self.objects[f"element_{name}"].setStyleSheet(f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}")
-
-            self.create.setItemWidget(item, 0, self.objects[f"element_{name}"])
-
-            self.objects[f"remove_{name}"] = QPushButton()
-
-            if SETTINGS["theme"] == "dark":
-                self.objects[f"remove_{name}"].setIcon(QIcon(QPixmap("src/files/sprites/remove.png")))
-
-            else:
-                self.objects[f"remove_{name}"].setIcon(QIcon(QPixmap("src/files/sprites/remove-light.png")))
-
-            # self.objects[f"remove_{name}"].setIconSize(QSize(16, 16))
-
-            self.objects[f"remove_{name}"].released.connect(lambda empty=None, n=name: self.remove(n))
-            self.objects[f"remove_{name}"].setStyleSheet(f"background-color: rgba(0, 0, 0, 0); border: 1px solid #{'3f4042' if SETTINGS['theme'] == 'dark' else 'dadce0'}")
-
-            self.create.setItemWidget(item, 1, self.objects[f"remove_{name}"])
+            self._createItem(name)
 
         self.objects["plus"] = QPushButton(self.create)
         self.objects["plus"].setText(translate("Create object group"))
         self.objects["plus"].clicked.connect(lambda: self.plus())
+
+    def _createItem(self, name: str) -> None:
+        item = QTreeWidgetItem()
+
+        self.create.addTopLevelItem(item)
+
+        self.objects[f"element_{name}"] = FocusLineEdit(releasedFocusFunction=lambda empty=None, n=name: self.rename(n))
+        self.objects[f"element_{name}"].setText(name)
+        self.objects[f"element_{name}"].setStyleSheet(self.style)
+
+        self.create.setItemWidget(item, 0, self.objects[f"element_{name}"])
+
+        self.objects[f"remove_{name}"] = QPushButton()
+
+        icon_name = "remove.png" if SETTINGS["theme"] == "dark" else "remove-light.png"
+        self.objects[f"remove_{name}"].setIcon(QIcon(QPixmap(f"src/files/sprites/{icon_name}")))
+
+        self.objects[f"remove_{name}"].released.connect(lambda empty=None, n=name: self.remove(n))
+        self.objects[f"remove_{name}"].setStyleSheet(self.style)
+
+        self.create.setItemWidget(item, 1, self.objects[f"remove_{name}"])
 
     def setGeometry(self) -> None:
         self.create.setGeometry(
@@ -78,30 +73,44 @@ class CollisionAdditions:
 
         self.objects["plus"].setGeometry(6, self.create.height() - 30, self.create.width() - 12, 25)
 
-    def show(self):
+    def show(self) -> None:
         self.create.show()
 
-        for obj in self.objects:
-            if hasattr(obj, "show"):
-                obj.show()
+        for obj in self.objects.values():
+            obj.show()
 
-    def hide(self):
+    def hide(self) -> None:
         self.create.hide()
 
-        for obj in self.objects:
-            if hasattr(obj, "hide"):
-                obj.hide()
+        for obj in self.objects.values():
+            obj.hide()
+
+    def destroy(self) -> None:
+        """Скрывает и удаляет всё дерево и его дочерние виджеты."""
+
+        self.hide()
+
+        for obj in self.objects.values():
+            obj.deleteLater()
+
+        self.objects.clear()
+
+        self.create.deleteLater()
 
     def rename(self, name: str) -> None:
-        if len(self.objects[f"element_{name}"].text().split()) > 1:
+        new_name = self.objects[f"element_{name}"].text().strip()
+
+        if not new_name or len(new_name.split()) > 1 or new_name in self.project.link["adds"]:
+            self.objects[f"element_{name}"].setText(name)
+
             return
 
-        if self.objects[f"element_{name}"].text() in self.project.link["adds"]:
+        if new_name == name:
             return
 
-        self.project.link["adds"].insert(self.project.link["adds"].index(name), self.objects[f"element_{name}"].text())
+        self.project.link["adds"][self.project.link["adds"].index(name)] = new_name
 
-        self.remove(name)
+        self.save()
 
     def remove(self, name: str) -> None:
         if name in self.project.link["adds"]:
@@ -130,15 +139,30 @@ class CollisionAdditions:
 
         config = f"$[{', '.join([symbol + element + symbol for element in self.project.link['adds']])}]$" + "\n" + "\n".join(config)
 
-        # print(config)
-
         with open(self.project.selectFile, "w", encoding="utf-8") as file:
             file.write(config)
+
+        # ВАЖНО: перед тем как выкинуть ссылку на старые виджеты из кэша,
+        # полностью скрываем и уничтожаем их (иначе они остаются
+        # видимыми "сиротами" поверх/рядом с новыми)
+        Collision.destroy(self.project, self.project.selectFile)
 
         self.project.init()
 
 
 class Collision:
+    @staticmethod
+    def destroy(project, file: str = None) -> None:
+        """Полностью скрывает и удаляет виджеты, относящиеся к указанному файлу
+        (по умолчанию - к текущему project.selectFile), и убирает запись из кэша."""
+
+        file = file or project.selectFile
+
+        link = project.objects["main"].pop(file, None)
+
+        if link is not None:
+            destroyLink(link)
+
     @staticmethod
     def initialization(project) -> None:
         project.objects["main"][project.selectFile] = {}
@@ -146,11 +170,11 @@ class Collision:
         project.link = project.objects["main"][project.selectFile]
 
         with open(project.selectFile, "r", encoding="utf-8") as file:
-            text = file.read().split("\n")[0].replace("$", "").replace("$", "")
+            text = file.read().split("\n")[0].replace("$", "")
 
         project.link["adds"] = eval(text)
 
-        project.link["groups"] = project.link["adds"]
+        project.link["groups"] = list(project.link["adds"])  # независимая копия, а не alias
 
         for path in getAllProjectObjects(project, onlyFileName=False) + getAllProjectInterface(project, onlyFileName=False):
             with open(path, "r", encoding="utf-8") as file:
@@ -180,6 +204,10 @@ class Collision:
 
     @staticmethod
     def init(project) -> None:
+        # прячем виджеты всех остальных открытых файлов, чтобы они
+        # не оставались видимыми при переключении на этот файл
+        hideOtherLinks(project, project.selectFile)
+
         if project.selectFile not in project.objects["main"]:
             Collision.initialization(project)
 

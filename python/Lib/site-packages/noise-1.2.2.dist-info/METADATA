@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: noise
+Version: 1.2.2
+Summary: Perlin noise for Python
+Home-page: https://github.com/caseman/noise
+Author: Casey Duncan
+Author-email: casey.duncan@gmail.com
+Classifier: Development Status :: 4 - Beta
+Classifier: Topic :: Multimedia :: Graphics
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: C
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+License-File: LICENSE.txt
+
+Perlin noise is ubiquitous in modern CGI. Used for procedural texturing,
+animation, and enhancing realism, Perlin noise has been called the "salt" of
+procedural content. Perlin noise is a type of gradient noise, smoothly
+interpolating across a pseudo-random matrix of values.
+
+The noise library includes native-code implementations of Perlin "improved"
+noise and Perlin simplex noise. It also includes a fast implementation of
+Perlin noise in GLSL, for use in OpenGL shaders. The shader code and many of
+the included examples require Pyglet (http://www.pyglet.org), the native-code
+noise functions themselves do not, however.
+
+The Perlin improved noise functions can also generate fBm (fractal Brownian
+motion) noise by combining multiple octaves of Perlin noise. Shader functions
+for convenient generation of turbulent noise are also included.
+
+- 1.2.2 AppVeyor support for Windows builds (Thanks to Federico Tomassetti)
+
+- 1.2.1 Fixes MSVC compatibility (Thanks to Christoph Gohlke)
+
+- 1.2.0 adds 4D simplex noise, tiling for 2D simplex noise, 
+  and parameterized lacunarity
+
+See CHANGES.txt for more details

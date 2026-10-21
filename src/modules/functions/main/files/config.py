@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QLabel, QCheckBox, QFileDialog, QPushButton, QDialog
 from PyQt5 import QtWidgets, QtCore
 
 from src.modules.functions.main.files.code import CodeAdditionsVarsType as ConfigAdditionsVarsType
+from src.modules.functions.main.files.utils import hideOtherLinks, destroyLink
 
 from src.modules.widgets import FocusLineEdit
 
@@ -186,6 +187,18 @@ class Config:
         return answer
 
     @staticmethod
+    def destroy(project, file: str = None) -> None:
+        """Полностью скрывает и удаляет виджеты, относящиеся к указанному файлу
+        (по умолчанию - к текущему project.selectFile), и убирает запись из кэша."""
+
+        file = file or project.selectFile
+
+        link = project.objects["main"].pop(file, None)
+
+        if link is not None:
+            destroyLink(link)
+
+    @staticmethod
     def initialization(project) -> None:
         project.objects["main"][project.selectFile] = {}
 
@@ -250,6 +263,10 @@ class Config:
 
     @staticmethod
     def init(project) -> None:
+        # прячем виджеты всех остальных открытых файлов, чтобы они
+        # не оставались видимыми при переключении на этот файл
+        hideOtherLinks(project, project.selectFile)
+
         if project.selectFile not in project.objects["main"]:
             Config.initialization(project)
 

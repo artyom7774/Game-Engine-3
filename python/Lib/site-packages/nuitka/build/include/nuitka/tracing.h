@@ -1,0 +1,82 @@
+//     Copyright 2025, Kay Hayen, mailto:kay.hayen@gmail.com find license text at end of file
+
+#ifndef __NUITKA_TRACING_H__
+#define __NUITKA_TRACING_H__
+
+/* Stupid tracing, intended to help where debugging is not an option
+ * and to give kind of progress record of startup and the running of
+ * the program.
+ */
+
+#ifdef _NUITKA_TRACE
+
+#define NUITKA_PRINT_TRACE(value)                                                                                      \
+    {                                                                                                                  \
+        puts(value);                                                                                                   \
+        fflush(stdout);                                                                                                \
+    }
+#define NUITKA_PRINTF_TRACE(...)                                                                                       \
+    {                                                                                                                  \
+        printf(__VA_ARGS__);                                                                                           \
+        fflush(stdout);                                                                                                \
+    }
+
+#else
+#define NUITKA_PRINT_TRACE(value)
+#define NUITKA_PRINTF_TRACE(...)
+
+#endif
+
+#if defined(_NUITKA_EXPERIMENTAL_SHOW_STARTUP_TIME)
+
+#if defined(_WIN32)
+
+#include <windows.h>
+static void inline PRINT_TIME_STAMP(void) {
+    SYSTEMTIME t;
+    GetSystemTime(&t); // or GetLocalTime(&t)
+    printf("%02d:%02d:%02d.%03d:", t.wHour, t.wMinute, t.wSecond, t.wMilliseconds);
+}
+#else
+static void inline PRINT_TIME_STAMP(void) {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+
+    time_t now_time = tv.tv_sec;
+    struct tm *now_tm = localtime(&now_time);
+
+    char tm_buf[64];
+    strftime(tm_buf, sizeof(tm_buf), "%Y-%m-%d %H:%M:%S", now_tm);
+    printf("%s.%03ld ", tm_buf, tv.tv_usec / 1000);
+}
+#endif
+
+#define NUITKA_PRINT_TIMING(value)                                                                                     \
+    {                                                                                                                  \
+        PRINT_TIME_STAMP();                                                                                            \
+        puts(value);                                                                                                   \
+        fflush(stdout);                                                                                                \
+    }
+
+#else
+
+#define NUITKA_PRINT_TIMING(value) NUITKA_PRINT_TRACE(value)
+
+#endif
+
+#endif
+
+//     Part of "Nuitka", an optimizing Python compiler that is compatible and
+//     integrates with CPython, but also works on its own.
+//
+//     Licensed under the GNU Affero General Public License, Version 3 (the "License");
+//     you may not use this file except in compliance with the License.
+//     You may obtain a copy of the License at
+//
+//        http://www.gnu.org/licenses/agpl.txt
+//
+//     Unless required by applicable law or agreed to in writing, software
+//     distributed under the License is distributed on an "AS IS" BASIS,
+//     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//     See the License for the specific language governing permissions and
+//     limitations under the License.
