@@ -163,7 +163,7 @@ class Main(QMainWindow):
 
                 logging.info(f"last version = {lastVersion}, now version = {nowVersion}")
 
-                if lastVersion[0] <= nowVersion[0] and lastVersion[2] <= nowVersion[2] and lastVersion[4] < nowVersion[4]:
+                if lastVersion > nowVersion:
                     msg = QMessageBox()
                     msg.setWindowTitle(f"{translate('Update')} {nowVersion} -> {lastVersion}")
                     msg.setText(translate("A new version of the project has been released. Please update the product"))
