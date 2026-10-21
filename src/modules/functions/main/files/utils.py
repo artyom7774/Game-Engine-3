@@ -1,56 +1,6 @@
 from PyQt5.QtWidgets import QWidget
+from PyQt5.QtCore import QTimer
 
-
-def hideWidgetLike(obj) -> None:
-    """Скрывает любой объект, похожий на виджет: как обычный QWidget,
-    так и кастомные обёртки (CollisionAdditions, ConfigAdditionsVarsType и т.п.),
-    которые хранят внутри себя .create / .objects."""
-
-    if obj is None:
-        return
-
-    if isinstance(obj, QWidget):
-        obj.hide()
-        return
-
-    if hasattr(obj, "hide") and callable(obj.hide):
-        try:
-            obj.hide()
-
-        except Exception:
-            pass
-
-    if hasattr(obj, "create") and isinstance(obj.create, QWidget):
-        obj.create.hide()
-
-    if hasattr(obj, "objects") and isinstance(obj.objects, dict):
-        for value in obj.objects.values():
-            hideWidgetLike(value)
-
-
-def destroyWidgetLike(obj) -> None:
-    """Скрывает и планирует удаление (deleteLater) любого виджетоподобного объекта."""
-
-    if obj is None:
-        return
-
-    hideWidgetLike(obj)
-
-    if isinstance(obj, QWidget):
-        obj.deleteLater()
-        return
-
-    if hasattr(obj, "create") and isinstance(obj.create, QWidget):
-        obj.create.deleteLater()
-
-    if hasattr(obj, "objects") and isinstance(obj.objects, dict):
-        for value in obj.objects.values():
-            destroyWidgetLike(value)
-
-
-def hideLink(link: dict) -> None:
-    for value in (link or {}).values():
-        hideWidgetLike(value)
 
 
 def destroyLink(link: dict) -> None:
@@ -58,13 +8,117 @@ def destroyLink(link: dict) -> None:
         destroyWidgetLike(value)
 
 
-def hideOtherLinks(project, currentFile) -> None:
-    """Прячет виджеты всех остальных открытых файлов, чтобы при
-    переключении между вкладками/файлами старая графика не оставалась
-    на экране поверх новой."""
+def hideWidgetLike(obj):
+    if obj is None:
+        return
 
-    for file, link in project.objects.get("main", {}).items():
-        if file == currentFile:
+    try:
+        if isinstance(obj, dict):
+            for value in obj.values():
+                hideWidgetLike(value)
+
+            return
+
+        if isinstance(obj, (list, tuple, set)):
+            for value in obj:
+                hideWidgetLike(value)
+
+            return
+
+        if isinstance(obj, QTimer):
+            obj.stop()
+
+            return
+
+        if hasattr(obj, "objects"):
+            try:
+                hideWidgetLike(obj.objects)
+
+            except Exception:
+                pass
+
+        if hasattr(obj, "create"):
+            try:
+                hideWidgetLike(obj.create)
+
+            except Exception:
+                pass
+
+        if isinstance(obj, QWidget):
+            obj.hide()
+
+    except RuntimeError:
+        pass
+
+    except Exception:
+        pass
+
+
+def destroyWidgetLike(obj):
+    if obj is None:
+        return
+
+    try:
+        hideWidgetLike(obj)
+
+    except Exception:
+        pass
+
+    try:
+        if isinstance(obj, dict):
+            for value in list(obj.values()):
+                destroyWidgetLike(value)
+
+            obj.clear()
+
+            return
+
+        if isinstance(obj, (list, tuple, set)):
+            for value in obj:
+                destroyWidgetLike(value)
+
+            return
+
+        if hasattr(obj, "objects"):
+            try:
+                destroyWidgetLike(obj.objects)
+
+            except Exception:
+                pass
+
+        if hasattr(obj, "create"):
+            try:
+                destroyWidgetLike(obj.create)
+
+            except Exception:
+                pass
+
+        if isinstance(obj, (QWidget, QTimer)):
+            obj.deleteLater()
+
+    except RuntimeError:
+        pass
+
+    except Exception:
+        pass
+
+
+def hideOtherLinks(project, currentFile):
+    main = project.objects.get("main", {})
+
+    for key, link in list(main.items()):
+        if key == currentFile:
             continue
 
-        hideLink(link)
+        hideWidgetLike(link)
+
+
+def destroyFileLink(project, file=None):
+    if file is None:
+        file = project.selectFile
+
+    main = project.objects.get("main", {})
+    link = main.pop(file, None)
+
+    if link is not None:
+        destroyWidgetLike(link)
