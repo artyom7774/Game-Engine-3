@@ -98,7 +98,7 @@ class ConfigButtonStartSceneFunctions:
 
         config["values"]["start_scene"]["value"] = scene
 
-        Config._atomicDump(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", config)
+        Config.dump(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", config)
 
         project.init()
 
@@ -165,7 +165,7 @@ class ConfigButtonStartScene(QDialog):
 
 class Config:
     @staticmethod
-    def _atomicDump(path: str, data: dict) -> None:
+    def dump(path: str, data: dict) -> None:
         directory = os.path.dirname(path) or "."
 
         fd, tmp_path = tempfile.mkstemp(dir=directory, suffix=".tmp")
@@ -199,7 +199,7 @@ class Config:
         else:
             config["values"]["start_scene"]["value"] = ""
 
-        Config._atomicDump(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", config)
+        Config.dump(f"{PATH_TO_PROJECTS}/{project.selectProject}/project/project.cfg", config)
 
     @staticmethod
     def get(file: dict) -> dict:
@@ -371,7 +371,7 @@ class Config:
         config["values"][key] = value
 
         try:
-            Config._atomicDump(name, config)
+            Config.dump(name, config)
 
         except PermissionError:
             pass
