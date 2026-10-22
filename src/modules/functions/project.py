@@ -379,106 +379,112 @@ def SaveAllObjectsValues(project) -> None:
             pass
 
 
-def centerMenuInit(project, update: bool = False) -> None:
-    if "main" not in project.objects:
-        project.objects["main"] = {}
+def centerMenuHide(project) -> None:
+    for group in list(project.objects["main"].keys()):
+        value = project.objects["main"].get(group)
 
-    try:
-        for group in project.objects["main"]:
-            if "main" in project.objects and "object_variables" in project.objects["main"]:
-                try:
-                    project.objects["main"][group]["object_variables"].hide()
+        if value is None:
+            continue
 
-                except RuntimeError:
-                    pass
-
-            if "main" in project.objects and "variables" in project.objects["main"]:
-                for element in project.objects["main"][group]["variables"].values():
+        if isinstance(value, dict):
+            try:
+                if "object_variables" in value:
                     try:
-                        element.hide()
+                        value["object_variables"].hide()
 
                     except RuntimeError:
                         pass
 
-            for element in list(project.objects["main"][group].values()):
+                if "variables" in value and isinstance(value["variables"], dict):
+                    for element in list(value["variables"].values()):
+                        try:
+                            element.hide()
+
+                        except RuntimeError:
+                            pass
+
+                for element in list(value.values()):
+                    try:
+                        element.hide()
+
+                    except BaseException:
+                        pass
+
+            except BaseException:
+                pass
+
+        elif isinstance(value, (list, tuple)):
+            for element in value:
                 try:
                     element.hide()
 
                 except BaseException:
                     pass
 
-    except BaseException:
-        pass
-
-    # if "main" in project.objects and "code" in project.objects["main"]:
-    #     project.objects["main"]["code"].hide()
-    #
-    #     project.objects["main"]["code"].deleteLater()
-
-    if project.selectFile != "" or update:
-        try:
-            SaveAllObjectsValues(project)
-
-        except BaseException:
-            pass
-
-        """
-        for key, value in project.objects["main"].items():
-            if key.find("timer") != -1:
-                try:
-                    value.stop()
-
-                except BaseException:
-                    pass
-
+        else:
             try:
-                value.deleteLater()
+                value.hide()
 
             except BaseException:
                 pass
-        """
 
-        if os.path.isdir(project.selectFile) and project.selectFile.find("%scene%") != -1:
-            if project.selectFile not in project.cache["file"]:
-                project.cache["file"][project.selectFile] = functions.main.files.SceneHash()
 
-        if project.selectFile.endswith(".func"):
-            if project.selectFile not in project.cache["file"]:
-                project.cache["file"][project.selectFile] = functions.main.files.CodeHash()
+def centerMenuInit(project, update: bool = False) -> None:
+    if "main" not in project.objects:
+        project.objects["main"] = {}
 
-        # TESTS
+    centerMenuHide(project)
 
-        functions.main.files.Config.test(project)
-        functions.main.files.Scene.test(project)
+    if project.selectFile == "" and not update:
+        return
 
-        # OPEN
+    try:
+        SaveAllObjectsValues(project)
 
-        if project.selectFile.endswith(".cfg") and not project.selectFile.endswith("collision.cfg"):
-            functions.main.files.Config.init(project)
+    except BaseException:
+        pass
 
-        elif project.selectFile.endswith("collision.cfg"):
-            functions.main.files.Collision.init(project)
+    if os.path.isdir(project.selectFile) and project.selectFile.find("%scene%") != -1:
+        if project.selectFile not in project.cache["file"]:
+            project.cache["file"][project.selectFile] = functions.main.files.SceneHash()
 
-        elif project.selectFile.endswith(".obj") or project.selectFile.endswith(".objc"):
-            functions.main.files.Object.init(project)
+    if project.selectFile.endswith(".func"):
+        if project.selectFile not in project.cache["file"]:
+            project.cache["file"][project.selectFile] = functions.main.files.CodeHash()
 
-        elif project.selectFile.endswith(".text") or project.selectFile.endswith(".textc"):
-            functions.main.files.ObjectText.init(project)
+    # TESTS
 
-        elif project.selectFile.endswith(".btn") or project.selectFile.endswith(".btnc"):
-            functions.main.files.Button.init(project)
+    functions.main.files.Config.test(project)
+    functions.main.files.Scene.test(project)
 
-        elif any([project.selectFile.endswith(element) for element in IMAGE_FORMATES]):
-            functions.main.files.Image.init(project)
+    # OPEN
 
-        elif os.path.isdir(project.selectFile) and project.selectFile[project.selectFile.rfind("/"):].find("%scene%") != -1:
-            functions.main.files.Scene.init(project)
+    if project.selectFile.endswith(".cfg") and not project.selectFile.endswith("collision.cfg"):
+        functions.main.files.Config.init(project)
 
-        elif project.selectFile.endswith(".func"):
-            functions.main.files.Code.init(project)
+    elif project.selectFile.endswith("collision.cfg"):
+        functions.main.files.Collision.init(project)
 
-        else:
-            functions.main.files.Text.init(project)
+    elif project.selectFile.endswith(".obj") or project.selectFile.endswith(".objc"):
+        functions.main.files.Object.init(project)
+
+    elif project.selectFile.endswith(".text") or project.selectFile.endswith(".textc"):
+        functions.main.files.ObjectText.init(project)
+
+    elif project.selectFile.endswith(".btn") or project.selectFile.endswith(".btnc"):
+        functions.main.files.Button.init(project)
+
+    elif any([project.selectFile.endswith(element) for element in IMAGE_FORMATES]):
+        functions.main.files.Image.init(project)
+
+    elif os.path.isdir(project.selectFile) and project.selectFile[project.selectFile.rfind("/"):].find("%scene%") != -1:
+        functions.main.files.Scene.init(project)
+
+    elif project.selectFile.endswith(".func"):
+        functions.main.files.Code.init(project)
+
+    else:
+        functions.main.files.Text.init(project)
 
 
 def projectTreeInit(project) -> None:
