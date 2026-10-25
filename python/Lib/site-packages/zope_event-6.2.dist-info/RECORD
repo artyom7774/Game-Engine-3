@@ -1,0 +1,12 @@
+zope/event/__init__.py,sha256=wSR1Y_yVzSd97zWmPCf4nLZqWyidlJ8_D85Ur_iYx1s,1142
+zope/event/__pycache__/__init__.cpython-311.pyc,,
+zope/event/__pycache__/classhandler.cpython-311.pyc,,
+zope/event/__pycache__/tests.cpython-311.pyc,,
+zope/event/classhandler.py,sha256=2xh4_ofStVc0an9FlHguXNTJwarIRYrWzR-LHf0Ud1Y,1820
+zope/event/tests.py,sha256=GpIP4EIxUZ0fA8vnT01Qv-B7vI6El2w9_prF0EmDrM8,1871
+zope_event-6.2.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+zope_event-6.2.dist-info/METADATA,sha256=bJ07P67__SQPI2jsdsq4riKmwoyDLkxIxpuGhLB05QE,5433
+zope_event-6.2.dist-info/RECORD,,
+zope_event-6.2.dist-info/WHEEL,sha256=YLJXdYXQ2FQ0Uqn2J-6iEIC-3iOey8lH3xCtvFLkd8Q,91
+zope_event-6.2.dist-info/licenses/LICENSE.txt,sha256=PmcdsR32h1FswdtbPWXkqjg-rKPCDOo_r1Og9zNdCjw,2070
+zope_event-6.2.dist-info/top_level.txt,sha256=QpUHvpO4wIuZDeEgKY8qZCtD-tAukB0fn_f6utzlb98,5
