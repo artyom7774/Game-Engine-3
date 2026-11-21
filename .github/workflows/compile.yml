@@ -38,22 +38,17 @@ jobs:
   build-linux:
     name: Linux
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      PY_VERSION: "3.11"
+      # Pinned portable Python: no GitHub API calls, same result on every run.
+      PY_URL: https://github.com/astral-sh/python-build-standalone/releases/download/20241008/cpython-3.11.10+20241008-x86_64-unknown-linux-gnu-install_only.tar.gz
     steps:
       - uses: actions/checkout@v4
 
       - name: Download portable Python
         run: |
-          set -euo pipefail
-          URL=$(gh api repos/astral-sh/python-build-standalone/releases/latest \
-            --jq '.assets[].browser_download_url' \
-            | grep -E "cpython-${PY_VERSION}\.[0-9]+\+[0-9]+-x86_64-unknown-linux-gnu-install_only\.tar\.gz$" \
-            | sort -V | tail -1)
-          [ -n "$URL" ] || { echo "Python build not found"; exit 1; }
-          echo "Downloading: $URL"
-          curl -fsSL -o python.tar.gz "$URL"
+          set -eux
+          curl -fL --retry 5 --retry-delay 3 --retry-all-errors -o python.tar.gz "$PY_URL"
           mkdir -p python/linux
           tar -xzf python.tar.gz -C python/linux --strip-components=1
           rm python.tar.gz
@@ -61,24 +56,35 @@ jobs:
 
       - name: Install requirements into portable Python
         run: |
-          set -euo pipefail
+          set -eux
           ./python/linux/bin/python3 -m pip install --upgrade pip
-          ./python/linux/bin/python3 -m pip install -r requirements.txt
-          echo "Installed packages:"
+          ./python/linux/bin/python3 -m pip install --retries 5 -r requirements.txt
           ./python/linux/bin/python3 -m pip list
 
       - name: Create linux archive
         run: |
-          set -euo pipefail
+          set -eu
           D=dist/Game-Engine-3
           mkdir -p "$D"
 
-          for f in COMMANDS.txt counter.py "Game Engine 3.py" icon.png LICENSE.txt \
-                   README.md requirements.txt setup.py start.py start.spec TODO.txt; do
-            cp "$f" "$D/"
+          # Must exist, otherwise the build fails with a clear message
+          for f in "Game Engine 3.py" requirements.txt engine libs src; do
+            if [ ! -e "$f" ]; then
+              echo "::error::Required path is missing: $f"
+              exit 1
+            fi
+            cp -r "$f" "$D/"
           done
 
-          cp -r descriptions engine libs src "$D/"
+          # Optional, a warning is printed if missing
+          for f in COMMANDS.txt counter.py icon.png LICENSE.txt README.md setup.py start.py start.spec TODO.txt descriptions; do
+            if [ -e "$f" ]; then
+              cp -r "$f" "$D/"
+            else
+              echo "::warning::Optional path is missing: $f"
+            fi
+          done
+
           cp -r python/linux "$D/python"
 
           cat > "$D/run.sh" <<'EOF'
@@ -89,10 +95,11 @@ jobs:
           chmod +x "$D/run.sh"
 
           tar -C dist -czf dist/Game-Engine-3-linux.tar.gz Game-Engine-3
+          ls -lh dist/Game-Engine-3-linux.tar.gz
 
       - name: Smoke test
         run: |
-          set -euo pipefail
+          set -eux
           mkdir /tmp/t
           tar -xzf dist/Game-Engine-3-linux.tar.gz -C /tmp/t
           /tmp/t/Game-Engine-3/python/bin/python3 -c "import sys; print(sys.version)"
@@ -105,4 +112,6 @@ jobs:
 
       - name: Attach to release
         if: startsWith(github.ref, 'refs/tags/GE')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release upload "${{ github.ref_name }}" dist/Game-Engine-3-linux.tar.gz --clobber
