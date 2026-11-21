@@ -36,51 +36,59 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-
-      - name: Install dependencies
+      - name: Download portable Python
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pyinstaller
+          set -euo pipefail
+          URL=$(curl -fsSL https://api.github.com/repos/astral-sh/python-build-standalone/releases/latest \
+            | jq -r '.assets[].browser_download_url' \
+            | grep -E 'cpython-3\.11\.[0-9]+\+[0-9]+-x86_64-unknown-linux-gnu-install_only\.tar\.gz$' \
+            | head -1)
+          echo "Downloading: $URL"
+          curl -fsSL -o python.tar.gz "$URL"
+          mkdir -p python/linux
+          tar -xzf python.tar.gz -C python/linux --strip-components=1
+          rm python.tar.gz
+          ./python/linux/bin/python3 --version
 
-      - name: Compile with PyInstaller
+      - name: Install requirements into portable Python
         run: |
-          pyinstaller start.spec --noconfirm --clean
+          set -euo pipefail
+          ./python/linux/bin/python3 -m ensurepip --upgrade
+          ./python/linux/bin/python3 -m pip install --upgrade pip
+          ./python/linux/bin/python3 -m pip install -r requirements.txt
+          echo "Installed packages:"
+          ./python/linux/bin/python3 -m pip list
 
       - name: Create linux archive
         run: |
-          mkdir -p package/Game-Engine-3
+          mkdir -p dist/Game-Engine-3
 
-          cp -r dist/* package/Game-Engine-3/ 2>/dev/null || true
+          cp "Game Engine 3.exe" dist/Game-Engine-3/ 2>/dev/null || true
+          cp COMMANDS.txt dist/Game-Engine-3/
+          cp counter.py dist/Game-Engine-3/
+          cp "Game Engine 3" dist/Game-Engine-3/ 2>/dev/null || true
+          cp "Game Engine 3.py" dist/Game-Engine-3/
+          cp icon.png dist/Game-Engine-3/
+          cp LICENSE.txt dist/Game-Engine-3/
+          cp README.md dist/Game-Engine-3/
+          cp requirements.txt dist/Game-Engine-3/
+          cp setup.py dist/Game-Engine-3/
+          cp start.py dist/Game-Engine-3/
+          cp start.spec dist/Game-Engine-3/
+          cp TODO.txt dist/Game-Engine-3/
 
-          cp COMMANDS.txt package/Game-Engine-3/ 2>/dev/null || true
-          cp counter.py package/Game-Engine-3/ 2>/dev/null || true
-          cp "Game Engine 3.py" package/Game-Engine-3/ 2>/dev/null || true
-          cp icon.png package/Game-Engine-3/ 2>/dev/null || true
-          cp LICENSE.txt package/Game-Engine-3/ 2>/dev/null || true
-          cp README.md package/Game-Engine-3/ 2>/dev/null || true
-          cp requirements.txt package/Game-Engine-3/ 2>/dev/null || true
-          cp setup.py package/Game-Engine-3/ 2>/dev/null || true
-          cp start.py package/Game-Engine-3/ 2>/dev/null || true
-          cp start.spec package/Game-Engine-3/ 2>/dev/null || true
-          cp TODO.txt package/Game-Engine-3/ 2>/dev/null || true
+          cp -r descriptions dist/Game-Engine-3/
+          cp -r engine dist/Game-Engine-3/
+          cp -r libs dist/Game-Engine-3/
+          cp -r src dist/Game-Engine-3/
 
-          cp -r descriptions package/Game-Engine-3/ 2>/dev/null || true
-          cp -r engine package/Game-Engine-3/ 2>/dev/null || true
-          cp -r libs package/Game-Engine-3/ 2>/dev/null || true
-          cp -r src package/Game-Engine-3/ 2>/dev/null || true
+          cp -r python/linux dist/Game-Engine-3/python
 
-          cd package
+          cd dist
           tar -czf Game-Engine-3-linux.tar.gz Game-Engine-3/
 
       - name: Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Game-Engine-3-Linux
-          path: package/Game-Engine-3-linux.tar.gz
-
+          path: dist/Game-Engine-3-linux.tar.gz
